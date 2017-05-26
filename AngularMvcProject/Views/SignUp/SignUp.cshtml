@@ -1,0 +1,66 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Sign Up</title>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:200,300,400,500,600,700" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <link href="~/Content/Assets/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/Assets/fonts/Font_stylesheet.css" rel="stylesheet">
+    <link href="~/Content/Assets/css/icon.css" rel="stylesheet">
+    <link href="~/Content/Assets/css/custom.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0rc1/angular-route.min.js"></script>
+    <script src="~/App/controller/SignUp.js"></script>
+    <script src="~/App/controller/app.module.js"></script>
+    <script src="~/App/service/service.js"></script>
+    <!--<script src="App/main.js"></script>-->
+</head>
+
+<body ng-app="MyApp" ng-controller="SignUp">
+
+    <div class="sign_up">
+        <div class="sign_inner">
+            <div class="sign_inner2">
+                <div class="sign_box">
+                    <div class="popup_headaer text-center">
+                        <h1><span style="font-weight: normal;">Create an Account for</span> Free!</h1>
+                        <p> Get a free account in 30 seconds. No credit card required.</p>
+                    </div>
+
+                    <div class="sign_form">
+
+                        <form name="myForm" novalidate>
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="Name" ng-model="username">
+                            </div>
+                            <div class="form-group">
+                                <input type="email" class="form-control" placeholder="Email" ng-model="Email">
+                            </div>
+                            <div class="form-group">
+                                <input type="password" class="form-control" placeholder="Password" ng-model="Password">
+                            </div>
+
+                            <button type="submit" ng-click="submitTheForm()" class="btn btn-default submit_btn">Create My Account!</button>
+                        </form>
+                    </div>
+                    <img src="~/Content/Assets/images/cloud.png" alt="Cloud" class="left_img">
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!--<script src="js/jquery.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script>
+    $(document).ready(function(){
+        $(function () {
+          $('[data-toggle="tooltip"]').tooltip()
+        })
+    });
+    </script>-->
+</body>
+</html>
