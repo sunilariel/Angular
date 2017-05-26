@@ -1,9 +1,10 @@
 ﻿var app = angular.module("MyApp", []);
-app.controller("SignUp", function ($scope, $http) {
+app.controller("SignUp",['$scope', '$http', '$timeout', function ($scope, $http, $timeout) {
     debugger;
     $scope.username = "";
     $scope.Email = "";
     $scope.Password = "";
+    $scope.IsVisible = false;
     $scope.submitTheForm = function () {
         debugger;
         var dataobject = {
@@ -26,9 +27,13 @@ app.controller("SignUp", function ($scope, $http) {
 
         $http.post("SignUp/postdata", { json: data }).success(function (data) {
             debugger;
-            alert("hello")
-            $scope.PostDataResponse = data;
+            if(data.success==true){
+            $scope.IsVisible = true;
+            $scope.MessageText ="Saving Data"
+            $scope.msg = "Post Data Submitted Successfully!";
 
+            $timeout(function () { $scope.MessageText = "Data saved."; $timeout(function () { $scope.IsVisible = false; }, 1000) }, 500);
+        }
         })
         .error(function (e) {             
                 alert('Error!');              
@@ -73,4 +78,5 @@ app.controller("SignUp", function ($scope, $http) {
         //    //defer.reject(e);
         //});
     }
-});
+}
+]);
