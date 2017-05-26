@@ -622,6 +622,8 @@ span.staff-break-delete-holder button.btn.btn-circle {
     background: #B4C0C0;
 	border: none;
     color: #fff;
+	position: relative;
+    z-index: 9;
 }
 .stepwizard-step .btn-circle:hover {
 	background: #B4C0C0;
@@ -640,10 +642,12 @@ span.staff-break-delete-holder button.btn.btn-circle {
     background: #f1f5f7;
     border: solid 1px #aaa;
     box-shadow: 0px 0px 10px #CCC;
+	height: 90%;
+    overflow: auto;
 }
-.demo_wizard .col-xs-12 {
+/* .demo_wizard .col-xs-12 {
     width: 100%;
-}
+} */
 
 .setmore button.btn.btn-primary.nextBtn.btn-lg.pull-right.waves-effect.waves-light {
 	padding: 9px 23px;
@@ -750,7 +754,7 @@ background: #31c1b3 !important;
     z-index: 99999;
 	display: flex;
     align-items: center;
-	overflow-y: scroll;
+	/* overflow-y: scroll; */
 }
 .welcome_div {
 	padding: 30px 0 0;
@@ -762,9 +766,9 @@ background: #31c1b3 !important;
 .setmore button .fa {
     font-size: 12px;
 }
-.setup-content .col-xs-12 .col-md-12 {
+/* .setup-content .col-xs-12 .col-md-12 {
     padding: 0 56px 56px 56px;
-}
+} */
 .onoffswitch {
     position: relative; width: 90px;
     text-align: center;
@@ -958,7 +962,7 @@ button:hover {
 }
 .sample_div .dropdown button#dLabel {
     padding: 0;
-	width: 47px;
+	width: 90px;
 	background: #F1F5F7;
     border: 1px solid #ccc !important;
     
@@ -974,17 +978,129 @@ button:hover {
 }
 
 /* 24-may-2017 css end here ===================== */
+	.setup-content {
+    margin: 0;
+}
 
 
-
+.active_div:before {
+    content: '0';
+    font-size: 0;
+    position: absolute;
+    background: #27C3BB;
+    height: 5px;
+    width: 100%;
+    left: -76px;
+    top: 32px;
+    z-index: 0;
+	display:none;
+}
+.active_div {
+    position: relative;
+}
+.step3_form .close_img img {
+    margin-top: 16px;
+    color: #717171;
+	max-width: 8px;
+}
+a.close_icon img {
+    max-width: 8px;
+    margin-top: 42px;
+}
+.stepwizard-step .wizard_circle{
+	background: #27C3BB !important;
+}
+.stepwizard-step .wizard_circle i.fa.fa-check {
+    display: none;
+}
+.check_div a.btn.btn-circle.wizard_circle.btn-default i.fa.fa-check {
+    display: block;
+	    margin-top: 3px;
+}
+.check_div a.btn.btn-circle.wizard_circle.btn-default span {
+    display: none;
+}
+.before_div:before{
+	display: block;
+}
 /* media css start here ================================= */
 @media (max-width:991px){
 	section.nav_sec .navbar .container button.navbar-toggler.navbar-toggler-right {
 		margin-top: 15px;
 		padding: 4px 0;
 	}
+	.setup-content {
+    margin: 0;
 }
 
+select.select_btn {
+    width: 100%;
+}
+.onoffswitch {
+    float:right;
+}
+.demo_wizard {
+    height: 100%;
+}
+
+}
+/* media css end here ================================= */
+
+/* ==================  MEDIA QUERY CSS START HERE  ================== */
+
+@media (max-width:767px){
+.sign_inner{
+	max-width: 430px;
+}
+.popup_headaer h1 {
+	font-size: 20px;
+}
+.sign_form{
+	padding: 30px 20px;
+}
+
+/* .fixed_div {
+	display:block;
+} */
+select.select_btn {
+    width: 100%;
+}
+.onoffswitch {
+    float:right;
+}
+.setmore button.btn.btn-primary.nextBtn.btn-lg.pull-right {
+    float: none !important;
+	    margin-bottom: 15px;
+}
+.back_btn button.btn.btn-default {
+    margin-bottom: 15px;
+}
+
+.border_top .form-group {
+    margin-bottom: 12px;
+}
+.setup-content {
+    margin: 0;
+}
+.closeIconDiv {
+	position:static;
+}
+.step3_form .dropdown ul.dropdown-menu {
+    left: 0; 	
+}
+.step3_form .row .col-md-2.col-sm-2, .step3_form .row .col-md-4.col-sm-4, .step3_form .row .col-md-6.col-sm-6, .step3_form .row .col-md-3.col-sm-3.col-xs-3 {
+    padding: 0 15px;
+}
+.demo_wizard {
+    height: 100%;
+}
+	
+}
+@media (max-width:500px){
+.active_div:before {
+	left: -50px;
+}
+}
 @media (max-width:475px){
 	.setmore {
 		text-align: center;
@@ -997,8 +1113,8 @@ button:hover {
 		float: none;
 	}
 	.setup-content .col-xs-12 .col-md-12 {
-		padding: 0 15px;
-	}
+		padding: 0 0px;
+	} 
 	.group_label label.control-label, .group_label .form-control {
 		width: 100%;
 		    margin: 0;
@@ -1011,21 +1127,6 @@ button:hover {
 		margin-bottom: 15px;
 	}
 	
-}
-/* media css end here ================================= */
-
-/* ==================  MEDIA QUERY CSS START HERE  ================== */
-
-@media (max-width:767px){
-.sign_inner{
-	    max-width: 430px;
-}
-	.popup_headaer h1 {
-		font-size: 20px;
-	}
-	.sign_form{
-		padding: 30px 20px;
-	}
 }
 
 

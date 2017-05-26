@@ -7,7 +7,7 @@
     <title>Dashboard</title>
     <link href="https://fonts.googleapis.com/css?family=Montserrat:200,300,400,500,600,700" rel="stylesheet">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
-    <link href="~/Content/Assets/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/Assets/css/bootstrap.min.css" rel="stylesheet">
     <link href="~/Content/Assets/fonts/Font_stylesheet.css" rel="stylesheet">
     <link href="~/Content/Assets/css/icon.css" rel="stylesheet">
     <link href="~/Content/Assets/css/animate.css" rel="stylesheet">
@@ -16,10 +16,12 @@
     <script src="~/Content/Assets/js/bootstrap.min.js"></script>
     <script src="~/Content/Assets/js/jquery.js"></script>
     <script src="~/App/controller/wizard.js"></script>
+    <!--<script src="../App/controller/wizard.js"></script>-->
 </head>
+
 <body ng-app="bookingApp">
     <header class="top">
-        <div class="logo_section"> <a class="logo" href="#"></a><img src="images/logo.png" alt="Logo"></a> </div>
+        <div class="logo_section"> <a class="logo" href="#"></a><img src="~/Content/Assets/images/logo.png" alt="Logo"></a> </div>
         <h1> Setting </h1>
         <div class="top_right">
             <nav class="navbar navbar-default">
@@ -323,7 +325,7 @@
 
     <!-- 23-may-2017 html start here ================= -->
 
-    <div class="fixed_div" ng-controller="bookingController">
+    <div class="fixed_div" ng-controller="bookingController" data-ng-init="init()">
         <div class="demo_wizard">
             <div class="demo_snipt">
                 <div class="wizar_bg"></div>
@@ -780,36 +782,36 @@
                                                     <div class="col-md-5 col-sm-4 col-xs-12">
                                                         <span>Service Name</span>
                                                         <div class="form-group ">
-                                                            <input type="text" class="form-control" id="" placeholder="">
+                                                            <input type="text" class="form-control" ng-model="service.serviceName" id="" placeholder="">
                                                         </div>
                                                     </div>
                                                     <div class="col-md-2 col-sm-2 col-xs-12">
                                                         <span class="time">Time</span>
                                                         <div class="form-group ">
-                                                            <input type="text" class="form-control" id="" placeholder="">
+                                                            <input type="text" class="form-control" ng-model="service.time" id="" placeholder="">
                                                         </div>
                                                     </div>
                                                     <div class="col-md-2 col-sm-2 col-xs-12">
                                                         <span>Price (₹)</span>
                                                         <div class="form-group">
-                                                            <input type="email" class="form-control" id="" placeholder="">
+                                                            <input type="text" class="form-control" ng-model="service.price" id="" placeholder="">
                                                         </div>
                                                     </div>
                                                     <div class="col-md-2 col-sm-2 col-xs-12">
                                                         <span>Staff</span>
                                                         <div class="form-group">
                                                             <div class="dropdown">
-                                                                <button class="angle_down" id="dLabel" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" ng-click="showDropDownBinded()">
+                                                                <button class="angle_down" id="dLabel" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" ng-click="showDropDownBinded($index)">
                                                                     <i class="fa fa-user" aria-hidden="true"></i> 1 <i class="fa fa-angle-down" aria-hidden="true"></i>
                                                                     </span>
                                                                 </button>
-                                                                <ul class="dropdown-menu" style="display:block" aria-labelledby="dLabel" ng-hide="showStaffBinded">
+                                                                <ul class="dropdown-menu" style="display:block" aria-labelledby="dLabel" ng-hide="showStaffBinded[$index]">
                                                                     <li>Who can perform this service?</li>
                                                                     <li ng-repeat="item in service.staff">
                                                                         <input type="checkbox" name="selectedFruits[]"
                                                                                value="{{item.staffEmail}}"
                                                                                ng-checked="selection.indexOf(item.staffName) > -1"
-                                                                               ng-click="toggleSelection(item.staffName)"> {{item.staffName}}
+                                                                               ng-click="toggleSelection(item)" ng-model="confirmed"> {{item.staffName}}
                                                                     </li>
 
                                                                 </ul>
@@ -817,7 +819,7 @@
                                                         </div>
                                                     </div>
                                                     <div class="col-md-1 col-sm-12 closeIconDiv">
-                                                        <a href="#" class="close_icon"><img src="~/Content/Assets/images/close-img.png"></a>
+                                                        <a href="#" class="close_icon" ng-click="removeServiceRow(service.serviceName)"><img src="~/Content/Assets/images/close-img.png"></a>
                                                     </div>
                                                 </div>
 
@@ -825,17 +827,17 @@
                                                     <div class="row">
                                                         <div class="col-md-4 col-sm-4 col-xs-12">
                                                             <div class="form-group ">
-                                                                <input type="text" class="form-control" id="" value="" placeholder="Sample Service">
+                                                                <input type="text" class="form-control" id="" ng-model="sampleService" placeholder="Sample Service">
                                                             </div>
                                                         </div>
                                                         <div class="col-md-2 col-sm-2 col-xs-12">
                                                             <div class="form-group ">
-                                                                <input type="text" class="form-control" id="" value="" placeholder="0 min">
+                                                                <input type="text" class="form-control" id="" ng-model="serviceTime" placeholder="0 min">
                                                             </div>
                                                         </div>
                                                         <div class="col-md-2 col-sm-2 col-xs-12">
                                                             <div class="form-group">
-                                                                <input type="email" class="form-control" id="" value="" placeholder="(₹) 0">
+                                                                <input type="text" class="form-control" id="" ng-model="servicePrice" placeholder="(₹) 0">
                                                             </div>
                                                         </div>
                                                         <div class="col-md-4 col-sm-4 col-xs-12">
@@ -844,14 +846,15 @@
                                                                     <button id="dLabel" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" ng-click="showDropDown()">
                                                                         <i class="fa fa-user" aria-hidden="true"></i> <i class="fa fa-angle-down" aria-hidden="true"></i>
                                                                     </button>
-                                                                    <button type="submit" class="btn btn-default">Add</button>
+                                                                    <button type="submit" class="btn btn-default" ng-click="addServiceItem()">Add</button>
                                                                     <ul class="dropdown-menu" style="display:block;" aria-labelledby="dLabel" ng-hide="showStaff">
                                                                         <li>Who can perform this service?</li>
                                                                         <li ng-repeat="staff in staffInfo">
                                                                             <input type="checkbox" name="selectedFruits[]"
                                                                                    value="{{staff.staffEmail}}"
                                                                                    ng-checked="selection.indexOf(staff.staffName) > -1"
-                                                                                   ng-click="toggleSelection(staff.staffName)"> {{staff.staffName}}
+                                                                                   ng-click="toggleSelection(staff)" ng-model="confirmed"> {{staff.staffName}}
+                                                                            {{confirmed}}
                                                                         </li>
                                                                     </ul>
                                                                 </div>
@@ -876,206 +879,224 @@
     <!--<script src="js/jquery.js"></script>
     <script src="js/bootstrap.min.js"></script>-->
     <script type="text/javascript">
+        var app = angular.module('bookingApp', [])
+        app.controller('bookingController', function ($scope, bookingService) {
 
-        //var app = angular.module('bookingApp', [])
-        //app.controller('bookingController', function ($scope, bookingService) {
-        //    debugger;
-        //    $scope.businessName = "";
-        //    $scope.businessIndustry = [{ name: 'Hair Salon/Barbershop', id: 1 }, { name: 'Nail Salon', id: 2 }, { name: 'Computers/Technology/IT', id: 3 }, { name: 'Spa/Massage/Waxing', id: 4 }];
-        //    $scope.businessPhone = "";
-        //    $scope.selectedIndustry = "";//$scope.businessIndustry[0].name;
-        //    $scope.firstStep = false;
-        //    $scope.secondStep = true;
-        //    $scope.thirdStep = true;
-        //    $scope.fourthStep = true;
-        //    $scope.showStaff = true;
-        //    $scope.showStaffBinded = true;
-        //    $scope.submitInfo = function () {
-        //        debugger;
-        //        var businessInfo = {
-        //            Id: $scope.selectedIndustry,
-        //            Name: $scope.businessName,
-        //            Address: "sample string 3",
-        //            Email: "sample string 4",
-        //            Telephone: $scope.businessPhone,
-        //            PostCode: "sample string 6",
-        //            Website: "sample string 7",
-        //            County: "sample string 8",
-        //            Town: "sample string 9",
-        //            Description: "sample string 10",
-        //            Password: "sample string 11",
-        //            CreationDate: "2017-05-24T07:20:31.1744476+00:00"
-        //        };
+            $scope.businessName = "";
+            $scope.businessIndustry = [{ name: 'Hair Salon/Barbershop', id: 1 }, { name: 'Nail Salon', id: 2 }, { name: 'Computers/Technology/IT', id: 3 }, { name: 'Spa/Massage/Waxing', id: 4 }];
+            $scope.businessPhone = "";
+            $scope.selectedIndustry = "";//$scope.businessIndustry[0].name;
+            $scope.firstStep = false;
+            $scope.secondStep = true;
+            $scope.thirdStep = true;
+            $scope.fourthStep = true;
+            $scope.showStaff = true;
+            $scope.showStaffBinded = [];
+            $scope.init = function () {
+                debugger;
+                var count = $scope.serviceInfo.length;
+                for (var i = 0; i < count; i++) {
+                    $scope.showStaffBinded[i] = true;
+                }
 
-        //        // Account.Id = $scope.employeeId;
-        //        // var getData = bookingService.addBookingInfo(businessInfo);
-        //        debugger;
-        //        $scope.secondStep = false;
-        //        $scope.firstStep = true;
-        //        $scope.thirdStep = true;
-        //        $scope.fourthStep = true;
-        //        $scope.staffName = '';
-        //        $scope.staffEmail = '';
+            };
+            $scope.submitInfo = function () {
+                debugger;
+                var businessInfo = {
+                    Id: $scope.selectedIndustry,
+                    Name: $scope.businessName,
+                    Address: "sample string 3",
+                    Email: "sample string 4",
+                    Telephone: $scope.businessPhone,
+                    PostCode: "sample string 6",
+                    Website: "sample string 7",
+                    County: "sample string 8",
+                    Town: "sample string 9",
+                    Description: "sample string 10",
+                    Password: "sample string 11",
+                    CreationDate: "2017-05-24T07:20:31.1744476+00:00"
+                };
 
-        //        //getData.then(function (msg) {
-        //        //    debugger;
-        //        //    alert(msg.success);
-        //        //    $scope.divAccount = false;
-        //        //}, function () {
-        //        //    alert('Error in updating record');
-        //        //});
+                // Account.Id = $scope.employeeId;
+                // var getData = bookingService.addBookingInfo(businessInfo);
+                debugger;
+                $scope.secondStep = false;
+                $scope.firstStep = true;
+                $scope.thirdStep = true;
+                $scope.fourthStep = true;
+                $scope.staffName = '';
+                $scope.staffEmail = '';
 
-        //    }
-        //    $scope.setUpBusiness = function () {
-        //        $scope.firstStep = true;
-        //        $scope.secondStep = true;
-        //        $scope.thirdStep = false;
-        //        $scope.fourthStep = true;
-        //    }
-        //    $scope.addStaff = function () {
-        //        $scope.firstStep = true;
-        //        $scope.secondStep = true;
-        //        $scope.thirdStep = true;
-        //        $scope.fourthStep = false;
-        //    }
-        //    $scope.addServices = function () {
-        //        $scope.firstStep = true;
-        //        $scope.secondStep = true;
-        //        $scope.thirdStep = true;
-        //        $scope.fourthStep = false;
-        //    }
-        //    $scope.backSecondStep = function () {
-        //        $scope.firstStep = false;
-        //        $scope.secondStep = true;
-        //        $scope.thirdStep = true;
-        //        $scope.fourthStep = true;
-        //    }
-        //    $scope.backThirdStep = function () {
-        //        $scope.firstStep = true;
-        //        $scope.secondStep = false;
-        //        $scope.thirdStep = true;
-        //        $scope.fourthStep = true;
-        //    }
-        //    $scope.backFourthStep = function () {
-        //        $scope.firstStep = true;
-        //        $scope.secondStep = true;
-        //        $scope.thirdStep = false;
-        //        $scope.fourthStep = true;
-        //    }
-        //    $scope.showDropDown = function () {
-        //        debugger;
-        //        $scope.showStaff = !$scope.showStaff;
-        //    }
-        //    $scope.showDropDownBinded = function () {
-        //        debugger;
-        //        $scope.showStaffBinded = !$scope.showStaffBinded;
-        //    }
-        //    $scope.staffInfo = [
-        //             {
-        //                 'staffName': 'David',
-        //                 'staffEmail': 'bookingmanager18@gmail.com',
+                //getData.then(function (msg) {
+                //    debugger;
+                //    alert(msg.success);
+                //    $scope.divAccount = false;
+                //}, function () {
+                //    alert('Error in updating record');
+                //});
 
-        //             },
-        //             {
-        //                 'staffName': 'John',
-        //                 'staffEmail': 'bookingmanager18@gmail.com',
+            }
+            $scope.setUpBusiness = function () {
+                $scope.firstStep = true;
+                $scope.secondStep = true;
+                $scope.thirdStep = false;
+                $scope.fourthStep = true;
+            }
+            $scope.addStaff = function () {
+                $scope.firstStep = true;
+                $scope.secondStep = true;
+                $scope.thirdStep = true;
+                $scope.fourthStep = false;
+            }
+            $scope.addServices = function () {
+                $scope.firstStep = true;
+                $scope.secondStep = true;
+                $scope.thirdStep = true;
+                $scope.fourthStep = false;
+            }
+            $scope.backSecondStep = function () {
+                $scope.firstStep = false;
+                $scope.secondStep = true;
+                $scope.thirdStep = true;
+                $scope.fourthStep = true;
+            }
+            $scope.backThirdStep = function () {
+                $scope.firstStep = true;
+                $scope.secondStep = false;
+                $scope.thirdStep = true;
+                $scope.fourthStep = true;
+            }
+            $scope.backFourthStep = function () {
+                $scope.firstStep = true;
+                $scope.secondStep = true;
+                $scope.thirdStep = false;
+                $scope.fourthStep = true;
+            }
+            $scope.showDropDown = function () {
+                debugger;
+                $scope.showStaff = !$scope.showStaff;
+            }
+            $scope.showDropDownBinded = function (index) {
+                debugger;
+                $scope.showStaffBinded[index] = !$scope.showStaffBinded[index];
+            }
+            $scope.staffInfo = [
+                     {
+                         'staffName': 'David',
+                         'staffEmail': 'bookingmanager18@gmail.com',
 
-        //             },
+                     },
+                     {
+                         'staffName': 'John',
+                         'staffEmail': 'bookingmanager18@gmail.com',
 
-        //    ];
-        //    $scope.sampleService = "";
-        //    $scope.serviceTime = "";
-        //    $scope.servicePrice = "";
-        //    $scope.serviceInfo = [
-        //            {
-        //                'serviceName': 'Web Design',
-        //                'time': '60 min',
-        //                'price': '£20',
-        //                'staff': $scope.staffInfo,
-        //            },
+                     },
 
-        //    ];
-        //    $scope.addStaffItem = function () {
-        //        debugger;
-        //        $scope.staffInfo.push({ 'serviceName': 'Web Design', 'time': '60 min', 'price': '£20', 'staff': $scope.staffInfo, });
-        //        $scope.staffName = '';
-        //        $scope.staffEmail = '';
-        //    };
-        //    $scope.removeRow = function (name) {
-        //        debugger;
-        //        var index = -1;
-        //        var comArr = eval($scope.staffInfo);
-        //        for (var i = 0; i < comArr.length; i++) {
-        //            if (comArr[i].staffName === name) {
-        //                index = i;
-        //                break;
-        //            }
-        //        }
-        //        if (index === -1) {
-        //            alert("Something gone wrong");
-        //        }
-        //        $scope.staffInfo.splice(index, 1);
-        //    };
-        //    $scope.addServiceItem = function () {
-        //        debugger;
-        //        $scope.serviceInfo.push({ 'staffName': $scope.staffName, 'staffEmail': $scope.staffEmail });
-        //        $scope.staffName = '';
-        //        $scope.staffEmail = '';
-        //    };
-        //    $scope.removeServiceRow = function (name) {
-        //        debugger;
-        //        var index = -1;
-        //        var comArr = eval($scope.staffInfo);
-        //        for (var i = 0; i < comArr.length; i++) {
-        //            if (comArr[i].staffName === name) {
-        //                index = i;
-        //                break;
-        //            }
-        //        }
-        //        if (index === -1) {
-        //            alert("Something gone wrong");
-        //        }
-        //        $scope.staffInfo.splice(index, 1);
-        //    };
-        //});
-        //app.service("bookingService", function ($http) {
-        //    this.addBookingInfo = function (businessInfo) {
-        //        debugger;
-        //        var response = $http({
-        //            method: "post",
-        //            url: "http://romzbookingmanager.azurewebsites.net/api/companyregistration/CreateAccount",
-        //            params: businessInfo
-        //        });
-        //        return response;
-        //    }
-        //    this.setUpBusinessHr = function (businessInfo) {
-        //        debugger;
-        //        var response = $http({
-        //            method: "post",
-        //            url: "http://romzbookingmanager.azurewebsites.net/api/companyregistration/CreateAccount",
-        //            params: businessInfo
-        //        });
-        //        return response;
-        //    }
-        //    this.addStaff = function (businessInfo) {
-        //        debugger;
-        //        var response = $http({
-        //            method: "post",
-        //            url: "http://romzbookingmanager.azurewebsites.net/api/companyregistration/CreateAccount",
-        //            params: businessInfo
-        //        });
-        //        return response;
-        //    }
-        //    this.addServices = function (businessInfo) {
-        //        debugger;
-        //        var response = $http({
-        //            method: "post",
-        //            url: "http://romzbookingmanager.azurewebsites.net/api/companyregistration/CreateAccount",
-        //            params: businessInfo
-        //        });
-        //        return response;
-        //    }
-        //})
+            ];
+            $scope.sampleService = "";
+            $scope.serviceTime = "";
+            $scope.servicePrice = "";
+            $scope.serviceInfo = [
+                    {
+                        'serviceName': 'Web Design',
+                        'time': '60 min',
+                        'price': '£20',
+                        'staff': $scope.staffInfo,
+                    },
+
+            ];
+            //$scope.confirmed = false;
+            $scope.addStaffItem = function () {
+                debugger;
+
+                $scope.staffInfo.push({ 'staffName': $scope.staffName, 'staffEmail': $scope.staffEmail });
+
+                $scope.staffName = '';
+                $scope.staffEmail = '';
+            };
+            $scope.toggleSelection = function staffChange(item) {
+                debugger;
+                $scope.confirmed='';
+                var checkconf = $scope.confirmed;
+                item['confirmed'] = checkconf;
+
+            }
+            $scope.removeRow = function (name) {
+                debugger;
+                var index = -1;
+                var comArr = eval($scope.staffInfo);
+                for (var i = 0; i < comArr.length; i++) {
+                    if (comArr[i].staffName === name) {
+                        index = i;
+                        break;
+                    }
+                }
+                if (index === -1) {
+                    alert("Something gone wrong");
+                }
+                $scope.staffInfo.splice(index, 1);
+            };
+            $scope.addServiceItem = function () {
+                debugger;
+
+                $scope.serviceInfo.push({ 'serviceName': $scope.sampleService, 'time': $scope.serviceTime, 'price': $scope.servicePrice, 'staff': $scope.staffInfo, });
+                $scope.staffName = '';
+                $scope.staffEmail = '';
+            };
+            $scope.removeServiceRow = function (name) {
+                debugger;
+                var index = -1;
+                var comArr = eval($scope.staffInfo);
+                for (var i = 0; i < comArr.length; i++) {
+                    if (comArr[i].staffName === name) {
+                        index = i;
+                        break;
+                    }
+                }
+                if (index === -1) {
+                    alert("Something gone wrong");
+                }
+                $scope.staffInfo.splice(index, 1);
+            };
+        });
+        app.service("bookingService", function ($http) {
+            this.addBookingInfo = function (businessInfo) {
+                debugger;
+                var response = $http({
+                    method: "post",
+                    url: "http://romzbookingmanager.azurewebsites.net/api/companyregistration/CreateAccount",
+                    params: businessInfo
+                });
+                return response;
+            }
+            this.setUpBusinessHr = function (businessInfo) {
+                debugger;
+                var response = $http({
+                    method: "post",
+                    url: "http://romzbookingmanager.azurewebsites.net/api/companyregistration/CreateAccount",
+                    params: businessInfo
+                });
+                return response;
+            }
+            this.addStaff = function (businessInfo) {
+                debugger;
+                var response = $http({
+                    method: "post",
+                    url: "http://romzbookingmanager.azurewebsites.net/api/companyregistration/CreateAccount",
+                    params: businessInfo
+                });
+                return response;
+            }
+            this.addServices = function (businessInfo) {
+                debugger;
+                var response = $http({
+                    method: "post",
+                    url: "http://romzbookingmanager.azurewebsites.net/api/companyregistration/CreateAccount",
+                    params: businessInfo
+                });
+                return response;
+            }
+        })
     </script>
     <script>
         $(document).ready(function () {

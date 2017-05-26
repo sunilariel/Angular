@@ -1,6 +1,6 @@
 ﻿var app = angular.module('bookingApp', [])
 app.controller('bookingController', function ($scope, bookingService) {
-    debugger;
+
     $scope.businessName = "";
     $scope.businessIndustry = [{ name: 'Hair Salon/Barbershop', id: 1 }, { name: 'Nail Salon', id: 2 }, { name: 'Computers/Technology/IT', id: 3 }, { name: 'Spa/Massage/Waxing', id: 4 }];
     $scope.businessPhone = "";
@@ -10,7 +10,15 @@ app.controller('bookingController', function ($scope, bookingService) {
     $scope.thirdStep = true;
     $scope.fourthStep = true;
     $scope.showStaff = true;
-    $scope.showStaffBinded = true;
+    $scope.showStaffBinded = [];
+    $scope.init = function () {
+        debugger;
+        var count = $scope.serviceInfo.length;
+        for (var i = 0; i < count; i++) {
+            $scope.showStaffBinded[i] = true;
+        }
+
+    };
     $scope.submitInfo = function () {
         debugger;
         var businessInfo = {
@@ -87,9 +95,9 @@ app.controller('bookingController', function ($scope, bookingService) {
         debugger;
         $scope.showStaff = !$scope.showStaff;
     }
-    $scope.showDropDownBinded = function () {
+    $scope.showDropDownBinded = function (index) {
         debugger;
-        $scope.showStaffBinded = !$scope.showStaffBinded;
+        $scope.showStaffBinded[index] = !$scope.showStaffBinded[index];
     }
     $scope.staffInfo = [
              {
@@ -116,12 +124,21 @@ app.controller('bookingController', function ($scope, bookingService) {
             },
 
     ];
+    //$scope.confirmed = false;
     $scope.addStaffItem = function () {
         debugger;
-        $scope.staffInfo.push({ 'serviceName': 'Web Design', 'time': '60 min', 'price': '£20', 'staff': $scope.staffInfo, });
+
+        $scope.staffInfo.push({ 'staffName': $scope.staffName, 'staffEmail': $scope.staffEmail });
+
         $scope.staffName = '';
         $scope.staffEmail = '';
     };
+    $scope.toggleSelection = function staffChange(item) {
+        debugger;
+        var checkconf = $scope.confirmed;
+        item['confirmed'] = checkconf;
+
+    }
     $scope.removeRow = function (name) {
         debugger;
         var index = -1;
@@ -139,7 +156,8 @@ app.controller('bookingController', function ($scope, bookingService) {
     };
     $scope.addServiceItem = function () {
         debugger;
-        $scope.serviceInfo.push({ 'staffName': $scope.staffName, 'staffEmail': $scope.staffEmail });
+
+        $scope.serviceInfo.push({ 'serviceName': $scope.sampleService, 'time': $scope.serviceTime, 'price': $scope.servicePrice, 'staff': $scope.staffInfo, });
         $scope.staffName = '';
         $scope.staffEmail = '';
     };
@@ -159,7 +177,6 @@ app.controller('bookingController', function ($scope, bookingService) {
         $scope.staffInfo.splice(index, 1);
     };
 });
-
 app.service("bookingService", function ($http) {
     this.addBookingInfo = function (businessInfo) {
         debugger;
@@ -197,4 +214,4 @@ app.service("bookingService", function ($http) {
         });
         return response;
     }
-});
+})
