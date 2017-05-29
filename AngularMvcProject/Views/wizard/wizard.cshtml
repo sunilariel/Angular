@@ -1,27 +1,7 @@
-﻿<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Dashboard</title>
-    <link href="https://fonts.googleapis.com/css?family=Montserrat:200,300,400,500,600,700" rel="stylesheet">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
-    <link href="~/Content/Assets/css/bootstrap.min.css" rel="stylesheet">
-    <link href="~/Content/Assets/fonts/Font_stylesheet.css" rel="stylesheet">
-    <link href="~/Content/Assets/css/icon.css" rel="stylesheet">
-    <link href="~/Content/Assets/css/animate.css" rel="stylesheet">
-    <link href="~/Content/Assets/css/custom.css" rel="stylesheet">
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
-    <script src="~/Content/Assets/js/bootstrap.min.js"></script>
-    <script src="~/Content/Assets/js/jquery.js"></script>
-    <script src="~/App/controller/wizard.js"></script>
-    <!--<script src="../App/controller/wizard.js"></script>-->
-</head>
-
-<body ng-app="bookingApp">
+﻿
+<div ng-app="bookingApp">
     <header class="top">
-        <div class="logo_section"> <a class="logo" href="#"></a><img src="~/Content/Assets/images/logo.png" alt="Logo"></a> </div>
+        <div class="logo_section"> <a class="logo" href="#"></a><img src="../Content/Assets/images/logo.png" alt="Logo"></a> </div>
         <h1> Setting </h1>
         <div class="top_right">
             <nav class="navbar navbar-default">
@@ -35,7 +15,6 @@
                             <li class="upgrade_btn"><a href="#" title="">Upgrade</a></li>
                             <li class="dropdown">
                                 <a class="dropdown-toggle" data-toggle="dropdown" href="#"> <i class="fa fa-bell-o" aria-hidden="true"></i> <span class="caret"></span> </a>
-
                                 <!-- /.dropdown-user -->
                                 <ul class="dropdown-menu dropdown-user animated flipInY">
                                     <li id="my_details">
@@ -163,7 +142,7 @@
         </ul>
     </div>
     <div class="right_section" id="settings">
-        <div class="tabs_section" style="    width: 100px;">
+        <div class="tabs_section" style=" width 100px;">
             <ul class="nav nav-tab nav-stacked">
                 <li>
                     <a href="#accounts" data-toggle="tab">
@@ -211,7 +190,7 @@
                             Staff (1)<button class="pull-right btn btn-circle" id="createNewStaffBtn" title="" data-original-title="Add New Staff"><i class="fa fa-plus" aria-hidden="true"></i></button>
                         </h3>
                         <ul class="nav nav-stacked side-list" style="height: 151px;">
-                            <li id="c358" class="active"> <a href="#"> <span class="user_img"><img src="~/Content/Assets/images/user.jpg"> </span> <span class="staffNameWrap" title="Adwart ">Adwart </span> </a> </li>
+                            <li id="c358" class="active"> <a href="#"> <span class="user_img"><img src="../Content/Assets/images/user.jpg"> </span> <span class="staffNameWrap" title="Adwart ">Adwart </span> </a> </li>
                         </ul>
                     </div>
                     <div class="col-sm-9">
@@ -237,7 +216,7 @@
                                             <div class="media">
                                                 <div class="media-left">
                                                     <a href="#">
-                                                        <span class="user_img"><img src="~/Content/Assets/images/user.jpg"> </span>
+                                                        <span class="user_img"><img src="../Content/Assets/images/user.jpg"> </span>
                                                     </a>
                                                 </div>
                                                 <div class="media-body">
@@ -429,17 +408,17 @@
                                     </div>
                                     <div class="group_label">
                                         <p>Your time zone is set to (GMT 00:00) GMT.</p>
-                                        <div class="colom_div">
+                                        <div class="colom_div" ng-repeat="timedata in businessHourInfo">
                                             <div class="row">
                                                 <div class="col-md-3 col-sm-3 col-xs-3">
                                                     <div class="week_div">
-                                                        <p>Monday:</p>
+                                                        <p>{{timedata.day}}</p>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-3 col-sm-3 col-xs-3">
                                                     <div class="onoffswitch">
-                                                        <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" checked>
-                                                        <label class="onoffswitch-label" for="myonoffswitch">
+                                                        <input type="checkbox" name="onoffswitch" ng-model="timedata.available" class="onoffswitch-checkbox" checked>
+                                                        <label class="onoffswitch-label" ng-click="switchOnOff(timedata)" for="myonoffswitch">
                                                             <span class="onoffswitch-inner"></span>
                                                             <span class="onoffswitch-switch"></span>
                                                         </label>
@@ -447,239 +426,25 @@
                                                 </div>
                                                 <div class="col-md-6 col-sm-6 col-xs-6">
                                                     <div class="week_div">
-                                                        <select class="select_btn">
-                                                            <option value="0">08:00 am</option>
-                                                            <option value="1">08:00 am</option>
-                                                            <option value="2">08:00 am</option>
-                                                            <option value="3">08:00 am</option>
+                                                        <select class="select_btn" ng-model="selectFrom" data-ng-options="o as o for o in timedata.timeFrom">
+                                                            @*<option value="0">08:00 am</option>
+                                                                <option value="1">08:00 am</option>
+                                                                <option value="2">08:00 am</option>
+                                                                <option value="3">08:00 am</option>*@
                                                         </select>
                                                         <span>to</span>
-                                                        <select class="select_btn">
-                                                            <option value="0">05:00 pm</option>
-                                                            <option value="1">05:00 pm</option>
-                                                            <option value="2">05:00 pm</option>
-                                                            <option value="3">05:00 pm</option>
+                                                        <select class="select_btn" ng-model="selectTo" data-ng-options="t as t for t in timedata.timeTo">
+                                                            @*<option value="0">05:00 pm</option>
+                                                                <option value="1">05:00 pm</option>
+                                                                <option value="2">05:00 pm</option>
+                                                                <option value="3">05:00 pm</option>*@
                                                         </select>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
 
-                                        <div class="colom_div">
-                                            <div class="row">
-                                                <div class="col-md-3 col-sm-3 col-xs-3">
-                                                    <div class="week_div">
-                                                        <p>Tuesday: </p>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-3 col-sm-3 col-xs-3">
-                                                    <div class="onoffswitch">
-                                                        <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch1" checked>
-                                                        <label class="onoffswitch-label" for="myonoffswitch1">
-                                                            <span class="onoffswitch-inner"></span>
-                                                            <span class="onoffswitch-switch"></span>
-                                                        </label>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6 col-sm-6 col-xs-6">
-                                                    <div class="week_div">
-                                                        <select class="select_btn">
-                                                            <option value="0">08:00 am</option>
-                                                            <option value="1">08:00 am</option>
-                                                            <option value="2">08:00 am</option>
-                                                            <option value="3">08:00 am</option>
-                                                        </select>
-                                                        <span>to</span>
-                                                        <select class="select_btn">
-                                                            <option value="0">05:00 pm</option>
-                                                            <option value="1">05:00 pm</option>
-                                                            <option value="2">05:00 pm</option>
-                                                            <option value="3">05:00 pm</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
 
-                                        <div class="colom_div">
-                                            <div class="row">
-                                                <div class="col-md-3 col-sm-3 col-xs-3">
-                                                    <div class="week_div">
-                                                        <p>Wednesday: </p>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-3 col-sm-3 col-xs-3">
-                                                    <div class="onoffswitch">
-                                                        <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch2" checked>
-                                                        <label class="onoffswitch-label" for="myonoffswitch2">
-                                                            <span class="onoffswitch-inner"></span>
-                                                            <span class="onoffswitch-switch"></span>
-                                                        </label>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6 col-sm-6 col-xs-6">
-                                                    <div class="week_div">
-                                                        <select class="select_btn">
-                                                            <option value="0">08:00 am</option>
-                                                            <option value="1">08:00 am</option>
-                                                            <option value="2">08:00 am</option>
-                                                            <option value="3">08:00 am</option>
-                                                        </select>
-                                                        <span>to</span>
-                                                        <select class="select_btn">
-                                                            <option value="0">05:00 pm</option>
-                                                            <option value="1">05:00 pm</option>
-                                                            <option value="2">05:00 pm</option>
-                                                            <option value="3">05:00 pm</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="colom_div">
-                                            <div class="row">
-                                                <div class="col-md-3 col-sm-3 col-xs-3">
-                                                    <div class="week_div">
-                                                        <p>Thursday: </p>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-3 col-sm-3 col-xs-3">
-                                                    <div class="onoffswitch">
-                                                        <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch3" checked>
-                                                        <label class="onoffswitch-label" for="myonoffswitch3">
-                                                            <span class="onoffswitch-inner"></span>
-                                                            <span class="onoffswitch-switch"></span>
-                                                        </label>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6 col-sm-6 col-xs-6">
-                                                    <div class="week_div">
-                                                        <select class="select_btn">
-                                                            <option value="0">08:00 am</option>
-                                                            <option value="1">08:00 am</option>
-                                                            <option value="2">08:00 am</option>
-                                                            <option value="3">08:00 am</option>
-                                                        </select>
-                                                        <span>to</span>
-                                                        <select class="select_btn">
-                                                            <option value="0">05:00 pm</option>
-                                                            <option value="1">05:00 pm</option>
-                                                            <option value="2">05:00 pm</option>
-                                                            <option value="3">05:00 pm</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="colom_div">
-                                            <div class="row">
-                                                <div class="col-md-3 col-sm-3 col-xs-3">
-                                                    <div class="week_div">
-                                                        <p>Friday: </p>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-3 col-sm-3 col-xs-3">
-                                                    <div class="onoffswitch">
-                                                        <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch4" checked>
-                                                        <label class="onoffswitch-label" for="myonoffswitch4">
-                                                            <span class="onoffswitch-inner"></span>
-                                                            <span class="onoffswitch-switch"></span>
-                                                        </label>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6 col-sm-6 col-xs-6">
-                                                    <div class="week_div">
-                                                        <select class="select_btn">
-                                                            <option value="0">08:00 am</option>
-                                                            <option value="1">08:00 am</option>
-                                                            <option value="2">08:00 am</option>
-                                                            <option value="3">08:00 am</option>
-                                                        </select>
-                                                        <span>to</span>
-                                                        <select class="select_btn">
-                                                            <option value="0">05:00 pm</option>
-                                                            <option value="1">05:00 pm</option>
-                                                            <option value="2">05:00 pm</option>
-                                                            <option value="3">05:00 pm</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="colom_div">
-                                            <div class="row">
-                                                <div class="col-md-3 col-sm-3 col-xs-3">
-                                                    <div class="week_div">
-                                                        <p>Saturday: </p>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-3 col-sm-3 col-xs-3">
-                                                    <div class="onoffswitch">
-                                                        <input type="checkbox" disabled="disabled" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch5">
-                                                        <label class="onoffswitch-label" for="myonoffswitch5">
-                                                            <span class="onoffswitch-inner"></span>
-                                                            <span class="onoffswitch-switch"></span>
-                                                        </label>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6 col-sm-6 col-xs-6">
-                                                    <div class="week_div">
-                                                        <select class="select_btn">
-                                                            <option value="0">08:00 am</option>
-                                                            <option value="1">08:00 am</option>
-                                                            <option value="2">08:00 am</option>
-                                                            <option value="3">08:00 am</option>
-                                                        </select>
-                                                        <span>to</span>
-                                                        <select class="select_btn">
-                                                            <option value="0">05:00 pm</option>
-                                                            <option value="1">05:00 pm</option>
-                                                            <option value="2">05:00 pm</option>
-                                                            <option value="3">05:00 pm</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="colom_div">
-                                            <div class="row">
-                                                <div class="col-md-3 col-sm-3 col-xs-3">
-                                                    <div class="week_div">
-                                                        <p>Sunday: </p>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-3 col-sm-3 col-xs-3">
-                                                    <div class="onoffswitch">
-                                                        <input type="checkbox" disabled="disabled" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch6">
-                                                        <label class="onoffswitch-label" for="myonoffswitch6">
-                                                            <span class="onoffswitch-inner"></span>
-                                                            <span class="onoffswitch-switch"></span>
-                                                        </label>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6 col-sm-6 col-xs-6">
-                                                    <div class="week_div">
-                                                        <select class="select_btn">
-                                                            <option value="0">08:00 am</option>
-                                                            <option value="1">08:00 am</option>
-                                                            <option value="2">08:00 am</option>
-                                                            <option value="3">08:00 am</option>
-                                                        </select>
-                                                        <span>to</span>
-                                                        <select class="select_btn">
-                                                            <option value="0">05:00 pm</option>
-                                                            <option value="1">05:00 pm</option>
-                                                            <option value="2">05:00 pm</option>
-                                                            <option value="3">05:00 pm</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
 
                                     </div>
                                 </div>
@@ -709,7 +474,7 @@
                                             <form class="form-inline">
                                                 <div class="row" ng-repeat="company in staffInfo">
                                                     <div class="col-md-2 col-sm-2 text-center">
-                                                        <label for="exampleInputName2"><img src="~/Content/Assets/images/user_img.png"></label>
+                                                        <label for="exampleInputName2"><img src="../Content/Assets/images/user_img.png"></label>
                                                     </div>
                                                     <div class="col-md-4 col-sm-4">
                                                         <div class="form-group ">
@@ -724,14 +489,14 @@
 
                                                         </div>
                                                     </div><div class="col-md-1 col-sm-1">
-                                                        <a href="#" class="close_img" ng-click="removeRow(company.staffName)"><img src="~/Content/Assets/images/close-img.png"></a>
+                                                        <a href="#" class="close_img" ng-click="removeRow(company.staffName)"><img src="../Content/Assets/images/close-img.png"></a>
                                                     </div>
                                                 </div>
 
                                                 <div class="border_top">
                                                     <div class="row">
                                                         <div class="col-md-2 col-sm-2 text-center">
-                                                            <label for="exampleInputName2"><img src="~/Content/Assets/images/user_img.png"></label>
+                                                            <label for="exampleInputName2"><img src="../Content/Assets/images/user_img.png"></label>
                                                         </div>
                                                         <div class="col-md-4 col-sm-4">
                                                             <div class="form-group ">
@@ -778,27 +543,41 @@
                                         <p>Your currency is set to Indian Rupee (INR ₹)</p>
                                         <div class="step3_form">
                                             <form class="form-inline">
-                                                <div class="row" ng-repeat="service in serviceInfo">
+                                                <div class="row">
                                                     <div class="col-md-5 col-sm-4 col-xs-12">
                                                         <span>Service Name</span>
+                                                    </div>
+                                                    <div class="col-md-2 col-sm-2 col-xs-12">
+                                                        <span class="time">Time</span>
+                                                    </div>
+                                                    <div class="col-md-2 col-sm-2 col-xs-12">
+                                                        <span>Price (₹)</span>
+                                                    </div>
+                                                    <div class="col-md-2 col-sm-2 col-xs-12">
+                                                        <span>Staff</span>
+                                                    </div>
+                                                </div>
+                                                <div class="row" ng-repeat="service in serviceInfo">
+                                                    <div class="col-md-5 col-sm-4 col-xs-12">
+
                                                         <div class="form-group ">
                                                             <input type="text" class="form-control" ng-model="service.serviceName" id="" placeholder="">
                                                         </div>
                                                     </div>
                                                     <div class="col-md-2 col-sm-2 col-xs-12">
-                                                        <span class="time">Time</span>
+
                                                         <div class="form-group ">
                                                             <input type="text" class="form-control" ng-model="service.time" id="" placeholder="">
                                                         </div>
                                                     </div>
                                                     <div class="col-md-2 col-sm-2 col-xs-12">
-                                                        <span>Price (₹)</span>
+
                                                         <div class="form-group">
                                                             <input type="text" class="form-control" ng-model="service.price" id="" placeholder="">
                                                         </div>
                                                     </div>
                                                     <div class="col-md-2 col-sm-2 col-xs-12">
-                                                        <span>Staff</span>
+
                                                         <div class="form-group">
                                                             <div class="dropdown">
                                                                 <button class="angle_down" id="dLabel" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" ng-click="showDropDownBinded($index)">
@@ -810,16 +589,14 @@
                                                                     <li ng-repeat="item in service.staff">
                                                                         <input type="checkbox" name="selectedFruits[]"
                                                                                value="{{item.staffEmail}}"
-                                                                               ng-checked="selection.indexOf(item.staffName) > -1"
-                                                                               ng-click="toggleSelection(item)" ng-model="confirmed"> {{item.staffName}}
+                                                                               ng-click="toggleSelection(item)" ng-model="item.confirmed"> {{item.staffName}}
                                                                     </li>
-
                                                                 </ul>
                                                             </div>
                                                         </div>
                                                     </div>
                                                     <div class="col-md-1 col-sm-12 closeIconDiv">
-                                                        <a href="#" class="close_icon" ng-click="removeServiceRow(service.serviceName)"><img src="~/Content/Assets/images/close-img.png"></a>
+                                                        <a href="#" class="close_icon" ng-click="removeServiceRow(service.serviceName)"><img src="../Content/Assets/images/close-img.png"></a>
                                                     </div>
                                                 </div>
 
@@ -850,11 +627,8 @@
                                                                     <ul class="dropdown-menu" style="display:block;" aria-labelledby="dLabel" ng-hide="showStaff">
                                                                         <li>Who can perform this service?</li>
                                                                         <li ng-repeat="staff in staffInfo">
-                                                                            <input type="checkbox" name="selectedFruits[]"
-                                                                                   value="{{staff.staffEmail}}"
-                                                                                   ng-checked="selection.indexOf(staff.staffName) > -1"
-                                                                                   ng-click="toggleSelection(staff)" ng-model="confirmed"> {{staff.staffName}}
-                                                                            {{confirmed}}
+                                                                            <input type="checkbox" ng-click="toggleSelection(staff)" ng-model="staff.confirmed"> {{staff.staffName}}
+
                                                                         </li>
                                                                     </ul>
                                                                 </div>
@@ -875,240 +649,22 @@
         </div>
     </div>
 
-    <!-- 23-may-2017 html end here ================= -->
-    <!--<script src="js/jquery.js"></script>
-    <script src="js/bootstrap.min.js"></script>-->
-    <script type="text/javascript">
-        var app = angular.module('bookingApp', [])
-        app.controller('bookingController', function ($scope, bookingService) {
-
-            $scope.businessName = "";
-            $scope.businessIndustry = [{ name: 'Hair Salon/Barbershop', id: 1 }, { name: 'Nail Salon', id: 2 }, { name: 'Computers/Technology/IT', id: 3 }, { name: 'Spa/Massage/Waxing', id: 4 }];
-            $scope.businessPhone = "";
-            $scope.selectedIndustry = "";//$scope.businessIndustry[0].name;
-            $scope.firstStep = false;
-            $scope.secondStep = true;
-            $scope.thirdStep = true;
-            $scope.fourthStep = true;
-            $scope.showStaff = true;
-            $scope.showStaffBinded = [];
-            $scope.init = function () {
-                debugger;
-                var count = $scope.serviceInfo.length;
-                for (var i = 0; i < count; i++) {
-                    $scope.showStaffBinded[i] = true;
-                }
-
-            };
-            $scope.submitInfo = function () {
-                debugger;
-                var businessInfo = {
-                    Id: $scope.selectedIndustry,
-                    Name: $scope.businessName,
-                    Address: "sample string 3",
-                    Email: "sample string 4",
-                    Telephone: $scope.businessPhone,
-                    PostCode: "sample string 6",
-                    Website: "sample string 7",
-                    County: "sample string 8",
-                    Town: "sample string 9",
-                    Description: "sample string 10",
-                    Password: "sample string 11",
-                    CreationDate: "2017-05-24T07:20:31.1744476+00:00"
-                };
-
-                // Account.Id = $scope.employeeId;
-                // var getData = bookingService.addBookingInfo(businessInfo);
-                debugger;
-                $scope.secondStep = false;
-                $scope.firstStep = true;
-                $scope.thirdStep = true;
-                $scope.fourthStep = true;
-                $scope.staffName = '';
-                $scope.staffEmail = '';
-
-                //getData.then(function (msg) {
-                //    debugger;
-                //    alert(msg.success);
-                //    $scope.divAccount = false;
-                //}, function () {
-                //    alert('Error in updating record');
-                //});
-
-            }
-            $scope.setUpBusiness = function () {
-                $scope.firstStep = true;
-                $scope.secondStep = true;
-                $scope.thirdStep = false;
-                $scope.fourthStep = true;
-            }
-            $scope.addStaff = function () {
-                $scope.firstStep = true;
-                $scope.secondStep = true;
-                $scope.thirdStep = true;
-                $scope.fourthStep = false;
-            }
-            $scope.addServices = function () {
-                $scope.firstStep = true;
-                $scope.secondStep = true;
-                $scope.thirdStep = true;
-                $scope.fourthStep = false;
-            }
-            $scope.backSecondStep = function () {
-                $scope.firstStep = false;
-                $scope.secondStep = true;
-                $scope.thirdStep = true;
-                $scope.fourthStep = true;
-            }
-            $scope.backThirdStep = function () {
-                $scope.firstStep = true;
-                $scope.secondStep = false;
-                $scope.thirdStep = true;
-                $scope.fourthStep = true;
-            }
-            $scope.backFourthStep = function () {
-                $scope.firstStep = true;
-                $scope.secondStep = true;
-                $scope.thirdStep = false;
-                $scope.fourthStep = true;
-            }
-            $scope.showDropDown = function () {
-                debugger;
-                $scope.showStaff = !$scope.showStaff;
-            }
-            $scope.showDropDownBinded = function (index) {
-                debugger;
-                $scope.showStaffBinded[index] = !$scope.showStaffBinded[index];
-            }
-            $scope.staffInfo = [
-                     {
-                         'staffName': 'David',
-                         'staffEmail': 'bookingmanager18@gmail.com',
-
-                     },
-                     {
-                         'staffName': 'John',
-                         'staffEmail': 'bookingmanager18@gmail.com',
-
-                     },
-
-            ];
-            $scope.sampleService = "";
-            $scope.serviceTime = "";
-            $scope.servicePrice = "";
-            $scope.serviceInfo = [
-                    {
-                        'serviceName': 'Web Design',
-                        'time': '60 min',
-                        'price': '£20',
-                        'staff': $scope.staffInfo,
-                    },
-
-            ];
-            //$scope.confirmed = false;
-            $scope.addStaffItem = function () {
-                debugger;
-
-                $scope.staffInfo.push({ 'staffName': $scope.staffName, 'staffEmail': $scope.staffEmail });
-
-                $scope.staffName = '';
-                $scope.staffEmail = '';
-            };
-            $scope.toggleSelection = function staffChange(item) {
-                debugger;
-                $scope.confirmed='';
-                var checkconf = $scope.confirmed;
-                item['confirmed'] = checkconf;
-
-            }
-            $scope.removeRow = function (name) {
-                debugger;
-                var index = -1;
-                var comArr = eval($scope.staffInfo);
-                for (var i = 0; i < comArr.length; i++) {
-                    if (comArr[i].staffName === name) {
-                        index = i;
-                        break;
-                    }
-                }
-                if (index === -1) {
-                    alert("Something gone wrong");
-                }
-                $scope.staffInfo.splice(index, 1);
-            };
-            $scope.addServiceItem = function () {
-                debugger;
-
-                $scope.serviceInfo.push({ 'serviceName': $scope.sampleService, 'time': $scope.serviceTime, 'price': $scope.servicePrice, 'staff': $scope.staffInfo, });
-                $scope.staffName = '';
-                $scope.staffEmail = '';
-            };
-            $scope.removeServiceRow = function (name) {
-                debugger;
-                var index = -1;
-                var comArr = eval($scope.staffInfo);
-                for (var i = 0; i < comArr.length; i++) {
-                    if (comArr[i].staffName === name) {
-                        index = i;
-                        break;
-                    }
-                }
-                if (index === -1) {
-                    alert("Something gone wrong");
-                }
-                $scope.staffInfo.splice(index, 1);
-            };
-        });
-        app.service("bookingService", function ($http) {
-            this.addBookingInfo = function (businessInfo) {
-                debugger;
-                var response = $http({
-                    method: "post",
-                    url: "http://romzbookingmanager.azurewebsites.net/api/companyregistration/CreateAccount",
-                    params: businessInfo
-                });
-                return response;
-            }
-            this.setUpBusinessHr = function (businessInfo) {
-                debugger;
-                var response = $http({
-                    method: "post",
-                    url: "http://romzbookingmanager.azurewebsites.net/api/companyregistration/CreateAccount",
-                    params: businessInfo
-                });
-                return response;
-            }
-            this.addStaff = function (businessInfo) {
-                debugger;
-                var response = $http({
-                    method: "post",
-                    url: "http://romzbookingmanager.azurewebsites.net/api/companyregistration/CreateAccount",
-                    params: businessInfo
-                });
-                return response;
-            }
-            this.addServices = function (businessInfo) {
-                debugger;
-                var response = $http({
-                    method: "post",
-                    url: "http://romzbookingmanager.azurewebsites.net/api/companyregistration/CreateAccount",
-                    params: businessInfo
-                });
-                return response;
-            }
-        })
-    </script>
-    <script>
-        $(document).ready(function () {
-            //$(function () {
-            //    $('[data-toggle="tooltip"]').tooltip()
-            //})
-        });
-    </script>
-
     <script>
         $(document).ready(function () {
 
+            //$(".nextBtn").click(function () {
+            //    debugger;
+            //    var element = $(".stepwizard a.btn-primary");
+
+
+            //    //$(element).next().find("a.btn-default").click();
+            //    nexttab(element);
+            //});
+
+            //function nexttab(ele)
+            //{
+            //    $(ele).next().find(".stepwizard a.btn-default").click();
+            //}
             var navListItems = $('div.setup-panel div a'),
                     allWells = $('.setup-content'),
                     allNextBtn = $('.nextBtn');
@@ -1149,6 +705,5 @@
             $('div.setup-panel div a.btn-primary').trigger('click');
         });
     </script>
-</body>
+</div>
 
-</html>

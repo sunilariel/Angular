@@ -6,10 +6,20 @@
     <title>@ViewBag.Title - My ASP.NET Application</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
-
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:200,300,400,500,600,700" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <link href="../Content/Assets/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../Content/Assets/fonts/Font_stylesheet.css" rel="stylesheet">
+    <link href="../Content/Assets/css/icon.css" rel="stylesheet">
+    <link href="../Content/Assets/css/animate.css" rel="stylesheet">
+    <link href="../Content/Assets/css/custom.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+    <script src="../Content/Assets/js/bootstrap.min.js"></script>
+    <script src="../Content/Assets/js/jquery.js"></script>
+    <script src="../App/controller/wizard.js"></script>
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
+    @*<div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -30,12 +40,13 @@
         </div>
     </div>
     <div class="container body-content">
+        *@
         @RenderBody()
-        <hr />
+        @*<hr />
         <footer>
             <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
         </footer>
-    </div>
+    </div>*@
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
