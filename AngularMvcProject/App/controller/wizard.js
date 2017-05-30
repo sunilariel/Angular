@@ -1,5 +1,5 @@
 ﻿var app = angular.module('bookingApp', [])
-app.controller('bookingController', function ($scope, bookingService) {
+app.controller('bookingController', ['$scope', '$http', '$timeout', 'bookingService', 'businessInfo', function ($scope, $http, $timeout, bookingService, businessInfo) {
 
     $scope.businessName = "";
     $scope.businessIndustry = [{ name: 'Hair Salon/Barbershop', id: 1 }, { name: 'Nail Salon', id: 2 }, { name: 'Computers/Technology/IT', id: 3 }, { name: 'Spa/Massage/Waxing', id: 4 }];
@@ -22,44 +22,92 @@ app.controller('bookingController', function ($scope, bookingService) {
     $scope.submitInfo = function () {
         debugger;
         var businessInfo = {
-            Id: $scope.selectedIndustry,
-            Name: $scope.businessName,
-            Address: "sample string 3",
-            Email: "sample string 4",
-            Telephone: $scope.businessPhone,
-            PostCode: "sample string 6",
-            Website: "sample string 7",
-            County: "sample string 8",
-            Town: "sample string 9",
-            Description: "sample string 10",
-            Password: "sample string 11",
-            CreationDate: "2017-05-24T07:20:31.1744476+00:00"
+            Url: "api/companyregistration/CreateAccount",
+            RequestData: {
+                Id: $scope.selectedIndustry,
+                Name: $scope.businessName,
+                Address: "sample string 3",
+                Email: "sample string 4",
+                Telephone: $scope.businessPhone,
+                PostCode: "sample string 6",
+                Website: "sample string 7",
+                County: "sample string 8",
+                Town: "sample string 9",
+                Description: "sample string 10",
+                Password: "sample string 11",
+                CreationDate: "2017-05-24T07:20:31.1744476+00:00"
+            }
         };
 
         // Account.Id = $scope.employeeId;
-        // var getData = bookingService.addBookingInfo(businessInfo);
+        var getData = bookingService.register(businessInfo);
         debugger;
-        $scope.secondStep = false;
-        $scope.firstStep = true;
-        $scope.thirdStep = true;
-        $scope.fourthStep = true;
-        $scope.staffName = '';
-        $scope.staffEmail = '';
+        getData.then(function (msg) {
+            debugger;
+            if (msg.data.Success == true) {
+                $scope.MessageText = "Saving Data"
+                $scope.companyId = msg.data.ReturnObject.CompanyId;
+                $scope.msg = "Post Data Submitted Successfully!";
 
-        //getData.then(function (msg) {
-        //    debugger;
-        //    alert(msg.success);
-        //    $scope.divAccount = false;
-        //}, function () {
-        //    alert('Error in updating record');
-        //});
-
+                $scope.secondStep = false;
+                $scope.firstStep = true;
+                $scope.thirdStep = true;
+                $scope.fourthStep = true;
+                $scope.staffName = '';
+                $scope.staffEmail = '';
+                $scope.divAccount = false;
+            }
+        }, function () {
+            alert('Error in updating record');
+        });
     }
+    $scope.timeInfoFrom = ["08:00 am", "09:00 am", "10:00 am", "11:00 am", "12:00 pm", "13:00 pm", "14:00 pm", "15:00 pm", "16:00 pm", "17:00 pm", "18:00 pm", "19:00 pm", "20:00 pm"];
+    $scope.timeInfoTo = ["08:00 am", "09:00 am", "10:00 am", "11:00 am", "12:00 pm", "13:00 pm", "14:00 pm", "15:00 pm", "16:00 pm", "17:00 pm", "18:00 pm", "19:00 pm", "20:00 pm"];
+    $scope.businessHourInfo = [{ 'day': 'Monday', 'timeFrom': $scope.timeInfoFrom, 'timeTo': $scope.timeInfoTo, 'available': true },
+    { 'day': 'Tuesday', 'timeFrom': $scope.timeInfoFrom, 'timeTo': $scope.timeInfoTo, 'available': true },
+    { 'day': 'Wednesday', 'timeFrom': $scope.timeInfoFrom, 'timeTo': $scope.timeInfoTo, 'available': true },
+    { 'day': 'Thursday', 'timeFrom': $scope.timeInfoFrom, 'timeTo': $scope.timeInfoTo, 'available': true },
+    { 'day': 'Friday', 'timeFrom': $scope.timeInfoFrom, 'timeTo': $scope.timeInfoTo, 'available': true },
+    { 'day': 'Saturday', 'timeFrom': $scope.timeInfoFrom, 'timeTo': $scope.timeInfoTo, 'available': false },
+    { 'day': 'Sunday', 'timeFrom': $scope.timeInfoFrom, 'timeTo': $scope.timeInfoTo, 'available': false }, ]
     $scope.setUpBusiness = function () {
-        $scope.firstStep = true;
-        $scope.secondStep = true;
-        $scope.thirdStep = false;
-        $scope.fourthStep = true;
+        debugger;
+        var businessInfo = {
+            Url: "api/companyregistration/SetBusinessInfo",
+            RequestData: {
+                Id: $scope.companyId,
+                Name: "sample string 1",
+                Address: "sample string 3",
+                Email: "sample string 4",
+                Telephone: "12345678",
+                PostCode: "sample string 6",
+                Website: "sample string 7",
+                County: "sample string 8",
+                Town: "sample string 9",
+                Description: "sample string 10",
+                Password: "sample string 11",
+                CreationDate: "2017-05-24T07:20:31.1744476+00:00"
+            }
+        };
+
+        var getData = businessInfo.register(businessInfo);
+
+        getData.then(function (msg) {
+            debugger;
+            if (msg.data.Success == true) {
+                $scope.MessageText = "Saving Data"
+
+                $scope.msg = "Post Data Submitted Successfully!";
+
+                $scope.firstStep = true;
+                $scope.secondStep = true;
+                $scope.thirdStep = false;
+                $scope.fourthStep = true;
+            }
+        }, function () {
+            alert('Error in updating record');
+        });
+
     }
     $scope.addStaff = function () {
         $scope.firstStep = true;
@@ -93,10 +141,12 @@ app.controller('bookingController', function ($scope, bookingService) {
     }
     $scope.showDropDown = function () {
         debugger;
+        $scope.init();
         $scope.showStaff = !$scope.showStaff;
     }
     $scope.showDropDownBinded = function (index) {
         debugger;
+        // $scope.init();
         $scope.showStaffBinded[index] = !$scope.showStaffBinded[index];
     }
     $scope.staffInfo = [
@@ -115,29 +165,27 @@ app.controller('bookingController', function ($scope, bookingService) {
     $scope.sampleService = "";
     $scope.serviceTime = "";
     $scope.servicePrice = "";
+
     $scope.serviceInfo = [
             {
                 'serviceName': 'Web Design',
                 'time': '60 min',
                 'price': '£20',
-                'staff': $scope.staffInfo,
+                'staff': $scope.staffInfoCopy,
             },
 
     ];
-    //$scope.confirmed = false;
+
     $scope.addStaffItem = function () {
         debugger;
 
         $scope.staffInfo.push({ 'staffName': $scope.staffName, 'staffEmail': $scope.staffEmail });
-
         $scope.staffName = '';
         $scope.staffEmail = '';
     };
+    $scope.HasPassport = false;
     $scope.toggleSelection = function staffChange(item) {
         debugger;
-        var checkconf = $scope.confirmed;
-        item['confirmed'] = checkconf;
-
     }
     $scope.removeRow = function (name) {
         debugger;
@@ -154,19 +202,22 @@ app.controller('bookingController', function ($scope, bookingService) {
         }
         $scope.staffInfo.splice(index, 1);
     };
+
     $scope.addServiceItem = function () {
         debugger;
-
-        $scope.serviceInfo.push({ 'serviceName': $scope.sampleService, 'time': $scope.serviceTime, 'price': $scope.servicePrice, 'staff': $scope.staffInfo, });
+        $scope.staffInfoCopy = angular.copy($scope.staffInfo);
+        $scope.serviceInfo.push({ 'serviceName': $scope.sampleService, 'time': $scope.serviceTime, 'price': $scope.servicePrice, 'staff': $scope.staffInfoCopy, });
         $scope.staffName = '';
         $scope.staffEmail = '';
+        $scope.showStaff = true;
+        $scope.init();
     };
     $scope.removeServiceRow = function (name) {
         debugger;
         var index = -1;
-        var comArr = eval($scope.staffInfo);
+        var comArr = eval($scope.serviceInfo);
         for (var i = 0; i < comArr.length; i++) {
-            if (comArr[i].staffName === name) {
+            if (comArr[i].serviceName === name) {
                 index = i;
                 break;
             }
@@ -174,44 +225,22 @@ app.controller('bookingController', function ($scope, bookingService) {
         if (index === -1) {
             alert("Something gone wrong");
         }
-        $scope.staffInfo.splice(index, 1);
+        $scope.serviceInfo.splice(index, 1);
     };
-});
-app.service("bookingService", function ($http) {
-    this.addBookingInfo = function (businessInfo) {
+    $scope.switchOnOff = function (item) {
         debugger;
-        var response = $http({
-            method: "post",
-            url: "http://romzbookingmanager.azurewebsites.net/api/companyregistration/CreateAccount",
-            params: businessInfo
+        angular.forEach($scope.businessHourInfo, function (value, key) {
+            debugger; if (value.day != "Sunday" && value.day != "Saturday") {
+                if (item.day == value.day) {
+                    if (item['available'] == true) {
+                        value.available = false;
+                    }
+                    else {
+                        value.available = true;
+                    }
+                }
+            }
         });
-        return response;
+
     }
-    this.setUpBusinessHr = function (businessInfo) {
-        debugger;
-        var response = $http({
-            method: "post",
-            url: "http://romzbookingmanager.azurewebsites.net/api/companyregistration/CreateAccount",
-            params: businessInfo
-        });
-        return response;
-    }
-    this.addStaff = function (businessInfo) {
-        debugger;
-        var response = $http({
-            method: "post",
-            url: "http://romzbookingmanager.azurewebsites.net/api/companyregistration/CreateAccount",
-            params: businessInfo
-        });
-        return response;
-    }
-    this.addServices = function (businessInfo) {
-        debugger;
-        var response = $http({
-            method: "post",
-            url: "http://romzbookingmanager.azurewebsites.net/api/companyregistration/CreateAccount",
-            params: businessInfo
-        });
-        return response;
-    }
-})
+}]);
