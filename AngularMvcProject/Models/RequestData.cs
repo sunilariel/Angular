@@ -25,4 +25,82 @@ namespace AngularMvcProject.Models
         public string Url { get; set; }
         public RequestData RequestData { get; set; }
     }
+
+    public class RequestStaffData
+    {
+        public int Id { get; set; }
+
+        public int CompanyId { get; set; }
+
+        public string UserName { get; set; }
+
+        public string Password { get; set; }
+
+        public string FirstName { get; set; }
+
+        public string LastName { get; set; }
+
+        public string Address { get; set; }
+
+        public string Email { get; set; }
+
+        public string TelephoneNo { get; set; }
+
+        public string CreationDate { get; set; }
+    }
+
+    public class StaffData
+    {
+        public string Url { get; set; }
+
+        public RequestStaffData ReqStaffData { get; set; }
+    }
+
+    public class ReqWorkingHours
+    {
+        public int Id { get; set; }
+        public int CompanyId { get; set; }
+        public string Start { get; set; }
+        public string End { get; set; }
+        public string NameOfDay { get; set; }
+        public bool IsOffAllDay { get; set; }
+        public string CreationDate { get; set; }
+    }
+
+    public class WorkingHours
+    {
+        public string Url { get; set; }
+
+        public ReqWorkingHours ReqWorkingHours { get; set; }
+    }
+
+    public class RequestAddService
+    {
+        public int Id { get; set; }
+
+        public int CompanyId { get; set; }
+
+        public string Name { get; set; }
+
+        public string CategoryName { get; set; }
+
+        public int CategoryId { get; set; }
+
+        public int DurationInMinutes { get; set; }
+
+        public int DurationInHours { get; set; }
+
+        public int Cost { get; set; }
+
+        public string Currency { get; set; }
+
+        public string CreationDate { get; set; }
+    }
+
+    public class Service
+    {
+       public string Url { get; set; }
+
+       public RequestAddService RequestAddService { get; set; }
+    }
 }

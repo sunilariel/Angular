@@ -114,7 +114,7 @@
             </nav>
         </div>
         <div class="clearfix"> </div>
-        <div style="width: 100%;text-align: center;position: absolute;z-index: 999999; top:65px;" ng-if="IsVisible"><span id="voice-box" class="noDisplay" style="background:yellow; padding:5px 10px; border-radius:0 0 2px 2px;" ng-bind="MessageText"></span></div>
+        @*<div style="width: 100%;text-align: center;position: absolute;z-index: 999999; top:65px;" ng-if="IsVisible=true"><span id="voice-box" class="noDisplay" style="background:yellow; padding:5px 10px; border-radius:0 0 2px 2px;" ng-bind="MessageText"></span></div>*@
     </header>
 
     <div class="left_sidebar">
@@ -272,12 +272,8 @@
                                                             <!-- </span> -->
                                                         </li>
                                                     </ul>
-
-
-
                                                 </div>
                                             </div>
-
                                         </div>
                                     </div>
                                     <div class="tab-pane" id="staff-timeoff" style="padding-bottom: 100px;"> </div>
@@ -305,6 +301,7 @@
     <!-- 23-may-2017 html start here ================= -->
 
     <div class="fixed_div" ng-controller="bookingController" data-ng-init="init()">
+        <div style="width: 100%;text-align: center;position: absolute;z-index: 999999; top:65px;" ng-if="IsVisible"><span id="voice-box" class="noDisplay" style="background:yellow; padding:5px 10px; border-radius:0 0 2px 2px;" ng-bind="MessageText"></span></div>
         <div class="demo_wizard">
             <div class="demo_snipt">
                 <div class="wizar_bg"></div>
@@ -332,8 +329,9 @@
                     </div>
                 </div>
                 <div class="container_div">
-                    <form role="form">
-                        <div class="row setup-content" id="step-1" ng-hide="firstStep">
+
+                    <div class="row setup-content" id="step-1" ng-hide="firstStep">
+                        <form ng-submit="submitInfo()" name="step1">
                             <div class="col-xs-12">
                                 <div class="col-md-12">
                                     <div class="welcome_div">
@@ -350,7 +348,7 @@
                                             <div class="col-md-4 col-sm-4 col-xs-4">
                                                 <div class="setmore back_btn">
                                                     <button type="button" class="btn btn-default"><i class="fa fa-angle-left" aria-hidden="true"></i></button>
-                                                    <button class="btn btn-primary nextBtn btn-lg pull-right" ng-click="submitInfo()" type="button">Next <i class="fa fa-chevron-right" aria-hidden="true"></i></button>
+                                                    <button class="btn btn-primary nextBtn btn-lg pull-right" type="submit">Next <i class="fa fa-chevron-right" aria-hidden="true"></i></button>
                                                 </div>
                                             </div>
                                         </div>
@@ -359,35 +357,28 @@
                                         <p>Setup only takes a moment, you'll be booking appointments in no time.</p>
                                         <div class="form-group">
                                             <label class="control-label">Your Business</label>
-                                            <input maxlength="100" type="text" required="required" class="form-control" ng-bind="businessName" placeholder="Business Name " />
+                                            <input maxlength="100" type="text" required="required" class="form-control" ng-model="businessName" placeholder="Business Name " />
                                         </div>
                                         <div class="form-group">
                                             <label class="control-label">Industry:</label>
-                                            <!--<select class="form-control" ng-model="test" ng-options="v as v.name for v in businessIndustry">
-                                                                                    <option value="0">Industry:</option>
-                                            <option value="1">Hair Salon/Barbershop</option>
-                                            <option value="2">Nail Salon</option>
-                                            <option value="3">Spa/Massage/Waxing</option>
-                                            <option value="4">Computers/Technology/IT</option>
-                                                                                </select>-->
-                                            <select class="form-control" ng-model="selectedIndustry" data-ng-options="Industry.id as Industry.name for Industry in businessIndustry">
-                                                <!--<option value="0" ng-selected="selectedIndustry == test">Choose Industry..</option>
-                                                <option ng-repeat="item in businessIndustry" value="{{item.id}}">
-                                                    {{item.name}}
-                                                </option>-->
+
+                                            <select class="form-control" ng-required="true" ng-model="selectedIndustry" data-ng-options="Industry.id as Industry.name for Industry in businessIndustry">
+                                                <option value="" selected="selected">Choose Industry...</option>
                                             </select>
                                         </div>
 
                                         <div class="form-group">
                                             <label class="control-label">Phone No:</label>
-                                            <input maxlength="100" type="text" required="required" class="form-control" placeholder="Business Phone" ng-bind="businessPhone" />
+                                            <input maxlength="100" type="text" required="required" class="form-control" placeholder="Business Phone" ng-model="businessPhone" />
                                         </div>
 
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="row setup-content" id="step-2" ng-hide="secondStep">
+                        </form>
+                    </div>
+                    <div class="row setup-content" id="step-2" ng-hide="secondStep">
+                        <form ng-submit="setUpBusiness()" name="step2">
                             <div class="col-xs-12">
                                 <div class="col-md-12">
                                     <div class="welcome_div">
@@ -401,7 +392,7 @@
                                             <div class="col-md-4 col-sm-4 col-xs-4">
                                                 <div class="setmore back_btn">
                                                     <button type="button" class="btn btn-default" ng-click="backSecondStep()"><i class="fa fa-angle-left" aria-hidden="true"></i></button>
-                                                    <button class="btn btn-primary nextBtn btn-lg pull-right" type="button" ng-click="setUpBusiness()">Next <i class="fa fa-chevron-right" aria-hidden="true"></i></button>
+                                                    <button class="btn btn-primary nextBtn btn-lg pull-right" type="submit">Next <i class="fa fa-chevron-right" aria-hidden="true"></i></button>
                                                 </div>
                                             </div>
                                         </div>
@@ -426,18 +417,12 @@
                                                 </div>
                                                 <div class="col-md-6 col-sm-6 col-xs-6">
                                                     <div class="week_div">
-                                                        <select class="select_btn" ng-model="selectFrom" data-ng-options="o as o for o in timedata.timeFrom">
-                                                            @*<option value="0">08:00 am</option>
-                                                                <option value="1">08:00 am</option>
-                                                                <option value="2">08:00 am</option>
-                                                                <option value="3">08:00 am</option>*@
+                                                        <select class="select_btn" ng-required="true" ng-model="timedata.timeFrom" ng-disabled="!timedata.available">
+                                                            <option ng-repeat="option in timeInfoFrom" value="{{option}}">{{option}}</option>
                                                         </select>
                                                         <span>to</span>
-                                                        <select class="select_btn" ng-model="selectTo" data-ng-options="t as t for t in timedata.timeTo">
-                                                            @*<option value="0">05:00 pm</option>
-                                                                <option value="1">05:00 pm</option>
-                                                                <option value="2">05:00 pm</option>
-                                                                <option value="3">05:00 pm</option>*@
+                                                        <select class="select_btn" ng-required="true" ng-model="timedata.timeTo" ng-disabled="!timedata.available">
+                                                            <option ng-repeat="option in timeInfoTo" value="{{option}}">{{option}}</option>
                                                         </select>
                                                     </div>
                                                 </div>
@@ -449,8 +434,10 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="row setup-content" id="step-3" ng-hide="thirdStep">
+                        </form>
+                    </div>
+                    <div class="row setup-content" id="step-3" ng-hide="thirdStep">
+                        <form ng-submit="addStaff()" name="step3">
                             <div class="col-xs-12">
                                 <div class="col-md-12">
                                     <div class="welcome_div">
@@ -464,64 +451,66 @@
                                             <div class="col-md-4 col-sm-4 col-xs-4">
                                                 <div class="setmore back_btn">
                                                     <button type="button" class="btn btn-default" ng-click="backThirdStep()"><i class="fa fa-angle-left" aria-hidden="true"></i></button>
-                                                    <button class="btn btn-primary nextBtn btn-lg pull-right" type="button" ng-click="addStaff()">Next <i class=" fa fa-chevron-right" aria-hidden="true"></i></button>
+                                                    <button class="btn btn-primary nextBtn btn-lg pull-right" type="submit">Next <i class=" fa fa-chevron-right" aria-hidden="true"></i></button>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="group_label">
                                         <div class="step3_form">
-                                            <form class="form-inline">
-                                                <div class="row" ng-repeat="company in staffInfo">
+
+                                            <div class="row" ng-repeat="company in staffInfo">
+                                                <div class="col-md-2 col-sm-2 text-center">
+                                                    <label for="exampleInputName2"><img src="../Content/Assets/images/user_img.png"></label>
+                                                </div>
+                                                <div class="col-md-4 col-sm-4">
+                                                    <div class="form-group ">
+                                                        <input type="text" class="form-control" id="" ng-model="company.staffName" value="" placeholder="">
+                                                        <!--<span ng-bind="company.staffName" class="form-control"></span>-->
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-5 col-sm-5">
+                                                    <div class="form-group">
+                                                        <input type="email" class="form-control" ng-model="company.staffEmail" id="" placeholder="">
+                                                        <!--<span ng-bind="company.staffEmail" class="form-control"></span>-->
+
+                                                    </div>
+                                                </div><div class="col-md-1 col-sm-1">
+                                                    <a href="#" class="close_img" ng-click="removeRow(company.staffName)"><img src="../Content/Assets/images/close-img.png"></a>
+                                                </div>
+                                            </div>
+
+                                            <div class="border_top">
+                                                <div class="row">
                                                     <div class="col-md-2 col-sm-2 text-center">
                                                         <label for="exampleInputName2"><img src="../Content/Assets/images/user_img.png"></label>
                                                     </div>
                                                     <div class="col-md-4 col-sm-4">
                                                         <div class="form-group ">
-                                                            <input type="text" class="form-control" id="" ng-model="company.staffName" value="" placeholder="">
-                                                            <!--<span ng-bind="company.staffName" class="form-control"></span>-->
+                                                            <input type="text" ng-model="staffName" class="form-control" id="exampleInputName2" placeholder="Name">
                                                         </div>
                                                     </div>
-                                                    <div class="col-md-5 col-sm-5">
+                                                    <div class="col-md-4 col-sm-4">
                                                         <div class="form-group">
-                                                            <input type="email" class="form-control" ng-model="company.staffEmail" id="" placeholder="">
-                                                            <!--<span ng-bind="company.staffEmail" class="form-control"></span>-->
-
-                                                        </div>
-                                                    </div><div class="col-md-1 col-sm-1">
-                                                        <a href="#" class="close_img" ng-click="removeRow(company.staffName)"><img src="../Content/Assets/images/close-img.png"></a>
-                                                    </div>
-                                                </div>
-
-                                                <div class="border_top">
-                                                    <div class="row">
-                                                        <div class="col-md-2 col-sm-2 text-center">
-                                                            <label for="exampleInputName2"><img src="../Content/Assets/images/user_img.png"></label>
-                                                        </div>
-                                                        <div class="col-md-4 col-sm-4">
-                                                            <div class="form-group ">
-                                                                <input type="text" ng-model="staffName" class="form-control" id="exampleInputName2" placeholder="Name">
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-md-4 col-sm-4">
-                                                            <div class="form-group">
-                                                                <input type="email" ng-model="staffEmail" class="form-control" id="exampleInputEmail2" placeholder="Email">
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-md-2 col-sm-2">
-                                                            <button type="submit" class="btn btn-default" ng-click="addStaffItem()">Add</button>
+                                                            <input type="email" ng-model="staffEmail" class="form-control" id="exampleInputEmail2" placeholder="Email">
                                                         </div>
                                                     </div>
+                                                    <div class="col-md-2 col-sm-2">
+                                                        <button type="button" class="btn btn-default" ng-click="addStaffItem()">Add</button>
+                                                    </div>
                                                 </div>
+                                            </div>
 
-                                            </form>
+
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="row setup-content" id="step-4" ng-hide="fourthStep">
-                            <div class="col-xs-12">
+                        </form>
+                    </div>
+                    <div class="row setup-content" id="step-4" ng-hide="fourthStep">
+                        <div class="col-xs-12">
+                            <form ng-submit="addServices()" name="step3">
                                 <div class="col-md-12">
                                     <div class="welcome_div">
                                         <div class="row">
@@ -534,7 +523,7 @@
                                             <div class="col-md-4 col-sm-4">
                                                 <div class="setmore back_btn">
                                                     <button type="button" class="btn btn-default" ng-click="backFourthStep()"><i class="fa fa-angle-left" aria-hidden="true"></i></button>
-                                                    <button class="btn btn-primary nextBtn btn-lg pull-right" type="button" ng-click="addServices()">Next <i class=" fa fa-chevron-right" aria-hidden="true"></i></button>
+                                                    <button class="btn btn-primary nextBtn btn-lg pull-right" type="submit">Next <i class=" fa fa-chevron-right" aria-hidden="true"></i></button>
                                                 </div>
                                             </div>
                                         </div>
@@ -542,108 +531,109 @@
                                     <div class="group_label">
                                         <p>Your currency is set to Indian Rupee (INR ₹)</p>
                                         <div class="step3_form">
-                                            <form class="form-inline">
-                                                <div class="row">
-                                                    <div class="col-md-5 col-sm-4 col-xs-12">
-                                                        <span>Service Name</span>
-                                                    </div>
-                                                    <div class="col-md-2 col-sm-2 col-xs-12">
-                                                        <span class="time">Time</span>
-                                                    </div>
-                                                    <div class="col-md-2 col-sm-2 col-xs-12">
-                                                        <span>Price (₹)</span>
-                                                    </div>
-                                                    <div class="col-md-2 col-sm-2 col-xs-12">
-                                                        <span>Staff</span>
+
+                                            <div class="row">
+                                                <div class="col-md-5 col-sm-4 col-xs-12">
+                                                    <span>Service Name</span>
+                                                </div>
+                                                <div class="col-md-2 col-sm-2 col-xs-12">
+                                                    <span class="time">Time</span>
+                                                </div>
+                                                <div class="col-md-2 col-sm-2 col-xs-12">
+                                                    <span>Price (₹)</span>
+                                                </div>
+                                                <div class="col-md-2 col-sm-2 col-xs-12">
+                                                    <span>Staff</span>
+                                                </div>
+                                            </div>
+                                            <div class="row" ng-repeat="service in serviceInfo">
+                                                <div class="col-md-5 col-sm-4 col-xs-12">
+
+                                                    <div class="form-group ">
+                                                        <input type="text" class="form-control" ng-model="service.serviceName" id="" placeholder="">
                                                     </div>
                                                 </div>
-                                                <div class="row" ng-repeat="service in serviceInfo">
-                                                    <div class="col-md-5 col-sm-4 col-xs-12">
+                                                <div class="col-md-2 col-sm-2 col-xs-12">
 
+                                                    <div class="form-group ">
+                                                        <input type="text" class="form-control" ng-model="service.time" id="" placeholder="">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-2 col-sm-2 col-xs-12">
+
+                                                    <div class="form-group">
+                                                        <input type="text" class="form-control" ng-model="service.price" id="" placeholder="">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-2 col-sm-2 col-xs-12">
+
+                                                    <div class="form-group">
+                                                        <div class="dropdown">
+                                                            <button class="angle_down" id="dLabel" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" ng-click="showDropDownBinded($index)">
+                                                                <i class="fa fa-user" aria-hidden="true"></i> 1 <i class="fa fa-angle-down" aria-hidden="true"></i>
+                                                                </span>
+                                                            </button>
+                                                            <ul class="dropdown-menu" style="display:block" aria-labelledby="dLabel" ng-hide="showStaffBinded[$index]">
+                                                                <li>Who can perform this service?</li>
+                                                                <li ng-repeat="item in service.staff">
+                                                                    <input type="checkbox" name="selectedFruits[]"
+                                                                           value="{{item.staffEmail}}"
+                                                                           ng-click="toggleSelection(item)" ng-model="item.confirmed"> {{item.staffName}}
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-1 col-sm-12 closeIconDiv">
+                                                    <a href="#" class="close_icon" ng-click="removeServiceRow(service.serviceName)"><img src="../Content/Assets/images/close-img.png"></a>
+                                                </div>
+                                            </div>
+
+                                            <div class="border_top sample_div">
+                                                <div class="row">
+                                                    <div class="col-md-4 col-sm-4 col-xs-12">
                                                         <div class="form-group ">
-                                                            <input type="text" class="form-control" ng-model="service.serviceName" id="" placeholder="">
+                                                            <input type="text" class="form-control" id="" ng-model="sampleService" placeholder="Sample Service">
                                                         </div>
                                                     </div>
                                                     <div class="col-md-2 col-sm-2 col-xs-12">
-
                                                         <div class="form-group ">
-                                                            <input type="text" class="form-control" ng-model="service.time" id="" placeholder="">
+                                                            <input type="text" class="form-control" id="" ng-model="serviceTime" placeholder="0 min">
                                                         </div>
                                                     </div>
                                                     <div class="col-md-2 col-sm-2 col-xs-12">
-
                                                         <div class="form-group">
-                                                            <input type="text" class="form-control" ng-model="service.price" id="" placeholder="">
+                                                            <input type="text" class="form-control" id="" ng-model="servicePrice" placeholder="(₹) 0">
                                                         </div>
                                                     </div>
-                                                    <div class="col-md-2 col-sm-2 col-xs-12">
-
+                                                    <div class="col-md-4 col-sm-4 col-xs-12">
                                                         <div class="form-group">
                                                             <div class="dropdown">
-                                                                <button class="angle_down" id="dLabel" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" ng-click="showDropDownBinded($index)">
-                                                                    <i class="fa fa-user" aria-hidden="true"></i> 1 <i class="fa fa-angle-down" aria-hidden="true"></i>
-                                                                    </span>
+                                                                <button id="dLabel" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" ng-click="showDropDown()">
+                                                                    <i class="fa fa-user" aria-hidden="true"></i> <i class="fa fa-angle-down" aria-hidden="true"></i>
                                                                 </button>
-                                                                <ul class="dropdown-menu" style="display:block" aria-labelledby="dLabel" ng-hide="showStaffBinded[$index]">
+                                                                <button type="submit" class="btn btn-default" ng-click="addServiceItem()">Add</button>
+                                                                <ul class="dropdown-menu" style="display:block;" aria-labelledby="dLabel" ng-hide="showStaff">
                                                                     <li>Who can perform this service?</li>
-                                                                    <li ng-repeat="item in service.staff">
-                                                                        <input type="checkbox" name="selectedFruits[]"
-                                                                               value="{{item.staffEmail}}"
-                                                                               ng-click="toggleSelection(item)" ng-model="item.confirmed"> {{item.staffName}}
+                                                                    <li ng-repeat="staff in staffInfo">
+                                                                        <input type="checkbox" ng-click="toggleSelection(staff)" ng-model="staff.confirmed"> {{staff.staffName}}
+
                                                                     </li>
                                                                 </ul>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div class="col-md-1 col-sm-12 closeIconDiv">
-                                                        <a href="#" class="close_icon" ng-click="removeServiceRow(service.serviceName)"><img src="../Content/Assets/images/close-img.png"></a>
-                                                    </div>
                                                 </div>
+                                            </div>
 
-                                                <div class="border_top sample_div">
-                                                    <div class="row">
-                                                        <div class="col-md-4 col-sm-4 col-xs-12">
-                                                            <div class="form-group ">
-                                                                <input type="text" class="form-control" id="" ng-model="sampleService" placeholder="Sample Service">
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-md-2 col-sm-2 col-xs-12">
-                                                            <div class="form-group ">
-                                                                <input type="text" class="form-control" id="" ng-model="serviceTime" placeholder="0 min">
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-md-2 col-sm-2 col-xs-12">
-                                                            <div class="form-group">
-                                                                <input type="text" class="form-control" id="" ng-model="servicePrice" placeholder="(₹) 0">
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-md-4 col-sm-4 col-xs-12">
-                                                            <div class="form-group">
-                                                                <div class="dropdown">
-                                                                    <button id="dLabel" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" ng-click="showDropDown()">
-                                                                        <i class="fa fa-user" aria-hidden="true"></i> <i class="fa fa-angle-down" aria-hidden="true"></i>
-                                                                    </button>
-                                                                    <button type="submit" class="btn btn-default" ng-click="addServiceItem()">Add</button>
-                                                                    <ul class="dropdown-menu" style="display:block;" aria-labelledby="dLabel" ng-hide="showStaff">
-                                                                        <li>Who can perform this service?</li>
-                                                                        <li ng-repeat="staff in staffInfo">
-                                                                            <input type="checkbox" ng-click="toggleSelection(staff)" ng-model="staff.confirmed"> {{staff.staffName}}
 
-                                                                        </li>
-                                                                    </ul>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                            </form>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </form>
                         </div>
-                    </form>
+                    </div>
+
                 </div>
             </div>
         </div>

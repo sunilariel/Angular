@@ -1,5 +1,5 @@
 ﻿var app = angular.module('bookingApp', [])
-app.controller('bookingController', ['$scope', '$http', '$timeout', 'bookingService', 'businessInfo', function ($scope, $http, $timeout, bookingService, businessInfo) {
+app.controller('bookingController', ['$scope', '$http', '$timeout', 'bookingService', function ($scope, $http, $timeout, bookingService) {
 
     $scope.businessName = "";
     $scope.businessIndustry = [{ name: 'Hair Salon/Barbershop', id: 1 }, { name: 'Nail Salon', id: 2 }, { name: 'Computers/Technology/IT', id: 3 }, { name: 'Spa/Massage/Waxing', id: 4 }];
@@ -10,6 +10,9 @@ app.controller('bookingController', ['$scope', '$http', '$timeout', 'bookingServ
     $scope.thirdStep = true;
     $scope.fourthStep = true;
     $scope.showStaff = true;
+    $scope.selectFrom = [];
+    $scope.selectTo = [];
+    $scope.IsVisible = false;
     $scope.showStaffBinded = [];
     $scope.init = function () {
         debugger;
@@ -39,7 +42,7 @@ app.controller('bookingController', ['$scope', '$http', '$timeout', 'bookingServ
             }
         };
 
-        // Account.Id = $scope.employeeId;
+
         var getData = bookingService.register(businessInfo);
         debugger;
         getData.then(function (msg) {
@@ -48,7 +51,6 @@ app.controller('bookingController', ['$scope', '$http', '$timeout', 'bookingServ
                 $scope.MessageText = "Saving Data"
                 $scope.companyId = msg.data.ReturnObject.CompanyId;
                 $scope.msg = "Post Data Submitted Successfully!";
-
                 $scope.secondStep = false;
                 $scope.firstStep = true;
                 $scope.thirdStep = true;
@@ -56,6 +58,8 @@ app.controller('bookingController', ['$scope', '$http', '$timeout', 'bookingServ
                 $scope.staffName = '';
                 $scope.staffEmail = '';
                 $scope.divAccount = false;
+                $scope.IsVisible = true;
+                $timeout(function () { $scope.MessageText = "Data saved."; $timeout(function () { $scope.IsVisible = false; }, 1000) }, 500);
             }
         }, function () {
             alert('Error in updating record');
@@ -63,36 +67,88 @@ app.controller('bookingController', ['$scope', '$http', '$timeout', 'bookingServ
     }
     $scope.timeInfoFrom = ["08:00 am", "09:00 am", "10:00 am", "11:00 am", "12:00 pm", "13:00 pm", "14:00 pm", "15:00 pm", "16:00 pm", "17:00 pm", "18:00 pm", "19:00 pm", "20:00 pm"];
     $scope.timeInfoTo = ["08:00 am", "09:00 am", "10:00 am", "11:00 am", "12:00 pm", "13:00 pm", "14:00 pm", "15:00 pm", "16:00 pm", "17:00 pm", "18:00 pm", "19:00 pm", "20:00 pm"];
-    $scope.businessHourInfo = [{ 'day': 'Monday', 'timeFrom': $scope.timeInfoFrom, 'timeTo': $scope.timeInfoTo, 'available': true },
-    { 'day': 'Tuesday', 'timeFrom': $scope.timeInfoFrom, 'timeTo': $scope.timeInfoTo, 'available': true },
-    { 'day': 'Wednesday', 'timeFrom': $scope.timeInfoFrom, 'timeTo': $scope.timeInfoTo, 'available': true },
-    { 'day': 'Thursday', 'timeFrom': $scope.timeInfoFrom, 'timeTo': $scope.timeInfoTo, 'available': true },
-    { 'day': 'Friday', 'timeFrom': $scope.timeInfoFrom, 'timeTo': $scope.timeInfoTo, 'available': true },
-    { 'day': 'Saturday', 'timeFrom': $scope.timeInfoFrom, 'timeTo': $scope.timeInfoTo, 'available': false },
-    { 'day': 'Sunday', 'timeFrom': $scope.timeInfoFrom, 'timeTo': $scope.timeInfoTo, 'available': false }, ]
+    $scope.businessHourInfo = [{ 'day': 'Monday', 'timeFrom': "", 'timeTo': "", 'available': true },
+    { 'day': 'Tuesday', 'timeFrom': "", 'timeTo': "", 'available': false },
+    { 'day': 'Wednesday', 'timeFrom': "", 'timeTo': "", 'available': false },
+    { 'day': 'Thursday', 'timeFrom': "", 'timeTo': "", 'available': false },
+    { 'day': 'Friday', 'timeFrom': "", 'timeTo': "", 'available': false },
+    { 'day': 'Saturday', 'timeFrom': "", 'timeTo': "", 'available': false },
+    { 'day': 'Sunday', 'timeFrom': "", 'timeTo': "", 'available': false }, ]
     $scope.setUpBusiness = function () {
         debugger;
+        var selectedVal = $scope.businessHourInfo.timeFrom;
+        var IsAllOff = true;
+        var StartTime = "";
+        var EndTime = "";
+        var DayName = "";
+        var dateTimeVal = "";
+        angular.forEach($scope.businessHourInfo, function (value, key) {
+
+            if (value.available == true) {
+                IsAllOff = false;
+                DayName = value.day;
+                StartTime = value.timeFrom;
+                EndTime = value.timeTo;
+                dateTimeVal = new Date();
+
+            }
+
+        });
+        StartTime = StartTime.split(":");
+        EndTime = EndTime.split(":");
         var businessInfo = {
-            Url: "api/companyregistration/SetBusinessInfo",
-            RequestData: {
-                Id: $scope.companyId,
-                Name: "sample string 1",
-                Address: "sample string 3",
-                Email: "sample string 4",
-                Telephone: "12345678",
-                PostCode: "sample string 6",
-                Website: "sample string 7",
-                County: "sample string 8",
-                Town: "sample string 9",
-                Description: "sample string 10",
-                Password: "sample string 11",
-                CreationDate: "2017-05-24T07:20:31.1744476+00:00"
+            Url: "api/companyregistration/SetWorkingHours",
+            ReqWorkingHours: {
+                Id: $scope.selectedIndustry,
+                CompanyId: $scope.companyId,
+                Start: StartTime[0] + ":00:00.1234567",
+                End: EndTime[0] + ":00:00.1234567",
+                NameOfDay: DayName,
+                IsOffAllDay: IsAllOff,
+                CreationDate: dateTimeVal,
             }
         };
 
-        var getData = businessInfo.register(businessInfo);
+        var getDataHour = bookingService.WorkingHours(businessInfo);
+        debugger;
+        getDataHour.then(function (msg) {
+            debugger;
+            if (msg.data.Success == true) {
+                $scope.MessageText = "Saving Data"
+                $scope.msg = "Post Data Submitted Successfully!";
+                $scope.firstStep = true;
+                $scope.secondStep = true;
+                $scope.thirdStep = false;
+                $scope.fourthStep = true;
+                $scope.IsVisible = true;
+                $timeout(function () { $scope.MessageText = "Data saved."; $timeout(function () { $scope.IsVisible = false; }, 1000) }, 500);
+            }
+        }, function () {
+            alert('Error in updating record');
+        });
 
-        getData.then(function (msg) {
+    }
+
+    $scope.addStaff = function () {
+        debugger;
+        var StaffInformation = {
+            Url: "api/companyregistration/AddStaff",
+            ReqStaffData: {
+                Id: $scope.selectedIndustry,
+                CompanyId: $scope.companyId,
+                UserName: "sample string 3",
+                Password: "sample string 4",
+                FirstName: $scope.staffName,
+                LastName: "sample string 5",
+                Address: "sample string 6",
+                Email: $scope.staffEmail,
+                TelephoneNo: "sample string 7",
+                CreationDate: "2017-05-31T06:08:49.5008702+00:00",
+            }
+        };
+        var getstaffdata = bookingService.staffInformation(StaffInformation);
+
+        getstaffdata.then(function (msg) {
             debugger;
             if (msg.data.Success == true) {
                 $scope.MessageText = "Saving Data"
@@ -101,19 +157,14 @@ app.controller('bookingController', ['$scope', '$http', '$timeout', 'bookingServ
 
                 $scope.firstStep = true;
                 $scope.secondStep = true;
-                $scope.thirdStep = false;
-                $scope.fourthStep = true;
+                $scope.thirdStep = true;
+                $scope.fourthStep = false;
+                $scope.IsVisible = true;
+                $timeout(function () { $scope.MessageText = "Data saved."; $timeout(function () { $scope.IsVisible = false; }, 1000) }, 500);
             }
         }, function () {
             alert('Error in updating record');
         });
-
-    }
-    $scope.addStaff = function () {
-        $scope.firstStep = true;
-        $scope.secondStep = true;
-        $scope.thirdStep = true;
-        $scope.fourthStep = false;
     }
     $scope.addServices = function () {
         $scope.firstStep = true;
@@ -187,6 +238,10 @@ app.controller('bookingController', ['$scope', '$http', '$timeout', 'bookingServ
     $scope.toggleSelection = function staffChange(item) {
         debugger;
     }
+    $scope.getSelected = function (item) {
+        debugger;
+
+    }
     $scope.removeRow = function (name) {
         debugger;
         var index = -1;
@@ -230,7 +285,7 @@ app.controller('bookingController', ['$scope', '$http', '$timeout', 'bookingServ
     $scope.switchOnOff = function (item) {
         debugger;
         angular.forEach($scope.businessHourInfo, function (value, key) {
-            debugger; if (value.day != "Sunday" && value.day != "Saturday") {
+            debugger; if (item.day != "Sunday" && item.day != "Saturday") {
                 if (item.day == value.day) {
                     if (item['available'] == true) {
                         value.available = false;
@@ -238,6 +293,9 @@ app.controller('bookingController', ['$scope', '$http', '$timeout', 'bookingServ
                     else {
                         value.available = true;
                     }
+                }
+                else {
+                    value.available = false;
                 }
             }
         });
