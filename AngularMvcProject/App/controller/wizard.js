@@ -1,5 +1,5 @@
 ﻿var app = angular.module('bookingApp', [])
-app.controller('bookingController', ['$scope', '$http', '$timeout', 'bookingService', function ($scope, $http, $timeout, bookingService) {
+app.controller('bookingController', ['$scope', '$http', '$timeout','bookingService', function ($scope, $http, $timeout, bookingService) {
 
     $scope.businessName = "";
     $scope.businessIndustry = [{ name: 'Hair Salon/Barbershop', id: 1 }, { name: 'Nail Salon', id: 2 }, { name: 'Computers/Technology/IT', id: 3 }, { name: 'Spa/Massage/Waxing', id: 4 }];
@@ -22,8 +22,11 @@ app.controller('bookingController', ['$scope', '$http', '$timeout', 'bookingServ
         }
 
     };
+
     $scope.submitInfo = function () {
         debugger;
+        
+        
         var businessInfo = {
             Url: "api/companyregistration/CreateAccount",
             RequestData: {
@@ -55,15 +58,19 @@ app.controller('bookingController', ['$scope', '$http', '$timeout', 'bookingServ
                 $scope.firstStep = true;
                 $scope.thirdStep = true;
                 $scope.fourthStep = true;
+               
                 $scope.staffName = '';
                 $scope.staffEmail = '';
                 $scope.divAccount = false;
                 $scope.IsVisible = true;
+
                 $timeout(function () { $scope.MessageText = "Data saved."; $timeout(function () { $scope.IsVisible = false; }, 1000) }, 500);
             }
         }, function () {
             alert('Error in updating record');
         });
+
+       
     }
     $scope.timeInfoFrom = ["08:00 am", "09:00 am", "10:00 am", "11:00 am", "12:00 pm", "13:00 pm", "14:00 pm", "15:00 pm", "16:00 pm", "17:00 pm", "18:00 pm", "19:00 pm", "20:00 pm"];
     $scope.timeInfoTo = ["08:00 am", "09:00 am", "10:00 am", "11:00 am", "12:00 pm", "13:00 pm", "14:00 pm", "15:00 pm", "16:00 pm", "17:00 pm", "18:00 pm", "19:00 pm", "20:00 pm"];
@@ -92,7 +99,6 @@ app.controller('bookingController', ['$scope', '$http', '$timeout', 'bookingServ
                 dateTimeVal = new Date();
 
             }
-
         });
         StartTime = StartTime.split(":");
         EndTime = EndTime.split(":");
@@ -110,12 +116,14 @@ app.controller('bookingController', ['$scope', '$http', '$timeout', 'bookingServ
         };
 
         var getDataHour = bookingService.WorkingHours(businessInfo);
-        debugger;
+              
         getDataHour.then(function (msg) {
             debugger;
             if (msg.data.Success == true) {
                 $scope.MessageText = "Saving Data"
                 $scope.msg = "Post Data Submitted Successfully!";
+
+              
                 $scope.firstStep = true;
                 $scope.secondStep = true;
                 $scope.thirdStep = false;
@@ -131,40 +139,10 @@ app.controller('bookingController', ['$scope', '$http', '$timeout', 'bookingServ
 
     $scope.addStaff = function () {
         debugger;
-        var StaffInformation = {
-            Url: "api/companyregistration/AddStaff",
-            ReqStaffData: {
-                Id: $scope.selectedIndustry,
-                CompanyId: $scope.companyId,
-                UserName: "sample string 3",
-                Password: "sample string 4",
-                FirstName: $scope.staffName,
-                LastName: "sample string 5",
-                Address: "sample string 6",
-                Email: $scope.staffEmail,
-                TelephoneNo: "sample string 7",
-                CreationDate: "2017-05-31T06:08:49.5008702+00:00",
-            }
-        };
-        var getstaffdata = bookingService.staffInformation(StaffInformation);
-
-        getstaffdata.then(function (msg) {
-            debugger;
-            if (msg.data.Success == true) {
-                $scope.MessageText = "Saving Data"
-
-                $scope.msg = "Post Data Submitted Successfully!";
-
-                $scope.firstStep = true;
-                $scope.secondStep = true;
-                $scope.thirdStep = true;
-                $scope.fourthStep = false;
-                $scope.IsVisible = true;
-                $timeout(function () { $scope.MessageText = "Data saved."; $timeout(function () { $scope.IsVisible = false; }, 1000) }, 500);
-            }
-        }, function () {
-            alert('Error in updating record');
-        });
+        $scope.firstStep = true;
+        $scope.secondStep = true;
+        $scope.thirdStep = true;
+        $scope.fourthStep = false;
     }
     $scope.addServices = function () {
         $scope.firstStep = true;
@@ -195,44 +173,71 @@ app.controller('bookingController', ['$scope', '$http', '$timeout', 'bookingServ
         $scope.init();
         $scope.showStaff = !$scope.showStaff;
     }
-    $scope.showDropDownBinded = function (index) {
-        debugger;
-        // $scope.init();
+    $scope.showDropDownBinded = function (index) {    
         $scope.showStaffBinded[index] = !$scope.showStaffBinded[index];
     }
-    $scope.staffInfo = [
-             {
-                 'staffName': 'David',
-                 'staffEmail': 'bookingmanager18@gmail.com',
-
-             },
-             {
-                 'staffName': 'John',
-                 'staffEmail': 'bookingmanager18@gmail.com',
-
-             },
-
-    ];
+    $scope.staffInfo = [];
     $scope.sampleService = "";
     $scope.serviceTime = "";
     $scope.servicePrice = "";
 
     $scope.serviceInfo = [
             {
-                'serviceName': 'Web Design',
-                'time': '60 min',
-                'price': '£20',
-                'staff': $scope.staffInfoCopy,
+            //    'serviceName': 'Web Design',
+            //    'time': '60 min',
+            //    'price': '£20',
+            //    'staff': $scope.staffInfoCopy,
             },
 
     ];
 
-    $scope.addStaffItem = function () {
-        debugger;
+    $scope.addStaffItem = function () {        
+        var StaffInformation = {
+            Url: "api/companyregistration/AddStaff",
+            ReqStaffData: {
+                Id: $scope.selectedIndustry,
+                CompanyId: $scope.companyId,
+                UserName: $scope.staffEmail,
+                Password: "sample string 4",
+                FirstName: $scope.staffName,
+                LastName: "sample string 5",
+                Address: "sample string 6",
+                Email: $scope.staffEmail,
+                TelephoneNo: "sample string 7",
+                CreationDate: "2017-05-31T06:08:49.5008702+00:00",
+            }
+        };
+        var getstaffdata = bookingService.staffInformation(StaffInformation);
 
-        $scope.staffInfo.push({ 'staffName': $scope.staffName, 'staffEmail': $scope.staffEmail });
-        $scope.staffName = '';
-        $scope.staffEmail = '';
+        getstaffdata.then(function (msg) {
+            debugger;
+            if (msg.data.Success == true) {
+                $scope.MessageText = "Saving Data"
+                $scope.msg = "Post Data Submitted Successfully!";
+
+                var CompanyId = $scope.companyId;
+                var getEmployeesData = bookingService.GetStaffData(CompanyId);
+
+                getEmployeesData.then(function (response) {
+                    debugger;
+                    $scope.staffInfo = [];
+                    for (var i = 0; i < response.data.length; i++) {
+                        $scope.staffInfo.push({ 'Id': response.data[i].Id, 'CompanyId': response.data[i].CompanyId, 'UserName': response.data[i].UserName, 'staffName': response.data[i].FirstName, 'staffEmail': response.data[i].Email });
+                    }
+                    $scope.staffName = '';
+                    $scope.staffEmail = '';
+                });
+              
+                $scope.IsVisible = true;
+                $timeout(function () { $scope.MessageText = "Data saved."; $timeout(function () { $scope.IsVisible = false; }, 1000) }, 500);
+            }
+        }, function () {
+            alert('Error in updating record');
+        });
+
+
+
+        
     };
     $scope.HasPassport = false;
     $scope.toggleSelection = function staffChange(item) {
@@ -242,45 +247,144 @@ app.controller('bookingController', ['$scope', '$http', '$timeout', 'bookingServ
         debugger;
 
     }
-    $scope.removeRow = function (name) {
+    $scope.removeRow = function (Id) {
         debugger;
-        var index = -1;
-        var comArr = eval($scope.staffInfo);
-        for (var i = 0; i < comArr.length; i++) {
-            if (comArr[i].staffName === name) {
-                index = i;
-                break;
-            }
+        var removestaffmember = bookingService.DeleteStaff(Id);
+        removestaffmember.then(function (response) {
+            $scope.MessageText = "Deleting Data"
+            $scope.msg = "Data Deleted Successfully!";
+
+            var CompanyId = $scope.companyId;
+            var getEmployeesData = bookingService.GetStaffData(CompanyId);
+
+            getEmployeesData.then(function (response) {
+                debugger;
+                $scope.staffInfo = [];
+                for (var i = 0; i < response.data.length; i++) {
+                    $scope.staffInfo.push({ 'Id': response.data[i].Id, 'CompanyId': response.data[i].CompanyId, 'UserName': response.data[i].UserName, 'staffName': response.data[i].FirstName, 'staffEmail': response.data[i].Email });
+                }
+                $scope.staffName = '';
+                $scope.staffEmail = '';
+            });
+
+            $timeout(function () { $scope.MessageText = "Data deleted."; $timeout(function () { $scope.IsVisible = false; }, 1000) }, 500);
+
+        }),function()
+        {
+            alert('Error in updating record');
         }
-        if (index === -1) {
-            alert("Something gone wrong");
-        }
-        $scope.staffInfo.splice(index, 1);
+
+        //var index = -1;
+        //var comArr = eval($scope.staffInfo);
+        //for (var i = 0; i < comArr.length; i++) {
+        //    if (comArr[i].staffName === name) {
+        //        index = i;
+        //        break;
+        //    }
+        //}
+        //if (index === -1) {
+        //    alert("Something gone wrong");
+        //}
+        //$scope.staffInfo.splice(index, 1);
     };
+
 
     $scope.addServiceItem = function () {
         debugger;
         $scope.staffInfoCopy = angular.copy($scope.staffInfo);
-        $scope.serviceInfo.push({ 'serviceName': $scope.sampleService, 'time': $scope.serviceTime, 'price': $scope.servicePrice, 'staff': $scope.staffInfoCopy, });
+        // $scope.serviceInfo.push({ 'serviceName': $scope.sampleService, 'time': $scope.serviceTime, 'price': $scope.servicePrice, 'staff': $scope.staffInfoCopy, });
+        var cost = $scope.servicePrice;
+        if (cost != "") {
+            cost = cost.split(" ");
+        }
+        var time = $scope.serviceTime;
+        if (time != "") {
+            time = time.split(" ");
+        }
+        var dateTimeVal = new Date();
+        var ServiceData = {
+            Url: "api/companyregistration/AddService",
+            RequestAddService: {
+                Id: $scope.selectedIndustry,
+                CompanyId: $scope.companyId,
+                Name: $scope.sampleService,
+                CategoryName: " ",
+                CategoryId: 0,
+                DurationInMinutes: "sample string 5",
+                DurationInHours: time[0],
+                Cost: cost[1],
+                Currency: "sample string 7",
+                CreationDate: dateTimeVal,
+            }
+        };
+        var serviceResponse = bookingService.AddService(ServiceData);
+        serviceResponse.then(function (msg) {
+            debugger;
+            if (msg.data.Success == true) {
+                $scope.MessageText = "Saving Data"
+                $scope.msg = "Post Data Submitted Successfully!";
+
+
+                $scope.IsVisible = true;
+
+                $timeout(function () { $scope.MessageText = "Data saved."; $timeout(function () { $scope.IsVisible = false; }, 1000) }, 500);
+            }
+        }, function () {
+            alert('Error in updating record');
+        });
+        var getServices = bookingService.getServicesData($scope.companyId);
+        getServices.then(function (response) {
+            debugger;
+            $scope.serviceInfo = [];
+            for (var i = 0; i < response.data.length; i++) {
+                $scope.serviceInfo.push({ 'Id': response.data[i].Id, 'CompanyId': response.data[i].CompanyId, 'serviceName': response.data[i].Name, 'staffName': response.data[i].FirstName, 'staffEmail': response.data[i].Email, 'DurationInMinutes': response.data[i].DurationInMinutes, 'time': response.data[i].DurationInHours, 'Currency': response.data[i].Currency, 'price': response.data[i].Cost, 'CreationDate': response.data[i].CreationDate, });
+            }
+            $scope.init();
+        });
         $scope.staffName = '';
         $scope.staffEmail = '';
         $scope.showStaff = true;
-        $scope.init();
+
     };
-    $scope.removeServiceRow = function (name) {
+    $scope.removeServiceRow = function (id) {
         debugger;
-        var index = -1;
-        var comArr = eval($scope.serviceInfo);
-        for (var i = 0; i < comArr.length; i++) {
-            if (comArr[i].serviceName === name) {
-                index = i;
-                break;
-            }
+        //var index = -1;
+        //var comArr = eval($scope.serviceInfo);
+        //for (var i = 0; i < comArr.length; i++) {
+        //    if (comArr[i].id === id) {
+        //        index = i;
+        //        break;
+        //    }
+        //}
+        //if (index === -1) {
+        //    alert("Something gone wrong");
+        //}
+        //$scope.serviceInfo.splice(index, 1);
+        var removeservicemember = bookingService.DeleteService(id);
+        removeservicemember.then(function (response) {
+            $scope.MessageText = "Deleting Data"
+            $scope.msg = "Data Deleted Successfully!";
+
+            var CompanyId = $scope.companyId;
+            var getServiceData = bookingService.getServicesData(CompanyId);
+
+            getServiceData.then(function (response) {
+                debugger;
+                $scope.serviceInfo = [];
+                for (var i = 0; i < response.data.length; i++) {
+                    $scope.serviceInfo.push({ 'Id': response.data[i].Id, 'CompanyId': response.data[i].CompanyId, 'serviceName': response.data[i].Name, 'staffName': response.data[i].FirstName, 'staffEmail': response.data[i].Email, 'DurationInMinutes': response.data[i].DurationInMinutes, 'time': response.data[i].DurationInHours, 'Currency': response.data[i].Currency, 'price': response.data[i].Cost, 'CreationDate': response.data[i].CreationDate, });
+                }
+                $scope.init();
+                $scope.staffName = '';
+                $scope.staffEmail = '';
+            });
+
+            $timeout(function () { $scope.MessageText = "Data deleted."; $timeout(function () { $scope.IsVisible = false; }, 1000) }, 500);
+
+        }), function () {
+            alert('Error in updating record');
         }
-        if (index === -1) {
-            alert("Something gone wrong");
-        }
-        $scope.serviceInfo.splice(index, 1);
+
     };
     $scope.switchOnOff = function (item) {
         debugger;
