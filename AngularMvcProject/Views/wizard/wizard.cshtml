@@ -307,23 +307,35 @@
                 <div class="wizar_bg"></div>
                 <div class="stepwizard">
 
-                    <div class="stepwizard-row setup-panel">
-                        <div class="stepwizard-step">
+                    <div class="stepwizard-row setup-panel active_div2 " >
+                        <div class="stepwizard-step" id="divstep1">
                             <p>Welcome</p>
-                            <a href="#step-1" type="button" class="btn btn-primary btn-circle">1</a>
+                            <a href="#step-1" type="button" class="btn btn-primary btn-circle" id="step1">
+                                <i class="fa fa-check" aria-hidden="true" id="i1"></i>
+                                <span id="span1">1</span>
+                            </a>
 
                         </div>
-                        <div class="stepwizard-step">
+                        <div class="stepwizard-step" id="divstep2">
                             <p>Hours</p>
-                            <a href="#step-2" type="button" class="btn btn-default btn-circle" disabled="disabled">2</a>
+                            <a href="#step-2" type="button" class="btn btn-default btn-circle" id="step2">
+                                <i class="fa fa-check" aria-hidden="true" id="i2"></i>
+                                <span id="span2">2</span>
+                            </a>
                         </div>
-                        <div class="stepwizard-step">
+                        <div class="stepwizard-step" id="divstep3">
                             <p>Staff</p>
-                            <a href="#step-3" type="button" class="btn btn-default btn-circle" disabled="disabled">3</a>
+                            <a href="#step-3" type="button" class="btn btn-default btn-circle" id="step3">
+                                <i class="fa fa-check" aria-hidden="true" id="i3"></i>
+                                <span id="span3">3</span>
+                            </a>
                         </div>
-                        <div class="stepwizard-step">
+                        <div class="stepwizard-step" id="divstep4">
                             <p>Services</p>
-                            <a href="#step-4" type="button" class="btn btn-default btn-circle" disabled="disabled">4</a>
+                            <a href="#step-4" type="button" class="btn btn-default btn-circle" id="step4">
+                                <i class="fa fa-check" aria-hidden="true" id="i4"></i>
+                                <span id="span4">4</span>
+                            </a>
                         </div>
 
                     </div>
@@ -667,8 +679,8 @@
                         $item = $(this);
 
                 if (!$item.hasClass('disabled')) {
-                    navListItems.removeClass('btn-primary').addClass('btn-default');
-                    $item.addClass('btn-primary');
+                    //navListItems.removeClass('btn-primary').addClass('btn-default');
+                    //$item.addClass('btn-primary');
                     //  allWells.hide();
                     $target.show();
                     $target.find('input:eq(0)').focus();

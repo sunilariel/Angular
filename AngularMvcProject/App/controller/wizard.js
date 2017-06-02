@@ -13,6 +13,17 @@ app.controller('bookingController', ['$scope', '$http', '$timeout','bookingServi
     $scope.selectFrom = [];
     $scope.selectTo = [];
     $scope.IsVisible = false;
+
+    var checki1active = angular.element(document.querySelector('#i1'));
+    var checki2active = angular.element(document.querySelector('#i2'));
+    var checki3active = angular.element(document.querySelector('#i3'));
+    var checki4active = angular.element(document.querySelector('#i4'));
+    checki1active.css("display", "none");
+    checki2active.css("display", "none");
+    checki3active.css("display", "none");
+    checki4active.css("display", "none");
+
+
     $scope.showStaffBinded = [];
     $scope.init = function () {
         debugger;
@@ -59,6 +70,19 @@ app.controller('bookingController', ['$scope', '$http', '$timeout','bookingServi
                 $scope.thirdStep = true;
                 $scope.fourthStep = true;
                
+              
+               
+                var activediv = angular.element(document.querySelector('#divstep2'));
+                activediv.addClass('before_div');
+                activediv.addClass('active_div');
+              
+                var activetab = angular.element(document.querySelector('#step2'));
+                activetab.addClass('btn-primary');
+
+                var span1 = angular.element(document.querySelector('#span1'));
+                span1.css("display", "none");
+                checki1active.css("display", "");
+                
                 $scope.staffName = '';
                 $scope.staffEmail = '';
                 $scope.divAccount = false;
@@ -123,7 +147,17 @@ app.controller('bookingController', ['$scope', '$http', '$timeout','bookingServi
                 $scope.MessageText = "Saving Data"
                 $scope.msg = "Post Data Submitted Successfully!";
 
-              
+                var activediv = angular.element(document.querySelector('#divstep3'));
+                activediv.addClass('before_div');
+                activediv.addClass('active_div');
+                var activetab = angular.element(document.querySelector('#step3'));
+                activetab.addClass('btn-primary');
+
+
+                var span = angular.element(document.querySelector('#span2'));
+                span.css("display", "none");               
+                checki2active.css("display", "");
+
                 $scope.firstStep = true;
                 $scope.secondStep = true;
                 $scope.thirdStep = false;
@@ -139,30 +173,75 @@ app.controller('bookingController', ['$scope', '$http', '$timeout','bookingServi
 
     $scope.addStaff = function () {
         debugger;
+        var activediv = angular.element(document.querySelector('#divstep4'));
+        activediv.addClass('before_div');
+        activediv.addClass('active_div');
+        var activetab = angular.element(document.querySelector('#step4'));
+        activetab.addClass('btn-primary');
+
+        var span = angular.element(document.querySelector('#span3'));
+        span.css("display", "none");
+        checki3active.css("display", "");
+
         $scope.firstStep = true;
         $scope.secondStep = true;
         $scope.thirdStep = true;
         $scope.fourthStep = false;
     }
     $scope.addServices = function () {
+
         $scope.firstStep = true;
         $scope.secondStep = true;
         $scope.thirdStep = true;
-        $scope.fourthStep = false;
+        $scope.fourthStep = false;       
     }
     $scope.backSecondStep = function () {
+
+        var activediv = angular.element(document.querySelector('#divstep2'));
+        activediv.removeClass('before_div');
+        activediv.removeClass('active_div');
+        var activetab = angular.element(document.querySelector('#step2'));
+        activetab.removeClass('btn-primary');
+
+        checki1active.css("display", "none");
+        var span = angular.element(document.querySelector('#span1'));
+        span.css("display", "");
+
         $scope.firstStep = false;
         $scope.secondStep = true;
         $scope.thirdStep = true;
         $scope.fourthStep = true;
     }
     $scope.backThirdStep = function () {
+        var activediv = angular.element(document.querySelector('#divstep3'));
+        activediv.removeClass('before_div');
+        activediv.removeClass('active_div');
+
+        var activetab = angular.element(document.querySelector('#step3'));
+        activetab.removeClass('btn-primary');
+
+        checki2active.css("display", "none");
+        var span = angular.element(document.querySelector('#span2'));
+        span.css("display", "");
+
         $scope.firstStep = true;
         $scope.secondStep = false;
         $scope.thirdStep = true;
         $scope.fourthStep = true;
     }
     $scope.backFourthStep = function () {
+
+        var activediv = angular.element(document.querySelector('#divstep4'));
+        activediv.removeClass('before_div');
+        activediv.removeClass('active_div');
+        var activetab = angular.element(document.querySelector('#step4'));
+        activetab.removeClass('btn-primary');
+       
+        checki3active.css("display", "none");
+        var span = angular.element(document.querySelector('#span3'));
+        span.css("display", "");
+
+
         $scope.firstStep = true;
         $scope.secondStep = true;
         $scope.thirdStep = false;
@@ -218,6 +297,7 @@ app.controller('bookingController', ['$scope', '$http', '$timeout','bookingServi
                 var CompanyId = $scope.companyId;
                 var getEmployeesData = bookingService.GetStaffData(CompanyId);
 
+               
                 getEmployeesData.then(function (response) {
                     debugger;
                     $scope.staffInfo = [];
@@ -233,19 +313,19 @@ app.controller('bookingController', ['$scope', '$http', '$timeout','bookingServi
             }
         }, function () {
             alert('Error in updating record');
-        });
-
-
-
-        
+        });        
     };
+
     $scope.HasPassport = false;
     $scope.toggleSelection = function staffChange(item) {
         debugger;
+        $scope.EmployeeId = item.Id;
+        $scope.selectedEmployeeId = [];
+        $scope.selectedEmployeeId.push({ 'EmployeeId': item.Id });
     }
     $scope.getSelected = function (item) {
         debugger;
-
+      
     }
     $scope.removeRow = function (Id) {
         debugger;
@@ -273,19 +353,7 @@ app.controller('bookingController', ['$scope', '$http', '$timeout','bookingServi
         {
             alert('Error in updating record');
         }
-
-        //var index = -1;
-        //var comArr = eval($scope.staffInfo);
-        //for (var i = 0; i < comArr.length; i++) {
-        //    if (comArr[i].staffName === name) {
-        //        index = i;
-        //        break;
-        //    }
-        //}
-        //if (index === -1) {
-        //    alert("Something gone wrong");
-        //}
-        //$scope.staffInfo.splice(index, 1);
+    
     };
 
 
@@ -347,19 +415,7 @@ app.controller('bookingController', ['$scope', '$http', '$timeout','bookingServi
 
     };
     $scope.removeServiceRow = function (id) {
-        debugger;
-        //var index = -1;
-        //var comArr = eval($scope.serviceInfo);
-        //for (var i = 0; i < comArr.length; i++) {
-        //    if (comArr[i].id === id) {
-        //        index = i;
-        //        break;
-        //    }
-        //}
-        //if (index === -1) {
-        //    alert("Something gone wrong");
-        //}
-        //$scope.serviceInfo.splice(index, 1);
+        debugger;      
         var removeservicemember = bookingService.DeleteService(id);
         removeservicemember.then(function (response) {
             $scope.MessageText = "Deleting Data"
