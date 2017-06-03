@@ -90,7 +90,7 @@ namespace AngularMvcProject.Models
 
         public int DurationInHours { get; set; }
 
-        public int Cost { get; set; }
+        public float Cost { get; set; }
 
         public string Currency { get; set; }
 
@@ -103,4 +103,76 @@ namespace AngularMvcProject.Models
 
        public RequestAddService RequestAddService { get; set; }
     }
+
+
+    public class AssignStaff
+    {
+        public string Url { get; set; }
+
+        public AssignStaffRequest RequestAssignService { get; set; }
+    }
+    public class AssignStaffRequest
+    {
+        public int Id { get; set; }
+
+        public int CompanyId { get; set; }
+        public int ServiceId { get; set; }
+        public int EmployeeId { get; set; }
+        public string CreationDate { get; set; }
+    }
+
+
+
+    public class EmployeeServicedata
+    {
+        public int Id { get; set; }
+
+        public int CompanyId { get; set; }
+
+        public string Name { get; set; }
+
+        public string CategoryName { get; set; }
+
+        public int CategoryId { get; set; }
+
+        public int DurationInMinutes { get; set; }
+
+        public int DurationInHours { get; set; }
+
+        public int Cost { get; set; }
+
+        public string Currency { get; set; }
+
+        public string CreationDate { get; set; }
+
+        public List<Employees> ListOfEmployees {get;set;}
+
+    }
+
+    public class Employees
+    {
+        public int Id { get; set; }
+
+        public int CompanyId { get; set; }
+
+        public string UserName { get; set; }
+
+        public string Password { get; set; }
+
+        public string FirstName { get; set; }
+
+        public string LastName { get; set; }
+
+        public string Address { get; set; }
+
+        public string Email { get; set; }
+
+        public string TelephoneNo { get; set; }
+
+        public string CreationDate { get; set; }
+
+        public bool confirmed { get; set; }
+    }
+
+
 }

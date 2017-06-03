@@ -65,6 +65,8 @@ app.controller('bookingController', ['$scope', '$http', '$timeout','bookingServi
                 $scope.MessageText = "Saving Data"
                 $scope.companyId = msg.data.ReturnObject.CompanyId;
                 $scope.msg = "Post Data Submitted Successfully!";
+
+
                 $scope.secondStep = false;
                 $scope.firstStep = true;
                 $scope.thirdStep = true;
@@ -260,6 +262,8 @@ app.controller('bookingController', ['$scope', '$http', '$timeout','bookingServi
     $scope.serviceTime = "";
     $scope.servicePrice = "";
 
+    $scope.service = [];
+
     $scope.serviceInfo = [
             {
             //    'serviceName': 'Web Design',
@@ -320,8 +324,7 @@ app.controller('bookingController', ['$scope', '$http', '$timeout','bookingServi
     $scope.toggleSelection = function staffChange(item) {
         debugger;
         $scope.EmployeeId = item.Id;
-        $scope.selectedEmployeeId = [];
-        $scope.selectedEmployeeId.push({ 'EmployeeId': item.Id });
+      
     }
     $scope.getSelected = function (item) {
         debugger;
@@ -362,13 +365,13 @@ app.controller('bookingController', ['$scope', '$http', '$timeout','bookingServi
         $scope.staffInfoCopy = angular.copy($scope.staffInfo);
         // $scope.serviceInfo.push({ 'serviceName': $scope.sampleService, 'time': $scope.serviceTime, 'price': $scope.servicePrice, 'staff': $scope.staffInfoCopy, });
         var cost = $scope.servicePrice;
-        if (cost != "") {
-            cost = cost.split(" ");
-        }
+        //if (cost != "") {
+        //    cost = cost.split(".");
+        //}
         var time = $scope.serviceTime;
-        if (time != "") {
-            time = time.split(" ");
-        }
+        //if (time != "") {
+        //    time = time.split(" ");
+        //}
         var dateTimeVal = new Date();
         var ServiceData = {
             Url: "api/companyregistration/AddService",
@@ -379,8 +382,8 @@ app.controller('bookingController', ['$scope', '$http', '$timeout','bookingServi
                 CategoryName: " ",
                 CategoryId: 0,
                 DurationInMinutes: "sample string 5",
-                DurationInHours: time[0],
-                Cost: cost[1],
+                DurationInHours: time,
+                Cost: cost,
                 Currency: "sample string 7",
                 CreationDate: dateTimeVal,
             }
@@ -394,18 +397,41 @@ app.controller('bookingController', ['$scope', '$http', '$timeout','bookingServi
 
 
                 $scope.IsVisible = true;
+                angular.forEach($scope.staffInfo, function (value, key) {
+                    debugger;
+                    if (value.confirmed == true) {
+                        var assignData = {
+                            Url: "api/companyregistration/AssignServiceToStaff",
+                            RequestAssignService: {
+                                Id: 1,
+                                CompanyId: $scope.companyId,
+                                EmployeeId: value.Id,
+                                ServiceId: msg.data.ReturnObject.ServiceId,
+                                CreationDate: dateTimeVal
+                            }
+                        }
+                        var assignStaff = bookingService.assignStaffToService(assignData);
 
-                $timeout(function () { $scope.MessageText = "Data saved."; $timeout(function () { $scope.IsVisible = false; }, 1000) }, 500);
+                       
+                    }
+                });
+
+        $timeout(function () { $scope.MessageText = "Data saved."; $timeout(function () { $scope.IsVisible = false; }, 1000) }, 500);
             }
         }, function () {
             alert('Error in updating record');
         });
+
         var getServices = bookingService.getServicesData($scope.companyId);
         getServices.then(function (response) {
             debugger;
             $scope.serviceInfo = [];
             for (var i = 0; i < response.data.length; i++) {
-                $scope.serviceInfo.push({ 'Id': response.data[i].Id, 'CompanyId': response.data[i].CompanyId, 'serviceName': response.data[i].Name, 'staffName': response.data[i].FirstName, 'staffEmail': response.data[i].Email, 'DurationInMinutes': response.data[i].DurationInMinutes, 'time': response.data[i].DurationInHours, 'Currency': response.data[i].Currency, 'price': response.data[i].Cost, 'CreationDate': response.data[i].CreationDate, });
+                $scope.serviceInfo.push({ 'Id': response.data[i].Id, 'CompanyId': response.data[i].CompanyId, 'serviceName': response.data[i].Name, 'staffName': response.data[i].FirstName, 'staffEmail': response.data[i].Email, 'DurationInMinutes': response.data[i].DurationInMinutes, 'time': response.data[i].DurationInHours, 'Currency': response.data[i].Currency, 'price': response.data[i].Cost, 'CreationDate': response.data[i].CreationDate});
+
+                //angular.forEach(response.data[0].ListOfEmployees, function (value, key) {
+                //    $scope.service.push({'staffEmail':value.Email,'staffName':value.Name,'confirmed':value.confirmed});  
+                //});
             }
             $scope.init();
         });

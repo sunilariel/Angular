@@ -77,6 +77,15 @@ app.service("bookingService", function ($http) {
         })
         return response;
     }
+    this.assignStaffToService = function (dataobject) {
+        debugger;
+        var response = $http({
+            method: "post",
+            url: "/wizard/AssignStaff",
+            data: { dataobj: dataobject }
+        })
+        return response;
+    }
 })
 
 
