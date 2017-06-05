@@ -590,14 +590,14 @@
                                                                 <li ng-repeat="item in service.staff">
                                                                     <input type="checkbox" name="selectedFruits[]"
                                                                            value="{{item.staffEmail}}"
-                                                                           ng-click="toggleSelection(item)" ng-model="item.confirmed"> {{item.staffName}}
+                                                                           ng-click="toggleSelection(item)" ng-model="item.confirmed"> {{item.FirstName}}
                                                                 </li>
                                                             </ul>
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-1 col-sm-12 closeIconDiv">
-                                                    <a href="#" class="close_icon" ng-click="removeServiceRow(service.serviceName)"><img src="../Content/Assets/images/close-img.png"></a>
+                                                    <a href="#" class="close_icon" ng-click="removeServiceRow(service.Id)"><img src="../Content/Assets/images/close-img.png"></a>
                                                 </div>
                                             </div>
 
@@ -626,9 +626,9 @@
                                                                 </button>
                                                                 <button type="submit" class="btn btn-default" ng-click="addServiceItem()">Add</button>
                                                                 <ul class="dropdown-menu" style="display:block;" aria-labelledby="dLabel" ng-hide="showStaff">
-                                                                    <li>Who can perform this service?</li><li><input type="checkbox" name="" value="" ng-click="toggleSelection(item)"> All Staff</li>
+                                                                    <li>Who can perform this service?</li><li><input type="checkbox" name="" value="" ng-model="allstaffchecked" ng-click="toggleAllSelection()"> All Staff</li>
                                                                     <li ng-repeat="staff in staffInfo">
-                                                                        <input type="checkbox" ng-click="toggleSelection(staff)" ng-model="staff.confirmed"> {{staff.staffName}}
+                                                                        <input type="checkbox" ng-click="toggleSelection()" ng-model="staff.confirmed"> {{staff.staffName}}
 
                                                                     </li>
                                                                 </ul>

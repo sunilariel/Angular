@@ -71,7 +71,7 @@ namespace AngularMvcProject.Models
     {
         public string Url { get; set; }
 
-        public ReqWorkingHours ReqWorkingHours { get; set; }
+        public List<ReqWorkingHours> ReqWorkingHours { get; set; }
     }
 
     public class RequestAddService
@@ -145,7 +145,7 @@ namespace AngularMvcProject.Models
 
         public string CreationDate { get; set; }
 
-        public List<Employees> ListOfEmployees {get;set;}
+        public List<Employees> staff {get;set;}
 
     }
 

@@ -181,11 +181,13 @@ namespace AngularMvcProject.Controllers
             List<EmployeeServicedata> EmpServiceData = new List<EmployeeServicedata>();
 
             //  return result;
-                EmployeeServicedata obj = new EmployeeServicedata();
+            
                 foreach ( var item in listofServices)
-                {                 
+                {
+                EmployeeServicedata obj = new EmployeeServicedata();
+                    obj.Id = item.Id;
                     obj.Name = item.Name;
-                    obj.CategoryId = item.Id;
+                    obj.CategoryId = item.CategoryId;
                     obj.CategoryName = item.CategoryName;
                     obj.DurationInHours = item.DurationInHours;
                     obj.DurationInMinutes = item.DurationInMinutes;
@@ -275,7 +277,7 @@ namespace AngularMvcProject.Controllers
             //}
             //obj.ListOfEmployees = ListOfStaff;
 
-            obj.ListOfEmployees = listofEmployees;
+            obj.staff = listofEmployees;
 
                 EmpServiceData.Add(obj);
             }
