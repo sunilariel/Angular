@@ -335,34 +335,64 @@ app.controller('bookingController', ['$scope', '$http', '$timeout', 'bookingServ
     $scope.toggleAllSelection = function staffChange() {
         debugger;
         if ($scope.allstaffchecked == true) {
-            angular.forEach($scope.staffInfo, function (value, key) {               
+            angular.forEach($scope.staffInfo, function (value, key) {
                 value.confirmed = true;
             });
         }
         else {
-            angular.forEach($scope.staffInfo, function (value,key) {
+            angular.forEach($scope.staffInfo, function (value, key) {
                 value.confirmed = false;
             });
         }
+    };
 
        
-        $scope.toggleSelection=function staffchecked()
-        {
-           
-            for (var i = 0; i < $scope.staffInfo.length; i++) {
-                if($scope.staffInfo[i].confirmed==false)
+    $scope.toggleSelection = function staffchecked() {
+        debugger;
+        for (var i = 0; i < $scope.staffInfo.length; i++) {
+            if ($scope.staffInfo[i].confirmed == false) {
+                $scope.allstaffchecked = false;
+
+                break;
+            }
+            else {
+                $scope.allstaffchecked = true;
+            }
+        }
+    };
+
+        $scope.togglealldataSelection = function (item) {
+            debugger;          
+            if (item.AllStaffChecked == true)
+            {
+                for(var i=0;i<item.staff.length;i++)
                 {
-                    $scope.allstaffchecked = false;
+                    item.staff[i].confirmed = true;
+                }
+            }
+            else {
+                for (var i = 0; i < item.staff.length; i++) {
+                    item.staff[i].confirmed = false;
+                }
+            }
+          
+        };
+
+        $scope.toggledataSelection = function (item) {
+            debugger;
+            for (var i = 0; i < item.staff.length; i++) {
+                if (item.staff[i].confirmed == false) {
+                    item.AllStaffChecked = false;
                     break;
                 }
                 else {
-                    $scope.allstaffchecked = true;
+                    item.AllStaffChecked = true;
                 }
             }
-        }
-       // $scope.EmployeeId = item.Id;
-      
-    }
+
+        };
+              
+       // $scope.EmployeeId = item.Id;       
     $scope.getSelected = function (item) {
         debugger;
       
@@ -451,21 +481,26 @@ app.controller('bookingController', ['$scope', '$http', '$timeout', 'bookingServ
 
                         assignStaff.then(function (response) {
                             //$scope.MessageText = "Saving Data"
-                            //$scope.msg = "Post Data Submitted Successfully!";                          
+                            //$scope.msg = "Post Data Submitted Successfully!";      
+
+                            var getServices = bookingService.getServicesData($scope.companyId);
+                            getServices.then(function (response) {
+                                debugger;
+                                $scope.serviceInfo = [];
+                                for (var i = 0; i < response.data.length; i++) {
+                                    $scope.serviceInfo.push({ 'Id': response.data[i].Id, 'CompanyId': response.data[i].CompanyId, 'serviceName': response.data[i].Name, 'staffName': response.data[i].FirstName, 'staffEmail': response.data[i].Email, 'DurationInMinutes': response.data[i].DurationInMinutes, 'time': response.data[i].DurationInHours, 'Currency': response.data[i].Currency, 'price': response.data[i].Cost, 'CreationDate': response.data[i].CreationDate, 'AllStaffChecked': response.data[i].AllStaffChecked, 'staff': response.data[i].staff });
+                                }
+
+                                $scope.init();
+                            });
+
+
                         });
                        
                     }
                 });
 
-                var getServices = bookingService.getServicesData($scope.companyId);
-                getServices.then(function (response) {
-                    debugger;
-                    $scope.serviceInfo = [];
-                    for (var i = 0; i < response.data.length; i++) {
-                        $scope.serviceInfo.push({ 'Id': response.data[i].Id, 'CompanyId': response.data[i].CompanyId, 'serviceName': response.data[i].Name, 'staffName': response.data[i].FirstName, 'staffEmail': response.data[i].Email, 'DurationInMinutes': response.data[i].DurationInMinutes, 'time': response.data[i].DurationInHours, 'Currency': response.data[i].Currency, 'price': response.data[i].Cost, 'CreationDate': response.data[i].CreationDate, 'staff': response.data[i].staff });
-                    }
-                    $scope.init();
-                });
+               
 
         $timeout(function () { $scope.MessageText = "Data saved."; $timeout(function () { $scope.IsVisible = false; }, 1000) }, 500);
             }

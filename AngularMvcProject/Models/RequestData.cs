@@ -145,6 +145,8 @@ namespace AngularMvcProject.Models
 
         public string CreationDate { get; set; }
 
+        public bool AllStaffChecked { get; set; }
+
         public List<Employees> staff {get;set;}
 
     }

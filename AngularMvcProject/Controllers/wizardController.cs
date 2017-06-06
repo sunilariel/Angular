@@ -214,6 +214,14 @@ namespace AngularMvcProject.Controllers
 
                     //List<RequestStaffData> ListOfStaff = new List<RequestStaffData>();
 
+                if(staffdata.Count==empallocatedservice.Count)
+                {
+                    obj.AllStaffChecked = true;
+                }
+                else
+                {
+                    obj.AllStaffChecked = false;
+                }
 
                 List<Employees> listofEmployees = new List<Employees>();
                 foreach (var emp in staffdata)
