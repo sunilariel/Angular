@@ -36,6 +36,26 @@ app.controller('bookingController', ['$scope', '$http', '$timeout', 'bookingServ
     };
    
    
+    window.onclick = function (e) {
+        debugger;
+      
+        if (angular.element(e.target.parentElement.parentElement)[0].classList.value !='dropdown-menu') {
+
+            if ($scope.showStaff == false) {
+                debugger;
+                $scope.showStaff = !($scope.showStaff);
+                $scope.$apply();
+            }
+            for (var i = 0; i < $scope.showStaffBinded.length; i++) {
+                if ($scope.showStaffBinded[i] == false) {
+                    debugger;
+                    $scope.showStaffBinded[i] = !($scope.showStaffBinded[i]);
+                    $scope.$apply();
+                }
+            }
+        }
+    };
+
     $scope.submitInfo = function () {
         debugger;
         
@@ -530,7 +550,7 @@ app.controller('bookingController', ['$scope', '$http', '$timeout', 'bookingServ
                 debugger;
                 $scope.serviceInfo = [];
                 for (var i = 0; i < response.data.length; i++) {
-                    $scope.serviceInfo.push({ 'Id': response.data[i].Id, 'CompanyId': response.data[i].CompanyId, 'serviceName': response.data[i].Name, 'staffName': response.data[i].FirstName, 'staffEmail': response.data[i].Email, 'DurationInMinutes': response.data[i].DurationInMinutes, 'time': response.data[i].DurationInHours, 'Currency': response.data[i].Currency, 'price': response.data[i].Cost, 'CreationDate': response.data[i].CreationDate, });
+                    $scope.serviceInfo.push({ 'Id': response.data[i].Id, 'CompanyId': response.data[i].CompanyId, 'serviceName': response.data[i].Name, 'staffName': response.data[i].FirstName, 'staffEmail': response.data[i].Email, 'DurationInMinutes': response.data[i].DurationInMinutes, 'time': response.data[i].DurationInHours, 'Currency': response.data[i].Currency, 'price': response.data[i].Cost, 'CreationDate': response.data[i].CreationDate,'AllAssignStaffChecked': response.data[i].AllAssignStaffChecked, 'staff': response.data[i].staff });
                 }
                 $scope.init();
                 $scope.staffName = '';
