@@ -346,11 +346,12 @@ app.controller('bookingController', ['$scope', '$http', '$timeout', 'bookingServ
         }
     };
 
-       
+    
+    
     $scope.toggleSelection = function staffchecked() {
         debugger;
         for (var i = 0; i < $scope.staffInfo.length; i++) {
-            if ($scope.staffInfo[i].confirmed == false) {
+            if ($scope.staffInfo[i].confirmed == false || $scope.staffInfo[i].hasOwnProperty('confirmed')==false) {
                 $scope.allstaffchecked = false;
 
                 break;
@@ -361,9 +362,10 @@ app.controller('bookingController', ['$scope', '$http', '$timeout', 'bookingServ
         }
     };
 
+
         $scope.togglealldataSelection = function (item) {
             debugger;          
-            if (item.AllStaffChecked == true)
+            if (item.AllAssignStaffChecked == true)
             {
                 for(var i=0;i<item.staff.length;i++)
                 {
@@ -382,11 +384,11 @@ app.controller('bookingController', ['$scope', '$http', '$timeout', 'bookingServ
             debugger;
             for (var i = 0; i < item.staff.length; i++) {
                 if (item.staff[i].confirmed == false) {
-                    item.AllStaffChecked = false;
+                    item.AllAssignStaffChecked = false;
                     break;
                 }
                 else {
-                    item.AllStaffChecked = true;
+                    item.AllAssignStaffChecked = true;
                 }
             }
 
@@ -488,7 +490,7 @@ app.controller('bookingController', ['$scope', '$http', '$timeout', 'bookingServ
                                 debugger;
                                 $scope.serviceInfo = [];
                                 for (var i = 0; i < response.data.length; i++) {
-                                    $scope.serviceInfo.push({ 'Id': response.data[i].Id, 'CompanyId': response.data[i].CompanyId, 'serviceName': response.data[i].Name, 'staffName': response.data[i].FirstName, 'staffEmail': response.data[i].Email, 'DurationInMinutes': response.data[i].DurationInMinutes, 'time': response.data[i].DurationInHours, 'Currency': response.data[i].Currency, 'price': response.data[i].Cost, 'CreationDate': response.data[i].CreationDate, 'AllStaffChecked': response.data[i].AllStaffChecked, 'staff': response.data[i].staff });
+                                    $scope.serviceInfo.push({ 'Id': response.data[i].Id, 'CompanyId': response.data[i].CompanyId, 'serviceName': response.data[i].Name, 'staffName': response.data[i].FirstName, 'staffEmail': response.data[i].Email, 'DurationInMinutes': response.data[i].DurationInMinutes, 'time': response.data[i].DurationInHours, 'Currency': response.data[i].Currency, 'price': response.data[i].Cost, 'CreationDate': response.data[i].CreationDate, 'AllAssignStaffChecked': response.data[i].AllAssignStaffChecked, 'staff': response.data[i].staff });
                                 }
 
                                 $scope.init();

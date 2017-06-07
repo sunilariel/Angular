@@ -216,11 +216,11 @@ namespace AngularMvcProject.Controllers
 
                 if(staffdata.Count==empallocatedservice.Count)
                 {
-                    obj.AllStaffChecked = true;
+                    obj.AllAssignStaffChecked = true;
                 }
                 else
                 {
-                    obj.AllStaffChecked = false;
+                    obj.AllAssignStaffChecked = false;
                 }
 
                 List<Employees> listofEmployees = new List<Employees>();
