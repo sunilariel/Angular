@@ -1,5 +1,7 @@
 body{
 	font-family: 'Montserrat', sans-serif;	
+    margin:0;
+    padding:0;
 }
 a:hover, button{
 	text-decoration:none;
@@ -93,7 +95,7 @@ li.upgrade_btn a:hover {
     font-family: "Lato", "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
     color: #222;
     line-height: 1.4;
-    z-index: 1000;
+    /*z-index: 1000;*/
 }
 
 
@@ -261,7 +263,7 @@ color: #333;
 	background:none;	
 }
 
-div#staffContentNav li a {
+.staffContent li a {
     font-size: 13px;
     color: #777;
     font-weight: 500;
@@ -269,10 +271,47 @@ div#staffContentNav li a {
 	background:none;
 	 border-radius: 0px;
 }
+.staffContent li a:hover {
+		border-bottom: 2px solid #00b5c8;
+		background:transparent !important;
+}
+.staffContent li a:focus {
+		background:transparent !important;
+}
+.staffContent {
+    padding: 40px 15px;
+    background: #fff;
+	position: fixed;
+    top: 60px;
+    bottom: 0;
+	/* overflow-y:auto; */
+	right: 0px;
+    width: 63%;
+}
+.staffContent li.active a {
+    background: transparent;
+    color: #333;
+    border-bottom: 2px solid #00b5c8;
+    color: #455862 !important;
+}
+.staffContent ul{
+	    width: 100%;
+    border-bottom: 1px solid #eee;
+	    margin-bottom: 17px;
+}
+
+/*div#staffContentNav li a {
+    font-size: 13px;
+    color: #777;
+    font-weight: 500;
+	padding:10px 20px;
+	background:none;
+	 border-radius: 0px;
+}*/
 div#staffContentNav li a:hover {
 		border-bottom: 2px solid #00b5c8;
 }
-div#staffContentNav {
+/*div#staffContentNav {
     padding: 40px 15px;
     background: #fff;
 	    position: fixed;
@@ -281,7 +320,7 @@ div#staffContentNav {
 	overflow-y:auto;
 	right: 0px;
     width: 63%;
-}
+}*/
 div#staffContentNav li.active a {
     background: none;
     color: #333;
@@ -440,13 +479,15 @@ div#staff-break .media-body li.row {
 }
 
 .top_right ul.dropdown-menu {
-       border-radius: 0 0 5px 5px;
+      border-radius: 0 0 5px 5px;
     top: 47px;
     border: none;
     box-shadow: 0px 2px 6px rgba(51, 51, 51, 0.5);
     padding: 0px;
     min-width: 230px;
-}.dropdown-user> li >a > div.nav-dropdown-icon-holder {
+	z-index: 999999;
+}
+.dropdown-user> li >a > div.nav-dropdown-icon-holder {
     width: 30px;
     text-align: center;
 }
@@ -528,7 +569,7 @@ span.staff-break-delete-holder button.btn.btn-circle {
     border-radius: 3px;
 }
 .submit_btn {
-       background: #58b253;
+       background: #58b253 !important;
     border: none;
     color: #fff;
     display: block;
@@ -584,7 +625,7 @@ span.staff-break-delete-holder button.btn.btn-circle {
     display: table;
     width: 100%;
     position: relative;
-	margin-top: -34px;
+	margin-top: -38px;
 }
 
 .stepwizard-step button[disabled] {
@@ -593,7 +634,7 @@ span.staff-break-delete-holder button.btn.btn-circle {
 }
 
 .stepwizard-row:before {
-    top: 32px;
+    top: 34px;
     bottom: 0;
     position: absolute;
     content: " ";
@@ -615,15 +656,12 @@ span.staff-break-delete-holder button.btn.btn-circle {
     width: 28px;
     height: 28px;
     text-align: center;
-    padding: 4px 0;
+    padding: 6px 0;
+    font-size: 12px;
     line-height: 1.428571429;
     border-radius: 100% !important;
     -webkit-appearance: inherit;
-    background: #B4C0C0;
-	border: none;
-    color: #fff;
-	position: relative;
-    z-index: 9;
+	    background: #B4C0C0;
 }
 .stepwizard-step .btn-circle:hover {
 	background: #B4C0C0;
@@ -645,9 +683,9 @@ span.staff-break-delete-holder button.btn.btn-circle {
 	height: 90%;
     overflow: auto;
 }
-/* .demo_wizard .col-xs-12 {
+ /*.demo_wizard .col-xs-12 {
     width: 100%;
-} */
+}*/
 
 .setmore button.btn.btn-primary.nextBtn.btn-lg.pull-right.waves-effect.waves-light {
 	padding: 9px 23px;
@@ -989,9 +1027,9 @@ button:hover {
     position: absolute;
     background: #27C3BB;
     height: 5px;
-    width: 100%;
+    width: 95%;
     left: -76px;
-    top: 32px;
+    top: 34px;
     z-index: 0;
 	display:none;
 }
@@ -1023,7 +1061,1673 @@ a.close_icon img {
 .before_div:before{
 	display: block;
 }
+
+
+
+/* add customer2 css 24-may-2017 end here ===================== */
+
+/* add customer3 css 24-may-2017 start here ===================== */
+
+.appointDate h4.media-heading {
+    font-size: 12px;
+    color: #000;
+    font-weight: normal;
+    margin: 0;
+    margin-bottom: 5px;
+    line-height: 12px;
+}
+
+.appointDate p {
+	font-size: 11px;
+    color: #555;
+    line-height: 11px;
+    margin-bottom: 0;
+}
+.appointMedia li {
+    padding: 10px 7px;
+	position: relative;
+    border-left: solid 1px #ffffff;
+    border-right: solid 1px #ffffff;
+    cursor: pointer;
+    line-height: 12px;
+	border-top: 1px solid #e5e5e5;
+    border-bottom: 1px solid #fff;
+}
+.appointMedia li:hover {
+	
+    border: solid 1px #e5e5e5;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    -moz-box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.15);
+    -webkit-box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.15);
+    box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.15);
+}
+
+.media-left.calendarIcon span {
+    display: inline-block;
+   
+    border: 1px solid #ccc;
+    border-radius: 100%;
+    height: 30px;
+    line-height: 28px;
+    text-align: center;
+    width: 30px;
+}
+.appoint_text.appoint_cust {
+    border-bottom: 0;
+}
+.appointmentListHolder {
+    /* overflow-y: auto; */
+    padding: 3px 3px 5px 1px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+	position: relative;
+}
+/* .modal-backdrop {
+    display: none;
+} */
+
+.modal_bg {
+	position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1040;
+    background-color: #fff;
+	opacity:0.9 !important;
+} 
+
+.appointPopupHead {
+    z-index: 1051;
+    overflow: hidden;
+        left: 0;
+}
+
+.appointPopupHead .modal-content {
+    border-radius: 0;
+    border: 1px solid #aaa;
+	width: 410px;
+	margin: auto;
+}
+.appointPopupHead .modal-header .modalcloseIcon {
+    margin-top: 7px;
+}
+.appointPopupHead .modal-header h3 {
+    font-size: 20px !important;
+    color: #495861 !important;
+}
+.appointPopupHead .modal-header {
+    background: #e4ebf1;
+    height: 65px;
+    cursor: move;
+}
+
+/*       Drop down button css start here          */
+
+.dropbtn {
+    background: transparent;
+    border: none;
+    box-shadow: none;
+	color: #8E8F64;
+    font-size: 11px;
+}
+.dropbtn:focus {
+	outline:none;
+}
+
+.labeldrowDownBtn {
+    position: relative;
+    text-align:right;
+	margin: 10px 0;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {background-color: #f1f1f1}
+
+.labeldrowDownBtn:hover .dropdown-content {
+    display: block;
+}
+
+ul.lableDropdownContent li {
+    margin-right: 0 !important;
+    text-align: left;
+    padding-left: 0;
+    padding: 0;
+    border: none;
+}
+ul.lableDropdownContent li:hover {
+	background: #27C3BB;
+	border: none;
+}
+ul.lableDropdownContent li a:hover {
+	color:#fff !important;
+}
+
+.labeldrowDownBtn ul.lableDropdownContent {
+    list-style-type: none;
+    margin-left: 0px;
+    background: none repeat scroll 0 0 #FFF;
+    box-shadow: 0 1px 6px #777;
+    font-size: 13px;
+    padding: 0;
+    min-width: 100px !important;
+    width: auto;
+    right: 0;
+}
+.labeldrowDownBtn ul.lableDropdownContent li a {
+    padding-bottom: 0;
+    border-bottom: none;
+    padding: 5px;
+	font-size: 11px;
+	text-transform: capitalize;
+	color:#000;
+}
+.detailText .appointDeatailDiv {
+    border-bottom: 0;
+	margin: 10px 0;
+}
+.detailText .appointDeatailDiv li a {
+    padding-bottom: 20px !important;
+    border-bottom: 2px #4f4f4f solid;
+    color: #4f4f4f !important;
+	font-size:11px !important;
+}
+.dropbtn span {
+    font-size: 8px !important;
+}
+.detailText .appointDeatailDiv li a:hover {
+   border-bottom: 2px #4f4f4f solid;
+}
+.appointPopupHead .appointPopupBody {
+    padding-top: 0;
+}
+.appointPopupBody .popupDeatailDiv {
+    background: #f1f5f8;
+    height: 50px;
+    margin-bottom: 20px;
+}	
+
+/*       Drop down button css end here          */
+
+.appointProvider .btn {
+    width: 100%;
+    text-align: left;
+    border: 1px solid #d9d9d9;
+    border-radius: 5px;
+    background: transparent;
+    box-shadow: none;
+	font-size: 12px;
+	height: 35px;
+}
+.appointProvider .btn:focus {
+    border: 1px solid #d9d9d9;
+    background: transparent;
+    box-shadow: none;
+	outline:none;
+}
+.appointProvider .btn .okIcon {
+    color: #00b4b2;
+    font-size: 11px;
+    margin-right: 2px;
+}
+.appointProvider .btn .chevronDownIcon {
+    float: right;
+    margin-top: 2px;
+    font-size: 11px;
+}
+
+.appointPopUpform .form-group label {
+    color: #5A5A5A;
+    margin-bottom: 0px;
+    font-size: 13px;
+    font-weight: normal;
+}
+.popupdropdownDiv {
+    width: 100%;
+    background: none repeat scroll 0 0 #FFF;
+    box-shadow: 0 1px 6px #777;
+    border-radius: 0;
+}
+
+
+/*      29-May-2017 css start here       */
+
+.appoint_text.appoint_cust span {
+    margin-top: 4px;
+    display: inline-block;
+}
+.dropdown-menu.popupdropdownDiv ul.list-inline {
+    margin: 0;
+    border-bottom: 0;
+}
+
+.dropdown-menu.popupdropdownDiv ul.list-inline li span.userIcon {
+    overflow: auto;
+    margin: 0 10px 0 0;
+    vertical-align: middle;
+}
+.dropdown-menu.popupdropdownDiv ul.list-inline li span.serviceCheckboxDiv {
+    color: #5A5A5A;
+    font-size: 13px;
+    font-weight: normal;
+    display: inline-block;
+    width: 170px;
+}
+span.serviceCheckboxDiv input.sampleCheckbox {
+    float: left;
+	margin-right: 3px;
+}
+.dropdown-menu.popupdropdownDiv ul.list-inline li {
+    margin-right: 0;
+}
+.dropdown-menu.popupdropdownDiv ul.list-inline li span.serviceMins {
+	color: #5A5A5A;
+    font-size: 13px;
+    font-weight: normal;
+}
+.appointProvider .btn .okIcon.longrightArrow {
+    color: #000 !important;
+}
+.dateTimeDiv {
+    position: relative;
+}
+.dateTimeDiv .calendarOk {
+    color: #00b4b2;
+    font-size: 11px;
+    position: absolute;
+    top: 0;
+    margin-top: 10px;
+    left: 25px;
+}
+.notesForCustomer .apptNotes {
+    height: 34px;
+    font-size: 13px;
+}
+.recurringOnOffBtn {
+    float: left;
+}
+.recurringOnOffBtn label.onoffswitch-label {
+    height: 24px;
+}
+.recurringOnOffBtn span.onoffswitch-switch {
+    width: 22px;
+    height: 22px;
+}
+.recurringOnOffBtn .onoffswitch-inner:before, .onoffswitch-inner:after {
+    height: 26px;
+    line-height: 25px;
+    font-size: 13px;
+}
+.recurringOnOffBtn .onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-switch {
+    right: 14px;
+}
+.premiumBtn .btn {
+    background: #27C3BB;
+    color: #FFF !important;
+    text-align: center;
+    border-radius: 4px;
+    border: 1px solid #27C3BB;
+    padding: 3px 10px;
+    text-transform: uppercase;
+    font-size: 13px;
+}
+.premiumBtn .btn span {
+    margin-right: 3px;
+}
+.premiumBtn .btn a {
+    color: #fff;
+    text-decoration: none;
+}
+.apptSaveBtn {
+    float: left;
+}
+.apptSaveBtn .btn {
+    background: #ACBBBA;
+    color: #fff;
+    font-size: 14px;
+	border:1px solid #ACBBBA;
+	line-height: 26px;
+}
+.apptSaveBtn .btn:hover {
+    background: #27C3BB;
+    color: #fff;
+	border:1px solid #27C3BB;
+}
+.apptSaveBtn .btn:focus {
+    outline:none;
+}
+.dateTimeDiv .datepickerBox {
+    padding-left: 25px;
+    font-size: 13px;
+}
+
+.apptDetailPopup {
+    top: -132px;
+    border-radius: 0;
+    left: -104%;
+    width: 100%;
+    display: none;
+}
+
+.apptDetailDiv {
+    padding: 20px;
+}
+.apptDetailDiv {
+    padding: 20px;
+}
+.appt_text {
+    border-bottom: solid 1px #E4E4E4;
+}
+
+.appt_text h2 {
+    padding-bottom: 15px;
+    color: #797D80;
+    font-size: 16px;
+    font-weight: normal;
+    margin: 0;
+	display:inline-block;
+}
+.appt_text .crossBtn {
+    color: #797D80;
+    font-size: 16px;
+    font-weight: normal;
+    float: right;
+	padding:0 !important;
+}
+.appt_text .crossBtn:hover {
+	border:none !important;
+}
+.apptdetailList p {
+    font-size: 12px;
+}
+.apptdetailList ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+	border:none;
+}
+.apptdetailList ul li {
+    padding: 9px 0px;
+    margin: 0 !important;
+    clear: both;
+    font-size: 12px;
+    border: none;
+    line-height: normal;
+}
+
+.apptdetailList ul li:hover {
+    border: none;
+    box-shadow: none;
+}
+.apptdetailList ul li label {
+    width: 35%;
+    float: left;
+    color: #B5BFC4;
+    text-align: left;
+    margin-right: 17px;
+    margin-bottom: 0;
+    font-size: 13px;
+    font-weight: 400;
+}
+
+.apptdetailList ul li span {
+    float: left;
+    color: #666;
+    font-size: 13px;
+    line-height: 20px;
+    max-width: 228px;
+    word-break: break-word;
+    word-wrap: break-word;
+    max-height: 150px;
+    overflow: auto;
+}
+.brdr_btm {
+    border-top: solid 1px #E4E4E4;
+    margin: 30px 0px 0px;
+}
+.pointerRightIcon {
+    position: absolute;
+    width: 27px;
+    height: 24px;
+    top: 41%;
+    right: 0px;
+    margin-right: -24px;
+    background: url(../images/popup_pointer.png) no-repeat;
+}	
+
+.apptViewFooter .editAppt {
+    font-size: 13px !important;
+    float: left;
+    color: #13C3BC !important;
+    font-weight: normal !important;
+    margin: 15px 0;
+    padding: 0 !important;
+    text-transform: capitalize !important;
+	text-decoration:none;
+}
+
+.apptViewFooter .editAppt:hover {
+	border:none !important;
+}
+.apptViewFooter .apptDeleteBtn {
+    font-size: 13px !important;
+    float: right;
+    color: #B5BFC4 !important;
+    position: relative;
+    font-weight: normal !important;
+    margin: 15px 0;
+    text-transform: capitalize !important;
+    padding-bottom: 0 !important;
+}
+.apptViewFooter .apptDeleteBtn:hover {
+	border:none !important;
+}
+.dateTimeDiv input.appt_cost {
+    padding-left: 30px;
+}
+.dateTimeDiv.costField {
+    padding-right: 2px;
+}
+.dateTimeDiv.costMinField {
+    padding-left: 2px;
+}
+.costMinField .appt_cost_min {
+    padding-left: 30px;
+}
+.dateTimeDiv.costField span.calendarOk {
+    color: #686868;
+}
+.dateTimeDiv.costMinField .minText {
+    position: absolute;
+    top: 0;
+    right: 20px;
+    margin-top: 7px;
+    font-size: 13px;
+	color:#686868;
+	text-decoration: none;
+}
+.dateTimeDiv.costMinField .minText span {
+    font-size: 11px;
+    padding-left: 7px;
+}
+.dateTimeDiv.costMinField ul.apptcustomeDropdown {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    border: none;
+    z-index: 1002;
+    background: none repeat scroll 0 0 #FFF;
+    box-shadow: 0 1px 6px #777;
+    font-weight: normal;
+    font-size: 14px;
+	width: 65%;
+    float: right;
+	display:none;
+    
+}
+
+.dateTimeDiv.costMinField ul.apptcustomeDropdown li {
+    padding: 2px 10px;
+    margin-right: 0;
+	cursor: pointer;
+	
+}
+.dateTimeDiv.costMinField ul.apptcustomeDropdown li:hover {
+    color: #FFF !important;
+    background: #27C3BB;
+
+}
+
+.dateTimeDiv.costMinField ul.apptcustomeDropdown li a {
+	color:#69737C;
+	font-size: 12px;
+    font-weight: normal;
+}
+
+.dateTimeDiv.costMinField ul.apptcustomeDropdown li a:hover {
+    border: none;
+	color:#fff;
+}
+.form-group.rescheduleDiv {
+    margin: 0;
+}
+.sendSchdlEmail span {
+    font-size: 12px;
+}
+.sendSchdlEmail input.sampleCheckbox {
+    margin-right: 10px;
+    float: left;
+}
+
+
+/*        customize checkbox css start here         */
+
+
+.checkbox-custom{
+    opacity: 0;
+    position: absolute;   
+}
+
+.checkbox-custom, .checkbox-custom-label  {
+    display: inline-block;
+    vertical-align: middle;
+    margin: 5px;
+    cursor: pointer;
+}
+
+
+
+.checkbox-custom + .checkbox-custom-label:before {
+    content: '';
+    background: #fff;
+    border: none;
+    display: inline-block;
+    vertical-align: middle;
+    width: 17px;
+    height: 17px;
+    padding: 0px;
+    margin-right: 10px;
+    text-align: center;
+	border-radius:4px;	
+	background:#ddd;
+}
+
+.checkbox-custom:checked + .checkbox-custom-label:before {
+    content: "\f00c";
+    font-family: 'FontAwesome';
+    background: #27C3BB;
+    color: #fff;
+}
+
+.checkbox-custom:focus + .checkbox-custom-label {
+  outline: none;
+}
+button#deleteBtn {
+    color: #fff;
+    background-color: #d9534f;
+    border-color: #d43f3a;
+}
+
+/*        customize checkbox css End here         */
+
+/* 23-may-2017 css start here ===================== */
+
+.fixed_div {
+    position: fixed;
+    top: 0;
+    background: rgba(255, 255, 255, 0.87);
+    width: 100%;
+	height: 100%;
+    z-index: 99999;
+	display: flex;
+    align-items: center;
+	overflow-y: scroll;
+}
+.welcome_div {
+	padding: 30px 0 0;
+}
+.setmore p {
+    color: #95a5a6;
+}
+.setmore button .fa {
+    font-size: 12px;
+}
+.stepwizard-step a.btn.btn-circle.active {
+    background: #27C3BB !important;
+}
+
+.onoffswitch {
+    position: relative; width: 90px;
+    text-align: center;
+}
+.onoffswitch-checkbox {
+    display: none;
+}
+.onoffswitch-label {
+    overflow: hidden; cursor: pointer;
+    border-radius: 20px;
+	margin: 0;
+	text-align: left;
+}
+.onoffswitch-inner {
+    display: block; width: 200%; margin-left: -100%;
+    transition: margin 0.3s ease-in 0s;
+}
+.onoffswitch-inner:before, .onoffswitch-inner:after {
+    display: block; float: left; width: 50%; height: 26px; padding: 0; line-height: 30px;
+    font-size: 14px; color: white; font-family: Trebuchet, Arial, sans-serif; font-weight: bold;
+    box-sizing: border-box;
+}
+.onoffswitch-inner:before {
+    content: "ON";
+    padding-left: 10px;
+    background-color: #27C3BB; color: #FFFFFF;
+}
+.onoffswitch-inner:after {
+    content: "OFF";
+    padding-right: 10px;
+    background-color: #d8dfe3; color: #fff;
+    text-align: right;
+}
+.onoffswitch-switch {
+    display: block;
+    width: 24px;
+    height: 24px;
+    background: #eee;
+    position: absolute;
+    top: 1px;
+    bottom: 0;
+    right: 55px;
+    border-radius: 100%;
+    transition: all 0.3s ease-in 0s;
+}
+.onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-inner {
+    margin-left: 0;
+}
+.onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-switch {
+    right: 10px; 
+}
+
+.week_div p {
+    font-size: 17px;
+    color: #3d484f;
+	margin: 0;
+}
+.colom_div .row .col-md-3.col-sm-3 {
+    margin-top: 5px;
+}
+select.select_btn {
+    border: 1px solid #E4E4E4;
+    border-radius: 3px;
+    padding: 5px 0;
+    height: 38px;
+    color: #3d484f;
+    font-size: 13px;
+}
+select.select_btn:focus {
+    background: #e6e6e6;
+	border: 1px solid #E4E4E4;
+	outline: none;
+	box-shadow: inset 0 2px 4px rgba(0,0,0,.15), 0 1px 2px rgba(0,0,0,.05);
+}
+.week_div span {
+    display: inline-block;
+    font-size: 13px;
+    margin: 0 4px;
+}
+.colom_div {
+    margin-bottom: 7px;
+}
+.btn.disabled, .btn[disabled], fieldset[disabled] .btn{
+	
+}
+.btn.disabled, .btn[disabled], fieldset[disabled] .btn {
+    pointer-events: inherit;
+    cursor:inherit;
+    opacity:inherit;
+}
+/* 23-may-2017 css end here ===================== */
+
+
+/* add customer css 24-may-2017 start here ===================== */
+
+
+
+.addcustomerSec {
+	height: 100%;
+    /* position: absolute; */
+    top: 0;
+    bottom: 0;
+}
+.addCustomer {
+    position: absolute;
+    top: -5px;
+    left: 135px;
+    z-index: 999;
+    display: none;
+    width: 100%;
+    padding: 1px;
+    text-align: left;
+    background-color: #ffffff;
+    border: 1px solid #ccc;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    -webkit-border-radius: 6px;
+    -moz-border-radius: 6px;
+    border-radius: 6px;
+    -webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+    -moz-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+    white-space: normal;
+}
+.addCustomer h3.addCustomerTitle {
+    margin: 0;
+    padding: 8px 14px;
+    font-size: 14px !important;
+    font-weight: normal;
+    line-height: 18px;
+    background-color: #f8f8f8;
+    -webkit-border-radius: 5px 5px 0 0;
+    -moz-border-radius: 5px 5px 0 0;
+    border-radius: 5px 5px 0 0;
+	color: #5a5a5a !important;
+}
+
+
+.addCustomer .arrow, .addCustomer .arrow:after {
+    position: absolute;
+    display: block;
+    width: 0;
+    height: 0;
+    border-color: transparent;
+    border-style: solid;
+}
+
+.addCustomer .arrow {
+    left: 50%;
+    margin-left: -11px;
+    border-top-width: 0;
+    border-bottom-color: #999;
+    border-bottom-color: rgba(0, 0, 0, 0.25);
+    top: -22px;
+	border-width: 11px;
+}
+.addCustomer .arrow:after {
+    top: 1px;
+    margin-left: -10px;
+    border-top-width: 0;
+    border-bottom-color: #ffffff;
+	border-width: 10px;
+	border-width: 10px;
+    content: "";
+    
+}
+.addCustomer.bottomArrow .arrow:after {
+    top: 1px;
+    margin-left: -10px;
+    border-top-width: 0;
+    border-bottom-color: #ffffff;
+}
+
+
+.addcustomerContent {
+	padding: 9px 14px;
+}
+input#customerName {
+    width: 87%;
+}
+input#customerEmail {
+    width: 87%;
+}
+.addcustomerContent .form-control {
+	display: inline-block;
+    height: 30px;
+    padding: 4px 6px;
+    margin-bottom: 10px;
+    font-size: 14px;
+    line-height: 20px;
+    color: #555555;
+}
+
+/* #customerExt {
+    width: 30px;
+    float: left;
+} */
+#customerMobile {
+    width: 84%;
+   /*  float: left;
+    margin-left: 3px; */
+}
+.userNumber {
+	padding-right:0;
+}
+.addCustomerbtn {
+    background: #27C3BB;
+    color: #FFF;
+    border-color: #27C3BB;
+	margin-top: 5px;
+	padding: 6px 20px;
+}
+
+button#createNewStaffBtn:focus {
+	box-shadow:none;
+	outline:none;
+}
+
+.detail-navbar.appointmentDiv ul li{
+    margin-right:40px;
+}
+.detail-navbar.appointmentDiv ul li a {
+    text-transform: uppercase;
+    padding: 0px 0px 24px 0px;
+    font-size: 14px;
+	font-weight: normal	;
+	color: #C1C8CD;
+}
+.detail-navbar.appointmentDiv ul li.active { 
+	color: #455862 !important;
+}
+.detail-navbar.appointmentDiv {
+    width: 70% !important;
+    position: relative !important;
+    margin: auto;
+    float: left;
+    top: 0 !important;
+}
+.appointment_content {
+    margin: 20px 0px 0;
+}
+.appointmentTab {
+	padding-left:0;
+}
+.appoint_text {
+    color: #555555;
+    font-size: 17px;
+    margin-bottom: 2px;
+    position: relative;
+    line-height: 1;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 20px;
+}
+
+.appointmentList li span {
+    font-size: 12px;
+	position: relative;
+}
+.dottext {
+	margin: -5px  8px;
+	position: relative;
+    font-size: 19px;
+}
+.appointmentList {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+	border-bottom: none !important;
+}
+.settingIcon {
+	font-size:20px;
+	color:#C1C8CD;
+}
+.addcustomerSearch {
+    float: left;
+	border-bottom: 1px solid #ccc;
+	padding-bottom:15px;
+}
+.addcustomerSearch input.form-control {
+    background: transparent;
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+	float:left;
+	width: 200px;
+}
+.addcustomerSearch  .iconBar {
+	float:left;
+	/* margin-left:20px; */
+	font-size:20px;
+	color:#777;
+}
+.addcustomerSearch .iconBar .dropdownIcon  span {
+    margin-left: 4px;
+    font-size: 12px;
+}
+
+.addcustomerSearch .iconBar ul.dropdown-menu li a {
+    padding: 10px;
+	font-size: 12px;
+}
+.addcustomerSearch .iconBar ul.dropdown-menu li a:hover {
+    background: #27C3BB;
+	color: #fff;
+}
+.addcustomerSearch .iconBar ul.dropdown-menu {
+    padding: 0;
+    left: -95px;
+	min-width: 140px !important;
+}
+.addcustomerSearch .iconBar .dropdownIcon {
+    background: transparent;
+    box-shadow: none;
+}
+.addcustomerSearch input.form-control:focus {
+    background: transparent;
+	border-color: rgba(39, 195, 187, 0.8) !important;
+	border: 1px solid rgba(39, 195, 187, 0.8) !important;
+	border-radius:4px;
+	
+}
+.tabcontent {
+	background:#fff !important;
+}
+
+.appointmentDiv ul.nav.nav-pills {
+    margin-bottom: 5px !important;
+}
+
+div#staff {
+    overflow: auto;
+}
+/* add customer css 24-may-2017 end here ===================== */
+
+/* add customer2 css 24-may-2017 start here ===================== */
+
+td.userImage img {
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+}
+
+td.profileImage img {
+    border-radius: 50%;
+}
+table#mytable {
+    margin-top: 20px;
+}
+/* table#mytable tr {
+    background: #e1e7eb;
+} */ 
+table#mytable tr td {
+    border: none;
+} 	
+.appointment_btn {
+    float: left !important;
+    margin-right: 8px;
+}
+.appoint_text.appoint2 span {
+    margin-top: 5px;
+    display: inline-block;
+}
+
+
+
+.providerCustomer ul.list-inline {
+    margin-top: 10px;
+}
+
+.providerCustomer .list-inline .selectCustomer {
+    position:relative;
+    border-radius: 4px;
+    color: #000;
+    height: 40px;
+    width: 100%;
+	margin-bottom: 10px;
+}
+.providerCustomer .list-inline .selectCustomer:hover {
+    background: #E1E7EB;
+}
+.formCheckbox .inputcheckbox {
+    vertical-align: middle;
+    height: 14px;
+    width: 18px;
+    margin: 0;
+	margin-right: 5px;
+}
+.providerImage img {
+   /*  margin: 4px 0 0 8px; */
+    width: 30px;
+    height: 30px;
+    border-radius: 100%;
+}
+.providerCustomer .list-inline .selectCustomer .providerName {
+    margin: 10px 0 0 10px;
+    cursor: pointer;
+    font-weight: normal;
+    font-size: 13px;
+    max-width: 140px;
+    word-break: break-all;
+    overflow-wrap: break-word;
+}
+.selectCustomer .popOverDeleteBtn {
+    float: right;
+    display: inline-block;
+    margin-top: 10px;
+}
+.selectCustomer .popOverDeleteBtn .delete_btn {
+    background: #fff !important;
+    padding: 2px 5px 20px 5px;
+    height: 20px;
+    line-height: 20px;
+    text-align: center;
+    font-size: 10px;
+    position: relative;
+    color: #555;
+    border: solid 1px #d7d7d7;
+}
+.customerProfileDiv {
+    margin: 40px 0 0 15px;
+    position: relative;
+}
+.selectCustomer .popOverDeleteBtn .delete_btn span {
+	margin-right:3px;
+}
+.popOverDeleteBtn .popover {
+	width:100%;
+}
+.imageUploadForm img {
+    width: 70px;
+    height: 70px;
+    border-radius: 100%;
+}
+
+.customerProfileDiv:hover .form-control {
+    background: #F1F5F7;
+}
+.customerProfileDiv:hover .form-control:focus {
+    background: #fff;
+}
+.customerProfileDiv:hover .uploadImageIcon i {
+    display:block;
+}
+.customerDetail .form-group {
+    margin-bottom: 5px;
+}
+.uploadImageIcon i {
+    width: 45px;
+    height: 45px;
+    position: absolute;
+    background: rgb(255, 255, 255);
+    text-align: center;
+    padding-top: 8px;
+    top: 20px;
+    left: 28px;
+    font-size: 2em;
+    opacity: 0.8;
+    display: none;
+    cursor: pointer;
+    border: 1px solid #CCC;
+    z-index: 100;
+    border-radius: 100%;
+}
+.customerName {
+    border: none;
+    box-shadow: none;
+    margin-top: 30px;
+    font-size: 24px;
+	height: 40px !important;
+    line-height: 40px !important;
+}
+.customerName:hover {
+	    background: #E1E7EB;
+}
+.customerName:focus {
+	background: #fff;
+	border:1px solid rgba(39, 195, 187, 0.8) !important;
+	-webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(39, 195, 187, 0.6) !important;
+    -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(39, 195, 187, 0.6) !important;
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(39, 195, 187, 0.6) !important;
+}
+.customerDetail .form-control {
+    height: 30px;
+    line-height: 30px;
+	border: none;
+    box-shadow: none;
+}
+.customerDetail .form-control:hover {
+    background: #E1E7EB;
+}
+
+.customerDetail .form-control:focus {
+    background: #fff;
+	border:1px solid rgba(39, 195, 187, 0.8) !important;
+	-webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(39, 195, 187, 0.6) !important;
+    -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(39, 195, 187, 0.6) !important;
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(39, 195, 187, 0.6) !important;
+}
+.customerDetail label {
+    font-size: 13px;
+    font-weight: normal;
+    color: #999;
+}
+.movileViewList {
+	display:none;
+}
+.tooltipArrow .arrow {
+    border-width: 11px;
+}
+.tooltipArrow {
+    width: 100%;
+    left: 105%;
+    top: -60px;
+}
+.emplyValues {
+    width: 59%;
+    left: 100%;
+    top: -134px;
+}
+
+.addCustomer.tooltipArrow > .arrow {
+    top: 50%;
+    left: -11px;
+    margin-top: -11px;
+    border-right-color: #999;
+    border-right-color: rgba(0,0,0,.25);
+    border-left-width: 0;
+	margin-left:0;
+	    border-bottom-color: transparent;
+}
+
+
+
+.tooltipArrow>.arrow:after {
+    content: "";
+    border-width: 10px;
+}
+.addCustomer.tooltipArrow >.arrow:after {
+    bottom: -10px;
+    left: 1px;
+    content: " ";
+    border-right-color: #fff;
+    border-left-width: 0;
+    border-bottom-color: transparent;
+    margin-left: 0;
+    top: -10px;
+}
+
+/*      29-May-2017 css start here       */
+
+/*   upload button css start here   */
+
+
+
+
+
+.btn-file {
+    overflow: hidden;
+    position: relative;
+    vertical-align: middle;
+}
+.btn-file>input {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 0;
+    opacity: 0;
+    filter: alpha(opacity=0);
+    transform: font-size: 23px;
+    direction: ltr;
+    cursor: pointer;
+}
+.fileupload {
+    margin-bottom: 9px;
+}
+.fileupload .uneditable-input {
+    display: inline-block;
+    margin-bottom: 0px;
+    vertical-align: middle;
+    cursor: text;
+}
+.fileupload .thumbnail {
+    overflow: hidden;
+    display: inline-block;
+    margin-bottom: 5px;
+    vertical-align: middle;
+    text-align: center;
+}
+
+.fileupload .btn {
+    vertical-align: middle;
+    background: none;
+    border: none;
+    color: #000;
+    box-shadow: none;
+}
+.fileupload-exists .fileupload-new,
+.fileupload-new .fileupload-exists {
+    display: none;
+}
+.fileupload-inline .fileupload-controls {
+    display: inline;
+}
+
+
+
+
+
+
+/*   upload button css start here   */
+
+
+/* add customer3 css 24-may-2017 end here ===================== */
+
+/* add services css 31-may-2017 start here ===================== */
+.categoriesHead {
+    float: left;
+}
+.categoriesHead h3 {
+    margin: 0;
+}
+.categoriesSec {
+    padding: 20px 0;
+}
+.addCategoryPopup {
+    top: 15px;
+    left: 48%;
+    width: 85%;
+}
+.add_category_btn {
+    margin: 0;
+    padding: 6px 12px;
+}
+.cateCancelbtn {
+    width: 100%;
+}
+.customerField.form-group {
+    margin-bottom: 0;
+}
+.categoryList ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+.categoryList {
+    margin-top: 20px;
+}
+.settingiconBar {
+	margin-left:-10px;
+}
+.addServices {
+	left:40%;
+}
+.categoryList ul li a {
+    color: rgb(193, 200, 205);
+    font-size: 13px;
+}
+.categoryList ul li a:hover {
+    color: rgb(73, 88, 97);
+}
+.categoryList ul li {
+    padding-bottom: 20px;
+}
+.categoryList ul li a span {
+    padding-left:5px;
+}
+.categoryButton i {
+    color: #000;
+}
+.categoryRightSec {
+	padding-left:30px;
+}
+.categoryButtonsDiv {
+    margin-top: 55px;
+	border-bottom: 1px solid #CCC;
+    padding-bottom: 25px;
+}
+.categoryButtonsDiv .serviceSaveBtn {
+    color: rgb(255, 255, 255);
+    background: rgb(39, 195, 187) !important;
+    border-color: rgb(39, 195, 187) !important;
+    padding: 6px 20px !important;
+    border-radius: 3px !important;
+    width: 11%;
+    margin-right: 5px;
+}
+.categoryButtonsDiv .serviceSaveBtn:focus {
+	outline:none;
+}
+.categoryButtonsDiv .serviceCancelBtn {
+    color: rgb(34, 34, 34);
+    border-color: rgb(181, 187, 187);
+    padding: 6px 20px !important;
+    border-radius: 3px !important;
+    width: 11%;
+}
+.categoryButtonsDiv .serviceCancelBtn:focus {
+    outline:none;
+}
+.serviceIconImage img {
+	border: 1px solid #CCC;
+    width: 90px;
+    height: 90px;
+}
+.serviceIconImage .uploadSeviceIcon i {
+    height: 60px;
+    top: 17%;
+    left: 90px;
+    width: 60px;
+    line-height: 45px;
+}
+.servicesTextareaDiv textarea.form-control {
+    border: none;
+    border-radius: 0;
+	box-shadow: none;
+
+}
+
+.servicesTextareaDiv textarea.form-control:focus {
+   background: #fff;
+    border: 1px solid rgba(39, 195, 187, 0.8) !important;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(39, 195, 187, 0.6) !important;
+    -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(39, 195, 187, 0.6) !important;
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(39, 195, 187, 0.6) !important;
+
+}
+.characterAllowed {
+	color: #a7a7a7;
+	display:block;
+	margin-left: 11px;
+}
+.serviceCategoryList .categoryDropBtn {
+	display: inline-block;
+    padding: 4px 12px;
+    margin-bottom: 0;
+    font-size: 14px;
+    line-height: 20px;
+    text-align: left;
+    vertical-align: middle;
+    cursor: pointer;
+    color: #333333;
+    text-shadow: 0 1px 1px rgba(255, 255, 255, 0.75);
+    background-color: #f5f5f5;
+    background-image: -moz-linear-gradient(top, #ffffff, #e6e6e6);
+    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#ffffff), to(#e6e6e6));
+    background-image: -webkit-linear-gradient(top, #ffffff, #e6e6e6);
+    background-image: -o-linear-gradient(top, #ffffff, #e6e6e6);
+    background-image: linear-gradient(to bottom, #ffffff, #e6e6e6);
+    background-repeat: repeat-x;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffffff', endColorstr='#ffe6e6e6', GradientType=0);
+    border-color: #e6e6e6 #e6e6e6 #bfbfbf;
+    border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+    filter: progid:DXImageTransform.Microsoft.gradient(enabled = false);
+    border: 1px solid #cccccc;
+    border-bottom-color: #b3b3b3;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    -webkit-box-shadow: inset 0 1px 0 rgba(255,255,255,.2), 0 1px 2px rgba(0,0,0,.05);
+    -moz-box-shadow: inset 0 1px 0 rgba(255,255,255,.2), 0 1px 2px rgba(0,0,0,.05);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.2), 0 1px 2px rgba(0,0,0,.05);
+}
+
+
+.serviceCategoryList .categoryDropBtn:focus {
+    text-shadow: 0 1px 1px rgba(255, 255, 255, 0.75);
+    background-color: #f5f5f5;
+    background-image: -moz-linear-gradient(top, #ffffff, #e6e6e6);
+    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#ffffff), to(#e6e6e6));
+    background-image: -webkit-linear-gradient(top, #ffffff, #e6e6e6);
+    background-image: -o-linear-gradient(top, #ffffff, #e6e6e6);
+    background-image: linear-gradient(to bottom, #ffffff, #e6e6e6);
+    background-repeat: repeat-x;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffffff', endColorstr='#ffe6e6e6', GradientType=0);
+    border-color: #e6e6e6 #e6e6e6 #bfbfbf;
+    border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+    filter: progid:DXImageTransform.Microsoft.gradient(enabled = false);
+    border: 1px solid #cccccc;
+    border-bottom-color: #b3b3b3;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    -webkit-box-shadow: inset 0 1px 0 rgba(255,255,255,.2), 0 1px 2px rgba(0,0,0,.05);
+    -moz-box-shadow: inset 0 1px 0 rgba(255,255,255,.2), 0 1px 2px rgba(0,0,0,.05);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.2), 0 1px 2px rgba(0,0,0,.05);
+}
+
+.serviceColors {
+    position: relative;
+}
+.serviceColors .chooseServiceColor {
+    position: absolute;
+    top: -35px;
+    left: 0px;
+    text-decoration: none;
+    color: #000;
+    background: transparent;
+    box-shadow: none;
+    border: none;
+}
+.serviceColors .chooseServiceColor:focus {
+    outline:none;
+}
+.serviceColors .chooseServiceColor span.caret {
+    margin-top: -7px;
+}
+.serviceColors .chooseServiceColor input.sampleCheckbox {
+    height: 16px;
+    width: 16px;
+    margin-top: 2px;
+}
+.sampleServicesSec input.customerName.form-control {
+    padding-left: 45px;
+}
+.serviceColorList > li > a.selected, .serviceColorList > li > a:hover, .serviceColorList > li > a:focus, .serviceColorList:hover > a, .serviceColorList:focus > a {
+    text-decoration: none;
+    color: #ffffff;
+    background-color: #0081c2;
+    background-image: -moz-linear-gradient(top, #0088cc, #0077b3);
+    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#0088cc), to(#0077b3));
+    background-image: -webkit-linear-gradient(top, #0088cc, #0077b3);
+    background-image: -o-linear-gradient(top, #0088cc, #0077b3);
+    background-image: linear-gradient(to bottom, #0088cc, #0077b3);
+    background-repeat: repeat-x;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff0088cc', endColorstr='#ff0077b3', GradientType=0);
+}
+.serviceColorPallet {
+    padding: 1px;
+    width: 2px;
+    height: 20px;
+    margin-right: 5px;
+}
+.serviceColorPallet.red {
+    background-color: #f0c2c1;
+    border: 1px solid #e59190;
+}
+.serviceColorPallet.light-gray {
+    background-color: #e1e0e2;
+    border: 1px solid #a9a8a9;
+}
+.serviceColorPallet.green {
+    background-color: #cae79e;
+    border: 1px solid #7bc40d;
+}
+.serviceColorPallet.light-blue {
+    background-color: #bbe6e1;
+    border: 1px solid #55bfb3;
+}
+.serviceColorPallet.maroon {
+    background-color: #e6dbcb;
+    border: 1px solid #c4a981;
+}
+.serviceColorPallet.deep-sky-blue {
+    background-color: #b5cedb;
+    border: 1px solid #4484a4;
+}
+.serviceColorPallet.violet {
+    background-color: #e1c6e1;
+    border: 1px solid #b597e8;
+}
+.serviceColorPallet.yellow {
+    background-color: #f3e7ae;
+    border: 1px solid #d4b825;
+}
+.serviceColorPallet.orange {
+    background-color: #fadeb3;
+    border: 1px solid #f2a836;
+}
+.serviceprovideBtn .btn {
+    border: none;
+    background: transparent;
+    box-shadow: none;
+	color: #999;
+}
+.serviceprovideBtn .btn span {
+    border: 1px solid #ccd2d6;
+    color: #fff;
+    background: #ccd2d6;
+    border-radius: 50%;
+    padding: 5px 5px;
+    font-size: 10px;
+    width: 22px;
+    height: 22px;
+	margin-right: 3px;
+}
+.serviceprovideBtn .btn:focus {
+    background-color: #dff6f5;
+    color: #455862;
+	border-radius: 50px;
+	outline:none;
+}
+.categorySwitchBtn {
+	margin-left:-10px;
+}
+.rowmrgnDiv {
+	margin:0;
+	padding:0;	
+}
+.serviceprovideBtn .btn .serviceOkIcon {
+	background:#27c3bb;
+	display:none;
+	border: 1px solid #27c3bb;
+}
+.servicesTabs  {
+	overflow:auto !important;
+}
+
+
+/* add services css 31-may-2017 start here ===================== */
+
+
+/*        Css changes start here June-9-2017         */
+
+.modal-backdrop {
+    display: none;
+}
+
+
+/*        Css changes start here June-9-2017         */
+
+
+
+
+
 /* media css start here ================================= */
+
+@media (max-width:1440px){
+/* .addCustomer {
+    left: 37%;
+} */
+.customerName {
+    margin-top: 20px;
+}
+.apptDetailPopup {
+    left: -104% !important;
+}
+.tooltipArrow {
+    left: 105% !important;
+}
+}
+
+@media (min-width:1024px) and (max-width:1200px){
+
+.addCustomer {
+    left: 105px;	
+}
+
+}
+
+@media (max-width:1300px){
+
+.addcustomerSearch input.form-control {
+	width:100%;
+}
+.row.staffaddCustomerSec {
+    padding: 0;
+    margin: 0;
+}
+.addCustomerbtn {
+    padding: 6px 10px;
+}
+.imageUploadForm img {
+    width: 60px;
+    height: 60px;
+}
+.uploadImageIcon i {
+    top: 15px;
+    left: 23px;
+}
+.customerDetail .form-control {
+    padding: 6px 3px;
+}
+.detail-navbar.appointmentDiv ul li {
+    margin-right: 20px;
+}
+.addcustomerSearch .iconBar ul.dropdown-menu {
+    left: 0;
+}
+
+
+}
+@media (max-width:1024px){
+.addcustomerSearch .iconBar ul.dropdown-menu {
+    left: 0;
+}
+.addCustomer {
+    left: 34%;
+}
+.customerName {
+    margin-top: 32px;
+}
+/* .addCustomer {
+    left: 90px;
+} */
+.addcustomerContent .form-control {
+    width: 30px;
+}
+.addCustomerbtn {
+    padding: 6px 10px;
+}
+.imageUploadForm img {
+    width: 50px;
+    height: 50px;
+    margin-top: 17px;
+}
+.detail-navbar.appointmentDiv ul li {
+    margin-right: 10px;
+}
+
+.orm-horizontal .control-label {
+    padding-top: 21px;
+}
+.uploadImageIcon i {
+    width: 30px;
+    height: 30px;
+    top: 34px;
+    left: 24px;
+    font-size: 1em;
+}
+.addcustomerContent .form-control {
+    padding: 4px 3px;
+}
+.serviceApptText h2 {
+	font-size:11px;
+}
+.providerpaddDiv {
+    padding: 0;
+}
+.addcustomerSearch input.form-control {
+    margin-bottom: 10px;
+}
+
+}
+
+
+
 @media (max-width:991px){
 	section.nav_sec .navbar .container button.navbar-toggler.navbar-toggler-right {
 		margin-top: 15px;
@@ -1043,12 +2747,186 @@ select.select_btn {
     height: 100%;
 }
 
+.addcustomerSearch input.form-control {
+	width:100%;
+}
+
+div#staff {
+    overflow: auto;
+}
+.detail-navbar.appointmentDiv {
+    width: 80% !important;
+}
+.detail-navbar.appointmentDiv ul li {
+    margin-right: 10px;
+}
+.detail-navbar.appointmentDiv ul li a {
+    font-size: 12px !important;
+}
+.customerDetail .form-control {
+    margin-bottom: 10px;
+}
+.textNumberDiv {
+    padding-left: 15px !important;
+}
+
+.labeldrowDownBtn {
+    margin: -25px 0;
+}
+
+.dateTimeDiv.costField {
+    padding-right: 15px;
+    margin-bottom: 15px;
+}
+.dateTimeDiv.costMinField {
+    padding-left: 15px;
+}
+
+input#customerName {
+    width: 100%;
+}
+input#customerEmail {
+    width: 100%;
+}
+#customerMobile {
+    width: 100%;
+}
+/* .addCustomer .arrow {
+    left: 33%;
+} */
+.apptDetailPopup {
+    top: -140px;
+    left: auto !important;
+    right: 100% !important;
+    min-width: 300px;
+    margin-right: 15px;
+}
+.dropdown.labeldrowDownBtn {
+    margin: 10px 0;
+}
+.tooltipArrow {
+    width: 100% !important;
+    left: 110% !important;
+    top: -57px;
+}
+.addcustomerContent .addCustomerbtn {
+    padding: 5px 8px;
+}
+.nolableDrop {
+    margin: -25px 0 !important;
+}
+.left_sidebar {
+    display: block;
+}
+.formCheckbox .inputcheckbox {
+    margin-right: 1px;
+}
+.providerpaddDiv {
+	padding:0;
+}
+
+.staffaddCustomerSec {
+	margin:0;
+	padding:0;	
+}
+.customerProfileDiv {
+    margin: 10px 0 60px 0px;
+}
+.appoint_text.appoint_cust span {
+    font-size: 13px;
+}
+.addcustomerSearch .iconBar ul.dropdown-menu {
+    left: 0;
+}
+.addcustomerSec {
+   /*  padding: 15px 5px; */
+	height:100%;
+}
+.imageUploadForm img {
+    width: 40px;
+    height: 40px;
+
+}
+
+.orm-horizontal .control-label {
+    padding-top: 21px;
+}
+.uploadImageIcon i {
+    width: 30px;
+    height: 30px;
+    top: 30px;
+    left: 20px;
+    font-size: 1em;
+}
+.customerDetail label {
+    text-align: left !important;
+    padding-top: 0 !important;
+    margin-bottom: 5px !important;
+}
+.apptdetailList ul li span {
+    max-width: 95px;
+}
+.addcustomerContent .form-control {
+    width: 30px;
+}
+
+.serviceIconImage  img {
+	width:90px;
+	height:90px;
+}
+.serviceIconImage .uploadSeviceIcon i {
+    top: 29%;
+    left: 30px;
+}
+.usernameImage img {
+	margin-top:0;
+}
+
 }
 /* media css end here ================================= */
 
 /* ==================  MEDIA QUERY CSS START HERE  ================== */
+@media (max-width:768px) {
+.imageUploadForm img {
+    margin-top: 25px;
+}
+.uploadImageIcon i {
+    top: 37px;
+}
+.addCustomer {
+    left: 60px;
+}
+.addcustomerContent .form-control {
+    width: 27px;
+}
+}
+@media (min-width:476px) and (max-width:767px) {
+.addCustomer {
+    left: 0;
+    width: 100%;
+    top: 0px;
+}
+}
+
 
 @media (max-width:767px){
+.addcustomerSec {
+    padding: 15px 20px;
+}
+.left_sidebar {
+	display:none;
+	    z-index: 9999999;
+}
+.movileViewList {
+	display:block;
+}
+.movileViewList {
+    margin-right: 30px;
+}
+.right_section {
+    margin-left: 0;
+	    z-index: 99999;
+}
 .sign_inner{
 	max-width: 430px;
 }
@@ -1094,11 +2972,307 @@ select.select_btn {
 .demo_wizard {
     height: 100%;
 }
+
+.addcustomerSec {
+    height: 100% !important;
+}
+.detail-navbar.appointmentDiv {
+    width: 100% !important;
+}
+.detail-navbar.appointmentDiv ul li {
+    margin-right: 10px;
+}
+.detail-navbar.appointmentDiv ul li a {
+    font-size: 12px !important;
+}
+
+.fileupload {
+    margin-bottom: 0px;
+}
+
+.recurringDiv {
+    margin-top: 2px;
+}
+
+.appointPopupHead .modal-content {
+    width: 100%;
+}
+
+.addcustomerSearch {
+    width: 100%;
+}
+
+.addCustomer .arrow {
+    left: 95%;
+}
+.addcustomerSearch input.form-control {
+    width: 100%; 
+    display: inline-block;
+}
+.tooltipArrow {
+    position: absolute;
+    top: -5px;
+    left: 115px;
+    z-index: 999;
+    display: none;
+    width: 100%;
+    padding: 1px;
+    text-align: left;
+    background-color: #ffffff;
+    border: 1px solid #ccc;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    -webkit-border-radius: 6px;
+    -moz-border-radius: 6px;
+    border-radius: 6px;
+    -webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+    -moz-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+    white-space: normal;
+}
+
+.tooltipArrow .arrow, .tooltipArrow .arrow:after {
+    position: absolute;
+    display: block;
+    width: 0;
+    height: 0;
+    border-color: transparent;
+    border-style: solid;
+}
+
+.addCustomer.tooltipArrow > .arrow{
+    left: 94%;
+    margin-left: -11px;
+    border-top-width: 0;
+    border-bottom-color: #999;
+    border-bottom-color: rgba(0, 0, 0, 0.25);
+    top: -22px;
+	border-width: 11px;
+	border-right-color: transparent;
+    border-right-color: transparent;
+	margin-top:0;
+}
+.addCustomer.tooltipArrow >.arrow:after {
+    top: -9px;
+    margin-left: -10px;
+    border-top-width: 0;
+    border-bottom-color: #ffffff;
+    border-width: 10px;
+    border-width: 10px;
+    content: "";
+    bottom: 0;
+    left: 0;
+    border-right-color: transparent;
+}
+.tooltipArrow .arrow:after {
+    top: 1px;
+    margin-left: -10px;
+    border-top-width: 0;
+    border-bottom-color: #ffffff;
+}
+.tooltipArrow {
+    width: 100% !important;
+    left: 0% !important;
+    top: 10px;
+}
+.apptDetailPopup {
+    top: -270px;
+    left: 0% !important;
+    width: 100% !important;
+	min-width: auto;
+}
+.pointerRightIcon {
+	display:none;
+}
+.providerCustomer ul.list-inline {
+    margin-left: 0;
+}
+
+.imageUploadForm img {
+    width: 70px;
+    height: 70px;
+}
+.uploadImageIcon i {
+    width: 40px;
+    height: 40px;
+    top: 38px;
+    left: 30px;
+    font-size: 22px;
+}
+
+
+.top_right button.navbar-toggle {
+	display: none;
+}
+.top_right .navbar-nav.nav>li {
+    position: relative;
+    display: block;
+    z-index: 99999999;
+}
+.top_right .navbar-default {
+    background: none;
+    border: none;
+    min-height: 10px;
+    margin-bottom: 0px;
+    z-index: 99999999;
+	margin-right: 50px;
+
+}
+.top_right .navbar-nav {
+    margin: 7.5px -15px;
+    background: #fff;
+}
+.top_right .navbar-default .navbar-nav>li>a {
+    color: #777 !important;
+}
+.top_right .navbar-default ul li.upgrade_btn a {
+	color:#fff !important;
+}
+.navbar-default .navbar-collapse, .navbar-default .navbar-form {
+    border-color: #e7e7e7;
+    border: none;
+    box-shadow: none;
+}
+
+.top_right {
+	float:none;
+}
+.upgradeButton .btn {
+    background: #0495a5;
+    font-size: 12px;
+    font-weight: 400;
+    color: #fff;
+    border-radius: 2px;
+    padding: 8px 20px;
+    display: inline-block;
+    text-transform: uppercase;
+    border: 1px solid #0495a5;
+}
+.upgradeButton .btn:hover, .upgradeButton .btn:focus {
+   box-shadow:none;
+   outline:none;
+}
+.upgradeDiv {
+    padding: 15px 10px;
+}
+.upgradeListbar {
+    padding-top: 5px;
+}
+.upgradeListbar .dropdown-user> li >a > div.nav-dropdown-desc-holder h3 {
+    font-size: 13px !important;
+    color: #333 !important;
+    font-weight: 400 !important;
+}
+.upgradeDiv .upgradeDivrow {
+	padding:0;
+	margin:0;
+}
+.upgradeListbar ul.dropdown-menu.upgradeDropdown {
+    position: absolute;
+    left: -140px;
+    border-radius: 0 0 5px 5px;
+    top: 43px;
+    border: none;
+    box-shadow: 0px 2px 6px rgba(51, 51, 51, 0.5);
+    padding: 0px;
+    min-width: 230px;
+}
+.upgradeListbar ul.dropdown-menu.userUpgradeDropdown {  
+    left: -180px;
+}
+.movileViewList a#menuiconBar {
+    background: #eee;
+    color: #00b6c7;
+}
+.modal-backdrop.fade.in {
+    display: none;
+}
+.userNumber {
+	padding-right:0px;
+} 
+
+.customerName {
+    margin-top: 40px;
+}
+.addcustomerContent .form-control {
+    width: 100%; 
+}
+
+
+
+/*    Setting page media css start here 2-June-2017    */
+
+
+.rightnavBarForMobile {
+    display: inline-block !important;
+    position: static;
+    width: auto;
+}
+.rightnavBarForMobile .tabs_section {
+
+    position: static;
+}
+.rightnavBarForMobile > div {
+    display: inherit;
+    width: 100% !important;
+}
+.rightnavBarForMobile .tabs_section ul li a {
+    width: 125px;
+}
+.rightnavBarForMobile .tabs_section ul.nav.nav-tab.nav-stacked li {
+    float: left;
+    display: inline-block;
+}
+.categoryButtonsDiv .serviceCancelBtn {
+    width: 35%;
+}
+.categoryButtonsDiv .serviceSaveBtn {
+    width: 35%;
+}
+.addCategoryPopup {
+    top: 45px;
+}
+.settingTopRight {
+	padding:0;
+}
+
+.categoryButtonsDiv {
+    margin-top: 30px;
+}
+.sampleServicesSec .sampServiceName {
+	font-size:16px;
+	margin-top: 0;
+}
+.serviceIconImage  img {
+	width:90px;
+	height:90px;
+}
+.serviceIconImage .uploadSeviceIcon i {
+    top: 29%;
+    left: 30px;
+}	
+
+.addServices {
+    left: 0;
+} 
+
+.addCategoryPopup {
+    top: 45px;
+    left: 0;
+    width: 100%;
+}
+
+
+
+/*    Setting page media css end here 2-June-2017    */
 	
 }
 @media (max-width:500px){
 .active_div:before {
 	left: -50px;
+}
+.tooltipArrow {
+    left: 37% !important;
+	width: 60% !important;
 }
 }
 @media (max-width:475px){
@@ -1126,8 +3300,121 @@ select.select_btn {
 		padding: 15px;
 		margin-bottom: 15px;
 	}
+    .visible{
+        display:none;
+    }
+	
+	.addcustomerSearch input.form-control {
+    width: 60%;
+}
+.appoint_text {
+    font-size: 13px;
+}
+.addCustomer .arrow {
+    left: 93%;
+}
+.imageUploadForm img {
+    width: 60px;
+    height: 60px;
+}
+.uploadImageIcon i {
+    width: 40px;
+    height: 40px;
+    top: 30px;
+    left: 24px;
+    font-size: 22px;
+}
+
+
+/*    Setting page media css start here 2-June-2017    */
+.addCategoryPopup {
+    top: 45px;
+}
+.serviceIconImage img {
+	width:90px;
+	height:90px;
+} 
+.serviceIconImage .uploadSeviceIcon i {
+    top: 29%;
+    left: 30px;
+}
+	
+/*    Setting page media css end here 2-June-2017    */
 	
 }
+
+
+@media (max-width: 425px) {
+.uploadImageIcon i {
+    top: 36px;
+}
+.addcustomerSearch .iconBar {
+    margin-left: 15px;
+}
+.customerName {
+    margin-top: 34px;
+}
+
+/*  setting page media css start here   */
+
+.rightnavBarForMobile .tabs_section ul li a {
+    width: 140px;
+}
+
+/*  setting page media css end here   */
+
+}
+
+@media (max-width: 375px){
+.tooltipArrow {
+    width: 100% !important;
+    left: 0% !important;
+    top: 10px;
+}
+.top_right {
+    padding-top: 5px;
+}
+.top_right button.navbar-toggle {
+     margin: 7px; 
+}
+.addcustomerSearch .iconBar ul.dropdown-menu {
+    left: -85px;
+}
+.uploadImageIcon i {
+    top: 34px;
+}
+.rightnavBarForMobile .tabs_section ul li a {
+    width: 125px;
+}
+
+}
+
+
+@media (max-width: 320px){
+.rightnavBarForMobile .tabs_section ul li a {
+    width: 160px;
+}
+
+}
+
+ .css-form input.ng-invalid.ng-touched {
+    border: solid 1px #bb4c4c !important;
+    background: #e8c9c9 !important;
+    color: #972a2a !important;
+    border: solid 1px #bb4c4c !important;
+  }
+
+
+ .select_btn:disabled {
+    color: #d4d2d2;
+}
+/* media css end here ================================= */
+
+/* ==================  23-may-2017 css start here  ================== */
+
+
+
+/* ==================  MEDIA QUERY CSS START HERE  ================== */
 
 
 
