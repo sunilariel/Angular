@@ -5,8 +5,29 @@ app.controller("SignUp",['$scope', '$http', '$timeout', function ($scope, $http,
     $scope.Email = "";
     $scope.Password = "";
     $scope.IsVisible = false;
-    $scope.submitTheForm = function () {
+    $scope.submitTheForm = function (form) {
         debugger;
+
+        if (form.$invalid == true)
+        {
+            if(form.username.$invalid==true)
+            {
+                form.username.$touched = true;
+                form.username.$setTouched();
+            }
+             if(form.email.$invalid==true)
+            {
+                form.email.$touched = true;
+                form.email.$setTouched();
+            }
+             if(form.password.$invalid==true)
+            {
+                form.password.$touched = true;
+                form.password.$setTouched();
+            }
+            return false;
+        }
+             
         var dataobject = {
             Id: 1,
             Name: $scope.username,

@@ -32,19 +32,19 @@
 
                     <div class="sign_form">
 
-                        <form name="myForm" ng-submit="submitTheForm()" novalidate class="css-form">
+                        <form name="myForm" ng-submit="submitTheForm(myForm)" novalidate class="css-form">
                             <div class="form-group">
-                                <input type="text" class="form-control" placeholder="name" ng-model="username" required>
+                                <input type="text" class="form-control usernameField" placeholder="name" name="username" ng-model="username" required  >
 
                             </div>
                             <div class="form-group">
-                                <input type="email" class="form-control" placeholder="Email" ng-model="Email" required>
+                                <input type="email" class="form-control usernameField" placeholder="Email" name="email" ng-model="Email" required>
                             </div>
                             <div class="form-group">
-                                <input type="password" class="form-control" placeholder="Password" ng-model="Password" required>
+                                <input type="password" class="form-control usernameField" placeholder="Password" name="password" ng-model="Password" required>
                             </div>
 
-                            <button type="submit" ng-disabled="myForm.$invalid" class="btn btn-default submit_btn">Create My Account!</button>
+                            <button type="submit"  class="btn btn-default submit_btn">Create My Account!</button>
                         </form>
                     </div>
                     <img src="~/Content/Assets/images/cloud.png" alt="Cloud" class="left_img">

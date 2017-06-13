@@ -343,7 +343,7 @@
                 <div class="container_div">
 
                     <div class="row setup-content" id="step-1" ng-hide="firstStep">
-                        <form ng-submit="submitInfo()" name="step1" novalidate class="css-form">
+                        <form ng-submit="submitInfo(step1)" name="step1" novalidate class="css-form">
                             <div class="col-xs-12">
                                 <div class="col-md-12">
                                     <div class="welcome_div">
@@ -360,7 +360,7 @@
                                             <div class="col-md-4 col-sm-4 col-xs-4">
                                                 <div class="setmore back_btn">
                                                     @*<button type="button" class="btn btn-default"><i class="fa fa-angle-left" aria-hidden="true"></i></button>*@
-                                                    <button class="btn btn-primary nextBtn btn-lg pull-right" ng-disabled="step1.$invalid" type="submit">Next <i class="fa fa-chevron-right" aria-hidden="true"></i></button>
+                                                    <button class="btn btn-primary nextBtn btn-lg pull-right"  type="submit">Next <i class="fa fa-chevron-right" aria-hidden="true"></i></button>
                                                 </div>
                                             </div>
                                         </div>
@@ -369,19 +369,19 @@
                                         <p>Setup only takes a moment, you'll be booking appointments in no time.</p>
                                         <div class="form-group">
                                             <label class="control-label">Your Business</label>
-                                            <input maxlength="100" type="text" required="required" class="form-control" ng-model="businessName" placeholder="Business Name " />
+                                            <input maxlength="100" type="text"  class="form-control" ng-model="businessName" placeholder="Business Name" name="buisnessName" required />
                                         </div>
                                         <div class="form-group">
                                             <label class="control-label">Industry:</label>
 
-                                            <select class="form-control" ng-required="true" ng-model="selectedIndustry" data-ng-options="Industry.id as Industry.name for Industry in businessIndustry">
+                                            <select class="form-control" ng-model="selectedIndustry" data-ng-options="Industry.id as Industry.name for Industry in businessIndustry" name="Industry" required>
                                                 <option value="" selected="selected">Choose Industry...</option>
                                             </select>
                                         </div>
 
                                         <div class="form-group">
                                             <label class="control-label">Phone No:</label>
-                                            <input maxlength="100" type="text" required="required" class="form-control" placeholder="Business Phone" ng-model="businessPhone" />
+                                            <input maxlength="100" type="text" class="form-control" placeholder="Business Phone" ng-model="businessPhone" name="buisnessPhone" required />
                                         </div>
 
                                     </div>
@@ -446,7 +446,7 @@
                         </form>
                     </div>
                     <div class="row setup-content" id="step-3" ng-hide="thirdStep">
-                        <form ng-submit="addStaff()" name="step3">
+                        @*<form ng-submit="addStaff()" name="step3">*@
                             <div class="col-xs-12">
                                 <div class="col-md-12">
                                     <div class="welcome_div">
@@ -460,7 +460,8 @@
                                             <div class="col-md-4 col-sm-4 col-xs-4">
                                                 <div class="setmore back_btn">
                                                     <button type="button" class="btn btn-default" ng-click="backThirdStep()"><i class="fa fa-angle-left" aria-hidden="true"></i></button>
-                                                    <button class="btn btn-primary nextBtn btn-lg pull-right" type="submit">Next <i class=" fa fa-chevron-right" aria-hidden="true"></i></button>
+                                                    @*<button class="btn btn-primary nextBtn btn-lg pull-right" type="submit">Next <i class=" fa fa-chevron-right" aria-hidden="true"></i></button>*@
+                                                    <button class="btn btn-primary nextBtn btn-lg pull-right" type="button" ng-click="addStaff()">Next <i class=" fa fa-chevron-right" aria-hidden="true"></i></button>
                                                 </div>
                                             </div>
                                         </div>
@@ -488,38 +489,39 @@
                                                     <a href="#" class="close_img" ng-click="removeRow(company.Id)"><img src="../Content/Assets/images/close-img.png"></a>
                                                 </div>
                                             </div>
-
-                                            <div class="border_top">
-                                                <div class="row">
-                                                    <div class="col-md-2 col-sm-2 text-center">
-                                                        <label for="exampleInputName2"><img src="../Content/Assets/images/user_img.png"></label>
-                                                    </div>
-                                                    <div class="col-md-4 col-sm-4">
-                                                        <div class="form-group ">
-                                                            <input type="text" ng-model="staffName" class="form-control" id="exampleInputName2" placeholder="Name">
+                                            <form ng-submit="addStaffItem(step3)" name="step3" novalidate class="css-form">
+                                                <div class="border_top">
+                                                    <div class="row">
+                                                        <div class="col-md-2 col-sm-2 text-center">
+                                                            <label for="exampleInputName2"><img src="../Content/Assets/images/user_img.png"></label>
                                                         </div>
-                                                    </div>
-                                                    <div class="col-md-4 col-sm-4">
-                                                        <div class="form-group">
-                                                            <input type="email" ng-model="staffEmail" class="form-control" id="exampleInputEmail2" placeholder="Email">
+                                                        <div class="col-md-4 col-sm-4">
+                                                            <div class="form-group ">
+                                                                <input type="text" ng-model="staffName" class="form-control" id="exampleInputName2" placeholder="Name" name="staffName" required>
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                    <div class="col-md-2 col-sm-2">
-                                                        <button type="button" class="btn btn-default" ng-click="addStaffItem()">Add</button>
+                                                        <div class="col-md-4 col-sm-4">
+                                                            <div class="form-group">
+                                                                <input type="email" ng-model="staffEmail" class="form-control" id="exampleInputEmail2" placeholder="Email" name="staffEmail" required>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-2 col-sm-2">
+                                                            @*<button type="button" class="btn btn-default" ng-click="addStaffItem()">Add</button>*@
+                                                            <button type="submit" class="btn btn-default" >Add</button>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
 
-
-                                        </div>
+                                            </form>
+</div>
                                     </div>
                                 </div>
                             </div>
-                        </form>
+                        
                     </div>
                     <div class="row setup-content" id="step-4" ng-hide="fourthStep">
                         <div class="col-xs-12">
-                            <form ng-submit="addServices()" name="step3">
+                            <form ng-submit="addServiceItem(step4)" name="step4" novalidate class="css-form">
                                 <div class="col-md-12">
                                     <div class="welcome_div">
                                         <div class="row">
@@ -532,7 +534,8 @@
                                             <div class="col-md-4 col-sm-4">
                                                 <div class="setmore back_btn">
                                                     <button type="button" class="btn btn-default" ng-click="backFourthStep()"><i class="fa fa-angle-left" aria-hidden="true"></i></button>
-                                                    <button class="btn btn-primary nextBtn btn-lg pull-right" type="submit">Next <i class=" fa fa-chevron-right" aria-hidden="true"></i></button>
+                                                    @*<button class="btn btn-primary nextBtn btn-lg pull-right" type="submit">Next <i class="fa fa-chevron-right" aria-hidden="true"></i></button>*@
+                                                    <button class="btn btn-primary nextBtn btn-lg pull-right" type="button" ng-click="redirection()">Next <i class="fa fa-chevron-right" aria-hidden="true"></i></button>
                                                 </div>
                                             </div>
                                         </div>
@@ -556,7 +559,7 @@
                                                 </div>
                                             </div>
                                             <div class="row" ng-repeat="service in serviceInfo">
-
+                                                <div ng-if="service.staff!=null">
                                                 <div class="col-md-5 col-sm-4 col-xs-12">
 
                                                     <div class="form-group">
@@ -580,7 +583,7 @@
                                                     <div class="form-group">
                                                         <div class="dropdown">
                                                             <button class="angle_down" id="dLabel" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" ng-click="showDropDownBinded($index)">
-                                                                <i class="fa fa-user" aria-hidden="true"></i> 1 <i class="fa fa-angle-down" aria-hidden="true"></i>
+                                                                <i class="fa fa-user" aria-hidden="true"></i>{{service.staffCheckedCount}}<i class="fa fa-angle-down" aria-hidden="true"></i>
                                                                 </span>
                                                             </button>
                                                             <ul class="dropdown-menu" style="display:block" aria-labelledby="dLabel" ng-hide="showStaffBinded[$index]">
@@ -599,22 +602,23 @@
                                                     <a href="#" class="close_icon" ng-click="removeServiceRow(service.Id)"><img src="../Content/Assets/images/close-img.png"></a>
                                                 </div>
                                             </div>
+                                            </div>
 
                                             <div class="border_top sample_div">
                                                 <div class="row">
                                                     <div class="col-md-4 col-sm-4 col-xs-12">
                                                         <div class="form-group ">
-                                                            <input type="text" class="form-control" id="" ng-model="sampleService" placeholder="Sample Service">
+                                                            <input type="text" class="form-control" id="" ng-model="sampleService" placeholder="Sample Service" name="sampleService" required>
                                                         </div>
                                                     </div>
                                                     <div class="col-md-2 col-sm-2 col-xs-12">
                                                         <div class="form-group ">
-                                                            <input type="text" class="form-control" id="" ng-model="serviceTime" placeholder="0 min">
+                                                            <input type="text" class="form-control" id="" ng-model="serviceTime" placeholder="0 min" name="serviceTime" required>
                                                         </div>
                                                     </div>
                                                     <div class="col-md-2 col-sm-2 col-xs-12">
                                                         <div class="form-group">
-                                                            <input type="text" class="form-control" id="" ng-model="servicePrice" placeholder="(₹) 0">
+                                                            <input type="text" class="form-control" id="" ng-model="servicePrice" placeholder="(₹) 0" name="servicePrice" required>
                                                         </div>
                                                     </div>
                                                     <div class="col-md-4 col-sm-4 col-xs-12">
@@ -623,7 +627,8 @@
                                                                 <button id="dLabel" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" ng-click="showDropDown()">
                                                                     <i class="fa fa-user" aria-hidden="true"></i> <i class="fa fa-angle-down" aria-hidden="true"></i>
                                                                 </button>
-                                                                <button type="submit" class="btn btn-default" ng-click="addServiceItem()">Add</button>
+                                                                @*<button type="submit" class="btn btn-default" ng-click="addServiceItem()">Add</button>*@
+                                                                <button type="submit" class="btn btn-default">Add</button>
                                                                 <ul class="dropdown-menu" style="display:block;" aria-labelledby="dLabel" ng-hide="showStaff">
                                                                     <li>Who can perform this service?</li>
                                                                     <li><input type="checkbox" class="staffcheckbox" name="" value="" ng-model="allstaffchecked" ng-click="toggleAllSelection()"> All Staff</li>

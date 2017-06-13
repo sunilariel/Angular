@@ -222,6 +222,7 @@ namespace AngularMvcProject.Controllers
                 {
                     obj.AllAssignStaffChecked = false;
                 }
+                obj.staffCheckedCount = empallocatedservice.Count.ToString();
 
                 List<Employees> listofEmployees = new List<Employees>();
                 foreach (var emp in staffdata)

@@ -662,6 +662,7 @@ span.staff-break-delete-holder button.btn.btn-circle {
     border-radius: 100% !important;
     -webkit-appearance: inherit;
 	    background: #B4C0C0;
+        border: none;
 }
 .stepwizard-step .btn-circle:hover {
 	background: #B4C0C0;
@@ -1027,8 +1028,8 @@ button:hover {
     position: absolute;
     background: #27C3BB;
     height: 5px;
-    width: 95%;
-    left: -76px;
+    width: 90%;
+    left: -72px;
     top: 34px;
     z-index: 0;
 	display:none;
@@ -3423,3 +3424,6 @@ select.select_btn {
 
 
 
+.usernameField {
+    max-width: 100%;
+}
