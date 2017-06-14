@@ -475,13 +475,13 @@
                                                 </div>
                                                 <div class="col-md-4 col-sm-4">
                                                     <div class="form-group ">
-                                                        <input type="text" class="form-control" id="" ng-model="company.staffName" value="" placeholder="">
+                                                        <input type="text" class="form-control" id="staffName" ng-model="company.staffName" ng-blur="EditStaff(company)" value="" placeholder="">
                                                         <!--<span ng-bind="company.staffName" class="form-control"></span>-->
                                                     </div>
                                                 </div>
                                                 <div class="col-md-5 col-sm-5">
                                                     <div class="form-group">
-                                                        <input type="email" class="form-control" ng-model="company.staffEmail" id="" placeholder="">
+                                                        <input type="email" class="form-control" ng-model="company.staffEmail" ng-blur="EditStaff(company)" id="staffEmail" placeholder="">
                                                         <!--<span ng-bind="company.staffEmail" class="form-control"></span>-->
 
                                                     </div>
@@ -563,19 +563,19 @@
                                                 <div class="col-md-5 col-sm-4 col-xs-12">
 
                                                     <div class="form-group">
-                                                        <input type="text" class="form-control" ng-model="service.serviceName" id="" placeholder="">
+                                                        <input type="text" class="form-control" ng-model="service.serviceName" ng-blur="EditService(service)" id="" placeholder="">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-2 col-sm-2 col-xs-12">
 
                                                     <div class="form-group ">
-                                                        <input type="text" class="form-control" ng-model="service.time" id="" placeholder="">
+                                                        <input type="text" class="form-control" ng-model="service.time" ng-blur="EditService(service)" id="" placeholder="">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-2 col-sm-2 col-xs-12">
 
                                                     <div class="form-group">
-                                                        <input type="text" class="form-control" ng-model="service.price" id="" placeholder="">
+                                                        <input type="text" class="form-control" ng-model="service.price" id="" ng-blur="EditService(service)" placeholder="">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-2 col-sm-2 col-xs-12">
@@ -592,7 +592,7 @@
                                                                 <li ng-repeat="item in service.staff">
                                                                     <input type="checkbox" name="selectedFruits[]"
                                                                            value="{{item.staffEmail}}"
-                                                                           ng-click="toggledataSelection(service)" ng-model="item.confirmed"> {{item.FirstName}}
+                                                                           ng-blur="toggledataSelection(service, item.Id,item.confirmed)" ng-model="item.confirmed" ng-bind="item.Id"> {{item.FirstName}}
                                                                 </li>
                                                             </ul>
                                                         </div>

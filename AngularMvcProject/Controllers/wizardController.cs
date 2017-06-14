@@ -94,6 +94,45 @@ namespace AngularMvcProject.Controllers
 
         }
 
+        [HttpPost]
+        public string EditStaffData(StaffData dataObj)
+        {
+
+            try
+            {
+                string apiUrl = "http://romzbookingmanager.azurewebsites.net/" + dataObj.Url;
+
+                string result = "";
+                var httpWebRequest = (HttpWebRequest)WebRequest.Create(apiUrl);
+                httpWebRequest.ContentType = "application/json";
+                httpWebRequest.Method = "POST";
+
+                using (var streamWriter = new StreamWriter(httpWebRequest.GetRequestStream()))
+                {
+                    var jsonstring = new JavaScriptSerializer().Serialize(dataObj.ReqStaffData);
+                    streamWriter.Write(jsonstring);
+                    streamWriter.Flush();
+                    streamWriter.Close();
+                }
+
+                var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
+
+                using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
+                {
+                    result = streamReader.ReadToEnd();
+                }
+
+                return result;
+            }
+            catch (Exception exception)
+            {
+                return exception.ToString();
+            }
+
+        }
+
+
+
         public string PostWorkingHours(WorkingHours dataobj)
         {
             string apiURL = "http://romzbookingmanager.azurewebsites.net/" + dataobj.Url;
@@ -331,6 +370,43 @@ namespace AngularMvcProject.Controllers
             }
 
         }
+
+        [HttpPost]
+        public string EditService(Service dataObj)
+        {
+            try
+            {
+                string apiUrl = "http://romzbookingmanager.azurewebsites.net/" + dataObj.Url;
+
+                string result = "";
+                var httpWebRequest = (HttpWebRequest)WebRequest.Create(apiUrl);
+                httpWebRequest.ContentType = "application/json";
+                httpWebRequest.Method = "POST";
+
+                using (var streamWriter = new StreamWriter(httpWebRequest.GetRequestStream()))
+                {
+                    var jsonstring = new JavaScriptSerializer().Serialize(dataObj.RequestAddService);
+                    streamWriter.Write(jsonstring);
+                    streamWriter.Flush();
+                    streamWriter.Close();
+                }
+
+                var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
+
+                using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
+                {
+                    result = streamReader.ReadToEnd();
+                }
+
+                return result;
+            }
+            catch (Exception exception)
+            {
+                return exception.ToString();
+            }
+
+        }
+
         [HttpPost]
         public string DeleteService(int Id)
         {
@@ -406,5 +482,31 @@ namespace AngularMvcProject.Controllers
            
             return result;
         }
+
+        public string DeAllocateServiceForEmployee(DeAllocateServiceEmployees dataobj)
+        {
+            try
+            {
+                string apiURL = "http://romzbookingmanager.azurewebsites.net/api/companyregistration/DeAllocateServiceForEmployee?companyId=" + dataobj.CompanyId + "&employeeId=" + dataobj.EmployeeId + "&serviceId=" + dataobj.ServiceId;
+                string result = "";
+                var httpWebRequest = (HttpWebRequest)WebRequest.Create(apiURL);
+                httpWebRequest.ContentType = "application/json";
+                httpWebRequest.Method = "POST";
+                httpWebRequest.ContentLength = 0;
+
+                var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
+                using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
+                {
+                    result = streamReader.ReadToEnd();
+                }
+
+                return result;
+            }
+            catch(Exception e)
+            {
+                return e.ToString();
+            }
+        }
+
     }
 }

@@ -20,6 +20,28 @@ app.service("bookingService", function ($http) {
         });
         return response;
     }
+
+    this.EditStaffInformation = function (dataobject) {
+        debugger;
+        var response = $http({
+            method: "post",
+            url: "/wizard/EditStaffData",
+            data: { dataObj: dataobject },
+        });
+        return response;
+    }
+
+    this.DeAllocateServiceForEmployee = function (dataobject) {
+        debugger;
+        var response = $http({
+            method: "post",
+            url: "/wizard/DeAllocateServiceForEmployee",
+            data: { dataObj: dataobject },
+        });
+        return response;
+    }
+   
+
     this.WorkingHours = function (dataobject) {
         var response = $http({
             method: "post",
@@ -38,6 +60,20 @@ app.service("bookingService", function ($http) {
         })
         return response;
     }
+
+    this.EditService = function (dataobject) {
+        debugger;
+        var response = $http({
+            method: "post",
+            url: "/wizard/EditService",
+            data: { dataobj: dataobject },
+        })
+        return response;
+    }
+
+
+
+
 
     this.GetStaffData = function (dataobject) {
         debugger;
@@ -86,6 +122,54 @@ app.service("bookingService", function ($http) {
         })
         return response;
     }
+    
+  
+    ///////////Customer Section in MileStone_2///////////////
+
+    this.CreateCustomer = function (dataobject) {
+        debugger;
+        var response = $http({
+            method: 'post',
+            url: "/Customer/CreateCustomer",
+            data: { dataobj: dataobject }
+        })
+        return response;
+    }
+
+    this.GetAllCustomer = function (dataobject) {
+        debugger;
+        var response = $http({
+            method: 'post',
+            url: '/Customer/GetAllCustomer',
+            data: { Id: dataobject }
+        })
+        return response;
+    }
+
+    this.DeleteCustomer = function (id) {
+        debugger;
+        var response = $http({
+            method: "post",
+            url: "/Customer/DeleteCustomer",
+            data: { Id: id }
+        })
+        return response;
+    }
+    ////////////for customer module Add appointment
+
+    this.GetAddAppointmentData = function (dataobject) {
+        debugger;
+        var response = $http({
+            method: 'post',
+            url: '/Customer/GetAddAppointmentData',
+            data: { Id: dataobject }
+        })
+    }
+
+    /////////////////
+
+   
+   
 })
 
 

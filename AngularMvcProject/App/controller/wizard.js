@@ -380,8 +380,6 @@ app.controller('bookingController', ['$scope', '$http', '$timeout', 'bookingServ
             return false;
         }
         
-
-
         var StaffInformation = {
             Url: "api/companyregistration/AddStaff",
             ReqStaffData: {
@@ -406,10 +404,7 @@ app.controller('bookingController', ['$scope', '$http', '$timeout', 'bookingServ
             if (msg.data.Success == true) {
                 $scope.MessageText = "Saving Data"
                 $scope.msg = "Post Data Submitted Successfully!";
-
                
-
-
                 var CompanyId = $scope.companyId;
                 var getEmployeesData = bookingService.GetStaffData(CompanyId);
 
@@ -444,6 +439,66 @@ app.controller('bookingController', ['$scope', '$http', '$timeout', 'bookingServ
         //staffnametouched.$touched = false;
         //staffnametouched.$setTouched();
     };
+
+
+    $scope.EditStaff = function (EditStaff) {
+        debugger;
+        var EditStaffInformation = {
+            Url: "api/staff/Update",
+            ReqStaffData: {
+                Id: EditStaff.Id,
+                CompanyId: EditStaff.CompanyId,
+                UserName: EditStaff.staffName,
+                Password: "sample string 4",
+                FirstName: EditStaff.staffName,
+                LastName: "sample string 5",
+                Address: "sample string 6",
+                Email: EditStaff.staffEmail,
+                TelephoneNo: "sample string 7",
+                CreationDate: "2017-05-31T06:08:49.5008702+00:00",
+            }
+        };
+
+
+        var geteditstaffdata = bookingService.EditStaffInformation(EditStaffInformation);
+
+
+        geteditstaffdata.then(function (msg) {
+            debugger;
+            if (msg.data.Success == true) {
+                $scope.MessageText = "Updating Staff..."
+                $scope.msg = "Update Data Successfully!";
+
+                var CompanyId = $scope.companyId;
+                var getEmployeesData = bookingService.GetStaffData(CompanyId);
+
+
+                getEmployeesData.then(function (response) {
+                    debugger;
+                    $scope.staffInfo = [];
+                    for (var i = 0; i < response.data.length; i++) {
+                        $scope.staffInfo.push({ 'Id': response.data[i].Id, 'CompanyId': response.data[i].CompanyId, 'UserName': response.data[i].UserName, 'staffName': response.data[i].FirstName, 'staffEmail': response.data[i].Email });
+                    }
+                    $scope.staffName = '';
+                    $scope.staffEmail = '';
+
+                    $scope.IsVisible = true;
+                    $timeout(function () {
+                        $scope.MessageText = "Staff Saved!"; $timeout(function () {
+                            $scope.IsVisible = false;
+
+                        }, 1000)
+                        var staffnametouched = angular.element(document.querySelector('#exampleInputName2'));
+                        staffnametouched.removeClass('ng-touched');
+                        var staffemailtouched = angular.element(document.querySelector('#exampleInputEmail2'));
+                        staffemailtouched.removeClass('ng-touched');
+                    }, 500);
+                });               
+            }
+        }, function () {
+            alert('Error in updating record');
+        });
+ }
 
     $scope.HasPassport = false;
     $scope.toggleAllSelection = function staffChange(e) {
@@ -490,8 +545,86 @@ app.controller('bookingController', ['$scope', '$http', '$timeout', 'bookingServ
 
     };
 
-    $scope.toggledataSelection = function (item) {
+    $scope.toggledataSelection = function (item, selectedItemId,checkedstatus) {
         debugger;
+      
+        var updateddate = new Date();
+        var assignData = {
+            Url: "api/companyregistration/AssignServiceToStaff",
+            RequestAssignService: {
+                Id: 1,
+                CompanyId: item.CompanyId,
+                EmployeeId: selectedItemId,
+                ServiceId: item.Id,
+                CreationDate: updateddate
+            }
+        }
+        if (checkedstatus == true) {
+            var assignStaff = bookingService.assignStaffToService(assignData);
+
+            assignStaff.then(function (response) {
+                $scope.MessageText = "Updating Service"
+                $scope.msg = "Update Data Successfully!";
+
+                var getServices = bookingService.getServicesData($scope.companyId);
+                getServices.then(function (response) {
+                    debugger;
+                    $scope.serviceInfo = [];
+                    for (var i = 0; i < response.data.length; i++) {
+                        $scope.serviceInfo.push({ 'Id': response.data[i].Id, 'CompanyId': response.data[i].CompanyId, 'serviceName': response.data[i].Name, 'staffName': response.data[i].FirstName, 'staffEmail': response.data[i].Email, 'DurationInMinutes': response.data[i].DurationInMinutes, 'time': response.data[i].DurationInHours, 'Currency': response.data[i].Currency, 'price': response.data[i].Cost, 'CreationDate': response.data[i].CreationDate, 'AllStaffChecked': response.data[i].AllStaffChecked, 'staffCheckedCount': response.data[i].staffCheckedCount, 'staff': response.data[i].staff });
+                    }
+
+                    $scope.init();
+
+                    $scope.IsVisible = true;
+
+                    $timeout(function () {
+                        $scope.MessageText = "Data Update."; $timeout(function () {
+                            $scope.IsVisible = false;
+                        }, 1000)
+                    }, 500);
+                });
+               
+            });
+        }
+        else {
+            var unassignstaffdata = {
+                CompanyId: item.CompanyId,
+                EmployeeId: selectedItemId,
+                ServiceId: item.Id,
+            }
+            var deallocateemployee = bookingService.DeAllocateServiceForEmployee(unassignstaffdata);
+
+            deallocateemployee.then(function (response) {
+                $scope.messagetext = "Updating Service.."
+                $scope.msg = " update data successfully!";      
+
+                var getServices = bookingService.getServicesData($scope.companyId);
+                getServices.then(function (response) {
+                    debugger;
+                    $scope.serviceInfo = [];
+                    for (var i = 0; i < response.data.length; i++) {
+                        $scope.serviceInfo.push({ 'Id': response.data[i].Id, 'CompanyId': response.data[i].CompanyId, 'serviceName': response.data[i].Name, 'staffName': response.data[i].FirstName, 'staffEmail': response.data[i].Email, 'DurationInMinutes': response.data[i].DurationInMinutes, 'time': response.data[i].DurationInHours, 'Currency': response.data[i].Currency, 'price': response.data[i].Cost, 'CreationDate': response.data[i].CreationDate, 'AllStaffChecked': response.data[i].AllStaffChecked, 'staffCheckedCount': response.data[i].staffCheckedCount, 'staff': response.data[i].staff });
+                    }
+
+                    $scope.init();
+
+                    $scope.IsVisible = true;
+                    $timeout(function () {
+                        $scope.MessageText = "service saved"; $timeout(function () {
+                            $scope.IsVisible = false;
+                        }, 1000)
+                    }, 500);
+                });
+                
+
+            });
+
+
+        }
+
+       
+
         for (var i = 0; i < item.staff.length; i++) {
             if (item.staff[i].confirmed == false) {
                 item.AllStaffChecked = false;
@@ -633,10 +766,13 @@ app.controller('bookingController', ['$scope', '$http', '$timeout', 'bookingServ
 
                     }
                 });
-
-
-
+              
+                $scope.IsVisible = true;
                 $timeout(function () { $scope.MessageText = "Data saved."; $timeout(function () { $scope.IsVisible = false; }, 1000) }, 500);
+            }
+            else {
+                $scope.IsVisible = true;
+                $timeout(function () { $scope.MessageText = "Service Already Exists"; $timeout(function () { $scope.IsVisible = false; }, 1000) }, 500);
             }
         }, function () {
             alert('Error in updating record');
@@ -650,6 +786,60 @@ app.controller('bookingController', ['$scope', '$http', '$timeout', 'bookingServ
     };
 
   
+    $scope.EditService = function (EditService) {
+
+        debugger;
+        var Id = $scope.FirstName;
+        var ServiceData = {
+            Url: "api/services/UpdateService",
+            RequestAddService: {
+                Id: EditService.Id,
+                CompanyId: EditService.CompanyId,
+                Name: EditService.serviceName,
+                CategoryName: " ",
+                CategoryId: 0,
+                DurationInMinutes: "sample string 5",
+                DurationInHours: EditService.time,
+                Cost: EditService.price,
+                Currency: "sample string 7",
+                CreationDate: EditService.CreationDate,
+            }
+        };
+        var editserviceResponse = bookingService.EditService(ServiceData);
+
+
+        editserviceResponse.then(function (response) {
+            $scope.MessageText = "Updating Service"
+            $scope.msg = "Updated Data  Successfully!";
+
+            var getServices = bookingService.getServicesData($scope.companyId);
+            getServices.then(function (response) {
+                debugger;
+                $scope.serviceInfo = [];
+                for (var i = 0; i < response.data.length; i++) {
+                    $scope.serviceInfo.push({ 'Id': response.data[i].Id, 'CompanyId': response.data[i].CompanyId, 'serviceName': response.data[i].Name, 'staffName': response.data[i].FirstName, 'staffEmail': response.data[i].Email, 'DurationInMinutes': response.data[i].DurationInMinutes, 'time': response.data[i].DurationInHours, 'Currency': response.data[i].Currency, 'price': response.data[i].Cost, 'CreationDate': response.data[i].CreationDate, 'AllStaffChecked': response.data[i].AllStaffChecked, 'staffCheckedCount': response.data[i].staffCheckedCount, 'staff': response.data[i].staff });
+                }
+                $scope.init();
+                $scope.IsVisible = true;
+                $timeout(function () { $scope.MessageText = "service saved!"; $timeout(function () { $scope.IsVisible = false; }, 1000) }, 500);
+            });
+
+          
+        }, function () {
+            alert("error in updating record");
+        });
+
+    };
+
+
+
+
+
+
+
+
+
+
     $scope.removeServiceRow = function (id) {
         debugger;
         var removeservicemember = bookingService.DeleteService(id);
