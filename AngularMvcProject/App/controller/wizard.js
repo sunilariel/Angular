@@ -330,20 +330,20 @@ app.controller('bookingController', ['$scope', '$http', '$timeout', 'bookingServ
                     $scope.$apply();
                 }
             }
-        }
-        //else if (angular.element(event.target.parentElement.parentElement)[0].classList.value != 'dropdown-menu')
-        //{
-        //    $scope.showStaff = true;
-        //}
-        //if ($scope.showStaffBinded[i] == false) {
-        //    debugger;
-        //    $scope.showStaffBinded[i] = !($scope.showStaffBinded[i]);
-        //    $scope.$apply();
-        //}
+        }       
     };
 
     $scope.showDropDownBinded = function (index) {
-        $scope.showStaffBinded[index] = !$scope.showStaffBinded[index];
+        var count = $scope.serviceInfo.length;
+        for (var i = 0; i < count; i++) {
+            if (i != index) {
+                $scope.showStaffBinded[i] = true;
+            }
+            else {
+                $scope.showStaffBinded[i] = !$scope.showStaffBinded[i];
+                $scope.showStaff = true;
+            }
+        }
     }
 
     $scope.staffInfo = [];
@@ -407,8 +407,6 @@ app.controller('bookingController', ['$scope', '$http', '$timeout', 'bookingServ
                
                 var CompanyId = $scope.companyId;
                 var getEmployeesData = bookingService.GetStaffData(CompanyId);
-
-
                 getEmployeesData.then(function (response) {
                     debugger;
                     $scope.staffInfo = [];
@@ -434,10 +432,7 @@ app.controller('bookingController', ['$scope', '$http', '$timeout', 'bookingServ
             }
         }, function () {
             alert('Error in updating record');
-        });
-        //var staffnametouched = angular.element(document.querySelector('#exampleInputName2'));
-        //staffnametouched.$touched = false;
-        //staffnametouched.$setTouched();
+        });      
     };
 
 
@@ -542,7 +537,6 @@ app.controller('bookingController', ['$scope', '$http', '$timeout', 'bookingServ
                 item.staff[i].confirmed = false;
             }
         }
-
     };
 
     $scope.toggledataSelection = function (item, selectedItemId,checkedstatus) {
@@ -615,16 +609,11 @@ app.controller('bookingController', ['$scope', '$http', '$timeout', 'bookingServ
                             $scope.IsVisible = false;
                         }, 1000)
                     }, 500);
-                });
-                
-
+                });               
             });
-
-
         }
 
-       
-
+      
         for (var i = 0; i < item.staff.length; i++) {
             if (item.staff[i].confirmed == false) {
                 item.AllStaffChecked = false;
@@ -661,9 +650,8 @@ app.controller('bookingController', ['$scope', '$http', '$timeout', 'bookingServ
                 $scope.staffName = '';
                 $scope.staffEmail = '';
             });
-
+            $scope.IsVisible = true;
             $timeout(function () { $scope.MessageText = "Data deleted."; $timeout(function () { $scope.IsVisible = false; }, 1000) }, 500);
-
         }), function () {
             alert('Error in updating record');
         }
@@ -690,10 +678,6 @@ app.controller('bookingController', ['$scope', '$http', '$timeout', 'bookingServ
             }
             return false;
         }
-
-
-
-
 
         debugger;
         $scope.staffInfoCopy = angular.copy($scope.staffInfo);
@@ -757,18 +741,17 @@ app.controller('bookingController', ['$scope', '$http', '$timeout', 'bookingServ
                                 for (var i = 0; i < response.data.length; i++) {
                                     $scope.serviceInfo.push({ 'Id': response.data[i].Id, 'CompanyId': response.data[i].CompanyId, 'serviceName': response.data[i].Name, 'staffName': response.data[i].FirstName, 'staffEmail': response.data[i].Email, 'DurationInMinutes': response.data[i].DurationInMinutes, 'time': response.data[i].DurationInHours, 'Currency': response.data[i].Currency, 'price': response.data[i].Cost, 'CreationDate': response.data[i].CreationDate, 'AllStaffChecked': response.data[i].AllStaffChecked,'staffCheckedCount':response.data[i].staffCheckedCount,'staff': response.data[i].staff });                                                                        
                                 }
-
                                 $scope.init();
                             });
-
-
                         });
-
                     }
                 });
               
+               
                 $scope.IsVisible = true;
-                $timeout(function () { $scope.MessageText = "Data saved."; $timeout(function () { $scope.IsVisible = false; }, 1000) }, 500);
+                $timeout(function () {
+                    $scope.MessageText = "Data saved."; $timeout(function () { $scope.IsVisible = false; }, 1000)
+                }, 500);
             }
             else {
                 $scope.IsVisible = true;
@@ -778,16 +761,12 @@ app.controller('bookingController', ['$scope', '$http', '$timeout', 'bookingServ
             alert('Error in updating record');
         });
 
-        $scope.staffName = '';
-        $scope.staffEmail = '';
+        //$scope.staffName = '';
+        //$scope.staffEmail = '';
         $scope.showStaff = true;
-
-
     };
-
   
     $scope.EditService = function (EditService) {
-
         debugger;
         var Id = $scope.FirstName;
         var ServiceData = {
@@ -806,8 +785,6 @@ app.controller('bookingController', ['$scope', '$http', '$timeout', 'bookingServ
             }
         };
         var editserviceResponse = bookingService.EditService(ServiceData);
-
-
         editserviceResponse.then(function (response) {
             $scope.MessageText = "Updating Service"
             $scope.msg = "Updated Data  Successfully!";
@@ -822,23 +799,11 @@ app.controller('bookingController', ['$scope', '$http', '$timeout', 'bookingServ
                 $scope.init();
                 $scope.IsVisible = true;
                 $timeout(function () { $scope.MessageText = "service saved!"; $timeout(function () { $scope.IsVisible = false; }, 1000) }, 500);
-            });
-
-          
+            });         
         }, function () {
             alert("error in updating record");
         });
-
     };
-
-
-
-
-
-
-
-
-
 
     $scope.removeServiceRow = function (id) {
         debugger;
@@ -860,9 +825,7 @@ app.controller('bookingController', ['$scope', '$http', '$timeout', 'bookingServ
                 $scope.staffName = '';
                 $scope.staffEmail = '';
             });
-
             $timeout(function () { $scope.MessageText = "Data deleted."; $timeout(function () { $scope.IsVisible = false; }, 1000) }, 500);
-
         }), function () {
             alert('Error in updating record');
         }
