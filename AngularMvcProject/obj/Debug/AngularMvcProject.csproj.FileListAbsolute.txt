@@ -65,22 +65,3 @@ D:\Officials\AngularGitHub\AngularMvcProject\bin\AngularMvcProject.pdb
 D:\Officials\AngularGitHub\AngularMvcProject\obj\Debug\AngularMvcProject.dll
 D:\Officials\AngularGitHub\AngularMvcProject\obj\Debug\AngularMvcProject.pdb
 D:\Officials\AngularGitHub\AngularMvcProject\obj\Debug\AngularMvcProject.csprojResolveAssemblyReference.cache
-D:\Official\David\Angular Clone Project\AngularMvcProject\bin\ApplicationInsights.config
-D:\Official\David\Angular Clone Project\AngularMvcProject\bin\roslyn\csc.exe
-D:\Official\David\Angular Clone Project\AngularMvcProject\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
-D:\Official\David\Angular Clone Project\AngularMvcProject\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
-D:\Official\David\Angular Clone Project\AngularMvcProject\bin\roslyn\Microsoft.CodeAnalysis.dll
-D:\Official\David\Angular Clone Project\AngularMvcProject\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
-D:\Official\David\Angular Clone Project\AngularMvcProject\bin\roslyn\Microsoft.CSharp.Core.targets
-D:\Official\David\Angular Clone Project\AngularMvcProject\bin\roslyn\Microsoft.VisualBasic.Core.targets
-D:\Official\David\Angular Clone Project\AngularMvcProject\bin\roslyn\System.Collections.Immutable.dll
-D:\Official\David\Angular Clone Project\AngularMvcProject\bin\roslyn\System.Reflection.Metadata.dll
-D:\Official\David\Angular Clone Project\AngularMvcProject\bin\roslyn\vbc.exe
-D:\Official\David\Angular Clone Project\AngularMvcProject\bin\roslyn\VBCSCompiler.exe
-D:\Official\David\Angular Clone Project\AngularMvcProject\bin\roslyn\VBCSCompiler.exe.config
-D:\Official\David\Angular Clone Project\AngularMvcProject\bin\AngularMvcProject.dll.config
-D:\Official\David\Angular Clone Project\AngularMvcProject\bin\AngularMvcProject.dll
-D:\Official\David\Angular Clone Project\AngularMvcProject\bin\AngularMvcProject.pdb
-D:\Official\David\Angular Clone Project\AngularMvcProject\obj\Debug\AngularMvcProject.dll
-D:\Official\David\Angular Clone Project\AngularMvcProject\obj\Debug\AngularMvcProject.pdb
-D:\Official\David\Angular Clone Project\AngularMvcProject\obj\Debug\AngularMvcProject.csprojResolveAssemblyReference.cache

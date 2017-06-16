@@ -202,18 +202,14 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\CustomerVM.cs" />
     <Compile Include="Models\IdentityModels.cs" />
-    <Compile Include="Models\RequestData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App\controller\app.js" />
     <Content Include="App\controller\app.module.js" />
     <Content Include="App\controller\Customer.js" />
     <Content Include="App\controller\dashboard.js" />
-    <Content Include="App\controller\routing.js" />
     <Content Include="App\controller\SignUp.js" />
     <Content Include="App\controller\wizard.js" />
     <Content Include="App\service\service.js" />
@@ -292,7 +288,6 @@
     <Content Include="bin\System.Web.WebPages.xml" />
     <Content Include="bin\WebGrease.dll" />
     <Content Include="Content\Assets\css\animate.css" />
-    <Content Include="Content\Assets\css\bootstrap-datetimepicker.css" />
     <Content Include="Content\Assets\css\bootstrap.min.css" />
     <Content Include="Content\Assets\css\custom.css" />
     <Content Include="Content\Assets\css\icon.css" />
@@ -301,7 +296,6 @@
     <Content Include="Content\Assets\images\close-img.png" />
     <Content Include="Content\Assets\images\cloud.png" />
     <Content Include="Content\Assets\images\logo.png" />
-    <Content Include="Content\Assets\images\provider_img2.png" />
     <Content Include="Content\Assets\images\user.jpg" />
     <Content Include="Content\Assets\images\user_img.png" />
     <Content Include="Content\Assets\js\bootstrap.min.js" />

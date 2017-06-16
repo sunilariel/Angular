@@ -1,4 +1,4 @@
-﻿//var app = angular.module("bookingApp", []);
+﻿var app = angular.module("MyApp", []);
 app.controller("SignUp",['$scope', '$http', '$timeout', function ($scope, $http, $timeout) {
     debugger;
     $scope.username = "";
