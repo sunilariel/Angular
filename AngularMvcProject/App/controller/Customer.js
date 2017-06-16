@@ -1,5 +1,5 @@
-﻿var app = angular.module('MyApp', [])
-app.controller('MyController', function ($scope, $timeout) {
+﻿//var app = angular.module('MyApp', [])
+app.controller('customerController', function ($scope, $timeout) {
     //This will hide the DIV by default.
     $scope.procedures = [
 {
