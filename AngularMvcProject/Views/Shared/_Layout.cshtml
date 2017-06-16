@@ -1,5 +1,4 @@
-﻿<!DOCTYPE html>
-<html>
+﻿
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,13 +13,16 @@
     <link href="../Content/Assets/css/animate.css" rel="stylesheet">
     <link href="../Content/Assets/css/custom.css" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-route.js"></script>
     <script src="../Content/Assets/js/bootstrap.min.js"></script>
     <script src="../Content/Assets/js/jquery.js"></script>
-    <script src="../App/controller/wizard.js"></script>
     <script src="../App/service/service.js"></script>
- 
+    <script src="../App/controller/wizard.js"></script>
+    <script src="../App/controller/dashboard.js"></script>
+    <script src="../App/controller/Customer.js"></script>
 </head>
-<body>
+<div ng-app="bookingApp">
+
     @*<div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
@@ -43,7 +45,9 @@
     </div>
     <div class="container body-content">
         *@
+        <div ng-view></div>
         @RenderBody()
+  
         @*<hr />
         <footer>
             <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
@@ -53,5 +57,5 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
-</body>
-</html>
+</div>
+

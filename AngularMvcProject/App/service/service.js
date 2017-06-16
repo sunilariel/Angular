@@ -1,4 +1,19 @@
 ﻿
+//var app = angular.module('bookingApp', ['ngRoute']);
+//app.config(function ($routeProvider, $locationProvider) {
+//    debugger;
+//    $routeProvider
+//    .when("/dashboard", {
+//        templateUrl: "/Views/dashboard/dashboard.cshtml",
+//        controller: "dashboardController"
+//    })
+//    .when("/wizard", {
+//        templateUrl: "/Views/wizard/wizard.cshtml",
+//        controller: "bookingController"
+//    })
+
+//    //$locationProvider.html5Mode(false).hashPrefix('!');
+//});
 app.service("bookingService", function ($http) {
     // Add Employee
     this.register = function (dataobject) {
