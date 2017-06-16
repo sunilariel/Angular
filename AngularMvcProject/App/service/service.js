@@ -1,4 +1,4 @@
-﻿
+﻿var app = angular.module("bookingApp", []);
 //var app = angular.module('bookingApp', ['ngRoute']);
 //app.config(function ($routeProvider, $locationProvider) {
 //    debugger;

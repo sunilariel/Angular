@@ -1,4 +1,4 @@
-﻿var app = angular.module("bookingApp", []);
+﻿
 app.controller('bookingController', ['$scope', '$http', '$timeout', 'bookingService', function ($scope, $http, $timeout, bookingService) {
 
     $scope.businessName = "";
