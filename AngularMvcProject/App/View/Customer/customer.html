@@ -1,0 +1,950 @@
+﻿<div ng-app="bookingApp">
+    <div ng-controller="customerController" data-ng-init="init()">
+
+        <div style="width: 100%;text-align: center;position: absolute;z-index: 999999; top:65px;" ng-if="IsVisible"><span id="voice-box" class="noDisplay" style="background:yellow; padding:5px 10px; border-radius:0 0 2px 2px;" ng-bind="MessageText"></span></div>
+
+        <header class="top">
+            <div class="logo_section"> <a class="logo" href="#"></a><img src="../Content/Assets/images/logo.png" alt="Logo"></a> </div>
+            <h1> Setting </h1>
+                
+            <div class="pull-right movileViewList">
+                <ul class="nav navbar-nav navbar-right ">
+                    <li><a href="#" id="menuiconBar" class="mobileViewIconBar"><i class="fa fa-bars" aria-hidden="true"></i></a></li>
+                </ul>
+            </div>
+            <div class="top_right">
+                <nav class="navbar navbar-default">
+                    <div class="container-fluid">
+                        <!-- Brand and toggle get grouped for better mobile display -->
+                        <div class="navbar-header">
+                            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
+                        </div>
+
+                        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+
+                            <ul class="nav navbar-nav navbar-right">
+                                <li class="upgrade_btn"><a href="#" title="">Upgrade</a></li>
+                                <li class="dropdown">
+                                    <a class="dropdown-toggle" data-toggle="dropdown" href="#"> <i class="fa fa-bell-o" aria-hidden="true"></i> <span class="caret"></span> </a>
+
+                                    <!-- /.dropdown-user -->
+                                    <ul class="dropdown-menu dropdown-user animated flipInY">
+                                        <li id="my_details">
+                                            <a href="#">
+                                                <div class="nav-dropdown-icon-holder"> <span class="setmore-icon-user setmore-icon-fsize"></span> </div>
+                                                <div class="nav-dropdown-desc-holder">
+                                                    <h3 class="nav-dropdown-desc-header">test@gmail.com</h3>
+                                                    <p class="nav-dropdown-desc-text">Username/password</p>
+                                                </div>
+                                                <div class="clear"></div>
+                                            </a>
+                                        </li>
+                                        <li id="account_details">
+                                            <a href="#">
+                                                <div class="nav-dropdown-icon-holder"> <span class="setmore-icon-account-plan setmore-icon-fsize"></span> </div>
+                                                <div class="nav-dropdown-desc-holder">
+                                                    <h3 class="nav-dropdown-desc-header">Account Plan</h3>
+                                                    <p class="nav-dropdown-desc-text">Update account</p>
+                                                </div>
+                                                <div class="clear"></div>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                <div class="nav-dropdown-icon-holder"> <span class="setmore-icon-cog setmore-icon-fsize"></span> </div>
+                                                <div class="nav-dropdown-desc-holder">
+                                                    <h3 class="nav-dropdown-desc-header">Refresh</h3>
+                                                    <p class="nav-dropdown-desc-text">Updates the Page</p>
+                                                </div>
+                                                <div class="clear"></div>
+                                            </a>
+                                        </li>
+                                        <li id="sign_out" class="nav-dropdown-li-last">
+                                            <a href="#">
+                                                <div class="nav-dropdown-icon-holder"> <span class="setmore-icon-log-out setmore-icon-fsize"></span> </div>
+                                                <div class="nav-dropdown-desc-holder">
+                                                    <h3 class="nav-dropdown-desc-header">Sign Out</h3>
+                                                    <p class="nav-dropdown-desc-text">See you soon!</p>
+                                                </div>
+                                                <div class="clear"></div>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="dropdown">
+                                    <a class="dropdown-toggle" data-toggle="dropdown" href="#"> <i class="setmore-icon-user nav_user_icon"></i> <span class="caret"></span> </a>
+
+                                    <!-- /.dropdown-user -->
+                                    <ul class="dropdown-menu dropdown-user animated flipInY">
+                                        <li id="my_details">
+                                            <a href="#">
+                                                <div class="nav-dropdown-icon-holder"> <span class="setmore-icon-user setmore-icon-fsize"></span> </div>
+                                                <div class="nav-dropdown-desc-holder">
+                                                    <h3 class="nav-dropdown-desc-header">test@gmail.com</h3>
+                                                    <p class="nav-dropdown-desc-text">Username/password</p>
+                                                </div>
+                                                <div class="clear"></div>
+                                            </a>
+                                        </li>
+                                        <li id="account_details">
+                                            <a href="#">
+                                                <div class="nav-dropdown-icon-holder"> <span class="setmore-icon-account-plan setmore-icon-fsize"></span> </div>
+                                                <div class="nav-dropdown-desc-holder">
+                                                    <h3 class="nav-dropdown-desc-header">Account Plan</h3>
+                                                    <p class="nav-dropdown-desc-text">Update account</p>
+                                                </div>
+                                                <div class="clear"></div>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                <div class="nav-dropdown-icon-holder"> <span class="setmore-icon-cog setmore-icon-fsize"></span> </div>
+                                                <div class="nav-dropdown-desc-holder">
+                                                    <h3 class="nav-dropdown-desc-header">Refresh</h3>
+                                                    <p class="nav-dropdown-desc-text">Updates the Page</p>
+                                                </div>
+                                                <div class="clear"></div>
+                                            </a>
+                                        </li>
+                                        <li id="sign_out" class="nav-dropdown-li-last">
+                                            <a href="/logout.do">
+                                                <div class="nav-dropdown-icon-holder"> <span class="setmore-icon-log-out setmore-icon-fsize"></span> </div>
+                                                <div class="nav-dropdown-desc-holder">
+                                                    <h3 class="nav-dropdown-desc-header">Sign Out</h3>
+                                                    <p class="nav-dropdown-desc-text">See you soon!</p>
+                                                </div>
+                                                <div class="clear"></div>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                        <!-- /.navbar-collapse -->
+                    </div>
+                    <!-- /.container-fluid -->
+                </nav>
+            </div>
+            <div class="clearfix"> </div>
+            <div style="width: 100%;text-align: center;position: absolute;z-index: 999999; top:65px;" ng-if="IsVisible"><span id="voice-box" class="noDisplay" style="background:yellow; padding:5px 10px; border-radius:0 0 2px 2px;" ng-bind="MessageText"></span></div>
+            <!-- <div style="width: 100%;text-align: center;position: absolute;z-index: 999999;" ng-if="IsVisible"><span id="voice-box" class="noDisplay" style="display: none;">Staff breaks saved.</span></div> -->
+        </header>
+
+        <div class="left_sidebar">
+            <ul class="nav">
+                <li class="side-nav-tooltip" id="side-dashboard" data-toggle="tooltip" data-original-title="Dashboard" data-placement="right">
+                    <a href="#" data-toggle="tab" class="setmore-icon-home" id="startDashboard"><small>Dashboard</small></a>
+                </li>
+                <li class="side-nav-tooltip" id="side-calendar" data-placement="right" data-toggle="tooltip" data-original-title="Calendar"> <a href="#" data-toggle="tab" class="setmore-icon-calendar-31" id="startCalendar"><small>Calendar</small></a> </li>
+                <li class="side-nav-tooltip" id="side-customers" title="" data-toggle="tooltip" data-original-title="Customers" data-placement="right">
+                    <a href="#" data-toggle="tab" class="setmore-icon-users2" id="side-nav-customers"><small>Customers</small></a>
+                </li>
+                <li class="side-nav-tooltip" id="side-profile" data-toggle="tooltip" data-original-title="Apps &amp; Integrations" data-placement="right">
+                    <a href="#" data-toggle="tab" class="setmore-icon-laptop-phone"><small>Profile&nbsp;</small></a>
+                </li>
+
+                <li class="side-nav-tooltip active" id="settings_new" data-original-title="Settings" data-placement="right" data-toggle="tooltip">
+                    <a href="#" data-toggle="tab" class="fa fa-cog"><small>Settings</small></a>
+
+
+
+                </li>
+
+
+                <li class="side-nav-tooltip blue_icon" data-toggle="tooltip" data-original-title="Premium" data-placement="right"> <a class="setmore-icon-shield-alert" href="#"><small>Premium</small></a> </li>
+            </ul>
+        </div>
+        <div class="right_section" id="settings">
+
+            <div id="settingsTabContent" class="tab-content full-height tabcontent">
+                <div class="tab-pane full-height active" id="staff">
+                    <div class="row staffaddCustomerSec">
+
+                        <div class="upgradeDiv">
+                            <div class="row upgradeDivrow">
+                                <div class="col-xs-12 visible-xs">
+                                    <div class="row">
+
+                                        <div class="col-xs-4 upgradeButton">
+                                            <button class="btn btn-default" type="button"> Upgrade</button>
+                                        </div>
+                                        <div class="col-xs-8">
+                                            <div class="upgradeListbar pull-right">
+                                                <ul class="list-inline">
+                                                    <li class="dropdown">
+                                                        <a class="dropdown-toggle" data-toggle="dropdown" href="#"> <i class="fa fa-bell-o" aria-hidden="true"></i> <span class="caret"></span> </a>
+
+                                                        <!-- /.dropdown-user -->
+                                                        <ul class="dropdown-menu dropdown-user animated flipInY upgradeDropdown">
+                                                            <li id="my_details">
+                                                                <a href="#">
+                                                                    <div class="nav-dropdown-icon-holder"> <span class="setmore-icon-user setmore-icon-fsize"></span> </div>
+                                                                    <div class="nav-dropdown-desc-holder">
+                                                                        <h3 class="nav-dropdown-desc-header">test@gmail.com</h3>
+                                                                        <p class="nav-dropdown-desc-text">Username/password</p>
+                                                                    </div>
+                                                                    <div class="clear"></div>
+                                                                </a>
+                                                            </li>
+                                                            <li id="account_details">
+                                                                <a href="#">
+                                                                    <div class="nav-dropdown-icon-holder"> <span class="setmore-icon-account-plan setmore-icon-fsize"></span> </div>
+                                                                    <div class="nav-dropdown-desc-holder">
+                                                                        <h3 class="nav-dropdown-desc-header">Account Plan</h3>
+                                                                        <p class="nav-dropdown-desc-text">Update account</p>
+                                                                    </div>
+                                                                    <div class="clear"></div>
+                                                                </a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="#">
+                                                                    <div class="nav-dropdown-icon-holder"> <span class="setmore-icon-cog setmore-icon-fsize"></span> </div>
+                                                                    <div class="nav-dropdown-desc-holder">
+                                                                        <h3 class="nav-dropdown-desc-header">Refresh</h3>
+                                                                        <p class="nav-dropdown-desc-text">Updates the Page</p>
+                                                                    </div>
+                                                                    <div class="clear"></div>
+                                                                </a>
+                                                            </li>
+                                                            <li id="sign_out" class="nav-dropdown-li-last">
+                                                                <a href="#">
+                                                                    <div class="nav-dropdown-icon-holder"> <span class="setmore-icon-log-out setmore-icon-fsize"></span> </div>
+                                                                    <div class="nav-dropdown-desc-holder">
+                                                                        <h3 class="nav-dropdown-desc-header">Sign Out</h3>
+                                                                        <p class="nav-dropdown-desc-text">See you soon!</p>
+                                                                    </div>
+                                                                    <div class="clear"></div>
+                                                                </a>
+                                                            </li>
+                                                        </ul>
+                                                    </li>
+                                                    <li class="dropdown">
+                                                        <a class="dropdown-toggle" data-toggle="dropdown" href="#"> <i class="setmore-icon-user nav_user_icon"></i> <span class="caret"></span> </a>
+
+                                                        <!-- /.dropdown-user -->
+                                                        <ul class="dropdown-menu dropdown-user animated flipInY userUpgradeDropdown upgradeDropdown">
+                                                            <li id="my_details">
+                                                                <a href="#">
+                                                                    <div class="nav-dropdown-icon-holder"> <span class="setmore-icon-user setmore-icon-fsize"></span> </div>
+                                                                    <div class="nav-dropdown-desc-holder">
+                                                                        <h3 class="nav-dropdown-desc-header">test@gmail.com</h3>
+                                                                        <p class="nav-dropdown-desc-text">Username/password</p>
+                                                                    </div>
+                                                                    <div class="clear"></div>
+                                                                </a>
+                                                            </li>
+                                                            <li id="account_details">
+                                                                <a href="#">
+                                                                    <div class="nav-dropdown-icon-holder"> <span class="setmore-icon-account-plan setmore-icon-fsize"></span> </div>
+                                                                    <div class="nav-dropdown-desc-holder">
+                                                                        <h3 class="nav-dropdown-desc-header">Account Plan</h3>
+                                                                        <p class="nav-dropdown-desc-text">Update account</p>
+                                                                    </div>
+                                                                    <div class="clear"></div>
+                                                                </a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="#">
+                                                                    <div class="nav-dropdown-icon-holder"> <span class="setmore-icon-cog setmore-icon-fsize"></span> </div>
+                                                                    <div class="nav-dropdown-desc-holder">
+                                                                        <h3 class="nav-dropdown-desc-header">Refresh</h3>
+                                                                        <p class="nav-dropdown-desc-text">Updates the Page</p>
+                                                                    </div>
+                                                                    <div class="clear"></div>
+                                                                </a>
+                                                            </li>
+                                                            <li id="sign_out" class="nav-dropdown-li-last">
+                                                                <a href="/logout.do">
+                                                                    <div class="nav-dropdown-icon-holder"> <span class="setmore-icon-log-out setmore-icon-fsize"></span> </div>
+                                                                    <div class="nav-dropdown-desc-holder">
+                                                                        <h3 class="nav-dropdown-desc-header">Sign Out</h3>
+                                                                        <p class="nav-dropdown-desc-text">See you soon!</p>
+                                                                    </div>
+                                                                    <div class="clear"></div>
+                                                                </a>
+                                                            </li>
+                                                        </ul>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                        <div class="col-sm-3 left_side2 addcustomerSec">
+                            <!-- <h3>Staff (1) </h3> -->
+
+
+
+                            <div class="row">
+
+                                <div class="addcustomerSearch col-md-12">
+                                    <input type="text" class="form-control" placeholder="Search..">
+                                    <!-- Split button -->
+                                    <div class="btn-group iconBar">
+                                        <button type="button" class="btn dropdownIcon dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <i class="fa fa-bars" aria-hidden="true"></i><span class="glyphicon glyphicon-menu-down"></span>
+                                            <span class="sr-only">Toggle Dropdown</span>
+                                        </button>
+                                        <ul class="dropdown-menu">
+                                            <li><a href="#">Sort by first name </a></li>
+                                            <li><a href="#">Sort by last name </a></li>
+                                            <li><a href="#">Import customers </a></li>
+                                            <li><a href="#">Export customers</a></li>
+                                        </ul>
+                                    </div>
+                                    <button class="pull-right btn btn-circle" id="createNewStaffBtn" title="" data-original-title="Add New Staff" ng-click="showCustomerpopup()"><i class="fa fa-plus" aria-hidden="true"></i></button>
+                                </div>
+
+                            </div>
+
+
+
+
+                            <div class="row">
+
+                                <div class="col-md-12">
+                                    <div id="addCustomerPopup" class="addCustomer bottomArrow">
+                                        <div class="arrow"></div>
+                                        <h3 class="addCustomerTitle">Add New Customer</h3>
+                                        <div class="addcustomerContent">
+                                            <div class="customerField">
+                                                <input id="customerName" class="form-control" type="text" placeholder="Name" ng-model="Customername" />
+                                                <input id="customerEmail" class="form-control" type="text" placeholder="E-mail" ng-model="Customeremail" />
+                                            </div>
+                                            <div class="customerField row form-group">
+                                                <div class="col-md-2 col-sm-2 col-xs-2  userNumber">
+                                                    <input id="customerExt" class="form-control" type="text" placeholder="91">
+                                                </div>
+                                                <div class="col-md-10 col-sm-10 col-xs-10">
+                                                    <input id="customerMobile" class="form-control" type="text" placeholder="Mobile" ng-model="customerno">
+                                                </div>
+
+
+                                                <div class="clearfix"></div>
+                                            </div>
+                                            <button id="addnewCustomer" class="btn addCustomerbtn" ng-click="CreateCustomer()">Add Customer</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+
+                                <div class="col-md-12 providerpaddDiv">
+                                    <div class="providerCustomer">
+                                        <ul class="list-inline">
+                                            @*
+                                            <li class="selectCustomer">
+                                                <span class="formCheckbox">
+                                                    <input type="checkbox" name="" class="inputcheckbox">
+                                                </span>
+
+                                                <span class="providerImage">
+                                                    <a href="#"<img src="../Content/Assets/images/provider_img2.png" />></a>
+                                                </span>
+                                                <label class="providerName">Alex</label>
+                                                <!-- Single button -->
+
+                                            </li>
+                                            *@
+
+                                            <li class="selectCustomer" ng-repeat="item in customerArr">
+                                                <span class="formCheckbox">
+                                                    <input type="checkbox" name="" class="inputcheckbox">
+                                                </span>
+
+                                                <span class="providerImage">
+                                                    <a href="#"<img src="../Content/Assets/images/provider_img2.png" />></a>
+                                                </span>
+                                                <input type="hidden" name="id" id="">
+                                                <label class="providerName">{{item.UserName}}</label>
+                                                <!-- Single button -->
+                                                <div class="popOverDeleteBtn">
+                                                    <a href="#" id="deleteBtn" class="btn btn-default delete_btn">
+                                                        <span class="glyphicon glyphicon-trash"></span>Delete
+                                                    </a>
+                                                </div>
+
+                                                <div class="col-md-12">
+                                                    <div id="tooltipPopup" class="addCustomer  tooltipArrow">
+                                                        <div class="arrow"></div>
+                                                        <h3 class="addCustomerTitle">Delete Customer?</h3>
+                                                        <div class="addcustomerContent">
+                                                            <button id="deleteBtn" class="btn btn-danger addCustomerbtn" ng-click="DeleteCustomerData()">Delete</button>
+                                                            <button id="cancleBtn" class="btn btn-default addCustomerbtn">Cancel</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+
+                                </div>
+                            </div>
+
+
+
+                        </div>
+
+                        <div class="col-sm-3">
+                            <div class="customerProfileDiv">
+                                <form class="form-horizontal imageUploadForm" action="">
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3 col-sm-3 col-xs-3">
+                                            <img src="../Content/Assets/images/provider_img2.png" />
+
+                                            <div class="fileupload fileupload-new" data-provides="fileupload">
+                                                <span class="btn btn-primary btn-file">
+                                                    <span class="fileupload-new">
+
+                                                    </span>
+
+                                                    <input type="file" />
+                                                </span>
+
+
+                                            </div>
+                                            <span class="uploadImageIcon"><i class="fa fa-camera" aria-hidden="true"></i></span>
+                                        </label>
+                                        <div class="col-md-9 col-sm-9 col-xs-9">
+                                            <input type="text" class="customerName form-control" value="Mark" id="name" name="name" placeholder="Mark">
+                                        </div>
+                                    </div>
+
+                                </form>
+
+                                <form class="form-horizontal customerDetail" action="">
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3 col-xs-3 col-sm-12">Email</label>
+                                        <div class="col-md-9 col-xs-9 col-sm-12">
+                                            <input type="email" class="form-control" id="email" placeholder="mark@bm.com" name="email">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3 col-xs-3 col-sm-12">Mobile</label>
+                                        <div class="col-md-9 col-xs-9 col-sm-12">
+                                            <div class="row">
+                                                <div class="col-md-4 ">
+                                                    <input type="text" class="form-control" id="text" placeholder="44" name="text">
+                                                </div>
+                                                <div class="col-md-8 textNumberDiv" style="padding-left:0;">
+                                                    <input type="text" class="form-control" id="text" placeholder="111111" name="text">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3 col-xs-3 col-sm-12">Office</label>
+                                        <div class="col-md-9 col-xs-9 col-sm-12">
+                                            <input type="text" class="form-control" id="text" placeholder="Phone" name="text">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3 col-xs-3 col-sm-12">Home</label>
+                                        <div class="col-md-9 col-xs-9 col-sm-12">
+                                            <input type="text" class="form-control" id="text" placeholder="Phone" name="text">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3 col-xs-3 col-sm-12">Address</label>
+                                        <div class="col-md-9 col-xs-9 col-sm-12">
+                                            <input type="text" class="form-control" id="text" placeholder="Address" name="text">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3 col-xs-3 col-sm-12"></label>
+                                        <div class="col-md-9 col-xs-9 col-sm-12">
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                    <input type="text" class="form-control" id="text" placeholder="City" name="text">
+                                                </div>
+                                                <div class="col-md-4 textNumberDiv" style="padding-left:0;">
+                                                    <input type="text" class="form-control" id="text" placeholder="State" name="text">
+                                                </div>
+                                                <div class="col-md-4 textNumberDiv" style="padding-left:0;">
+                                                    <input type="text" class="form-control" id="text" placeholder="Zip" name="text">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </form>
+
+                            </div>
+                        </div>
+
+
+                        <div class="col-sm-6">
+                            <div id="staffContentNav" class="detail-navbar appointmentDiv staffContent container-fluid">
+                                <ul class="nav nav-pills">
+                                    <li class="active" id="staff_details"><a href="#staff-details" data-toggle="tab">Appointments</a></li>
+                                    <li><a href="#staff-services" data-toggle="tab">Notes</a></li>
+                                    <li><a href="#staff-hours" data-toggle="tab">Stats</a></li>
+                                    <li class="pull-right settingIcon"><i class="fa fa-cog" aria-hidden="true"></i></li>
+                                    <div class="clearfix"></div>
+                                </ul>
+
+                                <div class="container-fluid staff-details-container appointmentTab">
+                                    <div class="tab-content" style="height: 186px;">
+                                        <div class="tab-pane active" id="staff-details">
+                                            <div class="appointment_content">
+                                                <div class="appoint_text appoint_cust">
+                                                    <button class="pull-right btn btn-circle appointment_btn" id="createnewstaffbtn" title="" data-toggle="modal" data-target="#squarespaceModal"><i class="fa fa-plus" aria-hidden="true" ng-click="AddAppointmentPopup()"></i></button><span>2  appointment  & 0 class</span><span class="dottext">.</span><span> $0</span>
+                                                </div>
+
+                                                <div class="modal fade appointmentPopup" id="squarespaceModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+                                                    <div class="modal-dialog appointPopupHead">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <button type="button" class="close modalcloseIcon" data-dismiss="modal"><span aria-hidden="true" class="">×</span><span class="sr-only">Close</span></button>
+                                                                <h3 class="modal-title" id="lineModalLabel">Appointment</h3>
+                                                            </div>
+                                                            <div class="modal-body appointPopupBody" ng-hide="ShowAddAppointmentPopup">
+
+                                                                <div class="row popupDeatailDiv">
+                                                                    <div class="col-md-6">
+                                                                        <div class="detailText">
+                                                                            <ul class="list-inline appointDeatailDiv">
+                                                                                <li><a href="#">Details</a></li>
+                                                                            </ul>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-6">
+                                                                        <div class="dropdown labeldrowDownBtn nolableDrop">
+                                                                            <button class="dropbtn">
+                                                                                No Label
+                                                                                <span class="glyphicon glyphicon-chevron-down"></span>
+                                                                            </button>
+                                                                            <ul class="lableDropdownContent dropdown-content">
+                                                                                <li><a href="#">No Label</a></li>
+                                                                                <li><a href="#">Pending</a></li>
+                                                                                <li><a href="#">Confirmed</a></li>
+                                                                                <li><a href="#">Done</a></li>
+                                                                                <li><a href="#">No-Show</a></li>
+                                                                                <li><a href="#">Paid</a></li>
+                                                                                <li><a href="#">Running Late</a></li>
+                                                                                <li><a href="#">Custom Label</a></li>
+                                                                            </ul>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <!-- content goes here -->
+                                                                <div class="deatailForm">
+                                                                    <form class="form-horizontal appointPopUpform">
+                                                                        <div class="form-group">
+                                                                            <label class="control-label col-sm-4" for="email">Provider</label>
+                                                                            <div class="col-sm-8">
+                                                                                <div class="dropdown appointProvider">
+                                                                                    <select class="btn btn-default dropdown-toggle" id="dropdownMenu2" aria-haspopup="true" aria-expanded="false" ng-click="GetAllAddAppointment()">
+                                                                                        <option value="">-- Select a Provider --</option>
+                                                                                        <option value="">-- Select a Provider --</option>
+                                                                                        <option value="">-- Select a Provider --</option>
+                                                                                    </select>
+                                                                                    @*<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                                                        <span class="glyphicon glyphicon-ok okIcon"></span>
+                                                                                        david
+                                                                                        <span class="glyphicon glyphicon-chevron-down chevronDownIcon"></span>
+                                                                                    </button>*@
+                                                                                    <div class="dropdown-menu popupdropdownDiv" aria-labelledby="dropdownMenu2">
+                                                                                        <ul class="list-inline">
+                                                                                            <li>
+                                                                                                <span class="userIcon providerImage">
+                                                                                                    <a href="#"><img src="../Content/Assets/images/provider_img2.png"></a>
+                                                                                                </span>
+                                                                                                <label class="providerName">Alex </label>
+                                                                                            </li>
+                                                                                        </ul>
+
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="form-group">
+                                                                            <label class="control-label col-sm-4" for="pwd">Service</label>
+                                                                            <div class="col-sm-8">
+                                                                                <div class="dropdown appointProvider">
+                                                                                    <select class="btn btn-default dropdown-toggle" id="dropdownMenu2" aria-haspopup="true" aria-expanded="false">
+                                                                                        <option value="">-- Select a Service --</option>
+                                                                                    </select>
+                                                                                    @*<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                                                        <span class="okIcon longrightArrow">
+                                                                                            <i class="fa fa-long-arrow-right" aria-hidden="true"></i>
+                                                                                        </span>
+                                                                                        Select a Service
+                                                                                        <span class="glyphicon glyphicon-chevron-down chevronDownIcon"></span>
+                                                                                    </button>*@
+                                                                                    <div class="dropdown-menu popupdropdownDiv" aria-labelledby="dropdownMenu2">
+                                                                                        <ul class="list-inline">
+                                                                                            <li>
+                                                                                                <span class="serviceCheckboxDiv">
+                                                                                                    <input type="checkbox" class="sampleCheckbox" name="" value="service">
+                                                                                                    Sample Service
+                                                                                                </span>
+                                                                                                <span class="serviceMins">60mins </span>
+                                                                                            </li>
+                                                                                        </ul>
+
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <div class="form-group">
+                                                                            <label class="control-label col-sm-4" for="pwd">Day/Time</label>
+                                                                            <div class="col-sm-8 dateTimeDiv">
+                                                                                <span class="glyphicon glyphicon-ok calendarOk"></span><input type='text' class="form-control datepickerBox" placeholder="Fri, May 12" id='datetimepicker4' />
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="form-group">
+                                                                            <label class="control-label col-sm-4"></label>
+                                                                            <div class="col-sm-8">
+                                                                                <div class="row">
+                                                                                    <div class="col-md-6 dateTimeDiv costField">
+                                                                                        <span class="calendarOk">$</span>
+                                                                                        <input type="text" class="appt_cost form-control" placeholder="10">
+                                                                                    </div>
+                                                                                    <div class="col-md-6 dateTimeDiv costMinField">
+                                                                                        <input type="text" class="appt_cost_min form-control" placeholder="60">
+                                                                                        <a href="#" id="minTextDiv" class="minText">
+                                                                                            Mins
+                                                                                            <span class="glyphicon glyphicon-chevron-down chevronDownIcon">
+                                                                                            </span>
+                                                                                        </a>
+                                                                                        <ul id="custmDropdown" class="apptcustomeDropdown">
+                                                                                            <li><a href="#">Mins</a></li>
+                                                                                            <li><a href="#">Hours</a></li>
+                                                                                        </ul>
+                                                                                    </div>
+                                                                                </div>
+
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="form-group">
+                                                                            <label class="control-label col-sm-4" for="pwd">Notes</label>
+                                                                            <div class="col-sm-8 notesForCustomer">
+                                                                                <textarea class="form-control apptNotes" placeholder="Notes for the Customer" maxlength="500"></textarea>
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <div class="form-group">
+                                                                            <label class="control-label col-sm-4" for="pwd">Recurring?</label>
+                                                                            <div class="col-sm-8 recurringDiv">
+                                                                                <div class="onoffswitch recurringOnOffBtn">
+                                                                                    <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" checked="">
+                                                                                    <label class="onoffswitch-label" for="myonoffswitch">
+                                                                                        <span class="onoffswitch-inner"></span>
+                                                                                        <span class="onoffswitch-switch"></span>
+                                                                                    </label>
+                                                                                </div>
+                                                                                <div class="premiumBtn">
+                                                                                    <button type="button" class="btn btn-default">
+                                                                                        <span><i class="fa fa-lock" aria-hidden="true"></i></span>
+                                                                                        <a href="#">premium</a>
+                                                                                    </button>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <div class="form-group rescheduleDiv">
+                                                                            <div class="col-sm-12 sendSchdlEmail">
+                                                                                <input type="checkbox" class="sampleCheckbox checkbox-custom" name="" value="service"><label for="checkbox-1" class="checkbox-custom-label">Send Reschedule Email</label>
+                                                                            </div>
+                                                                        </div>
+
+                                                                    </form>
+                                                                </div>
+
+
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <div class="btn-group apptSaveBtn" role="group">
+                                                                    <button type="button" class="btn btn-default" data-action="save" role="button">Save Appointment</button>
+                                                                </div>
+                                                                <div class="apptViewFooter">
+                                                                    <a href="#" class="apptDeleteBtn">Delete</a>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div id="modalPopupbg" class="fade modal_bg in"></div>
+                                                </div>
+
+
+                                            </div>
+                                            <div class="appointmentListHolder" style="height: 150px;">
+                                                <ul id="appointmentList" class="appointmentList appointMedia">
+                                                    <li>
+                                                        <span>
+                                                            <div class="media">
+                                                                <div class="media-left calendarIcon">
+                                                                    <span id="calendarfaIcon"><i class="fa fa-calendar" aria-hidden="true"></i></span>
+                                                                </div>
+                                                                <div class="media-body appointDate">
+                                                                    <h4 class="media-heading">Wed May 24,2017</h4>
+                                                                    <p>david . service1 . 60 min . $10</p>
+                                                                </div>
+                                                            </div>
+
+                                                        </span>
+
+                                                        <div id="detailPopup" class="apptDetailPopup addCustomer bottomArrow">
+                                                            <div class="apptDetailDiv">
+                                                                <div class="appt_text">
+                                                                    <h2>Appointment Details</h2>
+                                                                    <a href="#" id="crossHidebtn" class="crossBtn"><i class="fa fa-times" aria-hidden="true"></i></a>
+                                                                </div>
+                                                                <div class="dropdown labeldrowDownBtn">
+                                                                    <button class="dropbtn">
+                                                                        No Label
+                                                                        <span class="glyphicon glyphicon-chevron-down"></span>
+                                                                    </button>
+                                                                    <ul class="lableDropdownContent dropdown-content">
+                                                                        <li><a href="#">No Label</a></li>
+                                                                        <li><a href="#">Pending</a></li>
+                                                                        <li><a href="#">Confirmed</a></li>
+                                                                        <li><a href="#">Done</a></li>
+                                                                        <li><a href="#">No-Show</a></li>
+                                                                        <li><a href="#">Paid</a></li>
+                                                                        <li><a href="#">Running Late</a></li>
+                                                                        <li><a href="#">Custom Label</a></li>
+                                                                    </ul>
+                                                                </div>
+
+                                                                <div class="apptdetailList">
+                                                                    <p>Wed, May 24, 8:00 am  –  9:00 am</p>
+                                                                    <ul>
+                                                                        <li>
+                                                                            <label>Provider</label>
+                                                                            <span>David</span>
+                                                                        </li>
+                                                                        <li>
+                                                                            <label>Service</label>
+                                                                            <span>Service1</span>
+                                                                        </li>
+                                                                        <li>
+                                                                            <label>Cost $</label>
+                                                                            <span>10</span>
+                                                                        </li>
+                                                                        <li>
+                                                                            <label>Customer </label>
+                                                                            <span>
+                                                                                Mark<br />
+                                                                                44111111 <br />
+                                                                                mark@bm.com
+                                                                            </span>
+                                                                        </li>
+                                                                        <li>
+                                                                            <label>Booked from </label>
+                                                                            <span>Customer Page</span>
+                                                                        </li>
+
+                                                                    </ul>
+                                                                    <div class="brdr_btm"></div>
+                                                                </div>
+
+                                                                <div class="pointerRightIcon"></div>
+                                                                <div class="apptViewFooter">
+                                                                    <a href="#" class="editAppt">
+                                                                        Edit Appointment
+                                                                        <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                                                                    </a>
+                                                                    <a href="#" class="apptDeleteBtn">Delete</a>
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+                                                    </li>
+
+                                                    <li>
+                                                        <span>
+                                                            <div class="media">
+                                                                <div class="media-left calendarIcon">
+                                                                    <span><i class="fa fa-calendar" aria-hidden="true"></i></span>
+                                                                </div>
+                                                                <div class="media-body appointDate">
+                                                                    <h4 class="media-heading">Wed May 24,2017</h4>
+                                                                    <p>david . service1 . 60 min . $10</p>
+                                                                </div>
+                                                            </div>
+                                                        </span>
+                                                    </li>
+                                                </ul>
+                                            </div>
+
+
+
+                                        </div>
+                                        <div class="tab-pane" id="staff-services"> Service</div>
+                                        <div class="tab-pane" id="staff-hours">Staff Hours </div>
+                                        <div class="tab-pane " id="staff-break">
+                                            <div class="row-fluid">
+
+
+
+                                            </div>
+                                        </div>
+                                        <div class="tab-pane" id="staff-timeoff" style="padding-bottom: 100px;"> </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane full-height" id="accounts">
+                    <div id="accountsSideNav" class="span3 secondary-navbar container-fluid"> dfsdfsdfd </div>
+                </div>
+                <div class="tab-pane full-height" id="services"> sdfsadfs </div>
+                <div class="tab-pane full-height" id="classesSetting"> sdfsdfdfd </div>
+                <div class="tab-pane full-height" id="payments">
+                    <div id="paymentsSideNav" class="span3 secondary-navbar container-fluid full-height"> </div>
+                    fsdfsdfsd
+                </div>
+                <div class="tab-pane full-height" id="notifications">
+                    <div class="setmore-loader" style="display:block;"> sdfdf </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--@*
+<script src="js/jquery.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/moment.js"></script>
+<script src="js/bootstrap-datetimepicker.min.js"></script>*@
+@*
+<script type="text/javascript">
+        var app = angular.module('MyApp', [])
+        app.controller('MyController', function ($scope, $timeout) {
+            //This will hide the DIV by default.
+            $scope.procedures = [
+       {
+           definition: 'Monday',
+           show: false,
+           choice: []
+       },
+       {
+           definition: 'Tuesday',
+           show: false,
+           choice: []
+       },
+       {
+           definition: 'Wednesday',
+           show: false,
+           choice: []
+       },
+       {
+           definition: 'Thursday',
+           show: false,
+           choice: []
+       },
+       {
+           definition: 'Friday',
+           show: false,
+           choice: []
+       },
+       {
+           definition: 'Saturday',
+           show: false,
+           choice: []
+       },
+       {
+           definition: 'Sunday',
+           show: false,
+           choice: []
+       }
+            ];
+
+            $scope.MessageText = "";
+            $scope.IsVisible = false;
+            $scope.choices = [];
+            $scope.addNewChoice = function (procedure) {
+                debugger;
+                $scope.IsVisible = true;
+                $scope.MessageText = "Saving Staff breaks..";
+                var newItemNo = procedure.choice.length + 1;
+
+                procedure.choice.push([{ 'id': 'choice' + newItemNo }]);
+                $timeout(function () { $scope.MessageText = "Staff breaks saved."; $timeout(function () { $scope.IsVisible = false; }, 1000) }, 500);
+            };
+            $scope.showPopup = function (procedure) {
+                procedure.show = true;
+            };
+            $scope.hidePopup = function (procedure) {
+                debugger;
+                procedure.show = false;
+            };
+            $scope.removeChoice = function (procedure) {
+                debugger;
+                $scope.IsVisible = true;
+                var lastItem = procedure.choice.length - 1;
+                procedure.choice.splice(lastItem);
+                $scope.MessageText = "Saving Staff breaks..";
+                $timeout(function () { $scope.MessageText = "Staff breaks saved."; $timeout(function () { $scope.IsVisible = false; }, 1000) }, 500);
+            };
+        });
+
+
+
+
+
+</script>*@
+<script>
+    $(document).ready(function () {
+        $(function () {
+            $('.left_side2').height($(window).height() - 50)
+            $('[data-toggle="tooltip"]').tooltip();
+        })
+    });
+
+    $(document).ready(function () {
+        $("#createNewStaffBtn").click(function () {
+            $("#addCustomerPopup").toggle(200);
+        });
+
+    });
+
+    $(document).ready(function () {
+        $('[data-toggle="popover"]').popover();
+    });
+
+    $(document).ready(function () {
+        $("#menuiconBar").click(function () {
+            $(".left_sidebar").toggle(200);
+        });
+
+        $("#deleteBtn").click(function () {
+            $("#tooltipPopup").toggle(200);
+        });
+
+        $("#calendarfaIcon").click(function () {
+            $("#detailPopup").show(200);
+        });
+
+        $("#crossHidebtn").click(function () {
+            $("#detailPopup").hide(200);
+        });
+        $("#minTextDiv").click(function () {
+            $("#custmDropdown").toggle(200);
+        });
+
+
+        //$("#createNewStaffBtn").click(function () {
+        //    $("#modalPopupbg").addClass("modal_bg");
+        //});
+
+
+    });
+
+    $(function () {
+        //$('#datetimepicker4').datetimepicker();
+    });
+
+
+
+</script>-->

@@ -1,5 +1,5 @@
 ﻿
-app.controller('bookingController', ['$scope', '$http', '$timeout', 'bookingService', function ($scope, $http, $timeout, bookingService) {
+app.controller('bookingController', ['$scope', '$http', '$timeout','$location', 'bookingService', function ($scope, $http, $timeout,$location, bookingService) {
 
     $scope.businessName = "";
     $scope.businessIndustry = [{ name: 'Hair Salon/Barbershop', id: 1 }, { name: 'Nail Salon', id: 2 }, { name: 'Computers/Technology/IT', id: 3 }, { name: 'Spa/Massage/Waxing', id: 4 }];
@@ -29,20 +29,18 @@ app.controller('bookingController', ['$scope', '$http', '$timeout', 'bookingServ
     $scope.showStaffBinded = [];
     $scope.init = function () {
         debugger;
+       
+        $scope.IsVisible = false;
         var count = $scope.serviceInfo.length;
         for (var i = 0; i < count; i++) {
             $scope.showStaffBinded[i] = true;
         }              
     };
 
-    //$scope.redirection=function()
-    //{
-    //    $window.location.href="/dashboard/dashboard";
-    //}
-
-
-
-
+    $scope.redirecttodashboard= function ()
+    {
+        $location.path("/dashboard");
+    }
    
     $scope.submitInfo = function (form) {
         debugger;
@@ -65,8 +63,7 @@ app.controller('bookingController', ['$scope', '$http', '$timeout', 'bookingServ
             debugger;
             var businessInfo = {
                 Url: "api/companyregistration/CreateAccount",
-                RequestData: {
-                    Id: $scope.selectedIndustry,
+                RequestData: {                  
                     Name: $scope.businessName,
                     Address: "sample string 3",
                     Email: "sample string 4",
@@ -331,6 +328,7 @@ app.controller('bookingController', ['$scope', '$http', '$timeout', 'bookingServ
     };
 
     $scope.showDropDownBinded = function (index) {
+        debugger;
         var count = $scope.serviceInfo.length;
         for (var i = 0; i < count; i++) {
             if (i != index) {
@@ -529,9 +527,68 @@ app.controller('bookingController', ['$scope', '$http', '$timeout', 'bookingServ
         }
     };
 
+    $scope.Updateallstaff=function(item)
+    {
+        debugger;
+        var dateTimeVal = new Date();
+        angular.forEach(item.staff, function (value, key) {
+                       
+                    var assignData = {
+                        Url: "api/companyregistration/AssignServiceToStaff",
+                        RequestAssignService: {
+                            Id: 1,
+                            CompanyId: $scope.companyId,
+                            EmployeeId: value.Id,
+                            ServiceId: item.Id,
+                            CreationDate: dateTimeVal
+                        }
+                    }
+                    var assignStaff = bookingService.assignStaffToService(assignData);
+
+                    assignStaff.then(function (response) {
+                        $scope.MessageText = "Updating Service"
+                        $scope.msg = "Updated Data  Successfully!";
+
+
+
+                        var getServices = bookingService.getServicesData($scope.companyId);
+                        getServices.then(function (response) {
+                            debugger;
+                            $scope.serviceInfo = [];
+                            for (var i = 0; i < response.data.length; i++) {
+                                $scope.serviceInfo.push({ 'Id': response.data[i].Id, 'CompanyId': response.data[i].CompanyId, 'serviceName': response.data[i].Name, 'staffName': response.data[i].FirstName, 'staffEmail': response.data[i].Email, 'DurationInMinutes': response.data[i].DurationInMinutes, 'time': response.data[i].DurationInHours, 'Currency': response.data[i].Currency, 'price': response.data[i].Cost, 'CreationDate': response.data[i].CreationDate, 'AllStaffChecked': response.data[i].AllStaffChecked, 'staffCheckedCount': response.data[i].staffCheckedCount, 'staff': response.data[i].staff });
+                            }
+                            $scope.init();
+                            $scope.IsVisible = true;
+                            $timeout(function () { $scope.MessageText = "service saved!"; $timeout(function () { $scope.IsVisible = false; }, 1000) }, 500);
+                        });
+                    });
+          
+        });
+    }
+
+
+    $scope.allstaffselection = function () {
+        debugger;
+        for (var i = 0; i < item.staff.length; i++) {
+            if (item.staff[i].confirmed == false) {
+                item.AllStaffChecked = false;
+                break;
+            }
+            else {
+                item.AllStaffChecked = true;
+            }
+        }
+    };
+
+
+
+
+
+
     $scope.toggledataSelection = function (item, selectedItemId,checkedstatus) {
         debugger;
-      
+       
         var updateddate = new Date();
         var assignData = {
             Url: "api/companyregistration/AssignServiceToStaff",
@@ -603,15 +660,7 @@ app.controller('bookingController', ['$scope', '$http', '$timeout', 'bookingServ
         }
 
       
-        for (var i = 0; i < item.staff.length; i++) {
-            if (item.staff[i].confirmed == false) {
-                item.AllStaffChecked = false;
-                break;
-            }
-            else {
-                item.AllStaffChecked = true;
-            }
-        }
+       
 
     };
 
@@ -647,7 +696,7 @@ app.controller('bookingController', ['$scope', '$http', '$timeout', 'bookingServ
 
 
     $scope.addServiceItem = function (form) {
-
+        debugger;       
         if (form.$invalid == true)
         {
             if(form.sampleService.$invalid==true)
@@ -665,6 +714,27 @@ app.controller('bookingController', ['$scope', '$http', '$timeout', 'bookingServ
             }
             return false;
         }
+
+        var count = $("input[type='checkbox'].staffcheckbox").length;
+        for (var i = 0; i < count ; i++) {
+            if ($("input[type=checkbox].staffcheckbox")[i].checked == true) {
+                $scope.allchecked = true;
+                break;
+            }
+            else {
+                $scope.allchecked = false;
+            }
+        }
+        if ($scope.allchecked == false) {
+            $scope.MessageText = "At least one staff checked"
+            $scope.IsVisible = true;
+            $timeout(function () {               
+                $scope.IsVisible = false;
+            }, 500);
+
+            return false;
+        }
+
 
         debugger;
         $scope.staffInfoCopy = angular.copy($scope.staffInfo);
@@ -719,9 +789,7 @@ app.controller('bookingController', ['$scope', '$http', '$timeout', 'bookingServ
                         assignStaff.then(function (response) {
                             //$scope.MessageText = "Saving Data"
                             //$scope.msg = "Post Data Submitted Successfully!";    
-
-                           
-
+                          
                             var getServices = bookingService.getServicesData($scope.companyId);
                             getServices.then(function (response) {
                                 debugger;

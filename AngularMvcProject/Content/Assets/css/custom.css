@@ -198,7 +198,7 @@ li.upgrade_btn a:hover {
 
 .right_section > div{
 	    display: table-cell;	
-		width:100%;
+		/*width:100%;*/
 		
 }
 div#settingsTabContent {

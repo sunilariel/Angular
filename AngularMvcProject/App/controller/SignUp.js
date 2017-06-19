@@ -1,5 +1,5 @@
 ﻿//var app = angular.module("bookingApp", []);
-app.controller("SignUp",['$scope', '$http', '$timeout', function ($scope, $http, $timeout) {
+app.controller("SignUp",['$scope', '$http', '$timeout','$location', function ($scope, $http, $timeout,$location) {
     debugger;
     $scope.username = "";
     $scope.Email = "";
@@ -71,6 +71,8 @@ app.controller("SignUp",['$scope', '$http', '$timeout', function ($scope, $http,
                 $scope.msg = "Post Data Submitted Successfully!";
 
                 $timeout(function () { $scope.MessageText = "Data saved."; $timeout(function () { $scope.IsVisible = false; }, 1000) }, 500);
+
+                $location.path('/wizard');
             }
             //else if(data.success=="UserExits")
             //{

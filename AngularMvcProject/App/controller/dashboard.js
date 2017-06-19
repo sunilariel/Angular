@@ -1,6 +1,6 @@
 ﻿/// <reference path="dashboard.js" />
 //var app = angular.module('MyApp', [])
-app.controller('dashboardController', function ($scope, $timeout) {
+app.controller('dashboardController',['$scope','$timeout','$location', function ($scope, $timeout,$location) {
     //This will hide the DIV by default.
     $scope.procedures = [
 {
@@ -67,4 +67,9 @@ app.controller('dashboardController', function ($scope, $timeout) {
         $scope.MessageText = "Saving Staff breaks..";
         $timeout(function () { $scope.MessageText = "Staff breaks saved."; $timeout(function () { $scope.IsVisible = false; }, 1000) }, 500);
     };
-});
+
+    $scope.redirecttoCustomer=function()
+    {
+        $location.path("/customer");
+    }
+}]);
