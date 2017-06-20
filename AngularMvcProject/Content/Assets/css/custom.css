@@ -681,8 +681,8 @@ span.staff-break-delete-holder button.btn.btn-circle {
     background: #f1f5f7;
     border: solid 1px #aaa;
     box-shadow: 0px 0px 10px #CCC;
-	height: 90%;
-    overflow: auto;
+	/*height: 90%;
+    overflow: auto;*/
 }
  /*.demo_wizard .col-xs-12 {
     width: 100%;
@@ -784,7 +784,7 @@ background: #31c1b3 !important;
 
 /* 23-may-2017 css start here ===================== */
 
-.fixed_div {
+/*.fixed_div {
     position: fixed;
     top: 0;
     background: rgba(255, 255, 255, 0.87);
@@ -793,10 +793,29 @@ background: #31c1b3 !important;
     z-index: 99999;
 	display: flex;
     align-items: center;
-	/* overflow-y: scroll; */
+	 overflow-y: scroll; 
+}*/
+
+.fixed_div {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    z-index: 1002;
+    padding-top:90px;
 }
-.welcome_div {
-	padding: 30px 0 0;
+/*.wizardbussness {
+    padding: 45px 40px 45px 40px;
+}*/
+
+.wizardSec {
+    margin:120px auto;
+}
+
+.wizardPadDiv {
+        padding: 45px 35px 45px 35px;
 }
 .setmore p {
     color: #95a5a6;
@@ -1681,9 +1700,9 @@ button#deleteBtn {
     align-items: center;
 	overflow-y: scroll;
 }
-.welcome_div {
+/*.welcome_div {
 	padding: 30px 0 0;
-}
+}*/
 .setmore p {
     color: #95a5a6;
 }
@@ -2613,7 +2632,26 @@ table#mytable tr td {
 
 /*        Css changes start here June-9-2017         */
 
+/*    June-20 CSS start here     */
 
+.media-left.calendarIcon span i {
+    padding-top: 8px;
+}
+
+.imageUploadForm img {
+    width: 50px;
+    height: 50px;
+    border-radius: 100%;
+}
+.uploadImageIcon i {
+    width: 35px;
+    height: 35px;
+    top: 15px;
+    left: 21px;
+    font-size: 1.5em;
+}
+
+/*    June-20 CSS end here     */
 
 
 
@@ -3426,4 +3464,10 @@ select.select_btn {
 
 .usernameField {
     max-width: 100%;
+}
+div#addCustomerPopup {
+    display: block;
+}
+div#deletetooltipPopup{
+    display:block;
 }

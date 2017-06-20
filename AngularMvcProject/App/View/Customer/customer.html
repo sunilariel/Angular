@@ -297,7 +297,7 @@
                                             <li><a href="#">Export customers</a></li>
                                         </ul>
                                     </div>
-                                    <button class="pull-right btn btn-circle" id="createNewStaffBtn" title="" data-original-title="Add New Staff" ng-click="showCustomerpopup()"><i class="fa fa-plus" aria-hidden="true"></i></button>
+                                    <button class="pull-right btn btn-circle" id="createNewStaffBtn" title="" data-original-title="Add New Staff" ng-click="showcustomer = !showcustomer"><i class="fa fa-plus" aria-hidden="true"></i></button>
                                 </div>
 
                             </div>
@@ -308,28 +308,30 @@
                             <div class="row">
 
                                 <div class="col-md-12">
-                                    <div id="addCustomerPopup" class="addCustomer bottomArrow">
-                                        <div class="arrow"></div>
-                                        <h3 class="addCustomerTitle">Add New Customer</h3>
-                                        <div class="addcustomerContent">
-                                            <div class="customerField">
-                                                <input id="customerName" class="form-control" type="text" placeholder="Name" ng-model="Customername" />
-                                                <input id="customerEmail" class="form-control" type="text" placeholder="E-mail" ng-model="Customeremail" />
-                                            </div>
-                                            <div class="customerField row form-group">
-                                                <div class="col-md-2 col-sm-2 col-xs-2  userNumber">
-                                                    <input id="customerExt" class="form-control" type="text" placeholder="91">
+                                    <form ng-submit="CreateCustomer()" name="createCustomer" novalidate class="css-form">
+                                        <div id="addCustomerPopup" class="addCustomer bottomArrow addServices" ng-show="showcustomer">
+                                            <div class="arrow"></div>
+                                            <h3 class="addCustomerTitle">Add New Customer</h3>
+                                            <div class="addcustomerContent">
+                                                <div class="customerField">
+                                                    <input id="customerName" class="form-control" type="text" placeholder="Name" ng-model="customerName">
+                                                    <input  class="form-control" type="text" placeholder="E-mail" ng-model="customerEmail">
                                                 </div>
-                                                <div class="col-md-10 col-sm-10 col-xs-10">
-                                                    <input id="customerMobile" class="form-control" type="text" placeholder="Mobile" ng-model="customerno">
-                                                </div>
+                                                <div class="customerField row form-group">
+                                                    <div class="col-md-2 col-sm-2 col-xs-2  userNumber">
+                                                        <input id="customerExt" class="form-control" type="text" placeholder="91" ng-model="customerExt" >
+                                                    </div>
+                                                    <div class="col-md-10 col-sm-10 col-xs-10">
+                                                        <input id="customerMobile" class="form-control" type="text" placeholder="Mobile" ng-model="customerMobile">
+                                                    </div>
 
 
-                                                <div class="clearfix"></div>
+                                                    <div class="clearfix"></div>
+                                                </div>
+                                                <button id="addnewCustomer" type="submit" class="btn addCustomerbtn">Add Customer</button>
                                             </div>
-                                            <button id="addnewCustomer" class="btn addCustomerbtn" ng-click="CreateCustomer()">Add Customer</button>
                                         </div>
-                                    </div>
+                                    </form>
                                 </div>
                             </div>
 
@@ -338,7 +340,7 @@
                                 <div class="col-md-12 providerpaddDiv">
                                     <div class="providerCustomer">
                                         <ul class="list-inline">
-                                            @*
+                                            <!--@*
                                             <li class="selectCustomer">
                                                 <span class="formCheckbox">
                                                     <input type="checkbox" name="" class="inputcheckbox">
@@ -348,10 +350,10 @@
                                                     <a href="#"<img src="../Content/Assets/images/provider_img2.png" />></a>
                                                 </span>
                                                 <label class="providerName">Alex</label>
-                                                <!-- Single button -->
+                                                 Single button 
 
                                             </li>
-                                            *@
+                                            *@-->
 
                                             <li class="selectCustomer" ng-repeat="item in customerArr">
                                                 <span class="formCheckbox">
@@ -359,24 +361,26 @@
                                                 </span>
 
                                                 <span class="providerImage">
-                                                    <a href="#"<img src="../Content/Assets/images/provider_img2.png" />></a>
+                                                    <a href="#"><img src="/Content/Assets/images/provider_img2.png"/></a>
                                                 </span>
+
+                                                
                                                 <input type="hidden" name="id" id="">
-                                                <label class="providerName">{{item.UserName}}</label>
+                                                <label class="providerName">{{item.FirstName}}</label>
                                                 <!-- Single button -->
                                                 <div class="popOverDeleteBtn">
-                                                    <a href="#" id="deleteBtn" class="btn btn-default delete_btn">
+                                                    <a ng-click="showdeletepopup = !showdeletepopup" id="deleteBtn" class="btn btn-default delete_btn">
                                                         <span class="glyphicon glyphicon-trash"></span>Delete
                                                     </a>
                                                 </div>
 
                                                 <div class="col-md-12">
-                                                    <div id="tooltipPopup" class="addCustomer  tooltipArrow">
+                                                    <div id="deletetooltipPopup" class="addCustomer  tooltipArrow" ng-show="showdeletepopup">
                                                         <div class="arrow"></div>
                                                         <h3 class="addCustomerTitle">Delete Customer?</h3>
                                                         <div class="addcustomerContent">
-                                                            <button id="deleteBtn" class="btn btn-danger addCustomerbtn" ng-click="DeleteCustomerData()">Delete</button>
-                                                            <button id="cancleBtn" class="btn btn-default addCustomerbtn">Cancel</button>
+                                                            <button id="deleteBtn" class="btn btn-danger addCustomerbtn" ng-click="DeleteCustomerData(item.Id)">Delete</button>
+                                                            <button id="cancleBtn" class="btn btn-default addCustomerbtn" ng-click="showdeletepopup=false">Cancel</button>
                                                         </div>
                                                     </div>
                                                 </div>

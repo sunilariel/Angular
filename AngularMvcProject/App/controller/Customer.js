@@ -1,4 +1,4 @@
-﻿app.controller('customerController', ['$scope', '$http', '$timeout', 'bookingService', function ($scope, $http, $timeout, bookingService) {
+﻿app.controller('customerController', ['$scope','$rootScope', '$http', '$timeout', 'bookingService', function ($scope,$rootScope, $http, $timeout, bookingService) {
     //This will hide the DIV by default.
     $scope.procedures = [
 {
@@ -39,61 +39,16 @@
     ];
 
 
-
-
-    //   $scope.init = function () {
-    //       debugger;
-
-    //       $scope.ListofCustomer = [{
-    //           "Id": 1,
-    //           "CompanyId": 2,
-    //           "UserName": "sample string 3",
-    //           "Password": "sample string 4",
-    //           "FirstName": "David",
-    //           "LastName": "sample string 6",
-    //           "Address": "sample string 7",
-    //           "PostCode": "sample string 8",
-    //           "Email": "sample string 9",
-    //           "TelephoneNo": "sample string 10",
-    //           "CreationDate": "2017-06-08T04:41:21.9263797+00:00"
-    //       },
-    //     {
-    //         "Id": 1,
-    //         "CompanyId": 2,
-    //         "UserName": "sample string 3",
-    //         "Password": "sample string 4",
-    //         "FirstName": "John",
-    //         "LastName": "sample string 6",
-    //         "Address": "sample string 7",
-    //         "PostCode": "sample string 8",
-    //         "Email": "sample string 9",
-    //         "TelephoneNo": "sample string 10",
-    //         "CreationDate": "2017-06-08T04:41:21.9263797+00:00"
-    //     },
-    //{
-    //    "Id": 1,
-    //    "CompanyId": 2,
-    //    "UserName": "sample string 3",
-    //    "Password": "sample string 4",
-    //    "FirstName": "Tom",
-    //    "LastName": "sample string 6",
-    //    "Address": "sample string 7",
-    //    "PostCode": "sample string 8",
-    //    "Email": "sample string 9",
-    //    "TelephoneNo": "sample string 10",
-    //    "CreationDate": "2017-06-08T04:41:21.9263797+00:00"
-    //}
-
-    //       ];
-    //       var data = $scope.ListofCustomer;
-    //   };
-
-
-    showcustomer = false;
-    $scope.showCustomerpopup = function () {
-        debugger;
-        $scope.showcustomer != $scope.showcustomer;
-    };
+    $scope.init=function()
+    {
+        $scope.showcustomer = false;
+        $scope.customerArr = [];
+        var GetCustomer = bookingService.GetAllCustomer(410);
+        GetCustomer.then(function (response) {
+            debugger;
+          $scope.customerArr = response.data;
+        });
+    }
 
 
     //$scope.GetCustomer = function () {
@@ -112,19 +67,21 @@
 
     $scope.CreateCustomer = function () {
         debugger;
+        $scope.MobileNo = $scope.customerExt + $scope.customerMobile;
+        var companyId = $rootScope.GlobalComapnyId;
         var obj = {
             Url: 'api/customer/Create',
             ReqStaffData: {
                 "Id": 1,
                 "CompanyId": 410,
-                "UserName": $scope.Customername,
+                "UserName": $scope.customerEmail,
                 "Password": "*******",
-                "FirstName": "$scope.Customername",
+                "FirstName": $scope.customerName,
                 "LastName": "sample string 6",
                 "Address": "sample string 7",
                 "PostCode": "sample string 8",
-                "Email": $scope.Customeremail,
-                "TelephoneNo": $scope.customerno,
+                "Email": $scope.customerEmail,
+                "TelephoneNo": $scope.MobileNo,
                 "CreationDate": "2017-06-06T08:23:47.5497158+00:00"
             }
         }
@@ -132,8 +89,7 @@
 
         createcustomer.then(function (response) {
             debugger;
-            if (response.data.Success == true) {
-                alert("successfully Save data")
+            if (response.data.Success == true) {               
                 $scope.MessageText = "Saving Data";
                 $scope.msg = "Create Customer Successfully";
 
@@ -151,6 +107,8 @@
                     //$scope.init();
                     //$scope.username = '';  
                     $scope.customerArr = response.data;
+                    $scope.showcustomer = false;
+                    //$scope.showcustomer = false;
                 });
 
                 $timeout(function () {
@@ -162,6 +120,7 @@
             }
 
         }, function () {
+             $scope.showcustomer = false;
             alert('Error in updating record');
         });
     };
@@ -187,7 +146,13 @@
             //    $scope.staffName = '';
             //    $scope.staffEmail = '';
             //});
+            var GetCustomer = bookingService.GetAllCustomer(410);
+            GetCustomer.then(function (response) {
+                debugger;
+                $scope.customerArr = [];
 
+                $scope.customerArr = response.data;
+            });
             $timeout(function () { $scope.MessageText = "Data deleted."; $timeout(function () { $scope.IsVisible = false; }, 1000) }, 500);
 
         }), function () {
