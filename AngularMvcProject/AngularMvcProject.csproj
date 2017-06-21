@@ -216,7 +216,15 @@
     <Content Include="App\controller\routing.js" />
     <Content Include="App\controller\SignUp.js" />
     <Content Include="App\controller\wizard.js" />
+    <Content Include="App\View\Customer\customer.html" />
+    <Content Include="Content\Assets\images\service-icon-big.png" />
+    <Content Include="Content\Assets\js\bootstrap-datetimepicker.min.js" />
+    <Content Include="Content\Assets\js\moment.js" />
+    <Content Include="Index.html" />
     <Content Include="App\service\service.js" />
+    <Content Include="App\View\dashboard\dashboard.html" />
+    <Content Include="App\View\SignUp\SignUp.html" />
+    <Content Include="App\View\wizard\wizard.html" />
     <Content Include="bin\AngularMvcProject.dll" />
     <Content Include="bin\AngularMvcProject.pdb" />
     <Content Include="bin\Antlr3.Runtime.dll" />
