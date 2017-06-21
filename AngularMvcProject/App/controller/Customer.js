@@ -1,4 +1,4 @@
-﻿app.controller('customerController', ['$scope','$rootScope', '$http', '$timeout', 'bookingService', function ($scope,$rootScope, $http, $timeout, bookingService) {
+﻿app.controller('customerController', ['$scope','$rootScope','$routeParams', '$http', '$timeout', 'bookingService', function ($scope,$rootScope,$routeParams, $http, $timeout, bookingService) {
     //This will hide the DIV by default.
     $scope.procedures = [
 {
@@ -41,13 +41,28 @@
 
     $scope.init=function()
     {
+        debugger;
+
+      
+        $scope.CompanyId = $routeParams.CompanyId;;
         $scope.showcustomer = false;
         $scope.customerArr = [];
-        var GetCustomer = bookingService.GetAllCustomer(410);
-        GetCustomer.then(function (response) {
-            debugger;
+        var GetCustomer = bookingService.GetAllCustomer($scope.CompanyId);
+        GetCustomer.then(function (response) {           
           $scope.customerArr = response.data;
         });
+
+        //Getting all employees for appointment dropdown
+
+        var GetStaffProvider = bookingService.GetStaffData($scope.CompanyId);
+        GetStaffProvider.then(function (response) {
+            debugger;
+            $scope.Provider = [];
+            for (var i = 0; i < response.data.length; i++) {
+                $scope.Provider.push({ 'Id': response.data[i].Id, 'CompanyId': response.data[i].CompanyId, 'UserName': response.data[i].UserName, 'staffName': response.data[i].FirstName, 'staffEmail': response.data[i].Email });
+            }
+        });
+
     }
 
 
@@ -67,13 +82,12 @@
 
     $scope.CreateCustomer = function () {
         debugger;
-        $scope.MobileNo = $scope.customerExt + $scope.customerMobile;
-        var companyId = $rootScope.GlobalComapnyId;
+        $scope.MobileNo = $scope.customerExt + $scope.customerMobile;      
         var obj = {
             Url: 'api/customer/Create',
             ReqStaffData: {
                 "Id": 1,
-                "CompanyId": 410,
+                "CompanyId": $scope.CompanyId,
                 "UserName": $scope.customerEmail,
                 "Password": "*******",
                 "FirstName": $scope.customerName,
@@ -89,11 +103,12 @@
 
         createcustomer.then(function (response) {
             debugger;
-            if (response.data.Success == true) {               
+            if (response.data.Success == true) {
+                $scope.CustomerId=response.data.ReturnObject.CustomerId;
                 $scope.MessageText = "Saving Data";
                 $scope.msg = "Create Customer Successfully";
 
-                var GetCustomer = bookingService.GetAllCustomer(410);
+                var GetCustomer = bookingService.GetAllCustomer($scope.CompanyId);
                 GetCustomer.then(function (response) {
                     debugger;
                     $scope.customerArr = [];
@@ -125,6 +140,68 @@
         });
     };
 
+    //for Edit Customer
+
+    $scope.EditCustomer = function (item)
+    {
+        debugger;
+        $scope.CustomerId = item.Id;
+        $scope.updatedCustomerName = item.FirstName;
+        $scope.updatedCustomerEmail = item.Email;
+        $scope.updatedPreCustomerMobileNo = item.TelephoneNo.substring(0, 2);
+        $scope.updatedMobileNo = item.TelephoneNo.substring(2,12);
+    }
+
+    $scope.updateCustomer=function()
+    {
+        debugger;
+        var MobileNumber = $scope.updatedPreCustomerMobileNo + $scope.updatedMobileNo;
+        var updateddate = new Date();
+        var UpdateCustomer = {
+            Url:"api/customer/Update",
+            ReqStaffData: {
+                "Id":$scope.CustomerId,
+                "CompanyId": $scope.CompanyId,
+                "UserName": "sample string 3",
+                "Password": "sample string 4",
+                "FirstName": $scope.updatedCustomerName,
+                "LastName": "sample string 6",
+                "Address": "sample string 7",
+                "PostCode": "sample string 8",
+                "Email": $scope.updatedCustomerEmail,
+                "TelephoneNo": MobileNumber,
+                "CreationDate": updateddate
+            }
+        }
+
+        var updatedCustomerData = bookingService.UpdateCustomer(UpdateCustomer);
+        updatedCustomerData.then(function (response) {
+            if (response.data.Success == "true") {
+                $scope.MessageText = "Updating Customer details";
+                var GetCustomer = bookingService.GetAllCustomer($scope.CompanyId);
+                GetCustomer.then(function (response) {
+                    $scope.customerArr = [];
+                    $scope.customerArr = response.data;
+                })
+                $scope.IsVisible = true;
+                $timeout(function () {
+                    $scope.MessageText = "Customer details updated";
+                    $timeout(function () {
+                        $scope.IsVisible = false;
+                    }, 1000)
+                }, 500)
+
+            }
+        }, function () {
+            alert("Error in updating record");
+        });
+    }
+
+
+
+
+
+
     //// for delete customer 
 
     $scope.DeleteCustomerData = function (id) {
@@ -146,7 +223,7 @@
             //    $scope.staffName = '';
             //    $scope.staffEmail = '';
             //});
-            var GetCustomer = bookingService.GetAllCustomer(410);
+            var GetCustomer = bookingService.GetAllCustomer($scope.CompanyId);
             GetCustomer.then(function (response) {
                 debugger;
                 $scope.customerArr = [];
@@ -189,7 +266,7 @@
         $timeout(function () { $scope.MessageText = "Staff breaks saved."; $timeout(function () { $scope.IsVisible = false; }, 1000) }, 500);
     };
 
-    //////////////////////////////for Add Appointment module
+    ////////////////////Add Appointment Module ///////////////////////
     $scope.AddAppointmentPopup = function () {
         debugger;
         $scope.ShowAddAppointmentPopup != $scope.ShowAddAppointmentPopup;
@@ -201,20 +278,26 @@
         $scope.showModal = !$scope.showModal;
     };
 
-    $scope.AddAppointment = [];
-
-    $scope.GetAllAddAppointment = function () {
+    $scope.GetAllocateServiceToEmployee = function (EmployeeId) {
         debugger;
-        var getAddAppointmentdata = bookingService.GetAddAppointmentData();
 
-        getAddAppointmentdata.then(function (result) {
+        var EmployeeServices = bookingService.GetAllocatedServicetoEmployee($scope.CompanyId, EmployeeId);
+
+        EmployeeServices.then(function (result) {
             debugger;
-            $scope.AddAppointment = result.data;
+            $scope.EmployeeServices = [];
+            $scope.EmployeeServices = result.data;
 
-
-        }, function () {
+        }), function () {
             alert('Error in getting post records');
-        });
+        };
     }
+
+    $scope.ServiceDetail=function(service)
+    {
+
+    }
+
+   
 
 }]);

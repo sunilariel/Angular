@@ -9,11 +9,11 @@ app.config(function ($routeProvider) {
         templateUrl: "App/View/wizard/wizard.html",
         controller: "bookingController"
     })
-    .when("/dashboard", {
+    .when("/dashboard/:CompanyId", {
         templateUrl: "App/View/dashboard/dashboard.html",
         controller: "dashboardController"
     })
-    .when("/customer", {
+    .when("/customer/:CompanyId", {
         templateUrl: "App/View/Customer/customer.html",
         controller: "customerController"
     })

@@ -283,7 +283,7 @@
                             <div class="row">
 
                                 <div class="addcustomerSearch col-md-12">
-                                    <input type="text" class="form-control" placeholder="Search..">
+                                    <input type="text" class="form-control" placeholder="Search.." ng-model="searchName">
                                     <!-- Split button -->
                                     <div class="btn-group iconBar">
                                         <button type="button" class="btn dropdownIcon dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -355,7 +355,7 @@
                                             </li>
                                             *@-->
 
-                                            <li class="selectCustomer" ng-repeat="item in customerArr">
+                                            <li class="selectCustomer" ng-repeat="item in customerArr | filter:searchName"  ng-click="EditCustomer(item)" >
                                                 <span class="formCheckbox">
                                                     <input type="checkbox" name="" class="inputcheckbox">
                                                 </span>
@@ -363,9 +363,8 @@
                                                 <span class="providerImage">
                                                     <a href="#"><img src="/Content/Assets/images/provider_img2.png"/></a>
                                                 </span>
-
-                                                
-                                                <input type="hidden" name="id" id="">
+                                             
+                                                <!--<input type="hidden" name="id" ng-model="item.Id">-->
                                                 <label class="providerName">{{item.FirstName}}</label>
                                                 <!-- Single button -->
                                                 <div class="popOverDeleteBtn">
@@ -400,7 +399,7 @@
                                 <form class="form-horizontal imageUploadForm" action="">
                                     <div class="form-group">
                                         <label class="control-label col-md-3 col-sm-3 col-xs-3">
-                                            <img src="../Content/Assets/images/provider_img2.png" />
+                                            <img src="/Content/Assets/images/provider_img2.png" />
 
                                             <div class="fileupload fileupload-new" data-provides="fileupload">
                                                 <span class="btn btn-primary btn-file">
@@ -416,7 +415,7 @@
                                             <span class="uploadImageIcon"><i class="fa fa-camera" aria-hidden="true"></i></span>
                                         </label>
                                         <div class="col-md-9 col-sm-9 col-xs-9">
-                                            <input type="text" class="customerName form-control" value="Mark" id="name" name="name" placeholder="Mark">
+                                            <input type="text" class="customerName form-control" value="Mark" id="name" name="name" placeholder="Mark" ng-model="updatedCustomerName" ng-blur="updateCustomer()">
                                         </div>
                                     </div>
 
@@ -426,7 +425,7 @@
                                     <div class="form-group">
                                         <label class="control-label col-md-3 col-xs-3 col-sm-12">Email</label>
                                         <div class="col-md-9 col-xs-9 col-sm-12">
-                                            <input type="email" class="form-control" id="email" placeholder="mark@bm.com" name="email">
+                                            <input type="email" class="form-control" id="email" placeholder="Email" name="email" ng-model="updatedCustomerEmail" ng-blur="updateCustomer()">
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -434,10 +433,10 @@
                                         <div class="col-md-9 col-xs-9 col-sm-12">
                                             <div class="row">
                                                 <div class="col-md-4 ">
-                                                    <input type="text" class="form-control" id="text" placeholder="44" name="text">
+                                                    <input type="text" class="form-control" id="text" placeholder="90" name="text" ng-model="updatedPreCustomerMobileNo" ng-blur="updateCustomer()">
                                                 </div>
                                                 <div class="col-md-8 textNumberDiv" style="padding-left:0;">
-                                                    <input type="text" class="form-control" id="text" placeholder="111111" name="text">
+                                                    <input type="text" class="form-control" id="text" placeholder="Phone" name="text" ng-model="updatedMobileNo" ng-blur="updateCustomer()">
                                                 </div>
                                             </div>
                                         </div>
@@ -545,16 +544,14 @@
                                                                             <label class="control-label col-sm-4" for="email">Provider</label>
                                                                             <div class="col-sm-8">
                                                                                 <div class="dropdown appointProvider">
-                                                                                    <select class="btn btn-default dropdown-toggle" id="dropdownMenu2" aria-haspopup="true" aria-expanded="false" ng-click="GetAllAddAppointment()">
-                                                                                        <option value="">-- Select a Provider --</option>
-                                                                                        <option value="">-- Select a Provider --</option>
-                                                                                        <option value="">-- Select a Provider --</option>
+                                                                                    <select class="btn btn-default dropdown-toggle" ng-model="selectedprovider" data-ng-options ="x.Id as x.staffName for x in Provider" id="dropdownMenu2" name="x.staffName"  aria-haspopup="true" aria-expanded="false" ng-change="GetAllocateServiceToEmployee(selectedprovider)">
+                                                                                        <option value="" selected="selected">-- Select a Provider --</option>                                                                                                                                        
                                                                                     </select>
-                                                                                    @*<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                                                    <!--@*<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                                                         <span class="glyphicon glyphicon-ok okIcon"></span>
                                                                                         david
                                                                                         <span class="glyphicon glyphicon-chevron-down chevronDownIcon"></span>
-                                                                                    </button>*@
+                                                                                    </button>*@-->
                                                                                     <div class="dropdown-menu popupdropdownDiv" aria-labelledby="dropdownMenu2">
                                                                                         <ul class="list-inline">
                                                                                             <li>
@@ -573,16 +570,16 @@
                                                                             <label class="control-label col-sm-4" for="pwd">Service</label>
                                                                             <div class="col-sm-8">
                                                                                 <div class="dropdown appointProvider">
-                                                                                    <select class="btn btn-default dropdown-toggle" id="dropdownMenu2" aria-haspopup="true" aria-expanded="false">
+                                                                                    <select class="btn btn-default dropdown-toggle" id="dropdownMenu2" data-ng-options="x.Id as x.Name for x in EmployeeServices" ng-model="selectedservice" ng-change="ServiceDetail(selectedservice)" aria-haspopup="true" aria-expanded="false">
                                                                                         <option value="">-- Select a Service --</option>
                                                                                     </select>
-                                                                                    @*<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                                                    <!--@*<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                                                         <span class="okIcon longrightArrow">
                                                                                             <i class="fa fa-long-arrow-right" aria-hidden="true"></i>
                                                                                         </span>
                                                                                         Select a Service
                                                                                         <span class="glyphicon glyphicon-chevron-down chevronDownIcon"></span>
-                                                                                    </button>*@
+                                                                                    </button>*@-->
                                                                                     <div class="dropdown-menu popupdropdownDiv" aria-labelledby="dropdownMenu2">
                                                                                         <ul class="list-inline">
                                                                                             <li>
@@ -602,7 +599,7 @@
                                                                         <div class="form-group">
                                                                             <label class="control-label col-sm-4" for="pwd">Day/Time</label>
                                                                             <div class="col-sm-8 dateTimeDiv">
-                                                                                <span class="glyphicon glyphicon-ok calendarOk"></span><input type='text' class="form-control datepickerBox" placeholder="Fri, May 12" id='datetimepicker4' />
+                                                                                <span class="glyphicon glyphicon-ok calendarOk"></span><input type='text' class="form-control datepickerBox" ng-model="" placeholder="Fri, May 12" id='datetimepicker4' />
                                                                             </div>
                                                                         </div>
                                                                         <div class="form-group">
@@ -611,10 +608,10 @@
                                                                                 <div class="row">
                                                                                     <div class="col-md-6 dateTimeDiv costField">
                                                                                         <span class="calendarOk">$</span>
-                                                                                        <input type="text" class="appt_cost form-control" placeholder="10">
+                                                                                        <input type="text" class="appt_cost form-control" placeholder="10" ng-model="price">
                                                                                     </div>
                                                                                     <div class="col-md-6 dateTimeDiv costMinField">
-                                                                                        <input type="text" class="appt_cost_min form-control" placeholder="60">
+                                                                                        <input type="text" class="appt_cost_min form-control" placeholder="60" ng-model="mins">
                                                                                         <a href="#" id="minTextDiv" class="minText">
                                                                                             Mins
                                                                                             <span class="glyphicon glyphicon-chevron-down chevronDownIcon">
@@ -632,7 +629,7 @@
                                                                         <div class="form-group">
                                                                             <label class="control-label col-sm-4" for="pwd">Notes</label>
                                                                             <div class="col-sm-8 notesForCustomer">
-                                                                                <textarea class="form-control apptNotes" placeholder="Notes for the Customer" maxlength="500"></textarea>
+                                                                                <textarea class="form-control apptNotes" placeholder="Notes for the Customer" maxlength="500" ng-model="notes"></textarea>
                                                                             </div>
                                                                         </div>
 
@@ -668,7 +665,7 @@
                                                             </div>
                                                             <div class="modal-footer">
                                                                 <div class="btn-group apptSaveBtn" role="group">
-                                                                    <button type="button" class="btn btn-default" data-action="save" role="button">Save Appointment</button>
+                                                                    <button type="button" class="btn btn-default" data-action="save" role="button" ng-click="SaveAppointment()">Save Appointment</button>
                                                                 </div>
                                                                 <div class="apptViewFooter">
                                                                     <a href="#" class="apptDeleteBtn">Delete</a>

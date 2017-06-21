@@ -48,6 +48,46 @@ namespace AngularMvcProject.Controllers
         }
 
         [HttpPost]
+        public string UpdateCustomer(StaffData customer)
+        {
+            try
+            {
+                string apiURL = "http://romzbookingmanager.azurewebsites.net/" + customer.Url;
+                string result = "";
+                var httpWebRequest = (HttpWebRequest)WebRequest.Create(apiURL);
+                httpWebRequest.ContentType = "application/json";
+                httpWebRequest.Method = "POST";
+
+                using (var streamWriter = new StreamWriter(httpWebRequest.GetRequestStream()))
+                {
+
+                    var jsonString = new JavaScriptSerializer().Serialize(customer.ReqStaffData);
+                    streamWriter.Write(jsonString);
+                    streamWriter.Flush();
+                    streamWriter.Close();
+                }
+
+                var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
+                using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
+                {
+                    result = streamReader.ReadToEnd();
+                }
+
+                return result;
+            }
+            catch(Exception e)
+            {
+                return e.ToString();
+            }
+        }
+
+
+
+
+
+
+
+        [HttpPost]
         public string GetAllCustomer(String id)
         {
             string apiURL = "http://romzbookingmanager.azurewebsites.net/api/customer/GetAllCustomers?companyId=" + id;
@@ -57,13 +97,11 @@ namespace AngularMvcProject.Controllers
             httpWebRequest.ContentType = "application/json";
             httpWebRequest.Method = "GET";
 
-
             var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
             using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
             {
                 result = streamReader.ReadToEnd();
             }
-
             return result;
         }
 
@@ -92,11 +130,11 @@ namespace AngularMvcProject.Controllers
         }
 
         [HttpPost]
-        public string GetAddAppointmentData(string id)
+        public string GetAllocatedServicetoEmployee(string CompanyId,string EmployeeId)
         {
 
             // int Id = Convert.ToInt32(CompanyId);
-            string apiURL = "http://romzbookingmanager.azurewebsites.net/api/staff/GetAllocateServiceForEmployee?empid=1&compid=2";
+            string apiURL = "http://romzbookingmanager.azurewebsites.net/api/staff/GetAllocateServiceForEmployee?empid=" + EmployeeId+ "&compid=" + CompanyId;
             string result = "";
             var httpWebRequest = (HttpWebRequest)WebRequest.Create(apiURL);
             httpWebRequest.ContentType = "application/json";
@@ -108,10 +146,49 @@ namespace AngularMvcProject.Controllers
                 result = streamReader.ReadToEnd();
             }
 
-            List<CustomerVM> listcustomerdata = new List<CustomerVM>();
-            listcustomerdata = JsonConvert.DeserializeObject<List<CustomerVM>>(result);
+            
             return result;
 
         }
+
+        //[HttpPost]
+        //public string AddAppointment(StaffData customer)
+        //{
+        //    try
+        //    {
+        //        string apiURL = "http://romzbookingmanager.azurewebsites.net/" + customer.Url;
+        //        string result = "";
+        //        var httpWebRequest = (HttpWebRequest)WebRequest.Create(apiURL);
+        //        httpWebRequest.ContentType = "application/json";
+        //        httpWebRequest.Method = "POST";
+
+        //        using (var streamWriter = new StreamWriter(httpWebRequest.GetRequestStream()))
+        //        {
+
+        //            var jsonString = new JavaScriptSerializer().Serialize(customer.ReqStaffData);
+        //            streamWriter.Write(jsonString);
+        //            streamWriter.Flush();
+        //            streamWriter.Close();
+        //        }
+
+        //        var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
+        //        using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
+        //        {
+        //            result = streamReader.ReadToEnd();
+        //        }
+
+        //        return result;
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        return e.ToString();
+        //    }
+        //}
+
+
+
+
+
+
     }
 }

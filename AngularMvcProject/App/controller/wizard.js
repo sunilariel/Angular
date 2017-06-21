@@ -1,5 +1,5 @@
 ﻿
-app.controller('bookingController', ['$scope','$rootScope','$http', '$timeout','$location', 'bookingService', function ($scope,$rootScope, $http, $timeout,$location, bookingService) {
+app.controller('bookingController', ['$scope', '$routeParams', '$rootScope', '$http', '$timeout', '$location', 'bookingService', function ($scope, $routeParams, $rootScope, $http, $timeout, $location, bookingService) {
 
     $scope.businessName = "";
     $scope.businessIndustry = [{ name: 'Hair Salon/Barbershop', id: 1 }, { name: 'Nail Salon', id: 2 }, { name: 'Computers/Technology/IT', id: 3 }, { name: 'Spa/Massage/Waxing', id: 4 }];
@@ -44,7 +44,9 @@ app.controller('bookingController', ['$scope','$rootScope','$http', '$timeout','
 
     $scope.redirecttodashboard= function ()
     {
-        $location.path("/dashboard");
+        debugger;
+        $location.path("/dashboard/" + $scope.companyId);
+
     }
    
     $scope.submitInfo = function (form) {
@@ -89,7 +91,8 @@ app.controller('bookingController', ['$scope','$rootScope','$http', '$timeout','
                 if (msg.data.Success == true) {
                     $scope.MessageText = "Saving Data"
                     $scope.companyId = msg.data.ReturnObject.CompanyId;
-                    $rootScope.GlobalComapnyId = msg.data.ReturnObject.CompanyId;
+                    $rootScope.GlobalCompanyId = msg.data.ReturnObject.CompanyId;
+                 
                     $scope.msg = "Post Data Submitted Successfully!";
 
                     firstregistration = true;

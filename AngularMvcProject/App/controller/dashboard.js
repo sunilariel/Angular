@@ -1,6 +1,6 @@
 ﻿/// <reference path="dashboard.js" />
 //var app = angular.module('MyApp', [])
-app.controller('dashboardController', ['$scope', '$timeout', '$location', 'bookingService', function ($scope, $timeout, $location, bookingService) {
+app.controller('dashboardController', ['$scope', '$timeout','$routeParams', '$location', 'bookingService', function ($scope, $timeout,$routeParams,$location, bookingService) {
     //This will hide the DIV by default.
     $scope.procedures = [
 {
@@ -72,7 +72,8 @@ app.controller('dashboardController', ['$scope', '$timeout', '$location', 'booki
 
     $scope.redirecttoCustomer=function()
     {
-        $location.path("/customer");
+        debugger;
+        $location.path("/customer/" + $routeParams.CompanyId);
     }
 
     $scope.showCustomerpopup = function () {

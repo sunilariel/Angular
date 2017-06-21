@@ -136,6 +136,18 @@ app.service("bookingService", function ($http) {
         return response;
     }
 
+    this.UpdateCustomer=function(dataobject)
+    {
+        debugger;
+        var response = $http({
+            method: "POST",
+            url: "/Customer/UpdateCustomer",
+            data:{customer:dataobject}
+        })
+        return response;
+    }
+
+
     this.GetAllCustomer = function (dataobject) {
         debugger;
         var response = $http({
@@ -155,17 +167,33 @@ app.service("bookingService", function ($http) {
         })
         return response;
     }
+
+
+
+
     ////////////for customer module Add appointment
 
-    this.GetAddAppointmentData = function (dataobject) {
+    this.GetAllocatedServicetoEmployee = function (companyId,employeeId) {
         debugger;
         var response = $http({
             method: 'post',
-            url: '/Customer/GetAddAppointmentData',
-            data: { Id: dataobject }
+            url: '/Customer/GetAllocatedServicetoEmployee',
+            data: { CompanyId: companyId,EmployeeId:employeeId }
         })
+        return response;
     }
 
+    this.AddAppointment=function(dataobject)
+    {
+       var response= $http({
+            method: "POST",
+            url: "/Customer/AddAppointment",
+            data: { dataobj: dataobject }
+       })
+       return response;
+    }
+
+    
     /////////////////
 
    
