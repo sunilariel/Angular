@@ -562,7 +562,7 @@ app.controller('bookingController', ['$scope', '$routeParams', '$rootScope', '$h
                     debugger;
                     $scope.serviceInfo = [];
                     for (var i = 0; i < response.data.length; i++) {
-                        $scope.serviceInfo.push({ 'Id': response.data[i].Id, 'CompanyId': response.data[i].CompanyId, 'serviceName': response.data[i].Name, 'staffName': response.data[i].FirstName, 'staffEmail': response.data[i].Email, 'DurationInMinutes': response.data[i].DurationInMinutes, 'time': response.data[i].DurationInHours, 'Currency': response.data[i].Currency, 'price': response.data[i].Cost, 'CreationDate': response.data[i].CreationDate, 'AllStaffChecked': response.data[i].AllAssignStaffChecked, 'staffCheckedCount': response.data[i].staffCheckedCount, 'staff': response.data[i].staff });
+                        $scope.serviceInfo.push({ 'Id': response.data[i].Id, 'CompanyId': response.data[i].CompanyId, 'serviceName': response.data[i].Name, 'staffName': response.data[i].FirstName, 'staffEmail': response.data[i].Email, 'DurationInMinutes': response.data[i].DurationInMinutes, 'DurationInHours': response.data[i].DurationInHours, 'Currency': response.data[i].Currency, 'price': response.data[i].Cost, 'CreationDate': response.data[i].CreationDate, 'AllStaffChecked': response.data[i].AllAssignStaffChecked, 'staffCheckedCount': response.data[i].staffCheckedCount, 'staff': response.data[i].staff });
                     }
                 });
 
@@ -605,7 +605,7 @@ app.controller('bookingController', ['$scope', '$routeParams', '$rootScope', '$h
                             debugger;
                             $scope.serviceInfo = [];
                             for (var i = 0; i < response.data.length; i++) {
-                                $scope.serviceInfo.push({ 'Id': response.data[i].Id, 'CompanyId': response.data[i].CompanyId, 'serviceName': response.data[i].Name, 'staffName': response.data[i].FirstName, 'staffEmail': response.data[i].Email, 'DurationInMinutes': response.data[i].DurationInMinutes, 'time': response.data[i].DurationInHours, 'Currency': response.data[i].Currency, 'price': response.data[i].Cost, 'CreationDate': response.data[i].CreationDate, 'AllStaffChecked': response.data[i].AllAssignStaffChecked, 'staffCheckedCount': response.data[i].staffCheckedCount, 'staff': response.data[i].staff });
+                                $scope.serviceInfo.push({ 'Id': response.data[i].Id, 'CompanyId': response.data[i].CompanyId, 'serviceName': response.data[i].Name, 'staffName': response.data[i].FirstName, 'staffEmail': response.data[i].Email, 'DurationInMinutes': response.data[i].DurationInMinutes, 'DurationInHours': response.data[i].DurationInHours, 'Currency': response.data[i].Currency, 'price': response.data[i].Cost, 'CreationDate': response.data[i].CreationDate, 'AllStaffChecked': response.data[i].AllAssignStaffChecked, 'staffCheckedCount': response.data[i].staffCheckedCount, 'staff': response.data[i].staff });
                             }
                             $scope.init();
                             $scope.IsVisible = true;
@@ -665,7 +665,7 @@ app.controller('bookingController', ['$scope', '$routeParams', '$rootScope', '$h
                     debugger;
                     $scope.serviceInfo = [];
                     for (var i = 0; i < response.data.length; i++) {
-                        $scope.serviceInfo.push({ 'Id': response.data[i].Id, 'CompanyId': response.data[i].CompanyId, 'serviceName': response.data[i].Name, 'staffName': response.data[i].FirstName, 'staffEmail': response.data[i].Email, 'DurationInMinutes': response.data[i].DurationInMinutes, 'time': response.data[i].DurationInHours, 'Currency': response.data[i].Currency, 'price': response.data[i].Cost, 'CreationDate': response.data[i].CreationDate, 'AllStaffChecked': response.data[i].AllAssignStaffChecked, 'staffCheckedCount': response.data[i].staffCheckedCount, 'staff': response.data[i].staff });
+                        $scope.serviceInfo.push({ 'Id': response.data[i].Id, 'CompanyId': response.data[i].CompanyId, 'serviceName': response.data[i].Name, 'staffName': response.data[i].FirstName, 'staffEmail': response.data[i].Email, 'DurationInMinutes': response.data[i].DurationInMinutes, 'DurationInHours': response.data[i].DurationInHours, 'Currency': response.data[i].Currency, 'price': response.data[i].Cost, 'CreationDate': response.data[i].CreationDate, 'AllStaffChecked': response.data[i].AllAssignStaffChecked, 'staffCheckedCount': response.data[i].staffCheckedCount, 'staff': response.data[i].staff });
                     }
                 });
 
@@ -697,7 +697,7 @@ app.controller('bookingController', ['$scope', '$routeParams', '$rootScope', '$h
                     debugger;
                     $scope.serviceInfo = [];
                     for (var i = 0; i < response.data.length; i++) {
-                        $scope.serviceInfo.push({ 'Id': response.data[i].Id, 'CompanyId': response.data[i].CompanyId, 'serviceName': response.data[i].Name, 'staffName': response.data[i].FirstName, 'staffEmail': response.data[i].Email, 'DurationInMinutes': response.data[i].DurationInMinutes, 'time': response.data[i].DurationInHours, 'Currency': response.data[i].Currency, 'price': response.data[i].Cost, 'CreationDate': response.data[i].CreationDate, 'AllStaffChecked': response.data[i].AllAssignStaffChecked, 'staffCheckedCount': response.data[i].staffCheckedCount, 'staff': response.data[i].staff });
+                        $scope.serviceInfo.push({ 'Id': response.data[i].Id, 'CompanyId': response.data[i].CompanyId, 'serviceName': response.data[i].Name, 'staffName': response.data[i].FirstName, 'staffEmail': response.data[i].Email, 'DurationInMinutes': response.data[i].DurationInMinutes, 'DurationInHours': response.data[i].DurationInHours, 'Currency': response.data[i].Currency, 'price': response.data[i].Cost, 'CreationDate': response.data[i].CreationDate, 'AllStaffChecked': response.data[i].AllAssignStaffChecked, 'staffCheckedCount': response.data[i].staffCheckedCount, 'staff': response.data[i].staff });
                     }
 
                     $scope.init();
@@ -730,7 +730,7 @@ app.controller('bookingController', ['$scope', '$routeParams', '$rootScope', '$h
                     debugger;
                     $scope.serviceInfo = [];
                     for (var i = 0; i < response.data.length; i++) {
-                        $scope.serviceInfo.push({ 'Id': response.data[i].Id, 'CompanyId': response.data[i].CompanyId, 'serviceName': response.data[i].Name, 'staffName': response.data[i].FirstName, 'staffEmail': response.data[i].Email, 'DurationInMinutes': response.data[i].DurationInMinutes, 'time': response.data[i].DurationInHours, 'Currency': response.data[i].Currency, 'price': response.data[i].Cost, 'CreationDate': response.data[i].CreationDate, 'AllStaffChecked': response.data[i].AllAssignStaffChecked, 'staffCheckedCount': response.data[i].staffCheckedCount, 'staff': response.data[i].staff });
+                        $scope.serviceInfo.push({ 'Id': response.data[i].Id, 'CompanyId': response.data[i].CompanyId, 'serviceName': response.data[i].Name, 'staffName': response.data[i].FirstName, 'staffEmail': response.data[i].Email, 'DurationInMinutes': response.data[i].DurationInMinutes, 'DurationInHours': response.data[i].DurationInHours, 'Currency': response.data[i].Currency, 'price': response.data[i].Cost, 'CreationDate': response.data[i].CreationDate, 'AllStaffChecked': response.data[i].AllAssignStaffChecked, 'staffCheckedCount': response.data[i].staffCheckedCount, 'staff': response.data[i].staff });
                     }
 
                     $scope.init();
@@ -841,8 +841,8 @@ app.controller('bookingController', ['$scope', '$routeParams', '$rootScope', '$h
                 Name: $scope.sampleService,
                 CategoryName: " ",
                 CategoryId: 0,
-                DurationInMinutes: "sample string 5",
-                DurationInHours: time,
+                DurationInMinutes: time,
+                DurationInHours: "hour",
                 Cost: cost,
                 Currency: "sample string 7",
                 CreationDate: dateTimeVal,
@@ -880,7 +880,7 @@ app.controller('bookingController', ['$scope', '$routeParams', '$rootScope', '$h
                                 debugger;
                                 $scope.serviceInfo = [];
                                 for (var i = 0; i < response.data.length; i++) {
-                                    $scope.serviceInfo.push({ 'Id': response.data[i].Id, 'CompanyId': response.data[i].CompanyId, 'serviceName': response.data[i].Name, 'staffName': response.data[i].FirstName, 'staffEmail': response.data[i].Email, 'DurationInMinutes': response.data[i].DurationInMinutes, 'time': response.data[i].DurationInHours, 'Currency': response.data[i].Currency, 'price': response.data[i].Cost, 'CreationDate': response.data[i].CreationDate, 'AllStaffChecked': response.data[i].AllAssignStaffChecked, 'staffCheckedCount': response.data[i].staffCheckedCount, 'staff': response.data[i].staff });
+                                    $scope.serviceInfo.push({ 'Id': response.data[i].Id, 'CompanyId': response.data[i].CompanyId, 'serviceName': response.data[i].Name, 'staffName': response.data[i].FirstName, 'staffEmail': response.data[i].Email, 'DurationInMinutes': response.data[i].DurationInMinutes, 'DurationInHours': response.data[i].DurationInHours, 'Currency': response.data[i].Currency, 'price': response.data[i].Cost, 'CreationDate': response.data[i].CreationDate, 'AllStaffChecked': response.data[i].AllAssignStaffChecked, 'staffCheckedCount': response.data[i].staffCheckedCount, 'staff': response.data[i].staff });
                                    
                                 }
                                
@@ -930,8 +930,8 @@ app.controller('bookingController', ['$scope', '$routeParams', '$rootScope', '$h
                 Name: EditService.serviceName,
                 CategoryName: " ",
                 CategoryId: 0,
-                DurationInMinutes: "sample string 5",
-                DurationInHours: EditService.time,
+                DurationInMinutes: EditService.DurationInMinutes,
+                DurationInHours: "sample string 5",
                 Cost: EditService.price,
                 Currency: "sample string 7",
                 CreationDate: EditService.CreationDate,
@@ -947,7 +947,7 @@ app.controller('bookingController', ['$scope', '$routeParams', '$rootScope', '$h
                 debugger;
                 $scope.serviceInfo = [];
                 for (var i = 0; i < response.data.length; i++) {
-                    $scope.serviceInfo.push({ 'Id': response.data[i].Id, 'CompanyId': response.data[i].CompanyId, 'serviceName': response.data[i].Name, 'staffName': response.data[i].FirstName, 'staffEmail': response.data[i].Email, 'DurationInMinutes': response.data[i].DurationInMinutes, 'time': response.data[i].DurationInHours, 'Currency': response.data[i].Currency, 'price': response.data[i].Cost, 'CreationDate': response.data[i].CreationDate, 'AllStaffChecked': response.data[i].AllAssignStaffChecked, 'staffCheckedCount': response.data[i].staffCheckedCount, 'staff': response.data[i].staff });
+                    $scope.serviceInfo.push({ 'Id': response.data[i].Id, 'CompanyId': response.data[i].CompanyId, 'serviceName': response.data[i].Name, 'staffName': response.data[i].FirstName, 'staffEmail': response.data[i].Email, 'DurationInMinutes': response.data[i].DurationInMinutes, 'DurationInHours': response.data[i].DurationInHours, 'Currency': response.data[i].Currency, 'price': response.data[i].Cost, 'CreationDate': response.data[i].CreationDate, 'AllStaffChecked': response.data[i].AllAssignStaffChecked, 'staffCheckedCount': response.data[i].staffCheckedCount, 'staff': response.data[i].staff });
                 }
                 $scope.init();
                 $scope.IsVisible = true;
@@ -972,7 +972,7 @@ app.controller('bookingController', ['$scope', '$routeParams', '$rootScope', '$h
                 debugger;
                 $scope.serviceInfo = [];
                 for (var i = 0; i < response.data.length; i++) {
-                    $scope.serviceInfo.push({ 'Id': response.data[i].Id, 'CompanyId': response.data[i].CompanyId, 'serviceName': response.data[i].Name, 'staffName': response.data[i].FirstName, 'staffEmail': response.data[i].Email, 'DurationInMinutes': response.data[i].DurationInMinutes, 'time': response.data[i].DurationInHours, 'Currency': response.data[i].Currency, 'price': response.data[i].Cost, 'CreationDate': response.data[i].CreationDate, 'AllStaffChecked': response.data[i].AllAssignStaffChecked, 'staffCheckedCount': response.data[i].staffCheckedCount, 'staff': response.data[i].staff });
+                    $scope.serviceInfo.push({ 'Id': response.data[i].Id, 'CompanyId': response.data[i].CompanyId, 'serviceName': response.data[i].Name, 'staffName': response.data[i].FirstName, 'staffEmail': response.data[i].Email, 'DurationInMinutes': response.data[i].DurationInMinutes, 'DurationInHours': response.data[i].DurationInHours, 'Currency': response.data[i].Currency, 'price': response.data[i].Cost, 'CreationDate': response.data[i].CreationDate, 'AllStaffChecked': response.data[i].AllAssignStaffChecked, 'staffCheckedCount': response.data[i].staffCheckedCount, 'staff': response.data[i].staff });
                 }
                 $scope.init();             
             });

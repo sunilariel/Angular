@@ -186,13 +186,23 @@ app.service("bookingService", function ($http) {
     this.AddAppointment=function(dataobject)
     {
        var response= $http({
-            method: "POST",
-            url: "/Customer/AddAppointment",
-            data: { dataobj: dataobject }
+            method: 'POST',
+            url: '/Customer/AddAppointment',
+            data: { appointment: dataobject }
        })
        return response;
     }
 
+
+    this.GetSelectedService=function(dataobject)
+    {
+        var response = $http({
+            method: "POST",
+            url: "/Customer/GetSelectedService",
+            data:{ServiceId:dataobject}
+        })
+        return response;
+    }
     
     /////////////////
 

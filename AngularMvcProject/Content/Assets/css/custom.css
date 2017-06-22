@@ -1238,6 +1238,7 @@ ul.lableDropdownContent li:hover {
 }
 ul.lableDropdownContent li a:hover {
 	color:#fff !important;
+        border: none;
 }
 
 .labeldrowDownBtn ul.lableDropdownContent {
@@ -1252,19 +1253,18 @@ ul.lableDropdownContent li a:hover {
     right: 0;
 }
 .labeldrowDownBtn ul.lableDropdownContent li a {
-    padding-bottom: 0;
-    border-bottom: none;
-    padding: 5px;
-	font-size: 11px;
-	text-transform: capitalize;
-	color:#000;
+    padding-bottom: 0 !important;
+    padding: 5px !important;
+    font-size: 11px !important;
+    text-transform: capitalize !important;
+    color: #000 !important;
 }
 .detailText .appointDeatailDiv {
     border-bottom: 0;
 	margin: 10px 0;
 }
 .detailText .appointDeatailDiv li a {
-    padding-bottom: 20px !important;
+    padding-bottom: 24px !important;
     border-bottom: 2px #4f4f4f solid;
     color: #4f4f4f !important;
 	font-size:11px !important;
@@ -1600,6 +1600,7 @@ span.serviceCheckboxDiv input.sampleCheckbox {
 	width: 65%;
     float: right;
 	display:none;
+    margin-left: 30px;
     
 }
 
@@ -3443,6 +3444,12 @@ select.select_btn {
     border: solid 1px #bb4c4c !important;
   }
 
+ .css-form select.ng-invalid.ng-touched {
+    border: solid 1px #bb4c4c !important;
+    background: #e8c9c9 !important;
+    color: #972a2a !important;
+    border: solid 1px #bb4c4c !important;
+  }
 
  .select_btn:disabled {
     color: #d4d2d2;
@@ -3454,11 +3461,6 @@ select.select_btn {
 
 
 /* ==================  MEDIA QUERY CSS START HERE  ================== */
-
-
-
-
-
 
 
 

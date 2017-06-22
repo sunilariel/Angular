@@ -151,42 +151,62 @@ namespace AngularMvcProject.Controllers
 
         }
 
-        //[HttpPost]
-        //public string AddAppointment(StaffData customer)
-        //{
-        //    try
-        //    {
-        //        string apiURL = "http://romzbookingmanager.azurewebsites.net/" + customer.Url;
-        //        string result = "";
-        //        var httpWebRequest = (HttpWebRequest)WebRequest.Create(apiURL);
-        //        httpWebRequest.ContentType = "application/json";
-        //        httpWebRequest.Method = "POST";
+        [HttpPost]
+        public string AddAppointment(BookAppointment appointment)
+        {
+            try
+            {
+                string apiURL = "http://bookingmanager1romz.azurewebsites.net/api/booking/BookAppointment";
+                string result = "";
+                var httpWebRequest = (HttpWebRequest)WebRequest.Create(apiURL);
+                httpWebRequest.ContentType = "application/json";
+                httpWebRequest.Method = "POST";
 
-        //        using (var streamWriter = new StreamWriter(httpWebRequest.GetRequestStream()))
-        //        {
+                using (var streamWriter = new StreamWriter(httpWebRequest.GetRequestStream()))
+                {
 
-        //            var jsonString = new JavaScriptSerializer().Serialize(customer.ReqStaffData);
-        //            streamWriter.Write(jsonString);
-        //            streamWriter.Flush();
-        //            streamWriter.Close();
-        //        }
+                    var jsonString = new JavaScriptSerializer().Serialize(appointment);
+                    streamWriter.Write(jsonString);
+                    streamWriter.Flush();
+                    streamWriter.Close();
+                }
 
-        //        var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
-        //        using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
-        //        {
-        //            result = streamReader.ReadToEnd();
-        //        }
+                var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
+                using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
+                {
+                    result = streamReader.ReadToEnd();
+                }
 
-        //        return result;
-        //    }
-        //    catch (Exception e)
-        //    {
-        //        return e.ToString();
-        //    }
-        //}
+                return result;
+            }
+            catch (Exception e)
+            {
+                return e.ToString();
+            }
+        }
 
 
+        [HttpPost]
+        public string GetSelectedService(string ServiceId)
+        {
 
+            // int Id = Convert.ToInt32(CompanyId);
+            string apiURL = "https://romzbookingmanager.azurewebsites.net/api/services/GetServiceById?id=" + ServiceId;
+            string result = "";
+            var httpWebRequest = (HttpWebRequest)WebRequest.Create(apiURL);
+            httpWebRequest.ContentType = "application/json";
+            httpWebRequest.Method = "GET";
+
+            var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
+            using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
+            {
+                result = streamReader.ReadToEnd();
+            }
+
+
+            return result;
+
+        }
 
 
 

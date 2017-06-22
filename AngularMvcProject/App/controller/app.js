@@ -1,4 +1,4 @@
-﻿var app = angular.module('bookingApp', ['ngRoute']);
+﻿var app = angular.module('bookingApp', ['ngRoute', 'angularjs-datetime-picker']);
 app.config(function ($routeProvider) {
     $routeProvider
     .when("/",{

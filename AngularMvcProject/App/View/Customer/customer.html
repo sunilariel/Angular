@@ -5,7 +5,7 @@
 
         <header class="top">
             <div class="logo_section"> <a class="logo" href="#"></a><img src="../Content/Assets/images/logo.png" alt="Logo"></a> </div>
-            <h1> Setting </h1>
+            <h1>Customers</h1>
                 
             <div class="pull-right movileViewList">
                 <ul class="nav navbar-nav navbar-right ">
@@ -133,18 +133,18 @@
         <div class="left_sidebar">
             <ul class="nav">
                 <li class="side-nav-tooltip" id="side-dashboard" data-toggle="tooltip" data-original-title="Dashboard" data-placement="right">
-                    <a href="#" data-toggle="tab" class="setmore-icon-home" id="startDashboard"><small>Dashboard</small></a>
+                    <a href="" data-toggle="tab" class="setmore-icon-home" id="startDashboard"><small>Dashboard</small></a>
                 </li>
                 <li class="side-nav-tooltip" id="side-calendar" data-placement="right" data-toggle="tooltip" data-original-title="Calendar"> <a href="#" data-toggle="tab" class="setmore-icon-calendar-31" id="startCalendar"><small>Calendar</small></a> </li>
                 <li class="side-nav-tooltip" id="side-customers" title="" data-toggle="tooltip" data-original-title="Customers" data-placement="right">
-                    <a href="#" data-toggle="tab" class="setmore-icon-users2" id="side-nav-customers"><small>Customers</small></a>
+                    <a ng-click ="redirecttoCustomer()" data-toggle="tab" class="setmore-icon-users2" id="side-nav-customers"><small>Customers</small></a>
                 </li>
                 <li class="side-nav-tooltip" id="side-profile" data-toggle="tooltip" data-original-title="Apps &amp; Integrations" data-placement="right">
-                    <a href="#" data-toggle="tab" class="setmore-icon-laptop-phone"><small>Profile&nbsp;</small></a>
+                    <a href="" data-toggle="tab" class="setmore-icon-laptop-phone"><small>Profile&nbsp;</small></a>
                 </li>
 
                 <li class="side-nav-tooltip active" id="settings_new" data-original-title="Settings" data-placement="right" data-toggle="tooltip">
-                    <a href="#" data-toggle="tab" class="fa fa-cog"><small>Settings</small></a>
+                    <a ng-click="redirecttodashboard()" data-toggle="tab" class="fa fa-cog"><small>Settings</small></a>
 
 
 
@@ -484,7 +484,7 @@
 
 
                         <div class="col-sm-6">
-                            <div id="staffContentNav" class="detail-navbar appointmentDiv staffContent container-fluid">
+                            <div id="" class="detail-navbar appointmentDiv staffContent container-fluid">
                                 <ul class="nav nav-pills">
                                     <li class="active" id="staff_details"><a href="#staff-details" data-toggle="tab">Appointments</a></li>
                                     <li><a href="#staff-services" data-toggle="tab">Notes</a></li>
@@ -508,50 +508,52 @@
                                                                 <button type="button" class="close modalcloseIcon" data-dismiss="modal"><span aria-hidden="true" class="">×</span><span class="sr-only">Close</span></button>
                                                                 <h3 class="modal-title" id="lineModalLabel">Appointment</h3>
                                                             </div>
-                                                            <div class="modal-body appointPopupBody" ng-hide="ShowAddAppointmentPopup">
+                                                            <form class="form-horizontal appointPopUpform" ng-submit="SaveAppointment(appointmentform)" name="appointmentform" >
+                                                                <div class="modal-body appointPopupBody" ng-hide="ShowAddAppointmentPopup">
 
-                                                                <div class="row popupDeatailDiv">
-                                                                    <div class="col-md-6">
-                                                                        <div class="detailText">
-                                                                            <ul class="list-inline appointDeatailDiv">
-                                                                                <li><a href="#">Details</a></li>
-                                                                            </ul>
+                                                                    <div class="row popupDeatailDiv">
+                                                                        <div class="col-md-6">
+                                                                            <div class="detailText">
+                                                                                <ul class="list-inline appointDeatailDiv">
+                                                                                    <li><a href="#">Details</a></li>
+                                                                                </ul>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-md-6">
+                                                                            <div class="dropdown labeldrowDownBtn nolableDrop">
+                                                                                <button class="dropbtn">
+                                                                                    No Label
+                                                                                    <span class="glyphicon glyphicon-chevron-down"></span>
+                                                                                </button>
+                                                                                <ul class="lableDropdownContent dropdown-content">
+                                                                                    <li><a href="#">No Label</a></li>
+                                                                                    <li><a href="#">Pending</a></li>
+                                                                                    <li><a href="#">Confirmed</a></li>
+                                                                                    <li><a href="#">Done</a></li>
+                                                                                    <li><a href="#">No-Show</a></li>
+                                                                                    <li><a href="#">Paid</a></li>
+                                                                                    <li><a href="#">Running Late</a></li>
+                                                                                    <li><a href="#">Custom Label</a></li>
+                                                                                </ul>
+                                                                            </div>
                                                                         </div>
                                                                     </div>
-                                                                    <div class="col-md-6">
-                                                                        <div class="dropdown labeldrowDownBtn nolableDrop">
-                                                                            <button class="dropbtn">
-                                                                                No Label
-                                                                                <span class="glyphicon glyphicon-chevron-down"></span>
-                                                                            </button>
-                                                                            <ul class="lableDropdownContent dropdown-content">
-                                                                                <li><a href="#">No Label</a></li>
-                                                                                <li><a href="#">Pending</a></li>
-                                                                                <li><a href="#">Confirmed</a></li>
-                                                                                <li><a href="#">Done</a></li>
-                                                                                <li><a href="#">No-Show</a></li>
-                                                                                <li><a href="#">Paid</a></li>
-                                                                                <li><a href="#">Running Late</a></li>
-                                                                                <li><a href="#">Custom Label</a></li>
-                                                                            </ul>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <!-- content goes here -->
-                                                                <div class="deatailForm">
-                                                                    <form class="form-horizontal appointPopUpform">
+                                                                    <!-- content goes here -->
+                                                                    <!--<form class="form-horizontal appointPopUpform" ng-submit="SaveAppointment(appointmentform)" name="appointmentform" novalidate class="css-form">-->
+                                                                    <div class="deatailForm">
+                                                                        <!--<form class="form-horizontal appointPopUpform" ng-submit="SaveAppointment(appointmentform)" name="appointmentform" novalidate class="css-form">-->
                                                                         <div class="form-group">
                                                                             <label class="control-label col-sm-4" for="email">Provider</label>
                                                                             <div class="col-sm-8">
                                                                                 <div class="dropdown appointProvider">
-                                                                                    <select class="btn btn-default dropdown-toggle" ng-model="selectedprovider" data-ng-options ="x.Id as x.staffName for x in Provider" id="dropdownMenu2" name="x.staffName"  aria-haspopup="true" aria-expanded="false" ng-change="GetAllocateServiceToEmployee(selectedprovider)">
-                                                                                        <option value="" selected="selected">-- Select a Provider --</option>                                                                                                                                        
+                                                                                    <select class="btn btn-default dropdown-toggle" ng-model="selectedprovider" data-ng-options="x.Id as x.staffName for x in Provider" id="dropdownMenu2" name="x.staffName" aria-haspopup="true" aria-expanded="false" ng-change="GetAllocateServiceToEmployee(selectedprovider)">
+                                                                                        <option value="" selected="selected">-- Select a Provider --</option>
                                                                                     </select>
                                                                                     <!--@*<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                                                        <span class="glyphicon glyphicon-ok okIcon"></span>
-                                                                                        david
-                                                                                        <span class="glyphicon glyphicon-chevron-down chevronDownIcon"></span>
-                                                                                    </button>*@-->
+                                <span class="glyphicon glyphicon-ok okIcon"></span>
+                                david
+                                <span class="glyphicon glyphicon-chevron-down chevronDownIcon"></span>
+                            </button>*@-->
                                                                                     <div class="dropdown-menu popupdropdownDiv" aria-labelledby="dropdownMenu2">
                                                                                         <ul class="list-inline">
                                                                                             <li>
@@ -570,16 +572,16 @@
                                                                             <label class="control-label col-sm-4" for="pwd">Service</label>
                                                                             <div class="col-sm-8">
                                                                                 <div class="dropdown appointProvider">
-                                                                                    <select class="btn btn-default dropdown-toggle" id="dropdownMenu2" data-ng-options="x.Id as x.Name for x in EmployeeServices" ng-model="selectedservice" ng-change="ServiceDetail(selectedservice)" aria-haspopup="true" aria-expanded="false">
+                                                                                    <select class="btn btn-default dropdown-toggle" name="dropdownMenu2" data-ng-options="x.Id as x.Name for x in EmployeeServices" ng-model="selectedservice" ng-change="ServiceDetail(selectedservice)" aria-haspopup="true" aria-expanded="false" >
                                                                                         <option value="">-- Select a Service --</option>
                                                                                     </select>
                                                                                     <!--@*<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                                                        <span class="okIcon longrightArrow">
-                                                                                            <i class="fa fa-long-arrow-right" aria-hidden="true"></i>
-                                                                                        </span>
-                                                                                        Select a Service
-                                                                                        <span class="glyphicon glyphicon-chevron-down chevronDownIcon"></span>
-                                                                                    </button>*@-->
+                                <span class="okIcon longrightArrow">
+                                    <i class="fa fa-long-arrow-right" aria-hidden="true"></i>
+                                </span>
+                                Select a Service
+                                <span class="glyphicon glyphicon-chevron-down chevronDownIcon"></span>
+                            </button>*@-->
                                                                                     <div class="dropdown-menu popupdropdownDiv" aria-labelledby="dropdownMenu2">
                                                                                         <ul class="list-inline">
                                                                                             <li>
@@ -599,7 +601,8 @@
                                                                         <div class="form-group">
                                                                             <label class="control-label col-sm-4" for="pwd">Day/Time</label>
                                                                             <div class="col-sm-8 dateTimeDiv">
-                                                                                <span class="glyphicon glyphicon-ok calendarOk"></span><input type='text' class="form-control datepickerBox" ng-model="" placeholder="Fri, May 12" id='datetimepicker4' />
+                                                                                <span class="glyphicon glyphicon-ok calendarOk"></span><!--<input type="text" class="form-control datepickerBox" ng-model="datatime" placeholder="Fri, May 12" id="datetimepicker4" />-->
+                                                                                <input ng-model="selecteddate" class="form-control datepickerBox" datetime-picker date-format="EEE, MMM d" size="30" date-only />
                                                                             </div>
                                                                         </div>
                                                                         <div class="form-group">
@@ -608,18 +611,18 @@
                                                                                 <div class="row">
                                                                                     <div class="col-md-6 dateTimeDiv costField">
                                                                                         <span class="calendarOk">$</span>
-                                                                                        <input type="text" class="appt_cost form-control" placeholder="10" ng-model="price">
+                                                                                        <input type="text" class="appt_cost form-control" placeholder="10" ng-model="price" value="">
                                                                                     </div>
                                                                                     <div class="col-md-6 dateTimeDiv costMinField">
-                                                                                        <input type="text" class="appt_cost_min form-control" placeholder="60" ng-model="mins">
-                                                                                        <a href="#" id="minTextDiv" class="minText">
+                                                                                        <input type="text" class="appt_cost_min form-control" placeholder="60" ng-model="time">
+                                                                                        <a href="" id="minTextDiv" class="minText">
                                                                                             Mins
-                                                                                            <span class="glyphicon glyphicon-chevron-down chevronDownIcon">
+                                                                                            <span class="glyphicon glyphicon-chevron-down chevronDownIcon" ng-click="minhours = !minhours">
                                                                                             </span>
                                                                                         </a>
-                                                                                        <ul id="custmDropdown" class="apptcustomeDropdown">
-                                                                                            <li><a href="#">Mins</a></li>
-                                                                                            <li><a href="#">Hours</a></li>
+                                                                                        <ul id="custmDropdown" class="apptcustomeDropdown" ng-show="minhours" style="display:block;position:absolute;">
+                                                                                            <li><a ng-click="Converttomin()">Mins</a></li>
+                                                                                            <li><a ng-click="Convertohour()">Hours</a></li>
                                                                                         </ul>
                                                                                     </div>
                                                                                 </div>
@@ -646,7 +649,8 @@
                                                                                 <div class="premiumBtn">
                                                                                     <button type="button" class="btn btn-default">
                                                                                         <span><i class="fa fa-lock" aria-hidden="true"></i></span>
-                                                                                        <a href="#">premium</a>
+                                                                                        <!--<a href="#">premium</a>-->
+                                                                                        premium
                                                                                     </button>
                                                                                 </div>
                                                                             </div>
@@ -658,19 +662,21 @@
                                                                             </div>
                                                                         </div>
 
-                                                                    </form>
-                                                                </div>
+
+                                                                    </div>
 
 
-                                                            </div>
-                                                            <div class="modal-footer">
-                                                                <div class="btn-group apptSaveBtn" role="group">
-                                                                    <button type="button" class="btn btn-default" data-action="save" role="button" ng-click="SaveAppointment()">Save Appointment</button>
+
                                                                 </div>
-                                                                <div class="apptViewFooter">
-                                                                    <a href="#" class="apptDeleteBtn">Delete</a>
+                                                                <div class="modal-footer">
+                                                                    <div class="btn-group apptSaveBtn" role="group">
+                                                                        <button type="submit" class="btn btn-default" data-action="save" role="button">Save Appointment</button>
+                                                                    </div>
+                                                                    <div class="apptViewFooter">
+                                                                        <a href="#" class="apptDeleteBtn">Delete</a>
+                                                                    </div>
                                                                 </div>
-                                                            </div>
+                                                            </form>
                                                         </div>
                                                     </div>
                                                     <div id="modalPopupbg" class="fade modal_bg in"></div>
@@ -684,7 +690,7 @@
                                                         <span>
                                                             <div class="media">
                                                                 <div class="media-left calendarIcon">
-                                                                    <span id="calendarfaIcon"><i class="fa fa-calendar" aria-hidden="true"></i></span>
+                                                                    <span id="calendarfaIcon" ng-click="appointmentDetailisVisible = !appointmentDetailisVisible" ><i class="fa fa-calendar" aria-hidden="true"></i></span>
                                                                 </div>
                                                                 <div class="media-body appointDate">
                                                                     <h4 class="media-heading">Wed May 24,2017</h4>
@@ -694,7 +700,7 @@
 
                                                         </span>
 
-                                                        <div id="detailPopup" class="apptDetailPopup addCustomer bottomArrow">
+                                                        <div id="detailPopup" class="apptDetailPopup addCustomer bottomArrow" style="display:block;"  ng-show="appointmentDetailisVisible">
                                                             <div class="apptDetailDiv">
                                                                 <div class="appt_text">
                                                                     <h2>Appointment Details</h2>
@@ -813,12 +819,14 @@
         </div>
     </div>
 </div>
-<!--@*
-<script src="js/jquery.js"></script>
+
+<!--<script src="js/jquery.js"></script>
 <script src="js/bootstrap.min.js"></script>
 <script src="js/moment.js"></script>
-<script src="js/bootstrap-datetimepicker.min.js"></script>*@
+<script src="js/bootstrap-datetimepicker.min.js"></script>
 @*
+
+<script src="../Content/Assets/js/bootstrap-datetimepicker.min.js"></script>
 <script type="text/javascript">
         var app = angular.module('MyApp', [])
         app.controller('MyController', function ($scope, $timeout) {
@@ -943,7 +951,8 @@
     });
 
     $(function () {
-        //$('#datetimepicker4').datetimepicker();
+        debugger;
+        $('#datetimepicker4').datetimepicker();
     });
 
 
