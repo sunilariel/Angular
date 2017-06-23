@@ -51,6 +51,10 @@ app.controller('dashboardController', ['$scope', '$timeout','$routeParams', '$lo
         $location.path("/customer/" + $routeParams.CompanyId);
     }
 
+    $scope.RedirecttoStaff = function ()
+    {
+        $location.path("/Setting/" + $routeParams.CompanyId);
+    }
 
     $scope.addNewChoice = function (procedure) {
         debugger;

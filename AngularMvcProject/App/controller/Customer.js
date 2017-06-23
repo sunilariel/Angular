@@ -48,6 +48,9 @@
         $location.path("/dashboard/" + $routeParams.CompanyId);
 
     }
+    $scope.RedirecttoStaff = function () {
+        $location.path("/Setting/" + $routeParams.CompanyId);
+    }
 
     //This function will run first on page load.
     $scope.init=function()

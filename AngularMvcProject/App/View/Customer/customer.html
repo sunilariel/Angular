@@ -133,21 +133,18 @@
         <div class="left_sidebar">
             <ul class="nav">
                 <li class="side-nav-tooltip" id="side-dashboard" data-toggle="tooltip" data-original-title="Dashboard" data-placement="right">
-                    <a href="" data-toggle="tab" class="setmore-icon-home" id="startDashboard"><small>Dashboard</small></a>
+                    <a ng-click="redirecttodashboard()" style="cursor:pointer;" data-toggle="tab" class="setmore-icon-home" id="startDashboard"><small>Dashboard</small></a>
                 </li>
-                <li class="side-nav-tooltip" id="side-calendar" data-placement="right" data-toggle="tooltip" data-original-title="Calendar"> <a href="#" data-toggle="tab" class="setmore-icon-calendar-31" id="startCalendar"><small>Calendar</small></a> </li>
-                <li class="side-nav-tooltip" id="side-customers" title="" data-toggle="tooltip" data-original-title="Customers" data-placement="right">
-                    <a ng-click ="redirecttoCustomer()" data-toggle="tab" class="setmore-icon-users2" id="side-nav-customers"><small>Customers</small></a>
+                <li class="side-nav-tooltip" id="side-calendar" data-placement="right" data-toggle="tooltip" data-original-title="Calendar"> <a href="" data-toggle="tab" class="setmore-icon-calendar-31" id="startCalendar"><small>Calendar</small></a> </li>
+                <li class="side-nav-tooltip active" id="side-customers" title="" data-toggle="tooltip" data-original-title="Customers" data-placement="right">
+                    <a ng-click ="redirecttoCustomer()" style="cursor:pointer;" data-toggle="tab" class="setmore-icon-users2" id="side-nav-customers"><small>Customers</small></a>
                 </li>
                 <li class="side-nav-tooltip" id="side-profile" data-toggle="tooltip" data-original-title="Apps &amp; Integrations" data-placement="right">
                     <a href="" data-toggle="tab" class="setmore-icon-laptop-phone"><small>Profile&nbsp;</small></a>
                 </li>
 
-                <li class="side-nav-tooltip active" id="settings_new" data-original-title="Settings" data-placement="right" data-toggle="tooltip">
-                    <a ng-click="redirecttodashboard()" data-toggle="tab" class="fa fa-cog"><small>Settings</small></a>
-
-
-
+                <li class="side-nav-tooltip " id="settings_new" data-original-title="Settings" data-placement="right" data-toggle="tooltip">
+                    <a ng-click="RedirecttoStaff()" data-toggle="tab" class="fa fa-cog"><small>Settings</small></a>
                 </li>
 
 
@@ -277,11 +274,7 @@
 
                         <div class="col-sm-3 left_side2 addcustomerSec">
                             <!-- <h3>Staff (1) </h3> -->
-
-
-
                             <div class="row">
-
                                 <div class="addcustomerSearch col-md-12">
                                     <input type="text" class="form-control" placeholder="Search.." ng-model="searchName">
                                     <!-- Split button -->
@@ -412,7 +405,7 @@
 
 
                                             </div>
-                                            <span class="uploadImageIcon"><i class="fa fa-camera" aria-hidden="true"></i></span>
+                                            <span class="uploadImageIcon"><i class="fa fa-camera" aria-hidden="true" style="margin-left: 4px;"></i></span>
                                         </label>
                                         <div class="col-md-9 col-sm-9 col-xs-9">
                                             <input type="text" class="customerName form-control" value="Mark" id="name" name="name" placeholder="Mark" ng-model="updatedCustomerName" ng-blur="updateCustomer()">
@@ -486,9 +479,9 @@
                         <div class="col-sm-6">
                             <div id="" class="detail-navbar appointmentDiv staffContent container-fluid">
                                 <ul class="nav nav-pills">
-                                    <li class="active" id="staff_details"><a href="#staff-details" data-toggle="tab">Appointments</a></li>
-                                    <li><a href="#staff-services" data-toggle="tab">Notes</a></li>
-                                    <li><a href="#staff-hours" data-toggle="tab">Stats</a></li>
+                                    <li class="active" id="staff_details"><a data-target="#staff-details" style="cursor:pointer;" data-toggle="tab">Appointments</a></li>
+                                    <li><a data-target="#staff-services" style="cursor:pointer;" data-toggle="tab">Notes</a></li>
+                                    <li><a data-target="#staff-hours" style="cursor:pointer;" data-toggle="tab">Stats</a></li>
                                     <li class="pull-right settingIcon"><i class="fa fa-cog" aria-hidden="true"></i></li>
                                     <div class="clearfix"></div>
                                 </ul>
@@ -617,13 +610,14 @@
                                                                                         <input type="text" class="appt_cost_min form-control" placeholder="60" ng-model="time">
                                                                                         <a href="" id="minTextDiv" class="minText">
                                                                                             Mins
-                                                                                            <span class="glyphicon glyphicon-chevron-down chevronDownIcon" ng-click="minhours = !minhours">
+                                                                                            <!--<span class="glyphicon glyphicon-chevron-down chevronDownIcon" ng-click="minhours = !minhours">-->
+                                                                                            <span class="glyphicon glyphicon-chevron-down chevronDownIcon">
                                                                                             </span>
                                                                                         </a>
-                                                                                        <ul id="custmDropdown" class="apptcustomeDropdown" ng-show="minhours" style="display:block;position:absolute;">
+                                                                                        <!--<ul id="custmDropdown" class="apptcustomeDropdown" ng-show="minhours" style="display:block;position:absolute;">
                                                                                             <li><a ng-click="Converttomin()">Mins</a></li>
                                                                                             <li><a ng-click="Convertohour()">Hours</a></li>
-                                                                                        </ul>
+                                                                                        </ul>-->
                                                                                     </div>
                                                                                 </div>
 
@@ -655,17 +649,12 @@
                                                                                 </div>
                                                                             </div>
                                                                         </div>
-
                                                                         <div class="form-group rescheduleDiv">
                                                                             <div class="col-sm-12 sendSchdlEmail">
                                                                                 <input type="checkbox" class="sampleCheckbox checkbox-custom" name="" value="service"><label for="checkbox-1" class="checkbox-custom-label">Send Reschedule Email</label>
                                                                             </div>
                                                                         </div>
-
-
                                                                     </div>
-
-
 
                                                                 </div>
                                                                 <div class="modal-footer">
@@ -701,10 +690,10 @@
                                                         </span>
 
                                                         <div id="detailPopup" class="apptDetailPopup addCustomer bottomArrow" style="display:block;"  ng-show="appointmentDetailisVisible">
-                                                            <div class="apptDetailDiv">
+                                                            <div class="apptDetailDiv" >
                                                                 <div class="appt_text">
                                                                     <h2>Appointment Details</h2>
-                                                                    <a href="#" id="crossHidebtn" class="crossBtn"><i class="fa fa-times" aria-hidden="true"></i></a>
+                                                                    <a   id="crossHidebtn" class="crossBtn"><i class="fa fa-times" aria-hidden="true"></i></a>
                                                                 </div>
                                                                 <div class="dropdown labeldrowDownBtn">
                                                                     <button class="dropbtn">
@@ -712,14 +701,14 @@
                                                                         <span class="glyphicon glyphicon-chevron-down"></span>
                                                                     </button>
                                                                     <ul class="lableDropdownContent dropdown-content">
-                                                                        <li><a href="#">No Label</a></li>
-                                                                        <li><a href="#">Pending</a></li>
-                                                                        <li><a href="#">Confirmed</a></li>
-                                                                        <li><a href="#">Done</a></li>
-                                                                        <li><a href="#">No-Show</a></li>
-                                                                        <li><a href="#">Paid</a></li>
-                                                                        <li><a href="#">Running Late</a></li>
-                                                                        <li><a href="#">Custom Label</a></li>
+                                                                        <li><a href="">No Label</a></li>
+                                                                        <li><a href="">Pending</a></li>
+                                                                        <li><a href="">Confirmed</a></li>
+                                                                        <li><a href="">Done</a></li>
+                                                                        <li><a href="">No-Show</a></li>
+                                                                        <li><a href="">Paid</a></li>
+                                                                        <li><a href="">Running Late</a></li>
+                                                                        <li><a href="">Custom Label</a></li>
                                                                     </ul>
                                                                 </div>
 
@@ -750,7 +739,6 @@
                                                                             <label>Booked from </label>
                                                                             <span>Customer Page</span>
                                                                         </li>
-
                                                                     </ul>
                                                                     <div class="brdr_btm"></div>
                                                                 </div>
@@ -783,17 +771,13 @@
                                                     </li>
                                                 </ul>
                                             </div>
-
-
-
                                         </div>
                                         <div class="tab-pane" id="staff-services"> Service</div>
-                                        <div class="tab-pane" id="staff-hours">Staff Hours </div>
+                                        <div class="tab-pane" id="staff-hours">                                        
+                                        Staff Hours                                                                                    
+                                        </div>
                                         <div class="tab-pane " id="staff-break">
                                             <div class="row-fluid">
-
-
-
                                             </div>
                                         </div>
                                         <div class="tab-pane" id="staff-timeoff" style="padding-bottom: 100px;"> </div>

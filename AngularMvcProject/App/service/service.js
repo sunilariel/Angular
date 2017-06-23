@@ -204,10 +204,7 @@ app.service("bookingService", function ($http) {
         return response;
     }
     
-    /////////////////
-
-   
-   
+  
 })
 
 

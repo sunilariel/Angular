@@ -2043,7 +2043,7 @@ button#createNewStaffBtn:focus {
 }
 
 div#staff {
-    overflow: auto;
+    overflow: hidden;
 }
 /* add customer css 24-may-2017 end here ===================== */
 
@@ -2620,6 +2620,171 @@ table#mytable tr td {
 	overflow:auto !important;
 }
 
+/* Dashboard page css 22-june-2017 start here ===================== */
+
+.dashboardStatus {
+    position: fixed;
+    width: 100%;
+    background: #fff;
+    z-index: 10;
+    top: 60px;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, .05);
+    border-bottom: 1px solid #ccc;
+    margin: 0;
+}
+ul.dashboardDetailList {
+    list-style-type: none;
+    width: 100%;
+    margin: 0;
+}
+.dashboardDetail {
+    margin: 0 auto 5px;
+}
+li.dashboardLi {
+    float: left;
+    text-align: center;
+    width: 19%;
+    border-left: 1px solid #E7E7E7;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+span.dashboardHead {
+    font-size: 22px;
+    color: #00BFB9;
+    display: block;
+    line-height: 35px;
+}
+label.dashboardLable {
+    font-size: 14px;
+    color: #777;
+    font-weight: 300;
+    cursor: auto;
+	
+}
+span.dashboardCount {
+    font-size: 28px;
+    color: #485861;
+    display: block;
+    line-height: 35px;
+    font-weight: 300;
+}
+#dashboard {
+    background-color: #F1F5F7;
+    height: 100%;
+    overflow-y: auto;
+}
+.dashboardApptrow {
+	margin-bottom: 100px;
+    margin: 120px auto 30px;
+    padding: 0 80px 0 0px;
+    position: relative;
+}
+.dashboardAppt {
+    background-color: white;	
+    border-radius: 3px;
+    box-shadow: 0px 1px 5px rgba(0, 0, 0, .1);
+    height: calc(100% - 30px);
+}
+.dashboardApptHeader {
+    position: relative;
+	border-bottom: 2px solid #EAEBEB;
+}
+
+.dashboardApptHeader h3 {
+    color: #455862;
+    line-height: 60px;
+    padding-left: 30px;
+    margin: 0px;
+    font-size: 14px;
+    font-weight: normal;
+    text-transform: uppercase;
+	display:inline-block;
+}
+.dashboardApptHeader .bookBtn {
+	float:right;
+	text-align: center;
+    background: #F1F5F7;
+    font-size: 13px;
+    line-height: 20px;
+    padding: 0 10px;
+    height: 30px;
+    border-radius: 3px;
+	border: solid 1px #D7D7D7;
+    color: #777;
+    font-weight: 400;
+	margin: 15px 30px;
+
+}
+.apptDisplay {
+    overflow-y: auto;
+    position: relative;
+    height: 370px;
+    display: table;
+    width: 100%;
+}
+.apptDisplay .noAppt {
+    text-align: center;
+    vertical-align: middle;
+    display: table-cell;
+}
+ul.dashboardNtfList {
+    list-style-type: none;
+    margin: 0px;
+    position: relative;
+    overflow-y: auto;
+	padding-left: 0;
+}
+.DashboardListHolder {
+    margin: 0px 20px;
+    padding: 10px 0px;
+    border-bottom: 1px solid #E3E3E3;
+}
+.activity_icon.update {
+    background-color: #ECB900;
+}
+.nav-icon-fsize-activity {
+    font-size: 17px !important;
+    padding: 6px !important;
+    margin-top: 5px;
+    color: #FFF;
+}
+.activity_icon {
+    float: left;
+    border-radius: 2px;
+}
+.dashboardActivityText {
+    min-width: 200px;
+    word-wrap: break-word;
+    margin-top: 3px;
+    padding-left: 40px;
+}
+.dashboardSpanText {
+    font-size: 13px;
+    font-weight: 400;
+}
+.typeNameBold {
+    font-size: 13px;
+    color: #2E363E;
+	font-weight: 600;
+}
+.dashboardSpantime {
+    margin-left: 10px;
+    font-size: 14px;
+    font-weight: 300;
+    color: #9B9B9B;
+    display: block;
+    width: 100%;
+}
+.activityWeekDiv {
+	display:block;
+}
+
+
+
+/* Dashboard page css 22-june-2017 end here ===================== */
+
+
+
 
 /* add services css 31-may-2017 start here ===================== */
 
@@ -2921,7 +3086,16 @@ input#customerEmail {
 .usernameImage img {
 	margin-top:0;
 }
+/*    Dashboard page media css start here 22-June-2017    */
 
+.dashboardScheDiv {
+	margin-bottom:20px;
+}
+.dashboardApptrow {
+    padding: 0 60px 0 0;
+}
+
+/*    Dashboard page media css end here 22-June-2017    */
 }
 /* media css end here ================================= */
 
@@ -3301,7 +3475,15 @@ select.select_btn {
     width: 100%;
 }
 
-
+.dashboardScheDiv {
+	margin-bottom:20px;
+}
+.dashboardApptrow {
+    padding: 0 0px 0 0;
+}
+.dashboardApptrow {
+    margin: 150px auto 30px;
+}
 
 /*    Setting page media css end here 2-June-2017    */
 	
@@ -3314,6 +3496,23 @@ select.select_btn {
     left: 37% !important;
 	width: 60% !important;
 }
+/* Dashboard page css 22-june-2017 start here ===================== */
+
+li.dashboardLi {
+    width: 50%;
+	margin-top: 10px;
+    margin-bottom: 0px;
+
+}
+.dashboardApptrow {
+    margin: 230px auto 30px;
+}
+.dashboardApptHeader h3 {
+    padding-left: 10px;
+}
+
+/* Dashboard page css 22-june-2017 end here ===================== */
+
 }
 @media (max-width:475px){
 	.setmore {
@@ -3370,6 +3569,7 @@ select.select_btn {
 .addCategoryPopup {
     top: 45px;
 }
+
 .serviceIconImage img {
 	width:90px;
 	height:90px;
@@ -3472,4 +3672,7 @@ div#addCustomerPopup {
 }
 div#deletetooltipPopup{
     display:block;
+}
+.cursorhand{
+    cursor:pointer;
 }

@@ -42,15 +42,15 @@ app.controller('bookingController', ['$scope', '$routeParams', '$rootScope', '$h
         
     };
 
+    //Redirection to dashboard on next btn of step-4
     $scope.redirecttodashboard= function ()
-    {
-        debugger;
+    {      
         $location.path("/dashboard/" + $scope.companyId);
-
     }
    
+    //Submit buisness information of step-1//
     $scope.submitInfo = function (form) {
-        debugger;
+        //To check whether from is valid or not  and highlight the resp element by set its touched event.
         if (form.$invalid == true) {
             if (form.buisnessName.$invalid == true) {
                 form.buisnessName.$setTouched();
@@ -66,6 +66,8 @@ app.controller('bookingController', ['$scope', '$routeParams', '$rootScope', '$h
             }
             return false;
         }
+
+        //Check whether we are going from step-1 to step-2 in wizard firts time it register the buisness information and on other redirection from step-2 to step-1 viceversa it do nothing(just redirection).
         if (firstregistration != true) {
             debugger;
             var businessInfo = {
@@ -93,10 +95,9 @@ app.controller('bookingController', ['$scope', '$routeParams', '$rootScope', '$h
                     $scope.companyId = msg.data.ReturnObject.CompanyId;
                     $rootScope.GlobalCompanyId = msg.data.ReturnObject.CompanyId;
                  
-                    $scope.msg = "Post Data Submitted Successfully!";
-
+                    $scope.msg = "Post Data Submitted Successfully!"
+                    //on successful register buisness info i set firstregistration true
                     firstregistration = true;
-
                     $scope.staffName = '';
                     $scope.staffEmail = '';
                     $scope.divAccount = false;
@@ -149,6 +150,9 @@ app.controller('bookingController', ['$scope', '$routeParams', '$rootScope', '$h
             $scope.fourthStep = true;
         }
     };
+
+    //Step-2(Buisness Hours)
+
     $scope.timeInfoFrom = ["08:00 am", "09:00 am", "10:00 am", "11:00 am", "12:00 pm", "13:00 pm", "14:00 pm", "15:00 pm", "16:00 pm", "17:00 pm", "18:00 pm", "19:00 pm", "20:00 pm"];
     $scope.timeInfoTo = ["08:00 am", "09:00 am", "10:00 am", "11:00 am", "12:00 pm", "13:00 pm", "14:00 pm", "15:00 pm", "16:00 pm", "17:00 pm", "18:00 pm", "19:00 pm", "20:00 pm"];
     //$scope.timeInfoFrom = ["08:00 am", "09:00 am", "10:00 am", "11:00 am", "12:00 pm", "01:00 pm", "02:00 pm", "03:00 pm", "04:00 pm", "05:00 pm", "06:00 pm", "07:00 pm", "08:00 pm"];
@@ -160,6 +164,7 @@ app.controller('bookingController', ['$scope', '$routeParams', '$rootScope', '$h
     { 'day': 'Friday', 'timeFrom': "08:00 am", 'timeTo': "17:00 pm", 'available': true },
     { 'day': 'Saturday', 'timeFrom': "08:00 am", 'timeTo': "17:00 pm", 'available': false },
     { 'day': 'Sunday', 'timeFrom': "08:00 am", 'timeTo': "17:00 pm", 'available': false }, ]
+
     $scope.setUpBusiness = function () {
         debugger;
         var selectedVal = $scope.businessHourInfo.timeFrom;
@@ -230,6 +235,9 @@ app.controller('bookingController', ['$scope', '$routeParams', '$rootScope', '$h
         });
     }
 
+    //Step-3 Add Staff
+
+    //On click of next btn in set wizard steps active and mark it. 
     $scope.addStaff = function () {
         debugger;
         var activediv = angular.element(document.querySelector('#divstep4'));
@@ -306,17 +314,19 @@ app.controller('bookingController', ['$scope', '$routeParams', '$rootScope', '$h
         $scope.thirdStep = false;
         $scope.fourthStep = true;
     }
+    ///////////////Set wizard steps///////////
+
+
     $scope.showDropDown = function () {
         debugger;
         $scope.init();
         $scope.showStaff = !($scope.showStaff);
         event.stopPropagation();
-
     }
 
-    window.onclick = function ($event) {
-        debugger;
 
+    //Window click to close the hide dropdown on click on document (Specially for step-4 Add Services)
+    window.onclick = function ($event) {      
         if (angular.element(event.target.parentElement.parentElement)[0].classList.value != 'dropdown-menu') {
 
             if ($scope.showStaff == false) {
@@ -336,6 +346,7 @@ app.controller('bookingController', ['$scope', '$routeParams', '$rootScope', '$h
         }       
     };
 
+    //This is to hide the previous dropdown on click of other dropdown (data shown in services on top of add service)
     $scope.showDropDownBinded = function (index) {
         debugger;
         var count = $scope.serviceInfo.length;
@@ -349,12 +360,11 @@ app.controller('bookingController', ['$scope', '$routeParams', '$rootScope', '$h
             }
         }
     }
-
+    //Initialize the Variables
     $scope.staffInfo = [];
     $scope.sampleService = "";
     $scope.serviceTime = "";
     $scope.servicePrice = "";
-
     $scope.service = [];
 
     $scope.serviceInfo = [
@@ -367,6 +377,7 @@ app.controller('bookingController', ['$scope', '$routeParams', '$rootScope', '$h
 
     ];
 
+    //Add staff in step-3
     $scope.addStaffItem = function (form) {
 
         if (form.$invalid == true)
@@ -439,7 +450,7 @@ app.controller('bookingController', ['$scope', '$routeParams', '$rootScope', '$h
         });      
     };
 
-
+    //Edit Staff and update the staff on blur function. 
     $scope.EditStaff = function (EditStaff) {
         debugger;
         var EditStaffInformation = {
@@ -493,6 +504,8 @@ app.controller('bookingController', ['$scope', '$routeParams', '$rootScope', '$h
  }
 
     $scope.HasPassport = false;
+
+    //this function run on click of all staff checked in below dropdown of step-4(on adding staff).
     $scope.toggleAllSelection = function staffChange(e) {
         debugger;
         if ($scope.allstaffchecked == true) {
@@ -507,7 +520,7 @@ app.controller('bookingController', ['$scope', '$routeParams', '$rootScope', '$h
         }
     };
 
-
+    //this function run when on select staff.If every staff is selected then we set allstaff checked true.(below dropdown in step-4)
     $scope.toggleSelection = function staffchecked() {
         debugger;
         for (var i = 0; i < $scope.staffInfo.length; i++) {
@@ -522,6 +535,7 @@ app.controller('bookingController', ['$scope', '$routeParams', '$rootScope', '$h
         }
     };
 
+    //this function runs on select of allstaff to be true then it will checked each individual staff(above dropdown in step-4)
     $scope.togglealldataSelection = function (item) {
         debugger;
         if (item.AllStaffChecked == true) {
@@ -536,9 +550,10 @@ app.controller('bookingController', ['$scope', '$routeParams', '$rootScope', '$h
         }
     };
 
+    //Update the staff assigned to service.
     $scope.Updateallstaff=function(item)
     {
-        debugger;
+        //Check whether atleast on staff selected it it is not then it will show message and data wil not updated(Step-4 above dropdown)
         if (item.AllStaffChecked == false) {
             var count = item.staff.length;
             for (var i = 0; i < count; i++) {
@@ -570,15 +585,7 @@ app.controller('bookingController', ['$scope', '$routeParams', '$rootScope', '$h
             }
         }
 
-
-
-
-
-
-
-
-
-
+        //update the staff to service(Step-4 above dropdown)
         var dateTimeVal = new Date();
         angular.forEach(item.staff, function (value, key) {
                        
@@ -634,7 +641,7 @@ app.controller('bookingController', ['$scope', '$routeParams', '$rootScope', '$h
 
 
 
-
+    //Update service and assign staff to service(Step-4)
     $scope.toggledataSelection = function (item, selectedItemId,checkedstatus) {
         debugger;
        
@@ -743,17 +750,14 @@ app.controller('bookingController', ['$scope', '$routeParams', '$rootScope', '$h
                 });               
             });
         }
-
-      
-       
-
     };
 
     // $scope.EmployeeId = item.Id;       
     $scope.getSelected = function (item) {
         debugger;
-
     }
+
+    //Delete the staff(in Step-3)
     $scope.removeRow = function (Id) {
         debugger;
         var removestaffmember = bookingService.DeleteStaff(Id);
@@ -779,7 +783,7 @@ app.controller('bookingController', ['$scope', '$routeParams', '$rootScope', '$h
 
     };
 
-
+    //Add service and assign staff
     $scope.addServiceItem = function (form) {
         debugger;       
         if (form.$invalid == true)
@@ -919,6 +923,7 @@ app.controller('bookingController', ['$scope', '$routeParams', '$rootScope', '$h
         $scope.showStaff = true;
     };
   
+    //Updating Service
     $scope.EditService = function (EditService) {
         debugger;
         var Id = $scope.FirstName;
@@ -958,6 +963,8 @@ app.controller('bookingController', ['$scope', '$routeParams', '$rootScope', '$h
         });
     };
 
+
+    //Deleting Service.
     $scope.removeServiceRow = function (id) {
         debugger;
         var removeservicemember = bookingService.DeleteService(id);
@@ -983,6 +990,8 @@ app.controller('bookingController', ['$scope', '$routeParams', '$rootScope', '$h
         }
 
     };
+
+    //Enable and disable set hours days and date in step-2
     $scope.switchOnOff = function (item) {
         debugger;
         angular.forEach($scope.businessHourInfo, function (value, key) {
