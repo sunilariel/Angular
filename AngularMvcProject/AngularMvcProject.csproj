@@ -197,6 +197,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\CustomerController.cs" />
     <Compile Include="Controllers\dashboardController.cs" />
+    <Compile Include="Controllers\ServicesController.cs" />
     <Compile Include="Controllers\SignUpController.cs" />
     <Compile Include="Controllers\wizardController.cs" />
     <Compile Include="Global.asax.cs">
@@ -371,6 +372,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Services\" />
     <Folder Include="Views\Shared\" />
   </ItemGroup>
   <ItemGroup>

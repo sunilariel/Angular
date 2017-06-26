@@ -203,7 +203,48 @@ app.service("bookingService", function ($http) {
         })
         return response;
     }
+
+
+    ///Add Service and Category Section in MileStone_3
+
+    this.AddCategory = function (dataobject) {
+        var response = $http({
+            method: "POST",
+            url: "/Services/AddCategory",
+            data:{category:dataobject}
+        })
+        return response;
+    }
     
+    this.GetCategories=function(dataobject)
+    {
+        var response = $http({
+            method: "POST",
+            url: "/Services/GetCategories",
+            data:{Id:dataobject}
+        })
+        return response;
+    }
+
+    this.AddService=function(dataobject)
+    {
+        var response = $http({
+            method: "POST",
+            url: "/Services/AddService",
+            data:{service:dataobject}
+        })
+        return response;
+    }
+
+    this.AssignCategoryToService=function(serviceId,categoryId)
+    {
+        var response = $http({
+            method: "POST",
+            url: "/Services/AssignCategorytoService",
+            data: { SeviceId: serviceId, CategoryId: categoryId }
+        })
+        return response;
+    }
   
 })
 

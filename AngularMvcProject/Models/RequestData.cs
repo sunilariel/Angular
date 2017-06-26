@@ -208,4 +208,29 @@ namespace AngularMvcProject.Models
         public string End { get; set; }
     }
 
+    /////MileStone_3////
+    //Category and Service Section//
+
+    public class Category
+    {
+        public int Id { get; set; }
+        public string CompanyId { get; set; }
+        public string Name { get; set; }
+        public string CreationDate {get;set;}
+    }
+
+    public class Services
+    {
+        public int Id { get; set; }
+        public int CompanyId { get; set; }
+        public string Name { get; set; }
+        public string CategoryName { get; set; }
+        public int CategoryId { get; set; }
+        public int DurationInMinutes { get; set; }
+        public int DurationInHours { get; set; }
+        public double Cost { get; set; }
+        public string Currency { get; set; }
+        public string CreationDate { get; set; }
+    }
+
 }

@@ -1,4 +1,4 @@
-﻿<div ng-controller="servicesController">
+﻿<div ng-controller="servicesController" ng-init="init()">
     <header class="top">
         <div class="logo_section"> <a class="logo" href="#"></a><img src="/Content/Assets/images/logo.png" alt="Logo"></a> </div>
 
@@ -316,31 +316,31 @@
                                 <h3>Categories (2)</h3>
                             </div>
                             <div class="categoryButton">
-                                <button class="pull-right btn btn-circle" id="settingCategory" title="" data-original-title="Add New Staff">
+                                <button class="pull-right btn btn-circle" id="settingCategory" title="" data-original-title="Add New Staff" ng-click="showcategorypopup = !showcategorypopup">
                                     <i class="fa fa-plus" aria-hidden="true"></i>
                                 </button>
                                 <div class="row">
 
                                     <div class="col-md-12">
-                                        <div id="newaddCategoryPopup" class="addCustomer bottomArrow  addCategoryPopup">
+                                        <div id="newaddCategoryPopup" class="addCustomer bottomArrow  addCategoryPopup" ng-show="showcategorypopup" style="display:block;">
                                             <div class="arrow"></div>
                                             <h3 class="addCustomerTitle">Add New Category</h3>
-                                            <div class="addcustomerContent">
-                                                <div class="customerField form-group">
-                                                    <input id="categoryNewName" class="form-control" type="text" placeholder="Category Name">
-                                                </div>
-
-                                                <div class="row">
-                                                    <div class="col-md-6 col-xs-6">
-                                                        <button id="addcategoryBtn" class="btn  add_category_btn addCustomerbtn">Add Category</button>
+                                            <form ng-submit="AddCategory()" name="CategoryForm" novalidate class="css-form">
+                                                <div class="addcustomerContent">
+                                                    <div class="customerField form-group">
+                                                        <input id="categoryNewName" class="form-control" type="text" placeholder="Category Name" ng-model="CategoryName">
                                                     </div>
-                                                    <div class="col-md-6 col-xs-6">
-                                                        <button id="cancelBtn" class="btn btn-default cateCancelbtn">Cancel</button>
+
+                                                    <div class="row">
+                                                        <div class="col-md-6 col-xs-6">
+                                                            <button id="addcategoryBtn" class="btn  add_category_btn addCustomerbtn" type="submit">Add Category</button>
+                                                        </div>
+                                                        <div class="col-md-6 col-xs-6">
+                                                            <button id="cancelBtn" class="btn btn-default cateCancelbtn" type="button" ng-click="showcategorypopup =false">Cancel</button>
+                                                        </div>
                                                     </div>
                                                 </div>
-
-
-                                            </div>
+                                            </form>
                                         </div>
                                     </div>
                                 </div>
@@ -356,18 +356,19 @@
                                             <span class="categoryServices">All Services (1)</span>
                                         </a>
                                     </li>
-                                    <li>
+
+                                    <li ng-repeat="item in AllCategories">                                     
                                         <a href="#">
                                             <i class="fa fa-book" aria-hidden="true"></i>
-                                            <span class="categoryServices">Category 1 (0)</span>
+                                            <span class="categoryServices">{{item.Name}}</span>
                                         </a>
                                     </li>
-                                    <li>
+                                    <!--<li>
                                         <a href="#">
                                             <i class="fa fa-book" aria-hidden="true"></i>
                                             <span class="categoryServices">Category 2 (0)</span>
                                         </a>
-                                    </li>
+                                    </li>-->
                                 </ul>
 
                             </div>
@@ -378,7 +379,7 @@
 
                     <div class="col-md-9 categoryRightSec">
                         <div class="categoryButtonsDiv">
-                            <button id="serviceSaveBtn" class="btn  add_category_btn serviceSaveBtn">Save</button>
+                            <button id="serviceSaveBtn" class="btn  add_category_btn serviceSaveBtn" ng-click="SaveService()">Save</button>
                             <button id="serviceCancelBtn" class="btn btn-default serviceCancelBtn">Cancel</button>
                         </div>
                         <div class="row">
@@ -392,19 +393,15 @@
                                                 <div class="fileupload fileupload-new" data-provides="fileupload">
                                                     <span class="btn btn-primary btn-file">
                                                         <span class="fileupload-new">
-
                                                         </span>
-
                                                         <input type="file">
                                                     </span>
-
-
                                                 </div>
                                                 <span class="uploadImageIcon uploadSeviceIcon"><i class="fa fa-camera" style="margin-left:3px;margin-top:-3px;" aria-hidden="true"></i></span>
                                             </label>
                                             <div class="col-md-8 col-sm-8 col-xs-12 sampleServicesSec">
 
-                                                <input type="text" class="customerName sampServiceName form-control" id="" placeholder="Sample Service name*">
+                                                <input type="text" class="customerName sampServiceName form-control" id="" placeholder="Sample Service name*" ng-model="ServiceName">
                                                 <div class="">
 
                                                     <div class="dropdown serviceColors">
@@ -430,7 +427,7 @@
                                                 </div>
                                                 <span class="characterAllowed">Maximum characters allowed <span id="serviceName_CharacterCount" style="color:red;">250</span></span>
                                                 <div class="servicesTextareaDiv">
-                                                    <textarea class="form-control" placeholder="Service Description" maxlength="500"></textarea>
+                                                    <textarea class="form-control" placeholder="Service Description" maxlength="500" ng-model="ServiceDescription"></textarea>
                                                 </div>
                                             </div>
 
@@ -438,25 +435,23 @@
 
                                     </form>
 
-                                    <form class="form-horizontal customerDetail" action="">
-
-
+                                    <form class="form-horizontal customerDetail"  >
                                         <div class="form-group">
                                             <label class="control-label col-md-4 col-sm-4 col-xs-12">Service Cost (₹)</label>
                                             <div class="col-md-8 col-sm-8 col-xs-12">
-                                                <input type="text" class="form-control" id="text" placeholder="90" name="text">
+                                                <input type="text" class="form-control" id="text" placeholder="90" name="text" ng-model="ServiceCost">
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label class="control-label col-md-4 col-sm-4 col-xs-12">Service Time (mins*)</label>
                                             <div class="col-md-8 col-sm-8 col-xs-12">
-                                                <input type="text" class="form-control" id="text" placeholder="90" name="text">
+                                                <input type="text" class="form-control" id="text" placeholder="90" name="text" ng-model="ServiceTime">
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label class="control-label col-md-4 col-sm-4 col-xs-12">Buffer Time (mins)</label>
                                             <div class="col-md-8 col-sm-8 col-xs-12">
-                                                <input type="text" class="form-control" id="text" placeholder="Time in min" name="text">
+                                                <input type="text" class="form-control" id="text" placeholder="Time in min" name="text" ng-model="BufferTime">
                                             </div>
                                         </div>
 
@@ -470,15 +465,15 @@
                                                     </button>
                                                     <div class="dropdown-menu popupdropdownDiv" aria-labelledby="dropdownMenu2">
                                                         <ul class="list-inline">
-                                                            <li>
+                                                            <!--<li>
                                                                 <span class="serviceCheckboxDiv">
                                                                     <input type="checkbox" class="sampleCheckbox" name="" value="service">
                                                                     Category1
                                                                 </span>
-                                                            </li>
-                                                            <li>
+                                                            </li>-->
+                                                            <li ng-repeat="data in AllCategories">
                                                                 <span class="serviceCheckboxDiv">
-                                                                    <input type="checkbox" class="sampleCheckbox" name="" value="service">
+                                                                    <input type="checkbox" class="sampleCheckbox" name="" value="service" ng-model="data.Confirmed" >{{data.Name}}
                                                                     Category2
                                                                 </span>
                                                             </li>
@@ -517,22 +512,12 @@
                                             <span class="glyphicon glyphicon-ok serviceOkIcon"></span>
                                             All Staff
                                         </button>
-                                        <!-- 	<ul class="dropdown-menu">
-                                                <li><a href="#"></a></li>
-                                                <li><a href="#"></a></li>
-                                                <li><a href="#"></a></li>
-                                            </ul> -->
                                     </div>
                                     <div class="dropdown serviceprovideBtn">
                                         <button class="btn dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
                                             <span class="glyphicon glyphicon-plus"></span>
                                             David
-                                        </button>
-                                        <!-- 	<ul class="dropdown-menu">
-                                                <li><a href="#"></a></li>
-                                                <li><a href="#"></a></li>
-                                                <li><a href="#"></a></li>
-                                            </ul> -->
+                                        </button>                                     
                                     </div>
                                 </div>
                             </div>
