@@ -21,7 +21,7 @@ namespace AngularMvcProject.Controllers
         public JsonResult postdata(string json)
         {
                       
-            string apiURL = "http://romzbookingmanager.azurewebsites.net/api/companyregistration/CreateAccount";
+            string apiURL = "http://bookingmanager1romz.azurewebsites.net/api/companyregistration/CreateAccount";
 
             //Data parameter Example
             //string data = "name=" + value
@@ -46,7 +46,7 @@ namespace AngularMvcProject.Controllers
         {
             try
             {
-                string apiUrl = "http://romzbookingmanager.azurewebsites.net/api/companyregistration/AlreadyExistsCompany?email=" + email;
+                string apiUrl = "http://bookingmanager1romz.azurewebsites.net/api/companyregistration/AlreadyExistsCompany?email=" + email;
                 string result = "";
                 var httpWebRequest = (HttpWebRequest)WebRequest.Create(apiUrl);
                 httpWebRequest.ContentType = "application/json";

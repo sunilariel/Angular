@@ -23,7 +23,7 @@ namespace AngularMvcProject.Controllers
         [HttpPost]
         public string CreateCustomer(StaffData dataobj)
         {
-            string apiURL = "http://romzbookingmanager.azurewebsites.net/" + dataobj.Url;
+            string apiURL = "http://bookingmanager1romz.azurewebsites.net/" + dataobj.Url;
             string result = "";
             var httpWebRequest = (HttpWebRequest)WebRequest.Create(apiURL);
             httpWebRequest.ContentType = "application/json";
@@ -52,7 +52,7 @@ namespace AngularMvcProject.Controllers
         {
             try
             {
-                string apiURL = "http://romzbookingmanager.azurewebsites.net/" + customer.Url;
+                string apiURL = "http://bookingmanager1romz.azurewebsites.net/" + customer.Url;
                 string result = "";
                 var httpWebRequest = (HttpWebRequest)WebRequest.Create(apiURL);
                 httpWebRequest.ContentType = "application/json";
@@ -90,7 +90,7 @@ namespace AngularMvcProject.Controllers
         [HttpPost]
         public string GetAllCustomer(String id)
         {
-            string apiURL = "http://romzbookingmanager.azurewebsites.net/api/customer/GetAllCustomers?companyId=" + id;
+            string apiURL = "http://bookingmanager1romz.azurewebsites.net/api/customer/GetAllCustomers?companyId=" + id;
             string result = "";
 
             var httpWebRequest = (HttpWebRequest)WebRequest.Create(apiURL);
@@ -110,7 +110,7 @@ namespace AngularMvcProject.Controllers
         public string DeleteCustomer(String Id)
         {
 
-            string apiUrl = "http://romzbookingmanager.azurewebsites.net/api/customer/DeleteCustomer?companyId=410&customerId=" + Id;
+            string apiUrl = "http://bookingmanager1romz.azurewebsites.net/api/customer/DeleteCustomer?companyId=410&customerId=" + Id;
             string result = "";
             var httpWebRequest = (HttpWebRequest)WebRequest.Create(apiUrl);
 
@@ -134,7 +134,7 @@ namespace AngularMvcProject.Controllers
         {
 
             // int Id = Convert.ToInt32(CompanyId);
-            string apiURL = "http://romzbookingmanager.azurewebsites.net/api/staff/GetAllocateServiceForEmployee?empid=" + EmployeeId+ "&compid=" + CompanyId;
+            string apiURL = "http://bookingmanager1romz.azurewebsites.net/api/staff/GetAllocateServiceForEmployee?empid=" + EmployeeId+ "&compid=" + CompanyId;
             string result = "";
             var httpWebRequest = (HttpWebRequest)WebRequest.Create(apiURL);
             httpWebRequest.ContentType = "application/json";
@@ -191,7 +191,7 @@ namespace AngularMvcProject.Controllers
         {
 
             // int Id = Convert.ToInt32(CompanyId);
-            string apiURL = "https://romzbookingmanager.azurewebsites.net/api/services/GetServiceById?id=" + ServiceId;
+            string apiURL = "http://bookingmanager1romz.azurewebsites.net/api/services/GetServiceById?id=" + ServiceId;
             string result = "";
             var httpWebRequest = (HttpWebRequest)WebRequest.Create(apiURL);
             httpWebRequest.ContentType = "application/json";
