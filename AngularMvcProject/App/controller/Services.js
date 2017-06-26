@@ -74,7 +74,7 @@
                 "CreationDate": "2017-06-26T11:08:28.4943519+00:00"
             }
 
-            var responsedata = bookingService.AddService(service);
+            var responsedata = bookingService.AddServices(service);
 
             responsedata.then(function (response) {
                 debugger;

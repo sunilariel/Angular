@@ -72,7 +72,7 @@ namespace AngularMvcProject.Controllers
         }
 
         [HttpPost]
-        public string AddService(Services service)
+        public string AddServices(Services service)
         {
             try
             {

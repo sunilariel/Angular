@@ -226,11 +226,11 @@ app.service("bookingService", function ($http) {
         return response;
     }
 
-    this.AddService=function(dataobject)
+    this.AddServices=function(dataobject)
     {
         var response = $http({
             method: "POST",
-            url: "/Services/AddService",
+            url: "/Services/AddServices",
             data:{service:dataobject}
         })
         return response;
