@@ -220,6 +220,7 @@ div#settingsTabContent {
 	font-size: 23px;
     color: #455862;
 	font-weight:400;	
+    margin:0px;
 }
 
 
@@ -2821,6 +2822,213 @@ ul.dashboardNtfList {
 
 
 
+/* All Services page css 27-june-2017 start here ===================== */
+
+.serviceField {
+	margin-top:0 !important;
+}
+.deleteCate {
+    color: #A00000;
+    font-weight: 300;
+	margin-right:10px;
+	
+}
+
+
+.deleteCate:hover, .deleteCate:focus {
+    color: #A00000;
+	text-decoration:none;
+}
+.serviceButton:hover {
+	box-shadow: 0px 1px 4px rgba(0,0,0,.1);
+    border: 1px solid #B5BBBB;
+    color: #222;
+	background:transparent;
+}
+.allServiceSec {
+	padding-right:110px;
+}
+.addServiceButton {
+	float:right;
+}
+.deleteCategorySec {
+    left: -82px;
+    width: 51%;
+    top: -35px;
+	
+}
+
+.rightImage {
+	background: url(../images/popup_pointer1.png) no-repeat;
+}
+.sampleServiceImage img {
+	border-radius:100%;
+	width:50px;
+	height:50px;
+	float: left;
+	margin: 0px 0;
+	margin-right: 10px;
+
+
+}
+
+.sampleServicediv ul.list-inline{
+	border-bottom: 1px solid #ccc;
+}
+.sampleServicediv ul.list-inline li {
+    cursor: pointer;
+    margin: 0px 5px;
+	padding: 15px 0;
+	display: block;
+}
+.borderWidth {
+    width: 5px;
+    height: 60px;
+    background: #ECADAD;
+    border-radius: 5px;
+    margin: -5px 0px;
+    float: left;
+}
+.serviceDragImage {
+	background: url(../images/drag-drop-bg.png) repeat-y;
+    height: 60px;
+    width: 15px;
+    visibility: hidden;
+    cursor: move;
+    margin: -6px 0px;
+	float: left;
+}
+.sampleServicediv ul.list-inline li:hover .serviceDragImage  {
+    visibility: visible;
+}
+.sampleHead {
+    margin: 0;
+    font-size: 18px;
+    color: #455862;
+    font-weight: normal;
+    overflow: hidden;
+}
+.sampleParaText {
+    font-size: 12px;
+    color: #ccc;
+    font-weight: normal;
+    overflow: hidden;
+}
+.serviceSampleDetail {
+	margin-top: -45px;
+	margin-right: 60px;
+}
+.serviceSampleDetail span {
+    padding-left: 50px;
+    font-size: 13px;
+    color: #C1C8CD;
+    font-weight: 300;
+}
+.rightIcon {
+	visibility:hidden;
+	float: right;
+    margin-top: -40px;
+    font-size: 24px;
+    color: #C1C8CD;
+}
+.sampleServicediv ul.list-inline li:hover .rightIcon  {
+    visibility: visible;
+}
+
+/* checkbox css 27-june-2017 start here ===================== */
+
+.checkbox label:after {
+    content: '';
+    display: table;
+    clear: both;
+}
+
+
+.serviceprovideBtn .checkbox label {
+    padding: 0;
+}
+.serviceprovideBtn .checkbox:focus  {
+    padding: 7px 20px 7px 10px;
+	color: #999 !important;
+	outline:none;
+	display:inline-block;
+	border-radius: 50px;
+	background-color: #dff6f5 !important; 
+}
+/* .serviceprovideBtn .checkbox:focus + label {
+	background-color: #000 !important;
+    color: #455862 !important;
+   
+} */
+
+.serviceprovideBtn .checkbox .cr {
+    position: relative;
+    display: inline-block;
+    border: 1px solid #ccd2d6;
+    border-radius: 100%;
+    width: 20px;
+    height: 20px;
+    color: #fff;
+    float: left;
+    margin-right: .5em;
+    background: #ccd2d6;
+}
+
+
+.serviceprovideBtn .checkbox .cr .cr-icon {
+    position: absolute;
+    font-size: .8em;
+    line-height: 0;
+    top: 50%;
+    left: 20%;
+}
+
+
+
+.serviceprovideBtn .checkbox label input[type="checkbox"] {
+    display: none;
+}
+
+.serviceprovideBtn .checkbox label input[type="checkbox"] + .cr > .cr-icon{
+    transform: scale(3) rotateZ(-20deg);
+    opacity: 0;
+    transition: all .3s ease-in;
+}
+
+.serviceprovideBtn .checkbox label input[type="checkbox"]:checked + .cr > .cr-icon {
+    transform: scale(1) rotateZ(0deg);
+    opacity: 1;
+}
+.serviceprovideBtn .checkbox label input[type="checkbox"]:checked  + span{
+	background:#27c3bb;
+	border:1px solid #27c3bb;
+} 
+
+
+.serviceprovideBtn .checkbox label input[type="checkbox"]:checked  + span:after{
+	display:none;
+} 
+
+.serviceprovideBtn .checkbox label input[type="checkbox"]:disabled + .cr {
+    opacity: .5;
+}
+.serviceprovideBtn .checkbox .cr:after {
+    content: "\2b";
+    position: absolute;
+    top: -7px;
+    left: 3px;
+    font-size: 22px;
+    font-weight: bold;
+    color: #fff;
+}
+
+
+/* checkbox css 27-june-2017 end here ===================== */
+
+
+/* All Services page css 27-june-2017 start here ===================== */
+
+
 /* media css start here ================================= */
 
 @media (max-width:1440px){
@@ -3094,6 +3302,7 @@ input#customerEmail {
 .dashboardApptrow {
     padding: 0 60px 0 0;
 }
+
 
 /*    Dashboard page media css end here 22-June-2017    */
 }

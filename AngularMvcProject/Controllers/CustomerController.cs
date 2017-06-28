@@ -107,10 +107,10 @@ namespace AngularMvcProject.Controllers
 
 
         [HttpPost]
-        public string DeleteCustomer(String Id)
+        public string DeleteCustomer(string CompanyId,string CustomerId)
         {
 
-            string apiUrl = "http://bookingmanager1romz.azurewebsites.net/api/customer/DeleteCustomer?companyId=410&customerId=" + Id;
+            string apiUrl = "http://bookingmanager1romz.azurewebsites.net/api/customer/DeleteCustomer?companyId=" + CompanyId  +"&customerId=" + CustomerId;
             string result = "";
             var httpWebRequest = (HttpWebRequest)WebRequest.Create(apiUrl);
 

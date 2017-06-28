@@ -81,8 +81,28 @@
     }
 
    
-    $scope.CreateCustomer = function () {
+    $scope.CreateCustomer = function (form) {
         debugger;
+        if (form.$invalid == true) {
+            if (form.customerName.$invalid == true)
+            {
+                form.customerName.$setTouched();
+                form.customerName.$touched = true;
+                return false;
+            }
+            
+        }
+        if (form.$invalid == true) {
+            if (form.customerEmail.$invalid == true) {
+                form.customerEmail.$setTouched();
+                form.customerEmail.$touched = true;
+                return false;
+            }
+
+        }
+
+
+
         $scope.MobileNo = $scope.customerExt + $scope.customerMobile;      
         var obj = {
             Url: 'api/customer/Create',
@@ -141,7 +161,7 @@
         $scope.updatedCustomerName = item.FirstName;
         $scope.updatedCustomerEmail = item.Email;
         $scope.updatedPreCustomerMobileNo = item.TelephoneNo.substring(0, 2);
-        $scope.updatedMobileNo = item.TelephoneNo.substring(2,12);
+        $scope.updatedMobileNo = item.TelephoneNo.substring(2,item.length);
     }
 
 
@@ -192,9 +212,9 @@
     }
 
     //Delete Customer//
-    $scope.DeleteCustomerData = function (id) {
+    $scope.DeleteCustomerData = function (CustomerId) {
         debugger;
-        var deletecustomer = bookingService.DeleteCustomer(id);
+        var deletecustomer = bookingService.DeleteCustomer($scope.CompanyId, CustomerId);
         deletecustomer.then(function (response) {
             $scope.MessageText = "Deleting Data"
             $scope.msg = "Data Deleted Successfully!";            
@@ -285,32 +305,35 @@
         debugger;
         if (form.$invalid == true)
         {
-            if(form.dropdownMenu2.$invalid==true)
+            if (form.providerdd.$invalid == true)
             {
-                form.dropdownMenu2.$setTouched();
-                form.dropdownMenu2.$touched = true;
+                form.providerdd.$setTouched();
+                form.providerdd.$touched = true;
 
                 return false;
             }
+            if (form.Servicedd.$invalid == true) {
+                form.Servicedd.$setTouched();
+                form.Servicedd.$touched = true;
+                return false;
+            }
+            
         }
         var appointment = {
-            "Id": "d1cb2ba7-330d-4aef-8e21-5e493f24543b",
-            "CompanyId": 394,
-            "ServiceId": 213,
-            "EmployeeId": 422,
-            "CustomerIdsCommaSeperated": "87,88",
+          
+            "CompanyId": $routeParams.CompanyId,
+            "ServiceId": $scope.selectedservice,
+            "EmployeeId": $scope.selectedprovider,
+            "CustomerIdsCommaSeperated": "11",
             "StartHour": 6,
-            "StartMinute": 7,
-            "EndHour": 0,
-            "EndMinute": 0,
+            "StartMinute":7 ,
+            "EndHour": 8,
+            "EndMinute": 9,
             "IsAdded": true,
             "Message": "sample string 11",
-            "CustomerIds": [
-              87,
-              88,             
-            ],
-            "Start": "2017-06-19T16:26:00.5616667+00:00",
-            "End": "2017-06-19T16:26:00.5616667+00:00"
+            "CustomerIds": [11],
+            "Start": "2017-06-27T11:45:54.4481356+00:00",
+            "End": "2017-06-27T11:45:54.4481356+00:00"
         }
 
         var addappointment = bookingService.AddAppointment(appointment);

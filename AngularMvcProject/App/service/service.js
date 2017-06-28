@@ -158,12 +158,12 @@ app.service("bookingService", function ($http) {
         return response;
     }
 
-    this.DeleteCustomer = function (id) {
+    this.DeleteCustomer = function (companyId,customerId) {
         debugger;
         var response = $http({
             method: "post",
             url: "/Customer/DeleteCustomer",
-            data: { Id: id }
+            data: { CompanyId: companyId,CustomerId:customerId }
         })
         return response;
     }
@@ -244,6 +244,16 @@ app.service("bookingService", function ($http) {
             data: { SeviceId: serviceId, CategoryId: categoryId }
         })
         return response;
+    }
+
+    this.GetAllService=function(companyId)
+    {
+        var response = $http({
+            method: "POST",
+            url: "/Services/GetAllServices",
+            data: { CompanyId: companyId }
+        })
+       return response;
     }
   
 })

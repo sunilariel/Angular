@@ -570,7 +570,7 @@ app.controller('bookingController', ['$scope', '$routeParams', '$rootScope', '$h
                 $scope.IsVisible = true;
                 $timeout(function () {
                     $scope.IsVisible = false;
-                }, 500);
+                }, 1000);
 
                 var getServices = bookingService.getServicesData($scope.companyId);
                 getServices.then(function (response) {
@@ -665,7 +665,7 @@ app.controller('bookingController', ['$scope', '$routeParams', '$rootScope', '$h
                 $scope.IsVisible = true;
                 $timeout(function () {               
                     $scope.IsVisible = false;
-                }, 500);
+                }, 1000);
 
                 var getServices = bookingService.getServicesData($scope.companyId);
                 getServices.then(function (response) {
@@ -819,7 +819,7 @@ app.controller('bookingController', ['$scope', '$routeParams', '$rootScope', '$h
             $scope.IsVisible = true;
             $timeout(function () {               
                 $scope.IsVisible = false;
-            }, 500);
+            }, 1000);
 
             return false;
         }
