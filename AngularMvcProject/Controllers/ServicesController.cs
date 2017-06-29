@@ -127,5 +127,27 @@ namespace AngularMvcProject.Controllers
 
         }
 
+        [HttpPost]
+        public string GetAllServices(string CompanyId)
+        {
+            try
+            {
+                var result = "";
+                var httpWebRequest = (HttpWebRequest)WebRequest.Create("http://bookingmanager1romz.azurewebsites.net/api/services/GetServicesForCompany?companyId="+ CompanyId);
+                httpWebRequest.Method = "GET";
+                httpWebRequest.ContentType = "application/json";
+             
+                var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
+                using (var StreamReader = new StreamReader(httpResponse.GetResponseStream()))
+                {
+                    result = StreamReader.ReadToEnd();
+                }
+                return result;
+            }
+            catch (Exception e)
+            {
+                return e.ToString();
+            }
+        }
     }
 }

@@ -70,7 +70,7 @@ app.controller("SignUp",['$scope', '$http', '$timeout','$location', function ($s
                 $scope.MessageText ="Saving Data"
                 $scope.msg = "Post Data Submitted Successfully!";
 
-                $timeout(function () { $scope.MessageText = "Data saved."; $timeout(function () { $scope.IsVisible = false; }, 1000) }, 500);
+                $timeout(function () { $scope.MessageText = "Your Details saved."; $timeout(function () { $scope.IsVisible = false; }, 1000) }, 500);
 
                 $location.path('/wizard');
             }

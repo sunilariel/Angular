@@ -28,8 +28,7 @@ app.controller('bookingController', ['$scope', '$routeParams', '$rootScope', '$h
    
     $scope.showStaffBinded = [];
     $scope.init = function () {
-        debugger;
-       
+             
         $scope.IsVisible = false;
         var count = $scope.serviceInfo.length;
         for (var i = 0; i < count; i++) {
@@ -104,7 +103,7 @@ app.controller('bookingController', ['$scope', '$routeParams', '$rootScope', '$h
                     $scope.IsVisible = true;
 
                     $timeout(function () {
-                        $scope.MessageText = "Data saved."; $timeout(function () {
+                        $scope.MessageText = "Data Saved"; $timeout(function () {
                             $scope.IsVisible = false;
 
                             var activediv = angular.element(document.querySelector('#divstep2'));
@@ -210,7 +209,7 @@ app.controller('bookingController', ['$scope', '$routeParams', '$rootScope', '$h
 
                 $scope.IsVisible = true;
                 $timeout(function () {
-                    $scope.MessageText = "Data saved."; $timeout(function () {
+                    $scope.MessageText = "Your Business Hours Saved."; $timeout(function () {
                         $scope.IsVisible = false;
 
                         var activediv = angular.element(document.querySelector('#divstep3'));
@@ -417,7 +416,7 @@ app.controller('bookingController', ['$scope', '$routeParams', '$rootScope', '$h
         getstaffdata.then(function (msg) {
             debugger;
             if (msg.data.Success == true) {
-                $scope.MessageText = "Saving Data"
+                $scope.MessageText = "Adding New Staff"
                 $scope.msg = "Post Data Submitted Successfully!";
                
                 var CompanyId = $scope.companyId;
@@ -438,7 +437,7 @@ app.controller('bookingController', ['$scope', '$routeParams', '$rootScope', '$h
 
                 $scope.IsVisible = true;
                 $timeout(function () {
-                    $scope.MessageText = "Data saved."; $timeout(function () {
+                    $scope.MessageText = "Staff Saved."; $timeout(function () {
                         $scope.IsVisible = false;
                        
                     }, 1000)
@@ -856,7 +855,7 @@ app.controller('bookingController', ['$scope', '$routeParams', '$rootScope', '$h
         serviceResponse.then(function (msg) {
             debugger;
             if (msg.data.Success == true) {
-                $scope.MessageText = "Saving Data"
+                $scope.MessageText = "Adding Service"
                 $scope.msg = "Post Data Submitted Successfully!";
 
                 $scope.IsVisible = true;
@@ -905,7 +904,7 @@ app.controller('bookingController', ['$scope', '$routeParams', '$rootScope', '$h
                 servicePricetouched.removeClass('ng-touched');
                 $scope.IsVisible = true;
                 $timeout(function () {
-                    $scope.MessageText = "Data saved.";
+                    $scope.MessageText = "Services saved.";
                   
                     $timeout(function () { $scope.IsVisible = false; }, 1000)
                 }, 500);

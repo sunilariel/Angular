@@ -55,6 +55,12 @@
     //This function will run first on page load.
     $scope.init=function()
     {
+
+        /////////////////
+        $scope.startDate = new Date();
+        $scope.opened = false;
+
+        //////
         debugger;      
         $scope.CompanyId = $routeParams.CompanyId;
         $scope.showcustomer = false;
@@ -76,13 +82,23 @@
             for (var i = 0; i < response.data.length; i++) {
                 $scope.Provider.push({ 'Id': response.data[i].Id, 'CompanyId': response.data[i].CompanyId, 'UserName': response.data[i].UserName, 'staffName': response.data[i].FirstName, 'staffEmail': response.data[i].Email });
             }
-        });
-
+        });      
+        $scope.timeInfoFrom = ["08:00 am", "09:00 am", "10:00 am", "11:00 am", "12:00 pm", "13:00 pm", "14:00 pm", "15:00 pm", "16:00 pm", "17:00 pm", "18:00 pm", "19:00 pm", "20:00 pm"];
     }
 
-   
-    $scope.CreateCustomer = function (form) {
+    $scope.disabled = function (calendarDate, mode) {
+        return mode === 'day' && (calendarDate.getDay() === 0 || calendarDate.getDay() === 6);
+    };
+
+  
+
+
+
+
+  
+    $scope.CreateCustomer = function (form) {      
         debugger;
+  
         if (form.$invalid == true) {
             if (form.customerName.$invalid == true)
             {
@@ -100,8 +116,6 @@
             }
 
         }
-
-
 
         $scope.MobileNo = $scope.customerExt + $scope.customerMobile;      
         var obj = {
@@ -272,6 +286,8 @@
         $scope.showModal = !$scope.showModal;
     };
 
+
+    //Get Service allocated to employee
     $scope.GetAllocateServiceToEmployee = function (EmployeeId) {
         debugger;
 
@@ -282,6 +298,7 @@
             $scope.EmployeeServices = [];
             $scope.EmployeeServices = result.data;
 
+         
         }), function () {
             alert('Error in getting post records');
         };
@@ -303,6 +320,7 @@
     $scope.SaveAppointment=function(form)
     {
         debugger;
+        var selectedvalue = $scope.option;
         if (form.$invalid == true)
         {
             if (form.providerdd.$invalid == true)
@@ -325,24 +343,39 @@
             "ServiceId": $scope.selectedservice,
             "EmployeeId": $scope.selectedprovider,
             "CustomerIdsCommaSeperated": "11",
-            "StartHour": 6,
-            "StartMinute":7 ,
-            "EndHour": 8,
-            "EndMinute": 9,
+            "StartHour": 10,
+            "StartMinute":45 ,
+            "EndHour": 0,
+            "EndMinute": 0,
             "IsAdded": true,
             "Message": "sample string 11",
             "CustomerIds": [11],
-            "Start": "2017-06-27T11:45:54.4481356+00:00",
+            "Start": new Date(),
             "End": "2017-06-27T11:45:54.4481356+00:00"
         }
 
         var addappointment = bookingService.AddAppointment(appointment);
 
+        
         addappointment.then(function (response) {
-            debugger;
+            if(response.Success==true)
+            {
+                $scope.MessageText = "Creating Appointment";
+                $timeout(function () {
+                    $scope.IsVisible = true;
+                    $timeout(function () {
+                        $scope.MessageText = "Created Appointment";
+                        $scope.IsVisible = false;
+                    }, 500);
+                },1000)
+            }
 
         });
     }
 
    
 }]);
+
+
+
+

@@ -2365,7 +2365,13 @@ table#mytable tr td {
 	margin-left:-10px;
 }
 .addServices {
-	left:40%;
+	left: 48%;
+    width: 85%;
+    top: -10px;
+}
+.addCustomerCancelbtn {
+    margin-top: 5px;
+    display: inline-block;
 }
 .categoryList ul li a {
     color: rgb(193, 200, 205);
@@ -3028,6 +3034,434 @@ ul.dashboardNtfList {
 
 /* All Services page css 27-june-2017 start here ===================== */
 
+
+/* Staff page 28-june-2017 start here ===================== */
+
+.detail-navbar.staffDetail {
+    width: 95%;
+    position: relative !important;
+    margin: auto;
+    float: left;
+    top: 0 !important;
+}
+.detail-navbar.staffDetail ul li a {
+    text-transform: uppercase;
+    padding: 0px 0px 24px 0px;
+    font-size: 14px;
+    font-weight: normal;
+    color: #C1C8CD;
+}
+.detail-navbar.staffDetail ul li.active {
+    color: #455862 !important;
+}
+.detail-navbar.staffDetail ul li {
+    margin-right: 40px;
+}
+.staffList .staffUser img {
+	border: 1px solid #CCC;
+    width: 30px;
+    height: 30px;
+	border-radius:100%;
+}
+.staffList ul li a {
+	color:#495861;
+}
+.staffProfileDiv {
+	margin:0;
+	overflow: auto;
+    height: 600px;
+	padding-bottom: 85px;
+}
+.staffDetailImg img {
+	width:90px;
+	height:90px;
+	border:1px solid #ccc;
+}
+.staffTextaria {
+	margin-top:5px;
+}
+.staffIconImg i {
+    top: 24px;
+    padding-top: 13px;
+    left: 52px;
+    width: 55px;
+    height: 55px;
+}
+.staffformGroup {
+	margin-bottom:5px;
+}
+.staffUserDetail {
+    border-bottom: 1px solid #ccc;
+    padding: 20px 0;
+}
+.staffDetail  ul {
+	border-bottom: 1px solid #ccc;
+	width: 98%;
+}
+.textLink {
+	color:#0088cc;
+	font-size:12px;
+}
+.premiumBtn .wayGoogletext {
+	font-size: 13px;
+    color: #999;
+	margin-left:10px;
+}
+.staffNoteText {
+    font-size: 12px;
+    float: left;
+    width: 100%;
+    margin-left: 15px;
+}
+.disableField {
+    height: 38px !important;
+}
+.disableField.form-control[disabled] {
+	background: #fff !important;
+	border:1px solid #ccc;	
+}
+.staffProfileDiv:hover .disableField.form-control[disabled] {
+	background: #F1F5F7 !important;
+	border:1px solid #ccc;	
+}
+.InstructionsText a {
+	font-size: 13px;
+    color: #999;
+	text-decoration:none;
+}
+.betaText a{
+	font-size: 12px;
+    color: #455862;
+	text-decoration:none;
+	margin-left:10px;
+}
+.DetailDiv {
+	padding-top:0;
+}
+.staffServicImg {
+    text-align: right;
+}
+.staffServicImg img {
+	width:90px;
+	height:90px;
+	border-radius:100%;
+	border:1px solid #ccc;
+}
+.StaffminText {
+	margin:10px 0;
+}
+.StaffminText a {
+	color: #455862;
+    font-weight: 400;
+	text-decoration:none;
+	font-size:12px;
+}
+.staffDeleteIcon {
+    margin-right: 0 !important;
+}
+.staffDeleteIcon .btn {
+	margin-right:0;
+}
+.timeOffText {
+    border-bottom: 1px solid #ccc;
+}
+h3.serviceProText {
+    display: inline-block;
+    margin-top: 20px !important;
+    margin-bottom: 10px !important;
+}
+.timeOffPlusBtn {
+    padding: 4px 9px;
+    margin-top: 18px;
+}
+.addstaffBtn {
+  padding: 7px 9px;  
+}
+.clickingButton {
+    text-align: center;
+    border: 1px solid #ccc;
+    padding: 20px;
+    margin-top: 25px;
+}
+.clickingButton h5 {
+    color: #455862;
+    font-weight: normal;
+    font-size: 16px;
+    margin-bottom: 17px;
+}
+.addTimeOff {
+    background: #F1F5F7;
+    border-color: #F1F5F7;
+    font-size: 14px;
+    line-height: 32px;
+    margin-top: 5px;
+    padding: 1px 20px;
+    text-align: center;
+    color: #252C32;
+    border-style: solid;
+    border-width: 1px;
+    height: 34px;
+    border-radius: 3px;
+    cursor: pointer;
+    border: solid 1px #D7D7D7;
+	
+}
+
+.addTimeOff:hover {
+  box-shadow: 0px 1px 4px rgba(0,0,0,.1);
+    border: 1px solid #B5BBBB;
+    color: #222;
+	background: #F1F5F7;
+}
+.addTimeOff:focus {
+	outline:none;
+}
+span.staffdatepickerTime {
+    position: absolute;
+    top: 3px;
+    right: 16px;
+    border-left: 1px solid #ccc;
+    padding: 0px 10px;
+    height: 28px;
+}
+span.staffdatepickerTime a {
+    font-size: 13px;
+    color: #686868;
+    text-decoration: none;
+}
+.staffTimeDropDown ul.StaffdropdownList {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    z-index: 1002;
+    overflow: auto;
+    height: 150px;
+    background: none repeat scroll 0 0 #FFF;
+    box-shadow: 0 1px 6px #777;
+    width: 36%;
+    position: absolute;
+    right: 15px;
+	display:none;
+}
+.staffTimeDropDown ul.StaffdropdownList li {
+    text-align: left;
+    margin-right: 0px;
+    padding: 2px 10px;
+    font-size: 12px;
+    color: #686868;
+}
+.staffTimeDropDown ul.StaffdropdownList li:hover {
+    color: #000;
+}
+
+.staffdatepickerTime .staffdownArrow {
+    font-size: 11px;
+    margin-top: 9px;
+}
+ 
+
+.selectDropdown .select_btn {
+    background: none;
+    border: none;
+    position: absolute;
+    top: 2px;
+    right: 16px;
+    border-left: 1px solid #ccc;
+    height: 30px;
+}  
+.selectDropdown .select_btn:focus {
+    background: none;
+    border: none;
+    outline:none;
+    box-shadow:none;
+     border-left: 1px solid #ccc;
+} 
+.customerField .emailField {
+    width:87%;
+}
+.mobilenumberField {
+    padding-left:5px;
+}
+
+/* Staff page css 28-june-2017 end here ===================== */
+
+/* Staff page css 29-june-2017 start here ===================== */
+
+.StaffColumnDiv .week_div p {
+    border-radius: 50px;
+    background-color: #dff6f5;
+    color: #455862;
+    padding: 7px 12px;
+    font-size: 13px;
+    display: inline-block;
+	line-height:normal;
+}
+.staffWorkingHoursSec .colom_div {
+    margin-bottom: 3px;
+}
+.OffDayText .week_div p {
+	background:transparent;
+	color:#c1c8cd;
+}
+.BreakSelectDiv {
+	float:left;
+}
+.BreakDeleteBtn {
+    margin-left: 20px;
+    display: inline-block;
+	margin-top: 2px;
+}
+.addBreakBtn.btn {
+    background-color: #51a351;
+    border-radius: 15px;
+    padding: 2px 10px;
+    font-size: 11.9px;
+    color: #ffffff;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+    background-color: #5bb75b;
+    background-image: -moz-linear-gradient(top, #62c462, #51a351);
+    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#62c462), to(#51a351));
+    background-image: -webkit-linear-gradient(top, #62c462, #51a351);
+    background-image: -o-linear-gradient(top, #62c462, #51a351);
+    background-image: linear-gradient(to bottom, #62c462, #51a351);
+    background-repeat: repeat-x;
+    border-color: #51a351 #51a351 #387038;
+    border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+    filter: progid:DXImageTransform.Microsoft.gradient(enabled = false);
+	outline:none;
+	margin-top: 10px;
+}
+.BreakDeleteBtn .btn:focus {
+    outline: none;
+    box-shadow: none;
+}
+.addBreakBtn.btn:focus {
+	outline: none;
+    box-shadow: none;
+}
+.timeOffPlusBtn:focus {
+	outline: none !important;
+    box-shadow: none;
+}
+.staffBreakTooltip {
+    top: -33px;
+    width: 46%;
+    left: 40px;
+}
+
+.staffStartDate label {
+    color: #5a5a5a;
+    font-size: 13px;
+    font-weight: normal;
+}
+.allDayCheck {
+	float:left;
+	padding-top: 0 !important;
+}
+.moreOptionDiv {
+    text-align: right;
+    
+}
+.moreOptionDiv a {
+    color: #5a5a5a;
+    font-size: 13px;
+	text-decoration:none;
+}
+.Staffminus {
+	display:none;
+}
+.StaffrecurringDiv .onoffswitch.recurringOnOffBtn {
+    margin-left: -10px;
+}
+
+.StaffDateTime {
+    border: solid 1px #E9EDAB;
+    background: #FDFFE5;
+    text-align: center;
+	height:35px;
+}
+.StaffDateTime p {
+	margin:0;
+	line-height: 35px;
+	font-size:13px;
+	text-decoration:none;
+}
+.StaffrecurringDiv .apptNotes {
+    border: 1px solid #d9d9d9;
+    border-radius: 5px;
+    box-shadow: none;
+    color: #686868;
+    font-size: 13px;
+    height: 34px;
+}
+.StaffrecurringDiv .apptNotes:focus {
+   background-color: #fff !important;
+    border-color: rgba(39, 195, 187, 0.8) !important;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px rgba(39, 195, 187, 0.6) !important;
+}
+.hideContent {
+	display:none;
+}
+.staffFooter {
+	text-align:center;
+}
+.saveChangesDiv .saveChangesBtn {
+    background: none repeat scroll 0 0 #27c3bb;
+    border-radius: 4px;
+    color: #fff !important;
+    cursor: pointer;
+    border: 1px solid #27c3bb;
+    width: 150px;
+}
+.staffFooter {
+    text-align: center;
+    width: 90%;
+    margin: auto;
+}
+.staffBodyDiv {
+    padding: 25px;
+	    padding-bottom: 0;
+}
+.StaffPopupHead {
+	overflow:visible;
+}
+.staffModalPopup {
+	padding:25px;
+}
+.staffCalendar i {
+    border: 1px solid #ccc;
+    border-radius: 100%;
+    font-size: 16px;
+    height: 50px;
+    line-height: 46px;
+    text-align: center;
+    width: 50px;
+}
+.addstaffDiv {
+    padding: 10px 7px;
+    border-bottom: 1px solid #e5e5e5;
+    margin: 0;
+}
+.dateText h4 {
+    color: #455862;
+    font-size: 13px;
+    font-weight: normal;
+	margin-bottom: 2px;
+}
+.dateText p {
+    color: #c1c8cd;
+    font-size: 12px;
+    font-weight: normal;
+}
+.addstaffDiv:hover {
+	border-bottom: 1px solid #e5e5e5;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+}
+.exportBtn {
+	margin-right: 10px;
+}
+    
+/* Staff page css 29-june-2017 end here ===================== */
 
 /* media css start here ================================= */
 
@@ -3884,4 +4318,14 @@ div#deletetooltipPopup{
 }
 .cursorhand{
     cursor:pointer;
+}
+
+
+
+@media screen and (-webkit-min-device-pixel-ratio:0) {  /*safari and chrome*/
+    select {
+        height:30px;
+        line-height:30px;
+        background:#f4f4f4;
+    } 
 }

@@ -191,8 +191,7 @@ namespace AngularMvcProject.Models
     //////////Appointment Section//////////////////////
 
     public class BookAppointment
-    {
-        public string Id { get; set; }
+    {   
         public int CompanyId { get; set; }
         public int ServiceId { get; set; }
         public int EmployeeId { get; set; }
