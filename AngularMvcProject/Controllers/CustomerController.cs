@@ -202,13 +202,26 @@ namespace AngularMvcProject.Controllers
             {
                 result = streamReader.ReadToEnd();
             }
-
-
             return result;
-
         }
 
+        [HttpPost]
 
+        public string GetAppointmentWorkinghours(string EmployeeId)
+        {
+            string apiURL = "http://bookingmanager1romz.azurewebsites.net/api/staff/GetWorkingHours?employeeId=" + EmployeeId;
+            string result = "";
+            var httpWebRequest = (HttpWebRequest)WebRequest.Create(apiURL);
+            httpWebRequest.ContentType = "application/json";
+            httpWebRequest.Method = "GET";
+
+            var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
+            using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
+            {
+                result = streamReader.ReadToEnd();
+            }
+            return result;
+        }
 
     }
 }

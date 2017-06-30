@@ -255,6 +255,16 @@ app.service("bookingService", function ($http) {
         })
        return response;
     }
+
+    this.GetAppointmentWorkingHours=function(Id)
+    {
+        var response = $http({
+            method: "POST",
+            url: "/Customer/GetAppointmentWorkinghours",
+            data: { EmployeeId: Id }
+        })
+        return response;
+    }
   
 })
 

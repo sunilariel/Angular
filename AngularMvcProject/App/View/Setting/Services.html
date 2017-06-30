@@ -351,14 +351,14 @@
                             <div class="categoryList">
                                 <ul>
                                     <li>
-                                        <a href="#">
+                                        <a ng-click="showAllServicePopup()">
                                             <i class="fa fa-book" aria-hidden="true"></i>
-                                            <span class="categoryServices">All Services (1)</span>
+                                            <span class="categoryServices">All Services</span>
                                         </a>
                                     </li>
 
                                     <li ng-repeat="item in AllCategories">                                     
-                                        <a href="#">
+                                        <a ng-click="ShowCategoryService()">
                                             <i class="fa fa-book" aria-hidden="true"></i>
                                             <span class="categoryServices">{{item.Name}}</span>
                                         </a>
@@ -377,15 +377,15 @@
                         </div>
                     </div>
 
-                    <div class="col-md-9 categoryRightSec">
+                    <div class="col-md-9 categoryRightSec" ng-hide="showAddServiceDiv">
                         <div class="categoryButtonsDiv">
                             <button id="serviceSaveBtn" class="btn  add_category_btn serviceSaveBtn" ng-click="SaveService()">Save</button>
-                            <button id="serviceCancelBtn" class="btn btn-default serviceCancelBtn">Cancel</button>
+                            <button id="serviceCancelBtn" class="btn btn-default serviceCancelBtn" ng-click="showAllServicePopup()">Cancel</button>
                         </div>
                         <div class="row">
                             <div class="col-md-7">
                                 <div class="customerProfileDiv">
-                                    <form class="form-horizontal imageUploadForm">
+                                    <form class="form-horizontal imageUploadForm" name="servicenameform">
                                         <div class="form-group 	serviceIconImage">
                                             <label class="control-label col-md-4 col-sm-4 col-xs-4">
                                                 <img src="/Content/Assets/images/service-icon-big.png">
@@ -401,7 +401,7 @@
                                             </label>
                                             <div class="col-md-8 col-sm-8 col-xs-12 sampleServicesSec">
 
-                                                <input type="text" class="customerName sampServiceName form-control" id="" placeholder="Sample Service name*" ng-model="ServiceName">
+                                                <input type="text" class="customerName sampServiceName form-control" id="" placeholder="Sample Service name*" ng-model="ServiceName" name="ServiceName">
                                                 <div class="">
 
                                                     <div class="dropdown serviceColors">
@@ -411,15 +411,15 @@
                                                         </button>
 
                                                         <ul class="dropdown-menu serviceColorList">
-                                                            <li><a href="#"><span class="serviceColorPallet red"></span>Red</a></li>
-                                                            <li><a href="#"><span class="serviceColorPallet light-gray"></span>Light gray</a></li>
-                                                            <li><a href="#"><span class="serviceColorPallet green"></span>Green</a></li>
-                                                            <li><a href="#"><span class="serviceColorPallet light-blue"></span>Light blue</a></li>
-                                                            <li><a href="#"><span class="serviceColorPallet maroon"></span>Maroon</a></li>
-                                                            <li><a href="#"><span class="serviceColorPallet deep-sky-blue"></span>Deep sky blue</a></li>
-                                                            <li><a href="#"><span class="serviceColorPallet violet"></span>Violet</a></li>
-                                                            <li><a href="#"><span class="serviceColorPallet yellow"></span>Yellow</a></li>
-                                                            <li><a href="#"><span class="serviceColorPallet orange"></span>Orange</a></li>
+                                                            <li><a href=""><span class="serviceColorPallet red"></span>Red</a></li>
+                                                            <li><a href=""><span class="serviceColorPallet light-gray"></span>Light gray</a></li>
+                                                            <li><a href=""><span class="serviceColorPallet green"></span>Green</a></li>
+                                                            <li><a href=""><span class="serviceColorPallet light-blue"></span>Light blue</a></li>
+                                                            <li><a href=""><span class="serviceColorPallet maroon"></span>Maroon</a></li>
+                                                            <li><a href=""><span class="serviceColorPallet deep-sky-blue"></span>Deep sky blue</a></li>
+                                                            <li><a href=""><span class="serviceColorPallet violet"></span>Violet</a></li>
+                                                            <li><a href=""><span class="serviceColorPallet yellow"></span>Yellow</a></li>
+                                                            <li><a href=""><span class="serviceColorPallet orange"></span>Orange</a></li>
                                                         </ul>
 
 
@@ -435,7 +435,7 @@
 
                                     </form>
 
-                                    <form class="form-horizontal customerDetail"  >
+                                    <form class="form-horizontal customerDetail" name="servicedetailform"  >
                                         <div class="form-group">
                                             <label class="control-label col-md-4 col-sm-4 col-xs-12">Service Cost (₹)</label>
                                             <div class="col-md-8 col-sm-8 col-xs-12">
@@ -445,7 +445,7 @@
                                         <div class="form-group">
                                             <label class="control-label col-md-4 col-sm-4 col-xs-12">Service Time (mins*)</label>
                                             <div class="col-md-8 col-sm-8 col-xs-12">
-                                                <input type="text" class="form-control" id="text" placeholder="90" name="text" ng-model="ServiceTime">
+                                                <input type="text" class="form-control" id="text" placeholder="90" name="ServiceTime" ng-model="ServiceTime" >
                                             </div>
                                         </div>
                                         <div class="form-group">
@@ -473,8 +473,7 @@
                                                             </li>-->
                                                             <li ng-repeat="data in AllCategories">
                                                                 <span class="serviceCheckboxDiv">
-                                                                    <input type="checkbox" class="sampleCheckbox" name="" value="service" ng-model="data.Confirmed" >{{data.Name}}
-                                                                    Category2
+                                                                    <input type="checkbox" class="sampleCheckbox" name="" value="service" ng-model="data.Confirmed" >{{data.Name}}                                                                    
                                                                 </span>
                                                             </li>
                                                         </ul>
@@ -506,23 +505,154 @@
                             <div class="col-md-5">
                                 <div class="provideServiceDiv customerProfileDiv">
                                     <p>Who can provide the service *</p>
-                                    <div class="dropdown serviceprovideBtn">
-                                        <button id="staffBtn" class="btn dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
+                                    <div class="dropdown serviceprovideBtn" ng-repeat="data in StaffList">
+                                        <!--<button id="staffBtn" class="btn dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
                                             <span id="servicePlusIcon" class="glyphicon glyphicon-plus"></span>
                                             <span class="glyphicon glyphicon-ok serviceOkIcon"></span>
                                             All Staff
-                                        </button>
+                                        </button>-->
+                                        <div class="checkbox active">
+                                            <label class="labelBox" id="clickLabel">
+                                                <input type="checkbox" value="">
+                                                <span class="cr"><i class="cr-icon glyphicon glyphicon-ok"></i></span>
+                                                All Staff
+                                            </label>
+                                        </div>
                                     </div>
-                                    <div class="dropdown serviceprovideBtn">
-                                        <button class="btn dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
-                                            <span class="glyphicon glyphicon-plus"></span>
-                                            David
-                                        </button>                                     
+                                    <div class="dropdown serviceprovideBtn">                                                                              
+                                        <div class="checkbox active">
+                                            <label class="labelBox" id="clickLabel">
+                                                <input type="checkbox" value="">
+                                                <span class="cr"><i class="cr-icon glyphicon glyphicon-ok"></i></span>
+                                                David
+                                            </label>
+                                        </div>                                 
                                     </div>
                                 </div>
                             </div>
-
                         </div>
+                    </div>
+
+                    <div class="col-md-9 categoryRightSec allServiceSec" ng-hide="showCategoryServicesDiv" >
+                        <div class="categoryButtonsDiv">
+                            <div class="row">
+                                <div class="col-md-6 col-xs-6">
+                                    <div class="customerDetail">
+                                        <input type="text" class="customerName serviceField form-control" id="name" name="name" placeholder="Services">
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-xs-6">
+                                    <div class="addServiceButton">
+                                        <a href="#" id="deletecateBtn" class="deleteCate">
+                                            <i class="fa fa-trash-o" aria-hidden="true"></i>
+                                            <span>delete category</span>
+                                        </a>
+                                        <div id="tooltipPopupdelete" class="addCustomer deleteCategorySec" style="display: none;">
+                                            <div class="pointerRightIcon rightImage"></div>
+                                            <h3 class="addCustomerTitle">Delete Category?</h3>
+                                            <div class="addcustomerContent">
+                                                <button id="deleteBtn" class="btn btn-danger addCustomerbtn">Delete</button>
+                                                <button id="cancleBtn" class="btn btn-default addCustomerbtn">Cancel</button>
+                                            </div>
+                                        </div>
+                                        <a ng-click="AddServicePopup()" class="serviceButton btn btn-default">
+                                            <i class="fa fa-plus" aria-hidden="true"></i>
+                                            <span>Add Service</span>
+                                        </a>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="sampleServiceSec">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="sampleServicediv">
+                                        <ul class="list-inline">
+                                            <li ng-repeat="data in AllServices">
+                                                <div class="borderWidth"></div>
+                                                <div class="serviceDragImage"></div>
+                                                <div class="sampleServiceImage">
+                                                    <img src="/Content/Assets/images/service-icon-big.png">
+                                               
+                                                    <div class="samSerDiv">
+                                                        <h4 class="sampleHead">{{data.Name}}</h4>
+                                                        <p class="sampleParaText"></p>
+                                                        <div class="serviceSampleDetail pull-right">
+
+                                                            <span>{{data.DurationInMinutes}}</span>
+                                                            <span>{{data.Cost}}</span>
+                                                            <!--<span>No Buffer</span>-->
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="rightIcon">
+                                                    <i class="fa fa-chevron-right" aria-hidden="true"></i>
+                                                </div>
+                                            </li>
+
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="col-md-9 categoryRightSec allServiceSec" ng-hide="showAllServicesDiv">
+                        <div class="categoryButtonsDiv">
+                            <div class="row">
+                                <div class="col-md-6 col-xs-6">
+                                    <div class="customerDetail">
+                                        <h3>All Services</h3>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-xs-6">
+                                    <div class="addServiceButton">
+                                        <a ng-click="AddServicePopup()" class="serviceButton btn btn-default">
+                                            <i class="fa fa-plus" aria-hidden="true"></i>
+                                            <span>Add Service</span>
+                                        </a>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="sampleServiceSec">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="sampleServicediv">
+                                        <ul class="list-inline">
+                                            <li ng-repeat="servicedetail in AllServices ">
+                                                <div class="borderWidth"></div>
+                                                <div class="serviceDragImage"></div>
+                                                <div class="sampleServiceImage">
+                                                    <img src="/Content/Assets/images/service-icon-big.png">
+                                                  
+                                                    <div class="samSerDiv">
+                                                        <h4 class="sampleHead">{{servicedetail.Name}}</h4>
+                                                        <p class="sampleParaText"></p>
+                                                        <div class="serviceSampleDetail pull-right">
+
+                                                            <span>{{servicedetail.DurationInMinutes}}</span>
+                                                            <span>{{servicedetail.Cost}}</span>
+                                                            <span>No Buffer</span>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="rightIcon">
+                                                    <i class="fa fa-chevron-right" aria-hidden="true"></i>
+                                                </div>
+                                            </li>
+
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
 

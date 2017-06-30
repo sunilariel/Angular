@@ -18,6 +18,10 @@
 
     $scope.init = function () {
         debugger;
+        $scope.showAddServiceDiv = true;
+        $scope.showCategoryServicesDiv = true;
+        $scope.showAllServicesDiv = false;
+        
         var CompanyId = $routeParams.CompanyId;
         var responsedata = bookingService.GetCategories(CompanyId);
         responsedata.then(function (response) {
@@ -25,7 +29,32 @@
                 $scope.AllCategories = [];
                 $scope.AllCategories = response.data;
             }
-        })
+        });
+
+    //Get All Services of particular CompanyId//
+        var responsedata = bookingService.GetAllService($routeParams.CompanyId);
+        responsedata.then(function (response) {
+            $scope.AllServices = [];
+            $scope.AllServices = response.data;
+        });
+    }
+
+    $scope.AddServicePopup = function () {
+        $scope.showAddServiceDiv = false;
+        $scope.showAllServicesDiv = true;
+        $scope.showCategoryServicesDiv = true;
+    }
+
+    $scope.showAllServicePopup = function () {
+        debugger;
+        $scope.init();
+
+    }
+
+    $scope.ShowCategoryService = function () {
+        $scope.showAddServiceDiv = true;
+        $scope.showAllServicesDiv = true;
+        $scope.showCategoryServicesDiv = false;;
     }
 
     $scope.AddCategory = function () {
@@ -59,8 +88,24 @@
         });
     }
 
-    $scope.SaveService = function () {
-        debugger;          
+    $scope.SaveService = function () {        
+        if (servicenameform.ServiceName.value == "")
+        {
+            $scope.MessageText = "Service name cannot be empty!";
+            $scope.IsVisible = true;
+            $timeout(function () {
+                $scope.IsVisible = false;
+            }, 1000);
+            return false;
+        }
+        if (servicedetailform.ServiceTime.value == "") {
+            $scope.MessageText = "Service time cannot be empty!";
+            $scope.IsVisible = true;
+            $timeout(function () {
+                $scope.IsVisible = false;
+            }, 1000);
+            return false;
+        }
             var service = {
                 "Id": "",
                 "CompanyId": $routeParams.CompanyId,
@@ -87,14 +132,14 @@
                                 responsedata.then(function (response) {
                                     if (response.data == "Success") {
                                         $scope.MessageText = "";
+                                   
                                     }
                                 })
                             }
                         }
-                    });
+                    });                                
+                    $scope.init();
                 }
-            })
-
-       
-    }
+            })     
+    }  
 }]);
