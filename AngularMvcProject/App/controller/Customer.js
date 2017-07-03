@@ -204,7 +204,7 @@
 
         var updatedCustomerData = bookingService.UpdateCustomer(UpdateCustomer);
         updatedCustomerData.then(function (response) {
-            if (response.data.Success == "true") {
+            if (response.data.Success == true) {
                 $scope.MessageText = "Updating Customer details";
                 var GetCustomer = bookingService.GetAllCustomer($scope.CompanyId);
                 GetCustomer.then(function (response) {
