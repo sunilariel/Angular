@@ -435,6 +435,8 @@ app.controller('bookingController', ['$scope', '$routeParams', '$rootScope', '$h
                     staffemailtouched.removeClass('ng-touched');
                 });
 
+                $scope.GetServiceData();
+
                 $scope.IsVisible = true;
                 $timeout(function () {
                     $scope.MessageText = "Staff Saved."; $timeout(function () {
@@ -571,14 +573,8 @@ app.controller('bookingController', ['$scope', '$routeParams', '$rootScope', '$h
                     $scope.IsVisible = false;
                 }, 1000);
 
-                var getServices = bookingService.getServicesData($scope.companyId);
-                getServices.then(function (response) {
-                    debugger;
-                    $scope.serviceInfo = [];
-                    for (var i = 0; i < response.data.length; i++) {
-                        $scope.serviceInfo.push({ 'Id': response.data[i].Id, 'CompanyId': response.data[i].CompanyId, 'serviceName': response.data[i].Name, 'staffName': response.data[i].FirstName, 'staffEmail': response.data[i].Email, 'DurationInMinutes': response.data[i].DurationInMinutes, 'DurationInHours': response.data[i].DurationInHours, 'Currency': response.data[i].Currency, 'price': response.data[i].Cost, 'CreationDate': response.data[i].CreationDate, 'AllStaffChecked': response.data[i].AllAssignStaffChecked, 'staffCheckedCount': response.data[i].staffCheckedCount, 'staff': response.data[i].staff });
-                    }
-                });
+                //Reload the service data//
+                $scope.GetServiceData();
 
                 return false;
             }
@@ -604,19 +600,13 @@ app.controller('bookingController', ['$scope', '$routeParams', '$rootScope', '$h
                         $scope.MessageText = "Updating Service"
                         $scope.msg = "Updated Data  Successfully!";
 
-
-
-                        var getServices = bookingService.getServicesData($scope.companyId);
-                        getServices.then(function (response) {
-                            debugger;
-                            $scope.serviceInfo = [];
-                            for (var i = 0; i < response.data.length; i++) {
-                                $scope.serviceInfo.push({ 'Id': response.data[i].Id, 'CompanyId': response.data[i].CompanyId, 'serviceName': response.data[i].Name, 'staffName': response.data[i].FirstName, 'staffEmail': response.data[i].Email, 'DurationInMinutes': response.data[i].DurationInMinutes, 'DurationInHours': response.data[i].DurationInHours, 'Currency': response.data[i].Currency, 'price': response.data[i].Cost, 'CreationDate': response.data[i].CreationDate, 'AllStaffChecked': response.data[i].AllAssignStaffChecked, 'staffCheckedCount': response.data[i].staffCheckedCount, 'staff': response.data[i].staff });
-                            }
-                            $scope.init();
+                        //Reload the Service data//
+                       
+                        $scope.GetServiceData();
+                                                 
                             $scope.IsVisible = true;
                             $timeout(function () { $scope.MessageText = "service saved!"; $timeout(function () { $scope.IsVisible = false; }, 1000) }, 500);
-                        });
+                       
                     });
           
         });
@@ -666,14 +656,8 @@ app.controller('bookingController', ['$scope', '$routeParams', '$rootScope', '$h
                     $scope.IsVisible = false;
                 }, 1000);
 
-                var getServices = bookingService.getServicesData($scope.companyId);
-                getServices.then(function (response) {
-                    debugger;
-                    $scope.serviceInfo = [];
-                    for (var i = 0; i < response.data.length; i++) {
-                        $scope.serviceInfo.push({ 'Id': response.data[i].Id, 'CompanyId': response.data[i].CompanyId, 'serviceName': response.data[i].Name, 'staffName': response.data[i].FirstName, 'staffEmail': response.data[i].Email, 'DurationInMinutes': response.data[i].DurationInMinutes, 'DurationInHours': response.data[i].DurationInHours, 'Currency': response.data[i].Currency, 'price': response.data[i].Cost, 'CreationDate': response.data[i].CreationDate, 'AllStaffChecked': response.data[i].AllAssignStaffChecked, 'staffCheckedCount': response.data[i].staffCheckedCount, 'staff': response.data[i].staff });
-                    }
-                });
+                //Reload the service data//
+                $scope.GetServiceData();
 
                 return false;
             }
@@ -698,24 +682,17 @@ app.controller('bookingController', ['$scope', '$routeParams', '$rootScope', '$h
                 $scope.MessageText = "Updating Service"
                 $scope.msg = "Update Data Successfully!";
 
-                var getServices = bookingService.getServicesData($scope.companyId);
-                getServices.then(function (response) {
-                    debugger;
-                    $scope.serviceInfo = [];
-                    for (var i = 0; i < response.data.length; i++) {
-                        $scope.serviceInfo.push({ 'Id': response.data[i].Id, 'CompanyId': response.data[i].CompanyId, 'serviceName': response.data[i].Name, 'staffName': response.data[i].FirstName, 'staffEmail': response.data[i].Email, 'DurationInMinutes': response.data[i].DurationInMinutes, 'DurationInHours': response.data[i].DurationInHours, 'Currency': response.data[i].Currency, 'price': response.data[i].Cost, 'CreationDate': response.data[i].CreationDate, 'AllStaffChecked': response.data[i].AllAssignStaffChecked, 'staffCheckedCount': response.data[i].staffCheckedCount, 'staff': response.data[i].staff });
-                    }
-
-                    $scope.init();
-
+                                                                 
+                //Reload the Service data//
+                $scope.GetServiceData();
+                   
                     $scope.IsVisible = true;
-
                     $timeout(function () {
                         $scope.MessageText = "service saved"; $timeout(function () {
                             $scope.IsVisible = false;
                         }, 1000)
                     }, 500);
-                });
+             
                
             });
         }
@@ -731,22 +708,16 @@ app.controller('bookingController', ['$scope', '$routeParams', '$rootScope', '$h
                 $scope.messagetext = "Updating Service.."
                 $scope.msg = " update data successfully!";      
 
-                var getServices = bookingService.getServicesData($scope.companyId);
-                getServices.then(function (response) {
-                    debugger;
-                    $scope.serviceInfo = [];
-                    for (var i = 0; i < response.data.length; i++) {
-                        $scope.serviceInfo.push({ 'Id': response.data[i].Id, 'CompanyId': response.data[i].CompanyId, 'serviceName': response.data[i].Name, 'staffName': response.data[i].FirstName, 'staffEmail': response.data[i].Email, 'DurationInMinutes': response.data[i].DurationInMinutes, 'DurationInHours': response.data[i].DurationInHours, 'Currency': response.data[i].Currency, 'price': response.data[i].Cost, 'CreationDate': response.data[i].CreationDate, 'AllStaffChecked': response.data[i].AllAssignStaffChecked, 'staffCheckedCount': response.data[i].staffCheckedCount, 'staff': response.data[i].staff });
-                    }
 
-                    $scope.init();
+                //Reload the Service data//                
+                $scope.GetServiceData();                 
                     $scope.IsVisible = true;
                     $timeout(function () {
                         $scope.MessageText = "service saved"; $timeout(function () {
                             $scope.IsVisible = false;
                         }, 1000)
                     }, 500);
-                });               
+                           
             });
         }
     };
@@ -774,6 +745,11 @@ app.controller('bookingController', ['$scope', '$routeParams', '$rootScope', '$h
                     $scope.staffInfo.push({ 'Id': response.data[i].Id, 'CompanyId': response.data[i].CompanyId, 'UserName': response.data[i].UserName, 'staffName': response.data[i].FirstName, 'staffEmail': response.data[i].Email });
                 }              
             });
+
+            //Reload the Service data//
+            $scope.GetServiceData();
+
+
             $scope.IsVisible = true;
             $timeout(function () { $scope.MessageText = "Data deleted."; $timeout(function () { $scope.IsVisible = false; }, 1000) }, 500);
         }), function () {
@@ -878,17 +854,9 @@ app.controller('bookingController', ['$scope', '$routeParams', '$rootScope', '$h
                             //$scope.MessageText = "Saving Data"
                             //$scope.msg = "Post Data Submitted Successfully!";    
                           
-                            var getServices = bookingService.getServicesData($scope.companyId);
-                            getServices.then(function (response) {
-                                debugger;
-                                $scope.serviceInfo = [];
-                                for (var i = 0; i < response.data.length; i++) {
-                                    $scope.serviceInfo.push({ 'Id': response.data[i].Id, 'CompanyId': response.data[i].CompanyId, 'serviceName': response.data[i].Name, 'staffName': response.data[i].FirstName, 'staffEmail': response.data[i].Email, 'DurationInMinutes': response.data[i].DurationInMinutes, 'DurationInHours': response.data[i].DurationInHours, 'Currency': response.data[i].Currency, 'price': response.data[i].Cost, 'CreationDate': response.data[i].CreationDate, 'AllStaffChecked': response.data[i].AllAssignStaffChecked, 'staffCheckedCount': response.data[i].staffCheckedCount, 'staff': response.data[i].staff });
-                                   
-                                }
-                               
-                                $scope.init();
-                            });
+                            //Reload the Service data//
+                          
+                            $scope.GetServiceData();
                         });
                     }
                 });
@@ -946,17 +914,12 @@ app.controller('bookingController', ['$scope', '$routeParams', '$rootScope', '$h
             $scope.MessageText = "Updating Service"
             $scope.msg = "Updated Data  Successfully!";
 
-            var getServices = bookingService.getServicesData($scope.companyId);
-            getServices.then(function (response) {
-                debugger;
-                $scope.serviceInfo = [];
-                for (var i = 0; i < response.data.length; i++) {
-                    $scope.serviceInfo.push({ 'Id': response.data[i].Id, 'CompanyId': response.data[i].CompanyId, 'serviceName': response.data[i].Name, 'staffName': response.data[i].FirstName, 'staffEmail': response.data[i].Email, 'DurationInMinutes': response.data[i].DurationInMinutes, 'DurationInHours': response.data[i].DurationInHours, 'Currency': response.data[i].Currency, 'price': response.data[i].Cost, 'CreationDate': response.data[i].CreationDate, 'AllStaffChecked': response.data[i].AllAssignStaffChecked, 'staffCheckedCount': response.data[i].staffCheckedCount, 'staff': response.data[i].staff });
-                }
-                $scope.init();
+            //Reload the Service data//         
+            $scope.GetServiceData();
+                                                          
                 $scope.IsVisible = true;
                 $timeout(function () { $scope.MessageText = "service saved!"; $timeout(function () { $scope.IsVisible = false; }, 1000) }, 500);
-            });         
+                  
         }, function () {
             alert("error in updating record");
         });
@@ -971,17 +934,10 @@ app.controller('bookingController', ['$scope', '$routeParams', '$rootScope', '$h
             $scope.MessageText = "Deleting Service"
             $scope.msg = "Data Deleted Successfully!";
 
-            var CompanyId = $scope.companyId;
-            var getServiceData = bookingService.getServicesData(CompanyId);
+            //Reload the Service data//
+            $scope.GetServiceData();
 
-            getServiceData.then(function (response) {
-                debugger;
-                $scope.serviceInfo = [];
-                for (var i = 0; i < response.data.length; i++) {
-                    $scope.serviceInfo.push({ 'Id': response.data[i].Id, 'CompanyId': response.data[i].CompanyId, 'serviceName': response.data[i].Name, 'staffName': response.data[i].FirstName, 'staffEmail': response.data[i].Email, 'DurationInMinutes': response.data[i].DurationInMinutes, 'DurationInHours': response.data[i].DurationInHours, 'Currency': response.data[i].Currency, 'price': response.data[i].Cost, 'CreationDate': response.data[i].CreationDate, 'AllStaffChecked': response.data[i].AllAssignStaffChecked, 'staffCheckedCount': response.data[i].staffCheckedCount, 'staff': response.data[i].staff });
-                }
-                $scope.init();             
-            });
+            
             $scope.IsVisible = true;
             $timeout(function () { $scope.MessageText = "Service deleted."; $timeout(function () { $scope.IsVisible = false; }, 1000) }, 500);
         }), function () {
@@ -1008,5 +964,18 @@ app.controller('bookingController', ['$scope', '$routeParams', '$rootScope', '$h
             }
         });
 
+    }
+
+    //Get Service data with their assigned staff
+    $scope.GetServiceData = function () {
+        var getServices = bookingService.getServicesData($scope.companyId);
+        getServices.then(function (response) {
+            debugger;
+            $scope.serviceInfo = [];
+            for (var i = 0; i < response.data.length; i++) {
+                $scope.serviceInfo.push({ 'Id': response.data[i].Id, 'CompanyId': response.data[i].CompanyId, 'serviceName': response.data[i].Name, 'staffName': response.data[i].FirstName, 'staffEmail': response.data[i].Email, 'DurationInMinutes': response.data[i].DurationInMinutes, 'DurationInHours': response.data[i].DurationInHours, 'Currency': response.data[i].Currency, 'price': response.data[i].Cost, 'CreationDate': response.data[i].CreationDate, 'AllStaffChecked': response.data[i].AllAssignStaffChecked, 'staffCheckedCount': response.data[i].staffCheckedCount, 'staff': response.data[i].staff });
+            }
+            $scope.init();
+        });
     }
 }]);
