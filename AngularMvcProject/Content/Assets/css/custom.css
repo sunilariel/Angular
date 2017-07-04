@@ -2421,15 +2421,17 @@ table#mytable tr td {
 }
 .serviceIconImage img {
 	border: 1px solid #CCC;
-    width: 90px;
-    height: 90px;
+    width: 90px !important;
+    height: 90px !important;
 }
 .serviceIconImage .uploadSeviceIcon i {
     height: 60px;
-    top: 17%;
-    left: 90px;
+    top: 18%;
+    left: 40px;
     width: 60px;
     line-height: 45px;
+    font-size: 30px;
+
 }
 .servicesTextareaDiv textarea.form-control {
     border: none;
@@ -2450,6 +2452,8 @@ table#mytable tr td {
 	color: #a7a7a7;
 	display:block;
 	margin-left: 11px;
+    font-size: 12px;
+
 }
 .serviceCategoryList .categoryDropBtn {
 	display: inline-block;
@@ -2616,7 +2620,11 @@ table#mytable tr td {
 }
 .rowmrgnDiv {
 	margin:0;
-	padding:0;	
+	padding:0;
+    height:100%;
+}
+.row.staffaddCustomerSec {
+    height: 100%;
 }
 .serviceprovideBtn .btn .serviceOkIcon {
 	background:#27c3bb;
@@ -2912,7 +2920,9 @@ ul.dashboardNtfList {
     font-size: 18px;
     color: #455862;
     font-weight: normal;
+    display: inline-block;
     overflow: hidden;
+    padding-top: 15px;
 }
 .sampleParaText {
     font-size: 12px;
@@ -3086,6 +3096,7 @@ ul.dashboardNtfList {
     left: 52px;
     width: 55px;
     height: 55px;
+    font-size:30px;
 }
 .staffformGroup {
 	margin-bottom:5px;
@@ -3174,9 +3185,9 @@ h3.serviceProText {
     padding: 4px 9px;
     margin-top: 18px;
 }
-.addstaffBtn {
+/*.addstaffBtn {
   padding: 7px 9px;  
-}
+}*/
 .clickingButton {
     text-align: center;
     border: 1px solid #ccc;
@@ -3462,6 +3473,15 @@ span.staffdatepickerTime a {
 }
     
 /* Staff page css 29-june-2017 end here ===================== */
+
+
+/* 4-July-2017 css start here     */
+
+.provideServiceDiv.customerProfileDiv p {
+    font-size: 12px;
+}
+
+/* 4-July-2017 css end  here     */
 
 /* media css start here ================================= */
 

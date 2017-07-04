@@ -236,6 +236,16 @@ app.service("bookingService", function ($http) {
         return response;
     }
 
+    this.UpdateService=function(dataobject)
+    {
+        var response = $http({
+            method: "POST",
+            url: "/Services/UpdateService",
+            data:{service:dataobject}
+        })
+        return response;
+    }
+
     this.AssignCategoryToService=function(serviceId,categoryId)
     {
         var response = $http({
@@ -262,6 +272,57 @@ app.service("bookingService", function ($http) {
             method: "POST",
             url: "/Customer/GetAppointmentWorkinghours",
             data: { EmployeeId: Id }
+        })
+        return response;
+    }
+
+    this.GetAllServiceForCategory=function(Id)
+    {
+        var response = $http({
+            method: "POST",
+            url: "/Services/GetAllServiceForCategory",
+            data: { CategoryId: Id }
+        })
+        return response;
+    }
+
+    this.GetAllStaff=function(Id)
+    {
+        var response = $http({
+            method: "POST",
+            url: "/Services/GetAllStaff",
+            data:{CompanyId:Id}
+        })
+        return response;
+    }
+
+    this.AssignStafftoService=function(dataobject)
+    {
+        var response = $http({
+            method: "POST",
+            url: "/Services/AssignStaffToService",
+            data: { AssignStaff: dataobject }
+        })
+        return response;
+    }
+
+    this.UpdateCategory=function(dataobject)
+    {
+        var response = $http({
+            method: "POST",
+            url: "/Services/UpdateCategory",
+            data:{Category:dataobject}
+        })
+
+        return response;
+    }
+
+    this.DeleteCategory=function(Id)
+    {
+        var response = $http({
+            method: "POST",
+            url: "/Services/DeleteCategory",
+            data:{CompanyId:Id}
         })
         return response;
     }

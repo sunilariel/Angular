@@ -149,5 +149,170 @@ namespace AngularMvcProject.Controllers
                 return e.ToString();
             }
         }
+
+        [HttpPost]
+        public string GetAllServiceForCategory(string CategoryId)
+        {
+            try
+            {
+                var result = "";
+                var httpWebRequest = (HttpWebRequest)WebRequest.Create("http://bookingmanager1romz.azurewebsites.net/api/services/GetAllServcieForCategory?categoryId=" + CategoryId);
+                httpWebRequest.Method = "GET";
+                httpWebRequest.ContentType = "application/json";
+
+                var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
+                using (var StreamReader = new StreamReader(httpResponse.GetResponseStream()))
+                {
+                    result = StreamReader.ReadToEnd();
+                }
+                return result;
+            }
+            catch (Exception e)
+            {
+                return e.ToString();
+            }
+        }
+
+        [HttpPost]
+        public string UpdateService(Services service)
+        {
+            try
+            {
+                var result = "";
+                var httpWebRequest = (HttpWebRequest)WebRequest.Create("http://bookingmanager1romz.azurewebsites.net/api/services/UpdateService");
+                httpWebRequest.Method = "POST";
+                httpWebRequest.ContentType = "application/json";
+
+                using (var StreamWriter = new StreamWriter(httpWebRequest.GetRequestStream()))
+                {
+                    var json = new JavaScriptSerializer().Serialize(service);
+                    StreamWriter.Write(json);
+                    StreamWriter.Flush();
+                    StreamWriter.Close();
+                }
+                var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
+                using (var StreamReader = new StreamReader(httpResponse.GetResponseStream()))
+                {
+                    result = StreamReader.ReadToEnd();
+                }
+                return result;
+            }
+            catch (Exception e)
+            {
+                return e.ToString();
+            }
+
+        }
+
+        [HttpPost]
+        public string GetAllStaff(string CompanyId)
+        {
+            try
+            {
+                var result = "";
+                var httpWebRequest = (HttpWebRequest)WebRequest.Create("http://bookingmanager1romz.azurewebsites.net/api/companyregistration/GetCompanyEmployees?companyId="+CompanyId);
+                httpWebRequest.Method = "GET";
+                httpWebRequest.ContentType = "application/json";
+
+               
+                var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
+                using (var StreamReader = new StreamReader(httpResponse.GetResponseStream()))
+                {
+                    result = StreamReader.ReadToEnd();
+                }
+                return result;
+            }
+            catch (Exception e)
+            {
+                return e.ToString();
+            }
+        }
+
+        [HttpPost]
+        public string AssignStaffToService(AssignStaffRequest AssignStaff)
+        {
+            try
+            {
+                var result = "";
+                var httpWebRequest = (HttpWebRequest)WebRequest.Create("http://bookingmanager1romz.azurewebsites.net/api/companyregistration/AssignServiceToStaff");
+                httpWebRequest.Method = "POST";
+                httpWebRequest.ContentType = "application/json";
+
+                using (var StreamWriter = new StreamWriter(httpWebRequest.GetRequestStream()))
+                {
+                    var json = new JavaScriptSerializer().Serialize(AssignStaff);
+                    StreamWriter.Write(json);
+                    StreamWriter.Flush();
+                    StreamWriter.Close();
+                }
+                var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
+                using (var StreamReader = new StreamReader(httpResponse.GetResponseStream()))
+                {
+                    result = StreamReader.ReadToEnd();
+                }
+                return result;
+            }
+            catch (Exception e)
+            {
+                return e.ToString();
+            }
+
+        }
+
+        [HttpPost]
+        public string UpdateCategory(Category category)
+        {
+            try
+            {
+                var result = "";
+                var httpWebRequest = (HttpWebRequest)WebRequest.Create("http://bookingmanager1romz.azurewebsites.net/api/services/UpdateCategory");
+                httpWebRequest.Method = "POST";
+                httpWebRequest.ContentType = "application/json";
+
+                using (var StreamWriter = new StreamWriter(httpWebRequest.GetRequestStream()))
+                {
+                    var json = new JavaScriptSerializer().Serialize(category);
+                    StreamWriter.Write(json);
+                    StreamWriter.Flush();
+                    StreamWriter.Close();
+                }
+                var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
+                using (var StreamReader = new StreamReader(httpResponse.GetResponseStream()))
+                {
+                    result = StreamReader.ReadToEnd();
+                }
+                return result;
+            }
+            catch (Exception e)
+            {
+                return e.ToString();
+            }
+
+        }
+
+        [HttpPost]
+        public string DeleteCategory(string CompanyId)
+        {
+            try
+            {
+                var result = "";
+                var httpWebRequest = (HttpWebRequest)WebRequest.Create("http://bookingmanager1romz.azurewebsites.net/api/services/DeleteCategory?companyId=" + CompanyId);
+                httpWebRequest.Method = "DELETE";
+                httpWebRequest.ContentType = "application/json";
+              
+                
+                var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
+                using (var StreamReader = new StreamReader(httpResponse.GetResponseStream()))
+                {
+                    result = StreamReader.ReadToEnd();
+                }
+                return result;
+            }
+            catch (Exception e)
+            {
+                return e.ToString();
+            }
+
+        }
     }
 }
