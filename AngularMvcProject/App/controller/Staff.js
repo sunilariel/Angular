@@ -94,14 +94,15 @@
     }
 
     $scope.UpdateStaff = function () {
+        debugger;
         var CurrentDate = new Date();
         var requestedStaff=
         {
             "Id": $scope.StaffId,
             "CompanyId": $routeParams.CompanyId,
-            "UserName": $scope.Email,
+            "UserName": $scope.staffEmail,
             "Password": "sample string 4",
-            "FirstName": $scope.FirstName,
+            "FirstName": $scope.staffName,
             "LastName": "sample string 6",
             "Address": "sample string 7",
             "Email": $scope.staffEmail,
