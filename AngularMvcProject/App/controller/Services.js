@@ -44,6 +44,10 @@
     //Show the AddService Section with staff name
     $scope.AddServicePopup = function () {
         debugger;
+        $scope.ServiceName = "";
+        $scope.ServiceCost = "";
+        $scope.ServiceTime = "";
+
         var responsedata = bookingService.GetAllStaff($routeParams.CompanyId);
 
         responsedata.then(function (response) {
@@ -86,6 +90,7 @@
         
         $scope.showAddServiceDiv = true;
         $scope.showAllServicesDiv = true;
+        $scope.EditServiceDiv = true;
         $scope.showCategoryServicesDiv = false;
     }
 
@@ -153,6 +158,7 @@
         response.then(function (response) {
             if(response.data.Success==true)
             {
+                $scope.showcategorypopup = false;
                 var CompanyId = $routeParams.CompanyId;
                 var responsedata = bookingService.GetCategories(CompanyId);
                 responsedata.then(function (response) {
@@ -161,6 +167,7 @@
                         $scope.Categories = response.data;
                     }
                 })
+              
                 $scope.MessageText = "Adding new Category";
                 $scope.IsVisible = true;
                 $timeout(function () {
@@ -249,6 +256,7 @@
                                 }
 
                                 var responsedata = bookingService.UpdateService(updatedservice);
+                                //var responsedata = bookingService.AssignCategorytoService($scope.ServiceId,value.Id);
                                 responsedata.then(function (response) {
                                     if (response.data.Success == true) {
                                         $scope.MessageText = "Service Saved";
@@ -273,10 +281,38 @@
 
     $scope.EditService = function (item) {
         debugger;
+        $scope.ServiceId=item.Id;
         $scope.ServiceName = item.Name;
         $scope.ServiceCost = item.Cost;
         $scope.ServiceTime = item.DurationInMinutes;
-       
+        var responsedata = bookingService.GetAllStaff($routeParams.CompanyId);
+
+        responsedata.then(function (response) {
+            $scope.staffList = [];
+            $scope.staffList.push({ 'Id': "", 'CompanyId': "", 'UserName': "", 'staffName': "All Staff", 'staffEmail': "" });
+            for (var i = 0; i < response.data.length; i++) {
+                $scope.staffList.push({ 'Id': response.data[i].Id, 'CompanyId': response.data[i].CompanyId, 'UserName': response.data[i].UserName, 'staffName': response.data[i].FirstName, 'staffEmail': response.data[i].Email });
+            }
+        });
+        var responseresult = bookingService.GetEmployeeAssignedtoService($scope.ServiceId);
+        responseresult.then(function (response) {
+            for(var i=0;i<response.data.length;i++)
+            {
+                angular.forEach($scope.staffList,function(value,key)
+                {
+                    if(value.Id==response.data[i].Id)
+                    {
+                        value.confirmed = true;
+                    }
+                   
+                })
+                if($scope.staffList.length==response.data.length+1)
+                {
+                    $scope.staffList[0].confirmed = true;
+                }
+            }
+            
+        });
 
         $scope.EditServiceDiv = false;
         $scope.showAddServiceDiv = true;
@@ -284,6 +320,124 @@
         $scope.showAllServicesDiv = true;
 
     }
+
+    //Update Service//
+
+    $scope.updateService = function () {
+        debugger;
+        var CurrentDate = new Date();
+        var UpdatedService=
+        {
+            "Id": $scope.ServiceId,
+            "CompanyId": $routeParams.CompanyId,
+            "Name": $scope.ServiceName,
+            "CategoryName": "sample string 4",
+            "CategoryId": null,
+            "DurationInMinutes": $scope.ServiceTime ,
+            "DurationInHours": "",
+            "Cost": $scope.ServiceCost,
+            "Currency": "sample string 9",
+            "CreationDate": "2017-07-05T05:21:50.3448321+00:00"
+        }
+
+        var result = bookingService.UpdateService(UpdatedService);
+        result.then(function (response) {
+            if(response.data.Success==true)
+            {
+                $scope.MessageText = "Saving Service";
+                $scope.IsVisible = true;
+                $timeout(function()
+                {
+                    $scope.MessageText = "Service Saved";
+                    $timeout(function()
+                    {                        
+                        $scope.IsVisible = false;
+                    },1000)
+                },500)
+            }
+        });       
+    }
+
+    //Delete Service//
+    $scope.DeleteService = function () {
+        debugger;
+        var result = bookingService.DeleteService($scope.ServiceId);
+        result.then(function(response)
+        {
+            if (response.data.Success == true)
+            {
+                $scope.IsVisible = true;
+                $scope.MessageText = "Deleting Service";
+                $timeout(function () {
+                      
+                    $scope.MessageText = "Service Deleted";
+                    $timeout(function () {
+                        $scope.IsVisible = false;
+                        $scope.init();
+                    },1000)
+                }, 800)
+
+                
+                
+            }
+           
+        })
+    }
+
+
+    //Assigned/Deassigned Staff to Service
+
+    $scope.AssignedStafftoService=function(item)
+    {
+        debugger;
+        if(item.confirmed==true)
+        {
+            var CurrentDate = new Date();
+            var requesteddata = {
+                "Id": "",
+                "CompanyId": $routeParams.CompanyId,
+                "EmployeeId": item.Id,
+                "ServiceId": $scope.ServiceId,
+                "CreationDate": CurrentDate
+            }
+
+            var result = bookingService.AssignStafftoService(requesteddata);
+            result.then(function(response)
+            {
+                if(response.data.Success==true)
+                {
+                    $scope.MessageText = "Assigning staff to services";
+                    $scope.IsVisible = true;
+                    $timeout(function()
+                    {
+                        $scope.MessageText = "Service Saved";
+                        $timeout(function () {
+                            $scope.IsVisible = false;
+                        },1000)
+                    },800)
+                }
+            })
+        }
+        else {
+            var result = bookingService.DeAssignedStaffToService($routeParams.CompanyId, item.Id, $scope.ServiceId);
+            result.then(function (response) {
+                if (response.data.Success == true) {
+                    $scope.MessageText = "Unassigning staff to services";
+                    $scope.IsVisible = true;
+                    $timeout(function () {
+                        $scope.MessageText = "Service Saved";
+                        $timeout(function () {
+                            $scope.IsVisible = false;
+                        },1000)
+                    },800)
+                }
+            })
+        }
+
+        $scope.staffchecked(item);
+    }
+
+
 
     //Get Categories Count//
     $scope.CategoryConfirmedCount=function()
@@ -301,8 +455,8 @@
 
     //Checked and unchecked service provider in add service section//
 
-    $scope.staffchecked = function (item) {
-        debugger;
+    $scope.staffchecked = function (item)
+    {
         if(item.staffName=="All Staff")
         {
             if (item.confirmed == true) {
@@ -329,6 +483,7 @@
         }
     }
 
-   
+ 
+
 
 }]);

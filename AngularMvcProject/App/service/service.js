@@ -71,10 +71,6 @@ app.service("bookingService", function ($http) {
         return response;
     }
 
-
-
-
-
     this.GetStaffData = function (dataobject) {
         debugger;
 
@@ -246,7 +242,7 @@ app.service("bookingService", function ($http) {
         return response;
     }
 
-    this.AssignCategoryToService=function(serviceId,categoryId)
+    this.AssignCategorytoService=function(serviceId,categoryId)
     {
         var response = $http({
             method: "POST",
@@ -306,6 +302,16 @@ app.service("bookingService", function ($http) {
         return response;
     }
 
+    this.DeAssignedStaffToService=function(companyId,employeeId,serviceId)
+    {
+        var response = $http({
+            method: "POST",
+            url: "/Services/DeAssignedStaffToService",
+            data: { CompanyId: companyId, EmployeeId: employeeId, ServiceId: serviceId }
+        })
+        return response;
+    }
+
     this.UpdateCategory=function(dataobject)
     {
         var response = $http({
@@ -327,6 +333,48 @@ app.service("bookingService", function ($http) {
         return response;
     }
   
+
+    this.GetEmployeeAssignedtoService=function(Id)
+    {
+        debugger;
+        var response = $http({
+            method: "POST",
+            url: "/Services/GetEmployeeAssignedtoService",
+            data: { ServiceId: Id }
+        })
+        return response;
+    }
+
+    this.DeleteService=function(Id)
+    {
+        var response = $http({
+            method: "POST",
+            url: "/Services/DeleteService",
+            data: { ServiceId: Id }
+        })
+        return response;
+    }
+
+    //MileStone_4 Add Staff Section//
+
+    this.AddStaff = function (dataobject) {
+        var response = $http({
+            method: "POST",
+            url: "/Services/AddStaff",
+            data: { dataObj: dataobject }
+        })
+        return response;
+    }
+
+    this.UpdateStaff=function(dataobject)
+    {
+        var response = $http({
+            method: "POST",
+            url: "/Services/UpdateStaff",
+            data:{dataobj:dataobject}
+        })
+        return response;
+    }
 })
 
 

@@ -2391,6 +2391,7 @@ table#mytable tr td {
 }
 .categoryRightSec {
 	padding-left:30px;
+    padding-right:90px;
 }
 .categoryButtonsDiv {
     margin-top: 55px;
@@ -2432,6 +2433,15 @@ table#mytable tr td {
     line-height: 45px;
     font-size: 30px;
 
+}
+.uploadCateIcon i {
+    left:27px !important;
+}
+.categoryDeleteBtnDiv {
+    margin-top: 40px;
+}
+.provideServiceDiv.customerProfileDiv {
+    margin-top: 35px;
 }
 .servicesTextareaDiv textarea.form-control {
     border: none;

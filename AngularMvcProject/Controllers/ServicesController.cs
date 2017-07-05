@@ -260,6 +260,32 @@ namespace AngularMvcProject.Controllers
         }
 
         [HttpPost]
+        public string DeAssignedStaffToService(string CompanyId,string EmployeeId,string ServiceId)
+        {
+            try
+            {
+                string apiURL = "http://bookingmanager1romz.azurewebsites.net/api/companyregistration/DeAllocateServiceForEmployee?companyId=" + CompanyId + "&employeeId=" + EmployeeId + "&serviceId=" + ServiceId;
+                string result = "";
+                var httpWebRequest = (HttpWebRequest)WebRequest.Create(apiURL);
+                httpWebRequest.ContentType = "application/json";
+                httpWebRequest.Method = "POST";
+                httpWebRequest.ContentLength = 0;
+
+                var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
+                using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
+                {
+                    result = streamReader.ReadToEnd();
+                }
+
+                return result;
+            }
+            catch (Exception e)
+            {
+                return e.ToString();
+            }
+        }
+
+        [HttpPost]
         public string UpdateCategory(Category category)
         {
             try
@@ -311,6 +337,128 @@ namespace AngularMvcProject.Controllers
             catch (Exception e)
             {
                 return e.ToString();
+            }
+
+        }
+
+        [HttpPost]
+        public string GetEmployeeAssignedtoService(string ServiceId)
+        {
+            try
+            {
+                var result = "";
+                var httpWebRequest = (HttpWebRequest)WebRequest.Create("http://bookingmanager1romz.azurewebsites.net/api/staff/GetEmployeeAllocatedToService?serviceId=" + ServiceId);
+                httpWebRequest.Method = "GET";
+                httpWebRequest.ContentType = "application/json";
+
+
+                var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
+                using (var StreamReader = new StreamReader(httpResponse.GetResponseStream()))
+                {
+                    result = StreamReader.ReadToEnd();
+                }
+                return result;
+            }
+            catch (Exception e)
+            {
+                return e.ToString();
+            }
+        }
+
+        [HttpPost]
+        public string DeleteService( string ServiceId)
+        {
+            try
+            {
+                var result = "";
+                var httpWebRequest = (HttpWebRequest)WebRequest.Create("http://bookingmanager1romz.azurewebsites.net/api/services/DeleteService?companyId=" + ServiceId);
+                httpWebRequest.Method = "DELETE";
+                httpWebRequest.ContentType = "application/json";
+
+               
+                var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
+                using (var StreamReader = new StreamReader(httpResponse.GetResponseStream()))
+                {
+                    result = StreamReader.ReadToEnd();
+                }
+                return result;
+            }
+            catch (Exception e)
+            {
+                return e.ToString();
+            }
+
+        }
+
+        //Add Staff Section//
+
+        [HttpPost]
+        public string AddStaff(RequestStaffData dataObj)
+        {
+            try
+            {
+                string apiUrl = "http://bookingmanager1romz.azurewebsites.net/api/companyregistration/AddStaff";
+
+                string result = "";
+                var httpWebRequest = (HttpWebRequest)WebRequest.Create(apiUrl);
+                httpWebRequest.ContentType = "application/json";
+                httpWebRequest.Method = "POST";
+
+                using (var streamWriter = new StreamWriter(httpWebRequest.GetRequestStream()))
+                {
+                    var jsonstring = new JavaScriptSerializer().Serialize(dataObj);
+                    streamWriter.Write(jsonstring);
+                    streamWriter.Flush();
+                    streamWriter.Close();
+                }
+
+                var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
+
+                using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
+                {
+                    result = streamReader.ReadToEnd();
+                }
+
+                return result;
+            }
+            catch (Exception exception)
+            {
+                return exception.ToString();
+            }
+        }
+
+        [HttpPost]
+        public string UpdateStaff(RequestStaffData dataObj)
+        {
+            try
+            {
+                string apiUrl = "http://bookingmanager1romz.azurewebsites.net/api/staff/Update";
+
+                string result = "";
+                var httpWebRequest = (HttpWebRequest)WebRequest.Create(apiUrl);
+                httpWebRequest.ContentType = "application/json";
+                httpWebRequest.Method = "POST";
+
+                using (var streamWriter = new StreamWriter(httpWebRequest.GetRequestStream()))
+                {
+                    var jsonstring = new JavaScriptSerializer().Serialize(dataObj);
+                    streamWriter.Write(jsonstring);
+                    streamWriter.Flush();
+                    streamWriter.Close();
+                }
+
+                var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
+
+                using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
+                {
+                    result = streamReader.ReadToEnd();
+                }
+
+                return result;
+            }
+            catch (Exception exception)
+            {
+                return exception.ToString();
             }
 
         }

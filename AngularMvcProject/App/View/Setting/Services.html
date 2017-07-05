@@ -351,14 +351,14 @@
                             <div class="categoryList">
                                 <ul>
                                     <li>
-                                        <a ng-click="showAllServicePopup()">
+                                        <a ng-click="showAllServicePopup()" class="cursorhand">
                                             <i class="fa fa-book" aria-hidden="true"></i>
                                             <span class="categoryServices">All Services</span>
                                         </a>
                                     </li>
 
                                     <li ng-repeat="item in Categories">
-                                        <a ng-click="ShowCategoryService(item)">
+                                        <a ng-click="ShowCategoryService(item)" class="cursorhand">
                                             <i class="fa fa-book" aria-hidden="true"></i>
                                             <span class="categoryServices">{{item.Name}}</span>
                                         </a>
@@ -397,7 +397,7 @@
                                                         <input type="file">
                                                     </span>
                                                 </div>
-                                                <span class="uploadImageIcon uploadSeviceIcon"><i class="fa fa-camera" style="margin-left:3px;margin-top:-3px;" aria-hidden="true"></i></span>
+                                                <span class="uploadImageIcon uploadSeviceIcon uploadCateIcon"><i class="fa fa-camera" style="margin-left:3px;margin-top:-3px;" aria-hidden="true"></i></span>
                                             </label>
                                             <div class="col-md-8 col-sm-8 col-xs-12 sampleServicesSec">
 
@@ -535,8 +535,8 @@
 
                     <!--//////////////////////////////-->
                     <div class="col-md-9 categoryRightSec" ng-hide="EditServiceDiv">
-                        <div class="categoryButtonsDiv">
-                            <a id="deletecateBtn" ng-click="DeleteService()" class="deleteCate">
+                        <div class="categoryButtonsDiv text-right categoryDeleteBtnDiv">
+                            <a id="deletecateBtn" ng-click="DeleteService()" class="deletecatIconBtn btn btn-default">
                                 <i class="fa fa-trash-o" aria-hidden="true"></i>                              
                             </a>
                         </div>
@@ -555,11 +555,11 @@
                                                         <input type="file">
                                                     </span>
                                                 </div>
-                                                <span class="uploadImageIcon uploadSeviceIcon"><i class="fa fa-camera" style="margin-left:3px;margin-top:-3px;" aria-hidden="true"></i></span>
+                                                <span class="uploadImageIcon uploadSeviceIcon uploadCateIcon"><i class="fa fa-camera" style="margin-left:3px;margin-top:-3px;" aria-hidden="true"></i></span>
                                             </label>
                                             <div class="col-md-8 col-sm-8 col-xs-12 sampleServicesSec">
 
-                                                <input type="text" class="customerName sampServiceName form-control" id="" placeholder="Sample Service name*" ng-model="ServiceName" name="ServiceName">
+                                                <input type="text" class="customerName sampServiceName form-control" id="" placeholder="Sample Service name*" ng-model="ServiceName" name="ServiceName" ng-blur="updateService()">
                                                 <div class="">
 
                                                     <div class="dropdown serviceColors">
@@ -597,13 +597,13 @@
                                         <div class="form-group">
                                             <label class="control-label col-md-3 col-sm-3 col-xs-12">Service Cost (₹)</label>
                                             <div class="col-md-8 col-sm-8 col-xs-12">
-                                                <input type="text" class="form-control" id="text" placeholder="90" name="text" ng-model="ServiceCost">
+                                                <input type="text" class="form-control" id="text" placeholder="90" name="text" ng-model="ServiceCost" ng-blur="updateService()">
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label class="control-label col-md-3 col-sm-3 col-xs-12">Service Time (mins*)</label>
                                             <div class="col-md-8 col-sm-8 col-xs-12">
-                                                <input type="text" class="form-control" id="text" placeholder="90" name="ServiceTime" ng-model="ServiceTime">
+                                                <input type="text" class="form-control" id="text" placeholder="90" name="ServiceTime" ng-model="ServiceTime" ng-blur="updateService()">
                                             </div>
                                         </div>
                                         <div class="form-group">
@@ -660,7 +660,7 @@
                                     <div class="dropdown serviceprovideBtn" ng-repeat="staff in staffList">                                     
                                         <div class="checkbox active">
                                             <label class="labelBox" id="clickLabel">
-                                                <input type="checkbox" value="" ng-model="staff.confirmed" ng-click="staffchecked(staff)">
+                                                <input type="checkbox" value="" ng-model="staff.confirmed"  ng-click="AssignedStafftoService(staff)">
                                                 <span class="cr"><i class="cr-icon glyphicon glyphicon-ok"></i></span>
                                                 {{staff.staffName}}
                                             </label>
@@ -710,7 +710,7 @@
                                 <div class="col-md-12">
                                     <div class="sampleServicediv">
                                         <ul class="list-inline">
-                                            <li ng-repeat="data in ServiceDividedByCategory">
+                                            <li ng-repeat="data in ServiceDividedByCategory" ng-click="EditService(data)">
                                                 <div class="borderWidth"></div>
                                                 <div class="serviceDragImage"></div>
                                                 <div class="sampleServiceImage">
