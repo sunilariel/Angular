@@ -199,6 +199,7 @@
     <Compile Include="Controllers\dashboardController.cs" />
     <Compile Include="Controllers\ServicesController.cs" />
     <Compile Include="Controllers\SignUpController.cs" />
+    <Compile Include="Controllers\StaffController.cs" />
     <Compile Include="Controllers\wizardController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -375,6 +376,7 @@
     <Folder Include="App_Data\" />
     <Folder Include="Views\Services\" />
     <Folder Include="Views\Shared\" />
+    <Folder Include="Views\Staff\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

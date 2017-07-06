@@ -114,7 +114,7 @@ app.service("bookingService", function ($http) {
         var response = $http({
             method: "post",
             url: "/wizard/AssignStaff",
-            data: { dataobj: dataobject }
+            data: { dataobj: dataobject}
         })
         return response;
     }
@@ -163,8 +163,6 @@ app.service("bookingService", function ($http) {
         })
         return response;
     }
-
-
 
 
     ////////////for customer module Add appointment
@@ -360,7 +358,7 @@ app.service("bookingService", function ($http) {
     this.AddStaff = function (dataobject) {
         var response = $http({
             method: "POST",
-            url: "/Services/AddStaff",
+            url: "/Staff/AddStaff",
             data: { dataObj: dataobject }
         })
         return response;
@@ -370,8 +368,37 @@ app.service("bookingService", function ($http) {
     {
         var response = $http({
             method: "POST",
-            url: "/Services/UpdateStaff",
+            url: "/Staff/UpdateStaff",
             data:{dataobj:dataobject}
+        })
+        return response;
+    }
+
+    this.AssignedServicetoStaff=function(dataobject)
+    {
+        var response = $http({
+            method: "POST",
+            url: "/Staff/AllocateServicetoEmployee",
+            data:{dataObj:dataobject }
+        })
+        return response;
+    }
+    this.UnAssignServicetoStaff=function(companyId,employeeId,serviceId)
+    {
+        var response = $http({
+            method: "POST",
+            url: "/Staff/DeAllocateServicetoEmployee",
+            data:{CompanyId:companyId,EmployeeId:employeeId,ServiceId:serviceId}
+        })
+        return response;
+    }
+
+    this.GetAllServiceStatus=function(companyId,employeeId)
+    {
+        var response = $http({
+            method: "POST",
+            url: "/Staff/GetAllServiceStatus",
+            data:{companyId:companyId,EmployeeId:employeeId}
         })
         return response;
     }

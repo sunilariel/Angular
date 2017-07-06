@@ -310,7 +310,7 @@
                         <div class="col-sm-3 left_side2 addcustomerSec allServiceCategorySec">
                             <div class="categoriesSec">
                                 <div class="categoriesHead">
-                                    <h3>Staff (1)</h3>
+                                    <h3>Staff({{TotalNoOfStaff}})</h3>
                                 </div>
                                 <div class="categoryButton">
                                     <button class="pull-right btn btn-circle" id="settingCategory" title="" data-original-title="Add New Staff" ng-click="IsVisibleAddNewStaffPopUp = !IsVisibleAddNewStaffPopUp">
@@ -349,7 +349,7 @@
                                 <div class="categoryList staffList">
                                     <ul>
                                         <li ng-repeat="item in ListofStaff">
-                                            <a ng-click="EditStaff(item)" class="staffUser cursorhand">
+                                            <a ng-click="EditStaff(item)" class="staffUser cursorhand" data-target="#staff-details">
                                                 <img src="/Content/Assets/images/provider_img2.png">
                                                 <span class="categoryServices">{{item.FirstName}}</span>
                                             </a>
@@ -374,7 +374,7 @@
                         <div class="col-sm-9">
                             <div id="staffContentNav" class="detail-navbar staffDetail staffContent container-fluid">
                                 <ul class="nav nav-pills">
-                                    <li class="active" id="staff_details"><a href="#staff-details" data-toggle="tab">DETAILS</a></li>
+                                    <li class="active" id="staff_details"><a data-target="#staff-details"class="cursorhand" data-toggle="tab">DETAILS</a></li>
                                     <li><a data-target="#staff-services" data-toggle="tab" class="cursorhand">SERVICES</a></li>
                                     <li><a data-target="#staff-hours" data-toggle="tab" class="cursorhand">WORKING HOURS</a></li>
                                     <li><a data-target="#staff-break" data-toggle="tab" class="cursorhand">BREAKS</a></li>
@@ -585,7 +585,7 @@
                                                         </div>
                                                         <div class="col-md-10">
                                                             <div class="serviceProvideSec">
-                                                                <h3 class="serviceProText">Services David Provides (2):</h3>
+                                                                <h3 class="serviceProText">Services {{staffName}} Provides ({{EmployeeServiceCount}}):</h3>
                                                                 <!--<div class="allStaffDiv">
                                                                     <div class="dropdown serviceprovideBtn">
                                                                         <div class="checkbox active">
@@ -597,15 +597,15 @@
                                                                         </div>
                                                                     </div>
                                                                 </div>-->
-                                                                <div class="row" ng-repeat="item in ListofServices">
+                                                                <div class="row" ng-repeat="item in ListofAllServices">
                                                                     <div class="col-md-8">
                                                                         <div class="sampleStaffService">
                                                                             <div class="dropdown serviceprovideBtn">
                                                                                 <div class="checkbox active">
                                                                                     <label class="labelBox" id="clickLabel">
-                                                                                        <input type="checkbox" value="">
+                                                                                        <input type="checkbox" value="" ng-click="AssignServicetoEmployee(item)" ng-model="item.Confirmed">
                                                                                         <span class="cr"><i class="cr-icon glyphicon glyphicon-ok"></i></span>
-                                                                                        Sample Service
+                                                                                        {{item.Name}}
                                                                                     </label>
                                                                                 </div>
                                                                             </div>
@@ -613,12 +613,12 @@
                                                                     </div>
                                                                     <div class="col-md-2 col-xs-2">
                                                                         <div class="StaffminText">
-                                                                            <a href="#">60 min</a>
+                                                                            <a href="" ng-if="item.DurationInMinutes">{{item.DurationInMinutes}} min</a>
                                                                         </div>
                                                                     </div>
                                                                     <div class="col-md-2 col-xs-2">
                                                                         <div class="StaffminText">
-                                                                            <a href="#">₹ 10</a>
+                                                                            <a href="" ng-if="item.Cost">₹{{item.Cost}}</a>
                                                                         </div>
                                                                     </div>
                                                                 </div>
