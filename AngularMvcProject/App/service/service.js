@@ -402,6 +402,29 @@ app.service("bookingService", function ($http) {
         })
         return response;
     }
+
+    //Set Employee Working Hours//
+    this.SetEmployeeWorkingHours=function(dataobject)
+    {
+        var response = $http({
+            method: "POST",
+            url: "/Staff/SetEmployeeWorkingHours",
+            data:{dataObj:dataobject}
+        })
+        return response;
+    }
+
+    //Get Working Hours of Employee
+
+    this.GetWorkingHoursofEmployee=function(employeeId)
+    {
+        var response = $http({
+            method: "POST",
+            url: "/Staff/GetWorkingHoursofEmployee",
+            data: { EmployeeId: employeeId }
+        })
+        return response;
+    }
 })
 
 

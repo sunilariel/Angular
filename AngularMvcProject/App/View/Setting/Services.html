@@ -377,17 +377,17 @@
                         </div>
                     </div>
 
-                    <div class="col-md-9 categoryRightSec" ng-hide="showAddServiceDiv">
+                    <div class="col-md-9 col-sm-9 categoryRightSec" ng-hide="showAddServiceDiv">
                         <div class="categoryButtonsDiv">
                             <button id="serviceSaveBtn" class="btn  add_category_btn serviceSaveBtn" ng-click="SaveService()">Save</button>
                             <button id="serviceCancelBtn" class="btn btn-default serviceCancelBtn" ng-click="showAllServicePopup()">Cancel</button>
                         </div>
-                        <div class="row">
+                        <div class="row smapleServiceDivSec">
                             <div class="col-md-7">
                                 <div class="customerProfileDiv">
                                     <form class="form-horizontal imageUploadForm" name="servicenameform">
                                         <div class="form-group 	serviceIconImage">
-                                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                            <label class="control-label col-md-4 col-sm-4 col-xs-12">
                                                 <img src="/Content/Assets/images/service-icon-big.png">
 
                                                 <div class="fileupload fileupload-new" data-provides="fileupload">
@@ -437,26 +437,26 @@
 
                                     <form class="form-horizontal customerDetail" name="servicedetailform">
                                         <div class="form-group">
-                                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Service Cost (₹)</label>
+                                            <label class="control-label col-md-4 col-sm-4 col-xs-12">Service Cost (₹)</label>
                                             <div class="col-md-8 col-sm-8 col-xs-12">
                                                 <input type="text" class="form-control" id="text" placeholder="90" name="text" ng-model="ServiceCost">
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Service Time (mins*)</label>
+                                            <label class="control-label col-md-4 col-sm-4 col-xs-12">Service Time (mins*)</label>
                                             <div class="col-md-8 col-sm-8 col-xs-12">
                                                 <input type="text" class="form-control" id="text" placeholder="90" name="ServiceTime" ng-model="ServiceTime">
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Buffer Time (mins)</label>
+                                            <label class="control-label col-md-4 col-sm-4 col-xs-12">Buffer Time (mins)</label>
                                             <div class="col-md-8 col-sm-8 col-xs-12">
                                                 <input type="text" class="form-control" id="text" placeholder="Time in min" name="text" ng-model="BufferTime">
                                             </div>
                                         </div>
 
                                         <div class="form-group">
-                                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Categories List</label>
+                                            <label class="control-label col-md-4 col-sm-4 col-xs-12">Categories List</label>
                                             <div class="col-md-8 col-sm-8 col-xs-12">
                                                 <div class="dropdown appointProvider serviceCategoryList">
                                                     <button class="btn categoryDropBtn btn-default dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
@@ -484,7 +484,7 @@
                                         </div>
 
                                         <div class="form-group">
-                                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Private Service</label>
+                                            <label class="control-label col-md-4 col-sm-4 col-xs-12">Private Service</label>
                                             <div class="col-md-8 col-sm-8 col-xs-12 recurringDiv">
                                                 <div class="onoffswitch recurringOnOffBtn categorySwitchBtn">
                                                     <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch1" checked="">
@@ -515,7 +515,7 @@
                                             <label class="labelBox" id="clickLabel">
                                                 <input type="checkbox" value="" ng-model="staff.confirmed" ng-click="staffchecked(staff)">
                                                 <span class="cr"><i class="cr-icon glyphicon glyphicon-ok"></i></span>
-                                               {{staff.staffName}}
+                                                {{staff.staffName}}
                                             </label>
                                         </div>
                                     </div>
@@ -534,18 +534,18 @@
                     </div>
 
                     <!--//////////////////////////////-->
-                    <div class="col-md-9 categoryRightSec" ng-hide="EditServiceDiv">
+                    <div class="col-md-9 col-sm-9 categoryRightSec allServiceSec" ng-hide="EditServiceDiv">
                         <div class="categoryButtonsDiv text-right categoryDeleteBtnDiv">
                             <a id="deletecateBtn" ng-click="DeleteService()" class="deletecatIconBtn btn btn-default">
-                                <i class="fa fa-trash-o" aria-hidden="true"></i>                              
+                                <i class="fa fa-trash-o" aria-hidden="true"></i>
                             </a>
                         </div>
                         <div class="row">
                             <div class="col-md-7">
-                                <div class="customerProfileDiv">
-                                    <form class="form-horizontal imageUploadForm" >
+                                <div class="customerProfileDiv providetheService">
+                                    <form class="form-horizontal imageUploadForm">
                                         <div class="form-group 	serviceIconImage">
-                                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                            <label class="control-label col-md-4 col-sm-4 col-xs-12">
                                                 <img src="/Content/Assets/images/service-icon-big.png">
 
                                                 <div class="fileupload fileupload-new" data-provides="fileupload">
@@ -564,7 +564,7 @@
 
                                                     <div class="dropdown serviceColors">
                                                         <button class="btn dropdown-toggle chooseServiceColor" type="button" data-toggle="dropdown">
-                                                            <input type="checkbox" class="sampleCheckbox" name="" value="service"/>
+                                                            <input type="checkbox" class="sampleCheckbox" name="" value="service" />
                                                             <span class="caret"></span>
                                                         </button>
 
@@ -593,28 +593,28 @@
 
                                     </form>
 
-                                    <form class="form-horizontal customerDetail" >
+                                    <form class="form-horizontal customerDetail">
                                         <div class="form-group">
-                                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Service Cost (₹)</label>
+                                            <label class="control-label col-md-4 col-sm-4 col-xs-12">Service Cost (₹)</label>
                                             <div class="col-md-8 col-sm-8 col-xs-12">
                                                 <input type="text" class="form-control" id="text" placeholder="90" name="text" ng-model="ServiceCost" ng-blur="updateService()">
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Service Time (mins*)</label>
+                                            <label class="control-label col-md-4 col-sm-4 col-xs-12">Service Time (mins*)</label>
                                             <div class="col-md-8 col-sm-8 col-xs-12">
                                                 <input type="text" class="form-control" id="text" placeholder="90" name="ServiceTime" ng-model="ServiceTime" ng-blur="updateService()">
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Buffer Time (mins)</label>
+                                            <label class="control-label col-md-4 col-sm-4 col-xs-12">Buffer Time (mins)</label>
                                             <div class="col-md-8 col-sm-8 col-xs-12">
                                                 <input type="text" class="form-control" id="text" placeholder="Time in min" name="text" ng-model="BufferTime">
                                             </div>
                                         </div>
 
                                         <div class="form-group">
-                                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Categories List</label>
+                                            <label class="control-label col-md-4 col-sm-4 col-xs-12">Categories List</label>
                                             <div class="col-md-8 col-sm-8 col-xs-12">
                                                 <div class="dropdown appointProvider serviceCategoryList">
                                                     <button class="btn categoryDropBtn btn-default dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
@@ -622,7 +622,7 @@
                                                         <span class="glyphicon glyphicon-chevron-down chevronDownIcon"></span>
                                                     </button>
                                                     <div class="dropdown-menu popupdropdownDiv" aria-labelledby="dropdownMenu2">
-                                                        <ul class="list-inline">                                                          
+                                                        <ul class="list-inline">
                                                             <li ng-repeat="data in Categories">
                                                                 <span class="serviceCheckboxDiv">
                                                                     <input type="checkbox" class="sampleCheckbox" name="" value="service" ng-model="data.Confirmed" ng-click="CategoryConfirmedCount()">{{data.Name}}
@@ -636,7 +636,7 @@
                                         </div>
 
                                         <div class="form-group">
-                                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Private Service</label>
+                                            <label class="control-label col-md-4 col-sm-4 col-xs-12">Private Service</label>
                                             <div class="col-md-8 col-sm-8 col-xs-12 recurringDiv">
                                                 <div class="onoffswitch recurringOnOffBtn categorySwitchBtn">
                                                     <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch1" checked="">
@@ -657,15 +657,15 @@
                             <div class="col-md-5">
                                 <div class="provideServiceDiv customerProfileDiv">
                                     <p>Who can provide the service *</p>
-                                    <div class="dropdown serviceprovideBtn" ng-repeat="staff in staffList">                                     
+                                    <div class="dropdown serviceprovideBtn" ng-repeat="staff in staffList">
                                         <div class="checkbox active">
                                             <label class="labelBox" id="clickLabel">
-                                                <input type="checkbox" value="" ng-model="staff.confirmed"  ng-click="AssignedStafftoService(staff)">
+                                                <input type="checkbox" value="" ng-model="staff.confirmed" ng-click="AssignedStafftoService(staff)">
                                                 <span class="cr"><i class="cr-icon glyphicon glyphicon-ok"></i></span>
                                                 {{staff.staffName}}
                                             </label>
                                         </div>
-                                    </div>                                   
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -674,7 +674,7 @@
 
 
 
-                    <div class="col-md-9 categoryRightSec allServiceSec" ng-hide="showCategoryServicesDiv">
+                    <div class="col-md-9 col-sm-9 categoryRightSec allServiceSec" ng-hide="showCategoryServicesDiv">
                         <div class="categoryButtonsDiv">
                             <div class="row">
                                 <div class="col-md-6 col-xs-6">
@@ -684,7 +684,7 @@
                                 </div>
                                 <div class="col-md-6 col-xs-6">
                                     <div class="addServiceButton">
-                                        <a ng-click="DeleteCategory()"  id="deletecateBtn" class="deleteCate cursorhand">
+                                        <a ng-click="DeleteCategory()" id="deletecateBtn" class="deleteCate cursorhand">
                                             <i class="fa fa-trash-o" aria-hidden="true"></i>
                                             <span>delete category</span>
                                         </a>
@@ -740,7 +740,7 @@
 
                     </div>
 
-                    <div class="col-md-9 categoryRightSec allServiceSec" ng-hide="showAllServicesDiv">
+                    <div class="col-md-9 col-sm-9 categoryRightSec allServiceSec" ng-hide="showAllServicesDiv">
                         <div class="categoryButtonsDiv">
                             <div class="row">
                                 <div class="col-md-6 col-xs-6">

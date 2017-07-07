@@ -30,11 +30,48 @@
             $scope.ListofStaff = [];
             $scope.ListofStaff = response.data;
             $scope.TotalNoOfStaff = $scope.ListofStaff.length;
-            $scope.EditStaff(response.data[0]);
-        });
+          
+            //Set Working hours in Staff Section in MileStone_4//
 
-     
-       
+            $scope.StartTime = ["08:00", "09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00 ", "19:00", "20:00"];
+            $scope.EndTime = ["08:00", "09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00 ", "19:00", "20:00"];
+
+            $scope.WorkingHours = [{ "Day": "Monday", "StartTime": "08:00", "EndTime": "17:00", "Available": true, "NameOfDay": 1 },
+           { "Day": "Tuesday", "StartTime": "08:00", "EndTime": "17:00", "Available": true, "NameOfDay": 2 },
+           { "Day": "Wednesday", "StartTime": "08:00", "EndTime": "17:00", "Available": true, "NameOfDay": 3 },
+           { "Day": "Thursday", "StartTime": "08:00", "EndTime": "17:00", "Available": true, "NameOfDay": 4 },
+           { "Day": "Friday", "StartTime": "08:00", "EndTime": "17:00", "Available": true, "NameOfDay": 5 },
+           { "Day": "Saturday", "StartTime": "08:00", "EndTime": "17:00", "Available": false, "NameOfDay": 6 },
+           { "Day": "Sunday", "StartTime": "08:00", "EndTime": "17:00", "Available": false, "NameOfDay": 0 }
+            ]
+
+            ////Set default working hours for Employee//
+            //for(var i=0;i<$scope.ListofStaff.length;i++) {
+            //    debugger;
+            //    angular.forEach($scope.WorkingHours, function (value, key) {
+            //        bool = true;
+            //        if (value.Available == true)
+            //        {
+            //            bool = false;
+            //        }
+            //        var CurrentDate = new Date();                    
+            //        var workinghours =
+            //        {
+            //            "Id": 1,
+            //            "CompanyId": $routeParams.CompanyId,
+            //            "EmployeeId": $scope.ListofStaff[i].Id,
+            //            "Start": value.StartTime + ":00.1234567",
+            //            "End": value.EndTime + ":00.1234567",
+            //            "NameOfDay": value.NameOfDay,
+            //            "NameOfDayAsString": value.Day,
+            //            "IsOffAllDay": bool,
+            //            "CreationDate": CurrentDate
+            //        }
+            //        var result = bookingService.SetEmployeeWorkingHours(workinghours);
+            //    });
+            //}
+            $scope.EditStaff(response.data[0]);
+        });        
     }
 
     //Add Staff//
@@ -78,7 +115,34 @@
                     $timeout(function () {
                         $scope.IsVisible = false;
                     },1000);
-                },800)
+                }, 800)
+
+                //////////////////////
+
+                //Set Working hours in Staff Section in MileStone_4//
+
+               
+                angular.forEach($scope.WorkingHours, function (value, key) {
+                    bool = true;
+                    if (value.Available == true) {
+                        bool = false;
+                    }
+                    var CurrentDate = new Date();
+                    var workinghours =
+                    {
+                        "Id": 1,
+                        "CompanyId": $routeParams.CompanyId,
+                        "EmployeeId": response.data.ReturnObject.EmloyeeId,
+                        "Start": value.StartTime + ":00.1234567",
+                        "End": value.EndTime + ":00.1234567",
+                        "NameOfDay": value.NameOfDay,
+                        "NameOfDayAsString": value.Day,
+                        "IsOffAllDay": bool,
+                        "CreationDate": CurrentDate
+                    }
+                    var result = bookingService.SetEmployeeWorkingHours(workinghours);
+                });
+                /////////////
             }
         })
     }
@@ -108,7 +172,9 @@
                     break;
                 }
             }
-        });             
+        });
+
+        $scope.GetAllWorkingHoursOfEmployees(item.Id);
     }
 
     $scope.UpdateStaff = function () {
@@ -170,7 +236,7 @@
                                 $timeout(function () {
                                     $scope.IsVisible = false;
                                 }, 1000)
-                            }, 500)
+                            }, 800)
                         }
                     })
                 });
@@ -203,14 +269,8 @@
             if (item.Name == "All Staff") {
                 angular.forEach($scope.ListofAllServices, function (value, key) {
                     value.Confirmed = false;
-                    var requestedservice = {
-                        "Id": "",
-                        "CompanyId": $routeParams.CompanyId,
-                        "EmployeeId": $scope.StaffId,
-                        "ServiceId": value.Id,
-                        "CreationDate": new Date()
-                    }
-                    var responseresult = bookingService.AssignedServicetoStaff(requestedservice);
+                    
+                    var responseresult = bookingService.UnAssignServicetoStaff($routeParams.CompanyId, $scope.StaffId, value.Id);
                     responseresult.then(function (response) {
                         if (response.data.Success == true) {
                             $scope.MessageText = "Unassigning all Service to Staff.";
@@ -260,4 +320,136 @@
         }
 
     }
+
+    
+
+    $scope.EnabledDisabledDay =function(timeInfo)
+    {
+        debugger;
+        angular.forEach($scope.WorkingHours, function (value, key) {
+            if(timeInfo.Day==value.Day)
+            {
+                var CurrentDate = new Date();
+                var starttime = value.StartTime.split(" ");
+                var endtime = value.EndTime.split(" ");
+
+                if(timeInfo.Available==false)
+                {                                      
+                    var workinghours=
+                    {
+                        "Id": 1,
+                        "CompanyId": $routeParams.CompanyId,
+                        "EmployeeId": $scope.StaffId,
+                        "Start": starttime[0] + ":00.1234567",
+                        "End": endtime[0] + ":00.1234567",
+                        "NameOfDay": value.NameOfDay,
+                        "NameOfDayAsString": value.Day,
+                        "IsOffAllDay": false,
+                        "CreationDate": CurrentDate
+                    }
+                    var result = bookingService.SetEmployeeWorkingHours(workinghours);
+                    result.then(function (response) {
+                        if(response.data.Success==true)
+                        {
+                            $scope.MessageText = "Saving Staff Working Hours";
+                            $scope.IsVisible = true;
+                            $timeout(function () {
+                                $scope.MessageText = "Staff working hours saved"
+                                $timeout(function () {
+                                    $scope.IsVisible = false;
+                                },1000);
+                            },800);
+                        }
+                    });
+
+                    value.Available = true;
+                }
+                else
+                {
+                    var workinghours =
+                   {
+                       "Id": 1,
+                       "CompanyId": $routeParams.CompanyId,
+                       "EmployeeId": $scope.StaffId,
+                       "Start": starttime[0] + ":00.1234567",
+                       "End": endtime[0] + ":00.1234567",
+                       "NameOfDay": value.NameOfDay,
+                       "NameOfDayAsString": value.Day,
+                       "IsOffAllDay": true,
+                       "CreationDate": CurrentDate
+                   }
+                    var result = bookingService.SetEmployeeWorkingHours(workinghours);
+                    result.then(function (response) {
+                        if (response.data.Success == true) {
+                            $scope.MessageText = "Saving Staff Working Hours";
+                            $scope.IsVisible = true;
+                            $timeout(function () {
+                                $scope.MessageText = "Staff working hours saved"
+                                $timeout(function () {
+                                    $scope.IsVisible = false;
+                                }, 1000);
+                            }, 800);
+                        }
+                    });
+                    value.Available = false;
+                }
+            }
+        });       
+    }
+
+    //Set Enable and disable working Time
+    $scope.SetEmployeeWorkingTime = function (timedetail) {
+        debugger;
+        var CurrentDate = new Date();
+        var starttime = timedetail.StartTime.split(" ");
+        var endtime = timedetail.EndTime.split(" ");
+                                          
+            var workinghours=
+            {
+                "Id": 1,
+                "CompanyId": $routeParams.CompanyId,
+                "EmployeeId": $scope.StaffId,
+                "Start": starttime[0] + ":00.1234567",
+                "End": endtime[0] + ":00.1234567",
+                "NameOfDay": timedetail.NameOfDay,
+                "NameOfDayAsString": timedetail.Day,
+                "IsOffAllDay": false,
+                "CreationDate": CurrentDate
+            }
+            var result = bookingService.SetEmployeeWorkingHours(workinghours);
+            result.then(function (response) {
+                if(response.data.Success==true)
+                {
+                    $scope.MessageText = "Saving Staff Working Hours";
+                    $scope.IsVisible = true;
+                    $timeout(function () {
+                        $scope.MessageText = "Staff working hours saved"
+                        $timeout(function () {
+                            $scope.IsVisible = false;
+                        },1000);
+                    },800);
+                }
+            });
+    }
+
+    //Get Working Hours of Employee//
+    $scope.GetAllWorkingHoursOfEmployees = function (EmployeeId) {
+        debugger
+        var result = bookingService.GetWorkingHoursofEmployee(EmployeeId);
+        result.then(function (response) {
+            $scope.WorkingHours = [];
+            angular.forEach(response.data,function(value,key)
+            {
+                var start = value.Start.split(":");
+                var end = value.End.split(":");
+                var available = false;
+                if (value.IsOffAllDay == false)
+                {
+                    available = true;
+                }
+                $scope.WorkingHours.push({ "Day": value.NameOfDayAsString, "StartTime": start[0] + ":00", "EndTime": end[0] + ":00", "Available": available, "NameOfDay": value.NameOfDay });
+            })
+        });
+    }
+
 }]);

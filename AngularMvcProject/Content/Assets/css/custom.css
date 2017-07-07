@@ -1162,14 +1162,14 @@ a.close_icon img {
 
 .appointPopupHead {
     z-index: 1051;
-    overflow: hidden;
+    /*overflow: hidden;*/
         left: 0;
 }
 
 .appointPopupHead .modal-content {
     border-radius: 0;
     border: 1px solid #aaa;
-	width: 410px;
+	width: 420px;
 	margin: auto;
 }
 .appointPopupHead .modal-header .modalcloseIcon {
@@ -1258,7 +1258,7 @@ ul.lableDropdownContent li a:hover {
     padding: 5px !important;
     font-size: 11px !important;
     text-transform: capitalize !important;
-    color: #000 !important;
+    /*color: #000 !important;*/
 }
 .detailText .appointDeatailDiv {
     border-bottom: 0;
@@ -1733,7 +1733,7 @@ button#deleteBtn {
     transition: margin 0.3s ease-in 0s;
 }
 .onoffswitch-inner:before, .onoffswitch-inner:after {
-    display: block; float: left; width: 50%; height: 26px; padding: 0; line-height: 30px;
+    display: block; float: left; width: 50%; height: 26px; padding: 0; line-height: 27px;
     font-size: 14px; color: white; font-family: Trebuchet, Arial, sans-serif; font-weight: bold;
     box-sizing: border-box;
 }
@@ -1924,7 +1924,7 @@ input#customerEmail {
     color: #FFF;
     border-color: #27C3BB;
 	margin-top: 5px;
-	padding: 6px 20px;
+	padding: 6px 10px;
 }
 
 button#createNewStaffBtn:focus {
@@ -1940,7 +1940,7 @@ button#createNewStaffBtn:focus {
     padding: 0px 0px 24px 0px;
     font-size: 14px;
 	font-weight: normal	;
-	color: #C1C8CD;
+	color: #000;
 }
 .detail-navbar.appointmentDiv ul li.active { 
 	color: #455862 !important;
@@ -1987,10 +1987,11 @@ button#createNewStaffBtn:focus {
 	font-size:20px;
 	color:#C1C8CD;
 }
-.addcustomerSearch {
+.customerSearchDiv {
     float: left;
 	border-bottom: 1px solid #ccc;
 	padding-bottom:15px;
+    margin-top: 15px;
 }
 .addcustomerSearch input.form-control {
     background: transparent;
@@ -1998,8 +1999,10 @@ button#createNewStaffBtn:focus {
     border-radius: 0;
     box-shadow: none;
 	float:left;
-	width: 200px;
+	width: 130px;
+        height: 30px;
 }
+
 .addcustomerSearch  .iconBar {
 	float:left;
 	/* margin-left:20px; */
@@ -2012,8 +2015,9 @@ button#createNewStaffBtn:focus {
 }
 
 .addcustomerSearch .iconBar ul.dropdown-menu li a {
-    padding: 10px;
-	font-size: 12px;
+    padding: 5px;
+    font-size: 11px;
+    color: #777;
 }
 .addcustomerSearch .iconBar ul.dropdown-menu li a:hover {
     background: #27C3BB;
@@ -2021,8 +2025,10 @@ button#createNewStaffBtn:focus {
 }
 .addcustomerSearch .iconBar ul.dropdown-menu {
     padding: 0;
-    left: -95px;
-	min-width: 140px !important;
+    left: -79px;
+    min-width: 125px !important;
+    border-radius: 0;
+    margin: -5px;
 }
 .addcustomerSearch .iconBar .dropdownIcon {
     background: transparent;
@@ -2080,7 +2086,9 @@ table#mytable tr td {
 
 
 .providerCustomer ul.list-inline {
-    margin-top: 10px;
+    padding: 10px;
+    overflow: auto;
+    height: 600px;
 }
 
 .providerCustomer .list-inline .selectCustomer {
@@ -2131,10 +2139,12 @@ table#mytable tr td {
     position: relative;
     color: #555;
     border: solid 1px #d7d7d7;
+    margin-top: -3px;
 }
 .customerProfileDiv {
     margin: 40px 0 0 15px;
     position: relative;
+    
 }
 .selectCustomer .popOverDeleteBtn .delete_btn span {
 	margin-right:3px;
@@ -2200,6 +2210,7 @@ table#mytable tr td {
     line-height: 30px;
 	border: none;
     box-shadow: none;
+    font-size:12px;
 }
 .customerDetail .form-control:hover {
     background: #E1E7EB;
@@ -2340,8 +2351,8 @@ table#mytable tr td {
 }
 .addCategoryPopup {
     top: 15px;
-    left: 48%;
-    width: 85%;
+    left: 40%;
+    width: 100%;
 }
 .add_category_btn {
     margin: 0;
@@ -2357,6 +2368,8 @@ table#mytable tr td {
     list-style: none;
     margin: 0;
     padding: 0;
+    height: 600px;
+    overflow: auto;
 }
 .categoryList {
     margin-top: 20px;
@@ -2365,9 +2378,9 @@ table#mytable tr td {
 	margin-left:-10px;
 }
 .addServices {
-	left: 48%;
-    width: 85%;
-    top: -10px;
+	left: 33%;
+    width: 100%;
+    top: -7px;
 }
 .addCustomerCancelbtn {
     margin-top: 5px;
@@ -2391,7 +2404,7 @@ table#mytable tr td {
 }
 .categoryRightSec {
 	padding-left:30px;
-    padding-right:90px;
+    padding-right: 50px;
 }
 .categoryButtonsDiv {
     margin-top: 55px;
@@ -2434,19 +2447,11 @@ table#mytable tr td {
     font-size: 30px;
 
 }
-.uploadCateIcon i {
-    left:27px !important;
-}
-.categoryDeleteBtnDiv {
-    margin-top: 40px;
-}
-.provideServiceDiv.customerProfileDiv {
-    margin-top: 35px;
-}
 .servicesTextareaDiv textarea.form-control {
     border: none;
     border-radius: 0;
 	box-shadow: none;
+    font-size:12px;
 
 }
 
@@ -2469,8 +2474,9 @@ table#mytable tr td {
 	display: inline-block;
     padding: 4px 12px;
     margin-bottom: 0;
-    font-size: 14px;
+    font-size: 13px;
     line-height: 20px;
+    height:32px;
     text-align: left;
     vertical-align: middle;
     cursor: pointer;
@@ -2899,6 +2905,11 @@ ul.dashboardNtfList {
 .sampleServicediv ul.list-inline{
 	border-bottom: 1px solid #ccc;
 }
+.sampleServiceSec {
+    overflow: auto;
+    height: 450px;
+    overflow-x:hidden;
+}
 .sampleServicediv ul.list-inline li {
     cursor: pointer;
     margin: 0px 5px;
@@ -3089,8 +3100,9 @@ ul.dashboardNtfList {
 .staffProfileDiv {
 	margin:0;
 	overflow: auto;
-    height: 600px;
+    height: 450px;
 	padding-bottom: 85px;
+    overflow-x: hidden;
 }
 .staffDetailImg img {
 	width:90px;
@@ -3109,7 +3121,7 @@ ul.dashboardNtfList {
     font-size:30px;
 }
 .staffformGroup {
-	margin-bottom:5px;
+	margin-bottom:0px;
 }
 .staffUserDetail {
     border-bottom: 1px solid #ccc;
@@ -3203,6 +3215,7 @@ h3.serviceProText {
     border: 1px solid #ccc;
     padding: 20px;
     margin-top: 25px;
+
 }
 .clickingButton h5 {
     color: #455862;
@@ -3283,19 +3296,21 @@ span.staffdatepickerTime a {
 
 .selectDropdown .select_btn {
     background: none;
-    border: none;
+    border: none !important;
     position: absolute;
-    top: 2px;
+    top: 4px;
     right: 16px;
-    border-left: 1px solid #ccc;
-    height: 30px;
+    border-left: 1px solid #ccc !important;
+    height: 27px;
+    width:90px;
+    margin:0;
 }  
 .selectDropdown .select_btn:focus {
     background: none;
     border: none;
     outline:none;
     box-shadow:none;
-     border-left: 1px solid #ccc;
+    border-left: 1px solid #ccc !important;
 } 
 .customerField .emailField {
     width:87%;
@@ -3304,6 +3319,15 @@ span.staffdatepickerTime a {
     padding-left:5px;
 }
 
+.selectDropdown .dateTimeSelect {
+    border: none;
+}
+.selectDropdown .dateTimeSelect:focus {
+    border: none;
+    box-shadow:none;
+    outline:none;
+    background:transparent;
+}
 /* Staff page css 28-june-2017 end here ===================== */
 
 /* Staff page css 29-june-2017 start here ===================== */
@@ -3350,7 +3374,7 @@ span.staffdatepickerTime a {
     border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
     filter: progid:DXImageTransform.Microsoft.gradient(enabled = false);
 	outline:none;
-	margin-top: 10px;
+	margin-top: 5px;
 }
 .BreakDeleteBtn .btn:focus {
     outline: none;
@@ -3485,13 +3509,143 @@ span.staffdatepickerTime a {
 /* Staff page css 29-june-2017 end here ===================== */
 
 
-/* 4-July-2017 css start here     */
+/* 5-July-2017 css start here     */
 
 .provideServiceDiv.customerProfileDiv p {
     font-size: 12px;
 }
+.detail-navbar .dateTimeDiv ul li table {
+    background-color: #fff !important;
+}
+.detail-navbar .dateTimeDiv ul li table thead tr th button.btn {
+    background: #fff !important;
+        outline: none;
+}
+.detail-navbar .dateTimeDiv ul li table thead tr th {
+    background: #fff !important;
+    font-size: 12px;
+    font-weight: 600;
+    padding-left: 5px;
+}
+.detail-navbar .dateTimeDiv ul li table tbody tr td .btn {
+    background: #fff;
+    color: #555;
+    font-size: 10px;
+    padding: 2px 0px;
+    font-weight: 600;
+}
+/*.detail-navbar .dateTimeDiv ul li table tbody tr td:first-child {
+    display:none;
+}*/
+.detail-navbar .dateTimeDiv ul li table tbody tr td em {
+    background: #fff;
+    color: #ddd;
+    font-size: 12px;
+    padding: 7px;
+    cursor: default;
+}
 
-/* 4-July-2017 css end  here     */
+.dateTimeDiv ul li.divider {
+    display: none;
+}
+.dateTimeDiv ul li span.btn-group {
+    display: none;
+}
+.dateTimeDiv button.btn.btn-small.btn-success.pull-right {
+    display: none;
+}
+.calendarBox {
+    padding-left: 25px;
+    font-size: 13px;
+}
+.detail-navbar .dateTimeDiv ul li table thead tr th:first-child {
+    cursor: default;
+    color:#ddd;
+    text-align: center;
+}
+.detail-navbar .dateTimeDiv ul li table tbody tr td button.btn.btn-info {
+    background: #9DDD9D;
+    border: none;
+    border-radius: 0;
+    color: #000;
+}
+[class^="icon-"], [class*=" icon-"] {
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    line-height: 14px;
+    vertical-align: text-top;
+    background-image: url(../images/glyphicons-halflings.png);
+    /*background-image: url(../img/glyphicons-halflings.png);*/
+    background-position: 14px 14px;
+    background-repeat: no-repeat;
+    margin-top: 1px;
+}
+.icon-chevron-right {
+    background-position: -456px -72px;
+}
+.icon-chevron-left {
+    background-position: -432px -72px;
+}
+.dateTimeDiv ul {
+    width: auto;
+}
+.dateTimeDiv ul li {
+    margin-right:0 !important;
+}
+ul.list-inline.appointDeatailDiv {
+    margin: 7px 0;
+}
+.uploadCateIcon i {
+    left:62px !important;
+}
+.customerProfileDiv .form-group.serviceIconImage {
+    margin-bottom: 2px;
+}
+.providetheService {
+        margin-top:10px;
+}
+.addcustomerSec.allServiceCategorySec {
+    width: 270px;
+}
+.customerUserDiv {
+    padding:0;
+}
+
+.customerUserDiv img  {
+    height:70px;
+    width:70px;
+}
+.customerUserDiv span.uploadImageIcon i {
+    width: 45px;
+    height: 45px;
+    font-size: 26px;
+    padding-top: 10px;
+    top: 20px;
+    left: 22px;
+}
+form.form-horizontal.imageUploadForm .form-group.appointaploadDiv {
+    margin-bottom: 0;
+}
+.customerNameDiv .customerName {
+    margin-top: 45px;
+}
+.left_side2.addcustomerSec {
+    width: 270px;
+}
+.customerLeftSideBarSec {
+    margin-left:15px;
+}
+.appointmentList.appointMedia {
+    overflow: auto;
+    height: 500px;
+}
+
+.serviceProvideSec {
+    overflow: auto;
+    height: 600px;
+}
+/* 5-July-2017 css end  here     */
 
 /* media css start here ================================= */
 
@@ -3523,6 +3677,9 @@ span.staffdatepickerTime a {
 .addcustomerSearch input.form-control {
 	width:100%;
 }
+.left_side2.addcustomerSec {
+    width: 25%;
+}
 .row.staffaddCustomerSec {
     padding: 0;
     margin: 0;
@@ -3547,15 +3704,83 @@ span.staffdatepickerTime a {
 .addcustomerSearch .iconBar ul.dropdown-menu {
     left: 0;
 }
+.detail-navbar.staffDetail {
+    padding: 40px 70px 15px 15px;
+}
+.staffDetailImg img {
+	width:60px;
+	height:60px;
+}
+.staffIconImg i {
+    top: 17px !important;
+    padding-top: 11px;
+    left: 35px !important;
+    width: 40px;
+    height: 40px;
+    font-size: 20px;
+}
+.staffDetailSec {
+    margin-bottom:60px;
+}
+.detail-navbar.staffDetail ul li {
+    margin-right: 10px;
+}
+.detail-navbar.staffDetail ul li a {
+    font-size: 13px;
+}
+.staffServicImg img {
+    width: 60px;
+    height: 60px;
+}
+.staffCalendar i {
+    font-size: 12px;
+    height: 30px;
+    line-height: 28px;
+    width: 30px;
+    margin-top: 12px;
+}
+.StaffColumnDiv .week_div p {
+    padding: 7px 7px;
+    font-size: 11px;
 
+}
+.addBreakBtn.btn {
+    padding: 2px 7px;
+    font-size: 10.9px;
+    margin-top: 6px;
+}
+/*  july-7 css start here  */
+
+.customerAppointDiv {
+    width:23%;
+}
+.customerUserDiv span.uploadImageIcon i {
+    width: 35px;
+    height: 35px;
+    font-size: 20px;
+    padding-top: 7px;
+    top: 20px;
+    left: 7px;
+}
+input.form-control.emailField {
+    width: 86%;
+}
+.customerLeftSideBarSec {
+    margin-left:0px;
+}
+
+/*  july-7 css end here  */
 
 }
 @media (max-width:1024px){
 .addcustomerSearch .iconBar ul.dropdown-menu {
     left: 0;
 }
+.providerCustomer .list-inline .selectCustomer .providerName {
+    font-size: 11px;
+}
 .addCustomer {
-    left: 34%;
+    left: 37%;
 }
 .customerName {
     margin-top: 32px;
@@ -3601,6 +3826,91 @@ span.staffdatepickerTime a {
     margin-bottom: 10px;
 }
 
+/*     July-5-2017 css start here      */
+
+.staffIconImg i {
+    top: 33px !important;
+    padding-top: 8px;
+    left: 30px !important;
+}
+.categoriesHead h3 {
+    font-size: 20px !important;
+}
+.addCategoryPopup .addcustomerContent .customerField.form-group input#categoryNewName {
+    width: 100%;
+}
+.add_category_btn {
+    font-size: 12px;
+}
+.cateCancelbtn {
+    font-size: 12px;
+}
+.categoryButtonsDiv .serviceCancelBtn {
+    width: auto;
+}
+.categoryButtonsDiv .serviceSaveBtn {
+    font-size: 14px;
+    width:auto;
+}
+.smapleServiceDivSec {
+    padding-right:25px;
+}
+.serviceIconImage img {
+    width: 60px !important;
+    height: 60px !important;
+}
+.serviceIconImage .uploadSeviceIcon i {
+    height: 40px;
+    top: 33%;
+    left: 20px;
+    width: 40px;
+    line-height: 41px;
+    font-size: 20px;
+    padding-top: 0px;
+}
+.customerName {
+    font-size: 12px;
+}
+.form-group.staffformGroup label.control-label {
+    text-align: left;
+}
+.staffServicImg {
+    text-align: left;
+}
+select.select_btn {
+    font-size: 11px;
+}
+.week_div p {
+    margin-bottom: 9px;
+    margin-top: 5px;
+}
+
+.customerDetail .form-control {
+    padding: 6px 3px;
+    font-size: 10px;
+}
+.customerUserDiv span.uploadImageIcon i {
+    width: 35px;
+    height: 35px;
+    font-size: 20px;
+    padding-top: 7px;
+    top: 31px;
+    left: 9px;
+}
+.addcustomerSearch {
+    float: left;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 15px;
+}
+.customerSearchDiv {
+    float: none;
+    border-bottom: none;
+    padding-bottom: 0;
+    margin-top: 0;
+}
+/*     July-5-2017 css end here      */
+
+
 }
 
 
@@ -3614,8 +3924,13 @@ span.staffdatepickerTime a {
     margin: 0;
 }
 
+.colom_div .row .col-md-3.col-sm-3 {
+    margin-top: 5px;
+    padding-right: 0;
+}
+
 select.select_btn {
-    width: 100%;
+    width: 40%;
 }
 .onoffswitch {
     float:right;
@@ -3666,7 +3981,8 @@ input#customerEmail {
     width: 100%;
 }
 #customerMobile {
-    width: 100%;
+    width: 95%;
+    margin-left: 5px;
 }
 /* .addCustomer .arrow {
     left: 33%;
@@ -3748,12 +4064,24 @@ input#customerEmail {
 }
 
 .serviceIconImage  img {
-	width:90px;
-	height:90px;
+	width:90px !important;
+	height:90px !important;
+}
+.form-group.serviceIconImage label.control-label {
+    text-align: left;
 }
 .serviceIconImage .uploadSeviceIcon i {
     top: 29%;
     left: 30px;
+    height:60px;
+    width:60px;
+    line-height: 45px;
+    font-size: 30px;
+    padding-top: 9px;
+}
+.categoriesHead h3 {
+    font-size: 13px !important;
+    margin-top: 8px !important;
 }
 .usernameImage img {
 	margin-top:0;
@@ -3769,8 +4097,129 @@ input#customerEmail {
 
 
 /*    Dashboard page media css end here 22-June-2017    */
+
+.detail-navbar.staffDetail {
+    padding: 40px 30px 15px 0px;
 }
-/* media css end here ================================= */
+.detail-navbar.staffDetail ul li {
+    margin-right: 5px;
+}
+.staffDetailImg img {
+    width: 60px;
+    height: 60px;
+}
+.staffIconImg i {
+    top: 35px !important;
+    padding-top: 10px;
+    left: 28px !important;
+    width: 35px !important;
+    height: 35px !important;
+}
+.appointService {
+    width: 100%;
+    top:0;
+}
+.left_side2.addcustomerSec {
+    width: 25%;
+    margin-left: 0;
+}
+.namevalueField {
+    margin-top:0;
+}
+.appointaploadDiv .control-label {
+    text-align: left;
+}
+.appointaploadDiv img {
+    width: 50px;
+    height: 50px;
+}
+.appointaploadDiv i {
+    width: 30px;
+    height: 30px;
+    top: 33px;
+    left: 20px;
+    font-size: 1em;
+}
+.mobilenumberField {
+    padding-left: 10px;
+}
+.customerField input.form-control.emailField {
+    width: 100%;
+}
+.appointCustomBtn {
+    font-size: 10px;
+}
+.customerName {
+    margin-top: 0px;
+}
+/*   July-5-2017 css start here     */
+
+.dashboardStatus {
+    padding-right: 25px;
+}
+.dashboardAppt {
+    margin-bottom: 60px;
+}
+.addCategoryPopup {
+    top: 45px;
+    left: 31%;
+    width: 100%;
+}
+.add_category_btn {
+    font-size: 10px;
+}
+.cateCancelbtn {
+    font-size: 10px;
+    padding: 6px 7px;
+}
+.addcustomerContent .addCustomerbtn {
+    padding: 5px 3px;
+}
+.staffProfileDiv {
+    overflow-x: scroll;
+     height: auto; 
+   
+}
+.BreakDeleteBtn {
+    margin-top: 5px;
+}
+.uploadCateIcon i {
+    left: 26px !important;
+}
+.customerNameDiv .customerName {
+    margin-top: 0;
+}
+.customerUserDiv {
+    /* padding: 0; */
+    padding-right: 5px;
+    padding-left: 5px;
+}
+.customerUserDiv span.uploadImageIcon i {
+    width: 35px;
+    height: 35px;
+    font-size: 20px;
+    padding-top: 8px;
+    top: 31px;
+    left: 9px;
+}
+.addCustomer {
+    left: 37%;
+}
+.customerAppointDiv {
+    width: 15%;
+}
+div#newaddCategoryPopup {
+    left: 47px;
+}
+.addCustomer h3.addCustomerTitle {
+    font-size: 12px !important;
+}
+
+/*   July-5-2017 css end here     */
+
+}
+
+
 
 /* ==================  MEDIA QUERY CSS START HERE  ================== */
 @media (max-width:768px) {
@@ -3786,6 +4235,20 @@ input#customerEmail {
 .addcustomerContent .form-control {
     width: 27px;
 }
+/*   July-7 Css start here    */
+.customerAppointDiv {
+    width: 14%;
+}
+.customerUserDiv span.uploadImageIcon i {
+    width: 35px;
+    height: 35px;
+    font-size: 20px;
+    padding-top: 8px;
+    top: 39px;
+    left: 9px;
+}
+/*   July-7 Css start here    */
+
 }
 @media (min-width:476px) and (max-width:767px) {
 .addCustomer {
@@ -3799,6 +4262,12 @@ input#customerEmail {
 @media (max-width:767px){
 .addcustomerSec {
     padding: 15px 20px;
+}
+.providerCustomer ul.list-inline {
+    height: 100px;
+}
+.categoryList ul {
+    height: 100px;
 }
 .left_sidebar {
 	display:none;
@@ -3828,7 +4297,8 @@ input#customerEmail {
 	display:block;
 } */
 select.select_btn {
-    width: 100%;
+    /*width: 100%;*/
+    margin-top: 5px;
 }
 .onoffswitch {
     float:right;
@@ -3861,7 +4331,7 @@ select.select_btn {
 }
 
 .addcustomerSec {
-    height: 100% !important;
+    height: auto !important;
 }
 .detail-navbar.appointmentDiv {
     width: 100% !important;
@@ -4078,7 +4548,7 @@ select.select_btn {
 } 
 
 .customerName {
-    margin-top: 40px;
+    margin-top: 0px;
 }
 .addcustomerContent .form-control {
     width: 100%; 
@@ -4093,27 +4563,39 @@ select.select_btn {
     display: inline-block !important;
     position: static;
     width: auto;
+    margin-top: -15px;
 }
 .rightnavBarForMobile .tabs_section {
 
     position: static;
 }
 .rightnavBarForMobile > div {
-    display: inherit;
+    /*display: inherit;
+    width: 100% !important;*/
+        display: inline-grid;
     width: 100% !important;
 }
 .rightnavBarForMobile .tabs_section ul li a {
-    width: 125px;
+    width: 115px;
 }
 .rightnavBarForMobile .tabs_section ul.nav.nav-tab.nav-stacked li {
     float: left;
     display: inline-block;
 }
-.categoryButtonsDiv .serviceCancelBtn {
+/*.categoryButtonsDiv .serviceCancelBtn {
     width: 35%;
+}*/
+/*.categoryButtonsDiv .serviceSaveBtn {
+    width: 35%;
+}*/
+.cateCancelbtn {
+    width: auto;
+    float: right;
 }
-.categoryButtonsDiv .serviceSaveBtn {
-    width: 35%;
+.addCategoryPopup {
+    top: 45px;
+    left: 58%;
+    width: 40%;
 }
 .addCategoryPopup {
     top: 45px;
@@ -4142,11 +4624,11 @@ select.select_btn {
     left: 0;
 } 
 
-.addCategoryPopup {
+/*.addCategoryPopup {
     top: 45px;
     left: 0;
     width: 100%;
-}
+}*/
 
 .dashboardScheDiv {
 	margin-bottom:20px;
@@ -4159,8 +4641,109 @@ select.select_btn {
 }
 
 /*    Setting page media css end here 2-June-2017    */
-	
+
+.detail-navbar.staffDetail {
+    padding: 40px 0px 15px 15px;
+    width: 100%;
 }
+
+.staffIconImg i {
+    top: 40px !important;
+    padding-top: 9px;
+    left: 30px !important;
+    width: 40px !important;
+    height: 40px !important;
+}
+
+/*   July-5-2017 css start here    */
+
+.allServiceSec {
+    padding-right: 10px;
+}
+.customerDetail h3 {
+    font-size: 20px !important;
+}
+.left_side2.addcustomerSec.appointSec {
+    height: auto !important;
+    padding-bottom: 0;
+}
+.uploadCateIcon i {
+    left: 26px !important;
+    top: 32% !important;
+}
+.left_side2.addcustomerSec {
+    width: auto;
+}
+.customerUserDiv {
+    /* padding: 0; */
+    padding-right: 5px;
+    padding-left: 5px;
+}
+.customerUserDiv span.uploadImageIcon i {
+    width: 35px;
+    height: 35px;
+    font-size: 20px;
+    padding-top: 8px;
+   top: 41px;
+    left: 17px;
+}
+.customerAppointDiv {
+    width: auto;
+}
+.customerNameDiv .customerName {
+    margin-top: 45px;
+}
+
+/*   July-5-2017 css end here    */
+
+}
+@media (max-width:710px) {
+.rightnavBarForMobile .tabs_section ul li a {
+    width: 100px;
+}
+span.dashboardHead {
+    font-size: 18px;
+}
+span.dashboardCount {
+    font-size: 18px;
+}
+label.dashboardLable {
+    font-size: 12px;
+}
+.staffIconImg i {
+    padding-top: 12px;
+    font-size: 16px;
+}
+}
+
+/*   July-5-2017 css start here     */
+
+@media (max-width:600px) {
+.addCategoryPopup {
+    top: 45px;
+    left: 47%;
+    width: 50%;
+}
+}
+
+@media (max-width:550px) {
+span.dashboardHead {
+    font-size: 16px;
+}
+span.dashboardCount {
+    font-size: 18px;
+}
+label.dashboardLable {
+    font-size: 12px;
+}
+
+
+
+}
+
+/*   July-5-2017 css end here     */
+
+
 @media (max-width:500px){
 .active_div:before {
 	left: -50px;
@@ -4253,6 +4836,24 @@ li.dashboardLi {
 }
 	
 /*    Setting page media css end here 2-June-2017    */
+
+
+/*   July-5-2017 css start here     */
+
+.dashboardApptHeader .bookBtn {
+    margin: 15px 10px;
+}
+.dashboardApptHeader h3 {
+    font-size: 12px;
+}
+.appointService {
+    left: 0;
+}
+
+
+
+/*   July-5-2017 css end here     */
+
 	
 }
 
@@ -4271,10 +4872,26 @@ li.dashboardLi {
 /*  setting page media css start here   */
 
 .rightnavBarForMobile .tabs_section ul li a {
-    width: 140px;
+    width: 120px;
 }
 
 /*  setting page media css end here   */
+
+.addCategoryPopup {
+    top: 45px;
+    left: 36%;
+    width: 60%;
+}
+
+/*   July-7 css start here   */
+
+.customerUserDiv span.uploadImageIcon i {
+    top: 38px;
+    left: 13px;
+}
+
+/*   July-7 css start here   */
+
 
 }
 
@@ -4297,15 +4914,30 @@ li.dashboardLi {
     top: 34px;
 }
 .rightnavBarForMobile .tabs_section ul li a {
-    width: 125px;
+    width: 150px;
 }
+/*   July-5-2017 css start here     */
+
+.dashboardApptHeader h3 {
+    font-size: 10px;
+}
+.dashboardApptHeader .bookBtn {
+    margin: 15px 3px;
+    font-size:10px;
+}
+.addCategoryPopup {
+    top: 45px;
+    left: 26%;
+    width: 70%;
+}
+/*   July-5-2017 css end here     */
 
 }
 
 
 @media (max-width: 320px){
 .rightnavBarForMobile .tabs_section ul li a {
-    width: 160px;
+    width: 150px;
 }
 
 }

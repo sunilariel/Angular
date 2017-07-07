@@ -6,7 +6,7 @@
         <header class="top">
             <div class="logo_section"> <a class="logo" href="#"></a><img src="../Content/Assets/images/logo.png" alt="Logo"></a> </div>
             <h1>Customers</h1>
-                
+
             <div class="pull-right movileViewList">
                 <ul class="nav navbar-nav navbar-right ">
                     <li><a href="#" id="menuiconBar" class="mobileViewIconBar"><i class="fa fa-bars" aria-hidden="true"></i></a></li>
@@ -137,7 +137,7 @@
                 </li>
                 <li class="side-nav-tooltip" id="side-calendar" data-placement="right" data-toggle="tooltip" data-original-title="Calendar"> <a href="" data-toggle="tab" class="setmore-icon-calendar-31" id="startCalendar"><small>Calendar</small></a> </li>
                 <li class="side-nav-tooltip active" id="side-customers" title="" data-toggle="tooltip" data-original-title="Customers" data-placement="right">
-                    <a ng-click ="redirecttoCustomer()" style="cursor:pointer;" data-toggle="tab" class="setmore-icon-users2" id="side-nav-customers"><small>Customers</small></a>
+                    <a ng-click="redirecttoCustomer()" style="cursor:pointer;" data-toggle="tab" class="setmore-icon-users2" id="side-nav-customers"><small>Customers</small></a>
                 </li>
                 <li class="side-nav-tooltip" id="side-profile" data-toggle="tooltip" data-original-title="Apps &amp; Integrations" data-placement="right">
                     <a href="" data-toggle="tab" class="setmore-icon-laptop-phone"><small>Profile&nbsp;</small></a>
@@ -272,26 +272,29 @@
 
 
 
-                        <div class="col-sm-3 left_side2 addcustomerSec">
+                        <div class="col-sm-3 left_side2 addcustomerSec appointSec customerLeftSideBarSec">
                             <!-- <h3>Staff (1) </h3> -->
                             <div class="row">
                                 <div class="addcustomerSearch col-md-12">
-                                    <input type="text" class="form-control" placeholder="Search.." ng-model="searchName">
-                                    <!-- Split button -->
-                                    <div class="btn-group iconBar">
-                                        <button type="button" class="btn dropdownIcon dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            <i class="fa fa-bars" aria-hidden="true"></i><span class="glyphicon glyphicon-menu-down"></span>
-                                            <span class="sr-only">Toggle Dropdown</span>
-                                        </button>
-                                        <ul class="dropdown-menu">
-                                            <li><a href="">Sort by first name </a></li>
-                                            <li><a href="">Sort by last name </a></li>
-                                            <li><a href="">Import customers </a></li>
-                                            <li><a href="">Export customers</a></li>
-                                        </ul>
+                                    <div class="customerSearchDiv">
+                                        <input type="text" class="form-control" placeholder="Search.." ng-model="searchName">
+                                        <!-- Split button -->
+                                        <div class="btn-group iconBar">
+                                            <button type="button" class="btn dropdownIcon dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                <i class="fa fa-bars" aria-hidden="true"></i><span class="glyphicon glyphicon-menu-down"></span>
+                                                <span class="sr-only">Toggle Dropdown</span>
+                                            </button>
+                                            <ul class="dropdown-menu">
+                                                <li><a href="">Sort by first name </a></li>
+                                                <li><a href="">Sort by last name </a></li>
+                                                <li><a href="">Import customers </a></li>
+                                                <li><a href="">Export customers</a></li>
+                                            </ul>
+                                        </div>
+                                        <button class="pull-right btn btn-circle" id="createNewStaffBtn" title="" data-original-title="Add New Staff" ng-click="showcustomer = !showcustomer"><i class="fa fa-plus" aria-hidden="true"></i></button>
                                     </div>
-                                    <button class="pull-right btn btn-circle" id="createNewStaffBtn" title="" data-original-title="Add New Staff" ng-click="showcustomer = !showcustomer"><i class="fa fa-plus" aria-hidden="true"></i></button>
                                 </div>
+
 
                             </div>
 
@@ -302,17 +305,17 @@
 
                                 <div class="col-md-12">
                                     <form ng-submit="CreateCustomer(createCustomerform)" name="createCustomerform" novalidate class="css-form">
-                                        <div id="addCustomerPopup" class="addCustomer bottomArrow addServices" ng-show="showcustomer">
+                                        <div id="addCustomerPopup" class="addCustomer bottomArrow addServices appointService" ng-show="showcustomer">
                                             <div class="arrow"></div>
                                             <h3 class="addCustomerTitle">Add New Customer</h3>
                                             <div class="addcustomerContent">
                                                 <div class="customerField">
                                                     <input id="customerName" class="form-control" type="text" placeholder="Name" name="customerName" ng-model="customerName" required>
-                                                    <input  class="form-control emailField" type="text" placeholder="E-mail" name="customerEmail" ng-model="customerEmail" required>
+                                                    <input class="form-control emailField" type="text" placeholder="E-mail" name="customerEmail" ng-model="customerEmail" required>
                                                 </div>
                                                 <div class="customerField row form-group">
                                                     <div class="col-md-2 col-sm-2 col-xs-2  userNumber">
-                                                        <input id="customerExt" class="form-control" type="text" placeholder="91" ng-model="customerExt" >
+                                                        <input id="customerExt" class="form-control" type="text" placeholder="91" ng-model="customerExt">
                                                     </div>
                                                     <div class="col-md-10 col-sm-10 col-xs-10 mobilenumberField">
                                                         <input id="customerMobile" class="form-control" type="text" placeholder="Mobile" ng-model="customerMobile">
@@ -322,9 +325,9 @@
                                                     <div class="clearfix"></div>
                                                 </div>
 
-                                                <button id="addnewCustomer" type="submit" class="btn addCustomerbtn">Add Customer</button>
-                                                <button id="cancelCustomer" ng-click="showcustomer=false;" type="button" class="btn btn-default addCustomerCancelbtn">Cancel</button>
-                                                
+                                                <button id="addnewCustomer" type="submit" class="btn addCustomerbtn appointCustomBtn">Add Customer</button>
+                                                <button id="cancelCustomer" ng-click="showcustomer=false;" type="button" class="btn btn-default addCustomerCancelbtn appointCustomBtn">Cancel</button>
+
                                             </div>
                                         </div>
                                     </form>
@@ -346,20 +349,20 @@
                                                     <a href="#"<img src="../Content/Assets/images/provider_img2.png" />></a>
                                                 </span>
                                                 <label class="providerName">Alex</label>
-                                                 Single button 
+                                                 Single button
 
                                             </li>
                                             *@-->
 
-                                            <li class="selectCustomer" ng-repeat="item in customerArr | filter:searchName"  ng-click="EditCustomer(item)" >
+                                            <li class="selectCustomer" ng-repeat="item in customerArr | filter:searchName" ng-click="EditCustomer(item)">
                                                 <span class="formCheckbox">
                                                     <input type="checkbox" name="" class="inputcheckbox">
                                                 </span>
 
                                                 <span class="providerImage">
-                                                    <a href="#"><img src="/Content/Assets/images/provider_img2.png"/></a>
+                                                    <a href="#"><img src="/Content/Assets/images/provider_img2.png" /></a>
                                                 </span>
-                                             
+
                                                 <!--<input type="hidden" name="id" ng-model="item.Id">-->
                                                 <label class="providerName">{{item.FirstName}}</label>
                                                 <!-- Single button -->
@@ -390,11 +393,11 @@
 
                         </div>
 
-                        <div class="col-sm-3">
+                        <div class="col-sm-3 customerAppointDiv">
                             <div class="customerProfileDiv">
                                 <form class="form-horizontal imageUploadForm" action="">
-                                    <div class="form-group">
-                                        <label class="control-label col-md-3 col-sm-3 col-xs-3">
+                                    <div class="form-group appointaploadDiv">
+                                        <label class="control-label col-md-3 col-sm-12 col-xs-3 customerUserDiv">
                                             <img src="/Content/Assets/images/provider_img2.png" />
 
                                             <div class="fileupload fileupload-new" data-provides="fileupload">
@@ -410,8 +413,8 @@
                                             </div>
                                             <span class="uploadImageIcon"><i class="fa fa-camera" aria-hidden="true" style="margin-left: 4px;"></i></span>
                                         </label>
-                                        <div class="col-md-9 col-sm-9 col-xs-9">
-                                            <input type="text" class="customerName form-control" value="Mark" id="name" name="name" placeholder="Mark" ng-model="updatedCustomerName" ng-blur="updateCustomer()">
+                                        <div class="col-md-9 col-sm-12 col-xs-9 customerNameDiv">
+                                            <input type="text" class="customerName namevalueField form-control" value="Mark" id="name" name="name" placeholder="Mark" ng-model="updatedCustomerName" ng-blur="updateCustomer()">
                                         </div>
                                     </div>
 
@@ -505,7 +508,7 @@
                                                                 <h3 class="modal-title" id="lineModalLabel">Appointment</h3>
                                                             </div>
                                                             <div class="form-horizontal appointPopUpform">
-                                                                <form  ng-submit="SaveAppointment(appointmentform)" name="appointmentform" novalidate class="css-form">
+                                                                <form ng-submit="SaveAppointment(appointmentform)" name="appointmentform" novalidate class="css-form">
                                                                     <div class="modal-body appointPopupBody" ng-hide="ShowAddAppointmentPopup">
 
                                                                         <div class="row popupDeatailDiv">
@@ -547,10 +550,10 @@
                                                                                             <option value="" selected="selected">-- Select a Provider --</option>
                                                                                         </select>
                                                                                         <!--@*<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <span class="glyphicon glyphicon-ok okIcon"></span>
-                                    david
-                                    <span class="glyphicon glyphicon-chevron-down chevronDownIcon"></span>
-                                </button>*@-->
+                                                                                            <span class="glyphicon glyphicon-ok okIcon"></span>
+                                                                                            david
+                                                                                            <span class="glyphicon glyphicon-chevron-down chevronDownIcon"></span>
+                                                                                        </button>*@-->
                                                                                         <div class="dropdown-menu popupdropdownDiv" aria-labelledby="dropdownMenu2">
                                                                                             <ul class="list-inline">
                                                                                                 <li>
@@ -573,12 +576,12 @@
                                                                                             <option value="">-- Select a Service --</option>
                                                                                         </select>
                                                                                         <!--@*<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <span class="okIcon longrightArrow">
-                                        <i class="fa fa-long-arrow-right" aria-hidden="true"></i>
-                                    </span>
-                                    Select a Service
-                                    <span class="glyphicon glyphicon-chevron-down chevronDownIcon"></span>
-                                </button>*@-->
+                                                                                            <span class="okIcon longrightArrow">
+                                                                                                <i class="fa fa-long-arrow-right" aria-hidden="true"></i>
+                                                                                            </span>
+                                                                                            Select a Service
+                                                                                            <span class="glyphicon glyphicon-chevron-down chevronDownIcon"></span>
+                                                                                        </button>*@-->
                                                                                         <div class="dropdown-menu popupdropdownDiv" aria-labelledby="dropdownMenu2">
                                                                                             <ul class="list-inline">
                                                                                                 <li>
@@ -611,9 +614,9 @@
                                                                                                 </span>
                                                                                             </a>
                                                                                             <!--<ul id="custmDropdown" class="apptcustomeDropdown" ng-show="minhours" style="display:block;position:absolute;">
-                        <li><a ng-click="Converttomin()">Mins</a></li>
-                        <li><a ng-click="Convertohour()">Hours</a></li>
-                    </ul>-->
+                                                                                                <li><a ng-click="Converttomin()">Mins</a></li>
+                                                                                                <li><a ng-click="Convertohour()">Hours</a></li>
+                                                                                            </ul>-->
                                                                                         </div>
                                                                                     </div>
 
@@ -623,7 +626,8 @@
                                                                                 <label class="control-label col-sm-4" for="pwd">Day/Time</label>
                                                                                 <div class="col-sm-8 dateTimeDiv">
                                                                                     <span class="glyphicon glyphicon-ok calendarOk"></span><!--<input type="text" class="form-control datepickerBox" ng-model="datatime" placeholder="Fri, May 12" id="datetimepicker4" />-->
-                                                                                    <input datetime-picker ng-model="selecteddate" date-disabled-weekdays="disabled()" disable-weekends="true"  class="form-control datepickerBox"  date-format="EEE, MMM d" size="30" date-only   />
+                                                                                    <!--<input datetime-picker ng-model="selecteddate" date-disabled-weekdays="disabled()" disable-weekends="true"  class="form-control datepickerBox"  date-format="EEE, MMM d" size="30" date-only   />-->
+                                                                                    <input type="text" class="form-control calendarBox" datepicker-popup="EEE, MMM d" ng-model="dt" open="opened" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" name='theDate' ng-required="true" ng-change='ChangeDay(mode)' />
                                                                                     <!--<datetimepicker ng-model="date"
                                                                                                     date-format="EEE, MMM d"
                                                                                                     date-options="dateOptions"
@@ -637,15 +641,15 @@
                                                                                            ng-click="opened = !opened"
                                                                                            ng-readonly='true' />-->
                                                                                     <div class="selectDropdown">
-                                                                                        <select class="select_btn" ng-required="true" ng-model="option" ng-init="option=timeInfoFrom[0]">
-                                                                                            <option ng-repeat="option in timeInfoFrom" value="{{option}}">{{option}}</option>
+                                                                                        <select class="select_btn dateTimeSelect" ng-required="true" ng-model="option" ng-init="option=workinghours[0]">
+                                                                                            <option ng-repeat="option in workinghours" value="{{option}}">{{option}}</option>
                                                                                         </select>
                                                                                     </div>
                                                                                 </div>
 
-                                                                                
+
                                                                             </div>
-                                                                           
+
                                                                             <div class="form-group">
                                                                                 <label class="control-label col-sm-4" for="pwd">Notes</label>
                                                                                 <div class="col-sm-8 notesForCustomer">
@@ -703,7 +707,7 @@
                                                         <span>
                                                             <div class="media">
                                                                 <div class="media-left calendarIcon">
-                                                                    <span id="calendarfaIcon" ng-click="appointmentDetailisVisible = !appointmentDetailisVisible" ><i class="fa fa-calendar" aria-hidden="true"></i></span>
+                                                                    <span id="calendarfaIcon" ng-click="appointmentDetailisVisible = !appointmentDetailisVisible"><i class="fa fa-calendar" aria-hidden="true"></i></span>
                                                                 </div>
                                                                 <div class="media-body appointDate">
                                                                     <h4 class="media-heading">Wed May 24,2017</h4>
@@ -713,11 +717,11 @@
 
                                                         </span>
 
-                                                        <div id="detailPopup" class="apptDetailPopup addCustomer bottomArrow" style="display:block;"  ng-show="appointmentDetailisVisible">
-                                                            <div class="apptDetailDiv" >
+                                                        <div id="detailPopup" class="apptDetailPopup addCustomer bottomArrow" style="display:block;" ng-show="appointmentDetailisVisible">
+                                                            <div class="apptDetailDiv">
                                                                 <div class="appt_text">
                                                                     <h2>Appointment Details</h2>
-                                                                    <a   id="crossHidebtn" class="crossBtn" ng-click="appointmentDetailisVisible =!appointmentDetailisVisible"><i class="fa fa-times" aria-hidden="true"></i></a>
+                                                                    <a id="crossHidebtn" class="crossBtn" ng-click="appointmentDetailisVisible =!appointmentDetailisVisible"><i class="fa fa-times" aria-hidden="true"></i></a>
                                                                 </div>
                                                                 <div class="dropdown labeldrowDownBtn">
                                                                     <button class="dropbtn">
@@ -797,8 +801,8 @@
                                             </div>
                                         </div>
                                         <div class="tab-pane" id="staff-services"> Service</div>
-                                        <div class="tab-pane" id="staff-hours">                                        
-                                        Staff Hours                                                                                    
+                                        <div class="tab-pane" id="staff-hours">
+                                            Staff Hours
                                         </div>
                                         <div class="tab-pane " id="staff-break">
                                             <div class="row-fluid">
@@ -828,141 +832,3 @@
     </div>
 </div>
 
-<!--<script src="js/jquery.js"></script>
-<script src="js/bootstrap.min.js"></script>
-<script src="js/moment.js"></script>
-<script src="js/bootstrap-datetimepicker.min.js"></script>
-@*
-
-<script src="../Content/Assets/js/bootstrap-datetimepicker.min.js"></script>
-<script type="text/javascript">
-        var app = angular.module('MyApp', [])
-        app.controller('MyController', function ($scope, $timeout) {
-            //This will hide the DIV by default.
-            $scope.procedures = [
-       {
-           definition: 'Monday',
-           show: false,
-           choice: []
-       },
-       {
-           definition: 'Tuesday',
-           show: false,
-           choice: []
-       },
-       {
-           definition: 'Wednesday',
-           show: false,
-           choice: []
-       },
-       {
-           definition: 'Thursday',
-           show: false,
-           choice: []
-       },
-       {
-           definition: 'Friday',
-           show: false,
-           choice: []
-       },
-       {
-           definition: 'Saturday',
-           show: false,
-           choice: []
-       },
-       {
-           definition: 'Sunday',
-           show: false,
-           choice: []
-       }
-            ];
-
-            $scope.MessageText = "";
-            $scope.IsVisible = false;
-            $scope.choices = [];
-            $scope.addNewChoice = function (procedure) {
-                debugger;
-                $scope.IsVisible = true;
-                $scope.MessageText = "Saving Staff breaks..";
-                var newItemNo = procedure.choice.length + 1;
-
-                procedure.choice.push([{ 'id': 'choice' + newItemNo }]);
-                $timeout(function () { $scope.MessageText = "Staff breaks saved."; $timeout(function () { $scope.IsVisible = false; }, 1000) }, 500);
-            };
-            $scope.showPopup = function (procedure) {
-                procedure.show = true;
-            };
-            $scope.hidePopup = function (procedure) {
-                debugger;
-                procedure.show = false;
-            };
-            $scope.removeChoice = function (procedure) {
-                debugger;
-                $scope.IsVisible = true;
-                var lastItem = procedure.choice.length - 1;
-                procedure.choice.splice(lastItem);
-                $scope.MessageText = "Saving Staff breaks..";
-                $timeout(function () { $scope.MessageText = "Staff breaks saved."; $timeout(function () { $scope.IsVisible = false; }, 1000) }, 500);
-            };
-        });
-
-
-
-
-
-</script>*@
-<script>
-    $(document).ready(function () {
-        $(function () {
-            $('.left_side2').height($(window).height() - 50)
-            $('[data-toggle="tooltip"]').tooltip();
-        })
-    });
-
-    $(document).ready(function () {
-        $("#createNewStaffBtn").click(function () {
-            $("#addCustomerPopup").toggle(200);
-        });
-
-    });
-
-    $(document).ready(function () {
-        $('[data-toggle="popover"]').popover();
-    });
-
-    $(document).ready(function () {
-        $("#menuiconBar").click(function () {
-            $(".left_sidebar").toggle(200);
-        });
-
-        $("#deleteBtn").click(function () {
-            $("#tooltipPopup").toggle(200);
-        });
-
-        $("#calendarfaIcon").click(function () {
-            $("#detailPopup").show(200);
-        });
-
-        $("#crossHidebtn").click(function () {
-            $("#detailPopup").hide(200);
-        });
-        $("#minTextDiv").click(function () {
-            $("#custmDropdown").toggle(200);
-        });
-
-
-        //$("#createNewStaffBtn").click(function () {
-        //    $("#modalPopupbg").addClass("modal_bg");
-        //});
-
-
-    });
-
-    $(function () {
-        debugger;
-        $('#datetimepicker4').datetimepicker();
-    });
-
-
-
-</script>-->

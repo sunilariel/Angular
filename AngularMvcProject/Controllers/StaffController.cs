@@ -223,5 +223,64 @@ namespace AngularMvcProject.Controllers
             }
 
         }
+        [HttpPost]
+        public string SetEmployeeWorkingHours(EmployeeWorkingHours dataObj)
+        {
+            try
+            {
+                string apiUrl = "http://bookingmanager1romz.azurewebsites.net/api/staff/SetWorkingHours";
+
+                string result = "";
+                var httpWebRequest = (HttpWebRequest)WebRequest.Create(apiUrl);
+                httpWebRequest.ContentType = "application/json";
+                httpWebRequest.Method = "POST";
+                
+                using (var streamWriter = new StreamWriter(httpWebRequest.GetRequestStream()))
+                {
+                    var jsonstring = new JavaScriptSerializer().Serialize(dataObj);
+                    streamWriter.Write(jsonstring);
+                    streamWriter.Flush();
+                    streamWriter.Close();
+                }
+
+
+                var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
+
+                using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
+                {
+                    result = streamReader.ReadToEnd();
+                }
+
+                return result;
+            }
+            catch (Exception exception)
+            {
+                return exception.ToString();
+            }
+
+        }
+
+        [HttpPost]
+        public string GetWorkingHoursofEmployee(string EmployeeId)
+        {
+            try
+            {
+                var result = "";
+                var httpWebRequest = (HttpWebRequest)WebRequest.Create("http://bookingmanager1romz.azurewebsites.net/api/staff/GetWorkingHours?employeeId="+ EmployeeId);
+                httpWebRequest.Method = "GET";
+                httpWebRequest.ContentType = "application/json";
+
+                var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
+                using (var StreamReader = new StreamReader(httpResponse.GetResponseStream()))
+                {
+                    result = StreamReader.ReadToEnd();
+                }
+                return result;
+            }
+            catch (Exception e)
+            {
+                return e.ToString();
+            }
+        }
     }
 }
