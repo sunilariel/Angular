@@ -31,19 +31,7 @@
             $scope.ListofStaff = response.data;
             $scope.TotalNoOfStaff = $scope.ListofStaff.length;
           
-            //Set Working hours in Staff Section in MileStone_4//
-
-            $scope.StartTime = ["08:00", "09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00 ", "19:00", "20:00"];
-            $scope.EndTime = ["08:00", "09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00 ", "19:00", "20:00"];
-
-            $scope.WorkingHours = [{ "Day": "Monday", "StartTime": "08:00", "EndTime": "17:00", "Available": true, "NameOfDay": 1 },
-           { "Day": "Tuesday", "StartTime": "08:00", "EndTime": "17:00", "Available": true, "NameOfDay": 2 },
-           { "Day": "Wednesday", "StartTime": "08:00", "EndTime": "17:00", "Available": true, "NameOfDay": 3 },
-           { "Day": "Thursday", "StartTime": "08:00", "EndTime": "17:00", "Available": true, "NameOfDay": 4 },
-           { "Day": "Friday", "StartTime": "08:00", "EndTime": "17:00", "Available": true, "NameOfDay": 5 },
-           { "Day": "Saturday", "StartTime": "08:00", "EndTime": "17:00", "Available": false, "NameOfDay": 6 },
-           { "Day": "Sunday", "StartTime": "08:00", "EndTime": "17:00", "Available": false, "NameOfDay": 0 }
-            ]
+          
 
             ////Set default working hours for Employee//
             //for(var i=0;i<$scope.ListofStaff.length;i++) {
@@ -119,8 +107,20 @@
 
                 //////////////////////
 
+              
                 //Set Working hours in Staff Section in MileStone_4//
 
+                $scope.StartTime = ["08:00", "09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00 ", "19:00", "20:00"];
+                $scope.EndTime = ["08:00", "09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00 ", "19:00", "20:00"];
+
+                $scope.WorkingHours = [{ "Day": "Monday", "StartTime": "08:00", "EndTime": "17:00", "Available": true, "NameOfDay": 1 },
+               { "Day": "Tuesday", "StartTime": "08:00", "EndTime": "17:00", "Available": true, "NameOfDay": 2 },
+               { "Day": "Wednesday", "StartTime": "08:00", "EndTime": "17:00", "Available": true, "NameOfDay": 3 },
+               { "Day": "Thursday", "StartTime": "08:00", "EndTime": "17:00", "Available": true, "NameOfDay": 4 },
+               { "Day": "Friday", "StartTime": "08:00", "EndTime": "17:00", "Available": true, "NameOfDay": 5 },
+               { "Day": "Saturday", "StartTime": "08:00", "EndTime": "17:00", "Available": false, "NameOfDay": 6 },
+               { "Day": "Sunday", "StartTime": "08:00", "EndTime": "17:00", "Available": false, "NameOfDay": 0 }
+                ]
                
                 angular.forEach($scope.WorkingHours, function (value, key) {
                     bool = true;
