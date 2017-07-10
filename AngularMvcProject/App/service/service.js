@@ -425,6 +425,30 @@ app.service("bookingService", function ($http) {
         })
         return response;
     }
+
+    //Set timeOff//
+
+    this.AddtimeOff=function(dataobject)
+    {
+        var response = $http({
+            method: "POST",
+            url: "/Staff/SetTimeOff",
+            data:{dataobj:dataobject}
+        })
+        return response;
+    }
+
+    //Get TimeOff//
+
+    this.GetTimeOffDetail=function(Id)
+    {
+        var response = $http({
+            method: "POST",
+            url: "/Staff/GetTimeOffDetail",
+            data: { EmployeeId: Id }
+        })
+        return response;
+    }
 })
 
 

@@ -380,7 +380,7 @@
                                 <li><a data-target="#staff-break" data-toggle="tab" class="cursorhand">BREAKS</a></li>
                                 <li><a data-target="#staff-timeoff" data-toggle="tab" class="cursorhand">TIME OFF</a></li>
                                 <li class="pull-right settingIcon staffDeleteIcon">
-                                    <button class="pull-right btn btn-circle appointment_btn" id="createNewStaffBtn">
+                                    <button class="pull-right btn btn-circle appointment_btn" id="deletestaffbtn" ng-click="DeleteStaff()">
                                         <i class="fa fa-trash-o" aria-hidden="true"></i>
                                     </button>
                                 </li>
@@ -641,7 +641,7 @@
                                                         </div>
                                                     </div>
                                                     <div class="col-md-10">
-                                                        <h3 class="serviceProText">Working hours of David:</h3>
+                                                        <h3 class="serviceProText">Working hours of {{staffName}}:</h3>
                                                         <div class="staffWorkingHoursSec">
                                                             <div class="colom_div" ng-repeat="timedetail in WorkingHours">
                                                                 <div class="row">
@@ -1445,7 +1445,7 @@
                                                             <div class="timeOffText">
                                                                 <h3 class="serviceProText">Time Off for David:</h3>
 
-                                                                <button class="pull-right btn btn-circle addstaffBtn timeOffPlusBtn" id="createNewStaffBtn" title="" data-toggle="modal" data-target="#squarespaceModal"><i class="fa fa-plus" aria-hidden="true"></i></button>
+                                                                <button class="pull-right btn btn-circle addstaffBtn timeOffPlusBtn" id="timeOffPlusBtn" title="" data-toggle="modal" data-target="#addstaffPopUp" ng-click="isVisibleTimeOffPopup = !isVisibleTimeOffPopup"><i class="fa fa-plus" aria-hidden="true"></i></button>
                                                                 <button class="pull-right btn exportBtn btn-circle timeOffPlusBtn" id="createNewStaffBtn" title="" data-toggle="modal" data-target="#ExportModal">
                                                                     <i class="fa fa-download" aria-hidden="true"></i>
                                                                     Export
@@ -1461,7 +1461,7 @@
                                                                             <div class="modal-body staffBodyDiv">
 
 
-                                                                                <!-- content goes here -->
+                                                                                 content goes here 
                                                                                 <div class="staffPopUpDiv">
                                                                                     <form class="form-horizontal ">
 
@@ -1516,7 +1516,7 @@
 
 
 
-                                                                <!--<div class="modal fade appointmentPopup" id="squarespaceModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true" style="display: none;">
+                                                                <div class="modal fade appointmentPopup" id="addstaffPopUp" ng-show="isVisibleTimeOffPopup" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
                                                                     <div class="modal-dialog appointPopupHead StaffPopupHead">
                                                                         <div class="modal-content">
                                                                             <div class="modal-header staffModalPopup">
@@ -1526,20 +1526,22 @@
                                                                             <div class="modal-body staffBodyDiv">
 
 
-                                                                                 content goes here
+                                                                                <!-- content goes here -->
                                                                                 <div class="staffPopUpDiv">
-                                                                                    <form class="form-horizontal ">
+                                                                                    <form class="form-horizontal" ng-submit="AddtimeOff()" >
 
                                                                                         <div class="form-group staffStartDate">
                                                                                             <label class="control-label col-sm-4" for="pwd">Start Date</label>
                                                                                             <div class="col-sm-8 dateTimeDiv">
-                                                                                                <span class="glyphicon glyphicon-ok calendarOk"></span><input type="text" class="form-control datepickerBox" placeholder="Fri, May 12" id="datetimepicker4">
+                                                                                                <span class="glyphicon glyphicon-ok calendarOk"></span><!--<input type="text" class="form-control datepickerBox" placeholder="Fri, May 12" id="datetimepicker4">-->
+                                                                                                <input type="text" class="form-control calendarBox" datepicker-popup="dd MMMM yyyy" ng-model="startdate" open="opened" datepicker-options="dateOptions" name='theDate' ng-required="true"  />
                                                                                             </div>
                                                                                         </div>
                                                                                         <div class="form-group staffStartDate">
                                                                                             <label class="control-label col-sm-4" for="pwd">End Date</label>
                                                                                             <div class="col-sm-8 dateTimeDiv">
-                                                                                                <span class="glyphicon glyphicon-ok calendarOk"></span><input type="text" class="form-control datepickerBox" placeholder="Fri, May 12" id="datetimepicker5">
+                                                                                                <span class="glyphicon glyphicon-ok calendarOk"></span>
+                                                                                                <input type="text" class="form-control calendarBox" datepicker-popup="dd MMMM yyyy" ng-model="enddate" open="opened" datepicker-options="dateOptions" name='theDate' ng-required="true"  />
                                                                                             </div>
                                                                                         </div>
 
@@ -1550,14 +1552,14 @@
                                                                                                     <div class="dropdown serviceprovideBtn">
                                                                                                         <div class="checkbox allDayCheck">
                                                                                                             <label class="labelBox" id="clickLabel">
-                                                                                                                <input type="checkbox" value="">
+                                                                                                                <input type="checkbox" value="" ng-model="alldaystatus">
                                                                                                                 <span class="cr"><i class="cr-icon glyphicon glyphicon-ok"></i></span>
                                                                                                                 All Day
                                                                                                             </label>
                                                                                                         </div>
 
                                                                                                         <div class="moreOptionDiv">
-                                                                                                            <a class="moreOptionText" href="#"> <span class="Staffplus">+</span><span class="Staffminus">-</span>  More Options</a>
+                                                                                                            <a class="moreOptionText cursorhand" ng-click="showoption = !showoption"> <span class="Staffplus">+</span><span class="Staffminus">-</span>More Options</a>
                                                                                                         </div>
 
                                                                                                     </div>
@@ -1565,11 +1567,11 @@
 
                                                                                             </div>
                                                                                         </div>
-                                                                                        <div class="form-group staffStartDate hideContent">
+                                                                                        <div class="form-group staffStartDate hideContent" ng-show="showoption">
                                                                                             <label class="control-label col-sm-4" for="pwd">Recurring?</label>
                                                                                             <div class="col-sm-8 StaffrecurringDiv">
                                                                                                 <div class="onoffswitch recurringOnOffBtn">
-                                                                                                    <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitchrequi" checked="">
+                                                                                                    <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitchrequi" checked="" ng-model="">
                                                                                                     <label class="onoffswitch-label" for="myonoffswitchrequi">
                                                                                                         <span class="onoffswitch-inner"></span>
                                                                                                         <span class="onoffswitch-switch"></span>
@@ -1584,7 +1586,7 @@
                                                                                         <div class="form-group staffStartDate hideContent">
                                                                                             <label class="control-label col-sm-4" for="pwd">Notes</label>
                                                                                             <div class="col-sm-8 StaffrecurringDiv">
-                                                                                                <textarea class="form-control apptNotes" placeholder="Details..." maxlength="500"></textarea>
+                                                                                                <textarea class="form-control apptNotes" placeholder="Details..." maxlength="500" ng-model="notes"></textarea>
                                                                                             </div>
 
                                                                                         </div>
@@ -1594,7 +1596,7 @@
 
                                                                                             <div class="col-sm-12 StaffrecurringDiv">
                                                                                                 <div class="StaffDateTime">
-                                                                                                    <p>From 29 Jun 2017 to 29 Jun 2017</p>
+                                                                                                    <p>From {{startdate | date:'dd MMMM yyyy' }} to {{enddate | date:'dd MMMM yyyy'}}</p>
                                                                                                 </div>
 
                                                                                             </div>
@@ -1602,39 +1604,39 @@
                                                                                         </div>
 
 
+                                                                                        <div class="modal-footer staffFooter">
+                                                                                            <div class="btn-group saveChangesDiv" role="group">
+                                                                                                <button type="submit" class="btn saveChangesBtn btn-default" data-action="save" role="button">Save Changes</button>
+                                                                                            </div>
 
+                                                                                        </div>
                                                                                     </form>
                                                                                 </div>
 
 
                                                                             </div>
-                                                                            <div class="modal-footer staffFooter">
-                                                                                <div class="btn-group saveChangesDiv" role="group">
-                                                                                    <button type="button" class="btn saveChangesBtn btn-default" data-action="save" role="button">Save Changes</button>
-                                                                                </div>
-
-                                                                            </div>
+                                                                            
                                                                         </div>
                                                                     </div>
                                                                     <div id="modalPopupbg" class="fade modal_bg in"></div>
-                                                                </div>-->
+                                                                </div>
 
 
 
                                                             </div>
 
 
-                                                            <div class="clickingButton">
+                                                            <!--<div class="clickingButton">
                                                                 <h5>Add time off by clicking the button below.</h5>
                                                                 <button class="btn btn-default addTimeOff">
                                                                     <i class="fa fa-plus" aria-hidden="true"></i>
                                                                     Add Time Off
                                                                 </button>
-                                                            </div>
+                                                            </div>-->
 
 
 
-                                                            <div class="row addstaffDiv">
+                                                            <div class="row addstaffDiv" ng-repeat="item in timeOffDetail">
                                                                 <div class="col-md-1 col-sm-12">
                                                                     <div class="staffCalendar">
                                                                         <i class="fa fa-calendar-o" aria-hidden="true"></i>
@@ -1644,7 +1646,7 @@
                                                                     <div class="row">
                                                                         <div class="col-md-6 col-sm-6">
                                                                             <div class="dateText">
-                                                                                <h4>29 Jun 2017 to 29 Jun 2017</h4>
+                                                                                <h4>{{item.Start | date:"dd MMMM yyyy"}} to {{item.End | date:"dd MMMM yyyy"}}</h4>
                                                                                 <p>No Description</p>
                                                                             </div>
 
@@ -1656,7 +1658,7 @@
                                                                         </div>
                                                                         <div class="col-md-3 col-sm-3">
                                                                             <div class="dateText">
-                                                                                <p> Full Day </p>
+                                                                                <p>FullDay</p>
                                                                             </div>
                                                                         </div>
                                                                     </div>

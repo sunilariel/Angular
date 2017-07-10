@@ -1,4 +1,4 @@
-﻿app.controller("staffController", ['$scope', '$http', '$routeParams', '$timeout', '$location', 'bookingService', function ($scope, $http, $routeParams, $timeout, $location, bookingService) {
+﻿app.controller("staffController", ['$scope', '$http', '$routeParams','$filter', '$timeout', '$location', 'bookingService', function ($scope, $http, $routeParams,$filter, $timeout, $location, bookingService) {
 
 
     $scope.showstaffpopup = false;
@@ -23,6 +23,10 @@
         debugger;
         $scope.isvisibleMenuiconBar = true;
         $scope.IsVisibleAddNewStaffPopUp = false;
+        $scope.isVisibleTimeOffPopup = false;
+     
+        $scope.startdate = $filter('date')(new Date(), "dd MMMM yyyy");
+        $scope.enddate = $filter('date')(new Date(), "dd MMMM yyyy");
 
         //Use Wizard Controller to get AllStaffList through api//
         var StaffResult = bookingService.GetAllStaff($routeParams.CompanyId);
@@ -32,9 +36,13 @@
             $scope.TotalNoOfStaff = $scope.ListofStaff.length;
           
           
-            $scope.StartTime = ["08:00", "09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00 ", "19:00", "20:00"];
-            $scope.EndTime = ["08:00", "09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00 ", "19:00", "20:00"];
-            ////Set default working hours for Employee//
+            $scope.StartTime = ["08:00 AM", "09:00 AM", "10:00 AM", "11:00 AM", "12:00 AM", "01:00 PM", "02:00 PM", "03:00 PM", "04:00 PM", "05:00 PM", "06:00 PM", "07:00 PM", "08:00 PM"];
+            $scope.EndTime = ["08:00 AM", "09:00 AM", "10:00 AM", "11:00 AM", "12:00 AM", "01:00 PM", "02:00 PM", "03:00 PM", "04:00 PM", "05:00 PM", "06:00 PM", "07:00 PM", "08:00 PM"];
+
+           
+
+            //Set default working hours for Employee//
+
             //for(var i=0;i<$scope.ListofStaff.length;i++) {
             //    debugger;
             //    angular.forEach($scope.WorkingHours, function (value, key) {
@@ -97,32 +105,34 @@
                 //$scope.StaffId= response.data.ReturnObject.EmloyeeId;
                 $scope.MessageText = "Adding new Staff";
                 $scope.IsVisible = true;
-                $scope.init();
+                //$scope.init();
                 $timeout(function()
                 {
                     $scope.MessageText = "New Staff Added";
                     $timeout(function () {
                         $scope.IsVisible = false;
+                        $scope.IsVisibleAddNewStaffPopUp = false;
+                        var StaffResult = bookingService.GetAllStaff($routeParams.CompanyId);
+                        StaffResult.then(function (response) {
+                            $scope.ListofStaff = [];
+                            $scope.ListofStaff = response.data;
+                            $scope.TotalNoOfStaff = $scope.ListofStaff.length;
+                        });
                     },1000);
                 }, 800)
 
                 //////////////////////
-
               
                 //Set Working hours in Staff Section in MileStone_4//
-
-                $scope.StartTime = ["08:00", "09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00 ", "19:00", "20:00"];
-                $scope.EndTime = ["08:00", "09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00 ", "19:00", "20:00"];
-
-                $scope.WorkingHours = [{ "Day": "Monday", "StartTime": "08:00", "EndTime": "17:00", "Available": true, "NameOfDay": 1 },
-               { "Day": "Tuesday", "StartTime": "08:00", "EndTime": "17:00", "Available": true, "NameOfDay": 2 },
-               { "Day": "Wednesday", "StartTime": "08:00", "EndTime": "17:00", "Available": true, "NameOfDay": 3 },
-               { "Day": "Thursday", "StartTime": "08:00", "EndTime": "17:00", "Available": true, "NameOfDay": 4 },
-               { "Day": "Friday", "StartTime": "08:00", "EndTime": "17:00", "Available": true, "NameOfDay": 5 },
-               { "Day": "Saturday", "StartTime": "08:00", "EndTime": "17:00", "Available": false, "NameOfDay": 6 },
-               { "Day": "Sunday", "StartTime": "08:00", "EndTime": "17:00", "Available": false, "NameOfDay": 0 }
+                $scope.WorkingHours = [{ "Day": "Monday", "StartTime": "08:00 AM", "EndTime": "05:00 PM", "Available": true, "NameOfDay": 1 },
+             { "Day": "Tuesday", "StartTime": "08:00 AM", "EndTime": "05:00 PM", "Available": true, "NameOfDay": 2 },
+             { "Day": "Wednesday", "StartTime": "08:00 AM", "EndTime": "05:00 PM", "Available": true, "NameOfDay": 3 },
+             { "Day": "Thursday", "StartTime": "08:00 AM", "EndTime": "05:00 PM", "Available": true, "NameOfDay": 4 },
+             { "Day": "Friday", "StartTime": "08:00 AM", "EndTime": "05:00 PM", "Available": true, "NameOfDay": 5 },
+             { "Day": "Saturday", "StartTime": "08:00 AM", "EndTime": "05:00 PM", "Available": false, "NameOfDay": 6 },
+             { "Day": "Sunday", "StartTime": "08:00 AM", "EndTime": "05:00 PM", "Available": false, "NameOfDay": 0 }
                 ]
-               
+                            
                 angular.forEach($scope.WorkingHours, function (value, key) {
                     bool = true;
                     if (value.Available == true) {
@@ -134,8 +144,8 @@
                         "Id": 1,
                         "CompanyId": $routeParams.CompanyId,
                         "EmployeeId": response.data.ReturnObject.EmloyeeId,
-                        "Start": value.StartTime + ":00.1234567",
-                        "End": value.EndTime + ":00.1234567",
+                        "Start": value.StartTime,
+                        "End": value.EndTime ,
                         "NameOfDay": value.NameOfDay,
                         "NameOfDayAsString": value.Day,
                         "IsOffAllDay": bool,
@@ -174,9 +184,40 @@
                 }
             }
         });
-
-        $scope.GetAllWorkingHoursOfEmployees(item.Id);
+        $scope.GetTimeOffDetail(item.Id);
+        $scope.GetWorkingHoursOfEmployee(item.Id);
     }
+
+
+    //Delete  Staff by using wizard Controller DeleteStaff method by api
+    $scope.DeleteStaff = function () {
+        debugger;
+        var result = bookingService.DeleteStaff($scope.StaffId);
+        result.then(function (response) {
+            if(response.data.Success==true)
+            {
+                $scope.MessageText = "Deleting Staff.";
+                $scope.IsVisible = true;
+                $timeout(function () {
+                    $scope.MessageText = "Staff Deleted.";
+                    $timeout(function()
+                    {
+                        $scope.IsVisible = false;
+                        var StaffResult = bookingService.GetAllStaff($routeParams.CompanyId);
+                        StaffResult.then(function (response) {
+                            $scope.ListofStaff = [];
+                            $scope.ListofStaff = response.data;
+                            $scope.TotalNoOfStaff = $scope.ListofStaff.length;
+                        });
+                    },1000)
+                },800)
+            }
+        });
+       
+    }
+
+
+
 
     $scope.UpdateStaff = function () {
         debugger;
@@ -331,8 +372,7 @@
             if(timeInfo.Day==value.Day)
             {
                 var CurrentDate = new Date();
-                var starttime = value.StartTime.split(" ");
-                var endtime = value.EndTime.split(" ");
+               
 
                 if(timeInfo.Available==false)
                 {                                      
@@ -341,8 +381,8 @@
                         "Id": 1,
                         "CompanyId": $routeParams.CompanyId,
                         "EmployeeId": $scope.StaffId,
-                        "Start": starttime[0] + ":00.1234567",
-                        "End": endtime[0] + ":00.1234567",
+                        "Start": value.StartTime ,
+                        "End": value.EndTime,
                         "NameOfDay": value.NameOfDay,
                         "NameOfDayAsString": value.Day,
                         "IsOffAllDay": false,
@@ -372,8 +412,8 @@
                        "Id": 1,
                        "CompanyId": $routeParams.CompanyId,
                        "EmployeeId": $scope.StaffId,
-                       "Start": starttime[0] + ":00.1234567",
-                       "End": endtime[0] + ":00.1234567",
+                       "Start": value.StartTime,
+                       "End": value.EndTime,
                        "NameOfDay": value.NameOfDay,
                        "NameOfDayAsString": value.Day,
                        "IsOffAllDay": true,
@@ -402,16 +442,15 @@
     $scope.SetEmployeeWorkingTime = function (timedetail) {
         debugger;
         var CurrentDate = new Date();
-        var starttime = timedetail.StartTime.split(" ");
-        var endtime = timedetail.EndTime.split(" ");
+      
                                           
             var workinghours=
             {
                 "Id": 1,
                 "CompanyId": $routeParams.CompanyId,
                 "EmployeeId": $scope.StaffId,
-                "Start": starttime[0] + ":00.1234567",
-                "End": endtime[0] + ":00.1234567",
+                "Start": timedetail.StartTime ,
+                "End": timedetail.EndTime,
                 "NameOfDay": timedetail.NameOfDay,
                 "NameOfDayAsString": timedetail.Day,
                 "IsOffAllDay": false,
@@ -434,23 +473,58 @@
     }
 
     //Get Working Hours of Employee//
-    $scope.GetAllWorkingHoursOfEmployees = function (EmployeeId) {
+    $scope.GetWorkingHoursOfEmployee = function (EmployeeId) {
         debugger
         var result = bookingService.GetWorkingHoursofEmployee(EmployeeId);
         result.then(function (response) {
             $scope.WorkingHours = [];
             angular.forEach(response.data,function(value,key)
-            {
-                var start = value.Start.split(":");
-                var end = value.End.split(":");
+            {            
                 var available = false;
                 if (value.IsOffAllDay == false)
                 {
                     available = true;
                 }
-                $scope.WorkingHours.push({ "Day": value.NameOfDayAsString, "StartTime": start[0] + ":00", "EndTime": end[0] + ":00", "Available": available, "NameOfDay": value.NameOfDay });
+                $scope.WorkingHours.push({ "Id":value.Id,"EmployeeId":value.EmployeeId,"Day": value.NameOfDayAsString, "StartTime": value.Start , "EndTime": value.End , "Available": available, "NameOfDay": value.NameOfDay });
             })
         });
     }
 
+
+    //Set Time Off//
+    $scope.AddtimeOff = function () {
+        debugger;
+        var timeOff = {
+           
+            "CompanyId": $routeParams.CompanyId,
+            "EmployeeId": $scope.StaffId,
+            "Start": $scope.startdate,
+            "End": $scope.enddate,
+            "CreationDate": new Date(),
+            "IsOffAllDay": $scope.alldaystatus
+        }
+        var result = bookingService.AddtimeOff(timeOff);
+        result.then(function (response) {
+            if (response.data.Success == true) {
+                $scope.MessageText = "Saving TimeOff";
+                $scope.IsVisible = true;
+                $timeout(function () {
+                    $scope.MessageText = "TimeOff Saved";
+                    $timeout(function () {
+                        $scope.IsVisible = false;
+                        $scope.isVisibleTimeOffPopup = false;
+                        $scope.GetTimeOffDetail($scope.StaffId);
+                    }, 1000)
+                }, 800)
+            }
+        });
+    }
+   
+    $scope.GetTimeOffDetail = function (Id) {
+        debugger;
+        var result = bookingService.GetTimeOffDetail(Id);
+        result.then(function (response) {
+            $scope.timeOffDetail = response.data;
+        });
+    }
 }]);

@@ -8,6 +8,7 @@ using System.Net;
 using System.IO;
 using System.Web.Script.Serialization;
 using Newtonsoft.Json;
+using System.Globalization;
 
 namespace AngularMvcProject.Controllers
 {
@@ -228,6 +229,11 @@ namespace AngularMvcProject.Controllers
         {
             try
             {
+                DateTime startdate = DateTime.Parse(dataObj.Start, CultureInfo.CurrentCulture);
+                dataObj.Start = startdate.ToString("HH:mm");
+                DateTime endtdate = DateTime.Parse(dataObj.End, CultureInfo.CurrentCulture);
+                dataObj.End = endtdate.ToString("HH:mm");
+
                 string apiUrl = "http://bookingmanager1romz.azurewebsites.net/api/staff/SetWorkingHours";
 
                 string result = "";
@@ -275,11 +281,97 @@ namespace AngularMvcProject.Controllers
                 {
                     result = StreamReader.ReadToEnd();
                 }
-                return result;
+                var data = JsonConvert.DeserializeObject<List<EmployeeWorkingHours>>(result);
+                List<EmployeeWorkingHours> empworkinghours = new List<EmployeeWorkingHours>();
+
+                foreach(var item in data)
+                {
+                    EmployeeWorkingHours obj = new EmployeeWorkingHours();
+                    obj.EmployeeId = item.EmployeeId;
+                    obj.Id = item.Id;
+                    obj.IsOffAllDay = item.IsOffAllDay;
+                    obj.NameOfDay = item.NameOfDay;
+                    obj.NameOfDayAsString = item.NameOfDayAsString;
+                    DateTime startdate = DateTime.Parse(item.Start,CultureInfo.CurrentCulture);
+                    obj.Start = startdate.ToString("hh:mm tt");
+                    DateTime enddatedate = DateTime.Parse(item.End, CultureInfo.CurrentCulture);
+                    obj.End = enddatedate.ToString("hh:mm tt");
+                   
+                    obj.CompanyId = item.CompanyId;
+                    obj.CreationDate = item.CreationDate;
+                    empworkinghours.Add(obj);
+                }
+                var jsonresult = JsonConvert.SerializeObject(empworkinghours.OrderBy(x=>((int)x.NameOfDay + 6) % 7));
+                return jsonresult;
             }
             catch (Exception e)
             {
                 return e.ToString();
+            }
+        }
+
+        
+        [HttpPost]
+        public string SetTimeOff(TimeOff dataObj)
+        {
+            try
+            {           
+                string apiUrl = "http://bookingmanager1romz.azurewebsites.net/api/staff/AddTimeOff";
+
+                string result = "";
+                var httpWebRequest = (HttpWebRequest)WebRequest.Create(apiUrl);
+                httpWebRequest.ContentType = "application/json";
+                httpWebRequest.Method = "POST";
+
+                using (var streamWriter = new StreamWriter(httpWebRequest.GetRequestStream()))
+                {
+                    var jsonstring = new JavaScriptSerializer().Serialize(dataObj);
+                    streamWriter.Write(jsonstring);
+                    streamWriter.Flush();
+                    streamWriter.Close();
+                }
+
+
+                var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
+
+                using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
+                {
+                    result = streamReader.ReadToEnd();
+                }
+
+                return result;
+            }
+            catch (Exception exception)
+            {
+                return exception.ToString();
+            }
+
+        }
+
+        [HttpPost]
+        public string GetTimeOffDetail(string EmployeeId)
+        {
+            try
+            {
+                string apiUrl = "http://bookingmanager1romz.azurewebsites.net/api/staff/GetAllTimeOffForEmployee?employeeId=" + EmployeeId;
+
+                string result = "";
+                var httpWebRequest = (HttpWebRequest)WebRequest.Create(apiUrl);
+                httpWebRequest.ContentType = "application/json";
+                httpWebRequest.Method = "GET";
+
+                var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
+
+                using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
+                {
+                    result = streamReader.ReadToEnd();
+                }
+
+                return result;
+            }
+            catch (Exception exception)
+            {
+                return exception.ToString();
             }
         }
     }
