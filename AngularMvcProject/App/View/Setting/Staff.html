@@ -1442,12 +1442,12 @@
                                                                 <h3 class="serviceProText">Time Off for {{staffName}}:</h3>
 
                                                                 <button class="pull-right btn btn-circle addstaffBtn timeOffPlusBtn" id="timeOffPlusBtn" title="" data-toggle="modal" data-target="#timeoffPopUp"><i class="fa fa-plus" aria-hidden="true"></i></button>
-                                                                <button class="pull-right btn exportBtn btn-circle timeOffPlusBtn" id="exporttimeOffBtn" title="" data-toggle="modal" data-target="#ExportModal" ng-click="isVisibleExportTimeOffPopup = !isVisibleExportTimeOffPopup">
+                                                                <button class="pull-right btn exportBtn btn-circle timeOffPlusBtn" id="exporttimeOffBtn" title="" data-toggle="modal" data-target="#ExportModal" >
                                                                     <i class="fa fa-download" aria-hidden="true"></i>
                                                                     Export
                                                                 </button>
 
-                                                                <div class="modal fade appointmentPopup StaffPopupHead" id="ExportModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true" style="display: block;" ng-show="isVisibleExportTimeOffPopup" ng-init="isVisibleExportTimeOffPopup=false">
+                                                                <div class="modal fade appointmentPopup StaffPopupHead" id="ExportModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true" >
                                                                     <div class="modal-dialog appointPopupHead StaffPopupHead">
                                                                         <div class="modal-content">
                                                                             <div class="modal-header staffModalPopup">
@@ -1502,7 +1502,7 @@
 
 
 
-                                                                <div class="modal fade appointmentPopup" id="timeoffPopUp" ng-show="isVisibleTimeOffPopup" tabindex="-1" role="dialog" aria-labelledby="modalLabel">
+                                                                <div class="modal fade appointmentPopup" id="timeoffPopUp"  tabindex="-1" role="dialog" aria-labelledby="modalLabel">
                                                                     <div class="modal-dialog appointPopupHead StaffPopupHead">
                                                                         <div class="modal-content">
                                                                             <div class="modal-header staffModalPopup">
