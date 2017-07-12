@@ -310,7 +310,7 @@
                     <div class="col-sm-3 left_side2 addcustomerSec allServiceCategorySec">
                         <div class="categoriesSec">
                             <div class="categoriesHead">
-                                <h3>Staff (1)</h3>
+                                <h3>Staff ({{TotalNoOfStaff}})</h3>
                             </div>
                             <div class="categoryButton">
                                 <button class="pull-right btn btn-circle" id="settingCategory" title="" data-original-title="Add New Staff" ng-click="IsVisibleAddNewStaffPopUp = !IsVisibleAddNewStaffPopUp">
@@ -367,14 +367,10 @@
                     </div>
 
 
-
-
-
-
                     <div class="col-sm-9 staffservicesSec">
                         <div id="staffContentNav" class="detail-navbar staffDetail staffContent container-fluid">
                             <ul class="nav nav-pills">
-                                <li class="active" id="staff_details"><a data-target="#staff-details" data-toggle="tab">DETAILS</a></li>
+                                <li class="active" id="staff_details"><a data-target="tab" class="cursorhand" data-toggle="tab">DETAILS</a></li>
                                 <li><a data-target="#staff-services" data-toggle="tab" class="cursorhand">SERVICES</a></li>
                                 <li><a data-target="#staff-hours" data-toggle="tab" class="cursorhand">WORKING HOURS</a></li>
                                 <li><a data-target="#staff-break" data-toggle="tab" class="cursorhand">BREAKS</a></li>
@@ -1431,7 +1427,7 @@
 
                                         </div>
                                     </div>
-                                    <div class="tab-pane" id="staff-timeoff" style="padding-bottom: 100px;">
+                                    <div class="tab-pane" id="staff-timeoff" style="">
                                         <div class="stafftimeOff">
                                             <div class="staffServices">
                                                 <div class="row">
@@ -1443,15 +1439,15 @@
                                                     <div class="col-md-10">
                                                         <div class="serviceProvideSec">
                                                             <div class="timeOffText">
-                                                                <h3 class="serviceProText">Time Off for David:</h3>
+                                                                <h3 class="serviceProText">Time Off for {{staffName}}:</h3>
 
-                                                                <button class="pull-right btn btn-circle addstaffBtn timeOffPlusBtn" id="timeOffPlusBtn" title="" data-toggle="modal" data-target="#addstaffPopUp" ng-click="isVisibleTimeOffPopup = !isVisibleTimeOffPopup"><i class="fa fa-plus" aria-hidden="true"></i></button>
-                                                                <button class="pull-right btn exportBtn btn-circle timeOffPlusBtn" id="createNewStaffBtn" title="" data-toggle="modal" data-target="#ExportModal">
+                                                                <button class="pull-right btn btn-circle addstaffBtn timeOffPlusBtn" id="timeOffPlusBtn" title="" data-toggle="modal" data-target="#timeoffPopUp"><i class="fa fa-plus" aria-hidden="true"></i></button>
+                                                                <button class="pull-right btn exportBtn btn-circle timeOffPlusBtn" id="exporttimeOffBtn" title="" data-toggle="modal" data-target="#ExportModal" ng-click="isVisibleExportTimeOffPopup = !isVisibleExportTimeOffPopup">
                                                                     <i class="fa fa-download" aria-hidden="true"></i>
                                                                     Export
                                                                 </button>
 
-                                                                <div class="modal fade appointmentPopup StaffPopupHead" id="ExportModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true" style="display: none;">
+                                                                <div class="modal fade appointmentPopup StaffPopupHead" id="ExportModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true" style="display: block;" ng-show="isVisibleExportTimeOffPopup" ng-init="isVisibleExportTimeOffPopup=false">
                                                                     <div class="modal-dialog appointPopupHead StaffPopupHead">
                                                                         <div class="modal-content">
                                                                             <div class="modal-header staffModalPopup">
@@ -1459,10 +1455,7 @@
                                                                                 <h3 class="modal-title" id="lineModalLabel">Export Time off</h3>
                                                                             </div>
                                                                             <div class="modal-body staffBodyDiv">
-
-
-                                                                                 content goes here 
-                                                                                <div class="staffPopUpDiv">
+                                                                               <div class="staffPopUpDiv">
                                                                                     <form class="form-horizontal ">
 
                                                                                         <div class="form-group staffStartDate">
@@ -1477,13 +1470,6 @@
                                                                                                 <span class="glyphicon glyphicon-ok calendarOk"></span><input type="text" class="form-control datepickerBox" placeholder="Fri, May 12" id="datetimepicker5">
                                                                                             </div>
                                                                                         </div>
-
-
-
-
-
-
-
 
                                                                                         <div class="form-group staffStartDate">
 
@@ -1516,7 +1502,7 @@
 
 
 
-                                                                <div class="modal fade appointmentPopup" id="addstaffPopUp" ng-show="isVisibleTimeOffPopup" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+                                                                <div class="modal fade appointmentPopup" id="timeoffPopUp" ng-show="isVisibleTimeOffPopup" tabindex="-1" role="dialog" aria-labelledby="modalLabel">
                                                                     <div class="modal-dialog appointPopupHead StaffPopupHead">
                                                                         <div class="modal-content">
                                                                             <div class="modal-header staffModalPopup">
@@ -1535,6 +1521,12 @@
                                                                                             <div class="col-sm-8 dateTimeDiv">
                                                                                                 <span class="glyphicon glyphicon-ok calendarOk"></span><!--<input type="text" class="form-control datepickerBox" placeholder="Fri, May 12" id="datetimepicker4">-->
                                                                                                 <input type="text" class="form-control calendarBox" datepicker-popup="dd MMMM yyyy" ng-model="startdate" open="opened" datepicker-options="dateOptions" name='theDate' ng-required="true"  />
+
+                                                                                                <div class="selectDropdown">
+                                                                                                    <select class="select_btn dateTimeSelect" ng-model="StartoffTime" ng-init="alldaystatus ? StartoffTime='00:00' : StartoffTime ='08:00 AM'" ng-show="alldaystatus==false">
+                                                                                                        <option ng-repeat="StartoffTime in StartTime" value="{{StartoffTime}}">{{StartoffTime}}</option>
+                                                                                                    </select>
+                                                                                                </div>
                                                                                             </div>
                                                                                         </div>
                                                                                         <div class="form-group staffStartDate">
@@ -1542,6 +1534,14 @@
                                                                                             <div class="col-sm-8 dateTimeDiv">
                                                                                                 <span class="glyphicon glyphicon-ok calendarOk"></span>
                                                                                                 <input type="text" class="form-control calendarBox" datepicker-popup="dd MMMM yyyy" ng-model="enddate" open="opened" datepicker-options="dateOptions" name='theDate' ng-required="true"  />
+                                                                                                <div class="selectDropdown">
+                                                                                                    <select class="select_btn dateTimeSelect" ng-model="EndoffTime" ng-init="alldaystatus ? EndoffTime ='00:00' : EndoffTime= '05:00 PM'" ng-show="alldaystatus==false">
+                                                                                                        <option ng-repeat="EndoffTime in EndTime" value="{{EndoffTime}}">{{EndoffTime}}</option>
+                                                                                                    </select>
+                                                                                                    <!--<select class="select_btn dateTimeSelect" ng-model="selectedprovider" data-ng-options="x.Id as x.staffName for x in Provider" id="dropdownMenu2" name="providerdd" aria-haspopup="true" aria-expanded="false" ng-change="GetAllocateServiceToEmployee(selectedprovider)" required>
+                                                                                                        <option value="" selected="selected">-- Select a Provider --</option>
+                                                                                                    </select>-->
+                                                                                                </div>
                                                                                             </div>
                                                                                         </div>
 
@@ -1552,7 +1552,7 @@
                                                                                                     <div class="dropdown serviceprovideBtn">
                                                                                                         <div class="checkbox allDayCheck">
                                                                                                             <label class="labelBox" id="clickLabel">
-                                                                                                                <input type="checkbox" value="" ng-model="alldaystatus">
+                                                                                                                <input type="checkbox" value="" ng-model="alldaystatus" ng-init="alldaystatus=true">
                                                                                                                 <span class="cr"><i class="cr-icon glyphicon glyphicon-ok"></i></span>
                                                                                                                 All Day
                                                                                                             </label>
@@ -1571,7 +1571,7 @@
                                                                                             <label class="control-label col-sm-4" for="pwd">Recurring?</label>
                                                                                             <div class="col-sm-8 StaffrecurringDiv">
                                                                                                 <div class="onoffswitch recurringOnOffBtn">
-                                                                                                    <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitchrequi" checked="" ng-model="">
+                                                                                                    <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitchrequi" checked="" >
                                                                                                     <label class="onoffswitch-label" for="myonoffswitchrequi">
                                                                                                         <span class="onoffswitch-inner"></span>
                                                                                                         <span class="onoffswitch-switch"></span>
@@ -1596,7 +1596,9 @@
 
                                                                                             <div class="col-sm-12 StaffrecurringDiv">
                                                                                                 <div class="StaffDateTime">
-                                                                                                    <p>From {{startdate | date:'dd MMMM yyyy' }} to {{enddate | date:'dd MMMM yyyy'}}</p>
+                                                                                                    <p ng-if="alldaystatus==true">From {{startdate | date:'dd MMMM yyyy' }}  to {{enddate | date:'dd MMMM yyyy'}}</p>
+                                                                                                    <p ng-if="alldaystatus==false">From {{startdate | date:'dd MMMM yyyy'}} {{StartoffTime}}  to {{enddate | date:'dd MMMM yyyy'}} {{EndoffTime }} </p>
+                                                                                                   
                                                                                                 </div>
 
                                                                                             </div>
@@ -1635,39 +1637,44 @@
                                                             </div>-->
 
 
-
-                                                            <div class="row addstaffDiv" ng-repeat="item in timeOffDetail">
-                                                                <div class="col-md-1 col-sm-12">
-                                                                    <div class="staffCalendar">
-                                                                        <i class="fa fa-calendar-o" aria-hidden="true"></i>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-md-11 col-sm-12">
-                                                                    <div class="row">
-                                                                        <div class="col-md-6 col-sm-6">
-                                                                            <div class="dateText">
-                                                                                <h4>{{item.Start | date:"dd MMMM yyyy"}} to {{item.End | date:"dd MMMM yyyy"}}</h4>
-                                                                                <p>No Description</p>
-                                                                            </div>
-
+                                                            <div class="timeOffSec">
+                                                                <div class="row addstaffDiv" ng-repeat="item in timeOffDetail">
+                                                                    <div class="col-md-1 col-sm-12" >
+                                                                        <div class="staffCalendar" ng-if="item.IsOffAllDay==true">
+                                                                            <i class="fa fa-calendar-o" aria-hidden="true"></i>
                                                                         </div>
-                                                                        <div class="col-md-3 col-sm-3">
-                                                                            <div class="dateText">
-                                                                                <p>No Repeat</p>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="col-md-3 col-sm-3">
-                                                                            <div class="dateText">
-                                                                                <p>FullDay</p>
-                                                                            </div>
+                                                                        <div class="staffCalendar" ng-if="item.IsOffAllDay==false">
+                                                                            <i class="fa fa-clock-o" aria-hidden="true"></i>
                                                                         </div>
                                                                     </div>
-                                                                    <div class="staffCalendar">
+                                                                    <div class="col-md-11 col-sm-12">
+                                                                        <div class="row">
+                                                                            <div class="col-md-6 col-sm-6">
+                                                                                <div class="dateText">
+                                                                                    <h4 ng-if="item.IsOffAllDay==true">{{item.Start | date:"dd MMMM yyyy"}} to {{item.End | date:"dd MMMM yyyy"}}</h4>
+                                                                                    <h4 ng-if="item.IsOffAllDay==false">{{item.Start | date:"dd MMMM yyyy"}}, {{item.Start | date:"h:mm a"}} to {{item.End | date:"dd MMMM yyyy"}},{{item.End | date:"h:mm a"}}</h4>
+                                                                                    <p>No Description</p>
+                                                                                </div>
 
+                                                                            </div>
+                                                                            <div class="col-md-3 col-sm-3">
+                                                                                <div class="dateText">
+                                                                                    <p>No Repeat</p>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="col-md-3 col-sm-3">
+                                                                                <div class="dateText">
+                                                                                    <p ng-if="item.IsOffAllDay==true">Full Day</p>
+                                                                                    <p ng-if="item.IsOffAllDay==false">Break</p>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="staffCalendar">
+
+                                                                        </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
-
                                                         </div>
 
                                                     </div>

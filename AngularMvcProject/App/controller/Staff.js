@@ -24,6 +24,7 @@
         $scope.isvisibleMenuiconBar = true;
         $scope.IsVisibleAddNewStaffPopUp = false;
         $scope.isVisibleTimeOffPopup = false;
+        //$scope.alldaystatus = true;
      
         $scope.startdate = $filter('date')(new Date(), "dd MMMM yyyy");
         $scope.enddate = $filter('date')(new Date(), "dd MMMM yyyy");
@@ -39,9 +40,10 @@
             $scope.StartTime = ["08:00 AM", "09:00 AM", "10:00 AM", "11:00 AM", "12:00 AM", "01:00 PM", "02:00 PM", "03:00 PM", "04:00 PM", "05:00 PM", "06:00 PM", "07:00 PM", "08:00 PM"];
             $scope.EndTime = ["08:00 AM", "09:00 AM", "10:00 AM", "11:00 AM", "12:00 AM", "01:00 PM", "02:00 PM", "03:00 PM", "04:00 PM", "05:00 PM", "06:00 PM", "07:00 PM", "08:00 PM"];
 
+         
            
 
-            //Set default working hours for Employee//
+            ////Set default working hours for Employee//
 
             //for(var i=0;i<$scope.ListofStaff.length;i++) {
             //    debugger;
@@ -57,8 +59,8 @@
             //            "Id": 1,
             //            "CompanyId": $routeParams.CompanyId,
             //            "EmployeeId": $scope.ListofStaff[i].Id,
-            //            "Start": value.StartTime + ":00.1234567",
-            //            "End": value.EndTime + ":00.1234567",
+            //            "Start": value.StartTime,
+            //            "End": value.EndTime,
             //            "NameOfDay": value.NameOfDay,
             //            "NameOfDayAsString": value.Day,
             //            "IsOffAllDay": bool,
@@ -494,12 +496,15 @@
     //Set Time Off//
     $scope.AddtimeOff = function () {
         debugger;
-        var timeOff = {
-           
+      
+        
+        var timeOff = {           
             "CompanyId": $routeParams.CompanyId,
             "EmployeeId": $scope.StaffId,
-            "Start": $scope.startdate,
-            "End": $scope.enddate,
+            "StartDate": $scope.startdate ,
+            "EndDate": $scope.enddate ,
+            "StartTime": $scope.StartoffTime,
+            "EndTime":$scope.EndoffTime,
             "CreationDate": new Date(),
             "IsOffAllDay": $scope.alldaystatus
         }

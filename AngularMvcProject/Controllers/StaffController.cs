@@ -312,10 +312,30 @@ namespace AngularMvcProject.Controllers
 
         
         [HttpPost]
-        public string SetTimeOff(TimeOff dataObj)
+        public string SetTimeOff(CustomTimeOff dataObj)
         {
             try
-            {           
+            {
+                DateTime starttime = DateTime.Parse(dataObj.StartTime, CultureInfo.CurrentCulture);
+                dataObj.StartTime = starttime.ToString("HH:mm");
+                DateTime endtime = DateTime.Parse(dataObj.EndTime, CultureInfo.CurrentCulture);
+                dataObj.EndTime = endtime.ToString("HH:mm");
+
+                DateTime startdate = DateTime.Parse(dataObj.StartDate, CultureInfo.CurrentCulture);
+                dataObj.StartDate = startdate.ToString("yyyy-MM-dd");
+                DateTime enddate = DateTime.Parse(dataObj.EndDate, CultureInfo.CurrentCulture);
+                dataObj.EndDate = enddate.ToString("yyyy-MM-dd");
+
+
+
+                TimeOff obj = new TimeOff();
+                obj.CompanyId = dataObj.CompanyId;
+                obj.EmployeeId = dataObj.EmployeeId;
+                obj.Start = dataObj.StartDate +"T"+   dataObj.StartTime;
+                obj.End = dataObj.EndDate + "T"+  dataObj.EndTime;
+                obj.IsOffAllDay = dataObj.IsOffAllDay;
+                obj.CreationDate = dataObj.CreationDate;
+
                 string apiUrl = "http://bookingmanager1romz.azurewebsites.net/api/staff/AddTimeOff";
 
                 string result = "";
@@ -325,7 +345,7 @@ namespace AngularMvcProject.Controllers
 
                 using (var streamWriter = new StreamWriter(httpWebRequest.GetRequestStream()))
                 {
-                    var jsonstring = new JavaScriptSerializer().Serialize(dataObj);
+                    var jsonstring = new JavaScriptSerializer().Serialize(obj);
                     streamWriter.Write(jsonstring);
                     streamWriter.Flush();
                     streamWriter.Close();
