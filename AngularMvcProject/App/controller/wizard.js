@@ -152,17 +152,17 @@ app.controller('bookingController', ['$scope', '$routeParams', '$rootScope', '$h
 
     //Step-2(Buisness Hours)
 
-    $scope.timeInfoFrom = ["08:00 am", "09:00 am", "10:00 am", "11:00 am", "12:00 pm", "13:00 pm", "14:00 pm", "15:00 pm", "16:00 pm", "17:00 pm", "18:00 pm", "19:00 pm", "20:00 pm"];
-    $scope.timeInfoTo = ["08:00 am", "09:00 am", "10:00 am", "11:00 am", "12:00 pm", "13:00 pm", "14:00 pm", "15:00 pm", "16:00 pm", "17:00 pm", "18:00 pm", "19:00 pm", "20:00 pm"];
+    $scope.timeInfoFrom = ["08:00 AM", "09:00 AM", "10:00 AM", "11:00 AM", "12:00 AM", "01:00 PM", "02:00 PM", "03:00 PM", "04:00 PM", "05:00 PM", "06:00 PM", "07:00 PM", "08:00 PM"];
+    $scope.timeInfoTo = ["08:00 AM", "09:00 AM", "10:00 AM", "11:00 AM", "12:00 AM", "01:00 PM", "02:00 PM", "03:00 PM", "04:00 PM", "05:00 PM", "06:00 PM", "07:00 PM", "08:00 PM"];
     //$scope.timeInfoFrom = ["08:00 am", "09:00 am", "10:00 am", "11:00 am", "12:00 pm", "01:00 pm", "02:00 pm", "03:00 pm", "04:00 pm", "05:00 pm", "06:00 pm", "07:00 pm", "08:00 pm"];
     //$scope.timeInfoTo = ["05:00 pm", "06:00 pm", "07:00 pm", "08:00 pm", "09:00 pm", "10:00 pm", "11:00 pm", "12:00 pm", "01:00 am", "02:00 am", "03:00 am", "04:00 am", "05:00 am"]
-    $scope.businessHourInfo = [{ 'day': 'Monday', 'timeFrom': "08:00 am", 'timeTo': "17:00 pm", 'available': true },
-    { 'day': 'Tuesday', 'timeFrom': "08:00 am", 'timeTo': "17:00 pm", 'available': true },
-    { 'day': 'Wednesday', 'timeFrom': "08:00 am", 'timeTo': "17:00 pm", 'available': true },
-    { 'day': 'Thursday', 'timeFrom': "08:00 am", 'timeTo': "17:00 pm", 'available': true },
-    { 'day': 'Friday', 'timeFrom': "08:00 am", 'timeTo': "17:00 pm", 'available': true },
-    { 'day': 'Saturday', 'timeFrom': "08:00 am", 'timeTo': "17:00 pm", 'available': false },
-    { 'day': 'Sunday', 'timeFrom': "08:00 am", 'timeTo': "17:00 pm", 'available': false }, ]
+    $scope.businessHourInfo = [{ 'day': 'Monday', 'timeFrom': "08:00 AM", 'timeTo': "05:00 PM", 'available': true,'NameOfDay':1 },
+    { 'day': 'Tuesday', 'timeFrom': "08:00 AM", 'timeTo': "05:00 PM", 'available': true,'NameOfDay':2 },
+    { 'day': 'Wednesday', 'timeFrom': "08:00 AM", 'timeTo': "05:00 PM", 'available': true,'NameOfDay':3},
+    { 'day': 'Thursday', 'timeFrom': "08:00 AM", 'timeTo': "05:00 PM", 'available': true,'NameOfDay':4},
+    { 'day': 'Friday', 'timeFrom': "08:00 AM", 'timeTo': "05:00 PM", 'available': true,'NameOfDay':5 },
+    { 'day': 'Saturday', 'timeFrom': "08:00 AM", 'timeTo': "05:00 PM", 'available': false,'NameOfDay':6 },
+    { 'day': 'Sunday', 'timeFrom': "08:00 AM", 'timeTo': "05:00 PM", 'available': false,'NameOfDay':0 }, ]
 
     $scope.setUpBusiness = function () {
         debugger;
@@ -176,22 +176,20 @@ app.controller('bookingController', ['$scope', '$routeParams', '$rootScope', '$h
         var singleDay = {};
         angular.forEach($scope.businessHourInfo, function (value, key) {
 
-            if (value.available == true) {
-                var fromtime = value.timeFrom.split(":");
-                var totime = value.timeTo.split(":");
+                    
                 singleDay = {
 
                     Id: $scope.selectedIndustry,
                     CompanyId: $scope.companyId,
-                    Start: fromtime[0] + ":00:00.1234567",
-                    End: totime[0] + ":00:00.1234567",
+                    Start: value.timeFrom,
+                    End: value.timeTo,
                     NameOfDay: value.day,
-                    IsOffAllDay: true,
+                    IsOffAllDay: value.available == true ? false:true,
                     //CreationDate: "2017-06-05T05:20:32.2919738+00:00",
                     CreationDate: new Date(),
                 }
                 daysArr.push(singleDay);
-            }
+         
         });
 
         var businessInfo = {
@@ -418,11 +416,31 @@ app.controller('bookingController', ['$scope', '$routeParams', '$rootScope', '$h
             if (msg.data.Success == true) {
                 $scope.MessageText = "Adding New Staff"
                 $scope.msg = "Post Data Submitted Successfully!";
-               
+                $scope.EmployeeId = msg.data.ReturnObject.EmloyeeId;;
                 var CompanyId = $scope.companyId;
+
+                //Set  default working hours of Staff by hit Staff Controller method(SetEmployeeWorkingHours)//
+                angular.forEach($scope.businessHourInfo, function (value, key) {
+                    var requesteddata = {
+                        "Id": value.Id,
+                        "CompanyId": $scope.companyId,
+                        "EmployeeId": $scope.EmployeeId,
+                        "Start": value.timeFrom,
+                        "End": value.timeTo,
+                        "NameOfDay": value.NameOfDay,
+                        "NameOfDayAsString": value.day,
+                        "IsOffAllDay": value.available==true?false:true,
+                        "CreationDate": new Date(),
+                    }
+                    var result = bookingService.SetEmployeeWorkingHours(requesteddata)
+
+                });
+
+
                 var getEmployeesData = bookingService.GetStaffData(CompanyId);
                 getEmployeesData.then(function (response) {
                     debugger;
+                   
                     $scope.staffInfo = [];
                     for (var i = 0; i < response.data.length; i++) {
                         $scope.staffInfo.push({ 'Id': response.data[i].Id, 'CompanyId': response.data[i].CompanyId, 'UserName': response.data[i].UserName, 'staffName': response.data[i].FirstName, 'staffEmail': response.data[i].Email });
@@ -433,6 +451,9 @@ app.controller('bookingController', ['$scope', '$routeParams', '$rootScope', '$h
                     staffnametouched.removeClass('ng-touched');
                     var staffemailtouched = angular.element(document.querySelector('#exampleInputEmail2'));
                     staffemailtouched.removeClass('ng-touched');
+
+                   
+                   
                 });
 
                 $scope.GetServiceData();
@@ -852,8 +873,7 @@ app.controller('bookingController', ['$scope', '$routeParams', '$rootScope', '$h
 
                         assignStaff.then(function (response) {
                             //$scope.MessageText = "Saving Data"
-                            //$scope.msg = "Post Data Submitted Successfully!";    
-                          
+                            //$scope.msg = "Post Data Submitted Successfully!";                              
                             //Reload the Service data//
                           
                             $scope.GetServiceData();

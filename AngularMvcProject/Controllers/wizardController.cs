@@ -9,6 +9,7 @@ using AngularMvcProject.Models;
 using System.Web.Script.Serialization;
 using System.Text;
 using Newtonsoft.Json;
+using System.Globalization;
 //namespace AngularMvcProject.Controllers
 //{
 //    public class wizardController : Controller
@@ -135,6 +136,25 @@ namespace AngularMvcProject.Controllers
 
         public string PostWorkingHours(WorkingHours dataobj)
         {
+            List<ReqWorkingHours> listofworkinghours = new List<ReqWorkingHours>();
+            var data = dataobj.ReqWorkingHours;
+            foreach(var item in data)
+            {
+                ReqWorkingHours obj = new ReqWorkingHours();
+                obj.Id = item.Id;
+                obj.CompanyId = item.CompanyId;
+                DateTime starttime = DateTime.Parse(item.Start, CultureInfo.CurrentCulture);
+                obj.Start = starttime.ToString("HH:mm");
+                DateTime endtime = DateTime.Parse(item.End, CultureInfo.CurrentCulture);
+                obj.End = endtime.ToString("HH:mm");
+                obj.NameOfDay = item.NameOfDay;
+                obj.IsOffAllDay = item.IsOffAllDay;
+                obj.CreationDate = item.CreationDate;
+
+                listofworkinghours.Add(obj);
+
+
+            }
             string apiURL = "http://bookingmanager1romz.azurewebsites.net/" + dataobj.Url;
             string result = "";
             var httpWebRequest = (HttpWebRequest)WebRequest.Create(apiURL);
@@ -145,7 +165,7 @@ namespace AngularMvcProject.Controllers
             {
                 //string jsonString = "{\"user\":\"test\"," +
                 //              "\"password\":\"bla\"}";
-                var jsonString = new JavaScriptSerializer().Serialize(dataobj.ReqWorkingHours);
+                var jsonString = new JavaScriptSerializer().Serialize(listofworkinghours);
                 streamWriter.Write(jsonString);
                 streamWriter.Flush();
                 streamWriter.Close();
