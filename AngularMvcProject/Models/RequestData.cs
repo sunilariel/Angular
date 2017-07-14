@@ -207,6 +207,19 @@ namespace AngularMvcProject.Models
         public string End { get; set; }
     }
 
+    public class WorkingHoursofEmployee
+    {
+        public int CompanyId { get; set; }
+        public int ServiceId { get; set; }
+        public int EmployeeId { get; set; }
+        public string DateOfBooking { get; set; }
+        public string Day { get; set; }
+
+    }
+
+
+
+
     /////MileStone_3////
     //Category and Service Section//
 
@@ -283,4 +296,5 @@ namespace AngularMvcProject.Models
         public string CreationDate { get; set; }
         public bool IsOffAllDay { get; set; }
     }
+    
 }

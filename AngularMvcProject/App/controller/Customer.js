@@ -1,4 +1,4 @@
-﻿app.controller('customerController', ['$scope','$location','$filter','$routeParams', '$http', '$timeout', 'bookingService', function ($scope,$location,$filter,$routeParams, $http, $timeout, bookingService) {
+﻿app.controller('customerController', ['$scope', '$location', '$filter', '$routeParams', '$http', '$timeout', 'bookingService', function ($scope, $location, $filter, $routeParams, $http, $timeout, bookingService) {
     //This will hide the DIV by default.
     $scope.procedures = [
 {
@@ -53,25 +53,31 @@
     }
 
     //This function will run first on page load.
-    $scope.init=function()
-    {
+    $scope.init = function () {
 
-        /////////////////
-        $scope.startDate = new Date();
-        $scope.opened = false;
-
-        //////
-        debugger;      
+        debugger;
         $scope.CompanyId = $routeParams.CompanyId;
         $scope.showcustomer = false;
         $scope.appointmentDetailisVisible = false;
-        $scope.selecteddate = $filter('date')(new Date(), "EEE, MMM d");
-           
+        $scope.selecteddate = $filter('date')(new Date(),"EEE, MMM d");
+
+        $scope.AppointmentSchedule = [];
+
         $scope.customerArr = [];
         //On init Getting List of Customers.
         var GetCustomer = bookingService.GetAllCustomer($scope.CompanyId);
-        GetCustomer.then(function (response) {           
-          $scope.customerArr = response.data;
+        GetCustomer.then(function (response) {
+             $scope.CustomerCount = response.data.length;
+             if ($scope.CustomerCount == 0)
+            {
+                $scope.showcustomer = true;
+                $scope.setstaffdetails = true;               
+             }
+             else {
+                 $scope.EditCustomer(response.data[0]);
+             }
+           
+            $scope.customerArr = response.data;
         });
 
         //Getting all employees(provider) for appointment dropdown(Add Appointment)
@@ -82,31 +88,25 @@
             for (var i = 0; i < response.data.length; i++) {
                 $scope.Provider.push({ 'Id': response.data[i].Id, 'CompanyId': response.data[i].CompanyId, 'UserName': response.data[i].UserName, 'staffName': response.data[i].FirstName, 'staffEmail': response.data[i].Email });
             }
-        });      
-        $scope.timeInfoFrom = ["08:00 am", "09:00 am", "10:00 am", "11:00 am", "12:00 pm", "13:00 pm", "14:00 pm", "15:00 pm", "16:00 pm", "17:00 pm", "18:00 pm", "19:00 pm", "20:00 pm"];
+        });
+        $scope.timeInfoFrom = [];
     }
 
-    $scope.disabled = function (calendarDate, mode) {
-        return mode === 'day' && (calendarDate.getDay() === 0 || calendarDate.getDay() === 6);
-    };
-
-  
+    //$scope.disabled = function (calendarDate, mode) {
+    //    return mode === 'day' && (calendarDate.getDay() === 0 || calendarDate.getDay() === 6);
+    //};
 
 
-
-
-  
-    $scope.CreateCustomer = function (form) {      
+    $scope.CreateCustomer = function (form) {
         debugger;
-  
+
         if (form.$invalid == true) {
-            if (form.customerName.$invalid == true)
-            {
+            if (form.customerName.$invalid == true) {
                 form.customerName.$setTouched();
                 form.customerName.$touched = true;
                 return false;
             }
-            
+
         }
         if (form.$invalid == true) {
             if (form.customerEmail.$invalid == true) {
@@ -117,7 +117,7 @@
 
         }
 
-        $scope.MobileNo = $scope.customerExt + $scope.customerMobile;      
+        $scope.MobileNo = $scope.customerExt + $scope.customerMobile;
         var obj = {
             Url: 'api/customer/Create',
             ReqStaffData: {
@@ -139,17 +139,22 @@
         createcustomer.then(function (response) {
             debugger;
             if (response.data.Success == true) {
-                $scope.CustomerId=response.data.ReturnObject.CustomerId;
+                $scope.CustomerId = response.data.ReturnObject.CustomerId;
                 $scope.MessageText = "Saving Data";
                 $scope.msg = "Create Customer Successfully";
 
                 var GetCustomer = bookingService.GetAllCustomer($scope.CompanyId);
                 GetCustomer.then(function (response) {
                     debugger;
-                    $scope.customerArr = [];                   
+                    $scope.customerArr = [];
                     $scope.customerArr = response.data;
                     $scope.showcustomer = false;
-                   //$scope.showcustomer = false;
+                    $scope.CustomerCount = response.data.length;
+                    if($scope.CustomerCount!=0)
+                    {
+                        $scope.EditCustomer(response.data[0]);
+                    }
+                    //$scope.showcustomer = false;
                 });
 
                 $timeout(function () {
@@ -161,34 +166,33 @@
             }
 
         }, function () {
-             $scope.showcustomer = false;
+            $scope.showcustomer = false;
             alert('Error in updating record');
         });
     };
 
     //Edit Customer getting details
 
-    $scope.EditCustomer = function (item)
-    {
+    $scope.EditCustomer = function (item) {
         debugger;
         $scope.CustomerId = item.Id;
         $scope.updatedCustomerName = item.FirstName;
         $scope.updatedCustomerEmail = item.Email;
         $scope.updatedPreCustomerMobileNo = item.TelephoneNo.substring(0, 2);
-        $scope.updatedMobileNo = item.TelephoneNo.substring(2,item.length);
+        $scope.updatedMobileNo = item.TelephoneNo.substring(2, item.length);
+       
     }
 
 
     //Updating Customer on blur event of element
-    $scope.updateCustomer=function()
-    {
+    $scope.updateCustomer = function () {
         debugger;
         var MobileNumber = $scope.updatedPreCustomerMobileNo + $scope.updatedMobileNo;
         var updateddate = new Date();
         var UpdateCustomer = {
-            Url:"api/customer/Update",
+            Url: "api/customer/Update",
             ReqStaffData: {
-                "Id":$scope.CustomerId,
+                "Id": $scope.CustomerId,
                 "CompanyId": $scope.CompanyId,
                 "UserName": "sample string 3",
                 "Password": "sample string 4",
@@ -231,12 +235,19 @@
         var deletecustomer = bookingService.DeleteCustomer($scope.CompanyId, CustomerId);
         deletecustomer.then(function (response) {
             $scope.MessageText = "Deleting Data"
-            $scope.msg = "Data Deleted Successfully!";            
+            $scope.IsVisible = true;
+
+            $scope.updatedCustomerName = "";
+            $scope.updatedCustomerEmail = "";
+            $scope.updatedPreCustomerMobileNo = "";
+            $scope.updatedMobileNo = "";
+
             var GetCustomer = bookingService.GetAllCustomer($scope.CompanyId);
             GetCustomer.then(function (response) {
                 debugger;
                 $scope.customerArr = [];
                 $scope.customerArr = response.data;
+                $scope.CustomerCount = response.data.length
             });
             $timeout(function () { $scope.MessageText = "Data deleted."; $timeout(function () { $scope.IsVisible = false; }, 1000) }, 500);
 
@@ -277,6 +288,11 @@
     ////////////////////Add Appointment Module ///////////////////////
     $scope.AddAppointmentPopup = function () {
         debugger;
+        $scope.selectedprovider = "-- Select a Provider --";
+        $scope.selectedservice = "-- Select a Service --";
+        $scope.price = "";
+        $scope.time = "";
+        $scope.timeoption = "";
         $scope.ShowAddAppointmentPopup != $scope.ShowAddAppointmentPopup;
     };
 
@@ -290,7 +306,7 @@
     //Get Service allocated to employee
     $scope.GetAllocateServiceToEmployee = function (EmployeeId) {
         debugger;
-
+        $scope.EmployeeId=EmployeeId;
         var EmployeeServices = bookingService.GetAllocatedServicetoEmployee($scope.CompanyId, EmployeeId);
 
         EmployeeServices.then(function (result) {
@@ -298,33 +314,100 @@
             $scope.EmployeeServices = [];
             $scope.EmployeeServices = result.data;
 
-         
+
+            //Get Staff Appointment working hours ///
+            $scope.AppointmentSchedule = [];
+            var resultAppontmentWorkingHours = bookingService.GetAppointmentWorkingHours(EmployeeId);
+            resultAppontmentWorkingHours.then(function (response) {
+                
+                    //var count = response.data.length;
+                    //angular.forEach(response.data, function (value, key) {
+                    //    var start = value.Start.split(':');
+                    //    var end = value.End.split(':');
+                    //    var day = "";
+                    //    var minutes = 0;
+                    //    var hours = "AM";
+                    //    dayinnumber = value.NameOfDay;
+                    //    dayName = value.NameOfDayAsString;
+
+                    //    $scope.workinghours = [];
+                    //    for (var i = start[0]; i < end[0]; i++) {
+                    //        minutes = 0;
+                    //        if (i == 12) {
+                    //            hours = "PM";
+                    //        }
+                    //        for (var y = 0; y < 4; y++) {
+                    //            if (i == 16) {
+                    //                var time = i + 1 + ":" + "00" + "" + hours;
+                    //                $scope.workinghours.push(time);
+                    //                continue;
+                    //            }
+                    //            if (y == 0) {
+                    //                var time = i + ":" + "00" + "" + hours;
+                    //                $scope.workinghours.push(time);
+
+                    //                continue;
+                    //            }
+                    //            minutes = minutes + 15;
+                    //            var time = i + ":" + minutes + "" + hours;
+                    //            $scope.workinghours.push(time);
+
+                    //        }
+
+                    //    }
+
+                    //    $scope.AppointmentSchedule.push({ 'DaySeries': dayinnumber, 'DayName': dayName, 'WorkingHours': $scope.workinghours });
+
+                   
+                    angular.forEach(response.data,function(value,key){
+                        if(value.IsOffAllDay==true){
+                            $scope.AppointmentSchedule.push(value.NameOfDay);
+                        }
+                    });
+                    
+          
+                });
+
+            //    var CurrentDay = $scope.dt.getDay();
+            //    $scope.workinghours = [];
+            //    angular.forEach($scope.AppointmentSchedule, function (value, key) {
+            //        if (CurrentDay == value.DaySeries) {
+            //            $scope.workinghours = value.WorkingHours;
+
+            //        }
+            //        $scope.disabled = function (date, mode) {
+            //            return (mode === 'day' && (date.getDay() == $scope.AppointmentSchedule[0].DaySeries || date.getDay() == $scope.AppointmentSchedule[1].DaySeries));
+            //        };
+            //    });
+            //});
+            //////////////////////
+
+
+
         }), function () {
             alert('Error in getting post records');
         };
     }
 
-    $scope.ServiceDetail=function(SelectedServiceId)
-    {
-        
+    $scope.ServiceDetail = function (SelectedServiceId) {
+
         debugger;
+        $scope.ServiceId=SelectedServiceId;
         var SelectedService = bookingService.GetSelectedService(SelectedServiceId);
         SelectedService.then(function (response) {
-            debugger;                     
-                $scope.price = response.data.Cost;
-                $scope.time = response.data.DurationInMinutes;
-           
+            debugger;
+            $scope.price = response.data.Cost;
+            $scope.time = response.data.DurationInMinutes;
+         
+            $scope.today();
         });
     }
-   
-    $scope.SaveAppointment=function(form)
-    {
+
+    $scope.SaveAppointment = function (form) {
         debugger;
         var selectedvalue = $scope.option;
-        if (form.$invalid == true)
-        {
-            if (form.providerdd.$invalid == true)
-            {
+        if (form.$invalid == true) {
+            if (form.providerdd.$invalid == true) {
                 form.providerdd.$setTouched();
                 form.providerdd.$touched = true;
 
@@ -335,45 +418,122 @@
                 form.Servicedd.$touched = true;
                 return false;
             }
-            
+
         }
+        var time = $scope.timeoption.split(" ");
+        var starttime = time[0].split(":");
+      
         var appointment = {
-          
+
             "CompanyId": $routeParams.CompanyId,
             "ServiceId": $scope.selectedservice,
             "EmployeeId": $scope.selectedprovider,
-            "CustomerIdsCommaSeperated": "11",
-            "StartHour": 10,
-            "StartMinute":45 ,
+            "CustomerIdsCommaSeperated": $scope.CustomerId,
+            "StartHour": starttime[0],
+            "StartMinute": starttime[1],
             "EndHour": 0,
-            "EndMinute": 0,
+            "EndMinute": $scope.time,
             "IsAdded": true,
             "Message": "sample string 11",
-            "CustomerIds": [11],
+            "CustomerIds": [$scope.CustomerId],
             "Start": new Date(),
             "End": "2017-06-27T11:45:54.4481356+00:00"
         }
 
         var addappointment = bookingService.AddAppointment(appointment);
 
-        
+
         addappointment.then(function (response) {
-            if(response.Success==true)
-            {
+            if (response.data.Success == true) {
                 $scope.MessageText = "Creating Appointment";
                 $timeout(function () {
                     $scope.IsVisible = true;
                     $timeout(function () {
                         $scope.MessageText = "Created Appointment";
                         $scope.IsVisible = false;
+                        var result = bookingService.GetAppointmentDetails($scope.CustomerId);
                     }, 500);
-                },1000)
+                }, 1000)
             }
 
         });
     }
 
-   
+    //DateTime Picker
+
+    $scope.today = function () {
+        $scope.dt = new Date();
+       
+    };
+    $scope.today();
+
+    $scope.showWeeks = true;
+    $scope.toggleWeeks = function () {
+        $scope.showWeeks = !$scope.showWeeks;
+    };
+
+     //Disable weekend selection
+    $scope.disabled = function (date, mode) {
+        debugger;
+
+        //return (mode == 'day' && (date.getDay() == 0 || date.getDay() == 5));
+        return (mode == 'day' && (date.getDay() == $scope.AppointmentSchedule[0] || date.getDay() == $scope.AppointmentSchedule[1] || date.getDay() == $scope.AppointmentSchedule[2] || date.getDay() == $scope.AppointmentSchedule[3] || date.getDay() == $scope.AppointmentSchedule[4] || date.getDay() == $scope.AppointmentSchedule[5] || date.getDay() == $scope.AppointmentSchedule[6]));
+    };
+
+  
+    $scope.open = function () {
+        $timeout(function () {
+            $scope.opened = true;
+        });
+    };
+
+    $scope.dateOptions = {
+        'year-format': "'yy'",
+        'starting-day': 1
+    };
+
+    $scope.ChangeDate = function ()
+    {
+        debugger;
+        var day = $scope.dt;
+    }
+
+
+
+    $scope.$watch("dt", function (newValue, oldValue) {
+        debugger;
+        $scope.timeInfoFrom = [];
+      
+        var days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+        RequestValues = {
+            CompanyId: $routeParams.CompanyId,
+            ServiceId: $scope.ServiceId,
+            EmployeeId: $scope.EmployeeId,
+            DateofBooking: $filter('date')(newValue,"MM-dd-yyyy"),
+            Day:days[newValue.getDay()],
+        }
+        var result = bookingService.GetFreeBookingSlotsForEmployee(RequestValues);
+        result.then(function (response) {
+            if (newValue != oldValue) {
+                for (var i = 0; i < response.data.Value.length; i++) {
+                    if (i == 0) {
+                        var date = response.data.Value[i].Start.split(":");
+                        var datetime = new Date(1970, 0, 1, date[0], date[1], date[2]);
+                        var time = $filter('date')(datetime, 'h:mm a');
+                        $scope.timeInfoFrom.push(time);
+                    }
+                    else {
+                        var date = response.data.Value[i].End.split(":");
+                        var datetime = new Date(1970, 0, 1, date[0], date[1], date[2]);
+                        var time = $filter('date')(datetime, 'h:mm a');
+                        $scope.timeInfoFrom.push(time);
+                      
+                    }
+                }
+            }
+        });
+    });
+
 }]);
 
 

@@ -223,5 +223,61 @@ namespace AngularMvcProject.Controllers
             return result;
         }
 
+        [HttpPost]
+        public string GetFreeBookingSlotsForEmployee(WorkingHoursofEmployee dataObj)
+        {
+            try
+            {
+                string apiURL = "http://bookingmanager1romz.azurewebsites.net/api/booking/GetFreeBookingSlotsForEmployee?companyId=" + dataObj.CompanyId + "&serviceId="+ dataObj.ServiceId + "&employeeId=" + dataObj.EmployeeId + "&dateOfBooking=" + dataObj.DateOfBooking + "&day=" + dataObj.Day;
+                //string apiURL = "http://bookingmanager1romz.azurewebsites.net/api/booking/GetFreeBookingSlotsForEmployee?companyId=7&serviceId=4&employeeId=13&dateOfBooking=04-03-2017&day=Friday";
+                string result = "";
+                var httpWebRequest = (HttpWebRequest)WebRequest.Create(apiURL);
+                httpWebRequest.ContentType = "application/json";
+                httpWebRequest.Method = "GET";
+
+                var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
+                using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
+                {
+                    result = streamReader.ReadToEnd();
+                }
+
+                return result;
+            }
+            catch(Exception e)
+            {
+                return e.ToString();
+            }
+        }
+        
+        [HttpPost]
+        public string GetAppointmentDetails(string CustomerId)
+        {
+            // int Id = Convert.ToInt32(CompanyId);
+            try
+            {
+                var startDate = DateTime.Now.Date.ToShortDateString().Replace("/","-");
+             
+                var endDate = DateTime.Now.Date.AddYears(1).ToShortDateString().Replace("/","-");
+               
+                string apiURL = "http://bookingmanager1romz.azurewebsites.net/api/booking/GetBookingsForCustomerByIdBetweenDates?customerId=" + CustomerId + "&startDate=" + startDate + "&endDate=" + endDate;
+                string result = "";
+                var httpWebRequest = (HttpWebRequest)WebRequest.Create(apiURL);
+                httpWebRequest.ContentType = "application/json";
+                httpWebRequest.Method = "GET";
+
+                var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
+                using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
+                {
+                    result = streamReader.ReadToEnd();
+                }
+                return result;
+
+            }
+            catch(Exception e)
+            {
+                return e.ToString();
+            }
+        }
+
     }
 }

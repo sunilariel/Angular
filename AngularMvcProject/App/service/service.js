@@ -199,6 +199,25 @@ app.service("bookingService", function ($http) {
     }
 
 
+    //Get Working Time Slots for Employee//
+    this.GetFreeBookingSlotsForEmployee = function (dataobject) {
+        var response = $http({
+            method: "POST",
+            url: "/Customer/GetFreeBookingSlotsForEmployee",
+            data:{dataObj:dataobject}
+        })
+        return response;
+    }
+
+    this.GetAppointmentDetails=function(customerId){
+        var response=$http({
+            method:"POST",
+            url: "/Customer/GetAppointmentDetails",
+            data:{CustomerId:customerId}
+        })
+        return response;
+    }
+
     ///Add Service and Category Section in MileStone_3
 
     this.AddCategory = function (dataobject) {

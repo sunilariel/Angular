@@ -349,7 +349,7 @@
                             <div class="categoryList staffList">
                                 <ul>
                                     <li ng-repeat="item in ListofStaff">
-                                        <a ng-click="EditStaff(item)" class="staffUser cursorhand">
+                                        <a ng-click="EditStaff(item)"  class="staffUser cursorhand">
                                             <img src="/Content/Assets/images/provider_img2.png">
                                             <span class="categoryServices">{{item.FirstName}}</span>
                                         </a>
@@ -370,7 +370,7 @@
                     <div class="col-sm-9 staffservicesSec">
                         <div id="staffContentNav" class="detail-navbar staffDetail staffContent container-fluid">
                             <ul class="nav nav-pills">
-                                <li class="active" id="staff_details"><a data-target="tab" class="cursorhand" data-toggle="tab">DETAILS</a></li>
+                                <li class="active"><a data-target="#staff_details" class="cursorhand" data-toggle="tab">DETAILS</a></li>
                                 <li><a data-target="#staff-services" data-toggle="tab" class="cursorhand">SERVICES</a></li>
                                 <li><a data-target="#staff-hours" data-toggle="tab" class="cursorhand">WORKING HOURS</a></li>
                                 <li><a data-target="#staff-break" data-toggle="tab" class="cursorhand">BREAKS</a></li>
@@ -385,7 +385,7 @@
 
                             <div class="container-fluid staff-details-container appointmentTab">
                                 <div class="tab-content" style="height: 186px;">
-                                    <div class="tab-pane active staffDetailSec" id="staff-details">
+                                    <div class="tab-pane active staffDetailSec" id="staff_details">
 
                                         <div class="customerProfileDiv staffProfileDiv">
                                             <div class="staffUserDetail DetailDiv">
@@ -1447,7 +1447,7 @@
                                                                     Export
                                                                 </button>
 
-                                                                <div class="modal fade appointmentPopup StaffPopupHead" id="ExportModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true" >
+                                                                <div class="modal fade appointmentPopup StaffPopupHead" id="ExportModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true"  >
                                                                     <div class="modal-dialog appointPopupHead StaffPopupHead">
                                                                         <div class="modal-content">
                                                                             <div class="modal-header staffModalPopup">
@@ -1502,7 +1502,7 @@
 
 
 
-                                                                <div class="modal fade appointmentPopup" id="timeoffPopUp"  tabindex="-1" role="dialog" aria-labelledby="modalLabel">
+                                                                <div class="modal fade appointmentPopup" id="timeoffPopUp"  tabindex="-1" role="dialog" aria-labelledby="modalLabel" >
                                                                     <div class="modal-dialog appointPopupHead StaffPopupHead">
                                                                         <div class="modal-content">
                                                                             <div class="modal-header staffModalPopup">

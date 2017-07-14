@@ -3558,11 +3558,11 @@ span.staffdatepickerTime a {
     padding-left: 25px;
     font-size: 13px;
 }
-.detail-navbar .dateTimeDiv ul li table thead tr th:first-child {
+/*.detail-navbar .dateTimeDiv ul li table thead tr th:first-child {
     cursor: default;
     color:#ddd;
     text-align: center;
-}
+}*/
 .detail-navbar .dateTimeDiv ul li table tbody tr td button.btn.btn-info {
     background: #9DDD9D;
     border: none;
@@ -3648,7 +3648,15 @@ form.form-horizontal.imageUploadForm .form-group.appointaploadDiv {
 .staffServices {
     width: 104%;
 }
-
+input#customerExt {
+    padding: 2px;
+}
+/*.detail-navbar .dateTimeDiv ul li table thead tr th:first-child {
+    padding-left:15px;
+}*/
+.loadinggif {
+    background:url('../images/loading.gif') no-repeat left center !important;
+}
 /* 5-July-2017 css end  here     */
 
 /* media css start here ================================= */
@@ -4223,8 +4231,19 @@ div#newaddCategoryPopup {
 
 }
 
-
-
+.muted {
+    color: #999999;
+}
+.btn.disabled,
+.btn[disabled] {
+    cursor: default;
+    background-image: none;
+    opacity: 0.65;
+    filter: alpha(opacity=65);
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+}
 /* ==================  MEDIA QUERY CSS START HERE  ================== */
 @media (max-width:768px) {
 .imageUploadForm img {

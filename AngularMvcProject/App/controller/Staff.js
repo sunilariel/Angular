@@ -23,7 +23,7 @@
         debugger;
         $scope.isvisibleMenuiconBar = true;
         $scope.IsVisibleAddNewStaffPopUp = false;
-        $scope.isVisibleTimeOffPopup = false;
+        
         //$scope.alldaystatus = true;
      
         $scope.startdate = $filter('date')(new Date(), "dd MMMM yyyy");
@@ -517,8 +517,9 @@
                     $scope.MessageText = "TimeOff Saved";
                     $timeout(function () {
                         $scope.IsVisible = false;
-                        $scope.isVisibleTimeOffPopup = false;
+                        $scope.isVisibleTimeOffPopup = true;
                         $scope.GetTimeOffDetail($scope.StaffId);
+                       
                     }, 1000)
                 }, 800)
             }

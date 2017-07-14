@@ -1,8 +1,9 @@
-﻿
+﻿<!DOCTYPE html>
+<html>
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   
+
     <link href="https://fonts.googleapis.com/css?family=Montserrat:200,300,400,500,600,700" rel="stylesheet">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
     <link href="../Content/Assets/css/bootstrap.min.css" rel="stylesheet">
@@ -10,17 +11,24 @@
     <link href="../Content/Assets/css/icon.css" rel="stylesheet">
     <link href="../Content/Assets/css/animate.css" rel="stylesheet">
     <link href="../Content/Assets/css/custom.css" rel="stylesheet">
-    <link href="Content/Assets/css/angularjs-datetime-picker.css" rel="stylesheet" />
-    <!--<link href="../Content/Assets/css/bootstrap-datetimepicker.css" rel="stylesheet" />-->
+    <!--<link href="Content/Assets/css/angularjs-datetime-picker.css" rel="stylesheet" />-->
+
+    <link href="../Content/Assets/css/bootstrap-datetimepicker.css" rel="stylesheet" />
+   
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-route.js"></script>
-    <script src="Content/Assets/js/angularjs-datetime-picker.min.js"></script>
-   
+    <!--<script src="Content/Assets/js/angularjs-datetime-picker.min.js"></script>-->
     <script src="Content/Assets/js/jquery.js"></script>
+    <!--<script src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.5.0.js"></script>-->
+
+    <script src="Content/Assets/js/ui-bootstrap-tpls-0.5.0.js"></script>
+    
+    
     <script src="Content/Assets/js/bootstrap.min.js"></script>
     <script src="Content/Assets/js/moment.js"></script>
-    <script src="Content/Assets/js/bootstrap-datetimepicker.min.js"></script>  
-    <script src="../App/controller/app.js"></script> 
+    <!--<script src="Content/Assets/js/bootstrap-datetimepicker.min.js"></script>-->
+   
+    <script src="../App/controller/app.js"></script>
     <script src="../App/service/service.js"></script>
     <script src="../App/controller/SignUp.js"></script>
     <script src="../App/controller/wizard.js"></script>
@@ -29,7 +37,9 @@
     <script src="../App/controller/Staff.js"></script>
     <script src="../App/controller/Services.js"></script>
 </head>
-<div ng-app="bookingApp">    
-       <div ng-view></div>  
-</div>
-
+<body>
+    <div ng-app="bookingApp">
+        <div ng-view></div>
+    </div>
+</body>
+</html>

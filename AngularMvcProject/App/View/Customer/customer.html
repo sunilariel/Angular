@@ -315,7 +315,7 @@
                                                 </div>
                                                 <div class="customerField row form-group">
                                                     <div class="col-md-2 col-sm-2 col-xs-2  userNumber">
-                                                        <input id="customerExt" class="form-control" type="text" placeholder="91" ng-model="customerExt">
+                                                        <input id="customerExt" class="form-control" type="text" placeholder="Code" maxlength="2" ng-model="customerExt">
                                                     </div>
                                                     <div class="col-md-10 col-sm-10 col-xs-10 mobilenumberField">
                                                         <input id="customerMobile" class="form-control" type="text" placeholder="Mobile" ng-model="customerMobile">
@@ -326,7 +326,7 @@
                                                 </div>
 
                                                 <button id="addnewCustomer" type="submit" class="btn addCustomerbtn appointCustomBtn">Add Customer</button>
-                                                <button id="cancelCustomer" ng-click="showcustomer=false;" type="button" class="btn btn-default addCustomerCancelbtn appointCustomBtn">Cancel</button>
+                                                <button id="cancelCustomer" ng-click="showcustomer=false;" type="button" class="btn btn-default addCustomerCancelbtn appointCustomBtn" ng-hide="CustomerCount==0">Cancel</button>
 
                                             </div>
                                         </div>
@@ -367,9 +367,13 @@
                                                 <label class="providerName">{{item.FirstName}}</label>
                                                 <!-- Single button -->
                                                 <div class="popOverDeleteBtn">
-                                                    <a ng-click="showdeletepopup = !showdeletepopup" id="deleteBtn" class="btn btn-default delete_btn">
+                                                    <!--<a ng-click="showdeletepopup = !showdeletepopup" id="deleteBtn" class="btn btn-default delete_btn">
                                                         <span class="glyphicon glyphicon-trash"></span>Delete
-                                                    </a>
+                                                    </a>-->
+                                                    <a ng-click="DeleteCustomerData(item.Id)" id="deleteBtn" class="btn btn-default delete_btn">
+        <span class="glyphicon glyphicon-trash"></span>Delete
+    </a>
+
                                                 </div>
 
                                                 <div class="col-md-12">
@@ -414,7 +418,7 @@
                                             <span class="uploadImageIcon"><i class="fa fa-camera" aria-hidden="true" style="margin-left: 4px;"></i></span>
                                         </label>
                                         <div class="col-md-9 col-sm-12 col-xs-9 customerNameDiv">
-                                            <input type="text" class="customerName namevalueField form-control" value="Mark" id="name" name="name" placeholder="Mark" ng-model="updatedCustomerName" ng-blur="updateCustomer()">
+                                            <input type="text" class="customerName namevalueField form-control" value="Mark" id="name" name="name" placeholder="Name" ng-model="updatedCustomerName" ng-blur="updateCustomer()">
                                         </div>
                                     </div>
 
@@ -485,9 +489,9 @@
                         <div class="col-sm-6">
                             <div id="" class="detail-navbar appointmentDiv staffContent container-fluid">
                                 <ul class="nav nav-pills">
-                                    <li class="active" id="staff_details"><a data-target="#staff-details" style="cursor:pointer;" data-toggle="tab">Appointments</a></li>
-                                    <li><a data-target="#staff-services" style="cursor:pointer;" data-toggle="tab">Notes</a></li>
-                                    <li><a data-target="#staff-hours" style="cursor:pointer;" data-toggle="tab">Stats</a></li>
+                                    <li class="active" id="staff_details" ng-disabled="setstaffdetails"><a data-target="#staff-details" class="cursorhand" ng-disabled="CustomerCount==0" data-toggle="tab">Appointments</a></li>
+                                    <li><a data-target="#staff-services" style="cursor:pointer;" data-toggle="tab" ng-disabled="CustomerCount==0">Notes</a></li>
+                                    <li><a data-target="#staff-hours" style="cursor:pointer;" data-toggle="tab" ng-disabled="CustomerCount==0">Stats</a></li>
                                     <li class="pull-right settingIcon"><i class="fa fa-cog" aria-hidden="true"></i></li>
                                     <div class="clearfix"></div>
                                 </ul>
@@ -496,10 +500,11 @@
                                     <div class="tab-content" style="height: 186px;">
                                         <div class="tab-pane active" id="staff-details">
                                             <div class="appointment_content">
-                                                <div class="appoint_text appoint_cust">
-                                                    <button class="pull-right btn btn-circle appointment_btn" id="createnewstaffbtn" title="" data-toggle="modal" data-target="#squarespaceModal"><i class="fa fa-plus" aria-hidden="true" ng-click="AddAppointmentPopup()"></i></button><span>2  appointment  & 0 class</span><span class="dottext">.</span><span> $0</span>
+                                                <div class="appoint_text appoint_cust" ng-hide="CustomerCount==0">
+                                                    <button class="pull-right btn btn-circle appointment_btn" id="createnewstaffbtn" title="" data-toggle="modal" data-target="#squarespaceModal"><i class="fa fa-plus" aria-hidden="true" ng-click="AddAppointmentPopup()"></i></button>    
+                                                    <span>0 appointment & 0 class</span><span class="dottext">.</span><span> $0</span>                                                
                                                 </div>
-
+                                               
                                                 <div class="modal fade appointmentPopup" id="squarespaceModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
                                                     <div class="modal-dialog appointPopupHead">
                                                         <div class="modal-content">
@@ -554,7 +559,7 @@
                                                                                             david
                                                                                             <span class="glyphicon glyphicon-chevron-down chevronDownIcon"></span>
                                                                                         </button>*@-->
-                                                                                        <div class="dropdown-menu popupdropdownDiv" aria-labelledby="dropdownMenu2">
+                                                                                        <!--<div class="dropdown-menu popupdropdownDiv" aria-labelledby="dropdownMenu2">
                                                                                             <ul class="list-inline">
                                                                                                 <li>
                                                                                                     <span class="userIcon providerImage">
@@ -564,7 +569,7 @@
                                                                                                 </li>
                                                                                             </ul>
 
-                                                                                        </div>
+                                                                                        </div>-->
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
@@ -626,8 +631,8 @@
                                                                                 <label class="control-label col-sm-4" for="pwd">Day/Time</label>
                                                                                 <div class="col-sm-8 dateTimeDiv">
                                                                                     <span class="glyphicon glyphicon-ok calendarOk"></span><!--<input type="text" class="form-control datepickerBox" ng-model="datatime" placeholder="Fri, May 12" id="datetimepicker4" />-->
-                                                                                    <!--<input datetime-picker ng-model="selecteddate" date-disabled-weekdays="disabled()" disable-weekends="true"  class="form-control datepickerBox"  date-format="EEE, MMM d" size="30" date-only   />-->
-                                                                                    <input type="text" class="form-control calendarBox" datepicker-popup="EEE, MMM d" ng-model="dt" open="opened" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" name='theDate' ng-required="true" ng-change='ChangeDay(mode)' />
+                                                                                    <!--<input datetime-picker ng-model="selecteddate" date-disabled="disabled(date, mode)" disable-weekends="true"  class="form-control datepickerBox"  date-format="EEE, MMM d" size="30" date-only   />-->
+                                                                                    <input type="text" class="form-control calendarBox" datepicker-popup="EEE, MMM d" ng-model="dt" open="opened" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-change="ChangeDate()" name='theDate' ng-required="true"  />
                                                                                     <!--<datetimepicker ng-model="date"
                                                                                                     date-format="EEE, MMM d"
                                                                                                     date-options="dateOptions"
@@ -641,8 +646,8 @@
                                                                                            ng-click="opened = !opened"
                                                                                            ng-readonly='true' />-->
                                                                                     <div class="selectDropdown">
-                                                                                        <select class="select_btn dateTimeSelect" ng-required="true" ng-model="option" ng-init="option=workinghours[0]">
-                                                                                            <option ng-repeat="option in workinghours" value="{{option}}">{{option}}</option>
+                                                                                        <select class="select_btn dateTimeSelect" ng-required="true" ng-model="timeoption" ng-init="timeoption='8:00 AM'">
+                                                                                            <option ng-repeat="timeoption in timeInfoFrom " value="{{timeoption}}">{{timeoption}}</option>
                                                                                         </select>
                                                                                     </div>
                                                                                 </div>
