@@ -241,7 +241,8 @@
                     angular.forEach($scope.Categories, function (value, key) {
                         if (value.hasOwnProperty("Confirmed")==true) {
                             if (value.Confirmed == true) {
-                                //var responsedata = bookingService.AssignCategoryToService($scope.ServiceId, value.Id);
+                                //var responsedata = bookingService.AssignCategoryToService($scope.ServiceId, value.Id);\
+                               var CurrentDate= new Date();
                                 var updatedservice = {
                                     "Id": $scope.ServiceId,
                                     "CompanyId": $routeParams.CompanyId,
@@ -252,7 +253,7 @@
                                     "DurationInHours": 0,
                                     "Cost": $scope.ServiceCost,
                                     "Currency": "sample string 9",
-                                    "CreationDate": "2017-06-26T11:08:28.4943519+00:00"
+                                    "CreationDate": CurrentDate
                                 }
 
                                 var responsedata = bookingService.UpdateService(updatedservice);
@@ -270,6 +271,7 @@
                                         $scope.ServiceCost = "";
                                     }
                                 })
+
                             }
                         }
                     });                                

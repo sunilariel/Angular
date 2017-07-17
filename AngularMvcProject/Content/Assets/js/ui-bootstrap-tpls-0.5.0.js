@@ -3278,7 +3278,7 @@ angular.module("template/datepicker/datepicker.html", []).run(["$templateCache",
     "    <tr ng-repeat=\"row in rows\">\n" +
     //"      <td ng-show=\"showWeekNumbers\" class=\"text-center\"><em>{{ getweeknumber(row) }}</em></td>\n" +
     "      <td ng-repeat=\"dt in row\" class=\"text-center\">\n" +
-    "        <button type=\"button\" style=\"width:100%;\" class=\"btn\" ng-class=\"{'btn-info': dt.selected}\" ng-click=\"select(dt.date)\" ng-disabled=\"dt.disabled\" ng-hide=\"dt.secondary\"><span ng-class=\"{muted: dt.secondary}\" >{{dt.label}}</span></button>\n" +
+    "        <button type=\"button\" style=\"margin-left:13px;\" class=\"btn\" ng-class=\"{'btn-info': dt.selected}\" ng-click=\"select(dt.date)\" ng-disabled=\"dt.disabled\" ng-hide=\"dt.secondary\"><span ng-class=\"{muted: dt.secondary}\" >{{dt.label}}</span></button>\n" +
     "      </td>\n" +
     "    </tr>\n" +
     "  </tbody>\n" +

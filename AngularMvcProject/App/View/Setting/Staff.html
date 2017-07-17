@@ -349,7 +349,7 @@
                             <div class="categoryList staffList">
                                 <ul>
                                     <li ng-repeat="item in ListofStaff">
-                                        <a ng-click="EditStaff(item)"  class="staffUser cursorhand">
+                                        <a ng-click="EditStaff(item)"  class="staffUser cursorhand" data-target="#staff_details" data-toggle="tab">
                                             <img src="/Content/Assets/images/provider_img2.png">
                                             <span class="categoryServices">{{item.FirstName}}</span>
                                         </a>
@@ -370,11 +370,11 @@
                     <div class="col-sm-9 staffservicesSec">
                         <div id="staffContentNav" class="detail-navbar staffDetail staffContent container-fluid">
                             <ul class="nav nav-pills">
-                                <li class="active"><a data-target="#staff_details" class="cursorhand" data-toggle="tab">DETAILS</a></li>
-                                <li><a data-target="#staff-services" data-toggle="tab" class="cursorhand">SERVICES</a></li>
-                                <li><a data-target="#staff-hours" data-toggle="tab" class="cursorhand">WORKING HOURS</a></li>
-                                <li><a data-target="#staff-break" data-toggle="tab" class="cursorhand">BREAKS</a></li>
-                                <li><a data-target="#staff-timeoff" data-toggle="tab" class="cursorhand">TIME OFF</a></li>
+                                <li class="active" id="StaffDetailsLink"><a data-target="#staff_details" class="cursorhand" data-toggle="tab">DETAILS</a></li>
+                                <li id="StaffServicesLink"><a data-target="#staff-services" data-toggle="tab" class="cursorhand">SERVICES</a></li>
+                                <li id="StaffHoursLink"><a data-target="#staff-hours" data-toggle="tab" class="cursorhand">WORKING HOURS</a></li>
+                                <li id="StaffBreakLink"><a data-target="#staff-break" data-toggle="tab" class="cursorhand">BREAKS</a></li>
+                                <li id="StaffTimeOffLink"><a data-target="#staff-timeoff" data-toggle="tab" class="cursorhand">TIME OFF</a></li>
                                 <li class="pull-right settingIcon staffDeleteIcon">
                                     <button class="pull-right btn btn-circle appointment_btn" id="deletestaffbtn" ng-click="DeleteStaff()">
                                         <i class="fa fa-trash-o" aria-hidden="true"></i>

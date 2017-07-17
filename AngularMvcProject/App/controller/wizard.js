@@ -420,7 +420,18 @@ app.controller('bookingController', ['$scope', '$routeParams', '$rootScope', '$h
                 var CompanyId = $scope.companyId;
 
                 //Set  default working hours of Staff by hit Staff Controller method(SetEmployeeWorkingHours)//
-                angular.forEach($scope.businessHourInfo, function (value, key) {
+
+              
+                $scope.StaffbusinessHourInfo = [{ 'day': 'Monday', 'timeFrom': "08:00 AM", 'timeTo': "05:00 PM", 'available': true, 'NameOfDay': 1 },
+                { 'day': 'Tuesday', 'timeFrom': "08:00 AM", 'timeTo': "05:00 PM", 'available': true, 'NameOfDay': 2 },
+                { 'day': 'Wednesday', 'timeFrom': "08:00 AM", 'timeTo': "05:00 PM", 'available': true, 'NameOfDay': 3 },
+                { 'day': 'Thursday', 'timeFrom': "08:00 AM", 'timeTo': "05:00 PM", 'available': true, 'NameOfDay': 4 },
+                { 'day': 'Friday', 'timeFrom': "08:00 AM", 'timeTo': "05:00 PM", 'available': true, 'NameOfDay': 5 },
+                { 'day': 'Saturday', 'timeFrom': "08:00 AM", 'timeTo': "05:00 PM", 'available': false, 'NameOfDay': 6 },
+                { 'day': 'Sunday', 'timeFrom': "08:00 AM", 'timeTo': "05:00 PM", 'available': false, 'NameOfDay': 0 }, ]
+
+
+                angular.forEach($scope.StaffbusinessHourInfo, function (value, key) {
                     var requesteddata = {
                         "Id": value.Id,
                         "CompanyId": $scope.companyId,

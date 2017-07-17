@@ -383,7 +383,7 @@
                             <button id="serviceCancelBtn" class="btn btn-default serviceCancelBtn" ng-click="showAllServicePopup()">Cancel</button>
                         </div>
                         <div class="row smapleServiceDivSec">
-                            <div class="col-md-7">
+                            <div class="col-md-7" style="margin-top: -29px;">
                                 <div class="customerProfileDiv">
                                     <form class="form-horizontal imageUploadForm" name="servicenameform">
                                         <div class="form-group 	serviceIconImage">
@@ -397,11 +397,11 @@
                                                         <input type="file">
                                                     </span>
                                                 </div>
-                                                <span class="uploadImageIcon uploadSeviceIcon uploadCateIcon"><i class="fa fa-camera" style="margin-left:3px;margin-top:-3px;" aria-hidden="true"></i></span>
+                                                <span class="uploadImageIcon uploadSeviceIcon uploadCateIcon"><i class="fa fa-camera" style="margin-left:17px;margin-top:-1px;" aria-hidden="true"></i></span>
                                             </label>
                                             <div class="col-md-8 col-sm-8 col-xs-12 sampleServicesSec">
 
-                                                <input type="text" class="customerName sampServiceName form-control" id="" placeholder="Sample Service name*" ng-model="ServiceName" name="ServiceName">
+                                                <input type="text" class="customerName sampServiceName form-control" id="" placeholder="Enter Service name*" ng-model="ServiceName" name="ServiceName">
                                                 <div class="">
 
                                                     <div class="dropdown serviceColors">
@@ -439,13 +439,13 @@
                                         <div class="form-group">
                                             <label class="control-label col-md-4 col-sm-4 col-xs-12">Service Cost (₹)</label>
                                             <div class="col-md-8 col-sm-8 col-xs-12">
-                                                <input type="text" class="form-control" id="text" placeholder="90" name="text" ng-model="ServiceCost">
+                                                <input type="text" class="form-control" id="text" placeholder="Cost for the Service" name="text" ng-model="ServiceCost">
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label class="control-label col-md-4 col-sm-4 col-xs-12">Service Time (mins*)</label>
                                             <div class="col-md-8 col-sm-8 col-xs-12">
-                                                <input type="text" class="form-control" id="text" placeholder="90" name="ServiceTime" ng-model="ServiceTime">
+                                                <input type="text" class="form-control" id="text" placeholder="Time in min*" name="ServiceTime" ng-model="ServiceTime">
                                             </div>
                                         </div>
                                         <div class="form-group">
@@ -535,11 +535,14 @@
 
                     <!--//////////////////////////////-->
                     <div class="col-md-9 col-sm-9 categoryRightSec allServiceSec" ng-hide="EditServiceDiv">
-                        <div class="categoryButtonsDiv text-right categoryDeleteBtnDiv">
-                            <a id="deletecateBtn" ng-click="DeleteService()" class="deletecatIconBtn btn btn-default">
-                                <i class="fa fa-trash-o" aria-hidden="true"></i>
-                            </a>
-                        </div>
+                      
+                            
+                            <div class="categoryButtonsDiv text-right categoryDeleteBtnDiv">
+                                <a id="deletecateBtn" ng-click="DeleteService()" class="deletecatIconBtn btn btn-default">
+                                    <i class="fa fa-trash-o" aria-hidden="true"></i>
+                                </a>
+                            </div>
+                        
                         <div class="row">
                             <div class="col-md-7">
                                 <div class="customerProfileDiv providetheService">
@@ -555,11 +558,11 @@
                                                         <input type="file">
                                                     </span>
                                                 </div>
-                                                <span class="uploadImageIcon uploadSeviceIcon uploadCateIcon"><i class="fa fa-camera" style="margin-left:3px;margin-top:-3px;" aria-hidden="true"></i></span>
+                                                <span class="uploadImageIcon uploadSeviceIcon uploadCateIcon"><i class="fa fa-camera" style="margin-left: 6px;margin-top: -2px;"aria-hidden="true"></i></span>
                                             </label>
                                             <div class="col-md-8 col-sm-8 col-xs-12 sampleServicesSec">
 
-                                                <input type="text" class="customerName sampServiceName form-control" id="" placeholder="Sample Service name*" ng-model="ServiceName" name="ServiceName" ng-blur="updateService()">
+                                                <input type="text" class="customerName sampServiceName form-control" id="" placeholder="Enter Service name*" ng-model="ServiceName" name="ServiceName" ng-blur="updateService()">
                                                 <div class="">
 
                                                     <div class="dropdown serviceColors">
@@ -597,13 +600,13 @@
                                         <div class="form-group">
                                             <label class="control-label col-md-4 col-sm-4 col-xs-12">Service Cost (₹)</label>
                                             <div class="col-md-8 col-sm-8 col-xs-12">
-                                                <input type="text" class="form-control" id="text" placeholder="90" name="text" ng-model="ServiceCost" ng-blur="updateService()">
+                                                <input type="text" class="form-control" id="text" placeholder="Cost for the Service" name="text" ng-model="ServiceCost" ng-blur="updateService()">
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label class="control-label col-md-4 col-sm-4 col-xs-12">Service Time (mins*)</label>
                                             <div class="col-md-8 col-sm-8 col-xs-12">
-                                                <input type="text" class="form-control" id="text" placeholder="90" name="ServiceTime" ng-model="ServiceTime" ng-blur="updateService()">
+                                                <input type="text" class="form-control" id="text" placeholder="Time in min*" name="ServiceTime" ng-model="ServiceTime" ng-blur="updateService()">
                                             </div>
                                         </div>
                                         <div class="form-group">

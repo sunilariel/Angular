@@ -328,14 +328,14 @@ div#staffContentNav li.active a {
     border-bottom: 2px solid #00b5c8;
    
 }
-div#staffContentNav ul{
+/*div#staffContentNav ul{
 	    width: 100%;
     border-bottom: 1px solid #eee;
 	    margin-bottom: 17px;
 }
 div#staffContentNav ul li{
 	
-}
+}*/
 .media-left span.user_img {
     height: 110px;
     width: 110px;
@@ -2191,7 +2191,7 @@ table#mytable tr td {
     border: none;
     box-shadow: none;
     margin-top: 30px;
-    font-size: 24px;
+    font-size: 24px !important;
 	height: 40px !important;
     line-height: 40px !important;
 }
@@ -3526,12 +3526,14 @@ span.staffdatepickerTime a {
     font-size: 12px;
     font-weight: 600;
     padding-left: 5px;
+   text-align: center !important;
 }
 .detail-navbar .dateTimeDiv ul li table tbody tr td .btn {
     background: #fff;
     color: #555;
     font-size: 10px;
-    padding: 2px 0px;
+    /*padding: 2px 0px;*/
+    padding:0px 3px;
     font-weight: 600;
 }
 /*.detail-navbar .dateTimeDiv ul li table tbody tr td:first-child {

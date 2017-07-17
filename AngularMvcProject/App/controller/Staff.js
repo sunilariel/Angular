@@ -166,7 +166,7 @@
         $scope.StaffId = item.Id;
         $scope.staffName = item.FirstName;
         $scope.staffEmail = item.Email;
-
+        
 
         var ServiceResult = bookingService.GetAllServiceStatus($routeParams.CompanyId, item.Id);
         ServiceResult.then(function (response) {
@@ -188,6 +188,21 @@
         });
         $scope.GetTimeOffDetail(item.Id);
         $scope.GetWorkingHoursOfEmployee(item.Id);
+
+        //Active and DeActive tab in Staff Section
+        var tabelement1 = angular.element(document.querySelector("#StaffDetailsLink"));
+        tabelement1.addClass('active');
+        var divelement1 = angular.element(document.querySelector("#staff_details"));
+        divelement1.addClass('active');
+        var tabelement2 = angular.element(document.querySelector("#StaffServicesLink"));
+        tabelement2.removeClass('active');
+        var tabelement3 = angular.element(document.querySelector("#StaffHoursLink"));
+        tabelement3.removeClass('active');
+        var tabelement4 = angular.element(document.querySelector("#StaffBreakLink"));
+        tabelement4.removeClass('active');
+        var tabelement5 = angular.element(document.querySelector("#StaffTimeOffLink"));
+        tabelement5.removeClass('active');
+        
     }
 
 
@@ -517,6 +532,7 @@
                     $scope.MessageText = "TimeOff Saved";
                     $timeout(function () {
                         $scope.IsVisible = false;
+                        angular.element(document.querySelector('#timeoffPopUp')).css('display','None');
                         $scope.isVisibleTimeOffPopup = true;
                         $scope.GetTimeOffDetail($scope.StaffId);
                        
