@@ -6,6 +6,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Script.Serialization;
+using System.Configuration;
 
 namespace AngularMvcProject.Controllers
 {
@@ -21,7 +22,7 @@ namespace AngularMvcProject.Controllers
         public JsonResult postdata(string json)
         {
                       
-            string apiURL = "http://bookingmanager1romz.azurewebsites.net/api/companyregistration/CreateAccount";
+            string apiURL = ConfigurationManager.AppSettings["DomainUrl"].ToString() + "/api/companyregistration/CreateAccount";
 
             //Data parameter Example
             //string data = "name=" + value
@@ -46,7 +47,7 @@ namespace AngularMvcProject.Controllers
         {
             try
             {
-                string apiUrl = "http://bookingmanager1romz.azurewebsites.net/api/companyregistration/AlreadyExistsCompany?email=" + email;
+                string apiUrl = ConfigurationManager.AppSettings["DomainUrl"].ToString() + "/api/companyregistration/AlreadyExistsCompany?email=" + email;
                 string result = "";
                 var httpWebRequest = (HttpWebRequest)WebRequest.Create(apiUrl);
                 httpWebRequest.ContentType = "application/json";

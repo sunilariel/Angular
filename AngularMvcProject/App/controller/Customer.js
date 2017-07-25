@@ -60,6 +60,14 @@
         $scope.showcustomer = false;
         $scope.appointmentDetailisVisible = false;
         $scope.selecteddate = $filter('date')(new Date(),"EEE, MMM d");
+        $scope.ServicePriceTimeDetailIsVisible = false;
+
+        //Status List//
+        $scope.StatusList = [{Status: "Draft", "Value": 1},
+            { Status: "AwaitingApproval", "Value": 2 },
+            { Status:"RejectedByApprover","Value":4},
+            { Status: "Complete", "Value": 128 },
+            { Status: "Cancelled","Value":256}]
 
         $scope.AppointmentSchedule = [];
 
@@ -119,7 +127,7 @@
 
         $scope.MobileNo = $scope.customerExt + $scope.customerMobile;
         var obj = {
-            Url: 'api/customer/Create',
+            Url: '/api/customer/Create',
             ReqStaffData: {
                 "Id": 1,
                 "CompanyId": $scope.CompanyId,
@@ -190,7 +198,7 @@
         var MobileNumber = $scope.updatedPreCustomerMobileNo + $scope.updatedMobileNo;
         var updateddate = new Date();
         var UpdateCustomer = {
-            Url: "api/customer/Update",
+            Url: "/api/customer/Update",
             ReqStaffData: {
                 "Id": $scope.CustomerId,
                 "CompanyId": $scope.CompanyId,
@@ -288,11 +296,14 @@
     ////////////////////Add Appointment Module ///////////////////////
     $scope.AddAppointmentPopup = function () {
         debugger;
-        $scope.selectedprovider = "-- Select a Provider --";
-        $scope.selectedservice = "-- Select a Service --";
+       // $scope.selectedprovider = "-- Select a Provider --";
+        $scope.selectedservice = " ";
         $scope.price = "";
         $scope.time = "";
         $scope.timeoption = "";
+        $scope.timeInfoFrom = [];
+       
+        $scope.ServicePriceTimeDetailIsVisible = false;
         $scope.ShowAddAppointmentPopup != $scope.ShowAddAppointmentPopup;
     };
 
@@ -319,70 +330,13 @@
             $scope.AppointmentSchedule = [];
             var resultAppontmentWorkingHours = bookingService.GetAppointmentWorkingHours(EmployeeId);
             resultAppontmentWorkingHours.then(function (response) {
-                
-                    //var count = response.data.length;
-                    //angular.forEach(response.data, function (value, key) {
-                    //    var start = value.Start.split(':');
-                    //    var end = value.End.split(':');
-                    //    var day = "";
-                    //    var minutes = 0;
-                    //    var hours = "AM";
-                    //    dayinnumber = value.NameOfDay;
-                    //    dayName = value.NameOfDayAsString;
-
-                    //    $scope.workinghours = [];
-                    //    for (var i = start[0]; i < end[0]; i++) {
-                    //        minutes = 0;
-                    //        if (i == 12) {
-                    //            hours = "PM";
-                    //        }
-                    //        for (var y = 0; y < 4; y++) {
-                    //            if (i == 16) {
-                    //                var time = i + 1 + ":" + "00" + "" + hours;
-                    //                $scope.workinghours.push(time);
-                    //                continue;
-                    //            }
-                    //            if (y == 0) {
-                    //                var time = i + ":" + "00" + "" + hours;
-                    //                $scope.workinghours.push(time);
-
-                    //                continue;
-                    //            }
-                    //            minutes = minutes + 15;
-                    //            var time = i + ":" + minutes + "" + hours;
-                    //            $scope.workinghours.push(time);
-
-                    //        }
-
-                    //    }
-
-                    //    $scope.AppointmentSchedule.push({ 'DaySeries': dayinnumber, 'DayName': dayName, 'WorkingHours': $scope.workinghours });
-
-                   
+                                                     
                     angular.forEach(response.data,function(value,key){
                         if(value.IsOffAllDay==true){
                             $scope.AppointmentSchedule.push(value.NameOfDay);
                         }
-                    });
-                    
-          
-                });
-
-            //    var CurrentDay = $scope.dt.getDay();
-            //    $scope.workinghours = [];
-            //    angular.forEach($scope.AppointmentSchedule, function (value, key) {
-            //        if (CurrentDay == value.DaySeries) {
-            //            $scope.workinghours = value.WorkingHours;
-
-            //        }
-            //        $scope.disabled = function (date, mode) {
-            //            return (mode === 'day' && (date.getDay() == $scope.AppointmentSchedule[0].DaySeries || date.getDay() == $scope.AppointmentSchedule[1].DaySeries));
-            //        };
-            //    });
-            //});
-            //////////////////////
-
-
+                    });                            
+                });         
 
         }), function () {
             alert('Error in getting post records');
@@ -398,13 +352,36 @@
             debugger;
             $scope.price = response.data.Cost;
             $scope.time = response.data.DurationInMinutes;
-         
+            $scope.ServicePriceTimeDetailIsVisible = true;
             $scope.today();
         });
     }
 
     $scope.SaveAppointment = function (form) {
         debugger;
+
+        var data = $scope.item.Status;
+        var Status = 0;
+         if(data=="Complete")
+         {
+             Status = 1;
+         }
+         else if(data == "AwaitingApproval ")
+         {
+             Status = 2;
+         }
+         else if(data=="RejectedByApprover ")
+         {
+             Status = 4;
+         }
+         else if(data=="Complete")
+         {
+             Status = 128;
+         }
+         else if(data=="Cancelled")
+         {
+             Status = 256;
+         }
         var selectedvalue = $scope.option;
         if (form.$invalid == true) {
             if (form.providerdd.$invalid == true) {
@@ -418,6 +395,7 @@
                 form.Servicedd.$touched = true;
                 return false;
             }
+           
 
         }
         var time = $scope.timeoption.split(" ");
@@ -475,7 +453,6 @@
      //Disable weekend selection
     $scope.disabled = function (date, mode) {
         debugger;
-
         //return (mode == 'day' && (date.getDay() == 0 || date.getDay() == 5));
         return (mode == 'day' && (date.getDay() == $scope.AppointmentSchedule[0] || date.getDay() == $scope.AppointmentSchedule[1] || date.getDay() == $scope.AppointmentSchedule[2] || date.getDay() == $scope.AppointmentSchedule[3] || date.getDay() == $scope.AppointmentSchedule[4] || date.getDay() == $scope.AppointmentSchedule[5] || date.getDay() == $scope.AppointmentSchedule[6]));
     };

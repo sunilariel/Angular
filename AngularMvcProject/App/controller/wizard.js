@@ -70,7 +70,7 @@ app.controller('bookingController', ['$scope', '$routeParams', '$rootScope', '$h
         if (firstregistration != true) {
             debugger;
             var businessInfo = {
-                Url: "api/companyregistration/CreateAccount",
+                Url: "/api/companyregistration/CreateAccount",
                 RequestData: {                  
                     Name: $scope.businessName,
                     Address: "sample string 3",
@@ -193,7 +193,7 @@ app.controller('bookingController', ['$scope', '$routeParams', '$rootScope', '$h
         });
 
         var businessInfo = {
-            Url: "api/companyregistration/SetWorkingHoursForWeek",
+            Url: "/api/companyregistration/SetWorkingHoursForWeek",
             ReqWorkingHours: daysArr
         };
 
@@ -393,7 +393,7 @@ app.controller('bookingController', ['$scope', '$routeParams', '$rootScope', '$h
         }
         
         var StaffInformation = {
-            Url: "api/companyregistration/AddStaff",
+            Url: "/api/companyregistration/AddStaff",
             ReqStaffData: {
                 Id: $scope.selectedIndustry,
                 CompanyId: $scope.companyId,
@@ -487,7 +487,7 @@ app.controller('bookingController', ['$scope', '$routeParams', '$rootScope', '$h
     $scope.EditStaff = function (EditStaff) {
         debugger;
         var EditStaffInformation = {
-            Url: "api/staff/Update",
+            Url: "/api/staff/Update",
             ReqStaffData: {
                 Id: EditStaff.Id,
                 CompanyId: EditStaff.CompanyId,
@@ -617,7 +617,7 @@ app.controller('bookingController', ['$scope', '$routeParams', '$rootScope', '$h
         angular.forEach(item.staff, function (value, key) {
                        
                     var assignData = {
-                        Url: "api/companyregistration/AssignServiceToStaff",
+                        Url: "/api/companyregistration/AssignServiceToStaff",
                         RequestAssignService: {
                             Id: 1,
                             CompanyId: $scope.companyId,
@@ -698,7 +698,7 @@ app.controller('bookingController', ['$scope', '$routeParams', '$rootScope', '$h
 
         var updateddate = new Date();
         var assignData = {
-            Url: "api/companyregistration/AssignServiceToStaff",
+            Url: "/api/companyregistration/AssignServiceToStaff",
             RequestAssignService: {
                 Id: 1,
                 CompanyId: item.CompanyId,
@@ -845,7 +845,7 @@ app.controller('bookingController', ['$scope', '$routeParams', '$rootScope', '$h
         //}
         var dateTimeVal = new Date();
         var ServiceData = {
-            Url: "api/companyregistration/AddService",
+            Url: "/api/companyregistration/AddService",
             RequestAddService: {
                 Id: $scope.selectedIndustry,
                 CompanyId: $scope.companyId,
@@ -871,7 +871,7 @@ app.controller('bookingController', ['$scope', '$routeParams', '$rootScope', '$h
                     debugger;
                     if (value.confirmed == true) {
                         var assignData = {
-                            Url: "api/companyregistration/AssignServiceToStaff",
+                            Url: "/api/companyregistration/AssignServiceToStaff",
                             RequestAssignService: {
                                 Id: 1,
                                 CompanyId: $scope.companyId,
@@ -926,7 +926,7 @@ app.controller('bookingController', ['$scope', '$routeParams', '$rootScope', '$h
         debugger;
         var Id = $scope.FirstName;
         var ServiceData = {
-            Url: "api/services/UpdateService",
+            Url: "/api/services/UpdateService",
             RequestAddService: {
                 Id: EditService.Id,
                 CompanyId: EditService.CompanyId,

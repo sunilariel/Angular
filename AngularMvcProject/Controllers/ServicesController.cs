@@ -7,6 +7,7 @@ using AngularMvcProject.Models;
 using System.Net;
 using System.IO;
 using System.Web.Script.Serialization;
+using System.Configuration;
 
 namespace AngularMvcProject.Controllers
 {
@@ -19,7 +20,7 @@ namespace AngularMvcProject.Controllers
             try
             {
                 var result = "";
-                var httpWebRequest = (HttpWebRequest)WebRequest.Create("http://bookingmanager1romz.azurewebsites.net/api/services/CreateCategory");
+                var httpWebRequest = (HttpWebRequest)WebRequest.Create(ConfigurationManager.AppSettings["DomainUrl"].ToString() + "/api/services/CreateCategory");
                 httpWebRequest.ContentType = "application/json";
                 httpWebRequest.Method = "POST";
 
@@ -51,7 +52,7 @@ namespace AngularMvcProject.Controllers
             try
             {
                 var result = "";
-                var httpWebRequest = (HttpWebRequest)WebRequest.Create("http://bookingmanager1romz.azurewebsites.net/api/services/GetServiceCategoriesForCompany?companyId=" + Id);
+                var httpWebRequest = (HttpWebRequest)WebRequest.Create(ConfigurationManager.AppSettings["DomainUrl"].ToString() + "/api/services/GetServiceCategoriesForCompany?companyId=" + Id);
                 httpWebRequest.ContentType = "application/json";
                 httpWebRequest.Method = "GET";
                 httpWebRequest.ContentLength = 0;
@@ -77,7 +78,7 @@ namespace AngularMvcProject.Controllers
             try
             {
                 var result = "";
-                var httpWebRequest = (HttpWebRequest)WebRequest.Create("http://bookingmanager1romz.azurewebsites.net/api/companyregistration/AddService");
+                var httpWebRequest = (HttpWebRequest)WebRequest.Create(ConfigurationManager.AppSettings["DomainUrl"].ToString() + "/api/companyregistration/AddService");
                 httpWebRequest.Method = "POST";
                 httpWebRequest.ContentType = "application/json";
 
@@ -108,7 +109,7 @@ namespace AngularMvcProject.Controllers
             try
             {
                 var result = "";
-                var httpWebRequest = (HttpWebRequest)WebRequest.Create("http://bookingmanager1romz.azurewebsites.net/api/services/AssignCategoryToService?categoryId=" + CategoryId + "&serviceId=" + SeviceId);
+                var httpWebRequest = (HttpWebRequest)WebRequest.Create(ConfigurationManager.AppSettings["DomainUrl"].ToString() + "/api/services/AssignCategoryToService?categoryId=" + CategoryId + "&serviceId=" + SeviceId);
                 httpWebRequest.Method = "PUT";
                 httpWebRequest.ContentType = "application/json";
                 httpWebRequest.ContentLength = 0;
@@ -133,7 +134,7 @@ namespace AngularMvcProject.Controllers
             try
             {
                 var result = "";
-                var httpWebRequest = (HttpWebRequest)WebRequest.Create("http://bookingmanager1romz.azurewebsites.net/api/services/GetServicesForCompany?companyId="+ CompanyId);
+                var httpWebRequest = (HttpWebRequest)WebRequest.Create(ConfigurationManager.AppSettings["DomainUrl"].ToString() + "/api/services/GetServicesForCompany?companyId="+ CompanyId);
                 httpWebRequest.Method = "GET";
                 httpWebRequest.ContentType = "application/json";
              
@@ -156,7 +157,7 @@ namespace AngularMvcProject.Controllers
             try
             {
                 var result = "";
-                var httpWebRequest = (HttpWebRequest)WebRequest.Create("http://bookingmanager1romz.azurewebsites.net/api/services/GetAllServcieForCategory?categoryId=" + CategoryId);
+                var httpWebRequest = (HttpWebRequest)WebRequest.Create(ConfigurationManager.AppSettings["DomainUrl"].ToString() + "/api/services/GetAllServcieForCategory?categoryId=" + CategoryId);
                 httpWebRequest.Method = "GET";
                 httpWebRequest.ContentType = "application/json";
 
@@ -179,7 +180,7 @@ namespace AngularMvcProject.Controllers
             try
             {
                 var result = "";
-                var httpWebRequest = (HttpWebRequest)WebRequest.Create("http://bookingmanager1romz.azurewebsites.net/api/services/UpdateService");
+                var httpWebRequest = (HttpWebRequest)WebRequest.Create(ConfigurationManager.AppSettings["DomainUrl"].ToString() + "/api/services/UpdateService");
                 httpWebRequest.Method = "POST";
                 httpWebRequest.ContentType = "application/json";
 
@@ -210,7 +211,7 @@ namespace AngularMvcProject.Controllers
             try
             {
                 var result = "";
-                var httpWebRequest = (HttpWebRequest)WebRequest.Create("http://bookingmanager1romz.azurewebsites.net/api/companyregistration/GetCompanyEmployees?companyId="+CompanyId);
+                var httpWebRequest = (HttpWebRequest)WebRequest.Create(ConfigurationManager.AppSettings["DomainUrl"].ToString() + "/api/companyregistration/GetCompanyEmployees?companyId="+CompanyId);
                 httpWebRequest.Method = "GET";
                 httpWebRequest.ContentType = "application/json";
 
@@ -234,7 +235,7 @@ namespace AngularMvcProject.Controllers
             try
             {
                 var result = "";
-                var httpWebRequest = (HttpWebRequest)WebRequest.Create("http://bookingmanager1romz.azurewebsites.net/api/companyregistration/AssignServiceToStaff");
+                var httpWebRequest = (HttpWebRequest)WebRequest.Create(ConfigurationManager.AppSettings["DomainUrl"].ToString() + "/api/companyregistration/AssignServiceToStaff");
                 httpWebRequest.Method = "POST";
                 httpWebRequest.ContentType = "application/json";
 
@@ -264,7 +265,7 @@ namespace AngularMvcProject.Controllers
         {
             try
             {
-                string apiURL = "http://bookingmanager1romz.azurewebsites.net/api/companyregistration/DeAllocateServiceForEmployee?companyId=" + CompanyId + "&employeeId=" + EmployeeId + "&serviceId=" + ServiceId;
+                string apiURL = ConfigurationManager.AppSettings["DomainUrl"].ToString() + "/api/companyregistration/DeAllocateServiceForEmployee?companyId=" + CompanyId + "&employeeId=" + EmployeeId + "&serviceId=" + ServiceId;
                 string result = "";
                 var httpWebRequest = (HttpWebRequest)WebRequest.Create(apiURL);
                 httpWebRequest.ContentType = "application/json";
@@ -291,7 +292,7 @@ namespace AngularMvcProject.Controllers
             try
             {
                 var result = "";
-                var httpWebRequest = (HttpWebRequest)WebRequest.Create("http://bookingmanager1romz.azurewebsites.net/api/services/UpdateCategory");
+                var httpWebRequest = (HttpWebRequest)WebRequest.Create(ConfigurationManager.AppSettings["DomainUrl"].ToString()+"/api/services/UpdateCategory");
                 httpWebRequest.Method = "POST";
                 httpWebRequest.ContentType = "application/json";
 
@@ -322,7 +323,7 @@ namespace AngularMvcProject.Controllers
             try
             {
                 var result = "";
-                var httpWebRequest = (HttpWebRequest)WebRequest.Create("http://bookingmanager1romz.azurewebsites.net/api/services/DeleteCategory?companyId=" + CompanyId);
+                var httpWebRequest = (HttpWebRequest)WebRequest.Create(ConfigurationManager.AppSettings["DomainUrl"].ToString() + "/api/services/DeleteCategory?companyId=" + CompanyId);
                 httpWebRequest.Method = "DELETE";
                 httpWebRequest.ContentType = "application/json";
               
@@ -347,7 +348,7 @@ namespace AngularMvcProject.Controllers
             try
             {
                 var result = "";
-                var httpWebRequest = (HttpWebRequest)WebRequest.Create("http://bookingmanager1romz.azurewebsites.net/api/staff/GetEmployeeAllocatedToService?serviceId=" + ServiceId);
+                var httpWebRequest = (HttpWebRequest)WebRequest.Create(ConfigurationManager.AppSettings["DomainUrl"].ToString() + "/api/staff/GetEmployeeAllocatedToService?serviceId=" + ServiceId);
                 httpWebRequest.Method = "GET";
                 httpWebRequest.ContentType = "application/json";
 
@@ -371,7 +372,7 @@ namespace AngularMvcProject.Controllers
             try
             {
                 var result = "";
-                var httpWebRequest = (HttpWebRequest)WebRequest.Create("http://bookingmanager1romz.azurewebsites.net/api/services/DeleteService?companyId=" + ServiceId);
+                var httpWebRequest = (HttpWebRequest)WebRequest.Create(ConfigurationManager.AppSettings["DomainUrl"].ToString() + "/api/services/DeleteService?companyId=" + ServiceId);
                 httpWebRequest.Method = "DELETE";
                 httpWebRequest.ContentType = "application/json";
 

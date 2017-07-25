@@ -468,6 +468,16 @@ app.service("bookingService", function ($http) {
         })
         return response;
     }
+
+    this.SetStatusofAppointment = function (Status, bookingId)
+    {
+        var response = $http({
+            method: "POST",
+            url: "/Customer/SetStatusOfAppointment",
+            data: { status: Status, BookingId: bookingId }
+        })
+       return  response;
+    }
 })
 
 
