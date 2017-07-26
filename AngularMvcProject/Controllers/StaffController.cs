@@ -370,6 +370,65 @@ namespace AngularMvcProject.Controllers
         }
 
         [HttpPost]
+        public string UpdateTimeOff(CustomTimeOff dataObj)
+        {
+            try
+            {
+                DateTime starttime = DateTime.Parse(dataObj.StartTime, CultureInfo.CurrentCulture);
+                dataObj.StartTime = starttime.ToString("HH:mm");
+                DateTime endtime = DateTime.Parse(dataObj.EndTime, CultureInfo.CurrentCulture);
+                dataObj.EndTime = endtime.ToString("HH:mm");
+
+                DateTime startdate = DateTime.Parse(dataObj.StartDate, CultureInfo.CurrentCulture);
+                dataObj.StartDate = startdate.ToString("yyyy-MM-dd");
+                DateTime enddate = DateTime.Parse(dataObj.EndDate, CultureInfo.CurrentCulture);
+                dataObj.EndDate = enddate.ToString("yyyy-MM-dd");
+
+
+
+                TimeOff obj = new TimeOff();
+                obj.CompanyId = dataObj.CompanyId;
+                obj.EmployeeId = dataObj.EmployeeId;
+                obj.Start = dataObj.StartDate + "T" + dataObj.StartTime;
+                obj.End = dataObj.EndDate + "T" + dataObj.EndTime;
+                obj.IsOffAllDay = dataObj.IsOffAllDay;
+                obj.CreationDate = dataObj.CreationDate;
+
+                string apiUrl = ConfigurationManager.AppSettings["DomainUrl"].ToString() + "api/staff/UpdateTimeOff";
+
+                string result = "";
+                var httpWebRequest = (HttpWebRequest)WebRequest.Create(apiUrl);
+                httpWebRequest.ContentType = "application/json";
+                httpWebRequest.Method = "POST";
+
+                using (var streamWriter = new StreamWriter(httpWebRequest.GetRequestStream()))
+                {
+                    var jsonstring = new JavaScriptSerializer().Serialize(obj);
+                    streamWriter.Write(jsonstring);
+                    streamWriter.Flush();
+                    streamWriter.Close();
+                }
+
+
+                var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
+
+                using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
+                {
+                    result = streamReader.ReadToEnd();
+                }
+
+                return result;
+            }
+            catch (Exception exception)
+            {
+                return exception.ToString();
+            }
+
+        }
+
+
+
+        [HttpPost]
         public string GetTimeOffDetail(string EmployeeId)
         {
             try
@@ -395,5 +454,159 @@ namespace AngularMvcProject.Controllers
                 return exception.ToString();
             }
         }
+
+        [HttpPost]
+        public string SetEmployeeBreakTime(SetBreak dataObj)
+        {
+            try
+            {
+                
+                DateTime startdate = DateTime.Parse(dataObj.Start, CultureInfo.CurrentCulture);
+                dataObj.Start = startdate.ToString("HH:mm");
+                DateTime endtdate = DateTime.Parse(dataObj.End, CultureInfo.CurrentCulture);
+                dataObj.End = endtdate.ToString("HH:mm");
+
+                string apiUrl = ConfigurationManager.AppSettings["DomainUrl"].ToString() + "/api/staff/AddBreak";
+
+                string result = "";
+                var httpWebRequest = (HttpWebRequest)WebRequest.Create(apiUrl);
+                httpWebRequest.ContentType = "application/json";
+                httpWebRequest.Method = "POST";
+
+                using (var streamWriter = new StreamWriter(httpWebRequest.GetRequestStream()))
+                {
+                    var jsonstring = new JavaScriptSerializer().Serialize(dataObj);
+                    streamWriter.Write(jsonstring);
+                    streamWriter.Flush();
+                    streamWriter.Close();
+                }
+
+
+                var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
+
+                using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
+                {
+                    result = streamReader.ReadToEnd();
+                }
+
+                return result;
+            }
+            catch (Exception exception)
+            {
+                return exception.ToString();
+            }
+
+        }
+
+        public string GetBreakTimeHoursofEmployee( string EmployeeId)
+        {
+            try
+            {
+                var result = "";
+                var httpWebRequest = (HttpWebRequest)WebRequest.Create(ConfigurationManager.AppSettings["DomainUrl"].ToString() + "/api/staff/GetWorkingHours?employeeId=" + EmployeeId);
+                httpWebRequest.Method = "GET";
+                httpWebRequest.ContentType = "application/json";
+
+                var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
+                using (var StreamReader = new StreamReader(httpResponse.GetResponseStream()))
+                {
+                    result = StreamReader.ReadToEnd();
+                }
+                var data = JsonConvert.DeserializeObject<List<EmployeeWorkingHours>>(result);
+                List<EmployeeWorkingHours> empworkinghours = new List<EmployeeWorkingHours>();
+                empworkinghours = data;
+                httpWebRequest = (HttpWebRequest)WebRequest.Create(ConfigurationManager.AppSettings["DomainUrl"].ToString() + "/api/staff/GetAllBreaksForEmployee?employeeId=" + EmployeeId);
+                httpWebRequest.Method = "GET";
+                httpWebRequest.ContentType = "application/json";
+
+                httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
+                using (var StreamReader = new StreamReader(httpResponse.GetResponseStream()))
+                {
+                    result = StreamReader.ReadToEnd();
+                }
+
+                var breakdata = JsonConvert.DeserializeObject<List<BreakTime>>(result);
+                List<BreakTime> ListofBreaktime = new List<BreakTime>();
+                ListofBreaktime = breakdata;
+
+                List<BreakTimeHoursofEmployee> listofEmployeeBreakTime = new List<BreakTimeHoursofEmployee>();
+                foreach (var item in empworkinghours)
+                {
+                   
+                    BreakTimeHoursofEmployee dt = new BreakTimeHoursofEmployee();
+                    dt.EmployeeId = item.EmployeeId;
+                    dt.CompanyId = item.CompanyId;
+                    dt.Day = item.NameOfDayAsString;
+                    dt.DayOfWeek = item.NameOfDay;
+                    dt.CreationDate = DateTime.Now.ToString();
+                    dt.Available = item.IsOffAllDay == true ? false : true;
+                    List<TimeSchedule> objtime = new List<TimeSchedule>();
+                    foreach (var obj in ListofBreaktime)
+                    {                      
+                        if (item.NameOfDay == obj.DayOfWeek)
+                        {
+                                              
+                            TimeSchedule time = new TimeSchedule();
+                            time.Id = obj.Id;
+                            DateTime startdate = DateTime.Parse(obj.Start, CultureInfo.CurrentCulture);
+                            time.Start = startdate.ToString("hh:mm tt");
+                            DateTime enddatedate = DateTime.Parse(obj.End, CultureInfo.CurrentCulture);
+                            time.End = enddatedate.ToString("hh:mm tt");                           
+                            objtime.Add(time);
+                                                      
+                        }
+                    }
+                    dt.StartEndTime = objtime;
+                    listofEmployeeBreakTime.Add(dt);
+                    //if (match == false)
+                    //{
+                    //    dt.EmployeeId = item.EmployeeId;
+                    //    dt.CompanyId = item.CompanyId;
+                    //    dt.Day = item.NameOfDayAsString;
+                    //    dt.DayOfWeek = item.NameOfDay;
+                    //    dt.CreationDate = DateTime.Now.ToString();
+                    //    dt.Available = item.IsOffAllDay == true ? false : true;
+
+                    //}
+                    //listofEmployeeBreakTime.Add(dt);
+                }
+                var jsonstring = JsonConvert.SerializeObject(listofEmployeeBreakTime.OrderBy(x=>((int)x.DayOfWeek + 6) % 7));
+                return jsonstring;
+            }
+            catch(Exception e)
+            {
+               return  e.ToString();
+            }          
+        }
+
+        [HttpPost]
+        public string DeleteBreakTimeOfEmployee(string BreakId)
+        {
+            try
+            {
+                string apiUrl = ConfigurationManager.AppSettings["DomainUrl"].ToString() + "/api/staff/DeleteBreak?id="+ BreakId;
+
+                string result = "";
+                var httpWebRequest = (HttpWebRequest)WebRequest.Create(apiUrl);
+                httpWebRequest.ContentType = "application/json";
+                httpWebRequest.Method = "DELETE";
+           
+                var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
+
+                using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
+                {
+                    result = streamReader.ReadToEnd();
+                }
+
+                return result;
+            }
+            catch (Exception exception)
+            {
+                return exception.ToString();
+            }
+
+        }
+
+
     }
 }

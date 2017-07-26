@@ -167,6 +167,7 @@
         $scope.staffName = item.FirstName;
         $scope.staffEmail = item.Email;
         
+       
 
         var ServiceResult = bookingService.GetAllServiceStatus($routeParams.CompanyId, item.Id);
         ServiceResult.then(function (response) {
@@ -203,8 +204,24 @@
         var tabelement5 = angular.element(document.querySelector("#StaffTimeOffLink"));
         tabelement5.removeClass('active');
         
-    }
+        ///BreakTimeHours//
+        var BreakTimeHours = bookingService.GetBreakTimeHoursofEmployee(item.Id);
+        BreakTimeHours.then(function (response) {
+            debugger;
+            $scope.listofBreakingHours = [];
+            //if (response.data.Success == true) {
+                //$scope.listofBreakingHours = response.data;
+                //angular.forEach(response.data,function(value,key){
+                //    $scope.listofBreakingHours.push[{ "EmployeeId": value.EmployeeId, "CompanyId": value.CompanyId, "Day": value.Day, "DayOfWeek": value.DayOfWeek,"CreationDate":value.CreationDate,value.staren}]
+                //})
+                for( var i=0;i<response.data.length;i++)
+                {
+                    $scope.listofBreakingHours.push({ "EmployeeId": response.data[i].EmployeeId,"Id":response.data[i].Id, "Available": response.data[i].Available, "CompanyId": response.data[i].CompanyId, "Day": response.data[i].Day, "DayOfWeek": response.data[i].DayOfWeek, "CreationDate": response.data[i].CreationDate, "StartEndTime": response.data[i].StartEndTime });
+                }
 
+            //}
+        })
+    }
 
     //Delete  Staff by using wizard Controller DeleteStaff method by api
     $scope.DeleteStaff = function () {
@@ -232,9 +249,6 @@
         });
        
     }
-
-
-
 
     $scope.UpdateStaff = function () {
         debugger;
@@ -379,9 +393,7 @@
         }
 
     }
-
     
-
     $scope.EnabledDisabledDay =function(timeInfo)
     {
         debugger;
@@ -409,6 +421,15 @@
                     result.then(function (response) {
                         if(response.data.Success==true)
                         {
+                            //Geting Break Hours.As days are enabled/disabled//
+                            var BreakTimeHours = bookingService.GetBreakTimeHoursofEmployee($scope.StaffId);
+                            BreakTimeHours.then(function (response) {
+                                debugger;
+                                $scope.listofBreakingHours = [];
+                                for (var i = 0; i < response.data.length; i++) {
+                                    $scope.listofBreakingHours.push({ "EmployeeId": response.data[i].EmployeeId, "Available": response.data[i].Available, "CompanyId": response.data[i].CompanyId, "Day": response.data[i].Day, "DayOfWeek": response.data[i].DayOfWeek, "CreationDate": response.data[i].CreationDate, "StartEndTime": response.data[i].StartEndTime });
+                                }
+                            })
                             $scope.MessageText = "Saving Staff Working Hours";
                             $scope.IsVisible = true;
                             $timeout(function () {
@@ -439,6 +460,15 @@
                     var result = bookingService.SetEmployeeWorkingHours(workinghours);
                     result.then(function (response) {
                         if (response.data.Success == true) {
+                            //Geting Break Hours.As days are enabled/disabled//
+                            var BreakTimeHours = bookingService.GetBreakTimeHoursofEmployee($scope.StaffId);
+                            BreakTimeHours.then(function (response) {
+                                debugger;
+                                $scope.listofBreakingHours = [];
+                                for (var i = 0; i < response.data.length; i++) {
+                                    $scope.listofBreakingHours.push({ "EmployeeId": response.data[i].EmployeeId, "Available": response.data[i].Available, "CompanyId": response.data[i].CompanyId, "Day": response.data[i].Day, "DayOfWeek": response.data[i].DayOfWeek, "CreationDate": response.data[i].CreationDate, "StartEndTime": response.data[i].StartEndTime });
+                                }
+                            })
                             $scope.MessageText = "Saving Staff Working Hours";
                             $scope.IsVisible = true;
                             $timeout(function () {
@@ -452,15 +482,16 @@
                     value.Available = false;
                 }
             }
-        });       
+        });
+
+
+     
     }
 
     //Set Enable and disable working Time
     $scope.SetEmployeeWorkingTime = function (timedetail) {
         debugger;
-        var CurrentDate = new Date();
-      
-                                          
+        var CurrentDate = new Date();                                               
             var workinghours=
             {
                 "Id": 1,
@@ -507,12 +538,10 @@
         });
     }
 
-
     //Set Time Off//
     $scope.AddtimeOff = function () {
         debugger;
-      
-        
+             
         var timeOff = {           
             "CompanyId": $routeParams.CompanyId,
             "EmployeeId": $scope.StaffId,
@@ -541,12 +570,139 @@
             }
         });
     }
+
+    $scope.SetEmployeeBreakTime=function(time)
+    {
+        debugger;
+        
+        var BreakTime = {               
+                "CompanyId": $routeParams.CompanyId,
+                "EmployeeId": time.EmployeeId,
+                "DayOfWeek": time.DayOfWeek,
+                "Start": time.StartEndTime[0].Start,
+                "End": time.StartEndTime[0].End,
+                "CreationDate": new Date()
+            }
+        var apirequest = bookingService.AddEmployeeBreakTime(BreakTime);
+        apirequest.then(function (response) {
+            if(response.data.Success==true)
+            {
+                debugger;
+                var BreakTimeHours = bookingService.GetBreakTimeHoursofEmployee(time.EmployeeId);
+                BreakTimeHours.then(function (response) {
+                    debugger;
+                    $scope.listofBreakingHours = [];                   
+                    for (var i = 0; i < response.data.length; i++) {
+                        $scope.listofBreakingHours.push({ "EmployeeId": response.data[i].EmployeeId, "Available": response.data[i].Available, "CompanyId": response.data[i].CompanyId, "Day": response.data[i].Day, "DayOfWeek": response.data[i].DayOfWeek, "CreationDate": response.data[i].CreationDate, "StartEndTime": response.data[i].StartEndTime });
+                    }                    
+                })
+             
+            
+                $scope.MessageText = "Saving staff breaks";
+                $scope.IsVisible = true;
+                $timeout(function () {
+                    $scope.MessageText = "staff breaks saved";
+                    $timeout(function () {
+                        $scope.IsVisible = false;
+                    },1000)
+                },800)
+            }
+        });
+    }
+
+
+
+
+    $scope.UpdateTimeOff=function()
+    {
+
+    }
    
+    $scope.EditTimeOff=function(item)
+    {
+        debugger;
+        angular.element(document.querySelector('#UpdatetimeoffPopUp')).css('display', 'block');
+       // $scope.ShowUpdateTimeOffPopup = true;
+    }
     $scope.GetTimeOffDetail = function (Id) {
         debugger;
         var result = bookingService.GetTimeOffDetail(Id);
         result.then(function (response) {
             $scope.timeOffDetail = response.data;
         });
+    }
+
+    $scope.AddBreak = function (item) {
+        debugger;
+        var BreakTime = {
+          
+            "CompanyId": $routeParams.CompanyId,
+            "EmployeeId": item.EmployeeId,
+            "DayOfWeek": item.DayOfWeek,
+            "Start": "3:00 PM ",
+            "End": "4:00 PM",
+            "CreationDate": new Date()
+        }
+        // $scope.SetEmployeeBreakTime(BreakTime);
+
+
+        var apirequest = bookingService.AddEmployeeBreakTime(BreakTime);
+        apirequest.then(function (response) {
+            if (response.data.Success == true) {
+                debugger;
+                //var BreakTimeHours = bookingService.GetBreakTimeHoursofEmployee(item.EmployeeId);
+                //BreakTimeHours.then(function (response) {
+                //    debugger;
+                //    $scope.listofBreakingHours = [];
+                //    for (var i = 0; i < response.data.length; i++) {
+                //        $scope.listofBreakingHours.push({ "EmployeeId": response.data[i].EmployeeId, "Available": response.data[i].Available, "CompanyId": response.data[i].CompanyId, "Day": response.data[i].Day, "DayOfWeek": response.data[i].DayOfWeek, "CreationDate": response.data[i].CreationDate, "StartEndTime": response.data[i].StartEndTime });
+                //    }
+                //})
+                $scope.GetBreakHours(item.EmployeeId);
+
+                $scope.MessageText = "Saving staff breaks";
+                $scope.IsVisible = true;
+                $timeout(function () {
+                    $scope.MessageText = "staff breaks saved";
+                    $timeout(function () {
+                        $scope.IsVisible = false;
+                    }, 1000)
+                }, 800)
+            }
+        });
+
+        //Delete BreakTime of Employee//
+        $scope.DeleteBreakTime = function (Id) {
+            debugger;
+            var requestapi = bookingService.DeleteBreak(Id);
+            requestapi.then(function (response) {
+                if (response.data.Success == true) {
+                    $scope.GetBreakHours($scope.StaffId);
+                    $scope.MessageText = "Saving Staff Breaks";
+                    $scope.IsVisible = true;
+                    $timeout(function () {
+                        $scope.MessageText = "Staff Breaks Saved";
+                        $timeout(function () {
+                            $scope.IsVisible = false;
+                        }, 800)
+                    }, 1000)
+                }
+
+            })
+        }
+       
+
+        $scope.GetBreakHours=function(Id)
+        {
+            debugger;
+            var BreakTimeHours = bookingService.GetBreakTimeHoursofEmployee(Id);
+            BreakTimeHours.then(function (response) {
+                debugger;
+                $scope.listofBreakingHours = [];
+                for (var i = 0; i < response.data.length; i++) {
+                    $scope.listofBreakingHours.push({ "EmployeeId": response.data[i].EmployeeId,"Id":response.data[i].Id, "Available": response.data[i].Available, "CompanyId": response.data[i].CompanyId, "Day": response.data[i].Day, "DayOfWeek": response.data[i].DayOfWeek, "CreationDate": response.data[i].CreationDate, "StartEndTime": response.data[i].StartEndTime });
+                }
+            })
+        }   
     }
 }]);

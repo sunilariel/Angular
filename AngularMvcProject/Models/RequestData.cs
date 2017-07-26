@@ -21,7 +21,7 @@ namespace AngularMvcProject.Models
         public string CreationDate { get; set; }
     }
     public class CreateAccount
-    {        
+    {
         public string Url { get; set; }
         public RequestData RequestData { get; set; }
     }
@@ -99,9 +99,9 @@ namespace AngularMvcProject.Models
 
     public class Service
     {
-       public string Url { get; set; }
+        public string Url { get; set; }
 
-       public RequestAddService RequestAddService { get; set; }
+        public RequestAddService RequestAddService { get; set; }
     }
 
 
@@ -114,7 +114,6 @@ namespace AngularMvcProject.Models
     public class AssignStaffRequest
     {
         public int Id { get; set; }
-
         public int CompanyId { get; set; }
         public int ServiceId { get; set; }
         public int EmployeeId { get; set; }
@@ -149,7 +148,7 @@ namespace AngularMvcProject.Models
 
         public string staffCheckedCount { get; set; }
 
-        public List<Employees> staff {get;set;}
+        public List<Employees> staff { get; set; }
 
     }
 
@@ -191,7 +190,7 @@ namespace AngularMvcProject.Models
     //////////Appointment Section//////////////////////
 
     public class BookAppointment
-    {   
+    {
         public int CompanyId { get; set; }
         public int ServiceId { get; set; }
         public int EmployeeId { get; set; }
@@ -228,7 +227,7 @@ namespace AngularMvcProject.Models
         public int Id { get; set; }
         public string CompanyId { get; set; }
         public string Name { get; set; }
-        public string CreationDate {get;set;}
+        public string CreationDate { get; set; }
     }
 
     public class Services
@@ -257,7 +256,7 @@ namespace AngularMvcProject.Models
         public double Cost { get; set; }
         public string Currency { get; set; }
         public string CreationDate { get; set; }
-        public bool Confirmed { get; set; }     
+        public bool Confirmed { get; set; }
         public string AllocatedServiceCount { get; set; }
     }
 
@@ -276,7 +275,7 @@ namespace AngularMvcProject.Models
 
     public class CustomTimeOff
     {
-      
+
         public int CompanyId { get; set; }
         public int EmployeeId { get; set; }
         public string StartDate { get; set; }
@@ -292,9 +291,52 @@ namespace AngularMvcProject.Models
         public int CompanyId { get; set; }
         public int EmployeeId { get; set; }
         public string Start { get; set; }
-        public string End { get; set; }    
+        public string End { get; set; }
         public string CreationDate { get; set; }
         public bool IsOffAllDay { get; set; }
     }
-    
+
+    public class BreakTime
+    {
+        public string Id { get; set; }
+        public int CompanyId { get; set; }
+        public int EmployeeId { get; set; }
+        public int DayOfWeek { get; set; }
+        public string Start { get; set; }
+        public string End { get; set; }
+        public string CreationDate { get; set; }
+    }
+
+    public class BreakTimeHoursofEmployee
+    {
+        public string Id { get; set; }
+        public int CompanyId { get; set; }
+        public int EmployeeId { get; set; }
+        public int DayOfWeek { get; set; }
+        public string Day { get; set; }
+
+        public List<TimeSchedule> StartEndTime { get; set; }
+        public bool Available { get; set; }
+        public string CreationDate { get; set; }
+
+    }
+    public class TimeSchedule
+    {
+        public string Id { get; set;}
+        public string Start { get; set; }
+        public string End { get; set; }
+    }
+
+    public class SetBreak
+    {
+      
+        public int CompanyId { get; set; }
+        public int EmployeeId { get; set; }
+        public int DayOfWeek { get; set; }
+        public string Start { get; set; }
+        public string End { get; set; }
+        public string CreationDate { get; set; }
+    }
+
+  
 }

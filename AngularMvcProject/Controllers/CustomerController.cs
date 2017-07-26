@@ -284,11 +284,12 @@ namespace AngularMvcProject.Controllers
         {
             try
             {
-                string apiUrl = ConfigurationManager.AppSettings["DomainUrl"].ToString() + "/api/booking/SetStatus?status=" + 0 + "&bookingId=" + "6aafb5b9-7d63-4e6e-8776-4c5349b2570a";
+                string apiUrl = ConfigurationManager.AppSettings["DomainUrl"].ToString() + "/api/booking/SetStatus?status=" + status + "&bookingId=" + BookingId;
                 string result = "";
                 var httpWebRequest = (HttpWebRequest)WebRequest.Create(apiUrl);
                 httpWebRequest.Method = "POST";
                 httpWebRequest.ContentType = "application/json";
+                httpWebRequest.ContentLength = 0;
 
                 var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
                 using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))

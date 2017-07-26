@@ -478,6 +478,35 @@ app.service("bookingService", function ($http) {
         })
        return  response;
     }
+
+    this.AddEmployeeBreakTime=function(dataobj)
+    {
+        var response = $http({
+            method: "POST",
+            url: "/Staff/SetEmployeeBreakTime",
+            data:{dataObj:dataobj}
+        })
+        return response;
+    }
+    this.GetBreakTimeHoursofEmployee=function(employeeId)
+    {
+        var response = $http({
+            method: "POST",
+            url: "/Staff/GetBreakTimeHoursofEmployee",
+            data: { EmployeeId: employeeId }
+        })
+        return response;
+    }
+
+    this.DeleteBreak=function(Id)
+    {
+        var response = $http({
+            method: "POST",
+            url: "/Staff/DeleteBreakTimeOfEmployee",
+            data:{BreakId:Id}
+        })
+        return response;
+    }
 })
 
 

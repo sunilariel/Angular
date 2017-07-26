@@ -63,11 +63,14 @@
         $scope.ServicePriceTimeDetailIsVisible = false;
 
         //Status List//
-        $scope.StatusList = [{Status: "Draft", "Value": 1},
-            { Status: "AwaitingApproval", "Value": 2 },
-            { Status:"RejectedByApprover","Value":4},
-            { Status: "Complete", "Value": 128 },
-            { Status: "Cancelled","Value":256}]
+        $scope.StatusList = [{ Status: "No Label", "Value": 1 },
+            { Status: "Pending", "Value": 2 },
+            { Status: "Confirmed", "Value": 4 },
+            { Status: "Done", "Value": 128 },
+            { Status: "Paid", "Value": 512 },
+            {Status:"NoShow ","Value": 256 },
+            { Status: "RunningLate", "Value": 1024 }
+        ]
 
         $scope.AppointmentSchedule = [];
 
@@ -296,6 +299,7 @@
     ////////////////////Add Appointment Module ///////////////////////
     $scope.AddAppointmentPopup = function () {
         debugger;
+        var result = bookingService.GetAppointmentDetails($scope.CustomerId);
        // $scope.selectedprovider = "-- Select a Provider --";
         $scope.selectedservice = " ";
         $scope.price = "";
@@ -360,28 +364,37 @@
     $scope.SaveAppointment = function (form) {
         debugger;
 
+
         var data = $scope.item.Status;
-        var Status = 0;
-         if(data=="Complete")
+      
+        if (data == "No Label")
          {
-             Status = 1;
+            $scope.Status = 1;
          }
-         else if(data == "AwaitingApproval ")
+        else if (data == "Pending")
          {
-             Status = 2;
+            $scope.Status = 2;
          }
-         else if(data=="RejectedByApprover ")
+        else if (data == "Confirmed")
          {
-             Status = 4;
-         }
-         else if(data=="Complete")
+            $scope.Status = 4;
+        }
+        else if(data=="No-Show")
+        {
+            $scope.Status = 256;
+        }
+        else if (data == "Done")
          {
-             Status = 128;
+            $scope.Status = 128;
          }
-         else if(data=="Cancelled")
+        else if (data == "RunningLate")
          {
-             Status = 256;
-         }
+            $scope.Status = 1024;
+        }
+        else if (data == "Paid")
+        {
+            $scope.Status = 512;
+        }
         var selectedvalue = $scope.option;
         if (form.$invalid == true) {
             if (form.providerdd.$invalid == true) {
@@ -424,12 +437,14 @@
         addappointment.then(function (response) {
             if (response.data.Success == true) {
                 $scope.MessageText = "Creating Appointment";
+                $scope.AppointmentId = response.data.ReturnObject;
                 $timeout(function () {
                     $scope.IsVisible = true;
                     $timeout(function () {
                         $scope.MessageText = "Created Appointment";
                         $scope.IsVisible = false;
-                        var result = bookingService.GetAppointmentDetails($scope.CustomerId);
+                        //var result = bookingService.GetAppointmentDetails($scope.CustomerId);
+                        var SetStatus = bookingService.SetStatusofAppointment($scope.Status, $scope.AppointmentId);
                     }, 500);
                 }, 1000)
             }
