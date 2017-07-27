@@ -705,17 +705,17 @@
                                                                         <div class="col-md-8 col-sm-12 col-xs-12 StaffColumnDiv">
 
                                                                             <div class="week_div BreakSelectDiv" ng-if="BreakTime.StartEndTime.length!=0" ng-repeat="break in BreakTime.StartEndTime" ng-class="{'my-disable':BreakTime.Available==false}">
-                                                                                <select class="select_btn" ng-model="break.Start"  ng-change="SetEmployeeBreakTime(BreakTime)" >
+                                                                                <select class="select_btn" ng-model="break.Start" id="starttime_{{break.Id}}"  ng-change="UpdateBreakTime(break,'Start')" >
                                                                                     <option ng-repeat="timeoption in StartTime" value="{{timeoption}}">{{timeoption}}</option>
                                                                                 </select>
                                                                                 <span>to</span>
-                                                                                <select class="select_btn" ng-model="break.End"  ng-change="SetEmployeeBreakTime(BreakTime)" >
+                                                                                <select class="select_btn" ng-model="break.End" id="endtime_{{break.Id}}"  ng-change="UpdateBreakTime(break,'End')" >
                                                                                     <option ng-repeat="timeoption in EndTime" value="{{timeoption}}">{{timeoption}}</option>
                                                                                 </select>
                                                                                
                                                                                
                                                                                 <div class="BreakDeleteBtn">
-                                                                                    <button class="btn btn-default"  ng-click="DeleteBreakTime(break.Id)">
+                                                                                    <button class="btn btn-default" id="{{break.Id}}" ng-click="DeleteBreakTime(break.Id)">
                                                                                         <i class="fa fa-trash-o" aria-hidden="true"></i>
                                                                                     </button>
                                                                                 </div>
@@ -910,18 +910,11 @@
                                                                                             <div class="col-sm-12 StaffrecurringDiv">
                                                                                                 <div class="StaffDateTime">
                                                                                                     <p>From 29 Jun 2017 to 29 Jun 2017</p>
-                                                                                                </div>
-
+                                                                                              </div>
                                                                                             </div>
-
                                                                                         </div>
-
-
-
                                                                                     </form>
                                                                                 </div>
-
-
                                                                             </div>
                                                                             <div class="modal-footer staffFooter">
                                                                                 <div class="btn-group saveChangesDiv" role="group">
@@ -1059,11 +1052,11 @@
 
 
                                                                 <!--//////////////Update TimeOff Popup///////////////-->
-                                                                <div class="modal fade appointmentPopup" id="UpdatetimeoffPopUp" tabindex="-1" role="dialog" aria-labelledby="modalLabel" >
+                                                                <div class="modal appointmentPopup" id="UpdatetimeoffPopUp" tabindex="-1" role="dialog" aria-labelledby="modalLabel" >
                                                                     <div class="modal-dialog appointPopupHead StaffPopupHead">
                                                                         <div class="modal-content">
                                                                             <div class="modal-header staffModalPopup">
-                                                                                <button type="button" class="close modalcloseIcon" data-dismiss="modal"><span aria-hidden="true" class="">×</span><span class="sr-only">Close</span></button>
+                                                                                <button type="button" class="close modalcloseIcon" data-dismiss="modal" ng-click="CloseEditTimeOffModel()" ><span aria-hidden="true" class="">×</span><span class="sr-only">Close</span></button>
                                                                                 <h3 class="modal-title" id="lineModalLabel">Edit Time off</h3>
                                                                             </div>
                                                                             <div class="modal-body staffBodyDiv">
@@ -1077,11 +1070,11 @@
                                                                                             <label class="control-label col-sm-4" for="pwd">Start Date</label>
                                                                                             <div class="col-sm-8 dateTimeDiv">
                                                                                                 <span class="glyphicon glyphicon-ok calendarOk"></span><!--<input type="text" class="form-control datepickerBox" placeholder="Fri, May 12" id="datetimepicker4">-->
-                                                                                                <input type="text" class="form-control calendarBox" datepicker-popup="dd MMMM yyyy" ng-model="startdate" open="opened" datepicker-options="dateOptions" name='theDate' ng-required="true" />
+                                                                                                <input type="text" class="form-control calendarBox" datepicker-popup="dd MMMM yyyy" ng-model="EditStartDate" open="opened" datepicker-options="dateOptions" name='theDate' ng-required="true" />
 
                                                                                                 <div class="selectDropdown">
-                                                                                                    <select class="select_btn dateTimeSelect" ng-model="StartoffTime" ng-init="alldaystatus ? StartoffTime='00:00' : StartoffTime ='08:00 AM'" ng-show="alldaystatus==false">
-                                                                                                        <option ng-repeat="StartoffTime in StartTime" value="{{StartoffTime}}">{{StartoffTime}}</option>
+                                                                                                    <select class="select_btn dateTimeSelect" ng-model="EditStartoffTime " ng-init="alldaystatus ? EditStartoffTime='00:00' : EditStartoffTime ='08:00 AM'" ng-show="alldaystatus==false">
+                                                                                                        <option ng-repeat="EditStartoffTime in StartTime" value="{{EditStartoffTime}}">{{EditStartoffTime}}</option>
                                                                                                     </select>
                                                                                                 </div>
                                                                                             </div>
@@ -1090,10 +1083,10 @@
                                                                                             <label class="control-label col-sm-4" for="pwd">End Date</label>
                                                                                             <div class="col-sm-8 dateTimeDiv">
                                                                                                 <span class="glyphicon glyphicon-ok calendarOk"></span>
-                                                                                                <input type="text" class="form-control calendarBox" datepicker-popup="dd MMMM yyyy" ng-model="enddate" open="opened" datepicker-options="dateOptions" name='theDate' ng-required="true" />
+                                                                                                <input type="text" class="form-control calendarBox" datepicker-popup="dd MMMM yyyy" ng-model="EditEndDate" open="opened" datepicker-options="dateOptions" name='theDate' ng-required="true" />
                                                                                                 <div class="selectDropdown">
-                                                                                                    <select class="select_btn dateTimeSelect" ng-model="EndoffTime" ng-init="alldaystatus ? EndoffTime ='00:00' : EndoffTime= '05:00 PM'" ng-show="alldaystatus==false">
-                                                                                                        <option ng-repeat="EndoffTime in EndTime" value="{{EndoffTime}}">{{EndoffTime}}</option>
+                                                                                                    <select class="select_btn dateTimeSelect" ng-model="EditEndoffTime" ng-init="alldaystatus ? EditEndoffTime ='00:00' : EditEndoffTime = '05:00 PM'" ng-show="alldaystatus==false">
+                                                                                                        <option ng-repeat="EditEndoffTime in EndTime" value="{{EditEndoffTime}}">{{EditEndoffTime}}</option>
                                                                                                     </select>
                                                                                                     <!--<select class="select_btn dateTimeSelect" ng-model="selectedprovider" data-ng-options="x.Id as x.staffName for x in Provider" id="dropdownMenu2" name="providerdd" aria-haspopup="true" aria-expanded="false" ng-change="GetAllocateServiceToEmployee(selectedprovider)" required>
                                             <option value="" selected="selected">-- Select a Provider --</option>
@@ -1154,7 +1147,7 @@
                                                                                             <div class="col-sm-12 StaffrecurringDiv">
                                                                                                 <div class="StaffDateTime">
                                                                                                     <p ng-if="alldaystatus==true">From {{startdate | date:'dd MMMM yyyy' }}  to {{enddate | date:'dd MMMM yyyy'}}</p>
-                                                                                                    <p ng-if="alldaystatus==false">From {{startdate | date:'dd MMMM yyyy'}} {{StartoffTime}}  to {{enddate | date:'dd MMMM yyyy'}} {{EndoffTime }} </p>
+                                                                                                    <p ng-if="alldaystatus==false">From {{startdate | date:'dd MMMM yyyy'}} {{EditStartoffTime}}  to {{enddate | date:'dd MMMM yyyy'}} {{EditEndoffTime }} </p>
 
                                                                                                 </div>
 
@@ -1167,31 +1160,18 @@
                                                                                             <div class="btn-group saveChangesDiv" role="group">
                                                                                                 <button type="submit" class="btn saveChangesBtn btn-default" data-action="save" role="button">Save Changes</button>
                                                                                             </div>
-
                                                                                         </div>
                                                                                     </form>
                                                                                 </div>
-
-
                                                                             </div>
-
                                                                         </div>
                                                                     </div>
                                                                     <div id="modalPopupbg" class="fade modal_bg in"></div>
-                                                                </div>
-                                                                <!--/////////////////////////////////-->
+                                                                </div>                                                          
                                                             </div>
 
 
-                                                            <!--<div class="clickingButton">
-                                                                <h5>Add time off by clicking the button below.</h5>
-                                                                <button class="btn btn-default addTimeOff">
-                                                                    <i class="fa fa-plus" aria-hidden="true"></i>
-                                                                    Add Time Off
-                                                                </button>
-                                                            </div>-->
-
-
+                                                         
                                                             <div class="timeOffSec">
                                                                 <div class="row addstaffDiv" ng-repeat="item in timeOffDetail" ng-click="EditTimeOff(item)">
                                                                     <div class="col-md-1 col-sm-12" >

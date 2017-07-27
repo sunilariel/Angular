@@ -195,8 +195,8 @@ namespace AngularMvcProject.Models
         public int ServiceId { get; set; }
         public int EmployeeId { get; set; }
         public string CustomerIdsCommaSeperated { get; set; }
-        public int StartHour { get; set; }
-        public int StartMinute { get; set; }
+        public string StartHour { get; set; }
+        public string StartMinute { get; set; }
         public int EndHour { get; set; }
         public int EndMinute { get; set; }
         public bool IsAdded { get; set; }
@@ -275,7 +275,7 @@ namespace AngularMvcProject.Models
 
     public class CustomTimeOff
     {
-
+        public string Id { get; set; }
         public int CompanyId { get; set; }
         public int EmployeeId { get; set; }
         public string StartDate { get; set; }
@@ -285,9 +285,19 @@ namespace AngularMvcProject.Models
         public string CreationDate { get; set; }
         public bool IsOffAllDay { get; set; }
     }
-    public class TimeOff
-    {
 
+    public class UpdateTimeOff
+    {
+        public string Id { get; set; }
+        public int CompanyId { get; set; }
+        public int EmployeeId { get; set; }
+        public string Start { get; set; }
+        public string End { get; set; }
+        public string CreationDate { get; set; }
+        public bool IsOffAllDay { get; set; }
+    }
+    public class TimeOff
+    {       
         public int CompanyId { get; set; }
         public int EmployeeId { get; set; }
         public string Start { get; set; }
@@ -323,6 +333,7 @@ namespace AngularMvcProject.Models
     public class TimeSchedule
     {
         public string Id { get; set;}
+        public int  DayOfWeek { get; set; }
         public string Start { get; set; }
         public string End { get; set; }
     }

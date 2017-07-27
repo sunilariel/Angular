@@ -9,6 +9,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Script.Serialization;
 using System.Configuration;
+using System.Globalization;
 
 namespace AngularMvcProject.Controllers
 {
@@ -157,6 +158,12 @@ namespace AngularMvcProject.Controllers
         {
             try
             {
+                var StartTime = DateTime.Parse(appointment.StartHour, CultureInfo.InvariantCulture);
+                var Time = StartTime.ToString("HH:mm").Split(':');
+
+                appointment.StartHour = Time[0];
+                appointment.StartMinute = Time[1];
+
                 string apiURL = ConfigurationManager.AppSettings["DomainUrl"].ToString() + "/api/booking/BookAppointment";
                 string result = "";
                 var httpWebRequest = (HttpWebRequest)WebRequest.Create(apiURL);
@@ -230,7 +237,7 @@ namespace AngularMvcProject.Controllers
             try
             {
                 string apiURL = ConfigurationManager.AppSettings["DomainUrl"].ToString() + "/api/booking/GetFreeBookingSlotsForEmployee?companyId=" + dataObj.CompanyId + "&serviceId="+ dataObj.ServiceId + "&employeeId=" + dataObj.EmployeeId + "&dateOfBooking=" + dataObj.DateOfBooking + "&day=" + dataObj.Day;
-                //string apiURL = "http://bookingmanager1romz.azurewebsites.net/api/booking/GetFreeBookingSlotsForEmployee?companyId=7&serviceId=4&employeeId=13&dateOfBooking=04-03-2017&day=Friday";
+            
                 string result = "";
                 var httpWebRequest = (HttpWebRequest)WebRequest.Create(apiURL);
                 httpWebRequest.ContentType = "application/json";

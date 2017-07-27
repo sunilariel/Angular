@@ -456,7 +456,15 @@ app.service("bookingService", function ($http) {
         })
         return response;
     }
-
+    this.UpdateTimeOff=function(dataobject)
+    {
+        var response = $http({
+            method: "POST",
+            url: "/Staff/UpdateTimeOff",
+            data:{dataobj:dataobject}
+        })
+        return response;
+    }
     //Get TimeOff//
 
     this.GetTimeOffDetail=function(Id)
@@ -504,6 +512,16 @@ app.service("bookingService", function ($http) {
             method: "POST",
             url: "/Staff/DeleteBreakTimeOfEmployee",
             data:{BreakId:Id}
+        })
+        return response;
+    }
+
+    this.UpdateBreakTime=function(dataobj,status)
+    {
+        var response = $http({
+            method: "POST",
+            url: "/Staff/UpdateBreakTimeofEmployee",
+            data:{dataObj:dataobj,Status:status}
         })
         return response;
     }

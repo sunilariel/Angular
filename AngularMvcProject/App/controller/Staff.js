@@ -21,6 +21,7 @@
 
     $scope.init = function () {
         debugger;
+      
         $scope.isvisibleMenuiconBar = true;
         $scope.IsVisibleAddNewStaffPopUp = false;
         
@@ -37,8 +38,8 @@
             $scope.TotalNoOfStaff = $scope.ListofStaff.length;
           
           
-            $scope.StartTime = ["08:00 AM", "09:00 AM", "10:00 AM", "11:00 AM", "12:00 AM", "01:00 PM", "02:00 PM", "03:00 PM", "04:00 PM", "05:00 PM", "06:00 PM", "07:00 PM", "08:00 PM"];
-            $scope.EndTime = ["08:00 AM", "09:00 AM", "10:00 AM", "11:00 AM", "12:00 AM", "01:00 PM", "02:00 PM", "03:00 PM", "04:00 PM", "05:00 PM", "06:00 PM", "07:00 PM", "08:00 PM"];
+            $scope.StartTime = ["08:00 AM", "09:00 AM", "10:00 AM", "11:00 AM", "12:00 PM", "01:00 PM", "02:00 PM", "03:00 PM", "04:00 PM", "05:00 PM", "06:00 PM", "07:00 PM", "08:00 PM"];
+            $scope.EndTime = ["08:00 AM", "09:00 AM", "10:00 AM", "11:00 AM", "12:00 PM", "01:00 PM", "02:00 PM", "03:00 PM", "04:00 PM", "05:00 PM", "06:00 PM", "07:00 PM", "08:00 PM"];
 
          
            
@@ -160,6 +161,10 @@
         })
     }
 
+  
+
+
+
     $scope.EditStaff=function(item)
     {
         debugger;
@@ -167,6 +172,23 @@
         $scope.staffName = item.FirstName;
         $scope.staffEmail = item.Email;
         
+        //Active and DeActive tab in Staff Section
+        var tabelement1 = angular.element(document.querySelector("#StaffDetailsLink"));
+        tabelement1.addClass('active');
+        var divelement1 = angular.element(document.querySelector("#staff_details"));
+        divelement1.addClass('active');
+        var tabelement2 = angular.element(document.querySelector("#StaffServicesLink"));
+        tabelement2.removeClass('active');
+        var tabelement3 = angular.element(document.querySelector("#StaffHoursLink"));
+        tabelement3.removeClass('active');
+        var tabelement4 = angular.element(document.querySelector("#StaffBreakLink"));
+        tabelement4.removeClass('active');
+        var tabelement5 = angular.element(document.querySelector("#StaffTimeOffLink"));
+        tabelement5.removeClass('active');
+        angular.element(document.querySelector("#staff-break")).removeClass('active');
+        angular.element(document.querySelector("#staff-hours")).removeClass('active');
+        angular.element(document.querySelector("#staff-timeoff")).removeClass('active');
+        angular.element(document.querySelector("#staff-services")).removeClass('active');
        
 
         var ServiceResult = bookingService.GetAllServiceStatus($routeParams.CompanyId, item.Id);
@@ -190,33 +212,16 @@
         $scope.GetTimeOffDetail(item.Id);
         $scope.GetWorkingHoursOfEmployee(item.Id);
 
-        //Active and DeActive tab in Staff Section
-        var tabelement1 = angular.element(document.querySelector("#StaffDetailsLink"));
-        tabelement1.addClass('active');
-        var divelement1 = angular.element(document.querySelector("#staff_details"));
-        divelement1.addClass('active');
-        var tabelement2 = angular.element(document.querySelector("#StaffServicesLink"));
-        tabelement2.removeClass('active');
-        var tabelement3 = angular.element(document.querySelector("#StaffHoursLink"));
-        tabelement3.removeClass('active');
-        var tabelement4 = angular.element(document.querySelector("#StaffBreakLink"));
-        tabelement4.removeClass('active');
-        var tabelement5 = angular.element(document.querySelector("#StaffTimeOffLink"));
-        tabelement5.removeClass('active');
+      
         
         ///BreakTimeHours//
         var BreakTimeHours = bookingService.GetBreakTimeHoursofEmployee(item.Id);
         BreakTimeHours.then(function (response) {
             debugger;
-            $scope.listofBreakingHours = [];
-            //if (response.data.Success == true) {
-                //$scope.listofBreakingHours = response.data;
-                //angular.forEach(response.data,function(value,key){
-                //    $scope.listofBreakingHours.push[{ "EmployeeId": value.EmployeeId, "CompanyId": value.CompanyId, "Day": value.Day, "DayOfWeek": value.DayOfWeek,"CreationDate":value.CreationDate,value.staren}]
-                //})
+            $scope.listofBreakingHours = [];            
                 for( var i=0;i<response.data.length;i++)
                 {
-                    $scope.listofBreakingHours.push({ "EmployeeId": response.data[i].EmployeeId,"Id":response.data[i].Id, "Available": response.data[i].Available, "CompanyId": response.data[i].CompanyId, "Day": response.data[i].Day, "DayOfWeek": response.data[i].DayOfWeek, "CreationDate": response.data[i].CreationDate, "StartEndTime": response.data[i].StartEndTime });
+                    $scope.listofBreakingHours.push({ "EmployeeId": response.data[i].EmployeeId, "Id": response.data[i].Id, "Available": response.data[i].Available, "CompanyId": response.data[i].CompanyId, "Day": response.data[i].Day, "DayOfWeek": response.data[i].DayOfWeek, "CreationDate": response.data[i].CreationDate, "StartEndTime": response.data[i].StartEndTime });
                 }
 
             //}
@@ -557,6 +562,7 @@
             if (response.data.Success == true) {
                 $scope.MessageText = "Saving TimeOff";
                 $scope.IsVisible = true;
+              
                 $timeout(function () {
                     $scope.MessageText = "TimeOff Saved";
                     $timeout(function () {
@@ -610,20 +616,70 @@
         });
     }
 
-
-
-
     $scope.UpdateTimeOff=function()
     {
+        debugger;
+        var UpdatedTimeoff = {
+            "Id": $scope.TimeOffId,
+            "CompanyId": $routeParams.CompanyId,
+            "EmployeeId": $scope.StaffId,
+            "StartDate": $scope.EditStartDate,
+            "EndDate":$scope.EditEndDate,
+            "StartTime":  $scope.EditStartoffTime,
+            "EndTime": $scope.EditEndoffTime,
+            "CreationDate": new Date(),
+            "IsOffAllDay": $scope.alldaystatus
+        }
 
+        var apirequest = bookingService.UpdateTimeOff(UpdatedTimeoff);
+        apirequest.then(function (response) {
+            if(response.data.Success==true)
+            {
+                $scope.MessageText = "Saving Timeoff";
+                $scope.IsVisible = true;
+                $scope.GetTimeOffDetail($scope.StaffId);
+                angular.element(document.querySelector('#UpdatetimeoffPopUp')).css('display', 'none');
+                $timeout(function () {
+                    $scope.MessageText = "Timeoff Saved";
+                    $timeout(function () {
+                        $scope.IsVisible = false;
+                    },1000)
+                },800)
+            }
+        })
     }
    
     $scope.EditTimeOff=function(item)
     {
         debugger;
         angular.element(document.querySelector('#UpdatetimeoffPopUp')).css('display', 'block');
-       // $scope.ShowUpdateTimeOffPopup = true;
+        $scope.TimeOffId = item.Id;
+        var StartDateTime = item.Start.split('T');
+        var EndDateTime = item.End.split('T');
+        $scope.EditStartDate = $filter('date')(StartDateTime[0], 'dd-MMM-yyyy');
+        $scope.EditEndDate = $filter('date')(EndDateTime[0], 'dd-MMM-yyyy');
+        $scope.alldaystatus = item.IsOffAllDay;
+
+        var Time=StartDateTime[1].split(":");
+        var Stime=new Date(1970,5,6,Time[0],Time[1],Time[2]);
+        var FormatedTime=$filter('date')(Stime,'hh:mm a')
+        $scope.EditStartoffTime = FormatedTime;
+      
+        var Time = EndDateTime[1].split(":");
+        var Stime = new Date(1970, 5, 6, Time[0], Time[1], Time[2]);
+        var FormatedTime = $filter('date')(Stime, 'hh:mm a')
+        $scope.EditEndoffTime = FormatedTime;
+
+       
+    
+        //$scope.EditStartoffTime=
     }
+    $scope.CloseEditTimeOffModel = function () {
+        debugger;
+        angular.element(document.querySelector('#UpdatetimeoffPopUp')).css('display', 'none');
+    }
+
+
     $scope.GetTimeOffDetail = function (Id) {
         debugger;
         var result = bookingService.GetTimeOffDetail(Id);
@@ -639,8 +695,8 @@
             "CompanyId": $routeParams.CompanyId,
             "EmployeeId": item.EmployeeId,
             "DayOfWeek": item.DayOfWeek,
-            "Start": "3:00 PM ",
-            "End": "4:00 PM",
+            "Start": "1:00 PM ",
+            "End": "2:00 PM",
             "CreationDate": new Date()
         }
         // $scope.SetEmployeeBreakTime(BreakTime);
@@ -660,16 +716,49 @@
                 //})
                 $scope.GetBreakHours(item.EmployeeId);
 
-                $scope.MessageText = "Saving staff breaks";
+                $scope.MessageText = "Saving staff break";
                 $scope.IsVisible = true;
                 $timeout(function () {
-                    $scope.MessageText = "staff breaks saved";
+                    $scope.MessageText = "staff break saved";
                     $timeout(function () {
                         $scope.IsVisible = false;
                     }, 1000)
                 }, 800)
             }
         });
+
+        //Update BreakTime of Employee
+        $scope.UpdateBreakTime = function(time,status)
+        {
+            debugger;
+            var UpdatedbreakTime = {
+                "Id": time.Id,
+                "CompanyId": $routeParams.CompanyId,
+                "EmployeeId": $scope.StaffId,
+                "DayOfWeek": time.DayOfWeek,
+                "Start": time.Start,
+                "End": time.End,
+                "CreationDate": new Date()
+            }
+            var ApiRequest = bookingService.UpdateBreakTime(UpdatedbreakTime, status);
+            ApiRequest.then(function (response) {
+                if (response.data.Success == true) {
+                   
+                    $scope.MessageText = "Saving staff break";
+                    $scope.IsVisible = true;
+                    $timeout(function () {
+                        $scope.MessageText = "staff breaks saved";
+                        $scope.GetBreakHours($scope.StaffId);$scope.listofBreakingHours
+                        $timeout(function () {
+
+                            $scope.IsVisible = false;
+                        },1000)
+                    },500)
+                }
+            })
+        }
+
+
 
         //Delete BreakTime of Employee//
         $scope.DeleteBreakTime = function (Id) {

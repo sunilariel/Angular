@@ -336,6 +336,7 @@ namespace AngularMvcProject.Controllers
                 obj.End = dataObj.EndDate + "T"+  dataObj.EndTime;
                 obj.IsOffAllDay = dataObj.IsOffAllDay;
                 obj.CreationDate = dataObj.CreationDate;
+               
 
                 string apiUrl = ConfigurationManager.AppSettings["DomainUrl"].ToString() + "/api/staff/AddTimeOff";
 
@@ -386,15 +387,16 @@ namespace AngularMvcProject.Controllers
 
 
 
-                TimeOff obj = new TimeOff();
+                UpdateTimeOff obj = new UpdateTimeOff();
                 obj.CompanyId = dataObj.CompanyId;
                 obj.EmployeeId = dataObj.EmployeeId;
                 obj.Start = dataObj.StartDate + "T" + dataObj.StartTime;
                 obj.End = dataObj.EndDate + "T" + dataObj.EndTime;
                 obj.IsOffAllDay = dataObj.IsOffAllDay;
                 obj.CreationDate = dataObj.CreationDate;
+                obj.Id = dataObj.Id;
 
-                string apiUrl = ConfigurationManager.AppSettings["DomainUrl"].ToString() + "api/staff/UpdateTimeOff";
+                string apiUrl = ConfigurationManager.AppSettings["DomainUrl"].ToString() + "/api/staff/UpdateTimeOff";
 
                 string result = "";
                 var httpWebRequest = (HttpWebRequest)WebRequest.Create(apiUrl);
@@ -498,6 +500,56 @@ namespace AngularMvcProject.Controllers
 
         }
 
+        [HttpPost]
+        public string UpdateBreakTimeofEmployee(BreakTime dataObj, string Status)
+        {
+            try
+            {
+
+                DateTime startdate = DateTime.Parse(dataObj.Start, CultureInfo.CurrentCulture);
+                dataObj.Start = startdate.ToString("HH:mm");
+                DateTime endtdate = DateTime.Parse(dataObj.End, CultureInfo.CurrentCulture);
+                if (Status == "Start")
+                {
+                    endtdate = startdate.AddHours(1);
+                }
+                dataObj.End = endtdate.ToString("HH:mm");
+
+                
+
+                string apiUrl = ConfigurationManager.AppSettings["DomainUrl"].ToString() + "/api/staff/UpdateBreak";
+
+                string result = "";
+                var httpWebRequest = (HttpWebRequest)WebRequest.Create(apiUrl);
+                httpWebRequest.ContentType = "application/json";
+                httpWebRequest.Method = "POST";
+
+                using (var streamWriter = new StreamWriter(httpWebRequest.GetRequestStream()))
+                {
+                    var jsonstring = new JavaScriptSerializer().Serialize(dataObj);
+                    streamWriter.Write(jsonstring);
+                    streamWriter.Flush();
+                    streamWriter.Close();
+                }
+
+
+                var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
+
+                using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
+                {
+                    result = streamReader.ReadToEnd();
+                }
+
+                return result;
+            }
+            catch (Exception exception)
+            {
+                return exception.ToString();
+            }
+
+        }
+
+
         public string GetBreakTimeHoursofEmployee( string EmployeeId)
         {
             try
@@ -548,6 +600,7 @@ namespace AngularMvcProject.Controllers
                                               
                             TimeSchedule time = new TimeSchedule();
                             time.Id = obj.Id;
+                            time.DayOfWeek = obj.DayOfWeek;
                             DateTime startdate = DateTime.Parse(obj.Start, CultureInfo.CurrentCulture);
                             time.Start = startdate.ToString("hh:mm tt");
                             DateTime enddatedate = DateTime.Parse(obj.End, CultureInfo.CurrentCulture);

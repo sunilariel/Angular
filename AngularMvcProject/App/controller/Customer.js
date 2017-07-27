@@ -413,15 +413,17 @@
         }
         var time = $scope.timeoption.split(" ");
         var starttime = time[0].split(":");
-      
+        
+
+
         var appointment = {
 
             "CompanyId": $routeParams.CompanyId,
             "ServiceId": $scope.selectedservice,
             "EmployeeId": $scope.selectedprovider,
             "CustomerIdsCommaSeperated": $scope.CustomerId,
-            "StartHour": starttime[0],
-            "StartMinute": starttime[1],
+            "StartHour": $scope.timeoption,
+            "StartMinute": "",
             "EndHour": 0,
             "EndMinute": $scope.time,
             "IsAdded": true,
@@ -437,16 +439,16 @@
         addappointment.then(function (response) {
             if (response.data.Success == true) {
                 $scope.MessageText = "Creating Appointment";
+                $scope.IsVisible = true;
                 $scope.AppointmentId = response.data.ReturnObject;
                 $timeout(function () {
-                    $scope.IsVisible = true;
-                    $timeout(function () {
-                        $scope.MessageText = "Created Appointment";
+                    $scope.MessageText = "Created Appointment";
+                    $timeout(function () {                       
                         $scope.IsVisible = false;
                         //var result = bookingService.GetAppointmentDetails($scope.CustomerId);
                         var SetStatus = bookingService.SetStatusofAppointment($scope.Status, $scope.AppointmentId);
-                    }, 500);
-                }, 1000)
+                    }, 1000);
+                }, 500)
             }
 
         });
@@ -467,7 +469,7 @@
 
      //Disable weekend selection
     $scope.disabled = function (date, mode) {
-        debugger;
+       
         //return (mode == 'day' && (date.getDay() == 0 || date.getDay() == 5));
         return (mode == 'day' && (date.getDay() == $scope.AppointmentSchedule[0] || date.getDay() == $scope.AppointmentSchedule[1] || date.getDay() == $scope.AppointmentSchedule[2] || date.getDay() == $scope.AppointmentSchedule[3] || date.getDay() == $scope.AppointmentSchedule[4] || date.getDay() == $scope.AppointmentSchedule[5] || date.getDay() == $scope.AppointmentSchedule[6]));
     };
@@ -509,10 +511,14 @@
             if (newValue != oldValue) {
                 for (var i = 0; i < response.data.Value.length; i++) {
                     if (i == 0) {
-                        var date = response.data.Value[i].Start.split(":");
-                        var datetime = new Date(1970, 0, 1, date[0], date[1], date[2]);
-                        var time = $filter('date')(datetime, 'h:mm a');
-                        $scope.timeInfoFrom.push(time);
+                        var startdate = response.data.Value[i].Start.split(":");
+                        var startdatetime = new Date(1970, 0, 1, startdate[0], startdate[1], startdate[2]);
+                        var starttime = $filter('date')(startdatetime, 'h:mm a');
+                        $scope.timeInfoFrom.push(starttime);
+                        var enddate = response.data.Value[i].End.split(":");
+                        var enddatetime = new Date(1970, 0, 1, enddate[0], enddate[1], enddate[2]);
+                        var endtime = $filter('date')(enddatetime, 'h:mm a');
+                        $scope.timeInfoFrom.push(endtime);
                     }
                     else {
                         var date = response.data.Value[i].End.split(":");
