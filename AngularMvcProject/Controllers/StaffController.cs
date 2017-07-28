@@ -428,6 +428,35 @@ namespace AngularMvcProject.Controllers
 
         }
 
+        [HttpPost]
+        public string DeleteTimeOffofEmployee(string TimeOffId)
+        {
+            try
+            {
+                string apiUrl = ConfigurationManager.AppSettings["DomainUrl"].ToString() + "/api/staff/DeleteTimeOff?id="+ TimeOffId;
+
+                string result = "";
+                var httpWebRequest = (HttpWebRequest)WebRequest.Create(apiUrl);
+                httpWebRequest.ContentType = "application/json";
+                httpWebRequest.Method = "DELETE";
+
+                var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
+
+                using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
+                {
+                    result = streamReader.ReadToEnd();
+                }
+
+                return result;
+            }
+            catch (Exception exception)
+            {
+                return exception.ToString();
+            }
+        }
+
+
+
 
 
         [HttpPost]

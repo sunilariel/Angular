@@ -40,36 +40,7 @@
           
             $scope.StartTime = ["08:00 AM", "09:00 AM", "10:00 AM", "11:00 AM", "12:00 PM", "01:00 PM", "02:00 PM", "03:00 PM", "04:00 PM", "05:00 PM", "06:00 PM", "07:00 PM", "08:00 PM"];
             $scope.EndTime = ["08:00 AM", "09:00 AM", "10:00 AM", "11:00 AM", "12:00 PM", "01:00 PM", "02:00 PM", "03:00 PM", "04:00 PM", "05:00 PM", "06:00 PM", "07:00 PM", "08:00 PM"];
-
-         
-           
-
-            ////Set default working hours for Employee//
-
-            //for(var i=0;i<$scope.ListofStaff.length;i++) {
-            //    debugger;
-            //    angular.forEach($scope.WorkingHours, function (value, key) {
-            //        bool = true;
-            //        if (value.Available == true)
-            //        {
-            //            bool = false;
-            //        }
-            //        var CurrentDate = new Date();                    
-            //        var workinghours =
-            //        {
-            //            "Id": 1,
-            //            "CompanyId": $routeParams.CompanyId,
-            //            "EmployeeId": $scope.ListofStaff[i].Id,
-            //            "Start": value.StartTime,
-            //            "End": value.EndTime,
-            //            "NameOfDay": value.NameOfDay,
-            //            "NameOfDayAsString": value.Day,
-            //            "IsOffAllDay": bool,
-            //            "CreationDate": CurrentDate
-            //        }
-            //        var result = bookingService.SetEmployeeWorkingHours(workinghours);
-            //    });
-            //}
+                              
             $scope.EditStaff(response.data[0]);
         });        
     }
@@ -246,6 +217,7 @@
                         StaffResult.then(function (response) {
                             $scope.ListofStaff = [];
                             $scope.ListofStaff = response.data;
+                            $scope.EditStaff(response.data[0]);
                             $scope.TotalNoOfStaff = $scope.ListofStaff.length;
                         });
                     },1000)
@@ -577,6 +549,7 @@
         });
     }
 
+    
     $scope.SetEmployeeBreakTime=function(time)
     {
         debugger;
@@ -670,10 +643,32 @@
         var FormatedTime = $filter('date')(Stime, 'hh:mm a')
         $scope.EditEndoffTime = FormatedTime;
 
-       
-    
-        //$scope.EditStartoffTime=
+            
     }
+
+
+    $scope.Deletetimeoff=function()
+    {
+        debugger;
+        var apirequest = bookingService.DeleteTimeOff($scope.TimeOffId);
+        apirequest.then(function (response) {
+            if(response.data.Success==true)
+            {
+                $scope.MessageText = "Deleting TimeOff";
+                $scope.IsVisible = true;
+              
+                angular.element(document.querySelector('#UpdatetimeoffPopUp')).css('display', 'none');
+                $timeout(function () {
+                    $scope.MessageText = "TimeOff Deleted";
+                    $scope.GetTimeOffDetail($scope.StaffId);
+                    $timeout(function () {
+                        $scope.IsVisible = false;
+                    },700)
+                },1000)
+            }
+        })
+    }
+
     $scope.CloseEditTimeOffModel = function () {
         debugger;
         angular.element(document.querySelector('#UpdatetimeoffPopUp')).css('display', 'none');

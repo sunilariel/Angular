@@ -502,7 +502,7 @@
                                             <div class="appointment_content">
                                                 <div class="appoint_text appoint_cust" ng-hide="CustomerCount==0">
                                                     <button class="pull-right btn btn-circle appointment_btn" id="createnewstaffbtn" title="" data-toggle="modal" data-target="#squarespaceModal"><i class="fa fa-plus" aria-hidden="true" ng-click="AddAppointmentPopup()"></i></button>    
-                                                    <span>0 appointment & 0 class</span><span class="dottext">.</span><span> $0</span>                                                
+                                                    <span>{{NumberofAppointmnets}} appointment & 0 class</span><span class="dottext">.</span><span> ${{TotalCostofServices}}</span>                                                
                                                 </div>
                                                
                                                 <div class="modal fade appointmentPopup" id="squarespaceModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
@@ -713,20 +713,20 @@
                                             </div>
                                             <div class="appointmentListHolder" style="height: 150px;">
                                                 <ul id="appointmentList" class="appointmentList appointMedia">
-                                                    <li>
+                                                    <li ng-repeat="item in ListofAppointments">
                                                         <span>
                                                             <div class="media">
                                                                 <div class="media-left calendarIcon">
                                                                     <span id="calendarfaIcon" ng-click="appointmentDetailisVisible = !appointmentDetailisVisible"><i class="fa fa-calendar" aria-hidden="true"></i></span>
                                                                 </div>
                                                                 <div class="media-body appointDate">
-                                                                    <h4 class="media-heading">Wed May 24,2017</h4>
-                                                                    <p>david . service1 . 60 min . $10</p>
+                                                                    <h4 class="media-heading">{{item.StartTime | date :'EEE MMM d, y'}}</h4>
+                                                                    <p>{{item.EmployeeName}} . {{item.ServiceName}} . {{item.DurationInMinutes}} min . {{item.Cost | currency : undefined : 0}}</p>
                                                                 </div>
                                                             </div>
 
                                                         </span>
-
+                                                    </li>
                                                         <div id="detailPopup" class="apptDetailPopup addCustomer bottomArrow" style="display:block;" ng-show="appointmentDetailisVisible">
                                                             <div class="apptDetailDiv">
                                                                 <div class="appt_text">
@@ -738,22 +738,12 @@
                                                                         No Label
                                                                         <span class="glyphicon glyphicon-chevron-down"></span>
                                                                     </button>
-                                                                    <ul class="lableDropdownContent dropdown-content" ng-repeat="item in StatusList">
-                                                                        <!--<li><a href="">No Label</a></li>
-                                                                        <li><a href="">Pending</a></li>
-                                                                        <li><a href="">Confirmed</a></li>-->                                                                     
-                                                                        <!--<li><a href="">Done</a></li>
-                                                                        <li><a href="">No-Show</a></li>
-                                                                        <li><a href="">Paid</a></li>
-                                                                        <li><a href="">Running Late</a></li>
-                                                                        <li><a href="">Custom Label</a></li>-->
-
-                                                                        <li><a href=""  ng-model="item.Value">{{item.Status}}</a></li>
-                                                                     
+                                                                    <ul class="lableDropdownContent dropdown-content" ng-repeat="item in StatusList">                                                                      
+                                                                        <li><a href="" ng-model="item.Value">{{item.Status}}</a></li>                                                                  
                                                                     </ul>
                                                                 </div>
 
-                                                                <div class="apptdetailList">
+                                                                <!--<div class="apptdetailList">
                                                                     <p>Wed, May 24, 8:00 am  –  9:00 am</p>
                                                                     <ul>
                                                                         <li>
@@ -782,7 +772,7 @@
                                                                         </li>
                                                                     </ul>
                                                                     <div class="brdr_btm"></div>
-                                                                </div>
+                                                                </div>-->
 
                                                                 <div class="pointerRightIcon"></div>
                                                                 <div class="apptViewFooter">
@@ -795,9 +785,9 @@
 
                                                             </div>
                                                         </div>
-                                                    </li>
+                                                  
 
-                                                    <li>
+                                                    <!--<li>
                                                         <span>
                                                             <div class="media">
                                                                 <div class="media-left calendarIcon">
@@ -809,7 +799,7 @@
                                                                 </div>
                                                             </div>
                                                         </span>
-                                                    </li>
+                                                    </li>-->
                                                 </ul>
                                             </div>
                                         </div>

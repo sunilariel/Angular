@@ -628,7 +628,7 @@
                                                         <ul class="list-inline">
                                                             <li ng-repeat="data in Categories">
                                                                 <span class="serviceCheckboxDiv">
-                                                                    <input type="checkbox" class="sampleCheckbox" name="" value="service" ng-model="data.Confirmed" ng-click="CategoryConfirmedCount()">{{data.Name}}
+                                                                    <input type="checkbox" class="sampleCheckbox" name="" value="service" ng-model="data.Confirmed" ng-click="AssignCategorytoService(data)">{{data.Name}}
                                                                 </span>
                                                             </li>
                                                         </ul>

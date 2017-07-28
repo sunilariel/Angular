@@ -259,12 +259,33 @@ app.service("bookingService", function ($http) {
         return response;
     }
 
-    this.AssignCategorytoService=function(serviceId,categoryId)
+    this.AssignCategorytoService=function(companyId,serviceId,categoryId)
     {
         var response = $http({
             method: "POST",
             url: "/Services/AssignCategorytoService",
-            data: { SeviceId: serviceId, CategoryId: categoryId }
+            data: { CompanyId:companyId,SeviceId: serviceId, CategoryId: categoryId }
+        })
+        return response;
+    }
+
+    this.DeAllocateCategoryFromService=function(companyId,serviceId,categoryId)
+    {
+        var response = $http({
+            method: "POST",
+            url: "/Services/DeAllocateCategoryFromService",
+            data: { CompanyId: companyId, SeviceId: serviceId, CategoryId: categoryId }
+        })
+        return response;
+
+    }
+
+    this.GetCategoriesAssignedToService=function(companyId,serviceId)
+    {
+        var response = $http({
+            method: "POST",
+            url: "/Services/GetCategoriesAssignedToService",
+            data:{CompanyId:companyId,ServiceId:serviceId}
         })
         return response;
     }
@@ -289,12 +310,12 @@ app.service("bookingService", function ($http) {
         return response;
     }
 
-    this.GetAllServiceForCategory=function(Id)
+    this.GetAllServiceForCategory=function(categoryId,companyId)
     {
         var response = $http({
             method: "POST",
             url: "/Services/GetAllServiceForCategory",
-            data: { CategoryId: Id }
+            data: { CategoryId: categoryId, CompanyId: companyId }
         })
         return response;
     }
@@ -477,6 +498,15 @@ app.service("bookingService", function ($http) {
         return response;
     }
 
+    this.DeleteTimeOff=function(Id)
+    {
+        var response = $http({          
+            method:"POST",
+            url: "/Staff/DeleteTimeOffofEmployee",
+            data:{TimeOffId:Id}           
+        })
+        return response;
+    }
     this.SetStatusofAppointment = function (Status, bookingId)
     {
         var response = $http({

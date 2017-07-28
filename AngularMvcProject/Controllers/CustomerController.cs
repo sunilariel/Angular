@@ -158,6 +158,10 @@ namespace AngularMvcProject.Controllers
         {
             try
             {
+                DateTime obj = DateTime.Parse(appointment.Start);
+                appointment.Start = obj.ToString("yyyy-MM-dd T HH:mm:ss");
+                appointment.End = obj.AddMinutes(appointment.EndMinute).ToString("yyyy-MM-dd T HH:mm:ss");
+
                 var StartTime = DateTime.Parse(appointment.StartHour, CultureInfo.InvariantCulture);
                 var Time = StartTime.ToString("HH:mm").Split(':');
 
@@ -278,7 +282,32 @@ namespace AngularMvcProject.Controllers
                 {
                     result = streamReader.ReadToEnd();
                 }
-                return result;
+
+                List<AllAppointments> appointments = JsonConvert.DeserializeObject<List<AllAppointments>>(result);
+                List<AppointmentDetails> ListofAppointment = new List<AppointmentDetails>();
+               foreach( var appointment in appointments)
+                {
+                    AppointmentDetails obj = new AppointmentDetails();
+                    obj.BookingId = appointment.Id;
+                    obj.EmployeeId = appointment.EmployeeId;
+                    obj.ServiceId = appointment.ServiceId;
+                    obj.EmployeeName = appointment.Employee.FirstName;
+                    obj.ServiceName = appointment.Service.Name;
+                    obj.DurationInHours = appointment.Service.DurationInHours;
+                    obj.DurationInMinutes = appointment.Service.DurationInMinutes;
+                    obj.Cost = appointment.Service.Cost;
+                    obj.Currency = appointment.Service.Currency;
+                    obj.status = appointment.Status;
+                    obj.StartTime = appointment.Start;
+                    obj.EndTime = appointment.End;
+
+                    ListofAppointment.Add(obj);
+
+                }
+
+                var jsondata = JsonConvert.SerializeObject(ListofAppointment);
+
+                return jsondata;
 
             }
             catch(Exception e)

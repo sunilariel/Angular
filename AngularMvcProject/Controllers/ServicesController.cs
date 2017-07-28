@@ -104,16 +104,67 @@ namespace AngularMvcProject.Controllers
         }
 
         [HttpPost]
-        public string AssignCategorytoService(string SeviceId,string CategoryId)
+        public string AssignCategorytoService(string CompanyId,string SeviceId,string CategoryId)
         {
             try
             {
                 var result = "";
-                var httpWebRequest = (HttpWebRequest)WebRequest.Create(ConfigurationManager.AppSettings["DomainUrl"].ToString() + "/api/services/AssignCategoryToService?categoryId=" + CategoryId + "&serviceId=" + SeviceId);
+               
+                var httpWebRequest = (HttpWebRequest)WebRequest.Create(ConfigurationManager.AppSettings["DomainUrl"].ToString() + "/api/services/AssignCategoryToService?companyId=" + CompanyId + "&categoryId=" + CategoryId + "&serviceId=" + SeviceId);
                 httpWebRequest.Method = "PUT";
                 httpWebRequest.ContentType = "application/json";
                 httpWebRequest.ContentLength = 0;
 
+                var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
+                using (var StreamReader = new StreamReader(httpResponse.GetResponseStream()))
+                {
+                    result = StreamReader.ReadToEnd();
+                }
+                return result;
+            }
+            catch (Exception e)
+            {
+                return e.ToString();
+            }
+
+        }
+
+        [HttpPost]
+        public string DeAllocateCategoryFromService(string CompanyId, string SeviceId, string CategoryId)
+        {
+            try
+            {
+                var result = "";
+
+                var httpWebRequest = (HttpWebRequest)WebRequest.Create(ConfigurationManager.AppSettings["DomainUrl"].ToString() + "/api/services/DeAllocateCategoryFromService?companyId=" + CompanyId + "&categoryId=" + CategoryId + "&serviceId=" + SeviceId);
+                httpWebRequest.Method = "POST";
+                httpWebRequest.ContentType = "application/json";
+                httpWebRequest.ContentLength = 0;
+
+                var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
+                using (var StreamReader = new StreamReader(httpResponse.GetResponseStream()))
+                {
+                    result = StreamReader.ReadToEnd();
+                }
+                return result;
+            }
+            catch (Exception e)
+            {
+                return e.ToString();
+            }
+
+        }
+
+        [HttpPost]
+        public string GetCategoriesAssignedToService(string CompanyId, string ServiceId)
+        {
+            try
+            {
+                var result = "";
+                var httpWebRequest = (HttpWebRequest)WebRequest.Create(ConfigurationManager.AppSettings["DomainUrl"].ToString() +"/api/services/GetCategoriesAssignedToService?companyId="+ CompanyId + "&serviceId=" + ServiceId);
+                httpWebRequest.Method = "GET";
+                httpWebRequest.ContentType = "application/json";
+            
                 var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
                 using (var StreamReader = new StreamReader(httpResponse.GetResponseStream()))
                 {
@@ -152,12 +203,12 @@ namespace AngularMvcProject.Controllers
         }
 
         [HttpPost]
-        public string GetAllServiceForCategory(string CategoryId)
+        public string GetAllServiceForCategory(string CategoryId,string CompanyId)
         {
             try
             {
                 var result = "";
-                var httpWebRequest = (HttpWebRequest)WebRequest.Create(ConfigurationManager.AppSettings["DomainUrl"].ToString() + "/api/services/GetAllServcieForCategory?categoryId=" + CategoryId);
+                var httpWebRequest = (HttpWebRequest)WebRequest.Create(ConfigurationManager.AppSettings["DomainUrl"].ToString() + "/api/services/GetAllServicesForCategory?companyId="+ CompanyId + "&categoryId=" + CategoryId);
                 httpWebRequest.Method = "GET";
                 httpWebRequest.ContentType = "application/json";
 

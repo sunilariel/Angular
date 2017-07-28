@@ -191,6 +191,19 @@
         $scope.updatedCustomerEmail = item.Email;
         $scope.updatedPreCustomerMobileNo = item.TelephoneNo.substring(0, 2);
         $scope.updatedMobileNo = item.TelephoneNo.substring(2, item.length);
+
+        //Getting Appointment deail of Customer//
+        var result = bookingService.GetAppointmentDetails($scope.CustomerId);
+        result.then(function (response) {
+            $scope.ListofAppointments = [];
+            $scope.ListofAppointments = response.data;
+            $scope.NumberofAppointmnets = response.data.length;
+            var TotalCost = 0;
+            angular.forEach(response.data, function (value, key) {
+                TotalCost = TotalCost + value.Cost;
+            });
+            $scope.TotalCostofServices = TotalCost;
+        })
        
     }
 
@@ -414,7 +427,7 @@
         var time = $scope.timeoption.split(" ");
         var starttime = time[0].split(":");
         
-
+       
 
         var appointment = {
 
@@ -429,8 +442,8 @@
             "IsAdded": true,
             "Message": "sample string 11",
             "CustomerIds": [$scope.CustomerId],
-            "Start": new Date(),
-            "End": "2017-06-27T11:45:54.4481356+00:00"
+            "Start":$scope.dt,
+            "End": $scope.dt,
         }
 
         var addappointment = bookingService.AddAppointment(appointment);
@@ -444,9 +457,26 @@
                 $timeout(function () {
                     $scope.MessageText = "Created Appointment";
                     $timeout(function () {                       
-                        $scope.IsVisible = false;
-                        //var result = bookingService.GetAppointmentDetails($scope.CustomerId);
+                       
+                       
                         var SetStatus = bookingService.SetStatusofAppointment($scope.Status, $scope.AppointmentId);
+
+                        SetStatus.then(function (response) {
+                           var result = bookingService.GetAppointmentDetails($scope.CustomerId);
+                            result.then(function(response)
+                            {
+                                $scope.ListofAppointments = [];
+                                $scope.ListofAppointments = response.data;
+                                $scope.NumberofAppointmnets = response.data.length;
+                                var TotalCost = 0;
+                                angular.forEach(response.data, function (value, key) {
+                                    TotalCost = TotalCost + value.Cost;
+                                });
+                                $scope.TotalCostofServices = TotalCost;
+                                $scope.IsVisible = false;
+                                angular.element(document.querySelector("#squarespaceModal")).css("display", "none");
+                            })
+                        })
                     }, 1000);
                 }, 500)
             }
@@ -454,8 +484,11 @@
         });
     }
 
-    //DateTime Picker
+    
 
+
+
+    //DateTime Picker
     $scope.today = function () {
         $scope.dt = new Date();
        
@@ -474,7 +507,6 @@
         return (mode == 'day' && (date.getDay() == $scope.AppointmentSchedule[0] || date.getDay() == $scope.AppointmentSchedule[1] || date.getDay() == $scope.AppointmentSchedule[2] || date.getDay() == $scope.AppointmentSchedule[3] || date.getDay() == $scope.AppointmentSchedule[4] || date.getDay() == $scope.AppointmentSchedule[5] || date.getDay() == $scope.AppointmentSchedule[6]));
     };
 
-  
     $scope.open = function () {
         $timeout(function () {
             $scope.opened = true;
@@ -491,7 +523,6 @@
         debugger;
         var day = $scope.dt;
     }
-
 
 
     $scope.$watch("dt", function (newValue, oldValue) {

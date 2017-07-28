@@ -72,7 +72,7 @@
 
     $scope.ShowCategoryService = function (item) {
         debugger;
-        var responsedata = bookingService.GetAllServiceForCategory(item.Id);
+        var responsedata = bookingService.GetAllServiceForCategory(item.Id,$routeParams.CompanyId);
         responsedata.then(function (response) {
             debugger;
             if (response.data.length > 0) {
@@ -241,23 +241,9 @@
                     angular.forEach($scope.Categories, function (value, key) {
                         if (value.hasOwnProperty("Confirmed")==true) {
                             if (value.Confirmed == true) {
-                                //var responsedata = bookingService.AssignCategoryToService($scope.ServiceId, value.Id);\
-                               var CurrentDate= new Date();
-                                var updatedservice = {
-                                    "Id": $scope.ServiceId,
-                                    "CompanyId": $routeParams.CompanyId,
-                                    "Name": $scope.ServiceName,
-                                    "CategoryName": value.Name,
-                                    "CategoryId": value.Id,
-                                    "DurationInMinutes": $scope.ServiceTime,
-                                    "DurationInHours": 0,
-                                    "Cost": $scope.ServiceCost,
-                                    "Currency": "sample string 9",
-                                    "CreationDate": CurrentDate
-                                }
-
-                                var responsedata = bookingService.UpdateService(updatedservice);
-                                //var responsedata = bookingService.AssignCategorytoService($scope.ServiceId,value.Id);
+                                //var responsedata = bookingService.AssignCategoryToService($scope.ServiceId, value.Id);\                                                            
+                                //var responsedata = bookingService.UpdateService(updatedservice);
+                                var responsedata = bookingService.AssignCategorytoService($routeParams.CompanyId,$scope.ServiceId,value.Id);
                                 responsedata.then(function (response) {
                                     if (response.data.Success == true) {
                                         $scope.MessageText = "Service Saved";
@@ -287,6 +273,8 @@
         $scope.ServiceName = item.Name;
         $scope.ServiceCost = item.Cost;
         $scope.ServiceTime = item.DurationInMinutes;
+
+        //Get all Staff assigned to particular Service.
         var responsedata = bookingService.GetAllStaff($routeParams.CompanyId);
 
         responsedata.then(function (response) {
@@ -299,22 +287,39 @@
         var responseresult = bookingService.GetEmployeeAssignedtoService($scope.ServiceId);
         responseresult.then(function (response) {
             for(var i=0;i<response.data.length;i++)
-            {
+            {             
                 angular.forEach($scope.staffList,function(value,key)
                 {
                     if(value.Id==response.data[i].Id)
                     {
                         value.confirmed = true;
-                    }
-                   
+                    }                  
                 })
-                if($scope.staffList.length==response.data.length+1)
-                {
-                    $scope.staffList[0].confirmed = true;
-                }
+              
+            }
+            if ($scope.staffList.length == response.data.length + 1) {
+                $scope.staffList[0].confirmed = true;
             }
             
         });
+
+        //Get All Categories assigned to service//
+        var response = bookingService.GetCategoriesAssignedToService($routeParams.CompanyId, $scope.ServiceId);
+        response.then(function (response) {
+           
+                $scope.CategoryCheckedCount = response.data.length;
+                for(var i=0;i<response.data.length;i++)
+                {
+                    angular.forEach($scope.Categories, function (value, key) {
+                        if(response.data[i].Id==value.Id)
+                        {
+                            value.Confirmed = true;
+                        }
+                    })
+                }
+           
+        })
+
 
         $scope.EditServiceDiv = false;
         $scope.showAddServiceDiv = true;
@@ -439,7 +444,42 @@
         $scope.staffchecked(item);
     }
 
+    //Assign Category to Service While Updating//
 
+    $scope.AssignCategorytoService=function(category)
+    {
+        $scope.CategoryConfirmedCount();
+        if (category.Confirmed == true) {
+            var responsedata = bookingService.AssignCategorytoService($routeParams.CompanyId, $scope.ServiceId, category.Id);
+            responsedata.then(function (response) {
+                if (response.data.Success == true) {
+                    $scope.MessageText = "Assigning Service to category";
+                    $scope.IsVisible = true;
+                    $timeout(function () {
+                        $scope.MessageText = "Service Saved";
+                        $timeout(function () {
+                            $scope.IsVisible = false;
+                        }, 500)
+                    }, 1000);
+                }
+            })
+        }
+        else {
+            var responsedata = bookingService.DeAllocateCategoryFromService($routeParams.CompanyId, $scope.ServiceId, category.Id);
+            responsedata.then(function (response) {
+                if (response.data.Success == true) {
+                    $scope.MessageText = "Removing Service to category";
+                    $scope.IsVisible = true;
+                    $timeout(function () {
+                        $scope.MessageText = "Service Saved";
+                        $timeout(function () {
+                            $scope.IsVisible = false;
+                        }, 500)
+                    }, 1000);
+                }
+            })
+        }
+    }
 
     //Get Categories Count//
     $scope.CategoryConfirmedCount=function()
