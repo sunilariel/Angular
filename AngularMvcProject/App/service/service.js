@@ -187,7 +187,13 @@ app.service("bookingService", function ($http) {
        return response;
     }
 
-
+    this.UpdateAppointment = function (dataobject) {
+        var response = $http({
+            method: 'POST',
+            url: '/Customer/UpdateAppointment',
+            data:{appointment:dataobject}
+        })
+    }
     this.GetSelectedService=function(dataobject)
     {
         var response = $http({
@@ -214,6 +220,16 @@ app.service("bookingService", function ($http) {
             method:"POST",
             url: "/Customer/GetAppointmentDetails",
             data:{CustomerId:customerId}
+        })
+        return response;
+    }
+
+    this.DeleteAppointment=function(Id)
+    {
+        var response = $http({
+            method: "POST",
+            url: "/Customer/DeleteAppointment",
+            data: { BookingId: Id }
         })
         return response;
     }

@@ -197,6 +197,50 @@ namespace AngularMvcProject.Controllers
             }
         }
 
+        [HttpPost]
+        public string UpdateAppointment(UpdateBookAppointment appointment)
+        {
+            try
+            {
+                DateTime obj = DateTime.Parse(appointment.Start);
+                appointment.Start = obj.ToString("yyyy-MM-dd T HH:mm:ss");
+                appointment.End = obj.AddMinutes(appointment.EndMinute).ToString("yyyy-MM-dd T HH:mm:ss");
+
+                var StartTime = DateTime.Parse(appointment.StartHour, CultureInfo.InvariantCulture);
+                var Time = StartTime.ToString("HH:mm").Split(':');
+
+                appointment.StartHour = Time[0];
+                appointment.StartMinute = Time[1];
+
+                string apiURL = ConfigurationManager.AppSettings["DomainUrl"].ToString() + "/api/booking/UpdateBooking";
+                string result = "";
+                var httpWebRequest = (HttpWebRequest)WebRequest.Create(apiURL);
+                httpWebRequest.ContentType = "application/json";
+                httpWebRequest.Method = "POST";
+
+                using (var streamWriter = new StreamWriter(httpWebRequest.GetRequestStream()))
+                {
+
+                    var jsonString = new JavaScriptSerializer().Serialize(appointment);
+                    streamWriter.Write(jsonString);
+                    streamWriter.Flush();
+                    streamWriter.Close();
+                }
+
+                var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
+                using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
+                {
+                    result = streamReader.ReadToEnd();
+                }
+
+                return result;
+            }
+            catch (Exception e)
+            {
+                return e.ToString();
+            }
+        }
+
 
         [HttpPost]
         public string GetSelectedService(string ServiceId)
@@ -289,8 +333,8 @@ namespace AngularMvcProject.Controllers
                 {
                     AppointmentDetails obj = new AppointmentDetails();
                     obj.BookingId = appointment.Id;
-                    obj.EmployeeId = appointment.EmployeeId;
-                    obj.ServiceId = appointment.ServiceId;
+                    obj.EmployeeId = appointment.EmployeeId.ToString();
+                    obj.ServiceId = appointment.ServiceId.ToString();
                     obj.EmployeeName = appointment.Employee.FirstName;
                     obj.ServiceName = appointment.Service.Name;
                     obj.DurationInHours = appointment.Service.DurationInHours;
@@ -367,6 +411,30 @@ namespace AngularMvcProject.Controllers
                 return result;
             }
             catch(Exception e)
+            {
+                return e.ToString();
+            }
+        }
+
+        [HttpPost]
+        public string DeleteAppointment(string BookingId)
+        {
+            try
+            {
+                string apiUrl = ConfigurationManager.AppSettings["DomainUrl"].ToString() + "/api/booking/DeleteBooking?bookingId=" + BookingId;
+                string result = "";
+                var httpWebRequest = (HttpWebRequest)WebRequest.Create(apiUrl);
+                httpWebRequest.Method = "DELETE";
+                httpWebRequest.ContentType = "application/json";
+    
+                var httpWebResponse = (HttpWebResponse)httpWebRequest.GetResponse();
+                using (var StreamReader = new StreamReader(httpWebResponse.GetResponseStream()))
+                {
+                    result = StreamReader.ReadToEnd();
+                }
+                return result;
+            }
+            catch (Exception e)
             {
                 return e.ToString();
             }

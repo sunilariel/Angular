@@ -206,12 +206,31 @@ namespace AngularMvcProject.Models
         public string End { get; set; }
     }
 
+    public class UpdateBookAppointment
+    {
+        public string Id { get; set; }
+        public int CompanyId { get; set; }
+        public int ServiceId { get; set; }
+        public int EmployeeId { get; set; }
+        public string CustomerIdsCommaSeperated { get; set; }
+        public string StartHour { get; set; }
+        public string StartMinute { get; set; }
+        public int EndHour { get; set; }
+        public int EndMinute { get; set; }
+        public bool IsAdded { get; set; }
+        public string Message { get; set; }
+        public List<int> CustomerIds { get; set; }
+        public string Start { get; set; }
+        public string End { get; set; }
+    }
+
+
     public class AppointmentDetails
     {
         public string BookingId { get; set; }
-        public int EmployeeId { get; set; }
+        public string EmployeeId { get; set; }
         public string EmployeeName { get; set; }
-        public int ServiceId { get; set; }
+        public string ServiceId { get; set; }
         public string ServiceName { get; set; }
         public int DurationInMinutes { get; set; }
         public int DurationInHours { get; set; }
