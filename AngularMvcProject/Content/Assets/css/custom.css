@@ -2195,6 +2195,14 @@ table#mytable tr td {
 	height: 40px !important;
     line-height: 40px !important;
 }
+
+span.dotSplitter
+{
+    position: relative !important;
+    font-size: 19px !important;
+    margin: -5px 3px 0 3px;
+}
+
 .customerName:hover {
 	    background: #E1E7EB;
 }

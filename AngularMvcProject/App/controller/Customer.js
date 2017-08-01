@@ -335,14 +335,15 @@
         debugger;
        
         $scope.EmployeeId = EmployeeId;
+        $scope.EmployeeServices = [];
         var EmployeeServices = bookingService.GetAllocatedServicetoEmployee($scope.CompanyId, EmployeeId);
 
         EmployeeServices.then(function (result) {
             debugger;
-            $scope.EmployeeServices = [];
+          
             $scope.EmployeeServices = result.data;
 
-
+           // $scope.selectedservice = $scope.EmployeeServices[0].Id;
             //Get Staff Appointment working hours ///
             $scope.AppointmentSchedule = [];
             var resultAppontmentWorkingHours = bookingService.GetAppointmentWorkingHours(EmployeeId);
@@ -378,7 +379,7 @@
         debugger;
 
 
-        var data = $scope.item.Status;
+        var data = $scope.Status;
 
         if (data == "No Label") {
             $scope.Status = 1;
@@ -503,7 +504,9 @@
         $scope.appointmentDetailisVisible = !$scope.appointmentDetailisVisible;
     }
 
-    $scope.UpdateStatus = function (item) {        
+    $scope.UpdateStatus = function (item) {
+        debugger;
+        var status = $scope.StatusValue;
         $scope.UpdatedStatus = item.Status;
         var SetStatus = bookingService.SetStatusofAppointment(item.Status, $scope.AppointmentBookingId);
         SetStatus.then(function (response) {
@@ -603,6 +606,7 @@
     }
 
     $scope.GetAppointmentDetails = function (Id) {
+        debugger;
         var result = bookingService.GetAppointmentDetails(Id);
         result.then(function (response) {
             $scope.ListofAppointments = [];

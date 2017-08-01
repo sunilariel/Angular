@@ -27,8 +27,8 @@
         
         //$scope.alldaystatus = true;
      
-        $scope.startdate = $filter('date')(new Date(), "dd MMMM yyyy");
-        $scope.enddate = $filter('date')(new Date(), "dd MMMM yyyy");
+        $scope.startdate = $filter('date')(new Date(), "dd MMM yyyy");
+        $scope.enddate = $filter('date')(new Date(), "dd MMM yyyy");
 
         //Use Wizard Controller to get AllStaffList through api//
         var StaffResult = bookingService.GetAllStaff($routeParams.CompanyId);
@@ -126,8 +126,7 @@
                         "CreationDate": CurrentDate
                     }
                     var result = bookingService.SetEmployeeWorkingHours(workinghours);
-                });
-                /////////////
+                });               
             }
         })
     }
@@ -168,8 +167,10 @@
             $scope.ListofAllServices.push({ "Id": "", "CompanyId": $routeParams.CompanyId, "Name": "All Staff", "CategoryName": "", "CategoryId": "", "DurationInMinutes": "", "Cost": "", "Currency": "", "CreationDate": new Date() })
             angular.forEach(response.data, function (value, key) {
                 $scope.ListofAllServices.push({ "Id": value.Id, "CompanyId": value.CompanyId, "Name": value.Name, "CategoryName": value.CategoryName, "CategoryId": value.CategoryId, "DurationInMinutes": value.DurationInMinutes, "Cost": value.Cost, "Currency": value.Currency, "CreationDate": new Date(), "Confirmed": value.Confirmed })
+                $scope.EmployeeServiceCount = response.data.length;
             });
-            $scope.EmployeeServiceCount = response.data[0].AllocatedServiceCount;
+            //$scope.EmployeeServiceCount = response.data[0].AllocatedServiceCount;
+          
             for (var i = 1; i < $scope.ListofAllServices.length; i++) {
                 if ($scope.ListofAllServices[i].Confirmed == true) {
                     $scope.ListofAllServices[0].Confirmed = true;
@@ -775,6 +776,7 @@
             })
         }
        
+    
 
         $scope.GetBreakHours=function(Id)
         {

@@ -30,6 +30,7 @@
             if (response.data.length > 0) {
                 $scope.Categories = [];
                 $scope.Categories = response.data;
+                $scope.CategoriesCount = response.data.length;
             }
         });
 
@@ -165,6 +166,7 @@
                     if (response.data.length > 0) {
                         $scope.Categories = [];
                         $scope.Categories = response.data;
+                        $scope.CategoriesCount = response.data.length;
                     }
                 })
               
@@ -178,7 +180,8 @@
     }
 
   
-    $scope.SaveService = function () {        
+    $scope.SaveService = function () {
+      
         if (servicenameform.ServiceName.value == "")
         {
             $scope.MessageText = "Service name cannot be empty!";
@@ -194,6 +197,24 @@
             $timeout(function () {
                 $scope.IsVisible = false;
             }, 1000);
+            return false;
+        }
+        for (var i = 0; i < $scope.staffList.length; i++) {
+            if ($scope.staffList[i].confirmed == true) {
+                $scope.StaffAssigned = true;
+                break;
+            }
+            else {
+                $scope.StaffAssigned = false;
+            }
+        }
+        if ($scope.StaffAssigned == false) {
+
+            $scope.MessageText = "At Least one staff should be assigned!";
+            $scope.IsVisible = true;
+            $timeout(function () {
+                $scope.IsVisible = false;
+            }, 1000)
             return false;
         }
             var service = {

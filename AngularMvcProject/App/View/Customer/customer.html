@@ -526,11 +526,9 @@
                                                                             </div>
                                                                             <div class="col-md-6">
                                                                                 <div class="dropdown labeldrowDownBtn nolableDrop">                                                                                                                                                                          
-                                                                                            <select ng-model="Status" ng-init='item.Status="No Label"'>
+                                                                                            <select ng-model="Status" ng-init='Status="No Label"' style="border:none;font-size:12px;">
                                                                                                 <option ng-repeat="item in StatusList" value="{{item.Status}}">{{item.Status}}</option>
-                                                                                            </select>
-                                                                                     
-                                                                                    
+                                                                                            </select>         
                                                                                 </div>
                                                                             </div>
                                                                         </div>
@@ -692,7 +690,7 @@
                                                                 <h3 class="modal-title" id="lineModalLabel">Appointment</h3>
                                                             </div>
                                                             <div class="form-horizontal appointPopUpform">
-                                                                <form ng-submit="UpdateAppointment(appointmentform)" name="appointmentform" novalidate class="css-form">
+                                                                <form ng-submit="UpdateAppointment(appointmentform)" name="updateappointmentform" novalidate class="css-form">
                                                                     <div class="modal-body appointPopupBody" ng-hide="ShowAddAppointmentPopup">
 
                                                                         <div class="row popupDeatailDiv">
@@ -725,7 +723,7 @@
                                                                                                                                                                            
                                                                                         </select>-->   
                                                                                         <select class="btn btn-default dropdown-toggle" ng-model="selectedprovider" name="providerdd" ng-change="GetAllocateServiceToEmployee(selectedprovider)" required>
-                                                                                            <option ng-repeat="employee in Provider " value="{{employee.Id}}">{{employee.staffName}}</option>
+                                                                                            <option ng-repeat="employee in Provider" value="{{employee.Id}}">{{employee.staffName}}</option>
                                                                                         </select>                          
                                                                                     </div>
                                                                                 </div>
@@ -738,7 +736,7 @@
                                                                                             <option value="">-- Select a Service --</option>
                                                                                         </select>-->   
 
-                                                                                        <select class="btn btn-default dropdown-toggle" ng-model="selectedservice" name="Servicedd" ng-change="ServiceDetail(selectedservice)"  required>
+                                                                                        <select class="btn btn-default dropdown-toggle" ng-model="selectedservice" name="Servicedd"  ng-change="ServiceDetail(selectedservice)"  required>
                                                                                             <option ng-repeat="services in EmployeeServices " value="{{services.Id}}">{{services.Name}}</option>
                                                                                         </select>                                                                                        
                                                                                     </div>
@@ -830,11 +828,11 @@
                                                         <span>
                                                             <div class="media">
                                                                 <div class="media-left calendarIcon">
-                                                                    <span id="calendarfaIcon" ><i class="fa fa-calendar" aria-hidden="true"></i></span>
+                                                                    <span id="calendarfaIcon" ><i class="fa fa-calendar"  aria-hidden="true"></i></span>
                                                                 </div>
                                                                 <div class="media-body appointDate">
                                                                     <h4 class="media-heading">{{item.StartTime | date :'EEE MMM d, y'}}</h4>
-                                                                    <p>{{item.EmployeeName}} . {{item.ServiceName}} . {{item.DurationInMinutes}} min . {{item.Cost | currency : undefined : 0}}</p>
+                                                                    <p>{{item.EmployeeName}} <span class="dotSplitter">.</span> {{item.ServiceName}} <span class="dotSplitter">.</span> {{item.DurationInMinutes}} min <span class="dotSplitter">.</span> {{item.Cost | currency : undefined : 0}}</p>
                                                                 </div>
                                                             </div>
 
@@ -857,7 +855,7 @@
                                                                 </div>
 
                                                                 <div class="apptdetailList">                
-                                                                       <p>{{AppointmentStartDate| date:'EEE MMM d,y,hh:mm a'}}-{{AppointmentEndDate | date:'hh:mm a'}}</p>
+                                                                       <p>{{AppointmentStartDate| date:'EEE, MMM d' }},{{AppointmentStartDate| date:' h:mm a ' | lowercase}}-{{AppointmentEndDate | date:' hh:mm a' | lowercase}}</p>
                                                                     <ul>
                                                                         <li>
                                                                             <label>Provider</label>
