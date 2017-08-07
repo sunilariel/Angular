@@ -38,8 +38,13 @@
             $scope.TotalNoOfStaff = $scope.ListofStaff.length;
           
           
-            $scope.StartTime = ["08:00 AM", "09:00 AM", "10:00 AM", "11:00 AM", "12:00 PM", "01:00 PM", "02:00 PM", "03:00 PM", "04:00 PM", "05:00 PM", "06:00 PM", "07:00 PM", "08:00 PM"];
-            $scope.EndTime = ["08:00 AM", "09:00 AM", "10:00 AM", "11:00 AM", "12:00 PM", "01:00 PM", "02:00 PM", "03:00 PM", "04:00 PM", "05:00 PM", "06:00 PM", "07:00 PM", "08:00 PM"];
+           // $scope.StartTime = ["08:00 AM", "09:00 AM", "10:00 AM", "11:00 AM", "12:00 PM", "01:00 PM", "02:00 PM", "03:00 PM", "04:00 PM", "05:00 PM", "06:00 PM", "07:00 PM", "08:00 PM"];
+
+            $scope.StartTime = ["12:00 AM", "01:00 AM", "02:00 AM", "03:00 AM", "04:00 AM", "05:00 AM", "06:00 AM", "07:00 AM", "08:00 AM", "09:00 AM", "10:00 AM", "11:00 AM", "12:00 PM", "01:00 PM", "02:00 PM", "03:00 PM", "04:00 PM", "05:00 PM", "06:00 PM", "07:00 PM", "08:00 PM", "09:00 PM", "10:00 PM", "11:00 PM"];
+            $scope.EndTime = ["12:00 AM", "01:00 AM", "02:00 AM", "03:00 AM", "04:00 AM", "05:00 AM", "06:00 AM", "07:00 AM", "08:00 AM", "09:00 AM", "10:00 AM", "11:00 AM", "12:00 PM", "01:00 PM", "02:00 PM", "03:00 PM", "04:00 PM", "05:00 PM", "06:00 PM", "07:00 PM", "08:00 PM", "09:00 PM", "10:00 PM", "11:00 PM"];
+
+           // $scope.EndTime = ["08:00 AM", "09:00 AM", "10:00 AM", "11:00 AM", "12:00 PM", "01:00 PM", "02:00 PM", "03:00 PM", "04:00 PM", "05:00 PM", "06:00 PM", "07:00 PM", "08:00 PM"];
+
                               
             $scope.EditStaff(response.data[0]);
         });        
@@ -74,8 +79,21 @@
         var result = bookingService.AddStaff(requestedstaff);
         result.then(function(response)
         {
+            if (response.data.Success == false) {
+                if (response.data.Message.includes("Already member")) {
+                    $scope.MessageText = "Staff already exists!";
+                    $scope.IsVisible = true;
+                }
+                $timeout(function () {
+                    $scope.IsVisible = true;
+                    $timeout(function () {
+                        $scope.IsVisible = false;
+                    },800)
+                },1000)
+            }
+
             if(response.data.Success==true)
-            {
+            {                              
                 //$scope.StaffId= response.data.ReturnObject.EmloyeeId;
                 $scope.MessageText = "Adding new Staff";
                 $scope.IsVisible = true;

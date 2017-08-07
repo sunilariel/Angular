@@ -2342,6 +2342,16 @@ span.dotSplitter
 }
 
 
+.categoryList.staffList ul li:hover
+{
+    background: #E1E7EB; 
+
+}
+.categoryList.staffList ul li
+{
+   padding:5px !important;
+
+}
 
 
 

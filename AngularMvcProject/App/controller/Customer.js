@@ -189,7 +189,8 @@
         $scope.updatedCustomerEmail = item.Email;
         $scope.updatedPreCustomerMobileNo = item.TelephoneNo.substring(0, 2);
         $scope.updatedMobileNo = item.TelephoneNo.substring(2, item.length);
-
+        $scope.customerAddress = item.Address;
+        $scope.Zip = item.PostCode;
         //Getting Appointment deail of Customer//
         //var result = bookingService.GetAppointmentDetails($scope.CustomerId);
         //result.then(function (response) {
@@ -220,8 +221,8 @@
                 "Password": "sample string 4",
                 "FirstName": $scope.updatedCustomerName,
                 "LastName": "sample string 6",
-                "Address": "sample string 7",
-                "PostCode": "sample string 8",
+                "Address": $scope.customerAddress,
+                "PostCode": $scope.Zip,
                 "Email": $scope.updatedCustomerEmail,
                 "TelephoneNo": MobileNumber,
                 "CreationDate": updateddate
@@ -318,6 +319,7 @@
         $scope.timeoption = "";
         $scope.timeInfoFrom = [];
         $scope.Status = "No Label";
+        $scope.selectedprovider = "-- Select a Provider --";
 
         $scope.ServicePriceTimeDetailIsVisible = false;
         $scope.ShowAddAppointmentPopup != $scope.ShowAddAppointmentPopup;
@@ -371,7 +373,7 @@
             $scope.price = response.data.Cost;
             $scope.time = response.data.DurationInMinutes;
             $scope.ServicePriceTimeDetailIsVisible = true;
-            $scope.today();
+           // $scope.today();
         });
     }
 
@@ -434,7 +436,7 @@
             "EndHour": 0,
             "EndMinute": $scope.time,
             "IsAdded": true,
-            "Message": "sample string 11",
+            "Message": $scope.notes,
             "CustomerIds": [$scope.CustomerId],
             "Start": $scope.dt,
             "End": $scope.dt,
@@ -444,6 +446,18 @@
 
 
         addappointment.then(function (response) {
+            if (response.data.Success == false)
+            {
+                if(response.data.Message=="Booking Cannot Be Added , Not Free Slot Available.")
+                {
+                    $scope.MessageText = "Not Free Slot Available";
+                    $scope.IsVisible = true;
+                    $timeout(function () {
+                        
+                        $scope.IsVisible = false;
+                    },1000)
+                }
+            }
             if (response.data.Success == true) {
                 $scope.MessageText = "Creating Appointment";
                 $scope.IsVisible = true;
@@ -452,13 +466,11 @@
                     $scope.MessageText = "Created Appointment";
                     $timeout(function () {
 
-
                         var SetStatus = bookingService.SetStatusofAppointment($scope.Status, $scope.AppointmentId);
 
                         SetStatus.then(function (response) {
 
                             $scope.GetAppointmentDetails($scope.CustomerId);
-
                            
                         })
                     }, 1000);
@@ -629,12 +641,19 @@
         $scope.dt = new Date();
 
     };
+    
     $scope.today();
-
     $scope.showWeeks = true;
     $scope.toggleWeeks = function () {
+
         $scope.showWeeks = !$scope.showWeeks;
     };
+
+    $scope.SetDatePicker = function () {
+        debugger;
+        $scope.today();
+    }
+
 
     //Disable weekend selection
     $scope.disabled = function (date, mode) {
@@ -644,6 +663,7 @@
     };
 
     $scope.open = function () {
+
         $timeout(function () {
             $scope.opened = true;
         });
@@ -656,6 +676,7 @@
 
     $scope.ChangeDate = function () {
         debugger;
+       
         var day = $scope.dt;
     }
 
