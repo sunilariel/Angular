@@ -1,5 +1,5 @@
 ﻿
-app.service("bookingService", function ($http) {
+app.service("bookingService", function ($http, $window) {
 
     this.SignUp = function (dataobject)
     {
@@ -354,17 +354,20 @@ app.service("bookingService", function ($http) {
         var response = $http({
             method: "POST",
             url: "/Services/GetAllStaff",
-            data:{CompanyId:Id}
+            data: { CompanyId: Id },
+            headers: {
+                'Content-Type': 'application/json',
+                'Token':  $window.sessionStorage.getItem('userInfo-token')
+            }
         })
         return response;
     }
 
-    this.AssignStafftoService=function(dataobject)
-    {
+    this.AssignStafftoService =function (dataobject) {
         var response = $http({
             method: "POST",
-            url: "/Services/AssignStaffToService",
-            data: { AssignStaff: dataobject }
+                url: "/Services/AssignStaffToService",
+                    data: { AssignStaff: dataobject }
         })
         return response;
     }

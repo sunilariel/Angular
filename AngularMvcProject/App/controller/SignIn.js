@@ -1,4 +1,4 @@
-﻿app.controller("SignIn", ['$scope', '$http', '$timeout', '$location', function ($scope, $http, $timeout, $location) {
+﻿app.controller("SignIn", ['$scope', '$http', '$timeout', '$location', '$window', function ($scope, $http, $timeout, $location, $window) {
     debugger;
     $scope.username = "";
     $scope.Email = "";
@@ -53,6 +53,7 @@
                 $timeout(function () { $scope.MessageText = "Your Details saved."; $timeout(function () { $scope.IsVisible = false; }, 1000) }, 500);
 
                 $location.path("/dashboard/" + $scope.companyId);
+                $window.sessionStorage.setItem('userInfo-token', data.Token);
             }
             else {
                 $timeout(function () { $scope.messagetext = "Invalid Credentials."; }, 500);
@@ -62,9 +63,6 @@
             alert('Error!');
             //$timeout(function () { $scope.messagetext = "Invalid Credentials."; }, 500);
         });
-
-
-
     }
 }
 ]);
