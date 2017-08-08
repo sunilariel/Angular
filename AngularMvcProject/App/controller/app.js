@@ -25,4 +25,8 @@ app.config(function ($routeProvider) {
         templateUrl: "App/View/Setting/Services.html",
         controller: "servicesController"
     })
+    .when("/signin", {
+        templateUrl: "App/View/SignUp/SignIn.html",
+        controller: "SignIn"
+    })
 });

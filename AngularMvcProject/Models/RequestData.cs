@@ -408,5 +408,9 @@ namespace AngularMvcProject.Models
         public string CreationDate { get; set; }
     }
 
-  
+    public class LoginInfo
+    {
+        public string Password { get; set; }
+        public string Email { get; set; }
+    }
 }

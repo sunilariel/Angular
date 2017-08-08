@@ -198,6 +198,7 @@
     <Compile Include="Controllers\CustomerController.cs" />
     <Compile Include="Controllers\dashboardController.cs" />
     <Compile Include="Controllers\ServicesController.cs" />
+    <Compile Include="Controllers\SignInController.cs" />
     <Compile Include="Controllers\SignUpController.cs" />
     <Compile Include="Controllers\StaffController.cs" />
     <Compile Include="Controllers\wizardController.cs" />
@@ -217,6 +218,7 @@
     <Content Include="App\controller\dashboard.js" />
     <Content Include="App\controller\routing.js" />
     <Content Include="App\controller\Services.js" />
+    <Content Include="App\controller\SignIn.js" />
     <Content Include="App\controller\Staff.js" />
     <Content Include="App\controller\SignUp.js" />
     <Content Include="App\controller\wizard.js" />
@@ -374,6 +376,8 @@
     <Content Include="Views\SignUp\SignUp.cshtml" />
     <Content Include="Views\dashboard\dashboard.cshtml" />
     <Content Include="Views\Customer\Customer.cshtml" />
+    <Content Include="App\View\SignUp\SignIn.html" />
+    <Content Include="Views\SignUp\SignIn.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -1,0 +1,31 @@
+﻿<div ng-controller="SignIn">
+    <div class="sign_up">
+        <div class="sign_inner">
+            <div class="sign_inner2">
+                <div class="sign_box">
+                    <div class="popup_headaer text-center">
+                        <h1><span style="font-weight: normal;">Sign in</span></h1>
+                    </div>
+                    <div class="sign_form">
+                        <form name="myForm" ng-submit="submitTheForm(myForm)" novalidate class="css-form">
+                            <!--<div class="form-group">
+                                <input type="text" class="form-control usernameField" placeholder="name" name="username" ng-model="username" required>
+                            </div>-->
+                            <div class="form-group">
+                                <input type="email" class="form-control usernameField" placeholder="Email" name="email" ng-model="Email" required>
+                            </div>
+                            <div class="form-group">
+                                <input type="password" class="form-control usernameField" placeholder="Password" name="password" ng-model="Password" required>
+                            </div>
+                            <button type="submit" class="btn btn-default submit_btn">Sign in</button>
+                        </form>
+                    </div>
+                    <img src="/Content/Assets/images/cloud.png" alt="Cloud" class="left_img">
+
+                </div>
+                <!--@*<div style=" width 100px; text-align center; top 0; position absolute; left 45%; right 50%; z-index 999999;" ng-if="IsVisible"><span id="voice-box" class="noDisplay" style="background:yellow;" ng-bind="MessageText"></span></div>*@-->
+                <div style="width:100px; text-align:center; top:0; position:absolute; left:45%; right:50%; z-index:999999;" ng-if="IsVisible"><span id="voice-box" class="noDisplay" style="background:yellow;" ng-bind="MessageText"></span></div>
+            </div>
+        </div>
+    </div>
+</div>

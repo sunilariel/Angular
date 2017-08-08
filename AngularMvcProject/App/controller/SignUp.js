@@ -6,6 +6,10 @@ app.controller("SignUp",['$scope', '$http', '$timeout','$location', function ($s
     $scope.Password = "";
     $scope.IsVisible = false;
     var booluserexist = false;
+    $scope.signin = function (){
+        $location.path('/signin');
+    }
+
     $scope.submitTheForm = function (form) {
         debugger;
 
@@ -46,7 +50,7 @@ app.controller("SignUp",['$scope', '$http', '$timeout','$location', function ($s
        
        
             var dataobject = {
-                Id: 1,
+                Id: -1,
                 Name: $scope.username,
                 Address: "aaa",
                 Email: $scope.Email,

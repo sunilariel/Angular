@@ -18,6 +18,11 @@ namespace AngularMvcProject.Controllers
             return View();
         }
 
+        public ActionResult SignIn()
+        {
+            return View();
+        }
+
         [HttpPost]
         public JsonResult postdata(string json)
         {
@@ -29,7 +34,7 @@ namespace AngularMvcProject.Controllers
 
             HttpWebRequest httpRequest = HttpWebRequest.CreateHttp(apiURL);
             httpRequest.Method = "POST";
-            httpRequest.ContentType = "application/x-www-form-urlencoded";
+            httpRequest.ContentType = "application/json";
             httpRequest.ContentLength = json.Length;
             var streamWriter = new StreamWriter(httpRequest.GetRequestStream());
             streamWriter.Write(json);

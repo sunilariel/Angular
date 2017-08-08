@@ -13,30 +13,22 @@
     <link href="~/Content/Assets/css/custom.css" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0rc1/angular-route.min.js"></script>
-    <script src="~/App/controller/SignUp.js"></script>
+    <script src="~/App/controller/SignIn.js"></script>
     <script src="~/App/controller/app.module.js"></script>
     <script src="~/App/service/service.js"></script>
-    <!--<script src="App/main.js"></script>-->
 </head>
 
-<body ng-app="MyApp" ng-controller="SignUp">
+<body ng-app="MyApp" ng-controller="SignIn">
 
     <div class="sign_up">
         <div class="sign_inner">
             <div class="sign_inner2">
                 <div class="sign_box">
                     <div class="popup_headaer text-center">
-                        <h1><span style="font-weight: normal;">Create an Account for</span> Free!</h1>
-                        <p> Get a free account in 30 seconds. No credit card required.</p>
+                        <h1><span style="font-weight: normal;">Sign in</span></h1>
                     </div>
-
                     <div class="sign_form">
-
                         <form name="myForm" ng-submit="submitTheForm(myForm)" novalidate class="css-form">
-                            <div class="form-group">
-                                <input type="text" class="form-control usernameField" placeholder="name" name="username" ng-model="username" required  >
-
-                            </div>
                             <div class="form-group">
                                 <input type="email" class="form-control usernameField" placeholder="Email" name="email" ng-model="Email" required>
                             </div>
@@ -44,8 +36,7 @@
                                 <input type="password" class="form-control usernameField" placeholder="Password" name="password" ng-model="Password" required>
                             </div>
 
-                            <button type="submit"  class="btn btn-default submit_btn">Create My Account!</button>
-                            <a href="#/signin">Sign In</a>
+                            <button type="submit" class="btn btn-default submit_btn">Sign in</button>
                         </form>
                     </div>
                     <img src="~/Content/Assets/images/cloud.png" alt="Cloud" class="left_img">
@@ -67,4 +58,5 @@
     </script>-->
 </body>
 </html>
+
 
