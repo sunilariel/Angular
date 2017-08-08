@@ -35,7 +35,7 @@ namespace AngularMvcProject.Controllers
             if (response.StatusCode == HttpStatusCode.OK)
             {
                 string token = data.Headers["Token"];
-                return Json(new { success = true, CompanyId = data.Headers["CompanyId"] }, JsonRequestBehavior.AllowGet);
+                return Json(new { success = true, CompanyId = data.Headers["CompanyId"], Token = token }, JsonRequestBehavior.AllowGet);
             }
             else
             {
