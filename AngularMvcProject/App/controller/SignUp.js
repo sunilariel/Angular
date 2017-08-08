@@ -36,7 +36,7 @@ app.controller("SignUp", ['$scope', '$http', '$timeout', '$location', 'bookingSe
 
                    
             var dataobject = {
-                Id: 1,
+                Id: -1,
                 Name: $scope.username,
                 Address: "aaa",
                 Email: $scope.Email,
