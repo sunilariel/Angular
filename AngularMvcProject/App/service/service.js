@@ -1,5 +1,18 @@
 ﻿
 app.service("bookingService", function ($http) {
+
+    this.SignUp = function (dataobject)
+    {
+        var response = $http({
+            method: "POST",
+            url: "/SignUp/CreateAccount",
+            data: { dataObj: dataobject },
+        });
+        return response;
+    }
+
+
+
     // Add Employee
     this.register = function (dataobject) {
         debugger;
