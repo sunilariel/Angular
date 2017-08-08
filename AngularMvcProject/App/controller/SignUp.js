@@ -1,5 +1,5 @@
 ﻿//var app = angular.module("bookingApp", []);
-app.controller("SignUp",['$scope', '$http', '$timeout','$location', function ($scope, $http, $timeout,$location) {
+app.controller("SignUp", ['$scope', '$http', '$timeout', '$location', 'bookingService', function ($scope, $http, $timeout, $location, bookingService) {
     debugger;
     $scope.username = "";
     $scope.Email = "";
@@ -29,22 +29,7 @@ app.controller("SignUp",['$scope', '$http', '$timeout','$location', function ($s
             return false;
         }
 
-        //var email = form.email.$$rawmodelvalue;     
-        //$http.post("signup/userexist",
-        //    { email: email }
-        //    ).success(function (response) {
-        //        debugger;
-        //        if (response == false) {
-        //            booluserexist = true;
-        //            $timeout(function () { $scope.messagetext = "user already exist."; }, 500);
-        //            alert("user already exists");
-        //            return false;
-        //        }
-        //    }).error(function (e) {
-        //        alert("!error");
-        //    });
-       
-       
+                   
             var dataobject = {
                 Id: 1,
                 Name: $scope.username,
@@ -57,35 +42,52 @@ app.controller("SignUp",['$scope', '$http', '$timeout','$location', function ($s
                 Town: "aaaaa",
                 Description: "aa",
                 Password: $scope.Password,
-                CreationDate: "2017-05-22T05:55:21.9148617+00:00"
-
-            
+                CreationDate: "2017-05-22T05:55:21.9148617+00:00"           
             }
-        var data = JSON.stringify(dataobject);
 
-        $http.post("SignUp/postdata", { json: data }).success(function (data) {
-            debugger;
-            if(data.success==true){
-                $scope.IsVisible = true;
-                $scope.MessageText ="Saving Data"
-                $scope.msg = "Post Data Submitted Successfully!";
+            var apirequest = bookingService.SignUp(dataobject);
+            apirequest.then(function (response) {
+                if(response.data.Success==true)
+                {
+                    $scope.IsVisible = true;
+                    $scope.MessageText = "Saving Data";
+                    $timeout(function () {
+                        $scope.MessageText = "Your Details saved.";
+                        $timeout(function () {
+                            $scope.IsVisible = false;
+                            $location.path('/wizard');
+                        },800)
+                    },1000)                   
+                }
+            })
 
-                $timeout(function () { $scope.MessageText = "Your Details saved."; $timeout(function () { $scope.IsVisible = false; }, 1000) }, 500);
+        //var data = JSON.stringify(dataobject);
 
-                $location.path('/wizard');
-            }
-            //else if(data.success=="UserExits")
-            //{
-            //    $scope.IsVisible = true;
-            //    $scope.MessageText = "Saving Data"
-            //    $scope.msg = "Post Data Submitted Successfully!";
+        //$http.post("SignUp/postdata", { json: data }).success(function (data) {
+        //    debugger;
+        //    $scope.IsVisible = true;
+        //    $scope.MessageText = "Checking availability";
+        //    if(data.success==true){
+        //        $scope.IsVisible = true;
+        //        $scope.MessageText ="Saving Data"
+        //        $scope.msg = "Post Data Submitted Successfully!";
 
-            //    $timeout(function () { $scope.MessageText = "User alreay exist"; $timeout(function () { $scope.IsVisible = false; }, 1000) }, 500);
-            //}
-        })
-        .error(function (e) {             
-            alert('Error!');              
-        });
+        //        $timeout(function () { $scope.MessageText = "Your Details saved."; $timeout(function () { $scope.IsVisible = false; }, 1000) }, 500);
+
+        //        $location.path('/wizard');
+        //    }
+        //    //else if(data.success=="UserExits")
+        //    //{
+        //    //    $scope.IsVisible = true;
+        //    //    $scope.MessageText = "Saving Data"
+        //    //    $scope.msg = "Post Data Submitted Successfully!";
+
+        //    //    $timeout(function () { $scope.MessageText = "User alreay exist"; $timeout(function () { $scope.IsVisible = false; }, 1000) }, 500);
+        //    //}
+        //})
+        //.error(function (e) {             
+        //    alert('Error!');              
+        //});
 
        
 
