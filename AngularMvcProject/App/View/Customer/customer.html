@@ -500,8 +500,8 @@
                                     <div class="tab-content" style="height: 186px;">
                                         <div class="tab-pane active" id="staff-details">
                                             <div class="appointment_content">
-                                                <div class="appoint_text appoint_cust" ng-hide="CustomerCount==0">
-                                                    <button class="pull-right btn btn-circle appointment_btn" id="createnewstaffbtn" title="" data-toggle="modal" data-target="#squarespaceModal"><i class="fa fa-plus" aria-hidden="true" ng-click="AddAppointmentPopup()"></i></button>    
+                                                <div class="appoint_text appoint_cust" ng-hide="CustomerCount==0" ng-click="AddAppointmentPopup()">
+                                                    <button class="pull-right btn btn-circle appointment_btn" id="createnewstaffbtn" title="" data-toggle="modal" data-target="#squarespaceModal"><i class="fa fa-plus" aria-hidden="true" ></i></button>    
                                                     <span>{{NumberofAppointmnets}} appointment & 0 class</span><span class="dottext">.</span><span> £{{TotalCostofServices}}</span>                                                
                                                 </div>
                                                
@@ -624,7 +624,8 @@
                                                                                     <input type="text" class="form-control calendarBox" datepicker-popup="EEE, MMM d" ng-model="dt" open="opened" datepicker-options="dateOptions" date-disabled="disabled(date, mode)"  ng-click="SetDatePicker()" name='theDate' ng-required="true"  />
                                                                                     
                                                                                     <div class="selectDropdown">
-                                                                                        <select class="select_btn dateTimeSelect"  ng-model="timeoption" name="timeoption" ng-init="timeoption='8:00 AM'" >
+                                                                                        <div class="gifImage" ng-show="timeslotsloading"><img src="/Content/Assets/images/loading.gif" /></div>                                                                    
+                                                                                        <select class="select_btn dateTimeSelect"  ng-model="timeoption" name="timeoption" ng-init="timeoption='8:00 AM'" >                                                                                          
                                                                                             <option ng-repeat="timeoption in timeInfoFrom " value="{{timeoption}}">{{timeoption}}</option>
                                                                                         </select>
                                                                                     </div>
