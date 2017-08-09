@@ -1,5 +1,5 @@
 ﻿//var app = angular.module("bookingApp", []);
-app.controller("SignUp", ['$scope', '$http', '$timeout', '$location', 'bookingService', function ($scope, $http, $timeout, $location, bookingService) {
+app.controller("SignUp", ['$scope', '$http', '$timeout', '$location', 'bookingService', '$window', function ($scope, $http, $timeout, $location, bookingService, $window) {
     debugger;
     $scope.username = "";
     $scope.Email = "";
@@ -54,6 +54,8 @@ app.controller("SignUp", ['$scope', '$http', '$timeout', '$location', 'bookingSe
             apirequest.then(function (response) {
                 if(response.data.Success==true)
                 {
+                    alert(response.data.ReturnObject.AuthToken);
+                    $window.sessionStorage.setItem('userInfo-token', response.data.ReturnObject.AuthToken);
                     $scope.IsVisible = true;
                     $scope.MessageText = "Saving Data";
                     $timeout(function () {
