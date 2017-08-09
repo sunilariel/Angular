@@ -13,23 +13,32 @@ app.controller("SignUp", ['$scope', '$http', '$timeout', '$location', 'bookingSe
         {
             if(form.username.$invalid==true)
             {
+                $scope.IsVisible = true;
+                $scope.MessageText = "Name field cannot be blank";
+                $timeout(function () {
+                    $scope.IsVisible = false;
+                },1000)
                 form.username.$touched = true;
                 form.username.$setTouched();
+                return false;
             }
             if(form.email.$invalid==true)
             {
                 form.email.$touched = true;
                 form.email.$setTouched();
+              
             }
             if(form.password.$invalid==true)
             {
                 form.password.$touched = true;
                 form.password.$setTouched();
+               
             }
             return false;
         }
 
-                   
+        $scope.IsVisible = true;
+        $scope.MessageText = "Checking availability"
             var dataobject = {
                 Id: 1,
                 Name: $scope.username,

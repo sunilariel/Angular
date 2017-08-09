@@ -339,7 +339,7 @@ namespace AngularMvcProject.Controllers
                     obj.ServiceName = appointment.Service.Name;
                     obj.DurationInHours = appointment.Service.DurationInHours;
                     obj.DurationInMinutes = appointment.Service.DurationInMinutes;
-                    obj.Cost = appointment.Service.Cost;
+                    obj.Cost = appointment.Service.Cost==null?0:appointment.Service.Cost;
                     obj.Currency = appointment.Service.Currency;
                     obj.status = appointment.Status;
                     obj.StartTime = appointment.Start;
