@@ -30,6 +30,7 @@ namespace AngularMvcProject.Controllers
             var httpWebRequest = (HttpWebRequest)WebRequest.Create(apiURL);
             httpWebRequest.ContentType = "application/json";
             httpWebRequest.Method = "POST";
+            httpWebRequest.Headers.Add("Token", Request.Headers["Token"]);
 
             using (var streamWriter = new StreamWriter(httpWebRequest.GetRequestStream()))
             {
@@ -59,6 +60,7 @@ namespace AngularMvcProject.Controllers
                 var httpWebRequest = (HttpWebRequest)WebRequest.Create(apiURL);
                 httpWebRequest.ContentType = "application/json";
                 httpWebRequest.Method = "POST";
+                httpWebRequest.Headers.Add("Token", Request.Headers["Token"]);
 
                 using (var streamWriter = new StreamWriter(httpWebRequest.GetRequestStream()))
                 {
@@ -98,6 +100,7 @@ namespace AngularMvcProject.Controllers
             var httpWebRequest = (HttpWebRequest)WebRequest.Create(apiURL);
             httpWebRequest.ContentType = "application/json";
             httpWebRequest.Method = "GET";
+            httpWebRequest.Headers.Add("Token", Request.Headers["Token"]);
 
             var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
             using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
@@ -115,8 +118,8 @@ namespace AngularMvcProject.Controllers
             string apiUrl = ConfigurationManager.AppSettings["DomainUrl"].ToString() + "/api/customer/DeleteCustomer?companyId=" + CompanyId  +"&customerId=" + CustomerId;
             string result = "";
             var httpWebRequest = (HttpWebRequest)WebRequest.Create(apiUrl);
-
             httpWebRequest.Method = "DELETE";
+            httpWebRequest.Headers.Add("Token", Request.Headers["Token"]);
 
             var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
             using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
@@ -141,6 +144,7 @@ namespace AngularMvcProject.Controllers
             var httpWebRequest = (HttpWebRequest)WebRequest.Create(apiURL);
             httpWebRequest.ContentType = "application/json";
             httpWebRequest.Method = "GET";
+            httpWebRequest.Headers.Add("Token", Request.Headers["Token"]);
 
             var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
             using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
@@ -173,6 +177,7 @@ namespace AngularMvcProject.Controllers
                 var httpWebRequest = (HttpWebRequest)WebRequest.Create(apiURL);
                 httpWebRequest.ContentType = "application/json";
                 httpWebRequest.Method = "POST";
+                httpWebRequest.Headers.Add("Token", Request.Headers["Token"]);
 
                 using (var streamWriter = new StreamWriter(httpWebRequest.GetRequestStream()))
                 {
@@ -217,6 +222,7 @@ namespace AngularMvcProject.Controllers
                 var httpWebRequest = (HttpWebRequest)WebRequest.Create(apiURL);
                 httpWebRequest.ContentType = "application/json";
                 httpWebRequest.Method = "POST";
+                httpWebRequest.Headers.Add("Token", Request.Headers["Token"]);
 
                 using (var streamWriter = new StreamWriter(httpWebRequest.GetRequestStream()))
                 {
@@ -252,6 +258,7 @@ namespace AngularMvcProject.Controllers
             var httpWebRequest = (HttpWebRequest)WebRequest.Create(apiURL);
             httpWebRequest.ContentType = "application/json";
             httpWebRequest.Method = "GET";
+            httpWebRequest.Headers.Add("Token", Request.Headers["Token"]);
 
             var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
             using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
@@ -270,6 +277,7 @@ namespace AngularMvcProject.Controllers
             var httpWebRequest = (HttpWebRequest)WebRequest.Create(apiURL);
             httpWebRequest.ContentType = "application/json";
             httpWebRequest.Method = "GET";
+            httpWebRequest.Headers.Add("Token", Request.Headers["Token"]);
 
             var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
             using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
@@ -290,6 +298,7 @@ namespace AngularMvcProject.Controllers
                 var httpWebRequest = (HttpWebRequest)WebRequest.Create(apiURL);
                 httpWebRequest.ContentType = "application/json";
                 httpWebRequest.Method = "GET";
+                httpWebRequest.Headers.Add("Token", Request.Headers["Token"]);
 
                 var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
                 using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
@@ -320,6 +329,7 @@ namespace AngularMvcProject.Controllers
                 var httpWebRequest = (HttpWebRequest)WebRequest.Create(apiURL);
                 httpWebRequest.ContentType = "application/json";
                 httpWebRequest.Method = "GET";
+                httpWebRequest.Headers.Add("Token", Request.Headers["Token"]);
 
                 var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
                 using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
@@ -369,6 +379,7 @@ namespace AngularMvcProject.Controllers
                 var httpWebRequest = (HttpWebRequest)WebRequest.Create(apiUrl);
                 httpWebRequest.Method = "POST";
                 httpWebRequest.ContentType = "application/json";
+                httpWebRequest.Headers.Add("Token", Request.Headers["Token"]);
                 httpWebRequest.ContentLength = 0;
 
                 var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
@@ -394,8 +405,9 @@ namespace AngularMvcProject.Controllers
                 var httpWebRequest = (HttpWebRequest)WebRequest.Create(apiUrl);
                 httpWebRequest.Method = "POST";
                 httpWebRequest.ContentType = "application/json";
-               
-               using(var StreamWriter=new StreamWriter(httpWebRequest.GetRequestStream()))
+                httpWebRequest.Headers.Add("Token", Request.Headers["Token"]);
+
+                using (var StreamWriter=new StreamWriter(httpWebRequest.GetRequestStream()))
                 {
                     var JsonString = new JavaScriptSerializer().Serialize(appointment);
                     StreamWriter.Write(JsonString);
@@ -426,7 +438,8 @@ namespace AngularMvcProject.Controllers
                 var httpWebRequest = (HttpWebRequest)WebRequest.Create(apiUrl);
                 httpWebRequest.Method = "DELETE";
                 httpWebRequest.ContentType = "application/json";
-    
+                httpWebRequest.Headers.Add("Token", Request.Headers["Token"]);
+
                 var httpWebResponse = (HttpWebResponse)httpWebRequest.GetResponse();
                 using (var StreamReader = new StreamReader(httpWebResponse.GetResponseStream()))
                 {

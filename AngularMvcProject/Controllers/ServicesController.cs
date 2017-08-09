@@ -23,6 +23,7 @@ namespace AngularMvcProject.Controllers
                 var httpWebRequest = (HttpWebRequest)WebRequest.Create(ConfigurationManager.AppSettings["DomainUrl"].ToString() + "/api/services/CreateCategory");
                 httpWebRequest.ContentType = "application/json";
                 httpWebRequest.Method = "POST";
+                httpWebRequest.Headers.Add("Token", Request.Headers["Token"]);
 
                 using (var StreamWriter = new StreamWriter(httpWebRequest.GetRequestStream()))
                 {
@@ -55,8 +56,8 @@ namespace AngularMvcProject.Controllers
                 var httpWebRequest = (HttpWebRequest)WebRequest.Create(ConfigurationManager.AppSettings["DomainUrl"].ToString() + "/api/services/GetServiceCategoriesForCompany?companyId=" + Id);
                 httpWebRequest.ContentType = "application/json";
                 httpWebRequest.Method = "GET";
+                httpWebRequest.Headers.Add("Token", Request.Headers["Token"]);
                 httpWebRequest.ContentLength = 0;
-             
               
                 var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
                 using (var StreamReader = new StreamReader(httpResponse.GetResponseStream()))
@@ -81,6 +82,7 @@ namespace AngularMvcProject.Controllers
                 var httpWebRequest = (HttpWebRequest)WebRequest.Create(ConfigurationManager.AppSettings["DomainUrl"].ToString() + "/api/companyregistration/AddService");
                 httpWebRequest.Method = "POST";
                 httpWebRequest.ContentType = "application/json";
+                httpWebRequest.Headers.Add("Token", Request.Headers["Token"]);
 
                 using (var StreamWriter = new StreamWriter(httpWebRequest.GetRequestStream()))
                 {
@@ -113,6 +115,7 @@ namespace AngularMvcProject.Controllers
                 var httpWebRequest = (HttpWebRequest)WebRequest.Create(ConfigurationManager.AppSettings["DomainUrl"].ToString() + "/api/services/AssignCategoryToService?companyId=" + CompanyId + "&categoryId=" + CategoryId + "&serviceId=" + SeviceId);
                 httpWebRequest.Method = "PUT";
                 httpWebRequest.ContentType = "application/json";
+                httpWebRequest.Headers.Add("Token", Request.Headers["Token"]);
                 httpWebRequest.ContentLength = 0;
 
                 var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
@@ -139,6 +142,7 @@ namespace AngularMvcProject.Controllers
                 var httpWebRequest = (HttpWebRequest)WebRequest.Create(ConfigurationManager.AppSettings["DomainUrl"].ToString() + "/api/services/DeAllocateCategoryFromService?companyId=" + CompanyId + "&categoryId=" + CategoryId + "&serviceId=" + SeviceId);
                 httpWebRequest.Method = "POST";
                 httpWebRequest.ContentType = "application/json";
+                httpWebRequest.Headers.Add("Token", Request.Headers["Token"]);
                 httpWebRequest.ContentLength = 0;
 
                 var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
@@ -164,7 +168,8 @@ namespace AngularMvcProject.Controllers
                 var httpWebRequest = (HttpWebRequest)WebRequest.Create(ConfigurationManager.AppSettings["DomainUrl"].ToString() +"/api/services/GetCategoriesAssignedToService?companyId="+ CompanyId + "&serviceId=" + ServiceId);
                 httpWebRequest.Method = "GET";
                 httpWebRequest.ContentType = "application/json";
-            
+                httpWebRequest.Headers.Add("Token", Request.Headers["Token"]);
+
                 var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
                 using (var StreamReader = new StreamReader(httpResponse.GetResponseStream()))
                 {
@@ -188,7 +193,8 @@ namespace AngularMvcProject.Controllers
                 var httpWebRequest = (HttpWebRequest)WebRequest.Create(ConfigurationManager.AppSettings["DomainUrl"].ToString() + "/api/services/GetServicesForCompany?companyId="+ CompanyId);
                 httpWebRequest.Method = "GET";
                 httpWebRequest.ContentType = "application/json";
-             
+                httpWebRequest.Headers.Add("Token", Request.Headers["Token"]);
+
                 var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
                 using (var StreamReader = new StreamReader(httpResponse.GetResponseStream()))
                 {
@@ -211,6 +217,7 @@ namespace AngularMvcProject.Controllers
                 var httpWebRequest = (HttpWebRequest)WebRequest.Create(ConfigurationManager.AppSettings["DomainUrl"].ToString() + "/api/services/GetAllServicesForCategory?companyId="+ CompanyId + "&categoryId=" + CategoryId);
                 httpWebRequest.Method = "GET";
                 httpWebRequest.ContentType = "application/json";
+                httpWebRequest.Headers.Add("Token", Request.Headers["Token"]);
 
                 var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
                 using (var StreamReader = new StreamReader(httpResponse.GetResponseStream()))
@@ -234,6 +241,7 @@ namespace AngularMvcProject.Controllers
                 var httpWebRequest = (HttpWebRequest)WebRequest.Create(ConfigurationManager.AppSettings["DomainUrl"].ToString() + "/api/services/UpdateService");
                 httpWebRequest.Method = "POST";
                 httpWebRequest.ContentType = "application/json";
+                httpWebRequest.Headers.Add("Token", Request.Headers["Token"]);
 
                 using (var StreamWriter = new StreamWriter(httpWebRequest.GetRequestStream()))
                 {
@@ -265,7 +273,7 @@ namespace AngularMvcProject.Controllers
                 var httpWebRequest = (HttpWebRequest)WebRequest.Create(ConfigurationManager.AppSettings["DomainUrl"].ToString() + "/api/companyregistration/GetCompanyEmployees?companyId="+CompanyId);
                 httpWebRequest.Method = "GET";
                 httpWebRequest.ContentType = "application/json";
-
+                httpWebRequest.Headers.Add("Token", Request.Headers["Token"]);
                
                 var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
                 using (var StreamReader = new StreamReader(httpResponse.GetResponseStream()))
@@ -289,6 +297,7 @@ namespace AngularMvcProject.Controllers
                 var httpWebRequest = (HttpWebRequest)WebRequest.Create(ConfigurationManager.AppSettings["DomainUrl"].ToString() + "/api/companyregistration/AssignServiceToStaff");
                 httpWebRequest.Method = "POST";
                 httpWebRequest.ContentType = "application/json";
+                httpWebRequest.Headers.Add("Token", Request.Headers["Token"]);
 
                 using (var StreamWriter = new StreamWriter(httpWebRequest.GetRequestStream()))
                 {
@@ -321,6 +330,7 @@ namespace AngularMvcProject.Controllers
                 var httpWebRequest = (HttpWebRequest)WebRequest.Create(apiURL);
                 httpWebRequest.ContentType = "application/json";
                 httpWebRequest.Method = "POST";
+                httpWebRequest.Headers.Add("Token", Request.Headers["Token"]);
                 httpWebRequest.ContentLength = 0;
 
                 var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
@@ -346,6 +356,7 @@ namespace AngularMvcProject.Controllers
                 var httpWebRequest = (HttpWebRequest)WebRequest.Create(ConfigurationManager.AppSettings["DomainUrl"].ToString()+"/api/services/UpdateCategory");
                 httpWebRequest.Method = "POST";
                 httpWebRequest.ContentType = "application/json";
+                httpWebRequest.Headers.Add("Token", Request.Headers["Token"]);
 
                 using (var StreamWriter = new StreamWriter(httpWebRequest.GetRequestStream()))
                 {
@@ -377,8 +388,8 @@ namespace AngularMvcProject.Controllers
                 var httpWebRequest = (HttpWebRequest)WebRequest.Create(ConfigurationManager.AppSettings["DomainUrl"].ToString() + "/api/services/DeleteCategory?companyId=" + CompanyId);
                 httpWebRequest.Method = "DELETE";
                 httpWebRequest.ContentType = "application/json";
-              
-                
+                httpWebRequest.Headers.Add("Token", Request.Headers["Token"]);
+
                 var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
                 using (var StreamReader = new StreamReader(httpResponse.GetResponseStream()))
                 {
@@ -402,7 +413,7 @@ namespace AngularMvcProject.Controllers
                 var httpWebRequest = (HttpWebRequest)WebRequest.Create(ConfigurationManager.AppSettings["DomainUrl"].ToString() + "/api/staff/GetEmployeeAllocatedToService?serviceId=" + ServiceId);
                 httpWebRequest.Method = "GET";
                 httpWebRequest.ContentType = "application/json";
-
+                httpWebRequest.Headers.Add("Token", Request.Headers["Token"]);
 
                 var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
                 using (var StreamReader = new StreamReader(httpResponse.GetResponseStream()))
@@ -426,8 +437,8 @@ namespace AngularMvcProject.Controllers
                 var httpWebRequest = (HttpWebRequest)WebRequest.Create(ConfigurationManager.AppSettings["DomainUrl"].ToString() + "/api/services/DeleteService?companyId=" + ServiceId);
                 httpWebRequest.Method = "DELETE";
                 httpWebRequest.ContentType = "application/json";
+                httpWebRequest.Headers.Add("Token", Request.Headers["Token"]);
 
-               
                 var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
                 using (var StreamReader = new StreamReader(httpResponse.GetResponseStream()))
                 {

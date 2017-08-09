@@ -31,7 +31,6 @@ namespace AngularMvcProject.Controllers
         {
             return View();
         }
-
         [HttpPost]
         public string postdata(CreateAccount dataObj)
         {
@@ -58,7 +57,6 @@ namespace AngularMvcProject.Controllers
 
             return result;
         }
-
         [HttpPost]
         public string poststaffdata(StaffData dataObj)
         {
@@ -95,7 +93,6 @@ namespace AngularMvcProject.Controllers
             }
 
         }
-
         [HttpPost]
         public string EditStaffData(StaffData dataObj)
         {
@@ -132,9 +129,6 @@ namespace AngularMvcProject.Controllers
             }
 
         }
-
-
-
         public string PostWorkingHours(WorkingHours dataobj)
         {
             List<ReqWorkingHours> listofworkinghours = new List<ReqWorkingHours>();
@@ -180,7 +174,6 @@ namespace AngularMvcProject.Controllers
 
             return result;
         }
-
         [HttpPost]
         public string GetStaffData(int CompanyId)
         {
@@ -391,7 +384,6 @@ namespace AngularMvcProject.Controllers
             }
 
         }
-
         [HttpPost]
         public string EditService(Service dataObj)
         {
@@ -427,7 +419,6 @@ namespace AngularMvcProject.Controllers
             }
 
         }
-
         [HttpPost]
         public string DeleteService(int Id)
         {
@@ -476,7 +467,6 @@ namespace AngularMvcProject.Controllers
             }
 
         }
-
         public string AssignStaff(AssignStaff dataobj)
         {
             string apiURL = ConfigurationManager.AppSettings["DomainUrl"].ToString() + dataobj.Url;
@@ -503,7 +493,6 @@ namespace AngularMvcProject.Controllers
            
             return result;
         }
-
         public string DeAllocateServiceForEmployee(DeAllocateServiceEmployees dataobj)
         {
             try
