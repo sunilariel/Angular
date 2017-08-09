@@ -257,9 +257,9 @@ color: #333;
     font-size: 15px;
     padding: 0px 7px;
 }
-.left_side2 li a {
+/*.left_side2 li a {
     padding: 10px 0px;
-}
+}*/
 .left_side2 .nav>li>a:focus, .left_side2 .nav>li>a:hover{
 	background:none;	
 }
@@ -2149,7 +2149,7 @@ table#mytable tr td {
 .customerProfileDiv {
     margin: 40px 0 0 15px;
     position: relative;
-    
+   
 }
 .selectCustomer .popOverDeleteBtn .delete_btn span {
 	margin-right:3px;
@@ -2419,6 +2419,7 @@ span.dotSplitter
 .categoryList ul li a {
     color: rgb(193, 200, 205);
     font-size: 13px;
+     display:block;
 }
 .categoryList ul li:hover a {
     color: rgb(73, 88, 97);
@@ -2433,6 +2434,7 @@ span.dotSplitter
 .categoryButton i {
     color: #000;
 }
+
 .categoryRightSec {
 	padding-left:30px;
     padding-right: 50px;
@@ -3044,6 +3046,11 @@ ul.dashboardNtfList {
    
 } */
 
+
+.staffactive {
+    background: #E1E7EB;
+}
+
 .serviceprovideBtn .checkbox .cr {
     position: relative;
     display: inline-block;
@@ -3142,6 +3149,7 @@ ul.dashboardNtfList {
 }
 .staffList ul li a {
 	/*color:#495861;*/
+    display:block;
 }
 .staffProfileDiv {
 	margin:0;
@@ -3365,6 +3373,13 @@ span.staffdatepickerTime a {
 } 
 .customerField .emailField {
     width:87%;
+}
+.gifImage {
+    position: absolute;
+    right: 46px;
+    top: 1px;
+    background: transparent;
+    width: 31px;
 }
 .mobilenumberField {
     padding-left:5px;

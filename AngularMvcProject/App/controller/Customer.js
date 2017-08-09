@@ -55,6 +55,7 @@
     //This function will run first on page load.
     $scope.init = function () {
         var count = 0;
+        
         debugger;
         $scope.CompanyId = $routeParams.CompanyId;
         $scope.showcustomer = false;
@@ -336,6 +337,7 @@
     ////////////////////Add Appointment Module ///////////////////////
     $scope.AddAppointmentPopup = function () {
         debugger;
+        $scope.timeslotsloading = false;
         var result = bookingService.GetAppointmentDetails($scope.CustomerId);
         // $scope.selectedprovider = "-- Select a Provider --";
         $scope.selectedservice = " ";
@@ -713,8 +715,8 @@
     };
 
     $scope.SetDatePicker = function () {
-        debugger;              
-            $scope.today();     
+        debugger;
+        $scope.today();     
     }
 
 
@@ -755,6 +757,7 @@
             DateofBooking: $filter('date')(newValue, "MM-dd-yyyy"),
             Day: days[newValue.getDay()],
         }
+        $scope.timeslotsloading = true;
         var result = bookingService.GetFreeBookingSlotsForEmployee(RequestValues);
         result.then(function (response) {
             if (newValue != oldValue) {
@@ -777,6 +780,7 @@
 
                     }
                 }
+                $scope.timeslotsloading = false;
             }
         });
     });
