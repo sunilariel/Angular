@@ -104,6 +104,13 @@
                     $timeout(function () {
                         $scope.IsVisible = false;
                         $scope.IsVisibleAddNewStaffPopUp = false;
+
+                        //Clear the form elements value//
+                        $scope.StaffEmail = "";
+                        $scope.StaffName = "";
+                        form.StaffName.$setUntouched();
+                        form.StaffName.$untouched = true;
+
                         var StaffResult = bookingService.GetAllStaff($routeParams.CompanyId);
                         StaffResult.then(function (response) {
                             $scope.ListofStaff = [];
@@ -149,7 +156,16 @@
         })
     }
 
-  
+    $scope.StaffCancel = function(form) {
+        debugger;
+        $scope.IsVisibleAddNewStaffPopUp = false
+        //Clear the form elements value//
+       // $scope.StaffEmail = "";
+       // $scope.StaffName = "";
+       //// form.StaffName.$setTouched = true;
+       // form.StaffName.$setUntouched();
+       // form.StaffName.$untouched = true;
+    }
 
 
 

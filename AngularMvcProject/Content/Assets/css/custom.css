@@ -2088,19 +2088,24 @@ table#mytable tr td {
 .providerCustomer ul.list-inline {
     padding: 10px;
     overflow: auto;
-    height: 600px;
+    height: 570px;
+    padding-bottom: 15px;
+}
+.providerCustomer .list-inline li.selectCustomer.active {
+    background: #E1E7EB;
 }
 
 .providerCustomer .list-inline .selectCustomer {
     position:relative;
     border-radius: 4px;
-    color: #000;
+    color: #aab4b9;
     height: 40px;
     width: 100%;
 	margin-bottom: 10px;
 }
 .providerCustomer .list-inline .selectCustomer:hover {
     background: #E1E7EB;
+    color:black;
 }
 .formCheckbox .inputcheckbox {
     vertical-align: middle;
@@ -2389,8 +2394,12 @@ span.dotSplitter
     list-style: none;
     margin: 0;
     padding: 0;
-    height: 500px;
+    height: 490px;
     overflow: auto;
+}
+.provideServiceDiv.customerProfileDiv {
+    overflow: auto;
+    height: 420px;
 }
 .categoryList {
     margin-top: 20px;
@@ -2411,11 +2420,12 @@ span.dotSplitter
     color: rgb(193, 200, 205);
     font-size: 13px;
 }
-.categoryList ul li a:hover {
+.categoryList ul li:hover a {
     color: rgb(73, 88, 97);
 }
 .categoryList ul li {
-    padding-bottom: 20px;
+    border-radius: 5px;
+    padding: 10px;
 }
 .categoryList ul li a span {
     padding-left:5px;
@@ -2428,9 +2438,13 @@ span.dotSplitter
     padding-right: 50px;
 }
 .categoryButtonsDiv {
-    margin-top: 55px;
+    margin-top: 45px;
 	border-bottom: 1px solid #CCC;
     padding-bottom: 25px;
+}
+.left_side2.addcustomerSec .categoryList ul li:hover {
+    background: #E1E7EB;
+    display: block;
 }
 .categoryButtonsDiv .serviceSaveBtn {
     color: rgb(255, 255, 255);
@@ -2453,6 +2467,17 @@ span.dotSplitter
 }
 .categoryButtonsDiv .serviceCancelBtn:focus {
     outline:none;
+}
+a#deletecateBtn {
+    float: right;
+}
+.allservicesText {
+    float: left;
+}
+.allservicesText h3 span i {
+    padding-right: 10px;
+    font-size: 30px;
+    color: #C1C8CD;
 }
 .serviceIconImage img {
 	border: 1px solid #CCC;
@@ -3116,7 +3141,7 @@ ul.dashboardNtfList {
 	border-radius:100%;
 }
 .staffList ul li a {
-	color:#495861;
+	/*color:#495861;*/
 }
 .staffProfileDiv {
 	margin:0;
@@ -3227,6 +3252,11 @@ h3.serviceProText {
 .timeOffPlusBtn {
     padding: 4px 9px;
     margin-top: 5px;
+}
+.allserviceanchorbtn {
+    text-decoration: none;
+    font-size: 23px;
+    color: #455862;
 }
 /*.addstaffBtn {
   padding: 7px 9px;  
@@ -3567,6 +3597,23 @@ span.staffdatepickerTime a {
     padding: 7px;
     cursor: default;
 }
+
+
+.one:before {
+  content: "";
+  display: inline-block;
+  width: 15px;
+  height: 15px;
+  margin-right: 5px;
+ 
+}
+
+
+
+
+
+
+
 
 .dateTimeDiv ul li.divider {
     display: none;

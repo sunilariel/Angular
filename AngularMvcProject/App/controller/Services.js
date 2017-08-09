@@ -24,6 +24,22 @@
         $scope.CategoryCheckedCount = 0;
         $scope.EditServiceDiv = true;
 
+        $scope.ColourCode = "#f0c2c1";
+        $scope.BorderColourCode = "1px solid #e59190";
+
+        $scope.ServiceColourList = [{ "BackgroundColour": "Red", "ColourCode": "#f0c2c1", "BorderColourCode": " 1px solid #e59190" },
+        { "BackgroundColour": "Light gray", "ColourCode": "#e1e0e2", "BorderColourCode": "1px solid  #a9a8a9" },
+        { "BackgroundColour": "Green", "ColourCode": "#cae79e", "BorderColourCode": "1px solid  #7bc40d" },
+        { "BackgroundColour": "Light blue", "ColourCode": "#bbe6e1", "BorderColourCode": "1px solid  #55bfb3" },
+        { "BackgroundColour": "Maroon", "ColourCode": "#e6dbcb", "BorderColourCode": "1px solid  #c4a981" },
+        { "BackgroundColour": "Deep sky blue", "ColourCode": "#b5cedb", "BorderColourCode": "1px solid  #4484a4" },
+        { "BackgroundColour": "Violet", "ColourCode": "#e1c6e1", "BorderColourCode": "1px solid #b597e8" },
+        { "BackgroundColour": "Yellow", "ColourCode": "#f3e7ae", "BorderColourCode": "1px solid  #d4b825" },
+        { "BackgroundColour": "Orange", "ColourCode": "#fadeb3", "BorderColourCode": "1px solid  #f2a836" },
+        ]
+
+
+
         var CompanyId = $routeParams.CompanyId;
         var responsedata = bookingService.GetCategories(CompanyId);
         responsedata.then(function (response) {
@@ -37,8 +53,11 @@
     //Get All Services of particular CompanyId//
         var responsedata = bookingService.GetAllService($routeParams.CompanyId);
         responsedata.then(function (response) {
+            debugger;
             $scope.AllServices = [];
             $scope.AllServices = response.data;
+         
+           
         });
     }
 
@@ -123,6 +142,7 @@
 
     $scope.DeleteCategory=function()
     {
+        debugger;
         var responseresult = bookingService.DeleteCategory($scope.CategoryId);
         responseresult.then(function (response) {
             if(response.data.Success==true)
@@ -159,7 +179,7 @@
         response.then(function (response) {
             if(response.data.Success==true)
             {
-                $scope.showcategorypopup = false;
+              
                 var CompanyId = $routeParams.CompanyId;
                 var responsedata = bookingService.GetCategories(CompanyId);
                 responsedata.then(function (response) {
@@ -173,13 +193,32 @@
                 $scope.MessageText = "Adding new Category";
                 $scope.IsVisible = true;
                 $timeout(function () {
-                    $scope.IsVisible = false;
-                }, 500);
+                    $scope.MessageText = "Added new Category";
+                    $timeout(function () {                       
+                        $scope.IsVisible = false;
+                        $scope.showcategorypopup = false;
+                        $scope.CategoryName = "";
+                    },800)                  
+                }, 1000);
             }
         });
     }
 
+    $scope.CategoryCancel = function () {
+        $scope.showcategorypopup = false
+        $scope.CategoryName = "";
+    }
   
+    $scope.GetColour = function (Colour, ColourCode, BorderColourCode)
+    {
+        debugger;
+        $scope.ColourCode = ColourCode;
+        $scope.BorderColourCode = BorderColourCode;
+        $scope.Colour = Colour;
+    }
+
+
+
     $scope.SaveService = function () {
       
         if (servicenameform.ServiceName.value == "")
@@ -227,6 +266,8 @@
                 "DurationInHours": 0,
                 "Cost": $scope.ServiceCost,
                 "Currency": "sample string 9",
+                "Colour": $scope.ColourCode,
+                "Buffer": $scope.BufferTime,
                 "CreationDate": "2017-06-26T11:08:28.4943519+00:00"
             }
 
@@ -234,6 +275,17 @@
 
             responsedata.then(function (response) {
                 debugger;
+                if (response.data.Success == false)
+                {
+                    if (response.data.Message.includes("Already Exists"))
+                    {
+                        $scope.MessageText = "Service Already Exists";
+                        $scope.IsVisible = true;
+                        $timeout(function () {
+                            $scope.IsVisible = false;
+                        },1000)
+                    }
+                }
                 if (response.data.Success == true) {
                     $scope.ServiceId = response.data.ReturnObject.ServiceId;
 
@@ -294,6 +346,16 @@
         $scope.ServiceName = item.Name;
         $scope.ServiceCost = item.Cost;
         $scope.ServiceTime = item.DurationInMinutes;
+
+        //Get Colour Code of Service//
+        angular.forEach($scope.ServiceColourList,function(value,key)
+        {
+            if(value.ColourCode==item.Colour)
+            {
+                $scope.ColourCode = value.ColourCode;
+                $scope.BorderColourCode = value.BorderColourCode;
+            }
+        })
 
         //Get all Staff assigned to particular Service.
         var responsedata = bookingService.GetAllStaff($routeParams.CompanyId);
@@ -365,6 +427,8 @@
             "DurationInHours": "",
             "Cost": $scope.ServiceCost,
             "Currency": "sample string 9",
+            "Colour": $scope.ColourCode,
+            "Buffer": $scope.BufferTime,
             "CreationDate": "2017-07-05T05:21:50.3448321+00:00"
         }
 

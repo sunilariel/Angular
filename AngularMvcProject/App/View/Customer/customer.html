@@ -326,7 +326,7 @@
                                                 </div>
 
                                                 <button id="addnewCustomer" type="submit" class="btn addCustomerbtn appointCustomBtn">Add Customer</button>
-                                                <button id="cancelCustomer" ng-click="showcustomer=false;" type="button" class="btn btn-default addCustomerCancelbtn appointCustomBtn" ng-hide="CustomerCount==0">Cancel</button>
+                                                <button id="cancelCustomer" ng-click="CustomerCancel(createCustomerform)" type="button" class="btn btn-default addCustomerCancelbtn appointCustomBtn" ng-hide="CustomerCount==0">Cancel</button>
 
                                             </div>
                                         </div>
@@ -415,7 +415,7 @@
 
 
                                             </div>
-                                            <span class="uploadImageIcon"><i class="fa fa-camera" aria-hidden="true" style="margin-left: 4px;"></i></span>
+                                            <span class="uploadImageIcon"><i class="fa fa-camera" aria-hidden="true" style="margin-left: 4px; "></i></span>
                                         </label>
                                         <div class="col-md-9 col-sm-12 col-xs-9 customerNameDiv">
                                             <input type="text" class="customerName namevalueField form-control" value="Mark" id="name" name="name" placeholder="Name" ng-model="updatedCustomerName" ng-blur="updateCustomer()">
@@ -621,10 +621,10 @@
                                                                                 <div class="col-sm-8 dateTimeDiv">
                                                                                     <span class="glyphicon glyphicon-ok calendarOk"></span><!--<input type="text" class="form-control datepickerBox" ng-model="datatime" placeholder="Fri, May 12" id="datetimepicker4" />-->
                                                                                     <!--<input datetime-picker ng-model="selecteddate" date-disabled="disabled(date, mode)" disable-weekends="true"  class="form-control datepickerBox"  date-format="EEE, MMM d" size="30" date-only   />-->
-                                                                                    <input type="text" class="form-control calendarBox" datepicker-popup="EEE, MMM d" ng-model="dt" open="opened" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-change="ChangeDate()" ng-click="SetDatePicker()" name='theDate' ng-required="true"  />
+                                                                                    <input type="text" class="form-control calendarBox" datepicker-popup="EEE, MMM d" ng-model="dt" open="opened" datepicker-options="dateOptions" date-disabled="disabled(date, mode)"  ng-click="SetDatePicker()" name='theDate' ng-required="true"  />
                                                                                     
                                                                                     <div class="selectDropdown">
-                                                                                        <select class="select_btn dateTimeSelect"  ng-model="timeoption" name="timeoption" ng-init="timeoption='8:00 AM'">
+                                                                                        <select class="select_btn dateTimeSelect"  ng-model="timeoption" name="timeoption" ng-init="timeoption='8:00 AM'" >
                                                                                             <option ng-repeat="timeoption in timeInfoFrom " value="{{timeoption}}">{{timeoption}}</option>
                                                                                         </select>
                                                                                     </div>

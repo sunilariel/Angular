@@ -54,7 +54,7 @@
 
     //This function will run first on page load.
     $scope.init = function () {
-
+        var count = 0;
         debugger;
         $scope.CompanyId = $routeParams.CompanyId;
         $scope.showcustomer = false;
@@ -163,6 +163,16 @@
                     if ($scope.CustomerCount != 0) {
                         $scope.EditCustomer(response.data[0]);
                     }
+                    //Empty the Customer Fields in Popup
+                    $scope.customerName = null;
+                    $scope.customerEmail = null;
+                    $scope.customerExt = null;
+                    $scope.customerMobile = null;
+                    form.customerName.$setUntouched();
+                    form.customerName.$untouched = true;
+                    form.customerEmail.$setUntouched();
+                    form.customerEmail.$untouched = true;
+
                     //$scope.showcustomer = false;
                 });
 
@@ -179,6 +189,21 @@
             alert('Error in updating record');
         });
     };
+
+    //On Cancel btn click hide the popup and clear the form elements values//
+    $scope.CustomerCancel = function (form) {
+        debugger;
+        $scope.showcustomer = false;
+        $scope.customerName = null;
+        $scope.customerEmail = null;
+        $scope.customerExt = null;
+        $scope.customerMobile = null;
+        form.customerName.$setUntouched();
+        form.customerName.$untouched = true;
+        form.customerEmail.$setUntouched();
+        form.customerEmail.$untouched = true;
+    }
+
 
     //Edit Customer getting details
 
@@ -320,7 +345,7 @@
         $scope.timeInfoFrom = [];
         $scope.Status = "No Label";
         $scope.selectedprovider = "-- Select a Provider --";
-
+        $scope.timeoption = "8:00 AM";
         $scope.ServicePriceTimeDetailIsVisible = false;
         $scope.ShowAddAppointmentPopup != $scope.ShowAddAppointmentPopup;
     };
@@ -373,7 +398,42 @@
             $scope.price = response.data.Cost;
             $scope.time = response.data.DurationInMinutes;
             $scope.ServicePriceTimeDetailIsVisible = true;
-           // $scope.today();
+            // $scope.today();
+
+            $scope.timeInfoFrom = [];
+            var days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+            RequestValues = {
+                CompanyId: $routeParams.CompanyId,
+                ServiceId: $scope.ServiceId,
+                EmployeeId: $scope.EmployeeId,
+                DateofBooking: $filter('date')($scope.dt, "MM-dd-yyyy"),
+                Day: days[$scope.dt.getDay()],
+            }
+            var result = bookingService.GetFreeBookingSlotsForEmployee(RequestValues);
+            result.then(function (response) {
+            
+                    for (var i = 0; i < response.data.Value.length; i++) {
+                        if (i == 0) {
+                            var startdate = response.data.Value[i].Start.split(":");
+                            var startdatetime = new Date(1970, 0, 1, startdate[0], startdate[1], startdate[2]);
+                            var starttime = $filter('date')(startdatetime, 'h:mm a');
+                            $scope.timeInfoFrom.push(starttime);
+                            var enddate = response.data.Value[i].End.split(":");
+                            var enddatetime = new Date(1970, 0, 1, enddate[0], enddate[1], enddate[2]);
+                            var endtime = $filter('date')(enddatetime, 'h:mm a');
+                            $scope.timeInfoFrom.push(endtime);
+                        }
+                        else {
+                            var date = response.data.Value[i].End.split(":");
+                            var datetime = new Date(1970, 0, 1, date[0], date[1], date[2]);
+                            var time = $filter('date')(datetime, 'h:mm a');
+                            $scope.timeInfoFrom.push(time);
+
+                        }
+                    }
+               
+            });
+
         });
     }
 
@@ -469,8 +529,15 @@
                         var SetStatus = bookingService.SetStatusofAppointment($scope.Status, $scope.AppointmentId);
 
                         SetStatus.then(function (response) {
-
+                           
                             $scope.GetAppointmentDetails($scope.CustomerId);
+                            //$scope.selectedservice = " ";
+                            //$scope.price = "";
+                            //$scope.time = "";
+                            //$scope.timeoption = "";
+                            //$scope.timeInfoFrom = [];
+                            //$scope.Status = "No Label";
+                            //$scope.selectedprovider = "-- Select a Provider --";
                            
                         })
                     }, 1000);
@@ -592,14 +659,11 @@
     }
 
 
-  
-
     $scope.DeleteAppointment = function () {
         var apirequest = bookingService.DeleteAppointment($scope.AppointmentBookingId);
         apirequest.then(function (response) {
             if(response.data.Success==true)
-            {
-                
+            {               
                     $scope.MessageText = "Deleting Appointment";
                     $scope.IsVisible = true;
                     $timeout(function () {
@@ -638,26 +702,25 @@
 
     //DateTime Picker
     $scope.today = function () {
-        $scope.dt = new Date();
+       $scope.dt = new Date();
 
     };
     
     $scope.today();
     $scope.showWeeks = true;
     $scope.toggleWeeks = function () {
-
         $scope.showWeeks = !$scope.showWeeks;
     };
 
     $scope.SetDatePicker = function () {
-        debugger;
-        $scope.today();
+        debugger;              
+            $scope.today();     
     }
 
 
     //Disable weekend selection
     $scope.disabled = function (date, mode) {
-
+        
         //return (mode == 'day' && (date.getDay() == 0 || date.getDay() == 5));
         return (mode == 'day' && (date.getDay() == $scope.AppointmentSchedule[0] || date.getDay() == $scope.AppointmentSchedule[1] || date.getDay() == $scope.AppointmentSchedule[2] || date.getDay() == $scope.AppointmentSchedule[3] || date.getDay() == $scope.AppointmentSchedule[4] || date.getDay() == $scope.AppointmentSchedule[5] || date.getDay() == $scope.AppointmentSchedule[6]));
     };
@@ -674,11 +737,10 @@
         'starting-day': 1
     };
 
-    $scope.ChangeDate = function () {
-        debugger;
-       
-        var day = $scope.dt;
-    }
+    //$scope.ChangeDate = function () {
+    //    debugger;      
+    //    var day = $scope.dt;
+    //}
 
 
     $scope.$watch("dt", function (newValue, oldValue) {

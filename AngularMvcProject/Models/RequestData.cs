@@ -300,6 +300,8 @@ namespace AngularMvcProject.Models
         public int DurationInHours { get; set; }
         public double Cost { get; set; }
         public string Currency { get; set; }
+        public string Colour { get; set; }
+        public int Buffer { get; set; }
         public string CreationDate { get; set; }
     }
 

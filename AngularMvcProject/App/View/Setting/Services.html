@@ -336,7 +336,7 @@
                                                             <button id="addcategoryBtn" class="btn  add_category_btn addCustomerbtn" type="submit">Add Category</button>
                                                         </div>
                                                         <div class="col-md-6 col-xs-6">
-                                                            <button id="cancelBtn" class="btn btn-default cateCancelbtn" type="button" ng-click="showcategorypopup =false">Cancel</button>
+                                                            <button id="cancelBtn" class="btn btn-default cateCancelbtn" type="button" ng-click="CategoryCancel()">Cancel</button>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -404,25 +404,17 @@
                                                 <input type="text" class="customerName sampServiceName form-control" id="" placeholder="Enter Service name*" ng-model="ServiceName" name="ServiceName">
                                                 <div class="">
 
+                                                 
                                                     <div class="dropdown serviceColors">
                                                         <button class="btn dropdown-toggle chooseServiceColor" type="button" data-toggle="dropdown">
-                                                            <input type="checkbox" class="sampleCheckbox" name="" value="service">
+                                                            <!--<input type="checkbox" class="sampleCheckbox" name="" value="service" />-->
+                                                            <span class='one' ng-style="{'background': ColourCode,'border':BorderColourCode}">&nbsp;</span>
                                                             <span class="caret"></span>
                                                         </button>
 
                                                         <ul class="dropdown-menu serviceColorList">
-                                                            <li><a href=""><span class="serviceColorPallet red"></span>Red</a></li>
-                                                            <li><a href=""><span class="serviceColorPallet light-gray"></span>Light gray</a></li>
-                                                            <li><a href=""><span class="serviceColorPallet green"></span>Green</a></li>
-                                                            <li><a href=""><span class="serviceColorPallet light-blue"></span>Light blue</a></li>
-                                                            <li><a href=""><span class="serviceColorPallet maroon"></span>Maroon</a></li>
-                                                            <li><a href=""><span class="serviceColorPallet deep-sky-blue"></span>Deep sky blue</a></li>
-                                                            <li><a href=""><span class="serviceColorPallet violet"></span>Violet</a></li>
-                                                            <li><a href=""><span class="serviceColorPallet yellow"></span>Yellow</a></li>
-                                                            <li><a href=""><span class="serviceColorPallet orange"></span>Orange</a></li>
+                                                            <li ng-repeat="item in ServiceColourList"><a href="" ng-click="GetColour(item.BackgroundColour,item.ColourCode,item.BorderColourCode)"><span class="serviceColorPallet" ng-style="{'background':item.ColourCode,'border': item.BorderColourCode}"></span>{{item.BackgroundColour}}</a></li>
                                                         </ul>
-
-
                                                     </div>
                                                 </div>
                                                 <span class="characterAllowed">Maximum characters allowed <span id="serviceName_CharacterCount" style="color:red;">250</span></span>
@@ -544,9 +536,13 @@
                                 </div>-->
                                 <!--<div class="col-md-6 col-xs-6">-->
                                     <div class="categoryButtonsDiv text-right categoryDeleteBtnDiv">
+                                        <div class="allservicesText">
+                                            <a ng-click="showAllServicePopup()" class="allserviceanchorbtn cursorhand"><span><i class="fa fa-angle-left" aria-hidden="true"></i></span>All Services</a>
+                                        </div>
                                         <a id="deletecateBtn" ng-click="DeleteService()" class="deletecatIconBtn btn btn-default">
                                             <i class="fa fa-trash-o" aria-hidden="true"></i>
                                         </a>
+                                        <div class="clearfix"></div>
                                     </div>
                                 <!--</div>-->
                             <!--</div>-->
@@ -571,25 +567,18 @@
                                             </label>
                                             <div class="col-md-8 col-sm-8 col-xs-12 sampleServicesSec">
 
-                                                <input type="text" class="customerName sampServiceName form-control" id="" placeholder="Enter Service name*" ng-model="ServiceName" name="ServiceName" ng-blur="updateService()">
+                                                <input type="text" class="customerName sampServiceName form-control" id="" placeholder="Enter Service name*" ng-model="ServiceName" name="ServiceName" >
                                                 <div class="">
 
                                                     <div class="dropdown serviceColors">
                                                         <button class="btn dropdown-toggle chooseServiceColor" type="button" data-toggle="dropdown">
-                                                            <input type="checkbox" class="sampleCheckbox" name="" value="service" />
+                                                            <!--<input type="checkbox" class="sampleCheckbox" name="" value="service" />-->
+                                                            <span class='one' ng-style="{'background': ColourCode,'border':BorderColourCode}" ng-blur="updateService()">&nbsp;</span>
                                                             <span class="caret"></span>
                                                         </button>
 
                                                         <ul class="dropdown-menu serviceColorList">
-                                                            <li><a href=""><span class="serviceColorPallet red"></span>Red</a></li>
-                                                            <li><a href=""><span class="serviceColorPallet light-gray"></span>Light gray</a></li>
-                                                            <li><a href=""><span class="serviceColorPallet green"></span>Green</a></li>
-                                                            <li><a href=""><span class="serviceColorPallet light-blue"></span>Light blue</a></li>
-                                                            <li><a href=""><span class="serviceColorPallet maroon"></span>Maroon</a></li>
-                                                            <li><a href=""><span class="serviceColorPallet deep-sky-blue"></span>Deep sky blue</a></li>
-                                                            <li><a href=""><span class="serviceColorPallet violet"></span>Violet</a></li>
-                                                            <li><a href=""><span class="serviceColorPallet yellow"></span>Yellow</a></li>
-                                                            <li><a href=""><span class="serviceColorPallet orange"></span>Orange</a></li>
+                                                            <li ng-repeat="item in ServiceColourList"><a href="" ng-click="GetColour(item.BackgroundColour,item.ColourCode,item.BorderColourCode)" ng-blur="updateService()"><span class="serviceColorPallet" ng-style="{'background':item.ColourCode,'border': item.BorderColourCode}"></span>{{item.BackgroundColour}}</a></li>                                                          
                                                         </ul>
 
 
@@ -778,7 +767,7 @@
                                     <div class="sampleServicediv">
                                         <ul class="list-inline">
                                             <li ng-repeat="servicedetail in AllServices" ng-click="EditService(servicedetail)">
-                                                <div class="borderWidth"></div>
+                                                <div class="borderWidth" ng-style={'background':servicedetail.Colour}></div>
                                                 <div class="serviceDragImage"></div>
                                                 <div class="sampleServiceImage">
                                                     <img src="/Content/Assets/images/service-icon-big.png">
