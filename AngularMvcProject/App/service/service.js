@@ -21,6 +21,16 @@ app.service("bookingService", function ($http, $window) {
         return response;
     }
 
+
+    this.CheckUserExist=function(email)
+    {
+        var response = $http({
+            method: "POST",
+            url: "/SignUp/UserExist",
+            data: { Email: email }
+        });
+        return response;
+    }
     // Add Employee
     this.register = function (dataobject) {
         debugger;
