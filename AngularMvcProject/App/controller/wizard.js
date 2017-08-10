@@ -71,10 +71,11 @@ app.controller('bookingController', ['$scope', '$routeParams', '$rootScope', '$h
             debugger;
             var businessInfo = {
                 Url: "/api/companyregistration/CreateAccount",
-                RequestData: {                  
-                    Name: $scope.businessName,
+                RequestData: {
+                    Id:$rootScope.SignUpCompanyId,
+                    Name: $rootScope.LoginUsername,
                     Address: "sample string 3",
-                    Email: "sample string 4",
+                    Email: $rootScope.LoginEmail,
                     Telephone: $scope.businessPhone,
                     PostCode: "sample string 6",
                     Website: "sample string 7",
