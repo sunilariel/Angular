@@ -408,7 +408,7 @@
                 CompanyId: $routeParams.CompanyId,
                 ServiceId: $scope.ServiceId,
                 EmployeeId: $scope.EmployeeId,
-                DateofBooking: $filter('date')($scope.dt, "MM-dd-yyyy"),
+                DateofBooking: $filter('date')($scope.dt, "dd-MM-yyyy"),
                 Day: days[$scope.dt.getDay()],
             }
             var result = bookingService.GetFreeBookingSlotsForEmployee(RequestValues);
@@ -754,7 +754,7 @@
             CompanyId: $routeParams.CompanyId,
             ServiceId: $scope.ServiceId,
             EmployeeId: $scope.EmployeeId,
-            DateofBooking: $filter('date')(newValue, "MM-dd-yyyy"),
+            DateofBooking: $filter('date')(newValue, "dd-MM-yyyy"),
             Day: days[newValue.getDay()],
         }
         $scope.timeslotsloading = true;
