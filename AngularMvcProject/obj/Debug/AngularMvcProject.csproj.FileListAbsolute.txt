@@ -84,3 +84,21 @@ D:\Official\David\Angular Clone Project\AngularMvcProject\bin\AngularMvcProject.
 D:\Official\David\Angular Clone Project\AngularMvcProject\obj\Debug\AngularMvcProject.dll
 D:\Official\David\Angular Clone Project\AngularMvcProject\obj\Debug\AngularMvcProject.pdb
 D:\Official\David\Angular Clone Project\AngularMvcProject\obj\Debug\AngularMvcProject.csprojResolveAssemblyReference.cache
+C:\Users\Qasim\Documents\GitHub\AngularMVC\AngularMvcProject\bin\ApplicationInsights.config
+C:\Users\Qasim\Documents\GitHub\AngularMVC\AngularMvcProject\bin\roslyn\csc.exe
+C:\Users\Qasim\Documents\GitHub\AngularMVC\AngularMvcProject\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+C:\Users\Qasim\Documents\GitHub\AngularMVC\AngularMvcProject\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+C:\Users\Qasim\Documents\GitHub\AngularMVC\AngularMvcProject\bin\roslyn\Microsoft.CodeAnalysis.dll
+C:\Users\Qasim\Documents\GitHub\AngularMVC\AngularMvcProject\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+C:\Users\Qasim\Documents\GitHub\AngularMVC\AngularMvcProject\bin\roslyn\Microsoft.CSharp.Core.targets
+C:\Users\Qasim\Documents\GitHub\AngularMVC\AngularMvcProject\bin\roslyn\Microsoft.VisualBasic.Core.targets
+C:\Users\Qasim\Documents\GitHub\AngularMVC\AngularMvcProject\bin\roslyn\System.Collections.Immutable.dll
+C:\Users\Qasim\Documents\GitHub\AngularMVC\AngularMvcProject\bin\roslyn\System.Reflection.Metadata.dll
+C:\Users\Qasim\Documents\GitHub\AngularMVC\AngularMvcProject\bin\roslyn\vbc.exe
+C:\Users\Qasim\Documents\GitHub\AngularMVC\AngularMvcProject\bin\roslyn\VBCSCompiler.exe
+C:\Users\Qasim\Documents\GitHub\AngularMVC\AngularMvcProject\bin\roslyn\VBCSCompiler.exe.config
+C:\Users\Qasim\Documents\GitHub\AngularMVC\AngularMvcProject\bin\AngularMvcProject.dll.config
+C:\Users\Qasim\Documents\GitHub\AngularMVC\AngularMvcProject\bin\AngularMvcProject.dll
+C:\Users\Qasim\Documents\GitHub\AngularMVC\AngularMvcProject\bin\AngularMvcProject.pdb
+C:\Users\Qasim\Documents\GitHub\AngularMVC\AngularMvcProject\obj\Debug\AngularMvcProject.dll
+C:\Users\Qasim\Documents\GitHub\AngularMVC\AngularMvcProject\obj\Debug\AngularMvcProject.pdb
