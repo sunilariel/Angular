@@ -41,43 +41,59 @@ app.controller("SignUp", ['$scope', '$http', '$timeout', '$location','$rootScope
             }
             return false;
         }
-
+      
         $scope.IsVisible = true;
         $scope.MessageText = "Checking availability"
-            var dataobject = {
-                Id: -1,
-                Name: $scope.username,
-                Address: "aaa",
-                Email: $scope.Email,
-                Telephone: "123654789",
-                PostCode: "a",
-                Website: "a",
-                County: "aaa",
-                Town: "aaaaa",
-                Description: "aa",
-                Password: $scope.Password,
-                CreationDate: "2017-05-22T05:55:21.9148617+00:00"           
+
+        //Checking User Existence//
+        var apirequest = bookingService.CheckUserExist($scope.Email);
+        apirequest.then(function (response) {
+            debugger;
+            if (response.data == "true") {
+                $scope.MessageText = "User is already exist";
+                $scope.IsVisible = true;
+                $timeout(function () {
+                    $scope.IsVisible = false;
+                    return false;
+                }, 1000)
             }
-            $rootScope.LoginEmail = $scope.Email;
-            $rootScope.LoginUsername = $scope.username;
-            var apirequest = bookingService.SignUp(dataobject);
-            apirequest.then(function (response) {
-                if(response.data.Success==true)
-                {
-                    alert(response.data.ReturnObject.AuthToken);
-                    $rootScope.SignUpCompanyId = response.data.ReturnObject.CompanyId;
-                    $window.sessionStorage.setItem('userInfo-token', response.data.ReturnObject.AuthToken);
-                    $scope.IsVisible = true;
-                    $scope.MessageText = "Saving Data";
-                    $timeout(function () {
-                        $scope.MessageText = "Your Details saved.";
-                        $timeout(function () {
-                            $scope.IsVisible = false;
-                            $location.path('/wizard');
-                        },800)
-                    },1000)                   
+            else {
+                var dataobject = {
+                    Id: -1,
+                    Name: $scope.username,
+                    Address: "aaa",
+                    Email: $scope.Email,
+                    Telephone: "123654789",
+                    PostCode: "a",
+                    Website: "a",
+                    County: "aaa",
+                    Town: "aaaaa",
+                    Description: "aa",
+                    Password: $scope.Password,
+                    CreationDate: "2017-05-22T05:55:21.9148617+00:00"
                 }
-            })
+                $rootScope.LoginEmail = $scope.Email;
+                $rootScope.LoginUsername = $scope.username;
+                var apirequest = bookingService.SignUp(dataobject);
+                apirequest.then(function (response) {
+                    if (response.data.Success == true) {
+                       // alert(response.data.ReturnObject.AuthToken);
+                        $rootScope.SignUpCompanyId = response.data.ReturnObject.CompanyId;
+                        $window.sessionStorage.setItem('userInfo-token', response.data.ReturnObject.AuthToken);
+                        $scope.IsVisible = true;
+                        $scope.MessageText = "Saving Data";
+                        $timeout(function () {
+                            $scope.MessageText = "Your Details saved.";
+                            $timeout(function () {
+                                $scope.IsVisible = false;
+                                $location.path('/wizard');
+                            }, 800)
+                        }, 1000)
+                    }
+                })
+            }
+        })
+            
 
         //var data = JSON.stringify(dataobject);
 
