@@ -134,49 +134,56 @@ namespace AngularMvcProject.Controllers
         }
         public string PostWorkingHours(WorkingHours dataobj)
         {
-            List<ReqWorkingHours> listofworkinghours = new List<ReqWorkingHours>();
-            var data = dataobj.ReqWorkingHours;
-            foreach(var item in data)
+            try
             {
-                ReqWorkingHours obj = new ReqWorkingHours();
-                obj.Id = item.Id;
-                obj.CompanyId = item.CompanyId;
-                DateTime starttime = DateTime.Parse(item.Start, CultureInfo.CurrentCulture);
-                obj.Start = starttime.ToString("HH:mm");
-                DateTime endtime = DateTime.Parse(item.End, CultureInfo.CurrentCulture);
-                obj.End = endtime.ToString("HH:mm");
-                obj.NameOfDay = item.NameOfDay;
-                obj.IsOffAllDay = item.IsOffAllDay;
-                obj.CreationDate = item.CreationDate;
+                List<ReqWorkingHours> listofworkinghours = new List<ReqWorkingHours>();
+                var data = dataobj.ReqWorkingHours;
+                foreach (var item in data)
+                {
+                    ReqWorkingHours obj = new ReqWorkingHours();
+                    obj.Id = item.Id;
+                    obj.CompanyId = item.CompanyId;
+                    DateTime starttime = DateTime.Parse(item.Start, CultureInfo.CurrentCulture);
+                    obj.Start = starttime.ToString("HH:mm");
+                    DateTime endtime = DateTime.Parse(item.End, CultureInfo.CurrentCulture);
+                    obj.End = endtime.ToString("HH:mm");
+                    obj.NameOfDay = item.NameOfDay;
+                    obj.IsOffAllDay = item.IsOffAllDay;
+                    obj.CreationDate = item.CreationDate;
 
-                listofworkinghours.Add(obj);
+                    listofworkinghours.Add(obj);
 
 
+                }
+                string apiURL = ConfigurationManager.AppSettings["DomainUrl"].ToString() + dataobj.Url;
+                string result = "";
+                var httpWebRequest = (HttpWebRequest)WebRequest.Create(apiURL);
+                httpWebRequest.ContentType = "application/json";
+                httpWebRequest.Method = "POST";
+                httpWebRequest.Headers.Add("Token", Request.Headers["Token"]);
+
+                using (var streamWriter = new StreamWriter(httpWebRequest.GetRequestStream()))
+                {
+                    //string jsonString = "{\"user\":\"test\"," +
+                    //              "\"password\":\"bla\"}";
+                    var jsonString = new JavaScriptSerializer().Serialize(listofworkinghours);
+                    streamWriter.Write(jsonString);
+                    streamWriter.Flush();
+                    streamWriter.Close();
+                }
+
+                var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
+                using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
+                {
+                    result = streamReader.ReadToEnd();
+                }
+
+                return result;
             }
-            string apiURL = ConfigurationManager.AppSettings["DomainUrl"].ToString() + dataobj.Url;
-            string result = "";
-            var httpWebRequest = (HttpWebRequest)WebRequest.Create(apiURL);
-            httpWebRequest.ContentType = "application/json";
-            httpWebRequest.Method = "POST";
-            httpWebRequest.Headers.Add("Token", Request.Headers["Token"]);
-
-            using (var streamWriter = new StreamWriter(httpWebRequest.GetRequestStream()))
+            catch(Exception e)
             {
-                //string jsonString = "{\"user\":\"test\"," +
-                //              "\"password\":\"bla\"}";
-                var jsonString = new JavaScriptSerializer().Serialize(listofworkinghours);
-                streamWriter.Write(jsonString);
-                streamWriter.Flush();
-                streamWriter.Close();
+                return e.ToString();
             }
-
-            var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
-            using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
-            {
-                result = streamReader.ReadToEnd();
-            }
-
-            return result;
         }
         [HttpPost]
         public string GetStaffData(int CompanyId)

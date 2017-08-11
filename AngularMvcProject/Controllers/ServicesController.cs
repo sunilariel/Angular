@@ -380,12 +380,12 @@ namespace AngularMvcProject.Controllers
         }
 
         [HttpPost]
-        public string DeleteCategory(string CompanyId)
+        public string DeleteCategory(string CompanyId,string CategoryId)
         {
             try
             {
                 var result = "";
-                var httpWebRequest = (HttpWebRequest)WebRequest.Create(ConfigurationManager.AppSettings["DomainUrl"].ToString() + "/api/services/DeleteCategory?companyId=" + CompanyId);
+                var httpWebRequest = (HttpWebRequest)WebRequest.Create(ConfigurationManager.AppSettings["DomainUrl"].ToString() + "/api/services/DeleteCategory?companyId=" + CompanyId + "&categoryId=" + CategoryId);
                 httpWebRequest.Method = "DELETE";
                 httpWebRequest.ContentType = "application/json";
                 httpWebRequest.Headers.Add("Token", Request.Headers["Token"]);

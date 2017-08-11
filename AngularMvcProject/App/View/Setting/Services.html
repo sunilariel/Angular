@@ -350,15 +350,15 @@
 
                             <div class="categoryList">
                                 <ul>
-                                    <li>
-                                        <a ng-click="showAllServicePopup()" class="cursorhand">
+                                    <li id="allservice">
+                                        <a ng-click="showAllServicePopup()" class="cursorhand" >
                                             <i class="fa fa-book" aria-hidden="true"></i>
                                             <span class="categoryServices">All Services</span>
                                         </a>
                                     </li>
 
-                                    <li ng-repeat="item in Categories">
-                                        <a ng-click="ShowCategoryService(item)" class="cursorhand">
+                                    <li ng-repeat="item in Categories" ng-click="ShowCategoryService(item)" ng-class="{selected:CategoryId==item.Id}">
+                                        <a  class="cursorhand">
                                             <i class="fa fa-book" aria-hidden="true"></i>
                                             <span class="categoryServices">{{item.Name}}</span>
                                         </a>
@@ -408,7 +408,7 @@
                                                     <div class="dropdown serviceColors">
                                                         <button class="btn dropdown-toggle chooseServiceColor" type="button" data-toggle="dropdown">
                                                             <!--<input type="checkbox" class="sampleCheckbox" name="" value="service" />-->
-                                                            <span class='one' ng-style="{'background': ColourCode,'border':BorderColourCode}">&nbsp;</span>
+                                                            <span class='one span_check' ng-style="{'background': ColourCode,'border':BorderColourCode}">&nbsp;</span>
                                                             <span class="caret"></span>
                                                         </button>
 
@@ -455,18 +455,20 @@
                                                         Category({{CategoryCheckedCount}})
                                                         <span class="glyphicon glyphicon-chevron-down chevronDownIcon"></span>
                                                     </button>
-                                                    <div class="dropdown-menu popupdropdownDiv" aria-labelledby="dropdownMenu2">
-                                                        <ul class="list-inline">
+                                                    <div class="dropdown-menu popupdropdownDiv menu_scroll" aria-labelledby="dropdownMenu2">
+                                                        <ul class="list-inline" style="overflow-y:auto;min-height:10px;">
                                                             <!--<li>
                                                                 <span class="serviceCheckboxDiv">
                                                                     <input type="checkbox" class="sampleCheckbox" name="" value="service">
                                                                     Category1
                                                                 </span>
                                                             </li>-->
-                                                            <li ng-repeat="data in Categories">
-                                                                <span class="serviceCheckboxDiv">
-                                                                    <input type="checkbox" class="sampleCheckbox" name="" value="service" ng-model="data.Confirmed" ng-click="CategoryConfirmedCount()">{{data.Name}}
-                                                                </span>
+                                                            <li ng-repeat="data in Categories">   
+                                                                <label>
+                                                                    <span class="serviceCheckboxDiv">
+                                                                        <input type="checkbox" class="sampleCheckbox" name="" value="service" ng-model="data.Confirmed" ng-click="CategoryConfirmedCount()">{{data.Name}}
+                                                                    </span>
+                                                                </label>                                                              
                                                             </li>
                                                         </ul>
 
@@ -526,15 +528,7 @@
                     </div>
 
                     <!--//////////////////////////////-->
-                    <div class="col-md-9 col-sm-9 categoryRightSec allServiceSec" ng-hide="EditServiceDiv">
-                        <!--<div class="container-fluid">-->
-                            <!--<div class="row">
-                                <div class="col-md-6 col-xs-6" >
-                                    <div class="customerDetail">
-                                        <h3>All Services</h3>
-                                    </div>
-                                </div>-->
-                                <!--<div class="col-md-6 col-xs-6">-->
+                    <div class="col-md-9 col-sm-9 categoryRightSec allServiceSec" ng-hide="EditServiceDiv">                     
                                     <div class="categoryButtonsDiv text-right categoryDeleteBtnDiv">
                                         <div class="allservicesText">
                                             <a ng-click="showAllServicePopup()" class="allserviceanchorbtn cursorhand"><span><i class="fa fa-angle-left" aria-hidden="true"></i></span>All Services</a>
@@ -543,11 +537,7 @@
                                             <i class="fa fa-trash-o" aria-hidden="true"></i>
                                         </a>
                                         <div class="clearfix"></div>
-                                    </div>
-                                <!--</div>-->
-                            <!--</div>-->
-                        <!--</div>-->
-                        
+                                    </div>                                                       
                         <div class="row">
                             <div class="col-md-7">
                                 <div class="customerProfileDiv providetheService">
@@ -569,19 +559,15 @@
 
                                                 <input type="text" class="customerName sampServiceName form-control" id="" placeholder="Enter Service name*" ng-model="ServiceName" name="ServiceName" >
                                                 <div class="">
-
                                                     <div class="dropdown serviceColors">
                                                         <button class="btn dropdown-toggle chooseServiceColor" type="button" data-toggle="dropdown">
                                                             <!--<input type="checkbox" class="sampleCheckbox" name="" value="service" />-->
-                                                            <span class='one' ng-style="{'background': ColourCode,'border':BorderColourCode}" ng-blur="updateService()">&nbsp;</span>
+                                                            <span class="one span_check" ng-style="{'background': ColourCode,'border':BorderColourCode}" ng-blur="updateService()">&nbsp;</span>
                                                             <span class="caret"></span>
                                                         </button>
-
                                                         <ul class="dropdown-menu serviceColorList">
                                                             <li ng-repeat="item in ServiceColourList"><a href="" ng-click="GetColour(item.BackgroundColour,item.ColourCode,item.BorderColourCode)" ng-blur="updateService()"><span class="serviceColorPallet" ng-style="{'background':item.ColourCode,'border': item.BorderColourCode}"></span>{{item.BackgroundColour}}</a></li>                                                          
                                                         </ul>
-
-
                                                     </div>
                                                 </div>
                                                 <span class="characterAllowed">Maximum characters allowed <span id="serviceName_CharacterCount" style="color:red;">250</span></span>
@@ -589,9 +575,7 @@
                                                     <textarea class="form-control" placeholder="Service Description" maxlength="500" ng-model="ServiceDescription"></textarea>
                                                 </div>
                                             </div>
-
                                         </div>
-
                                     </form>
 
                                     <form class="form-horizontal customerDetail">
@@ -623,15 +607,16 @@
                                                         Category({{CategoryCheckedCount}})
                                                         <span class="glyphicon glyphicon-chevron-down chevronDownIcon"></span>
                                                     </button>
-                                                    <div class="dropdown-menu popupdropdownDiv" aria-labelledby="dropdownMenu2">
+                                                    <div class="dropdown-menu popupdropdownDiv menu_scroll" aria-labelledby="dropdownMenu2">
                                                         <ul class="list-inline">
                                                             <li ng-repeat="data in Categories">
-                                                                <span class="serviceCheckboxDiv">
-                                                                    <input type="checkbox" class="sampleCheckbox" name="" value="service" ng-model="data.Confirmed" ng-click="AssignCategorytoService(data)">{{data.Name}}
-                                                                </span>
+                                                                <label>
+                                                                    <span class="serviceCheckboxDiv">
+                                                                        <input type="checkbox" class="sampleCheckbox" name="" value="service" ng-model="data.Confirmed" ng-click="AssignCategorytoService(data)">{{data.Name}}
+                                                                    </span>
+                                                                </label>
                                                             </li>
                                                         </ul>
-
                                                     </div>
                                                 </div>
                                             </div>
@@ -649,11 +634,8 @@
                                                 </div>
                                             </div>
                                         </div>
-
                                     </form>
-
                                 </div>
-
                             </div>
 
                             <div class="col-md-5">
@@ -713,7 +695,7 @@
                                     <div class="sampleServicediv">
                                         <ul class="list-inline">
                                             <li ng-repeat="data in ServiceDividedByCategory" ng-click="EditService(data)">
-                                                <div class="borderWidth"></div>
+                                                <div class="borderWidth" ng-style={'background':data.Colour}></div>
                                                 <div class="serviceDragImage"></div>
                                                 <div class="sampleServiceImage">
                                                     <img src="/Content/Assets/images/service-icon-big.png">
@@ -722,10 +704,9 @@
                                                         <h4 class="sampleHead">{{data.Name}}</h4>
                                                         <p class="sampleParaText"></p>
                                                         <div class="serviceSampleDetail pull-right">
-                                                            <span>{{data.DurationInMinutes}}</span>
-                                                            <span>{{data.Cost}}</span>
-                                                            <!--<span>No Buffer</span>-->
-
+                                                            <span>{{data.DurationInMinutes}} mins</span>
+                                                            <span>£{{data.Cost}}</span>
+                                                            <span>{{data.Buffer}} mins</span>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -777,9 +758,9 @@
                                                         <p class="sampleParaText"></p>
                                                         <div class="serviceSampleDetail pull-right">
 
-                                                            <span>{{servicedetail.DurationInMinutes}}</span>
-                                                            <span>{{servicedetail.Cost}}</span>
-                                                            <span>No Buffer</span>
+                                                            <span>{{servicedetail.DurationInMinutes}} mins</span>
+                                                            <span>£{{servicedetail.Cost}}</span>
+                                                            <span>{{servicedetail.Buffer}} mins</span>
 
                                                         </div>
                                                     </div>

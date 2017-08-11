@@ -171,7 +171,7 @@
                                                     <li class="dropdown">
                                                         <a class="dropdown-toggle" data-toggle="dropdown" href="#"> <i class="fa fa-bell-o" aria-hidden="true"></i> <span class="caret"></span> </a>
 
-                                                        <!-- /.dropdown-user -->
+                                                        <!--dropdown-user -->
                                                         <ul class="dropdown-menu dropdown-user animated flipInY upgradeDropdown">
                                                             <li id="my_details">
                                                                 <a href="#">
@@ -338,23 +338,8 @@
 
                                 <div class="col-md-12 providerpaddDiv">
                                     <div class="providerCustomer">
-                                        <ul class="list-inline">
-                                            <!--@*
-                                            <li class="selectCustomer">
-                                                <span class="formCheckbox">
-                                                    <input type="checkbox" name="" class="inputcheckbox">
-                                                </span>
-
-                                                <span class="providerImage">
-                                                    <a href="#"<img src="../Content/Assets/images/provider_img2.png" />></a>
-                                                </span>
-                                                <label class="providerName">Alex</label>
-                                                 Single button
-
-                                            </li>
-                                            *@-->
-
-                                            <li class="selectCustomer" ng-repeat="item in customerArr | filter:searchName" ng-click="EditCustomer(item)">
+                                        <ul class="list-inline">                                           
+                                            <li class="selectCustomer" ng-repeat="item in customerArr | filter:searchName |orderBy :'Id'" ng-click="EditCustomer(item)" ng-class="{selected:CustomerId==item.Id}">
                                                 <span class="formCheckbox">
                                                     <input type="checkbox" name="" class="inputcheckbox">
                                                 </span>
@@ -371,9 +356,8 @@
                                                         <span class="glyphicon glyphicon-trash"></span>Delete
                                                     </a>-->
                                                     <a ng-click="DeleteCustomerData(item.Id)" id="deleteBtn" class="btn btn-default delete_btn">
-        <span class="glyphicon glyphicon-trash"></span>Delete
-    </a>
-
+                                                    <span class="glyphicon glyphicon-trash"></span>Delete
+                                                    </a>
                                                 </div>
 
                                                 <div class="col-md-12">
@@ -509,7 +493,7 @@
                                                     <div class="modal-dialog appointPopupHead">
                                                         <div class="modal-content">
                                                             <div class="modal-header">
-                                                                <button type="button" class="close modalcloseIcon" data-dismiss="modal"><span aria-hidden="true" class="">×</span><span class="sr-only">Close</span></button>
+                                                                <button type="button" ng-click="CloseAppointmentModal()" class="close modalcloseIcon" data-dismiss="modal"><span aria-hidden="true" class="">×</span><span class="sr-only">Close</span></button>
                                                                 <h3 class="modal-title" id="lineModalLabel">Appointment</h3>
                                                             </div>
                                                             <div class="form-horizontal appointPopUpform">
@@ -543,6 +527,8 @@
                                                                                         <select class="btn btn-default dropdown-toggle" ng-model="selectedprovider" data-ng-options="x.Id as x.staffName for x in Provider" id="dropdownMenu2" name="providerdd" aria-haspopup="true" aria-expanded="false" ng-change="GetAllocateServiceToEmployee(selectedprovider)" required>
                                                                                             <option value="" selected="selected">-- Select a Provider --</option>
                                                                                         </select>
+
+                                                                                       
                                                                                         <!--@*<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                                                             <span class="glyphicon glyphicon-ok okIcon"></span>
                                                                                             david

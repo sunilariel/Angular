@@ -336,7 +336,7 @@
                                                             <button id="addcategoryBtn" type="submit" class="btn  add_category_btn addCustomerbtn">Add Staff</button>
                                                         </div>
                                                         <div class="col-md-6 col-xs-6">
-                                                            <button id="cancelBtn" class="btn btn-default cateCancelbtn" ng-click="StaffCancel(AddStaffForm)">Cancel</button>
+                                                            <button id="cancelBtn" class="btn btn-default cateCancelbtn" type="button" ng-click="StaffCancel(AddStaffForm)">Cancel</button>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -348,8 +348,8 @@
                             </div>
                             <div class="categoryList staffList">
                                 <ul>
-                                    <li ng-repeat="item in ListofStaff">
-                                        <a ng-click="EditStaff(item)"  class="staffUser cursorhand" data-target="#staff_details" data-toggle="tab">
+                                    <li ng-repeat="item in ListofStaff"  ng-click="EditStaff(item)" ng-class="{selected:StaffId==item.Id}" >
+                                        <a  class="staffUser cursorhand" data-target="#staff_details" data-toggle="tab">
                                             <img src="/Content/Assets/images/provider_img2.png">
                                             <span class="categoryServices">{{item.FirstName}}</span>
                                         </a>
@@ -614,7 +614,7 @@
                                                                 </div>
                                                                 <div class="col-md-2 col-xs-2">
                                                                     <div class="StaffminText">
-                                                                        <a href="" ng-if="item.Cost">₹{{item.Cost}}</a>
+                                                                        <a href="" ng-if="item.Cost">£{{item.Cost}}</a>
                                                                     </div>
                                                                 </div>
                                                             </div>

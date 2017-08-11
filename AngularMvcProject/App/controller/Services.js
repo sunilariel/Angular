@@ -38,6 +38,7 @@
         { "BackgroundColour": "Orange", "ColourCode": "#fadeb3", "BorderColourCode": "1px solid  #f2a836" },
         ]
 
+        angular.element(document.querySelector("#allservice")).addClass("selected");
 
 
         var CompanyId = $routeParams.CompanyId;
@@ -87,17 +88,19 @@
     
     $scope.showAllServicePopup = function () {
         debugger;
+        $scope.CategoryId = null;     
         $scope.init();
     }
 
     $scope.ShowCategoryService = function (item) {
         debugger;
+        angular.element(document.querySelector("#allservice")).removeClass("selected");
+        $scope.CategoryName = item.Name;
+        $scope.CategoryId = item.Id;
         var responsedata = bookingService.GetAllServiceForCategory(item.Id,$routeParams.CompanyId);
         responsedata.then(function (response) {
             debugger;
-            if (response.data.length > 0) {
-                $scope.CategoryName = response.data[0].CategoryName;
-                $scope.CategoryId = response.data[0].CategoryId;
+            if (response.data.length > 0) {             
                 $scope.ServiceDividedByCategory = [];
                 $scope.ServiceDividedByCategory = response.data;
             }
@@ -143,7 +146,7 @@
     $scope.DeleteCategory=function()
     {
         debugger;
-        var responseresult = bookingService.DeleteCategory($scope.CategoryId);
+        var responseresult = bookingService.DeleteCategory($routeParams.CompanyId,$scope.CategoryId);
         responseresult.then(function (response) {
             if(response.data.Success==true)
             {

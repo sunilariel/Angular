@@ -159,12 +159,12 @@
     $scope.StaffCancel = function(form) {
         debugger;
         $scope.IsVisibleAddNewStaffPopUp = false
-        //Clear the form elements value//
-       // $scope.StaffEmail = "";
-       // $scope.StaffName = "";
-       //// form.StaffName.$setTouched = true;
-       // form.StaffName.$setUntouched();
-       // form.StaffName.$untouched = true;
+        //Clear the form elements value
+        $scope.StaffEmail = "";
+        $scope.StaffName = "";      
+        form.StaffName.$untouched = true;
+        form.StaffName.$setUntouched();
+     
     }
 
 

@@ -216,19 +216,7 @@
         $scope.updatedPreCustomerMobileNo = item.TelephoneNo.substring(0, 2);
         $scope.updatedMobileNo = item.TelephoneNo.substring(2, item.length);
         $scope.customerAddress = item.Address;
-        $scope.Zip = item.PostCode;
-        //Getting Appointment deail of Customer//
-        //var result = bookingService.GetAppointmentDetails($scope.CustomerId);
-        //result.then(function (response) {
-        //    $scope.ListofAppointments = [];
-        //    $scope.ListofAppointments = response.data;
-        //    $scope.NumberofAppointmnets = response.data.length;
-        //    var TotalCost = 0;
-        //    angular.forEach(response.data, function (value, key) {
-        //        TotalCost = TotalCost + value.Cost;
-        //    });
-        //    $scope.TotalCostofServices = TotalCost;
-        //})
+        $scope.Zip = item.PostCode;       
         $scope.GetAppointmentDetails($scope.CustomerId);
     }
 
@@ -349,6 +337,7 @@
         $scope.selectedprovider = "-- Select a Provider --";
         $scope.timeoption = "8:00 AM";
         $scope.ServicePriceTimeDetailIsVisible = false;
+        $scope.count = 0;
         $scope.ShowAddAppointmentPopup != $scope.ShowAddAppointmentPopup;
     };
 
@@ -358,6 +347,10 @@
         $scope.showModal = !$scope.showModal;
     };
 
+    //Close Appointment Modal//
+    $scope.CloseAppointmentModal = function () {
+        $scope.today();
+    }
 
     //Get Service allocated to employee
     $scope.GetAllocateServiceToEmployee = function (EmployeeId) {
@@ -411,9 +404,11 @@
                 DateofBooking: $filter('date')($scope.dt, "dd-MM-yyyy"),
                 Day: days[$scope.dt.getDay()],
             }
+            $scope.timeslotsloading = true;
             var result = bookingService.GetFreeBookingSlotsForEmployee(RequestValues);
             result.then(function (response) {
-            
+                if (response.data.Value != null)
+                    {
                     for (var i = 0; i < response.data.Value.length; i++) {
                         if (i == 0) {
                             var startdate = response.data.Value[i].Start.split(":");
@@ -433,7 +428,8 @@
 
                         }
                     }
-               
+            }
+                    $scope.timeslotsloading = false;
             });
 
         });
@@ -530,17 +526,8 @@
 
                         var SetStatus = bookingService.SetStatusofAppointment($scope.Status, $scope.AppointmentId);
 
-                        SetStatus.then(function (response) {
-                           
-                            $scope.GetAppointmentDetails($scope.CustomerId);
-                            //$scope.selectedservice = " ";
-                            //$scope.price = "";
-                            //$scope.time = "";
-                            //$scope.timeoption = "";
-                            //$scope.timeInfoFrom = [];
-                            //$scope.Status = "No Label";
-                            //$scope.selectedprovider = "-- Select a Provider --";
-                           
+                        SetStatus.then(function (response) {                           
+                            $scope.GetAppointmentDetails($scope.CustomerId);                                                      
                         })
                     }, 1000);
                 }, 500)
@@ -655,7 +642,16 @@
 
    var apirequest=bookingService.UpdateAppointment(appointment);
    apirequest.then(function (response) {
+       if (response.data.Success == false) {
+           if (response.data.Message == "Booking Cannot Be Added , Not Free Slot Available.") {
+               $scope.MessageText = "Not Free Slot Available";
+               $scope.IsVisible = true;
+               $timeout(function () {
 
+                   $scope.IsVisible = false;
+               }, 1000)
+           }
+       }
    })
 
     }
@@ -697,6 +693,7 @@
             $scope.TotalCostofServices = TotalCost;
             $scope.IsVisible = false;
             angular.element(document.querySelector("#squarespaceModal")).css("display", "none");
+            $scope.today();
         })
     }
 
@@ -714,9 +711,11 @@
         $scope.showWeeks = !$scope.showWeeks;
     };
 
-    $scope.SetDatePicker = function () {
-        debugger;
-        $scope.today();     
+    $scope.SetDatePicker = function () {       
+        if ($scope.count == 0) {
+            $scope.count = $scope.count + 1;
+            $scope.today();
+        }
     }
 
 
@@ -761,6 +760,8 @@
         var result = bookingService.GetFreeBookingSlotsForEmployee(RequestValues);
         result.then(function (response) {
             if (newValue != oldValue) {
+                if (response.data.Value != null)
+                {
                 for (var i = 0; i < response.data.Value.length; i++) {
                     if (i == 0) {
                         var startdate = response.data.Value[i].Start.split(":");
@@ -780,6 +781,7 @@
 
                     }
                 }
+            }
                 $scope.timeslotsloading = false;
             }
         });

@@ -447,12 +447,12 @@ app.service("bookingService", function ($http, $window) {
         return response;
     }
 
-    this.DeleteCategory=function(Id)
+    this.DeleteCategory = function (companyId,categoryId)
     {
         var response = $http({
             method: "POST",
             url: "/Services/DeleteCategory",
-            data: { CompanyId: Id },
+            data: { CompanyId: companyId,CategoryId:categoryId },
             headers: GetHeader()
         })
         return response;

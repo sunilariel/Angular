@@ -24,31 +24,7 @@ namespace AngularMvcProject.Controllers
             return View();
         }
 
-        //[HttpPost]
-        //public JsonResult postdata(string json)
-        //{
-
-        //    string apiURL = ConfigurationManager.AppSettings["DomainUrl"].ToString() + "/api/companyregistration/CreateAccount";
-
-        //    //Data parameter Example
-        //    //string data = "name=" + value
-
-        //    HttpWebRequest httpRequest = HttpWebRequest.CreateHttp(apiURL);
-        //    httpRequest.Method = "POST";
-        //    httpRequest.ContentType = "application/x-www-form-urlencoded";
-        //    httpRequest.ContentLength = json.Length;
-        //    var streamWriter = new StreamWriter(httpRequest.GetRequestStream());
-        //    streamWriter.Write(json);
-        //    streamWriter.Close();
-
-
-        //    var data = httpRequest.GetResponse();
-
-        //    //var response= communicationManager.Post<string, int>(apiURL, json);
-
-        //    return Json(new { success = true }, JsonRequestBehavior.AllowGet);
-        //}
-
+        
         [HttpPost]
         public string CreateAccount(RequestData dataObj)
         {         
@@ -91,8 +67,6 @@ namespace AngularMvcProject.Controllers
                 var httpWebRequest = (HttpWebRequest)WebRequest.Create(apiUrl);
                 httpWebRequest.ContentType = "application/json";
                 httpWebRequest.Method = "GET";
-
-
 
                 var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
 
