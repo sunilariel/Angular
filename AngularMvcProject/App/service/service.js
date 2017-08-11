@@ -245,12 +245,23 @@ app.service("bookingService", function ($http, $window) {
             headers: GetHeader()
         })
     }
-    this.GetSelectedService=function(dataobject)
+
+    this.GetSelectedService = function (dataobject)
     {
         var response = $http({
             method: "POST",
             url: "/Customer/GetSelectedService",
             data: { ServiceId: dataobject},
+            headers: GetHeader()
+        })
+        return response;
+    }
+
+    this.GetCompanyDetails = function (dataobject) {
+        var response = $http({
+            method: "POST",
+            url: "/Customer/GetCompanyDetails",
+            data: { companyId: dataobject },
             headers: GetHeader()
         })
         return response;

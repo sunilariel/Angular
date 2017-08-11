@@ -63,6 +63,12 @@
         $scope.selecteddate = $filter('date')(new Date(), "EEE, MMM d");
         $scope.ServicePriceTimeDetailIsVisible = false;
 
+        var CompanyDetails = bookingService.GetCompanyDetails($scope.CompanyId);
+        CompanyDetails.then(function (response) {
+            debugger;
+            $scope.companyEmail = response.data.Email;
+        });
+
         //Status List//
         $scope.StatusList = [{ Status: "No Label", "Value": 1 },
             { Status: "Pending", "Value": 2 },

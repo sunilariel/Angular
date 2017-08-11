@@ -269,6 +269,27 @@ namespace AngularMvcProject.Controllers
         }
 
         [HttpPost]
+        public string GetCompanyDetails(string companyId)
+        {
+
+            // int Id = Convert.ToInt32(CompanyId);
+            string apiURL = ConfigurationManager.AppSettings["DomainUrl"].ToString() + "/api/companyregistration/GetCompanyDetails?companyId=" + companyId;
+            string result = "";
+            var httpWebRequest = (HttpWebRequest)WebRequest.Create(apiURL);
+            httpWebRequest.ContentType = "application/json";
+            httpWebRequest.Method = "GET";
+            httpWebRequest.Headers.Add("Token", Request.Headers["Token"]);
+
+            var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
+            using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
+            {
+                result = streamReader.ReadToEnd();
+            }
+            return result;
+        }
+        
+
+        [HttpPost]
 
         public string GetAppointmentWorkinghours(string EmployeeId)
         {
