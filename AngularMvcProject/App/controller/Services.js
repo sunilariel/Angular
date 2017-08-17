@@ -268,7 +268,7 @@
                 "DurationInMinutes": $scope.ServiceTime,
                 "DurationInHours": 0,
                 "Cost": $scope.ServiceCost,
-                "Currency": "sample string 9",
+                "Currency": "",
                 "Colour": $scope.ColourCode,
                 "Buffer": $scope.BufferTime,
                 "CreationDate": "2017-06-26T11:08:28.4943519+00:00"
@@ -424,12 +424,12 @@
             "Id": $scope.ServiceId,
             "CompanyId": $routeParams.CompanyId,
             "Name": $scope.ServiceName,
-            "CategoryName": "sample string 4",
+            "CategoryName": "",
             "CategoryId": null,
             "DurationInMinutes": $scope.ServiceTime ,
             "DurationInHours": "",
             "Cost": $scope.ServiceCost,
-            "Currency": "sample string 9",
+            "Currency": "",
             "Colour": $scope.ColourCode,
             "Buffer": $scope.BufferTime,
             "CreationDate": "2017-07-05T05:21:50.3448321+00:00"

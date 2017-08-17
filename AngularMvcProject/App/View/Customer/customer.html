@@ -526,25 +526,7 @@
                                                                                     <div class="dropdown appointProvider">
                                                                                         <select class="btn btn-default dropdown-toggle" ng-model="selectedprovider" data-ng-options="x.Id as x.staffName for x in Provider" id="dropdownMenu2" name="providerdd" aria-haspopup="true" aria-expanded="false" ng-change="GetAllocateServiceToEmployee(selectedprovider)" required>
                                                                                             <option value="" selected="selected">-- Select a Provider --</option>
-                                                                                        </select>
-
-                                                                                       
-                                                                                        <!--@*<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                                                            <span class="glyphicon glyphicon-ok okIcon"></span>
-                                                                                            david
-                                                                                            <span class="glyphicon glyphicon-chevron-down chevronDownIcon"></span>
-                                                                                        </button>*@-->
-                                                                                        <!--<div class="dropdown-menu popupdropdownDiv" aria-labelledby="dropdownMenu2">
-                                                                                            <ul class="list-inline">
-                                                                                                <li>
-                                                                                                    <span class="userIcon providerImage">
-                                                                                                        <a href="#"><img src="../Content/Assets/images/provider_img2.png"></a>
-                                                                                                    </span>
-                                                                                                    <label class="providerName">Alex </label>
-                                                                                                </li>
-                                                                                            </ul>
-
-                                                                                        </div>-->
+                                                                                        </select>                                                                                                                                                                             
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
@@ -554,26 +536,7 @@
                                                                                     <div class="dropdown appointProvider">
                                                                                         <select class="btn btn-default dropdown-toggle" name="Servicedd" data-ng-options="x.Id as x.Name for x in EmployeeServices" ng-model="selectedservice" ng-change="ServiceDetail(selectedservice)" aria-haspopup="true" aria-expanded="false" required>
                                                                                             <option value="">-- Select a Service --</option>
-                                                                                        </select>
-                                                                                        <!--@*<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                                                            <span class="okIcon longrightArrow">
-                                                                                                <i class="fa fa-long-arrow-right" aria-hidden="true"></i>
-                                                                                            </span>
-                                                                                            Select a Service
-                                                                                            <span class="glyphicon glyphicon-chevron-down chevronDownIcon"></span>
-                                                                                        </button>*@-->
-                                                                                        <!--<div class="dropdown-menu popupdropdownDiv" aria-labelledby="dropdownMenu2">
-                                                                                            <ul class="list-inline">
-                                                                                                <li>
-                                                                                                    <span class="serviceCheckboxDiv">
-                                                                                                        <input type="checkbox" class="sampleCheckbox" name="" value="service">
-                                                                                                        Sample Service
-                                                                                                    </span>
-                                                                                                    <span class="serviceMins">60mins </span>
-                                                                                                </li>
-                                                                                            </ul>
-
-                                                                                        </div>-->
+                                                                                        </select>                                                                                       
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
@@ -753,7 +716,7 @@
                                                                                 <label class="control-label col-sm-4" for="pwd">Day/Time</label>
                                                                                 <div class="col-sm-8 dateTimeDiv">
                                                                                     <span class="glyphicon glyphicon-ok calendarOk"></span>
-                                                                                    <input type="text" class="form-control calendarBox" datepicker-popup="EEE, MMM d" ng-model="dt" open="opened" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-change="ChangeDate()" name='theDate' ng-required="true" />
+                                                                                    <input type="text" class="form-control calendarBox" datepicker-popup="EEE, MMM d" ng-model="dt" open="opened" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-click="EditDatePicker()" name='theDate' ng-required="true" />
                                                                                    
                                                                                     <div class="selectDropdown">
                                                                                         <select class="select_btn dateTimeSelect" ng-model="timeoption" name="timeoption">
@@ -809,7 +772,7 @@
 
 
                                             </div>
-                                            <div class="appointmentListHolder" style="height: 150px;">
+                                            <div class="appointmentListHolder">
                                                 <ul id="appointmentList" class="appointmentList appointMedia">
                                                     <li ng-repeat="item in ListofAppointments" ng-click="ShowAppointmentDetail(item)">
                                                         <span>
@@ -887,6 +850,8 @@
                                         </div>
                                         <div class="tab-pane" id="staff-services"> Service</div>
                                         <div class="tab-pane" id="staff-hours">
+                                            <div id="chart" style="height: 440px;" dx-chart="chartOptions"></div>
+
                                             Staff Hours
                                         </div>
                                         <div class="tab-pane " id="staff-break">

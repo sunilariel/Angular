@@ -67,12 +67,12 @@
                 "Id": "",
                 "CompanyId": $routeParams.CompanyId,
                 "UserName": $scope.StaffEmail,
-                "Password": "sample string 4",
+                "Password": "",
                 "FirstName": $scope.StaffName,
-                "LastName": "sample string 6",
-                "Address": "sample string 7",
+                "LastName": "",
+                "Address": "",
                 "Email": $scope.StaffEmail,
-                "TelephoneNo": "sample string 9",
+                "TelephoneNo": "",
                 "CreationDate": CurrentDate            
         }
 
@@ -270,12 +270,12 @@
             "Id": $scope.StaffId,
             "CompanyId": $routeParams.CompanyId,
             "UserName": $scope.staffEmail,
-            "Password": "sample string 4",
+            "Password": "",
             "FirstName": $scope.staffName,
-            "LastName": "sample string 6",
-            "Address": "sample string 7",
+            "LastName": "",
+            "Address": "",
             "Email": $scope.staffEmail,
-            "TelephoneNo": "sample string 9",
+            "TelephoneNo": "",
             "CreationDate": CurrentDate
         }
         var responseresult = bookingService.UpdateStaff(requestedStaff);

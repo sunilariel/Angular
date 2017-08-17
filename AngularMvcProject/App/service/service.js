@@ -671,6 +671,36 @@ app.service("bookingService", function ($http, $window) {
         })
         return response;
     }
+
+    //Dashboard Section//
+    this.GetWeeksSchedule=function(companyId)
+    {
+        var response = $http({
+            method: "POST",
+            url: "/Dashboard/GetWeeksSchedule",
+            data: { CompanyId: companyId },
+            headers:GetHeader()
+        })
+        return response;
+    }
+    this.GetWeeksActivitySummary = function (companyId) {
+        var response = $http({
+            method: "POST",
+            url: "/Dashboard/GetWeeksActivitySummary",
+            data: { CompanyId: companyId },
+            headers: GetHeader()
+        })
+        return response;
+    }
+    this.GetCurrentWeeksRevenueSummary = function (companyId) {
+        var response = $http({
+            method: "POST",
+            url: "/Dashboard/GetCurrentWeeksRevenueSummary",
+            data: { CompanyId: companyId },
+            headers: GetHeader()
+        })
+        return response;
+    }
 })
 
 

@@ -1220,7 +1220,7 @@ a.close_icon img {
     display: block;
 }
 
-.dropdown-content a:hover {background-color: #f1f1f1}
+/*.dropdown-content a:hover {background-color: #f1f1f1}*/
 
 .labeldrowDownBtn:hover .dropdown-content {
     display: block;
@@ -3771,6 +3771,69 @@ span.one.span_check {
 }
 /*11-aug-2017 css end here ==================================*/
 
+/*17-aug-2017 css start here ==================================*/
+.check_img {
+    width: 40%;
+    float: left;
+}
+.check_img2{
+    width: 60%;
+    float: left;
+    margin-top: 2px;
+}
+.web_div {
+    padding: 15px;
+    border-bottom: 2px solid #EAEBEB;
+}
+.check_img ul {
+    margin: 0;
+}
+.check_img ul li {
+    font-size: 28px;
+    font-weight: 300;
+    line-height: normal;
+}
+.check_img ul li:last-child {
+    font-size: 14px;
+    text-transform: uppercase;
+    color: #9B9B99;
+}
+.check_img2 label, .market_div label, .complete_div a {
+    font-weight: 400;
+    color: #2E363E;
+    margin-bottom: 2px;
+    display: block;
+}
+.check_img2 label .fa {
+    color: #00BFB9;
+    font-size: 28px;
+    vertical-align: top;
+    margin-right: 10px;
+}
+.check_img2 p, .market_div p {
+    color: #9B9B99;
+    margin: 0;
+    font-weight: 300;
+}
+.am_div{
+    width:30%;
+    float:left;
+}
+.am_div2{
+    width:70%;
+    float:left;
+}
+.complete_div a {
+    margin-top: 2px;
+    display: inline-block;
+}
+.weeks_div {
+    overflow-y: auto;
+    height: 372px;
+}
+
+/*17-aug-2017 css end here ==================================*/
+
 /* media css start here ================================= */
 
 @media (max-width:1440px){
@@ -3786,6 +3849,13 @@ span.one.span_check {
 .tooltipArrow {
     left: 105% !important;
 }
+}
+
+.appoin_popup{
+	left: auto !important;
+    top: 120px;
+    right: 100px;
+    max-width: 423px;
 }
 
 @media (min-width:1024px) and (max-width:1200px){

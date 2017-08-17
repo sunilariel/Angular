@@ -1,4 +1,4 @@
-﻿<div ng-controller="dashboardController">
+﻿<div ng-controller="dashboardController" ng-init="init()">
     <header class="top">
         <div class="logo_section"> <a class="logo" href="#"></a><img src="/Content/Assets/images/logo.png" alt="Logo"></a> </div>
         <h1>Dashboard</h1>
@@ -159,22 +159,22 @@
                         <ul class="dashboardDetailList list-inline">
                             <li class="dashboardLi">
                                 <span class="dashboardHead">This Week</span>
-                                <label class="dashboardLable">Jun 19 - Jun 25</label>
+                                <label class="dashboardLable">{{WeekFirstDate | date:'MMM d'}} - {{WeekLastDate | date:'MMM d'}}</label>
                             </li>
                             <li class="dashboardLi">
-                                <span class="dashboardCount">0</span>
+                                <span class="dashboardCount">{{WeekRevenueSummary.Appointments}}</span>
                                 <label class="dashboardLable">Appointments</label>
                             </li>
                             <li class="dashboardLi">
-                                <span class="dashboardCount">£0</span>
+                                <span class="dashboardCount">£{{WeekRevenueSummary.ConfirmedRevenue}}</span>
                                 <label class="dashboardLable">Confirmed Revenue</label>
                             </li>
                             <li class="dashboardLi">
-                                <span class="dashboardCount">£0</span>
+                                <span class="dashboardCount">£{{WeekRevenueSummary.ProjectedRevenue}}</span>
                                 <label class="dashboardLable">Projected Revenue</label>
                             </li>
                             <li class="dashboardLi">
-                                <span class="dashboardCount">£0</span>
+                                <span class="dashboardCount">£{{WeekRevenueSummary.ProjectedRevenue}}</span>
                                 <label class="dashboardLable">Total Estimated</label>
                             </li>
                         </ul>
@@ -188,9 +188,182 @@
                                 <!--<button class="btn btn-default bookBtn" type="">Book Appointment...</button>-->
                                 <div class="clearfix"></div>
                             </div>
-                            <div class="apptDisplay">
-                                <span class="noAppt">No Appointments To Display</span>
+                            <div class="weeks_div">
+                                <div class="web_div cursorhand" ng-repeat="item in ListofWeekSchedule" style="overflow-y:auto;" ng-click="DashboardAppointmentDetail(item)">
+                                    <div class="col-sm-3">
+                                        <div class="check_img">
+                                            <ul class="list-unstyled">
+                                                <li>{{item.BookingStartDate | date : 'd'}}</li>
+                                                <li class="web_list">{{item.BookingStartDate | date :'EEE'}}</li>
+                                            </ul>
+                                        </div>
+                                        <div class="check_img2">
+                                            <div class="am_div">
+                                                <label><i class="fa fa-check-circle" aria-hidden="true"></i></label>
+                                            </div>
+                                            <div class="am_div2">
+                                                <label>{{item.BookingStartDate | date :'h:mm a'}}</label>
+                                                <p>{{item.BookingDuration}} min</p>
+                                            </div>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="market_div">
+                                            <label>{{item.CustomerNames[0]}}</label>
+                                            <p>{{item.ServiceName}} w/ {{item.EmployeeName}}, £ {{item.BookingCost | number:0}}</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-5 text-right">
+                                        <div class="complete_div">
+                                            <a title="">{{item.BookingStatusDisplay}}</a>
+                                        </div>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                </div>
+                                <div class="apptDisplay" ng-if="ListofWeekSchedule.length ==0">
+                                    <span class="noAppt">No Appointment to Display</span>
+                                </div>
                             </div>
+                               
+
+                            <div class="modal fade appointmentPopup" id="UpdateDashboardAppointmentPopup" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+                                <div class="modal-dialog appointPopupHead">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close modalcloseIcon" data-dismiss="modal"><span aria-hidden="true" class="">×</span><span class="sr-only">Close</span></button>
+                                            <h3 class="modal-title" id="lineModalLabel">Appointment</h3>
+                                        </div>
+                                        <div class="form-horizontal appointPopUpform">
+                                            <form ng-submit="UpdateAppointment(appointmentform)" name="updateappointmentform" novalidate class="css-form">
+                                                <div class="modal-body appointPopupBody" ng-hide="ShowAddAppointmentPopup">
+
+                                                    <div class="row popupDeatailDiv">
+                                                        <div class="col-md-6">
+                                                            <div class="detailText">
+                                                                <ul class="list-inline appointDeatailDiv">
+                                                                    <li><a href="#">Details</a></li>
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="dropdown labeldrowDownBtn">
+                                                                <button class="dropbtn">
+                                                                    {{UpdatedStatus}}
+                                                                    <span class="glyphicon glyphicon-chevron-down"></span>
+                                                                </button>
+                                                                <ul class="lableDropdownContent dropdown-content">
+                                                                    <li ng-repeat="item in StatusList"><a href="" ng-click="UpdateStatus(item)">{{item.Status}}</a></li>
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="deatailForm">
+                                                        <div class="form-group">
+                                                            <label class="control-label col-sm-4" for="email">Provider</label>
+                                                            <div class="col-sm-8">
+                                                                <div class="dropdown appointProvider">
+                                                                    <!--<select class="btn btn-default dropdown-toggle" ng-model="selectedprovider" data-ng-options="x.Id as x.staffName for x in Provider" id="dropdownMenu2" name="providerdd" aria-haspopup="true" aria-expanded="false" ng-change="GetAllocateServiceToEmployee(selectedprovider)" required>
+
+                                            </select>-->
+                                                                    <select class="btn btn-default dropdown-toggle" ng-model="selectedprovider" name="providerdd" ng-change="GetAllocateServiceToEmployee(selectedprovider)" required>
+                                                                        <option ng-repeat="employee in Provider" value="{{employee.Id}}">{{employee.staffName}}</option>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label class="control-label col-sm-4" for="pwd">Service</label>
+                                                            <div class="col-sm-8">
+                                                                <div class="dropdown appointProvider">
+                                                                    <!--<select class="btn btn-default dropdown-toggle" name="Servicedd" data-ng-options="x.Id as x.Name for x in EmployeeServices" ng-model="selectedservice" ng-change="ServiceDetail(selectedservice)" aria-haspopup="true" aria-expanded="false" required>
+                                                <option value="">-- Select a Service --</option>
+                                            </select>-->
+
+                                                                    <select class="btn btn-default dropdown-toggle" ng-model="selectedservice" name="Servicedd" ng-change="ServiceDetail(selectedservice)" required>
+                                                                        <option ng-repeat="services in EmployeeServices " value="{{services.Id}}">{{services.Name}}</option>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label class="control-label col-sm-4"></label>
+                                                            <div class="col-sm-8">
+                                                                <div class="row">
+                                                                    <div class="col-md-6 dateTimeDiv costField">
+                                                                        <span class="calendarOk">£</span>
+                                                                        <input type="text" class="appt_cost form-control" placeholder="10" ng-model="price" value="">
+                                                                    </div>
+                                                                    <div class="col-md-6 dateTimeDiv costMinField">
+                                                                        <input type="text" class="appt_cost_min form-control" placeholder="60" ng-model="time">
+                                                                        <a href="" id="minTextDiv" class="minText">
+                                                                            Mins
+                                                                            <!--<span class="glyphicon glyphicon-chevron-down chevronDownIcon" ng-click="minhours = !minhours">-->
+                                                                            <span class="glyphicon glyphicon-chevron-down chevronDownIcon">
+                                                                            </span>
+                                                                        </a>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label class="control-label col-sm-4" for="pwd">Day/Time</label>
+                                                            <div class="col-sm-8 dateTimeDiv">
+                                                                <span class="glyphicon glyphicon-ok calendarOk"></span>
+                                                                <input type="text" class="form-control calendarBox" datepicker-popup="EEE, MMM d" ng-model="dt" open="opened" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-click="EditDatePicker()" name='theDate' ng-required="true" />
+
+                                                                <div class="selectDropdown">
+                                                                    <select class="select_btn dateTimeSelect" ng-model="timeoption" name="timeoption">
+                                                                        <option ng-repeat="timeoption in timeInfoFrom " value="{{timeoption}}">{{timeoption}}</option>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+
+
+                                                        </div>
+
+                                                        <div class="form-group">
+                                                            <label class="control-label col-sm-4" for="pwd">Notes</label>
+                                                            <div class="col-sm-8 notesForCustomer">
+                                                                <textarea class="form-control apptNotes" placeholder="Notes for the Customer" maxlength="500" ng-model="notes"></textarea>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="form-group">
+                                                            <label class="control-label col-sm-4" for="pwd">Recurring?</label>
+                                                            <div class="col-sm-8 recurringDiv">
+                                                                <div class="onoffswitch recurringOnOffBtn">
+                                                                    <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" checked="">
+                                                                    <label class="onoffswitch-label" for="myonoffswitch">
+                                                                        <span class="onoffswitch-inner"></span>
+                                                                        <span class="onoffswitch-switch"></span>
+                                                                    </label>
+                                                                </div>
+                                                                <div class="premiumBtn">
+                                                                    <button type="button" class="btn btn-default">
+                                                                        <span><i class="fa fa-lock" aria-hidden="true"></i></span>
+
+                                                                        premium
+                                                                    </button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <div class="btn-group apptSaveBtn" role="group">
+                                                        <button type="submit" class="btn btn-default" data-action="save" role="button">Save Appointment</button>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="modalPopupbg" class="fade modal_bg in"></div>
+                            </div>
+
+                           
                         </div>
                     </div>
                     <div class="col-md-4 col-xs-12">
@@ -200,9 +373,8 @@
                             </div>
                             <div class="apptDisplay activityWeekDiv">
                                 <ul class="dashboardNtfList">
-
-                                    <li class="">
-                                        <div class="DashboardListHolder">
+                                    <li class="" ng-repeat="item in WeekActivityList">
+                                        <!--<div class="DashboardListHolder">
                                             <div class="setmore-icon-calendar-full update  nav-icon-fsize-activity activity_icon setmoreCalendarIcon">
                                             </div>
                                             <div class="dashboardActivityText">
@@ -213,345 +385,84 @@
                                                 <span class="dashboardSpantime">20 days  ago </span>
                                             </div>
                                             <div class="clear"></div>
-                                        </div>
-                                    </li>
-
-                                    <li class="">
+                                        </div>-->
                                         <div class="DashboardListHolder">
                                             <div class="setmore-icon-calendar-full update  nav-icon-fsize-activity activity_icon setmoreCalendarIcon">
                                             </div>
                                             <div class="dashboardActivityText">
                                                 <span class="dashboardSpanText">
-                                                    <b class="typeNameBold">Updated:</b>
-                                                    Service Sample Service's details have been updated.
+                                                    <b class="typeNameBold">{{item.Tiltle}}:</b>
+                                                    {{item.Description}}
                                                 </span>
-                                                <span class="dashboardSpantime">20 days  ago </span>
+                                                <!--<span class="dashboardSpantime">{{item.Activity}} days  ago </span>-->
                                             </div>
                                             <div class="clear"></div>
                                         </div>
-                                    </li>
-
-                                    <li class="">
-                                        <div class="DashboardListHolder">
-                                            <div class="setmore-icon-calendar-full update  nav-icon-fsize-activity activity_icon setmoreCalendarIcon">
-                                            </div>
-                                            <div class="dashboardActivityText">
-                                                <span class="dashboardSpanText">
-                                                    <b class="typeNameBold">Updated:</b>
-                                                    Service Sample Service's details have been updated.
-                                                </span>
-                                                <span class="dashboardSpantime">20 days  ago </span>
-                                            </div>
-                                            <div class="clear"></div>
-                                        </div>
-                                    </li>
-
-                                    <li class="">
-                                        <div class="DashboardListHolder">
-                                            <div class="setmore-icon-calendar-full update  nav-icon-fsize-activity activity_icon setmoreCalendarIcon">
-                                            </div>
-                                            <div class="dashboardActivityText">
-                                                <span class="dashboardSpanText">
-                                                    <b class="typeNameBold">Updated:</b>
-                                                    Service Sample Service's details have been updated.
-                                                </span>
-                                                <span class="dashboardSpantime">20 days  ago </span>
-                                            </div>
-                                            <div class="clear"></div>
-                                        </div>
-                                    </li>
-
-                                    <li class="">
-                                        <div class="DashboardListHolder">
-                                            <div class="setmore-icon-calendar-full update  nav-icon-fsize-activity activity_icon setmoreCalendarIcon">
-                                            </div>
-                                            <div class="dashboardActivityText">
-                                                <span class="dashboardSpanText">
-                                                    <b class="typeNameBold">Updated:</b>
-                                                    Service Sample Service's details have been updated.
-                                                </span>
-                                                <span class="dashboardSpantime">20 days  ago </span>
-                                            </div>
-                                            <div class="clear"></div>
-                                        </div>
-                                    </li>
-
-                                    <li class="">
-                                        <div class="DashboardListHolder">
-                                            <div class="setmore-icon-calendar-full update  nav-icon-fsize-activity activity_icon setmoreCalendarIcon">
-                                            </div>
-                                            <div class="dashboardActivityText">
-                                                <span class="dashboardSpanText">
-                                                    <b class="typeNameBold">Updated:</b>
-                                                    Service Sample Service's details have been updated.
-                                                </span>
-                                                <span class="dashboardSpantime">20 days  ago </span>
-                                            </div>
-                                            <div class="clear"></div>
-                                        </div>
-                                    </li>
-
-                                    <li class="">
-                                        <div class="DashboardListHolder">
-                                            <div class="setmore-icon-calendar-full update  nav-icon-fsize-activity activity_icon setmoreCalendarIcon">
-                                            </div>
-                                            <div class="dashboardActivityText">
-                                                <span class="dashboardSpanText">
-                                                    <b class="typeNameBold">Updated:</b>
-                                                    Service Sample Service's details have been updated.
-                                                </span>
-                                                <span class="dashboardSpantime">20 days  ago </span>
-                                            </div>
-                                            <div class="clear"></div>
-                                        </div>
-                                    </li>
-
-                                    <li class="">
-                                        <div class="DashboardListHolder">
-                                            <div class="setmore-icon-calendar-full update  nav-icon-fsize-activity activity_icon setmoreCalendarIcon">
-                                            </div>
-                                            <div class="dashboardActivityText">
-                                                <span class="dashboardSpanText">
-                                                    <b class="typeNameBold">Updated:</b>
-                                                    Service Sample Service's details have been updated.
-                                                </span>
-                                                <span class="dashboardSpantime">20 days  ago </span>
-                                            </div>
-                                            <div class="clear"></div>
-                                        </div>
-                                    </li>
-
-                                    <li class="">
-                                        <div class="DashboardListHolder">
-                                            <div class="setmore-icon-calendar-full update  nav-icon-fsize-activity activity_icon setmoreCalendarIcon">
-                                            </div>
-                                            <div class="dashboardActivityText">
-                                                <span class="dashboardSpanText">
-                                                    <b class="typeNameBold">Updated:</b>
-                                                    Service Sample Service's details have been updated.
-                                                </span>
-                                                <span class="dashboardSpantime">20 days  ago </span>
-                                            </div>
-                                            <div class="clear"></div>
-                                        </div>
-                                    </li>
-
-                                    <li class="">
-                                        <div class="DashboardListHolder">
-                                            <div class="setmore-icon-calendar-full update  nav-icon-fsize-activity activity_icon setmoreCalendarIcon">
-                                            </div>
-                                            <div class="dashboardActivityText">
-                                                <span class="dashboardSpanText">
-                                                    <b class="typeNameBold">Updated:</b>
-                                                    Service Sample Service's details have been updated.
-                                                </span>
-                                                <span class="dashboardSpantime">20 days  ago </span>
-                                            </div>
-                                            <div class="clear"></div>
-                                        </div>
-                                    </li>
-
-                                    <li class="">
-                                        <div class="DashboardListHolder">
-                                            <div class="setmore-icon-calendar-full update  nav-icon-fsize-activity activity_icon setmoreCalendarIcon">
-                                            </div>
-                                            <div class="dashboardActivityText">
-                                                <span class="dashboardSpanText">
-                                                    <b class="typeNameBold">Updated:</b>
-                                                    Service Sample Service's details have been updated.
-                                                </span>
-                                                <span class="dashboardSpantime">20 days  ago </span>
-                                            </div>
-                                            <div class="clear"></div>
-                                        </div>
-                                    </li>
-
-                                    <li class="">
-                                        <div class="DashboardListHolder">
-                                            <div class="setmore-icon-calendar-full update  nav-icon-fsize-activity activity_icon setmoreCalendarIcon">
-                                            </div>
-                                            <div class="dashboardActivityText">
-                                                <span class="dashboardSpanText">
-                                                    <b class="typeNameBold">Updated:</b>
-                                                    Service Sample Service's details have been updated.
-                                                </span>
-                                                <span class="dashboardSpantime">20 days  ago </span>
-                                            </div>
-                                            <div class="clear"></div>
-                                        </div>
-                                    </li>
-
-                                    <li class="">
-                                        <div class="DashboardListHolder">
-                                            <div class="setmore-icon-calendar-full update  nav-icon-fsize-activity activity_icon setmoreCalendarIcon">
-                                            </div>
-                                            <div class="dashboardActivityText">
-                                                <span class="dashboardSpanText">
-                                                    <b class="typeNameBold">Updated:</b>
-                                                    Service Sample Service's details have been updated.
-                                                </span>
-                                                <span class="dashboardSpantime">20 days  ago </span>
-                                            </div>
-                                            <div class="clear"></div>
-                                        </div>
-                                    </li>
-
-                                    <li class="">
-                                        <div class="DashboardListHolder">
-                                            <div class="setmore-icon-calendar-full update  nav-icon-fsize-activity activity_icon setmoreCalendarIcon">
-                                            </div>
-                                            <div class="dashboardActivityText">
-                                                <span class="dashboardSpanText">
-                                                    <b class="typeNameBold">Updated:</b>
-                                                    Service Sample Service's details have been updated.
-                                                </span>
-                                                <span class="dashboardSpantime">20 days  ago </span>
-                                            </div>
-                                            <div class="clear"></div>
-                                        </div>
-                                    </li>
-
-                                    <li class="">
-                                        <div class="DashboardListHolder">
-                                            <div class="setmore-icon-calendar-full update  nav-icon-fsize-activity activity_icon setmoreCalendarIcon">
-                                            </div>
-                                            <div class="dashboardActivityText">
-                                                <span class="dashboardSpanText">
-                                                    <b class="typeNameBold">Updated:</b>
-                                                    Service Sample Service's details have been updated.
-                                                </span>
-                                                <span class="dashboardSpantime">20 days  ago </span>
-                                            </div>
-                                            <div class="clear"></div>
-                                        </div>
-                                    </li>
-
-                                    <li class="">
-                                        <div class="DashboardListHolder">
-                                            <div class="setmore-icon-calendar-full update  nav-icon-fsize-activity activity_icon setmoreCalendarIcon">
-                                            </div>
-                                            <div class="dashboardActivityText">
-                                                <span class="dashboardSpanText">
-                                                    <b class="typeNameBold">Updated:</b>
-                                                    Service Sample Service's details have been updated.
-                                                </span>
-                                                <span class="dashboardSpantime">20 days  ago </span>
-                                            </div>
-                                            <div class="clear"></div>
-                                        </div>
-                                    </li>
-
-                                    <li class="">
-                                        <div class="DashboardListHolder">
-                                            <div class="setmore-icon-calendar-full update  nav-icon-fsize-activity activity_icon setmoreCalendarIcon">
-                                            </div>
-                                            <div class="dashboardActivityText">
-                                                <span class="dashboardSpanText">
-                                                    <b class="typeNameBold">Updated:</b>
-                                                    Service Sample Service's details have been updated.
-                                                </span>
-                                                <span class="dashboardSpantime">20 days  ago </span>
-                                            </div>
-                                            <div class="clear"></div>
-                                        </div>
-                                    </li>
-
-                                    <li class="">
-                                        <div class="DashboardListHolder">
-                                            <div class="setmore-icon-calendar-full update  nav-icon-fsize-activity activity_icon setmoreCalendarIcon">
-                                            </div>
-                                            <div class="dashboardActivityText">
-                                                <span class="dashboardSpanText">
-                                                    <b class="typeNameBold">Updated:</b>
-                                                    Service Sample Service's details have been updated.
-                                                </span>
-                                                <span class="dashboardSpantime">20 days  ago </span>
-                                            </div>
-                                            <div class="clear"></div>
-                                        </div>
-                                    </li>
-
-                                    <li class="">
-                                        <div class="DashboardListHolder">
-                                            <div class="setmore-icon-calendar-full update  nav-icon-fsize-activity activity_icon setmoreCalendarIcon">
-                                            </div>
-                                            <div class="dashboardActivityText">
-                                                <span class="dashboardSpanText">
-                                                    <b class="typeNameBold">Updated:</b>
-                                                    Service Sample Service's details have been updated.
-                                                </span>
-                                                <span class="dashboardSpantime">20 days  ago </span>
-                                            </div>
-                                            <div class="clear"></div>
-                                        </div>
-                                    </li>
-
-                                    <li class="">
-                                        <div class="DashboardListHolder">
-                                            <div class="setmore-icon-calendar-full update  nav-icon-fsize-activity activity_icon setmoreCalendarIcon">
-                                            </div>
-                                            <div class="dashboardActivityText">
-                                                <span class="dashboardSpanText">
-                                                    <b class="typeNameBold">Updated:</b>
-                                                    Service Sample Service's details have been updated.
-                                                </span>
-                                                <span class="dashboardSpantime">20 days  ago </span>
-                                            </div>
-                                            <div class="clear"></div>
-                                        </div>
-                                    </li>
-
-                                    <li class="">
-                                        <div class="DashboardListHolder">
-                                            <div class="setmore-icon-calendar-full update  nav-icon-fsize-activity activity_icon setmoreCalendarIcon">
-                                            </div>
-                                            <div class="dashboardActivityText">
-                                                <span class="dashboardSpanText">
-                                                    <b class="typeNameBold">Updated:</b>
-                                                    Service Sample Service's details have been updated.
-                                                </span>
-                                                <span class="dashboardSpantime">20 days  ago </span>
-                                            </div>
-                                            <div class="clear"></div>
-                                        </div>
-                                    </li>
-
-                                    <li class="">
-                                        <div class="DashboardListHolder">
-                                            <div class="setmore-icon-calendar-full update  nav-icon-fsize-activity activity_icon setmoreCalendarIcon">
-                                            </div>
-                                            <div class="dashboardActivityText">
-                                                <span class="dashboardSpanText">
-                                                    <b class="typeNameBold">Updated:</b>
-                                                    Service Sample Service's details have been updated.
-                                                </span>
-                                                <span class="dashboardSpantime">20 days  ago </span>
-                                            </div>
-                                            <div class="clear"></div>
-                                        </div>
-                                    </li>
-
-                                    <li class="">
-                                        <div class="DashboardListHolder">
-                                            <div class="setmore-icon-calendar-full update  nav-icon-fsize-activity activity_icon setmoreCalendarIcon">
-                                            </div>
-                                            <div class="dashboardActivityText">
-                                                <span class="dashboardSpanText">
-                                                    <b class="typeNameBold">Updated:</b>
-                                                    Service Sample Service's details have been updated.
-                                                </span>
-                                                <span class="dashboardSpantime">20 days  ago </span>
-                                            </div>
-                                            <div class="clear"></div>
-                                        </div>
-                                    </li>
-
+                                    </li>                                                                     
                                 </ul>
                             </div>
                         </div>
                     </div>
 
                 </div>
+                <div id="dashboarddetailPopup" class="apptDetailPopup addCustomer bottomArrow appoin_popup " ng-show="appointmentDetailisVisible" style="display:block;">
+                    <div class="apptDetailDiv">
+                        <div class="appt_text">
+                            <h2>Appointment Details</h2>
+                            <a id="crossHidebtn" class="crossBtn cursorhand" ng-click="appointmentDetailisVisible=false"><i class="fa fa-times" aria-hidden="true"></i></a>
+                        </div>
+                        <div class="dropdown labeldrowDownBtn">
+                            <button class="dropbtn">
+                                {{UpdatedStatus}}
+                                <span class="glyphicon glyphicon-chevron-down"></span>
+                            </button>
+                            <ul class="lableDropdownContent dropdown-content">
+                                <li ng-repeat="item in StatusList"><a href="" ng-click="UpdateStatus(item)">{{item.Status}}</a></li>
+                            </ul>
+                        </div>
+
+                        <div class="apptdetailList">
+                            <p>{{AppointmentStartDate| date:'EEE, MMM d' }},{{AppointmentStartDate| date:' h:mm a ' | lowercase}}-{{AppointmentEndDate | date:' hh:mm a' | lowercase}}</p>
+                            <ul>
+                                <li>
+                                    <label>Provider</label>
+                                    <span>{{AppointmentProvider}}</span>
+                                </li>
+                                <li>
+                                    <label>Service</label>
+                                    <span>{{AppointmentService}}</span>
+                                </li>
+                                <li>
+                                    <label>Cost £</label>
+                                    <span>{{AppointmentServiceCost}}</span>
+                                </li>
+                                <li>
+                                    <label>Customer </label>
+                                    <span>
+                                        {{CustomerName}}<br />
+                                        {{updatedMobileNo}} <br />
+                                        {{updatedCustomerEmail}}
+                                    </span>
+                                </li>
+                                <li>
+                                    <label>Booked from </label>
+                                    <span>Customer Page</span>
+                                </li>
+                            </ul>
+                            <div class="brdr_btm"></div>
+                        </div>
+
+                        <div class="pointerRightIcon"></div>
+                        <div class="apptViewFooter">
+                            <a ng-click="EditAppointment()" class="editAppt cursorhand" data-toggle="modal" data-target="#UpdateDashboarddsadsaAppointmentPopup">
+                                Edit Appointment
+                                <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                            </a>
+                            <a class="apptDeleteBtn cursorhand" ng-click="DeleteAppointment()">Delete</a>
+                        </div>
+                    </div>
+                    <div class="pointer_pos pointer_left" style="top: 161px;"></div>
+                </div> 
             </div>
             <div class="tab-pane full-height" id="accounts">
                 <div id="accountsSideNav" class="span3 secondary-navbar container-fluid"> dfsdfsdfd </div>
@@ -567,127 +478,7 @@
             </div>
         </div>
     </div>
-    <script src="js/jquery.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/moment.js"></script>
-    <script src="js/bootstrap-datetimepicker.min.js"></script>
-    <script type="text/javascript">
-        var app = angular.module('MyApp', [])
-        app.controller('MyController', function ($scope, $timeout) {
-            //This will hide the DIV by default.
-			 $scope.procedures = [
-        {
-            definition: 'Monday',
-            show: false,
-			choice:[]
-        },
-        {
-            definition: 'Tuesday',
-            show: false,
-			choice:[]
-        },
-        {
-            definition: 'Wednesday',
-            show: false,
-			choice:[]
-        },
-		{
-            definition: 'Thursday',
-           show: false,
-		   choice:[]
-        },
-		{
-            definition: 'Friday',
-        show: false,
-		choice:[]
-        },
-		{
-            definition: 'Saturday',
-        show: false,
-		choice:[]
-        },
-		{
-            definition: 'Sunday',
-           show: false,
-		   choice:[]
-        }
-    ];
-
-		  $scope.MessageText = "";
-		  $scope.IsVisible = false;
-		  $scope.choices=[];
-          $scope.addNewChoice = function(procedure) {debugger;
-		  $scope.IsVisible=true;
-		  $scope.MessageText = "Saving Staff breaks..";
-          var newItemNo = procedure.choice.length+1;
-
-         procedure.choice.push([{'id':'choice'+newItemNo}]);
-		 $timeout(function () { $scope.MessageText = "Staff breaks saved."; $timeout(function () {$scope.IsVisible=false;},1000) }, 500);
-         };
-    $scope.showPopup = function(procedure){
-	procedure.show=true;
-	};
-	 $scope.hidePopup = function(procedure){debugger;
-	procedure.show=false;
-	};
-        $scope.removeChoice = function(procedure) {debugger;
-		$scope.IsVisible=true;
-        var lastItem = procedure.choice.length-1;
-      procedure.choice.splice(lastItem);
-	  $scope.MessageText = "Saving Staff breaks..";
-	  $timeout(function () { $scope.MessageText = "Staff breaks saved."; $timeout(function () {$scope.IsVisible=false;},1000) }, 500);
-     };
-        });
-
-
-
-
-
-    </script>
-    <script>
-	$(document).ready(function(){
-		$(function () {
-		  $('.left_side2').height($(window).height() - 50)
-		  $('[data-toggle="tooltip"]').tooltip();
-		})
-	});
-
-	$(document).ready(function(){
-		$("#createNewStaffBtn").click(function(){
-			$("#addCustomerPopup").toggle(200);
-		});
-
-	});
-
-	$(document).ready(function(){
-			$('[data-toggle="popover"]').popover();
-		});
-
-	$(document).ready(function(){
-		$("#menuiconBar").click(function(){
-			$(".left_sidebar").toggle(200);
-		});
-
-		$("#deleteBtn").click(function(){
-			$("#tooltipPopup").toggle(200);
-		});
-
-		$("#calendarfaIcon").click(function(){
-			$("#detailPopup").show(200);
-		});
-
-		$("#crossHidebtn").click(function(){
-			$("#detailPopup").hide(200);
-		});
-	});
-
-	 $(function () {
-		$('#datetimepicker4').datetimepicker();
-     });
-
-
-
-    </script>
+    
 
 
 </div>

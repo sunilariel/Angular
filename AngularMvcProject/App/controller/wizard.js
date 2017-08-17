@@ -74,15 +74,15 @@ app.controller('bookingController', ['$scope', '$routeParams', '$rootScope', '$h
                 RequestData: {
                     Id:$rootScope.SignUpCompanyId,
                     Name: $rootScope.LoginUsername,
-                    Address: "sample string 3",
+                    Address: "",
                     Email: $rootScope.LoginEmail,
                     Telephone: $scope.businessPhone,
-                    PostCode: "sample string 6",
-                    Website: "sample string 7",
-                    County: "sample string 8",
-                    Town: "sample string 9",
-                    Description: "sample string 10",
-                    Password: "sample string 11",
+                    PostCode: "",
+                    Website: "",
+                    County: "",
+                    Town: "",
+                    Description: "",
+                    Password: "12345678",
                     CreationDate: "2017-05-24T07:20:31.1744476+00:00"
                 }
             };
@@ -402,12 +402,12 @@ app.controller('bookingController', ['$scope', '$routeParams', '$rootScope', '$h
                 Id: $scope.selectedIndustry,
                 CompanyId: $scope.companyId,
                 UserName: $scope.staffName,
-                Password: "sample string 4",
+                Password: "",
                 FirstName: $scope.staffName,
-                LastName: "sample string 5",
-                Address: "sample string 6",
+                LastName: "",
+                Address: "",
                 Email: $scope.staffEmail,
-                TelephoneNo: "sample string 7",
+                TelephoneNo: "",
                 CreationDate: "2017-05-31T06:08:49.5008702+00:00",
             }
         };
@@ -496,12 +496,12 @@ app.controller('bookingController', ['$scope', '$routeParams', '$rootScope', '$h
                 Id: EditStaff.Id,
                 CompanyId: EditStaff.CompanyId,
                 UserName: EditStaff.staffName,
-                Password: "sample string 4",
+                Password: "",
                 FirstName: EditStaff.staffName,
-                LastName: "sample string 5",
-                Address: "sample string 6",
+                LastName: "",
+                Address: "",
                 Email: EditStaff.staffEmail,
-                TelephoneNo: "sample string 7",
+                TelephoneNo: "",
                 CreationDate: "2017-05-31T06:08:49.5008702+00:00",
             }
         };
@@ -859,7 +859,7 @@ app.controller('bookingController', ['$scope', '$routeParams', '$rootScope', '$h
                 DurationInMinutes: time,
                 DurationInHours: "hour",
                 Cost: cost,
-                Currency: "sample string 7",
+                Currency: "",
                 CreationDate: dateTimeVal,
             }
         };
@@ -938,9 +938,9 @@ app.controller('bookingController', ['$scope', '$routeParams', '$rootScope', '$h
                 CategoryName: " ",
                 CategoryId: 0,
                 DurationInMinutes: EditService.DurationInMinutes,
-                DurationInHours: "sample string 5",
+                DurationInHours: "",
                 Cost: EditService.price,
-                Currency: "sample string 7",
+                Currency: "",
                 CreationDate: EditService.CreationDate,
             }
         };

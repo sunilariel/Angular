@@ -1,8 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Script.Serialization;
+using System.Configuration;
+using System.Globalization;
 
 namespace AngularMvcProject.Controllers
 {
@@ -10,9 +15,78 @@ namespace AngularMvcProject.Controllers
     {
         //
         // GET: /dashboard/
-        public ActionResult dashboard()
+        [HttpPost]
+        public string GetWeeksSchedule(string CompanyId)
         {
-            return View();
+            try
+            {
+                var result = "";
+                string apiUrl = ConfigurationManager.AppSettings["DomainUrl"] + "/api/dashboard/GetWeeksSchedule?companyId=" + CompanyId;
+                var httpWebRequest = (HttpWebRequest)WebRequest.Create(apiUrl);
+                httpWebRequest.ContentType = "application/json";
+                httpWebRequest.Method = "GET";
+                httpWebRequest.Headers.Add("Token", Request.Headers["Token"]);
+
+                var httpWebResponse = (HttpWebResponse)httpWebRequest.GetResponse();
+                using (var StreamReader = new StreamReader(httpWebResponse.GetResponseStream()))
+                {
+                    result = StreamReader.ReadToEnd();
+                }
+                return result;
+            }
+            catch (Exception e)
+            {
+                return e.ToString();
+            }
         }
-	}
+        [HttpPost]
+        public string GetWeeksActivitySummary(string CompanyId)
+        {
+            try
+            {
+                var result = "";
+                string apiUrl = ConfigurationManager.AppSettings["DomainUrl"] + "/api/dashboard/GetWeeksActivitySummary?companyId=" + CompanyId;
+                var httpWebRequest = (HttpWebRequest)WebRequest.Create(apiUrl);
+                httpWebRequest.ContentType = "application/json";
+                httpWebRequest.Method = "GET";
+                httpWebRequest.Headers.Add("Token", Request.Headers["Token"]);
+
+                var httpWebResponse = (HttpWebResponse)httpWebRequest.GetResponse();
+                using (var StreamReader = new StreamReader(httpWebResponse.GetResponseStream()))
+                {
+                    result = StreamReader.ReadToEnd();
+                }
+                return result;
+            }
+            catch (Exception e)
+            {
+                return e.ToString();
+            }
+        }
+
+        [HttpPost]
+        public string GetCurrentWeeksRevenueSummary(string CompanyId)
+        {
+            try
+            {
+                var result = "";
+                string apiUrl = ConfigurationManager.AppSettings["DomainUrl"] + "/api/dashboard/GetCurrentWeeksRevenueSummary?companyId=" + CompanyId;
+                var httpWebRequest = (HttpWebRequest)WebRequest.Create(apiUrl);
+                httpWebRequest.ContentType = "application/json";
+                httpWebRequest.Method = "GET";
+                httpWebRequest.Headers.Add("Token", Request.Headers["Token"]);
+
+                var httpWebResponse = (HttpWebResponse)httpWebRequest.GetResponse();
+                using (var StreamReader = new StreamReader(httpWebResponse.GetResponseStream()))
+                {
+                    result = StreamReader.ReadToEnd();
+                }
+                return result;
+            }
+            catch (Exception e)
+            {
+                return e.ToString();
+            }
+        }
+    }
 }
