@@ -341,7 +341,7 @@ namespace AngularMvcProject.Controllers
             // int Id = Convert.ToInt32(CompanyId);
             try
             {
-                var startDate = DateTime.Now.Date.ToShortDateString().Replace("/","-");
+                var startDate = DateTime.Now.Date.AddYears(-1).ToShortDateString().Replace("/","-");
              
                 var endDate = DateTime.Now.Date.AddYears(1).ToShortDateString().Replace("/","-");
                
