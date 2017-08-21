@@ -344,8 +344,8 @@
                                                     <input type="checkbox" name="" class="inputcheckbox">
                                                 </span>
 
-                                                <span class="providerImage">
-                                                    <a href="#"><img src="/Content/Assets/images/provider_img2.png" /></a>
+                                                <span class="providerImage cursorhand" >
+                                                    <a><img src="/Content/Assets/images/provider_img2.png" /></a>
                                                 </span>
 
                                                 <!--<input type="hidden" name="id" ng-model="item.Id">-->
@@ -672,7 +672,7 @@
                                                                                         <!--<select class="btn btn-default dropdown-toggle" ng-model="selectedprovider" data-ng-options="x.Id as x.staffName for x in Provider" id="dropdownMenu2" name="providerdd" aria-haspopup="true" aria-expanded="false" ng-change="GetAllocateServiceToEmployee(selectedprovider)" required>      
                                                                                                                                                                            
                                                                                         </select>-->   
-                                                                                        <select class="btn btn-default dropdown-toggle" ng-model="selectedprovider" name="providerdd" ng-change="GetAllocateServiceToEmployee(selectedprovider)" required>
+                                                                                        <select class="btn btn-default dropdown-toggle" ng-model="selectedprovider" name="provider" ng-change="GetAllocateServiceToEmployee(selectedprovider)" required>
                                                                                             <option ng-repeat="employee in Provider" value="{{employee.Id}}">{{employee.staffName}}</option>
                                                                                         </select>                          
                                                                                     </div>
@@ -686,7 +686,7 @@
                                                                                             <option value="">-- Select a Service --</option>
                                                                                         </select>-->   
 
-                                                                                        <select class="btn btn-default dropdown-toggle" ng-model="selectedservice" name="Servicedd"  ng-change="ServiceDetail(selectedservice)"  required>
+                                                                                        <select class="btn btn-default dropdown-toggle" ng-model="selectedservice" name="Service"  ng-change="ServiceDetail(selectedservice)"  required>
                                                                                             <option ng-repeat="services in EmployeeServices " value="{{services.Id}}">{{services.Name}}</option>
                                                                                         </select>                                                                                        
                                                                                     </div>
@@ -850,9 +850,14 @@
                                         </div>
                                         <div class="tab-pane" id="staff-services"> Service</div>
                                         <div class="tab-pane" id="staff-hours">
-                                            <div id="chart" style="height: 440px;" dx-chart="chartOptions"></div>
-
-                                            Staff Hours
+                                            <div class="action">
+                                                <div class="label">Choose a month:</div>
+                                                <div id="selectbox" dx-select-box="selectBoxOptions"></div> 
+                                                <div class="label">Choose a year:</div>  
+                                                <div id="selectyearbox" dx-select-box="selectBoxYearOption"></div>                                            
+                                            </div>   
+                                            <div id="chart" style="height: 350px;" dx-chart="chartOptions"></div> 
+                                                                                
                                         </div>
                                         <div class="tab-pane " id="staff-break">
                                             <div class="row-fluid">

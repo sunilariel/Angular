@@ -139,7 +139,7 @@ app.controller('dashboardController', ['$scope', '$timeout','$routeParams','$fil
     }
 
     $scope.DashboardAppointmentDetail = function (item) {
-       
+        debugger;
         $scope.AppointmentStartDate = item.BookingStartDate;
         $scope.AppointmentEndDate = new Date(item.BookingStartDate).setMinutes(item.BookingDuration,0,0);
         $scope.AppointmentProvider = item.EmployeeName;
@@ -149,9 +149,17 @@ app.controller('dashboardController', ['$scope', '$timeout','$routeParams','$fil
         $scope.AppointmentServiceId = item.ServiceId;
         $scope.ServiceTime = item.BookingDuration;        
         $scope.UpdatedStatus = item.BookingStatusDisplay;
+        $scope.StatusId = item.BookingStatus;
         $scope.AppointmentBookingId = item.BookingId;
         $scope.CustomerName = item.CustomerNames[0];
+        $scope.CustomerId = item.CustomerIds[0];
         $scope.appointmentDetailisVisible = !$scope.appointmentDetailisVisible;
+        var date = $scope.AppointmentStartDate.split("T");
+        var appointmentdate = new Date(date[0]);
+        var time = date[1].split(":");
+        var appointmenttime = new Date(1997, 4, 5, time[0], time[1], time[2]);
+        $scope.timeoption = $filter('date')(appointmenttime, 'h:mm a');
+        $scope.dt = appointmentdate;
     }
 
     $scope.UpdateStatus = function (item) {
@@ -198,8 +206,8 @@ app.controller('dashboardController', ['$scope', '$timeout','$routeParams','$fil
         debugger;
         $scope.appointmentDetailisVisible = false;
         $scope.Status = $scope.UpdatedStatus;
-        $scope.selectedprovider = $scope.AppointmentEmployeeId;
-        $scope.selectedservice = $scope.AppointmentServiceId;
+        $scope.selectedprovider = $scope.AppointmentEmployeeId.toString();
+        $scope.selectedservice = $scope.AppointmentServiceId.toString();
         $scope.price = $scope.AppointmentServiceCost;
         $scope.time = $scope.ServiceTime;
         var date = $scope.AppointmentStartDate.split("T");
@@ -211,6 +219,8 @@ app.controller('dashboardController', ['$scope', '$timeout','$routeParams','$fil
         // $scope.ServiceDetail($scope.AppointmentServiceId);
         $scope.GetAllocateServiceToEmployee($scope.AppointmentEmployeeId);
         $scope.ServiceId = $scope.AppointmentServiceId;
+        $scope.UpdateAppointmentId = $scope.AppointmentBookingId;
+        $scope.count = 0;
         //$scope.EmployeeId = $scope.AppointmentEmployeeId;
     }
 
@@ -245,6 +255,95 @@ app.controller('dashboardController', ['$scope', '$timeout','$routeParams','$fil
         };
     }
 
+    $scope.ServiceDetail = function (SelectedServiceId) {
+        debugger;
+        $scope.ServiceId = SelectedServiceId;
+        var SelectedService = bookingService.GetSelectedService(SelectedServiceId);
+        SelectedService.then(function (response) {
+            debugger;
+            $scope.price = response.data.Cost;
+            $scope.time = response.data.DurationInMinutes;
+            $scope.ServicePriceTimeDetailIsVisible = true;
+            // $scope.today();
+
+            $scope.timeInfoFrom = [];
+            var days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+            RequestValues = {
+                CompanyId: $routeParams.CompanyId,
+                ServiceId: $scope.ServiceId,
+                EmployeeId: $scope.EmployeeId,
+                DateofBooking: $filter('date')($scope.dt, "dd-MM-yyyy"),
+                Day: days[$scope.dt.getDay()],
+            }
+            $scope.timeslotsloading = true;
+            var result = bookingService.GetFreeBookingSlotsForEmployee(RequestValues);
+            result.then(function (response) {
+                if (response.data.Value != null) {
+                    for (var i = 0; i < response.data.Value.length; i++) {
+                        if (i == 0) {
+                            var startdate = response.data.Value[i].Start.split(":");
+                            var startdatetime = new Date(1970, 0, 1, startdate[0], startdate[1], startdate[2]);
+                            var starttime = $filter('date')(startdatetime, 'h:mm a');
+                            $scope.timeInfoFrom.push(starttime);
+                            var enddate = response.data.Value[i].End.split(":");
+                            var enddatetime = new Date(1970, 0, 1, enddate[0], enddate[1], enddate[2]);
+                            var endtime = $filter('date')(enddatetime, 'h:mm a');
+                            $scope.timeInfoFrom.push(endtime);
+                        }
+                        else {
+                            var date = response.data.Value[i].End.split(":");
+                            var datetime = new Date(1970, 0, 1, date[0], date[1], date[2]);
+                            var time = $filter('date')(datetime, 'h:mm a');
+                            $scope.timeInfoFrom.push(time);
+
+                        }
+                    }
+                }
+                $scope.timeslotsloading = false;
+            });
+
+        });
+    }
+
+    $scope.UpdateAppointment = function () {
+        debugger;
+        var appointment =
+         {
+             "Id": $scope.UpdateAppointmentId,
+             "CompanyId": $routeParams.CompanyId,
+             "ServiceId": $scope.selectedprovider,
+             "EmployeeId": $scope.selectedservice,
+             "CustomerIdsCommaSeperated": $scope.CustomerId,
+             "StartHour": $scope.timeoption,
+             "StartMinute": "",
+             "EndHour": 0,
+             "EndMinute": $scope.time,
+             "IsAdded": true,
+             "Message": "",
+             "CustomerIds": [$scope.CustomerId],
+             "Start": $scope.dt,
+             "End": $scope.dt,
+         }
+
+        var apirequest = bookingService.UpdateAppointment(appointment);
+        apirequest.then(function (response) {
+            if (response.data.Success == true)
+            {
+                $scope.appointmentDetailisVisible = true;
+                $scope.init();
+            }
+            if (response.data.Success == false) {
+                if (response.data.Message == "Booking Cannot Be Added , Not Free Slot Available.") {
+                    $scope.MessageText = "Not Free Slot Available";
+                    $scope.IsVisible = true;
+                    $timeout(function () {
+
+                        $scope.IsVisible = false;
+                    }, 1000)
+                }
+            }
+        })
+    }
 
     //DateTime Picker
     $scope.today = function () {
@@ -257,18 +356,11 @@ app.controller('dashboardController', ['$scope', '$timeout','$routeParams','$fil
         $scope.showWeeks = !$scope.showWeeks;
     };
 
-    $scope.SetDatePicker = function () {
-        if ($scope.count == 0) {
-            $scope.count = $scope.count + 1;
-            $scope.today();
-        }
-    }
-
-
+   
     $scope.EditDatePicker = function () {
         debugger;
-        if ($scope.editcount == 0) {
-            $scope.editcount = $scope.editcount + 1;
+        if ($scope.count == 0) {
+            $scope.count = $scope.count + 1;
             $scope.today();
         }
     }

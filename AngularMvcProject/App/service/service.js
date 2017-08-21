@@ -212,6 +212,16 @@ app.service("bookingService", function ($http, $window) {
         return response;
     }
 
+    this.GetCustomerStats=function(companyId,customerId,year,month)
+    {
+        var response = $http({
+            method: "post",
+            url: "/Customer/GetCustomerStats",
+            data: { CompanyId: companyId, CustomerId: customerId, Year: year, Month: month },
+            headers:GetHeader()
+        })
+        return response;
+    }
 
     ////////////for customer module Add appointment
 

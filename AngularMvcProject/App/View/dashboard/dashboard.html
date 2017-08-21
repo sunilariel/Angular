@@ -235,6 +235,7 @@
                                             <h3 class="modal-title" id="lineModalLabel">Appointment</h3>
                                         </div>
                                         <div class="form-horizontal appointPopUpform">
+                                           
                                             <form ng-submit="UpdateAppointment(appointmentform)" name="updateappointmentform" novalidate class="css-form">
                                                 <div class="modal-body appointPopupBody" ng-hide="ShowAddAppointmentPopup">
 
@@ -267,8 +268,8 @@
                                                                     <!--<select class="btn btn-default dropdown-toggle" ng-model="selectedprovider" data-ng-options="x.Id as x.staffName for x in Provider" id="dropdownMenu2" name="providerdd" aria-haspopup="true" aria-expanded="false" ng-change="GetAllocateServiceToEmployee(selectedprovider)" required>
 
                                             </select>-->
-                                                                    <select class="btn btn-default dropdown-toggle" ng-model="selectedprovider" name="providerdd" ng-change="GetAllocateServiceToEmployee(selectedprovider)" required>
-                                                                        <option ng-repeat="employee in Provider" value="{{employee.Id}}">{{employee.staffName}}</option>
+                                                                    <select class="btn btn-default dropdown-toggle" ng-model= "selectedprovider" name="providerdd" ng-change="GetAllocateServiceToEmployee(selectedprovider)" >
+                                                                        <option ng-repeat="employee in Provider" value={{employee.Id}}>{{employee.staffName}}</option>
                                                                     </select>
                                                                 </div>
                                                             </div>
@@ -314,6 +315,7 @@
                                                                 <input type="text" class="form-control calendarBox" datepicker-popup="EEE, MMM d" ng-model="dt" open="opened" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-click="EditDatePicker()" name='theDate' ng-required="true" />
 
                                                                 <div class="selectDropdown">
+                                                                    <div class="gifImage" ng-show="timeslotsloading"><img src="/Content/Assets/images/loading.gif" /></div> 
                                                                     <select class="select_btn dateTimeSelect" ng-model="timeoption" name="timeoption">
                                                                         <option ng-repeat="timeoption in timeInfoFrom " value="{{timeoption}}">{{timeoption}}</option>
                                                                     </select>
@@ -454,7 +456,7 @@
 
                         <div class="pointerRightIcon"></div>
                         <div class="apptViewFooter">
-                            <a ng-click="EditAppointment()" class="editAppt cursorhand" data-toggle="modal" data-target="#UpdateDashboarddsadsaAppointmentPopup">
+                            <a ng-click="EditAppointment()" class="editAppt cursorhand" data-toggle="modal" data-target="#UpdateDashboardAppointmentPopup">
                                 Edit Appointment
                                 <i class="fa fa-angle-double-right" aria-hidden="true"></i>
                             </a>
