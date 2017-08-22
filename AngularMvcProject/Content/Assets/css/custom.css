@@ -3834,6 +3834,40 @@ span.one.span_check {
 
 /*17-aug-2017 css end here ==================================*/
 
+.calendarDiv .dateTimeDiv ul li table {
+    background-color: #fff !important;
+}
+.calendarDiv .dateTimeDiv ul li table thead tr th button.btn {
+    background: #fff !important;
+        outline: none;
+}
+.calendarDiv .dateTimeDiv ul li table thead tr th {
+    background: #fff !important;
+    font-size: 12px;
+    font-weight: 600;
+    padding-left: 5px;
+   text-align: center !important;
+}
+.calendarDiv .dateTimeDiv ul li table tbody tr td .btn {
+    background: #fff;
+    color: #555;
+    font-size: 10px;
+    /*padding: 2px 0px;*/
+    padding:0px 3px;
+    font-weight: 600;
+}
+
+.calendarDiv .dateTimeDiv ul li table tbody tr td em {
+    background: #fff;
+    color: #ddd;
+    font-size: 12px;
+    padding: 7px;
+    cursor: default;
+}
+
+
+
+
 /* media css start here ================================= */
 
 @media (max-width:1440px){

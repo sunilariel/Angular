@@ -719,6 +719,7 @@
                                                                                     <input type="text" class="form-control calendarBox" datepicker-popup="EEE, MMM d" ng-model="dt" open="opened" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-click="EditDatePicker()" name='theDate' ng-required="true" />
                                                                                    
                                                                                     <div class="selectDropdown">
+                                                                                        <div class="gifImage" ng-show="timeslotsloading"><img src="/Content/Assets/images/loading.gif" /></div>
                                                                                         <select class="select_btn dateTimeSelect" ng-model="timeoption" name="timeoption">
                                                                                             <option ng-repeat="timeoption in timeInfoFrom " value="{{timeoption}}">{{timeoption}}</option>
                                                                                         </select>

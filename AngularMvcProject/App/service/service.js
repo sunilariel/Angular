@@ -254,6 +254,7 @@ app.service("bookingService", function ($http, $window) {
             data: { appointment: dataobject },
             headers: GetHeader()
         })
+        return response;
     }
 
     this.GetSelectedService = function (dataobject)
