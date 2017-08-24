@@ -47,7 +47,12 @@
 
                               
             $scope.EditStaff(response.data[0]);
-        });        
+        });
+        var CompanyDetails = bookingService.GetCompanyDetails($scope.CompanyId);
+        CompanyDetails.then(function (response) {
+
+            $scope.companyEmail = response.data.Email;
+        });
     }
 
     //Add Staff//

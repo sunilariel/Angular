@@ -376,6 +376,10 @@ namespace AngularMvcProject.Controllers
                     obj.StartTime = appointment.Start;
                     obj.EndTime = appointment.End;
 
+                    
+                  
+
+
                     ListofAppointment.Add(obj);
 
                 }
@@ -473,5 +477,31 @@ namespace AngularMvcProject.Controllers
                 return e.ToString();
             }
         }
+
+        [HttpPost]
+        public string GetCustomerStats(string CompanyId, string CustomerId, string Year, string Month)
+        {
+            try
+            {               
+                var result = "";
+                string apiUrl = ConfigurationManager.AppSettings["DomainUrl"] + "/api/booking/GetCustomerStats?companyId=" + CompanyId + "&customerId=" + CustomerId + "&year=" + Year + "&month=" + Month;
+                var httpWebRequest = (HttpWebRequest)WebRequest.Create(apiUrl);
+                httpWebRequest.ContentType = "application/json";
+                httpWebRequest.Method = "GET";
+                httpWebRequest.Headers.Add("Token", Request.Headers["Token"]);
+
+                var httpWebResponse = (HttpWebResponse)httpWebRequest.GetResponse();
+                using (var StreamReader = new StreamReader(httpWebResponse.GetResponseStream()))
+                {
+                    result = StreamReader.ReadToEnd();
+                }
+                return result;
+            }
+            catch (Exception e)
+            {
+                return e.ToString();
+            }
+        }
+        
     }
 }

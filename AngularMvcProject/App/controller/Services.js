@@ -60,6 +60,11 @@
          
            
         });
+        var CompanyDetails = bookingService.GetCompanyDetails($scope.CompanyId);
+        CompanyDetails.then(function (response) {
+
+            $scope.companyEmail = response.data.Email;
+        });
     }
 
     //Show the AddService Section with staff name

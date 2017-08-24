@@ -228,6 +228,10 @@
     <Content Include="Content\Assets\js\bootstrap-datetimepicker.min.js" />
     <Content Include="Content\Assets\js\moment.js" />
     <Content Include="Content\Assets\js\ui-bootstrap-tpls-0.5.0.js" />
+    <Content Include="Content\dx.common.css" />
+    <Content Include="Content\dx.dark.css" />
+    <Content Include="Content\dx.light.css" />
+    <Content Include="Content\dx.spa.css" />
     <Content Include="Index.html" />
     <Content Include="App\service\service.js" />
     <Content Include="App\View\dashboard\dashboard.html" />
@@ -269,6 +273,8 @@
     <Content Include="Content\Assets\fonts\icomoon.woff2" />
     <None Include="Properties\PublishProfiles\Default Settings.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\dx.all.js" />
+    <Content Include="Scripts\globalize.min.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />

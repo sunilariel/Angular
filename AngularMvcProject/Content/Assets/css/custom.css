@@ -3803,6 +3803,7 @@ span.one.span_check {
     color: #2E363E;
     margin-bottom: 2px;
     display: block;
+    font-size: 14px;
 }
 .check_img2 label .fa {
     color: #00BFB9;
@@ -3865,9 +3866,204 @@ span.one.span_check {
     cursor: default;
 }
 
+div#selectbox .dx-dropdowneditor-icon {
+    display: inline-block;
+    width: 0;
+    height: 0;
+    margin-left: 2px;
+    border-top: 4px dashed;
+    border-right: 4px solid transparent;
+    border-left: 4px solid transparent;
+}
+div#selectbox .dx-dropdowneditor-icon:before {
+    content: "" !important;
+}
+div#selectbox .dx-dropdowneditor-icon:hover {
+    border: none;
+    background: #fff;
+}
+div#selectyearbox .dx-dropdowneditor-icon {
+    display: inline-block;
+    width: 0;
+    height: 0;
+    margin-left: 2px;
+    border-top: 4px dashed;
+    border-right: 4px solid transparent;
+    border-left: 4px solid transparent;
+}
+div#selectyearbox .dx-dropdowneditor-icon:before {
+    content: "" !important;
+}
+div#selectyearbox .dx-dropdowneditor-icon:hover {
+    border: none;
+    background: #fff;
+}
+div#staff-hours .action .label {
+    color: #434343;
+    font-weight: normal;
+    font-size: 13px;
+    margin-bottom: 10px;
+    display: block;
+    padding-left: 0;
+}
+.chooseYearDiv {
+    display: inline-block;
+}
+.chooseMonthDiv {
+    display: inline-block;
+    margin-right: 15px;
+}
+.chooseYearDiv input.dx-texteditor-input {
+    display: inline-block;
+    padding: 4px 12px;
+    margin-bottom: 0;
+    font-size: 14px;
+    line-height: 20px;
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
+    color: #333333;
+    text-shadow: 0 1px 1px rgba(255, 255, 255, 0.75);
+    background-color: #f5f5f5;
+    background-image: -moz-linear-gradient(top, #ffffff, #e6e6e6);
+    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#ffffff), to(#e6e6e6));
+    background-image: -webkit-linear-gradient(top, #ffffff, #e6e6e6);
+    background-image: -o-linear-gradient(top, #ffffff, #e6e6e6);
+    background-image: linear-gradient(to bottom, #ffffff, #e6e6e6);
+    background-repeat: repeat-x;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffffff', endColorstr='#ffe6e6e6', GradientType=0);
+    border-color: #e6e6e6 #e6e6e6 #bfbfbf;
+    border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+    filter: progid:DXImageTransform.Microsoft.gradient(enabled = false);
+    border: 1px solid #cccccc;
+    border-bottom-color: #b3b3b3;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    -webkit-box-shadow: inset 0 1px 0 rgba(255,255,255,.2), 0 1px 2px rgba(0,0,0,.05);
+    -moz-box-shadow: inset 0 1px 0 rgba(255,255,255,.2), 0 1px 2px rgba(0,0,0,.05);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.2), 0 1px 2px rgba(0,0,0,.05);
+}
+.chooseMonthDiv input.dx-texteditor-input {
+    display: inline-block;
+    padding: 4px 12px;
+    margin-bottom: 0;
+    font-size: 14px;
+    line-height: 20px;
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
+    color: #333333;
+    text-shadow: 0 1px 1px rgba(255, 255, 255, 0.75);
+    background-color: #f5f5f5;
+    background-image: -moz-linear-gradient(top, #ffffff, #e6e6e6);
+    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#ffffff), to(#e6e6e6));
+    background-image: -webkit-linear-gradient(top, #ffffff, #e6e6e6);
+    background-image: -o-linear-gradient(top, #ffffff, #e6e6e6);
+    background-image: linear-gradient(to bottom, #ffffff, #e6e6e6);
+    background-repeat: repeat-x;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffffff', endColorstr='#ffe6e6e6', GradientType=0);
+    border-color: #e6e6e6 #e6e6e6 #bfbfbf;
+    border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+    filter: progid:DXImageTransform.Microsoft.gradient(enabled = false);
+    border: 1px solid #cccccc;
+    border-bottom-color: #b3b3b3;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    -webkit-box-shadow: inset 0 1px 0 rgba(255,255,255,.2), 0 1px 2px rgba(0,0,0,.05);
+    -moz-box-shadow: inset 0 1px 0 rgba(255,255,255,.2), 0 1px 2px rgba(0,0,0,.05);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.2), 0 1px 2px rgba(0,0,0,.05);  
+}
+.dxChartDiv {
+    border: 1px solid #C0C0C0;
+    margin-top: 10px;
+    overflow: hidden;
+    
+}
+.dxChartDiv .chartText {
+     font-size: 14px !important;
+    font-weight: normal;
+    fill: #434343 !important;
+    padding-left:10px;
+    padding-top:10px;
+    font-family: Lato, Helvetica, sans-serif !important;
+    
+}
 
+.dxChartDiv .chartDay {
+    font-size: 14px !important;
+    font-weight: normal;
+    fill: #434343 !important;
+    font-family: Lato, Helvetica, sans-serif !important;
+    text-align:center;
+    display:block;
+    padding-bottom:10px;
 
+}
 
+div#dxchart {
+    text-align: center;
+    text-align: -webkit-center;
+    position:relative;
+}
+
+.valueToDateContent {
+    color: #555555;
+    float: left;
+    margin-top: 5px;
+    width: 35% !important;
+    height: 113px;
+    border: 1px solid #C0C0C0;
+    position: relative;
+    line-height: 1;
+    text-align: center;
+    padding-top: 15px;
+    overflow: hidden;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+.valueToDateContent h5 {
+    font-size: 14px;
+    font-weight: normal;
+    margin: 10px 0;
+}
+.valueToDateContent h2 {
+    font-size: 30px;
+    font-weight: normal;
+}
+
+div#staff-hours {
+    overflow: auto;
+    height: 470px;
+} 
+div#pie {
+    text-align: center;
+    text-align: -webkit-center;
+}
+div#pie svg.dxc.dxc-chart {
+    margin: 10px 0px 0 30px;
+}
+.pieChartDiv {
+    border: 1px solid #C0C0C0;
+    margin: 5px 0px 0px 0px;
+    float: right;
+    width: 64% !important;
+    padding: 0px;
+    overflow: hidden;
+
+}
+
+.pieChartDiv .chartText {
+     font-size: 14px !important;
+    font-weight: normal;
+    fill: #434343 !important;
+    padding-left:10px;
+    padding-top:10px;
+    font-family: Lato, Helvetica, sans-serif !important;
+    
+}
 /* media css start here ================================= */
 
 @media (max-width:1440px){

@@ -1,4 +1,22 @@
-﻿<div ng-app="bookingApp">
+﻿<style>
+
+    .dx-list:not(.dx-list-select-decorator-enabled) .dx-list-item.dx-state-focused {
+    background-color: #00bbc5 !important;
+    color: #fff !important;
+}
+.dx-list:not(.dx-list-select-decorator-enabled) .dx-list-item.dx-list-item-selected {
+    background-color: #00bbc5 !important;
+    color: #fff !important;
+}
+.dx-list:not(.dx-list-select-decorator-enabled) .dx-list-item.dx-state-hover {
+    background-color: #00bbc5 !important;
+    color: #fff !important;
+}
+
+
+</style>
+
+<div ng-app="bookingApp">
     <div ng-controller="customerController" data-ng-init="init()">
 
         <div style="width: 100%;text-align: center;position: absolute;z-index: 999999; top:65px;" ng-if="IsVisible"><span id="voice-box" class="noDisplay" style="background:yellow; padding:5px 10px; border-radius:0 0 2px 2px;" ng-bind="MessageText"></span></div>
@@ -849,17 +867,49 @@
                                                 </ul>
                                             </div>
                                         </div>
-                                        <div class="tab-pane" id="staff-services"> Service</div>
+                                        <div class="tab-pane" id="staff-services">  </div>
                                         <div class="tab-pane" id="staff-hours">
-                                            <div class="action">
-                                                <div class="label">Choose a month:</div>
-                                                <div id="selectbox" dx-select-box="selectBoxOptions"></div> 
-                                                <div class="label">Choose a year:</div>  
-                                                <div id="selectyearbox" dx-select-box="selectBoxYearOption"></div>                                            
-                                            </div>   
-                                            <div id="chart" style="height: 350px;" dx-chart="chartOptions"></div> 
-                                                                                
-                                        </div>
+                                          <div class="action">
+                                              <div class="chooseYearDiv">
+                                                  <div class="label">Choose a year:</div>
+                                                  <div id="selectyearbox" dx-select-box="selectBoxYearOption" ng-model="SelectedYear" ></div>
+                                              </div>
+                                              <div class="chooseMonthDiv">
+                                                  <div class="label">Choose a month:</div>
+                                                  <!--<div id="selectbox" dx-select-box="selectBoxOptions"  ></div>--> 
+                                                  <div id="selectbox" dx-select-box="{dataSource: AllAppointmentMonths}" ng-model="SelectedMonth"></div>
+                                              </div>
+                                              
+                                                   
+                                           
+                                                                                   
+                                            </div>
+                                            <div class="dxChartDiv" >
+                                                <!--<label class="chartText">Appointments AUG, 2017</label>-->
+                                                <label class="chartText" >Appointments {{Month}} {{Year}}</label>
+                                                <div id="dxchart" style="height: 200px;" dx-chart="chartOptions">
+                                                  
+                                                </div>
+                                                <label class="chartDay">{{DateIn}}</label>
+                                            </div>
+                                            <div>
+                                                <div id="value_todate" class="valueToDateContent">
+                                                    <h5>Value to Date</h5>
+                                                    <h2>£{{TotalCostofServices}}</h2>
+                                                </div>
+
+                                                <div class="pieChartDiv">
+                                                    <label class="chartText">Services {{Month}} {{Year}}</label>
+                                                    <div id="pie" style="height:188px;" dx-pie-chart="piechartOptions"></div>
+                                                   
+                                                </div>
+
+                                                <div id="avg_purchase" class="avgPurchaseContent valueToDateContent">
+                                                    <h5>Average Purchase</h5>
+                                                    <h2>£{{AvgCostofService | number:0}}</h2>
+                                                </div>
+                                            </div>
+                                            </div>
                                         <div class="tab-pane " id="staff-break">
                                             <div class="row-fluid">
                                             </div>
