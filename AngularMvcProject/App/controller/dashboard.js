@@ -136,10 +136,16 @@ app.controller('dashboardController', ['$scope', '$timeout','$routeParams','$fil
          { Status: "NoShow ", "Value": 5 },
          { Status: "RunningLate", "Value": 7 }
         ]
+
+        var CompanyDetails = bookingService.GetCompanyDetails($routeParams.CompanyId);
+        CompanyDetails.then(function (response) {
+
+            $scope.companyEmail = response.data.Email;
+        });
     }
 
     $scope.DashboardAppointmentDetail = function (item) {
-        debugger;
+        debugger;  //1111
         $scope.AppointmentStartDate = item.BookingStartDate;
         $scope.AppointmentEndDate = new Date(item.BookingStartDate).setMinutes(item.BookingDuration,0,0);
         $scope.AppointmentProvider = item.EmployeeName;
@@ -176,7 +182,12 @@ app.controller('dashboardController', ['$scope', '$timeout','$routeParams','$fil
                     $scope.MessageText = "Appointment Label Saved";
                     $timeout(function () {
                         $scope.IsVisible = false;
-                        $scope.GetAppointmentDetails($scope.CustomerId);
+                        var apirequestWeeksSchedule = bookingService.GetWeeksSchedule($routeParams.CompanyId);
+                        apirequestWeeksSchedule.then(function (response) {
+                            $scope.ListofWeekSchedule = [];
+                            $scope.ListofWeekSchedule = response.data;
+                            $scope.IsVisible = false;
+                        })
                     }, 800)
                 }, 1000)
             }
@@ -221,6 +232,7 @@ app.controller('dashboardController', ['$scope', '$timeout','$routeParams','$fil
         $scope.ServiceId = $scope.AppointmentServiceId;
         $scope.UpdateAppointmentId = $scope.AppointmentBookingId;
         $scope.count = 0;
+        $scope.notes = "";
         //$scope.EmployeeId = $scope.AppointmentEmployeeId;
     }
 
