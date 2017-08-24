@@ -60,7 +60,7 @@
          
            
         });
-        var CompanyDetails = bookingService.GetCompanyDetails($scope.CompanyId);
+        var CompanyDetails = bookingService.GetCompanyDetails($routeParams.CompanyId);
         CompanyDetails.then(function (response) {
 
             $scope.companyEmail = response.data.Email;
