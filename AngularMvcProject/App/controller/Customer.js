@@ -144,7 +144,7 @@
                 "Id": 1,
                 "CompanyId": $scope.CompanyId,
                 "UserName": $scope.customerEmail,
-                "Password": "*******",
+                "Password": $scope.customerPassword,
                 "FirstName": $scope.customerName,
                 "LastName": "",
                 "Address": "",
@@ -177,6 +177,7 @@
                     $scope.customerName = null;
                     $scope.customerEmail = null;
                     $scope.customerExt = null;
+                    $scope.customerPassword = null;
                     $scope.customerMobile = null;
                     form.customerName.$setUntouched();
                     form.customerName.$untouched = true;
@@ -206,6 +207,7 @@
         $scope.showcustomer = false;
         $scope.customerName = null;
         $scope.customerEmail = null;
+        $scope.customerPassword = null;
         $scope.customerExt = null;
         $scope.customerMobile = null;
         form.customerName.$setUntouched();

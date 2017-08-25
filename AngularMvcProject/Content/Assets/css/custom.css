@@ -1898,6 +1898,9 @@ input#customerName {
 input#customerEmail {
     width: 87%;
 }
+input#customerPassword {
+    width: 87%;
+}
 .addcustomerContent .form-control {
 	display: inline-block;
     height: 30px;
