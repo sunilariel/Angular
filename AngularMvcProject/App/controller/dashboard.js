@@ -435,4 +435,7 @@ app.controller('dashboardController', ['$scope', '$timeout','$routeParams','$fil
             });
         }
     });
+
+    $scope.Logout = function () {
+    }
 }]);

@@ -67,8 +67,7 @@
         $scope.ServicePriceTimeDetailIsVisible = false;
 
         var CompanyDetails = bookingService.GetCompanyDetails($scope.CompanyId);
-        CompanyDetails.then(function (response) {
-            
+        CompanyDetails.then(function (response) {            
             $scope.companyEmail = response.data.Email;
         });
 
@@ -117,16 +116,13 @@
     }
 
   
-    $scope.CreateCustomer = function (form) {
-        
-
+    $scope.CreateCustomer = function (form) {        
         if (form.$invalid == true) {
             if (form.customerName.$invalid == true) {
                 form.customerName.$setTouched();
                 form.customerName.$touched = true;
                 return false;
             }
-
         }
         if (form.$invalid == true) {
             if (form.customerEmail.$invalid == true) {
@@ -134,7 +130,6 @@
                 form.customerEmail.$touched = true;
                 return false;
             }
-
         }
 
         $scope.MobileNo = $scope.customerExt + $scope.customerMobile;
@@ -155,9 +150,7 @@
             }
         }
         var createcustomer = bookingService.CreateCustomer(obj);
-
-        createcustomer.then(function (response) {
-            
+        createcustomer.then(function (response) {            
             if (response.data.Success == true) {
                 $scope.CustomerId = response.data.ReturnObject.CustomerId;
                 $scope.MessageText = "Saving Data";
@@ -230,13 +223,18 @@
         $scope.customerAddress = item.Address;
         $scope.Zip = item.PostCode;       
         $scope.GetAppointmentDetails($scope.CustomerId);      
-        var count = 0;             
+        var count = 0;
+        angular.element(document.querySelector("#staff_details")).addClass("active");
+        angular.element(document.querySelector("#notes_details")).removeClass("active");
+        angular.element(document.querySelector("#appointment_details")).removeClass("active");
+        angular.element(document.querySelector("#staff-services")).removeClass("active");
+        angular.element(document.querySelector("#staff-hours")).removeClass("active");
+        angular.element(document.querySelector("#staff-details")).addClass("active");
     }
 
 
     //Updating Customer on blur event of element
-    $scope.updateCustomer = function () {
-        
+    $scope.updateCustomer = function () {        
         var MobileNumber = $scope.updatedPreCustomerMobileNo + $scope.updatedMobileNo;
         var updateddate = new Date();
         var UpdateCustomer = {
@@ -673,14 +671,29 @@
         })
     }
 
+    $scope.ShowEditorValue=function()
+    {
+        debugger;
+        var data = $scope.EditorValue;
+    }
+
     $scope.GetAppointmentDetails = function (Id) {
         debugger;      
         var result = bookingService.GetAppointmentDetails(Id);
         result.then(function (response) {
             $scope.ListofAppointments = [];
             $scope.ListofAppointments = response.data;
+            $scope.AllAppointmentYears = [];
+            $scope.AllAppointmentMonths = [];
             $scope.NumberofAppointmnets = response.data.length;
+            if (response.data.length == 0) {
+                $scope.NoRecords = false;
+            }
+            else {
+                $scope.NoRecords = true;
+            }
             var TotalCost = 0;
+           
             $scope.AllAppointmentMonths.push("All");
             angular.forEach(response.data, function (value, key) {
                 TotalCost = TotalCost + value.Cost;
@@ -692,10 +705,14 @@
                 if ($scope.AllAppointmentMonths.includes(($scope.months[date.getMonth()]).toString()) == false) {
                     $scope.AllAppointmentMonths.push(($scope.months[date.getMonth()]).toString());
                 }
+            
             });
 
             $scope.LineChartDataSource();
+            chartDataSource.load();
+
             $scope.PieChartDataSource();
+            PieChartSource.load();
             $scope.TotalCostofServices = TotalCost;
             $scope.IsVisible = false;
             angular.element(document.querySelector("#squarespaceModal")).css("display", "none");
@@ -722,8 +739,7 @@
     }
 
 
-    $scope.EditDatePicker = function () {
-        
+    $scope.EditDatePicker = function () {       
         if ($scope.editcount == 0) {
             $scope.editcount = $scope.editcount + 1;
             $scope.today();        
@@ -791,46 +807,6 @@
         }
     });
 
-  
-    //var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-
-
-    // $scope.monthdetail = [
-    //{
-    //        Text:"All",
-    //        Value:"All"
-    //},
-    //{
-    //    Text: months[new Date().getMonth() - 1],
-    //    Value: months[new Date().getMonth() - 1]
-    //},
-    //{
-    //    Text: months[new Date().getMonth()],
-    //    Value: months[new Date().getMonth()]
-    //},
-    //{
-    //    Text: months[new Date().getMonth() + 1],
-    //    Value: months[new Date().getMonth() + 1]
-    //}
-    //]
-
-     
-    //    $scope.months = [   
-    //{
-    //    Text: months[new Date().getMonth() - 1],
-    //    Value: months[new Date().getMonth() - 1]
-    //},
-    //{
-    //    Text: months[new Date().getMonth()],
-    //    Value: months[new Date().getMonth()]
-    //},
-    //{
-    //    Text: months[new Date().getMonth() + 1],
-    //    Value: months[new Date().getMonth() + 1]
-    //}
-    //    ]
-
-      
             var chartDataSource = new DevExpress.data.DataSource({
                 load: function () {
                     var df = $.Deferred();
@@ -909,7 +885,7 @@
                                 }else if(month=="September")
                                 {
                                   
-                                    SeptemberApp=JanuaryApp+1;
+                                    SeptemberApp = SeptemberApp + 1;
                                   //  $scope.AllAppointments.push({ "arg": ((month).substring(0, 3)).toUpperCase(), "val": SeptemberApp });
                                 }else if(month=="October")
                                 {
@@ -1024,7 +1000,7 @@
             });
      
             $scope.LineChartDataSource = function () {
-
+                debugger;
                 $scope.chartOptions = {
                     dataSource: chartDataSource,
                     legend: {
@@ -1055,8 +1031,8 @@
                         customizeTooltip: function (arg) {
 
                             return {
-
-                                text: arg.argument + "  " + "Appointment(s):" + arg.value
+                                html: "<h6>" + arg.argument + "</h6>" + "<div>" + "Appointment(s):" + "<b>" + arg.value + "</b></div>",                               
+                               // text: arg.argument + "  " + "Appointment(s):" + arg.value
                             };
                         }
                     },
@@ -1072,33 +1048,30 @@
                     //}
                 };
              
-                //$scope.selectBoxOptions = 
-                //    {
-                //        width: 110,
-                //        value: "All",
-                //        items: $scope.AllAppointmentMonths,
-                //        onValueChanged: function (e) {
-                //            chartDataSource.load();
-                //            $scope.piechartOptions.dataSource.load();
-                //        }
-                //    };
-                /////////////////////////////////
-
-                $("#selectbox").dxSelectBox({
-                    width: 110,
-                    value: "All",
-                    dataSource:  $scope.AllAppointmentMonths,                                                               
-                    onValueChanged: function (e) {
-                        chartDataSource.load();
-                        $scope.piechartOptions.dataSource.load();
-                    }
-                })
+                $scope.selectBoxOptions = 
+                    {
+                        width: 110,
+                        value: "All",
+                        items: $scope.AllAppointmentMonths,
+                        onValueChanged: function (e) {
+                            $scope.SelectedMonth = e.value;
+                            chartDataSource.load();
+                            PieChartSource.load();
+                        }
+                    };
+               
+                //$scope.AllAppointmentYears = ["2018", "2017"];
                 $scope.selectBoxYearOption = {
                     width: 120,
                     value: "2017",
+                    //bindingOptions:{
+                    //    dataSource: $scope.AllAppointmentYears,
+                    //},
                     items: $scope.AllAppointmentYears,
                     onValueChanged: function (e) {
-                        debugger; var apirequest = bookingService.GetCustomerStats($routeParams.CompanyId, $scope.CustomerId, $scope.SelectedYear, "All");
+                        $scope.SelectedYear = e.value;
+                        debugger;
+                        var apirequest = bookingService.GetCustomerStats($routeParams.CompanyId, $scope.CustomerId, $scope.SelectedYear, "All");
                         $scope.AllAppointmentMonths = [];
                         $scope.AllAppointmentMonths.push("All");
                         apirequest.then(function (response) {
@@ -1108,34 +1081,14 @@
                                     $scope.AllAppointmentMonths.push(($scope.months[date.getMonth()]).toString());
                                 }
                             })
-                            $("#selectbox").dxSelectBox.dataSource = $scope.AllAppointmentMonths;
-                            chartDataSource.load();
-                            $scope.piechartOptions.dataSource.load();
+                          //  $("#selectbox").dxSelectBox.dataSource = $scope.AllAppointmentMonths;
+                           // chartDataSource.load();
+                           // PieChartSource.load();
                         })                                                                  
                     }
                 };
             }
-
-
-    //Pie Chart//
-    var GetHeader = function () {
-        var headers = {
-            'Content-Type': 'application/json',
-            'Token': $window.sessionStorage.getItem('userInfo-token')
-        };
-        return headers;
-    }
-
-    $scope.PieChartDataSource = function () {
-
-        $scope.piechartOptions = {
-            size: {
-                width: 180,
-                height: 180
-            },
-            palette: "bright",
-            dataSource: new DevExpress.data.DataSource({
-
+            var PieChartSource = new DevExpress.data.DataSource({
                 load: function () { 
                     debugger;
                     $scope.PieChartData = [];
@@ -1161,7 +1114,26 @@
                     return def.promise();
                 }
 
-            }),
+            });
+
+    //Pie Chart//
+    var GetHeader = function () {
+        var headers = {
+            'Content-Type': 'application/json',
+            'Token': $window.sessionStorage.getItem('userInfo-token')
+        };
+        return headers;
+    }
+
+    $scope.PieChartDataSource = function () {
+
+        $scope.piechartOptions = {
+            size: {
+                width: 180,
+                height: 180
+            },
+            palette: "bright",
+            dataSource: PieChartSource,
             legend: {
                 visible: true,
 
@@ -1171,7 +1143,8 @@
 
                 customizeTooltip: function (arg) {
                     return {
-                        text: arg.valueText + " " + (arg.argument),
+                        //text: arg.valueText + " " + (arg.argument),
+                        html: "<div>" + arg.valueText + "</div>" + "<div>" + "<b>" + arg.argument + "</b></div>",
                     };
                 }
             },
@@ -1179,19 +1152,19 @@
                 {
                     argumentField: "arg",
                     valueField: "val",
-                    //label: {
-                    //    visible: true,
-                    //    font: {
-                    //        size: 10,
+                    label: {
+                        visible: true,
+                        font: {
+                            size: 10,
 
-                    //    },
-                    //    backgroundColor: 'transparent',
-                    //    format: 'percent',
-                    //    position: "inside"
-                    //},
+                        },
+                        backgroundColor: 'transparent',
+                        //format: 'percent',
+                        position: "inside"
+                    },
                     customizeText: function (arg) {
                         return {
-                            text: arg.valueText + "(0)"
+                            html: "<div>" + arg.valueText + "</div>" + "<h6>" + arg.percentText + (arg.argument) + "</h6>",
                         };
                     }
                 }],

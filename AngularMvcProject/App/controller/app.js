@@ -1,4 +1,4 @@
-﻿var app = angular.module('bookingApp', ['ngRoute', 'ui.bootstrap','dx']);
+﻿var app = angular.module('bookingApp', ['ngRoute', 'ui.bootstrap','dx','angularTrix']);
 app.config(function ($routeProvider) {
     $routeProvider
     .when("/",{
