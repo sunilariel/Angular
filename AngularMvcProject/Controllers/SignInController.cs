@@ -6,10 +6,14 @@ using Newtonsoft.Json;
 using AngularMvcProject.Models;
 using System;
 
+
 namespace AngularMvcProject.Controllers
 {
     public class SignInController : Controller
     {
+        const string AdminRole = "Admin";
+        const string StaffRole = "Staff";
+        
         [HttpPost]
         public JsonResult postdata(string json)
         {
@@ -33,7 +37,8 @@ namespace AngularMvcProject.Controllers
 
             var data = httpRequest.GetResponse();
             var response = (HttpWebResponse)httpRequest.GetResponse();
-            if (response.StatusCode == HttpStatusCode.OK)
+            var role = data.Headers["RoleType"];
+            if (response.StatusCode == HttpStatusCode.OK && (role == AdminRole || role == StaffRole))
             {
                 string token = data.Headers["Token"];
                 return Json(new { success = true, CompanyId = data.Headers["CompanyId"], Token = token }, JsonRequestBehavior.AllowGet);
