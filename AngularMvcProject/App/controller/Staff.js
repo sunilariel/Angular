@@ -726,7 +726,7 @@
     $scope.AddBreak = function (item) {
         debugger;
         var BreakTime = {
-          
+
             "CompanyId": $routeParams.CompanyId,
             "EmployeeId": item.EmployeeId,
             "DayOfWeek": item.DayOfWeek,
@@ -761,7 +761,7 @@
                 }, 800)
             }
         });
-
+    }
         //Update BreakTime of Employee
         $scope.UpdateBreakTime = function(time,status)
         {
@@ -828,6 +828,13 @@
                     $scope.listofBreakingHours.push({ "EmployeeId": response.data[i].EmployeeId,"Id":response.data[i].Id, "Available": response.data[i].Available, "CompanyId": response.data[i].CompanyId, "Day": response.data[i].Day, "DayOfWeek": response.data[i].DayOfWeek, "CreationDate": response.data[i].CreationDate, "StartEndTime": response.data[i].StartEndTime });
                 }
             })
-        }   
-    }
+        }
+
+        $scope.Logout = function () {
+            debugger;
+            var apirequest = bookingService.SignOut();
+            sessionStorage.removeItem('userInfo-token');
+            $location.path("/signin");
+        }
+   
 }]);
