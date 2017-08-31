@@ -1,6 +1,6 @@
 ﻿/// <reference path="dashboard.js" />
 //var app = angular.module('MyApp', [])
-app.controller('dashboardController', ['$scope', '$timeout','$routeParams','$filter','$location', 'bookingService', function ($scope, $timeout,$routeParams,$filter,$location, bookingService) {
+app.controller('dashboardController', ['$scope', '$timeout','$window', '$http', '$routeParams', '$filter', '$location', 'bookingService', function ($scope, $timeout,$window, $http,$routeParams, $filter, $location, bookingService) {
     //This will hide the DIV by default.
     $scope.procedures = [
 {
@@ -437,5 +437,9 @@ app.controller('dashboardController', ['$scope', '$timeout','$routeParams','$fil
     });
 
     $scope.Logout = function () {
+        debugger;
+        var apirequest = bookingService.SignOut();     
+        sessionStorage.removeItem('userInfo-token');      
+        $location.path("/signin");
     }
 }]);

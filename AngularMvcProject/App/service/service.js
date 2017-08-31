@@ -712,6 +712,16 @@ app.service("bookingService", function ($http, $window) {
         })
         return response;
     }
+
+    this.SignOut=function()
+    {
+        var response = $http({
+            method: "POST",
+            url: "/Dashboard/SignOut",
+            headers:GetHeader()
+        })
+        return response;
+    }
 })
 
 

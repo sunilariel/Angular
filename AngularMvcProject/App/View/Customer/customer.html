@@ -78,7 +78,7 @@
                                             </a>
                                         </li>
                                         <li id="sign_out" class="nav-dropdown-li-last">
-                                            <a href="#">
+                                            <a ng-click="Logout()" class="cursorhand">
                                                 <div class="nav-dropdown-icon-holder"> <span class="setmore-icon-log-out setmore-icon-fsize"></span> </div>
                                                 <div class="nav-dropdown-desc-holder">
                                                     <h3 class="nav-dropdown-desc-header">Sign Out</h3>
@@ -125,7 +125,7 @@
                                             </a>
                                         </li>
                                         <li id="sign_out" class="nav-dropdown-li-last">
-                                            <a href="/logout.do">
+                                            <a ng-click="Logout()" class="cursorhand">
                                                 <div class="nav-dropdown-icon-holder"> <span class="setmore-icon-log-out setmore-icon-fsize"></span> </div>
                                                 <div class="nav-dropdown-desc-holder">
                                                     <h3 class="nav-dropdown-desc-header">Sign Out</h3>
@@ -222,7 +222,7 @@
                                                                 </a>
                                                             </li>
                                                             <li id="sign_out" class="nav-dropdown-li-last">
-                                                                <a href="#">
+                                                                <a ng-click="Logout()" class="cursorhand">
                                                                     <div class="nav-dropdown-icon-holder"> <span class="setmore-icon-log-out setmore-icon-fsize"></span> </div>
                                                                     <div class="nav-dropdown-desc-holder">
                                                                         <h3 class="nav-dropdown-desc-header">Sign Out</h3>
@@ -269,7 +269,7 @@
                                                                 </a>
                                                             </li>
                                                             <li id="sign_out" class="nav-dropdown-li-last">
-                                                                <a href="/logout.do">
+                                                                <a ng-click="Logout()" class="cursorhand">
                                                                     <div class="nav-dropdown-icon-holder"> <span class="setmore-icon-log-out setmore-icon-fsize"></span> </div>
                                                                     <div class="nav-dropdown-desc-holder">
                                                                         <h3 class="nav-dropdown-desc-header">Sign Out</h3>
@@ -878,20 +878,29 @@
                                         <div class="tab-pane" id="staff-hours">
                                             <div ng-if="NoRecords">
                                                 <div class="action">
-                                                    <div class="chooseYearDiv">
+                                                    <!--<div class="chooseYearDiv">
                                                         <div class="label">Choose a year:</div>
                                                         <div id="selectyearbox" dx-select-box="selectBoxYearOption" ng-model="SelectedYear"></div>
+                                                    </div>-->
+                                                    <div class="chooseYearDiv">
+                                                    <div class="label">Choose a year:</div>
+                                                    <div id="selectyearbox" dx-select-box="{dataSource: SelectBoxYearDataSource,onValueChanged: filterMonthsbyYears}"></div>
                                                     </div>
+                                                        <!--<div class="chooseMonthDiv">
+                                                            <div class="label">Choose a month:</div>
+                                                            <div id="selectbox" dx-select-box="selectBoxOptions"  ></div>
+                                                            <div id="selectbox" dx-select-box="selectBoxOptions" ng-model="SelectedMonth"></div>
+                                                        </div>-->
                                                     <div class="chooseMonthDiv">
                                                         <div class="label">Choose a month:</div>
                                                         <!--<div id="selectbox" dx-select-box="selectBoxOptions"  ></div>-->
-                                                        <div id="selectbox" dx-select-box="selectBoxOptions" ng-model="SelectedMonth"></div>
+                                                        <!--<div id="selectbox" dx-select-box="selectBoxOptions" ng-model="SelectedMonth"></div>-->
+                                                        <div id="selectbox" dx-select-box="{dataSource: SelectBoxMonthDataSource,onValueChanged:ReloadChart}"></div>
                                                     </div>
 
 
 
-
-                                                </div>
+                                                    </div>
                                                 <div class="dxChartDiv">
                                                     <!--<label class="chartText">Appointments AUG, 2017</label>-->
                                                     <label class="chartText">Appointments {{Month}} {{Year}}</label>

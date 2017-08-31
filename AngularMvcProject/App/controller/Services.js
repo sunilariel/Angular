@@ -618,6 +618,12 @@
         }
     }
 
+    $scope.Logout = function () {
+        debugger;
+        var apirequest = bookingService.SignOut();
+        sessionStorage.removeItem('userInfo-token');
+        $location.path("/signin");
+    }
  
 
 
