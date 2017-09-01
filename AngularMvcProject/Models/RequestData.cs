@@ -415,4 +415,14 @@ namespace AngularMvcProject.Models
         public string Password { get; set; }
         public string Email { get; set; }
     }
+
+    public class Notes
+    {
+        public int CustomerId { get; set; }
+        public int CompanyId { get; set; }
+        public string Description { get; set; }
+        public string WhoAddedThis { get; set; }
+        public string CreationDate { get; set; }
+    }
+
 }

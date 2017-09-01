@@ -85,12 +85,6 @@ namespace AngularMvcProject.Controllers
             }
         }
 
-
-
-
-
-
-
         [HttpPost]
         public string GetAllCustomer(String id)
         {
@@ -129,11 +123,7 @@ namespace AngularMvcProject.Controllers
             return result;
 
         }
-        public ActionResult Settings()
-        {
-            return View();
-        }
-
+       
         [HttpPost]
         public string GetAllocatedServicetoEmployee(string CompanyId,string EmployeeId)
         {
@@ -150,11 +140,8 @@ namespace AngularMvcProject.Controllers
             using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
             {
                 result = streamReader.ReadToEnd();
-            }
-
-            
-            return result;
-
+            }            
+           return result;
         }
 
         [HttpPost]
@@ -370,16 +357,12 @@ namespace AngularMvcProject.Controllers
                     obj.ServiceName = appointment.Service.Name;
                     obj.DurationInHours = appointment.Service.DurationInHours;
                     obj.DurationInMinutes = appointment.Service.DurationInMinutes;
-                    obj.Cost = appointment.Service.Cost==null?0:appointment.Service.Cost;
+                    obj.Cost = appointment.Service.Cost;
                     obj.Currency = appointment.Service.Currency;
                     obj.status = appointment.Status;
                     obj.StartTime = appointment.Start;
                     obj.EndTime = appointment.End;
-
-                    
-                  
-
-
+                   
                     ListofAppointment.Add(obj);
 
                 }
@@ -502,6 +485,90 @@ namespace AngularMvcProject.Controllers
                 return e.ToString();
             }
         }
-        
+
+        [HttpPost]
+        public string AddCustomerNote(Notes notesdetail)
+        {
+            try
+            {
+                string apiUrl = ConfigurationManager.AppSettings["DomainUrl"].ToString() + "/api/customer/AddNote";
+                string result = "";
+                var httpWebRequest = (HttpWebRequest)WebRequest.Create(apiUrl);
+                httpWebRequest.Method = "POST";
+                httpWebRequest.ContentType = "application/json";
+                httpWebRequest.Headers.Add("Token", Request.Headers["Token"]);
+
+                using (var StreamWriter = new StreamWriter(httpWebRequest.GetRequestStream()))
+                {
+                    var JsonString = new JavaScriptSerializer().Serialize(notesdetail);
+                    StreamWriter.Write(JsonString);
+                    StreamWriter.Flush();
+                    StreamWriter.Close();
+                }
+
+                var httpWebResponse = (HttpWebResponse)httpWebRequest.GetResponse();
+                using (var StreamReader = new StreamReader(httpWebResponse.GetResponseStream()))
+                {
+                    result = StreamReader.ReadToEnd();
+                }
+                return result;
+            }
+            catch (Exception e)
+            {
+                return e.ToString();
+            }
+        }
+
+        [HttpPost]
+        public string DeleteCustomerNote(string CompanyId,string CustomerNoteId)
+        {
+            try
+            {
+                string apiUrl = ConfigurationManager.AppSettings["DomainUrl"].ToString() + "/api/customer/DeleteCustomerNote?companyId="+ CompanyId +"&customerNoteId="+ CustomerNoteId;
+                string result = "";
+                var httpWebRequest = (HttpWebRequest)WebRequest.Create(apiUrl);
+                httpWebRequest.Method = "DELETE";
+                httpWebRequest.ContentType = "application/json";
+                httpWebRequest.Headers.Add("Token", Request.Headers["Token"]);
+               
+                var httpWebResponse = (HttpWebResponse)httpWebRequest.GetResponse();
+                using (var StreamReader = new StreamReader(httpWebResponse.GetResponseStream()))
+                {
+                    result = StreamReader.ReadToEnd();
+                }
+                return result;
+            }
+            catch (Exception e)
+            {
+                return e.ToString();
+            }
+        }
+
+        [HttpPost]
+        public string GetCustomerNotes(string CompanyId, string CustomerId)
+        {
+            try
+            {
+                var result = "";
+                string apiUrl = ConfigurationManager.AppSettings["DomainUrl"] + "/api/customer/GetAllCustomerNotes?companyId=" +CompanyId +"&customerId=" +CustomerId;
+                var httpWebRequest = (HttpWebRequest)WebRequest.Create(apiUrl);
+                httpWebRequest.ContentType = "application/json";
+                httpWebRequest.Method = "GET";
+                httpWebRequest.Headers.Add("Token", Request.Headers["Token"]);
+
+                var httpWebResponse = (HttpWebResponse)httpWebRequest.GetResponse();
+                using (var StreamReader = new StreamReader(httpWebResponse.GetResponseStream()))
+                {
+                    result = StreamReader.ReadToEnd();
+                }
+                return result;
+            }
+            catch (Exception e)
+            {
+                return e.ToString();
+            }
+        }
+
+
     }
 }

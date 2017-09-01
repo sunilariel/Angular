@@ -10,7 +10,7 @@ trix-editor {
   border-radius: 3px;
   margin: 0;
   padding: 4px 22px;
-  min-height: 400px;
+  min-height: 250px;
   font-size: 14px;
   outline: none; }
 trix-toolbar * {
@@ -212,3 +212,6 @@ trix-editor .attachment .caption.caption-editing textarea {
     text-align: center; }
     .trix-content .attachment .caption .size:before {
       content: ' · '; }
+    button.code{
+        display:none;
+    }

@@ -4067,6 +4067,50 @@ div#pie svg.dxc.dxc-chart {
     font-family: Lato, Helvetica, sans-serif !important;
     
 }
+.createDiv {
+    margin-top: 30px;
+    height:151px;
+    overflow:auto;
+}
+
+.discripDiv {
+    float: left;
+    width: 45%;
+    overflow: hidden;
+}
+.createdOnby {
+    float: right;
+    width: 55%;
+}
+.createdOnby ul.list-inline {
+    text-align: right;
+    margin-bottom: 0;
+    border: none;
+}
+.createdOnby ul.list-inline li {
+    margin-right: 0;
+    color:#000;
+   font-size:14px;
+   font-weight:normal;
+}
+.createdOnby ul.list-inline li a i {
+   color:#C1C8CD;
+   font-size:18px;
+}
+.discripDiv span {
+   color:#000;
+   font-size:14px;
+   font-weight:normal;
+
+}
+.createdOnby ul.list-inline li a {
+    padding: 0;
+    text-decoration:none;
+}
+.createdOnby ul.list-inline li a:hover {
+    border:none;
+}
+
 /* media css start here ================================= */
 
 @media (max-width:1440px){

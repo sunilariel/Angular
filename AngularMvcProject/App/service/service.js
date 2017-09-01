@@ -223,6 +223,39 @@ app.service("bookingService", function ($http, $window) {
         return response;
     }
 
+    this.AddCustomerNote=function(dataobj)
+    {
+        var response = $http({
+            url: "/Customer/AddCustomerNote",
+            method: "POST",
+            data: { notesdetail: dataobj },
+            headers:GetHeader()
+        })
+        return response;
+    }
+
+    this.GetCustomerNotes=function(companyId,customerId)
+    {
+        var response = $http({
+            url: "/Customer/GetCustomerNotes",
+            data: { CompanyId: companyId, CustomerId: customerId },
+            method: "POST",
+            headers:GetHeader()
+        })
+        return response;
+    }
+
+    this.DeleteCustomerNote=function(companyId,customerNoteId)
+    {
+        var response = $http({
+            url: "/Customer/DeleteCustomerNote",
+            data: { CompanyId: companyId, CustomerNoteId: customerNoteId },
+            method: "POST",
+            headers:GetHeader()
+        })
+        return response;
+    }
+
     ////////////for customer module Add appointment
 
     this.GetAllocatedServicetoEmployee = function (companyId,employeeId) {

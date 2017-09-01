@@ -1,4 +1,4 @@
-﻿app.controller('customerController', ['$scope', '$location', '$filter','$window', '$routeParams','$q', '$http', '$timeout', 'bookingService', function ($scope, $location, $filter,$window, $routeParams,$q, $http, $timeout, bookingService) {
+﻿app.controller('customerController', ['$scope', '$location', '$filter', '$window', '$routeParams', '$q', '$http', '$timeout', 'bookingService', function ($scope, $location, $filter, $window, $routeParams, $q, $http, $timeout, bookingService) {
     //This will hide the DIV by default.
     $scope.procedures = [
 {
@@ -116,8 +116,7 @@
         });
         $scope.timeInfoFrom = [];
 
-      
-
+       
     }
 
   
@@ -229,6 +228,12 @@
         $scope.Zip = item.PostCode;       
         $scope.GetAppointmentDetails($scope.CustomerId);      
         var count = 0;
+        //Get Customer Notes Details of Customer//
+        var apigetrequest = bookingService.GetCustomerNotes($routeParams.CompanyId, $scope.CustomerId);
+        apigetrequest.then(function (response) {
+            $scope.CustomerNotesDetail = [];
+            $scope.CustomerNotesDetail = response.data;
+        })
         angular.element(document.querySelector("#staff_details")).addClass("active");
         angular.element(document.querySelector("#notes_details")).removeClass("active");
         angular.element(document.querySelector("#appointment_details")).removeClass("active");
@@ -676,11 +681,61 @@
         })
     }
 
-    $scope.ShowEditorValue=function()
+    $scope.trixBlur = function (e, editor)
     {
-        debugger;
-        var data = $scope.EditorValue;
+        if ($scope.trix != undefined && $scope.trix!="") {
+        var CustomerNoteDetail = {
+            "CustomerId": $scope.CustomerId,
+            "CompanyId": $scope.CompanyId,
+            "Description": $scope.trix,
+            "WhoAddedThis": $scope.updatedCustomerName,
+            "CreationDate":new Date(),
+        }
+        var apirequest = bookingService.AddCustomerNote(CustomerNoteDetail);
+        apirequest.then(function (response) {
+            debugger;
+            if (response.data.Success == true) {               
+                $scope.MessageText = "Add Customer Notes";
+                $scope.IsVisible = true;
+                $timeout(function () {
+                    $scope.MessageText = "Customer Notes Added";
+                    $timeout(function () {
+                        $scope.IsVisible = false;
+                        var apigetrequest = bookingService.GetCustomerNotes($routeParams.CompanyId, $scope.CustomerId);
+                        apigetrequest.then(function (response) {
+                            $scope.CustomerNotesDetail = [];
+                            $scope.CustomerNotesDetail = response.data;
+                        })
+                    }, 1000)
+                }, 800)
+            }
+        })
     }
+    }
+
+    $scope.DeleteCustomerNote = function (Id) {
+        var apideleterequest = bookingService.DeleteCustomerNote($routeParams.CompanyId, Id);
+        apideleterequest.then(function (response) {
+            if(response.data.Success==true)
+            {
+                $scope.MessageText = "Delete Customer Notes";
+                $scope.IsVisible = true;
+                $timeout(function () {
+                    $scope.MessageText = "Customer Notes Deleted";
+                    $timeout(function () {
+                        $scope.IsVisible = false;
+                        var apigetrequest = bookingService.GetCustomerNotes($routeParams.CompanyId, $scope.CustomerId);
+                        apigetrequest.then(function (response) {
+                            $scope.CustomerNotesDetail = [];
+                            $scope.CustomerNotesDetail = response.data;
+                        })
+                    },1000)
+                    },800)
+               
+            }
+        })
+    }
+
 
     $scope.GetAppointmentDetails = function (Id) {
         debugger;      
