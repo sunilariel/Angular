@@ -1174,10 +1174,7 @@
                         type: "line",
                         color: "#27c3bb"
                     },
-                    valueField: 'val',
-                    //argumentAxis: {
-                    //    tickInterval: 10
-                    //},
+                    valueField: 'val',                   
                     valueAxis: {
                         label: {
                             visible: false
@@ -1191,8 +1188,7 @@
                         customizeTooltip: function (arg) {
 
                             return {
-                                html: "<h6>" + arg.argument + "</h6>" + "<div>" + "Appointment(s):" + "<b>" + arg.value + "</b></div>",                               
-                               // text: arg.argument + "  " + "Appointment(s):" + arg.value
+                                html: "<h6>" + arg.argument + "</h6>" + "<div>" + "Appointment(s):" + "<b>" + arg.value + "</b></div>",                                                              
                             };
                         }
                     },
@@ -1206,18 +1202,7 @@
                     //        family:"'Segoe UI Light', 'Helvetica Neue Light', 'Segoe UI', 'Helvetica Neue', 'Trebuchet MS', Verdana"
                     //    }
                     //}
-                };
-
-                                           
-                //$("#selectyearbox").dxSelectBox({
-                //    width: 120,
-                //    value: "2017",                                                                      
-                //});
-
-                //$("#selectbox").dxSelectBox({
-                //    width: 120,
-                //    value: "All",                  
-                //});
+                };                                                         
             }
             var PieChartSource = new DevExpress.data.DataSource({
                 load: function () { 
@@ -1273,8 +1258,7 @@
                 enabled: true,
 
                 customizeTooltip: function (arg) {
-                    return {
-                        //text: arg.valueText + " " + (arg.argument),
+                    return {                       
                         html: "<div>" + arg.argument + "</div>" + "<div>" + "<b>" + arg.valueText + " (" + arg.percentText +") " + "</b></div>",
                     };
                 }
@@ -1289,8 +1273,7 @@
                             size: 11,
 
                         },
-                        backgroundColor: 'transparent',
-                        //format: 'percent',
+                        backgroundColor: 'transparent',                      
                         position: "inside",
                         customizeText: function (arg) {                            
                             return arg.percentText;
