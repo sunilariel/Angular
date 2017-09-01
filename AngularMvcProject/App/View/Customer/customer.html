@@ -872,9 +872,10 @@
                                         <div class="tab-pane" id="staff-services" style="margin-top:10px;">
                                             <div id="form-container">
                                                 <!--<div id="form" dx-form="formOptions"></div>-->
+                                               
                                                 <trix-editor ng-model-options="{ updateOn: 'blur' }" spellcheck="false" class="trix-content" ng-model="trix" angular-trix trix-initialize="trixInitialize(e, editor);" trix-change="trixChange(e, editor);" trix-selection-change="trixSelectionChange(e, editor);" trix-focus="trixFocus(e, editor);" trix-blur="trixBlur(e, editor);" trix-file-accept="trixFileAccept(e, editor);" trix-attachment-add="trixAttachmentAdd(e, editor);" trix-attachment-remove="trixAttachmentRemove(e, editor);" ></trix-editor>
                                             </div>
-                                            <div class="createDiv">
+                                            <div class="createDiv" style="font-size:14px;">
                                                 <div class="" ng-repeat="item in CustomerNotesDetail">
                                                     <div class="discripDiv" ng-bind-html="item.Description">
                                                        
@@ -883,7 +884,7 @@
                                                         <ul class="list-inline">
                                                             <li>{{item.WhoAddedThis}}</li>
                                                             <li>{{item.CreationDate | date :'dd,MMM yyyy'}}</li>
-                                                            <li><a ng-click="DeleteCustomerNote(item.Id)"><i class="fa fa-trash-o" aria-hidden="true"></i></a></li>
+                                                            <li><a ng-click="DeleteCustomerNote(item.Id)" class="cursorhand"><i class="fa fa-trash-o" aria-hidden="true"></i></a></li>
                                                         </ul>
                                                     </div>
                                                 </div>
