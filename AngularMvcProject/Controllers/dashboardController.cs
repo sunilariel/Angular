@@ -97,17 +97,26 @@ namespace AngularMvcProject.Controllers
             try
             {
                 var result = "";
-                string apiUrl = ConfigurationManager.AppSettings["DomainUrl"] + "/api/Authenticate/logout";
-                var httpWebRequest = (HttpWebRequest)WebRequest.Create(apiUrl);
+                var httpWebRequest = (HttpWebRequest)WebRequest.Create(ConfigurationManager.AppSettings["DomainUrl"].ToString() + "/api/customer/Logout");
                 httpWebRequest.ContentType = "application/json";
-                httpWebRequest.ContentLength = 0;
                 httpWebRequest.Method = "POST";
-                using (var streamWriter = new StreamWriter(httpWebRequest.GetRequestStream()))
-                {                                      
-                    streamWriter.Flush();
-                    streamWriter.Close();
+                httpWebRequest.Headers.Add("Token", Request.Headers["Token"]);
+
+                using (var StreamWriter = new StreamWriter(httpWebRequest.GetRequestStream()))
+                {
+                    //var jsonString = new JavaScriptSerializer().Serialize(category);
+                    //StreamWriter.Write(jsonString);
+                    StreamWriter.Flush();
+                    StreamWriter.Close();
                 }
-                return "success";
+
+                var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
+                using (var StreamReader = new StreamReader(httpResponse.GetResponseStream()))
+                {
+                    result = StreamReader.ReadToEnd();
+                }
+
+                return result;
             }
             catch (Exception e)
             {
