@@ -935,7 +935,7 @@
                                                                                             <label class="control-label col-sm-4" for="pwd">Start Date</label>
                                                                                             <div class="col-sm-8 dateTimeDiv">
                                                                                                 <span class="glyphicon glyphicon-ok calendarOk"></span><!--<input type="text" class="form-control datepickerBox" placeholder="Fri, May 12" id="datetimepicker4">-->
-                                                                                                <input type="text" class="form-control calendarBox" datepicker-popup="dd MMMM yyyy" ng-model="EditStartDate" open="opened" datepicker-options="dateOptions" name='theDate' ng-required="true" />
+                                                                                                <input type="text" class="form-control calendarBox"  datepicker-popup="dd MMM yyyy" ng-model="EditStartDate" open="opened" datepicker-options="dateOptions" name='theDate' ng-required="true" />
 
                                                                                                 <div class="selectDropdown">
                                                                                                     <select class="select_btn dateTimeSelect" ng-model="EditStartoffTime " ng-init="alldaystatus ? EditStartoffTime='00:00' : EditStartoffTime ='08:00 AM'" ng-show="alldaystatus==false">
@@ -948,7 +948,7 @@
                                                                                             <label class="control-label col-sm-4" for="pwd">End Date</label>
                                                                                             <div class="col-sm-8 dateTimeDiv">
                                                                                                 <span class="glyphicon glyphicon-ok calendarOk"></span>
-                                                                                                <input type="text" class="form-control calendarBox" datepicker-popup="dd MMMM yyyy" ng-model="EditEndDate" open="opened" datepicker-options="dateOptions" name='theDate' ng-required="true" />
+                                                                                                <input type="text" class="form-control calendarBox" datepicker-popup="dd MMM yyyy" ng-model="EditEndDate" open="opened" datepicker-options="dateOptions" name='theDate' ng-required="true" />
                                                                                                 <div class="selectDropdown">
                                                                                                     <select class="select_btn dateTimeSelect" ng-model="EditEndoffTime" ng-init="alldaystatus ? EditEndoffTime ='00:00' : EditEndoffTime = '05:00 PM'" ng-show="alldaystatus==false">
                                                                                                         <option ng-repeat="EditEndoffTime in EndTime" value="{{EditEndoffTime}}">{{EditEndoffTime}}</option>

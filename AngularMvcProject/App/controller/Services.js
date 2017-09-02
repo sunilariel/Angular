@@ -73,6 +73,7 @@
         $scope.ServiceName = "";
         $scope.ServiceCost = "";
         $scope.ServiceTime = "";
+        $scope.BufferTime = "";
 
         var responsedata = bookingService.GetAllStaff($routeParams.CompanyId);
 
@@ -336,6 +337,7 @@
                                         $scope.ServiceName = "";
                                         $scope.ServiceTime = "";
                                         $scope.ServiceCost = "";
+                                        $scope.BufferTime = "";
                                     }
                                 })
 

@@ -292,6 +292,12 @@
                 $timeout(function () {
                     $scope.MessageText = "Staff Details Saved";
                     $timeout(function () {
+                         var StaffResult = bookingService.GetAllStaff($routeParams.CompanyId);
+                        StaffResult.then(function (response) {
+                            $scope.ListofStaff = [];
+                            $scope.ListofStaff = response.data;
+                            $scope.TotalNoOfStaff = $scope.ListofStaff.length;
+                        });
                         $scope.IsVisible = false;
                     },1000)
                 },800)
@@ -669,8 +675,8 @@
         $scope.TimeOffId = item.Id;
         var StartDateTime = item.Start.split('T');
         var EndDateTime = item.End.split('T');
-        $scope.EditStartDate = $filter('date')(StartDateTime[0], 'dd-MMM-yyyy');
-        $scope.EditEndDate = $filter('date')(EndDateTime[0], 'dd-MMM-yyyy');
+        $scope.EditStartDate = $filter('date')(StartDateTime[0], 'dd MMM yyyy');
+        $scope.EditEndDate = $filter('date')(EndDateTime[0], 'dd MMM yyyy');
         $scope.alldaystatus = item.IsOffAllDay;
 
         var Time=StartDateTime[1].split(":");

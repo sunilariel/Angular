@@ -358,7 +358,7 @@
                                 <div class="col-md-12 providerpaddDiv">
                                     <div class="providerCustomer">
                                         <ul class="list-inline">                                           
-                                            <li class="selectCustomer" ng-repeat="item in customerArr | filter:searchName |orderBy :'Id'" ng-click="EditCustomer(item)" ng-class="{selected:CustomerId==item.Id}">
+                                            <li class="selectCustomer" ng-repeat="item in customerArr | filter:searchName" ng-click="EditCustomer(item)" ng-class="{selected:CustomerId==item.Id}">
                                                 <span class="formCheckbox">
                                                     <input type="checkbox" name="" class="inputcheckbox">
                                                 </span>
@@ -531,8 +531,8 @@
                                                                             </div>
                                                                             <div class="col-md-6">
                                                                                 <div class="dropdown labeldrowDownBtn nolableDrop">
-                                                                                    <select ng-model="Status" ng-init='Status="No Label"' style="border:none;font-size:12px;">
-                                                                                        <option ng-repeat="item in StatusList" value="{{item.Status}}">{{item.Status}}</option>
+                                                                                    <select ng-model="Status" ng-init='Status="1"' style="border:none;font-size:12px;">
+                                                                                        <option ng-repeat="item in StatusList" value="{{item.Value}}" >{{item.Status}}</option>
                                                                                     </select>
                                                                                 </div>
                                                                             </div>
