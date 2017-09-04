@@ -600,8 +600,8 @@
              {
                  "Id": $scope.AppointmentBookingId,
                  "CompanyId": $routeParams.CompanyId,
-                 "ServiceId": $scope.selectedprovider,
-                 "EmployeeId": $scope.selectedservice,
+                 "ServiceId": $scope.selectedservice,
+                 "EmployeeId": $scope.selectedprovider,
                  "CustomerIdsCommaSeperated": $scope.CustomerId,
                  "StartHour": $scope.timeoption,
                  "StartMinute": "",
@@ -882,71 +882,46 @@
                                 var date=new Date(value.Start);
                                 var month=$scope.months[date.getMonth()];
                                 if(month=="January")
-                                {
-                                    
-                                    JanuaryApp=JanuaryApp+1;
-                                  //  $scope.AllAppointments.push({ "arg": ((month).substring(0, 3)).toUpperCase(), "val": JanuaryApp });
+                                {                                    
+                                    JanuaryApp=JanuaryApp+1;                               
                                 }
                                 else if(month=="February")
-                                {
-                                 
-                                    FebuaryApp=FebuaryApp+1;
-                                   // $scope.AllAppointments.push({ "arg": ((month).substring(0, 3)).toUpperCase(), "val": FebuaryApp });
+                                {                               
+                                    FebuaryApp=FebuaryApp+1;                                 
                                 }
                                 else if(month=="March")
-                                {
-                                  
-                                    MarchApp=MarchApp+1;
-                                   // $scope.AllAppointments.push({ "arg": ((month).substring(0, 3)).toUpperCase(), "val": MarchApp });
+                                {                                  
+                                    MarchApp=MarchApp+1;                                  
                                 }else if(month=="April")
-                                {
-                                   
-                                    AprilApp=AprilApp+1;
-                                   // $scope.AllAppointments.push({ "arg": ((month).substring(0, 3)).toUpperCase(), "val": AprilApp });
+                                {                                   
+                                    AprilApp=AprilApp+1;                                  
                                 }
                                 else if(month=="May")
-                                {
-                                   
-                                     MayApp=MayApp+1;
-                                   // $scope.AllAppointments.push({ "arg": ((month).substring(0, 3)).toUpperCase(), "val": MayApp });
+                                {                                   
+                                     MayApp=MayApp+1;                                  
                                 }else if(month=="June")
-                                {
-                                   
-                                     JuneApp=JuneApp+1;
-                                   // $scope.AllAppointments.push({ "arg": ((month).substring(0, 3)).toUpperCase(), "val": JuneApp });
+                                {                                   
+                                     JuneApp=JuneApp+1;                                
                                 }else if(month=="July")
-                                {
-                                   
-                                     JulyApp=JulyApp+1;
-                                  //  $scope.AllAppointments.push({ "arg": ((month).substring(0, 3)).toUpperCase(), "val": JulyApp });
+                                {                                   
+                                     JulyApp=JulyApp+1;                               
                                 }else if(month=="August")
-                                {
-                                   
-                                     AugustApp=AugustApp+1;
-                                  //  $scope.AllAppointments.push({ "arg": ((month).substring(0, 3)).toUpperCase(), "val": AugustApp });
+                                {                                   
+                                     AugustApp=AugustApp+1;                               
                                 }else if(month=="September")
-                                {
-                                  
-                                    SeptemberApp = SeptemberApp + 1;
-                                  //  $scope.AllAppointments.push({ "arg": ((month).substring(0, 3)).toUpperCase(), "val": SeptemberApp });
+                                {                                  
+                                    SeptemberApp = SeptemberApp + 1;                               
                                 }else if(month=="October")
-                                {
-                                   
-                                    OctoberApp=OctoberApp+1;
-                                  //  $scope.AllAppointments.push({ "arg": ((month).substring(0, 3)).toUpperCase(), "val": OctoberApp });
+                                {                                   
+                                    OctoberApp=OctoberApp+1;                                 
                                 }else if(month=="November")
-                                {
-                                   
-                                     NovemberApp=NovemberApp+1;
-                                   // $scope.AllAppointments.push({ "arg": ((month).substring(0, 3)).toUpperCase(), "val": NovemberApp });
+                                {                                   
+                                     NovemberApp=NovemberApp+1;                                
                                 }
                                 else if(month=="December")
-                                {
-                                    
-                                     DecemberApp=DecemberApp+1;
-                                    $scope.AllAppointments.push({ "arg": ((month).substring(0, 3)).toUpperCase(), "val": DecemberApp });
+                                {                                    
+                                     DecemberApp=DecemberApp+1;                                
                                 }
-
                             })
 
                             if (JanuaryApp != 0) {

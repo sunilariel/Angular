@@ -41,17 +41,17 @@
 
         }
         var data = JSON.stringify(dataobject);
-
+         $scope.IsVisible = true;
+         $scope.MessageText = "Signing In"
         $http.post("SignIn/postdata", { json: data }).success(function (data) {
             debugger;
             if (data.success == true) {
-                $scope.IsVisible = true;
-                $scope.MessageText = "Signing In"
+              
                 $scope.msg = "Post Data Submitted Successfully!";
                 $scope.companyId = data.CompanyId;
 
-                $timeout(function () { $scope.MessageText = "Your Details saved."; $timeout(function () { $scope.IsVisible = false; }, 1000) }, 500);
-
+              //  $timeout(function () { $scope.MessageText = "Your Details saved."; $timeout(function () { $scope.IsVisible = false; }, 1000) }, 500);
+                $scope.IsVisible = false;
                 $location.path("/dashboard/" + $scope.companyId);
                 $window.sessionStorage.setItem('userInfo-token', data.Token);
             }
