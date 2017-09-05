@@ -108,8 +108,7 @@
 
         //Getting all employees(provider) for appointment dropdown(Add Appointment)
         var GetStaffProvider = bookingService.GetStaffData($scope.CompanyId);
-        GetStaffProvider.then(function (response) {
-            
+        GetStaffProvider.then(function (response) {            
             $scope.Provider = [];
             for (var i = 0; i < response.data.length; i++) {
                 $scope.Provider.push({ 'Id': response.data[i].Id, 'CompanyId': response.data[i].CompanyId, 'UserName': response.data[i].UserName, 'staffName': response.data[i].FirstName, 'staffEmail': response.data[i].Email });
@@ -724,8 +723,12 @@
             $scope.ListofAppointments = [];
             $scope.ListofAppointments = response.data;
            // $scope.AllAppointmentYears = [];
-           // $scope.AllAppointmentMonths = [];
-
+            // $scope.AllAppointmentMonths = [];
+            $scope.TotalCost = 0;
+            angular.forEach($scope.ListofAppointments, function (value, key) {
+                $scope.TotalCost = $scope.TotalCost + value.Cost;
+                })
+           
             $scope.NumberofAppointmnets = response.data.length;
             if (response.data.length == 0) {
                 $scope.NoRecords = false;
@@ -742,17 +745,20 @@
             $scope.LineChartDataSource();           
             $scope.SelectBoxYearDataSource.load();
             $scope.SelectBoxMonthDataSource.load();
-            $("#selectyearbox").dxSelectBox({               
-                width: 120,
-                value: $scope.Year,
-               
-            });
 
-            $("#selectbox").dxSelectBox({
-                width: 120,
-                value: "All",
-               
-            });
+            $timeout(function () {
+                debugger;
+                $("#selectyearbox").dxSelectBox({
+                    width: 120,
+                    value: $scope.Year,
+                });
+            }, 1000);
+           
+          
+            //$("#selectbox").dxSelectBox({
+            //    width: 120,
+            //    value: "All",               
+            //});
             chartDataSource.load();
             $scope.PieChartDataSource();
             PieChartSource.load();
@@ -1024,16 +1030,16 @@
                     var df = $.Deferred();                    
                      $scope.AllAppointmentYears = [];
                     // $scope.AllAppointmentMonths = [];
-                     var TotalCost = 0;           
+                    // var TotalCost = 0;           
                        // $scope.AllAppointmentMonths.push("All");
                         angular.forEach($scope.ListofAppointments, function (value, key) {
-                            TotalCost = TotalCost + value.Cost;
+                         //   TotalCost = TotalCost + value.Cost;
                             var date = new Date(value.StartTime);
                             if($scope.AllAppointmentYears.includes((date.getFullYear()).toString())==false)
                             {                                
                                 $scope.AllAppointmentYears.push((date.getFullYear()).toString());
                             }                                       
-                        });                        
+                        });                   
                         df.resolve($scope.AllAppointmentYears);
                         return df.promise();
                 },                            
@@ -1050,11 +1056,10 @@
                     debugger;
                     var df = $.Deferred();                   
                     $scope.AllAppointmentMonths = [];
-                    var TotalCost = 0;
-
+                   // var TotalCost = 0;
                     $scope.AllAppointmentMonths.push("All");
                     angular.forEach($scope.ListofAppointments, function (value, key) {
-                        TotalCost = TotalCost + value.Cost;
+                       // TotalCost = TotalCost + value.Cost;
                         var date = new Date(value.StartTime);
                         if ((date.getFullYear()).toString() == $scope.SelectedYear) {
                             // $scope.AllAppointmentYears.push({ "Id": (date.getFullYear()).toString(), "Year": (date.getFullYear()).toString() });
@@ -1079,7 +1084,7 @@
               $("#selectbox").dxSelectBox({
                   width: 120,
                   value: "All",                 
-              });
+              });             
               $scope.SelectBoxMonthDataSource.load();
               chartDataSource.load();
               PieChartSource.load();
@@ -1153,7 +1158,7 @@
                         angular.forEach(data.ServiceStats, function (value, key) {
                             $scope.PieChartData.push({ "arg": value.Service.Name, "val": value.NumberOfAppointment });
                             
-                            $scope.TotalCostofServices = $scope.TotalCostofServices + value.Service.Cost;
+                            $scope.TotalCostofServices = $scope.TotalCostofServices + (value.NumberOfAppointment) * value.Service.Cost;
                             TotalAppointment = TotalAppointment + value.NumberOfAppointment;
                            
                         })

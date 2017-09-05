@@ -124,34 +124,29 @@ namespace AngularMvcProject.Controllers
             }
         }
 
-        //[HttpPost]
-        //public string GetStaffData(int CompanyId)
-        //{
-        //    try
-        //    {
-        //        // int Id = Convert.ToInt32(CompanyId);
-        //        string apiURL = ConfigurationManager.AppSettings["DomainUrl"].ToString() + "/api/companyregistration/GetCompanyEmployees?companyId=" + CompanyId;
-        //        string result = "";
-        //        var httpWebRequest = (HttpWebRequest)WebRequest.Create(apiURL);
-        //        httpWebRequest.ContentType = "application/json";
-        //        httpWebRequest.Method = "GET";
-        //        httpWebRequest.Headers.Add("Token", Request.Headers["Token"]);
+        [HttpPost]
+        public string GetCustomerById(string CustomerId)
+        {
+            try
+            {
+                var result = "";
+                string apiUrl = ConfigurationManager.AppSettings["DomainUrl"] + "/api/customer/GetCustomerById?id=" + CustomerId;
+                var httpWebRequest = (HttpWebRequest)WebRequest.Create(apiUrl);
+                httpWebRequest.ContentType = "application/json";
+                httpWebRequest.Method = "GET";
+                httpWebRequest.Headers.Add("Token", Request.Headers["Token"]);
 
-        //        var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
-        //        using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
-        //        {
-        //            result = streamReader.ReadToEnd();
-        //        }
-
-        //        List<RequestStaffData> listofEmployees = new List<RequestStaffData>();
-        //        listofEmployees = JsonConvert.DeserializeObject<List<RequestStaffData>>(result);
-        //        return result;
-        //    }
-        //    catch (Exception e)
-        //    {
-        //        return e.ToString();
-        //    }
-
-        //}
+                var httpWebResponse = (HttpWebResponse)httpWebRequest.GetResponse();
+                using (var StreamReader = new StreamReader(httpWebResponse.GetResponseStream()))
+                {
+                    result = StreamReader.ReadToEnd();
+                }
+                return result;
+            }
+            catch (Exception e)
+            {
+                return e.ToString();
+            }
+        }
     }
 }

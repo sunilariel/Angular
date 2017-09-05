@@ -41,22 +41,24 @@
 
         }
         var data = JSON.stringify(dataobject);
-         $scope.IsVisible = true;
-         $scope.MessageText = "Signing In"
+        $scope.IsVisible = true;
+        $scope.MessageText = "Signing In"
         $http.post("SignIn/postdata", { json: data }).success(function (data) {
             debugger;
             if (data.success == true) {
-              
+
                 $scope.msg = "Post Data Submitted Successfully!";
                 $scope.companyId = data.CompanyId;
 
-              //  $timeout(function () { $scope.MessageText = "Your Details saved."; $timeout(function () { $scope.IsVisible = false; }, 1000) }, 500);
+                //  $timeout(function () { $scope.MessageText = "Your Details saved."; $timeout(function () { $scope.IsVisible = false; }, 1000) }, 500);
                 $scope.IsVisible = false;
                 $location.path("/dashboard/" + $scope.companyId);
                 $window.sessionStorage.setItem('userInfo-token', data.Token);
             }
-            else {
-                $timeout(function () { $scope.MessageText = "Invalid Credentials."; }, 500);
+            else if (data.includes("System.Net.WebException: The remote server returned an error")) {
+                $scope.MessageText = "Invalid Credentials.";
+                $timeout(function () { $scope.IsVisible = false; }, 1000);
+
             }
         })
         .error(function (e) {

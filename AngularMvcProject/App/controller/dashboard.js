@@ -88,6 +88,7 @@ app.controller('dashboardController', ['$scope', '$timeout','$window', '$http', 
 
     $scope.init = function () {
 
+      
         $scope.AppointmentSchedule = [];
         $scope.MessageText = "Fetching Data...";
         $scope.IsVisible = true;
@@ -159,6 +160,15 @@ app.controller('dashboardController', ['$scope', '$timeout','$window', '$http', 
         $scope.AppointmentBookingId = item.BookingId;
         $scope.CustomerName = item.CustomerNames[0];
         $scope.CustomerId = item.CustomerIds[0];
+        var apirequest = bookingService.GetCustomerById($scope.CustomerId);
+        apirequest.then(function (response) {
+            debugger;
+            $scope.CustomerName = response.data.FirstName;
+            $scope.CustomerEmail = response.data.Email;
+            $scope.CustomerTelephone = response.data.TelephoneNo.substring(2,response.data.TelephoneNo.length);
+            $scope.Code = response.data.TelephoneNo.substring(0, 2);
+            $scope.CustomerAddress = response.data.Address;
+        })
         $scope.appointmentDetailisVisible = !$scope.appointmentDetailisVisible;
         var date = $scope.AppointmentStartDate.split("T");
         var appointmentdate = new Date(date[0]);
@@ -225,7 +235,7 @@ app.controller('dashboardController', ['$scope', '$timeout','$window', '$http', 
         var appointmentdate = new Date(date[0]);
         var time = date[1].split(":");
         var appointmenttime = new Date(1997, 4, 5, time[0], time[1], time[2]);
-        $scope.timeoption = $filter('date')(appointmenttime, 'h:mm a');
+        $scope.timeoption = $filter('date')(appointmenttime,'h:mm a');
         $scope.dt = appointmentdate;
         // $scope.ServiceDetail($scope.AppointmentServiceId);
         $scope.GetAllocateServiceToEmployee($scope.AppointmentEmployeeId);
@@ -233,6 +243,7 @@ app.controller('dashboardController', ['$scope', '$timeout','$window', '$http', 
         $scope.UpdateAppointmentId = $scope.AppointmentBookingId;
         $scope.count = 0;
         $scope.notes = "";
+       
         //$scope.EmployeeId = $scope.AppointmentEmployeeId;
     }
 
@@ -442,4 +453,7 @@ app.controller('dashboardController', ['$scope', '$timeout','$window', '$http', 
         sessionStorage.removeItem('userInfo-token');      
         $location.path("/signin");
     }
+   
+
+  
 }]);

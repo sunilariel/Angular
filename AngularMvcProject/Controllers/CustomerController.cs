@@ -353,7 +353,7 @@ namespace AngularMvcProject.Controllers
                     obj.BookingId = appointment.Id;
                     obj.EmployeeId = appointment.EmployeeId.ToString();
                     obj.ServiceId = appointment.ServiceId.ToString();
-                    obj.EmployeeName = appointment.Employee.FirstName;
+                    obj.EmployeeName = (appointment.Employee)==null?"": appointment.Employee.FirstName;
                     obj.ServiceName = appointment.Service.Name;
                     obj.DurationInHours = appointment.Service.DurationInHours;
                     obj.DurationInMinutes = appointment.Service.DurationInMinutes;

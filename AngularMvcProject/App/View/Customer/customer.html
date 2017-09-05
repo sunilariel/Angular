@@ -505,7 +505,7 @@
                                             <div class="appointment_content">
                                                 <div class="appoint_text appoint_cust" ng-hide="CustomerCount==0" ng-click="AddAppointmentPopup()">
                                                     <button class="pull-right btn btn-circle appointment_btn" id="createnewstaffbtn" title="" data-toggle="modal" data-target="#squarespaceModal"><i class="fa fa-plus" aria-hidden="true"></i></button>
-                                                    <span>{{NumberofAppointmnets}} appointment & 0 class</span><span class="dottext">.</span><span> £{{TotalCostofServices}}</span>
+                                                    <span>{{NumberofAppointmnets}} appointment & 0 class</span><span class="dottext">.</span><span> £{{TotalCost}}</span>
                                                 </div>
                                                 <div ng-if="NumberofAppointmnets==0">
                                                     <span> No records available! </span>
@@ -794,7 +794,7 @@
 
                                             </div>
                                             <div class="appointmentListHolder">
-                                                <ul id="appointmentList" class="appointmentList appointMedia">
+                                                <ul id="appointmentList" class="appointmentList appointMedia customermedia">
                                                     <li ng-repeat="item in ListofAppointments" ng-click="ShowAppointmentDetail(item)">
                                                         <span>
                                                             <div class="media">
@@ -900,7 +900,7 @@
                                                     </div>-->
                                                     <div class="chooseYearDiv">
                                                     <div class="label">Choose a year:</div>
-                                                    <div id="selectyearbox" dx-select-box="{dataSource: SelectBoxYearDataSource,onValueChanged: filterMonthsbyYears,value:'2017',width:120}"></div>
+                                                    <div id="selectyearbox" dx-select-box="{dataSource: SelectBoxYearDataSource,onValueChanged: filterMonthsbyYears,value:{{Year}},width:120}"></div>
                                                     </div>
                                                         <!--<div class="chooseMonthDiv">
                                                             <div class="label">Choose a month:</div>
@@ -911,7 +911,7 @@
                                                         <div class="label">Choose a month:</div>
                                                         <!--<div id="selectbox" dx-select-box="selectBoxOptions"  ></div>-->
                                                         <!--<div id="selectbox" dx-select-box="selectBoxOptions" ng-model="SelectedMonth"></div>-->
-                                                        <div id="selectbox" dx-select-box="{dataSource: SelectBoxMonthDataSource,onValueChanged:ReloadChart,value:'All',width:120}"></div>
+                                                        <div id="selectbox" dx-select-box="{dataSource: SelectBoxMonthDataSource,onValueChanged:ReloadChart,value:'All',width:120}" ></div>
                                                     </div>
 
 
