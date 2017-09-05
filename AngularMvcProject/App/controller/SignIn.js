@@ -56,7 +56,7 @@
                 $window.sessionStorage.setItem('userInfo-token', data.Token);
             }
             else {
-                $timeout(function () { $scope.messagetext = "Invalid Credentials."; }, 500);
+                $timeout(function () { $scope.MessageText = "Invalid Credentials."; }, 500);
             }
         })
         .error(function (e) {
