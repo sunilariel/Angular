@@ -61,7 +61,7 @@
         var count = 0;
        // $scope.LineChartDataSource();
       //  $scope.PieChartDataSource();
-        $scope.SelectedMonth = "All";
+       
         $scope.months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
         //$scope.AllAppointmentYears = [];
         //$scope.AllAppointmentMonths = [];
@@ -718,6 +718,7 @@
 
     $scope.GetAppointmentDetails = function (Id) {
         debugger;
+         $scope.SelectedMonth = "All";
         var result = bookingService.GetAppointmentDetails(Id);
         result.then(function (response) {
             $scope.ListofAppointments = [];
@@ -747,13 +748,13 @@
             $scope.SelectBoxYearDataSource.load();
             $scope.SelectBoxMonthDataSource.load();
 
-            //$timeout(function () {
+            $timeout(function () {
                 
-            //    $("#selectyearbox").dxSelectBox({
-            //        width: 120,
-            //        value: $scope.Year,
-            //    });
-            //}, 1000);
+                $("#selectyearbox").dxSelectBox({
+                    width: 120,
+                    value: $scope.Year,
+                });
+            }, 1000);
            
           
             //$("#selectbox").dxSelectBox({
