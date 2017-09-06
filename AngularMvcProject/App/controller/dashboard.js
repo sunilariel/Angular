@@ -448,7 +448,8 @@ app.controller('dashboardController', ['$scope', '$timeout','$window', '$http', 
 
     $scope.Logout = function () {
         debugger;
-        var apirequest = bookingService.SignOut();     
+         $rootScope.IsLoggedInUser = false;
+        var apirequest = bookingService.SignOut();
         sessionStorage.removeItem('userInfo-token');      
         $location.path("/signin");
     } 

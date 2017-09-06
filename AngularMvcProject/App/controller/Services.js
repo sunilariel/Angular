@@ -622,6 +622,7 @@
 
     $scope.Logout = function () {
         debugger;
+        $rootScope.IsLoggedInUser = false;
         var apirequest = bookingService.SignOut();
         sessionStorage.removeItem('userInfo-token');
         $location.path("/signin");
