@@ -33,7 +33,7 @@ app.service("bookingService", function ($http, $window) {
     }
     // Add Employee
     this.register = function (dataobject) {
-        debugger;
+        
         var response = $http({
             method: "post",
             url: "/wizard/postdata",
@@ -44,7 +44,7 @@ app.service("bookingService", function ($http, $window) {
 
     }
     this.staffInformation = function (dataobject) {
-        debugger;
+        
         var response = $http({
             method: "post",
             url: "/wizard/poststaffdata",
@@ -55,7 +55,7 @@ app.service("bookingService", function ($http, $window) {
     }
 
     this.EditStaffInformation = function (dataobject) {
-        debugger;
+        
         var response = $http({
             method: "post",
             url: "/wizard/EditStaffData",
@@ -66,7 +66,7 @@ app.service("bookingService", function ($http, $window) {
     }
 
     this.DeAllocateServiceForEmployee = function (dataobject) {
-        debugger;
+        
         var response = $http({
             method: "post",
             url: "/wizard/DeAllocateServiceForEmployee",
@@ -88,7 +88,7 @@ app.service("bookingService", function ($http, $window) {
     }
 
     this.AddService = function (dataobject) {
-        debugger;
+        
         var response = $http({
             method: "post",
             url: "/wizard/AddService",
@@ -99,7 +99,7 @@ app.service("bookingService", function ($http, $window) {
     }
 
     this.EditService = function (dataobject) {
-        debugger;
+        
         var response = $http({
             method: "post",
             url: "/wizard/EditService",
@@ -110,7 +110,7 @@ app.service("bookingService", function ($http, $window) {
     }
 
     this.GetStaffData = function (dataobject) {
-        debugger;
+        
 
         var response = $http({
             method: "post",
@@ -122,7 +122,7 @@ app.service("bookingService", function ($http, $window) {
     }
 
     this.DeleteStaff = function (id) {
-        debugger;
+        
         var response = $http({
             method: "post",
             url: "/wizard/DeleteStaff",
@@ -132,7 +132,7 @@ app.service("bookingService", function ($http, $window) {
         return response;
     }
     this.getServicesData = function (id) {
-        debugger;
+        
         var response = $http({
             method: "post",
             url: "/wizard/GetServiceData",
@@ -142,7 +142,7 @@ app.service("bookingService", function ($http, $window) {
         return response;
     }
     this.DeleteService = function (id) {
-        debugger;
+        
         var response = $http({
             method: "post",
             url: "/wizard/DeleteService",
@@ -152,7 +152,7 @@ app.service("bookingService", function ($http, $window) {
         return response;
     }
     this.assignStaffToService = function (dataobject) {
-        debugger;
+        
         var response = $http({
             method: "post",
             url: "/wizard/AssignStaff",
@@ -166,7 +166,7 @@ app.service("bookingService", function ($http, $window) {
     ///////////Customer Section in MileStone_2///////////////
 
     this.CreateCustomer = function (dataobject) {
-        debugger;
+        
         var response = $http({
             method: 'post',
             url: "/Customer/CreateCustomer",
@@ -178,7 +178,7 @@ app.service("bookingService", function ($http, $window) {
 
     this.UpdateCustomer=function(dataobject)
     {
-        debugger;
+        
         var response = $http({
             method: "POST",
             url: "/Customer/UpdateCustomer",
@@ -191,7 +191,7 @@ app.service("bookingService", function ($http, $window) {
 
 
     this.GetAllCustomer = function (dataobject) {
-        debugger;
+        
         var response = $http({
             method: 'post',
             url: '/Customer/GetAllCustomer',
@@ -202,7 +202,7 @@ app.service("bookingService", function ($http, $window) {
     }
 
     this.DeleteCustomer = function (companyId,customerId) {
-        debugger;
+        
         var response = $http({
             method: "post",
             url: "/Customer/DeleteCustomer",
@@ -259,7 +259,7 @@ app.service("bookingService", function ($http, $window) {
     ////////////for customer module Add appointment
 
     this.GetAllocatedServicetoEmployee = function (companyId,employeeId) {
-        debugger;
+        
         var response = $http({
             method: 'post',
             url: '/Customer/GetAllocatedServicetoEmployee',
@@ -516,7 +516,7 @@ app.service("bookingService", function ($http, $window) {
 
     this.GetEmployeeAssignedtoService=function(Id)
     {
-        debugger;
+        
         var response = $http({
             method: "POST",
             url: "/Services/GetEmployeeAssignedtoService",
@@ -752,6 +752,16 @@ app.service("bookingService", function ($http, $window) {
             method: "POST",
             url: "/Dashboard/SignOut",
             headers:GetHeader()
+        })
+        return response;
+    }
+
+    this.GetCustomerById = function (customerId) {
+        var response = $http({
+            method: "POST",
+            url: "/Dashboard/GetCustomerById",
+            headers: GetHeader(),
+            data: { CustomerId: customerId }
         })
         return response;
     }

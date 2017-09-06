@@ -899,8 +899,8 @@
                                                         <div id="selectyearbox" dx-select-box="selectBoxYearOption" ng-model="SelectedYear"></div>
                                                     </div>-->
                                                     <div class="chooseYearDiv">
-                                                    <div class="label">Choose a year:</div>
-                                                    <div id="selectyearbox" dx-select-box="{dataSource: SelectBoxYearDataSource,onValueChanged: filterMonthsbyYears,value:{{Year}},width:120}"></div>
+                                                    <div class="label">Choose a year:</div>                                                                                                        
+                                                    <div id="selectyearbox" ng-model="Year" dx-select-box="{dataSource: SelectBoxYearDataSource,onValueChanged: filterMonthsbyYears,width:120}"></div>
                                                     </div>
                                                         <!--<div class="chooseMonthDiv">
                                                             <div class="label">Choose a month:</div>

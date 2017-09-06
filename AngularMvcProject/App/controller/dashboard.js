@@ -86,9 +86,7 @@ app.controller('dashboardController', ['$scope', '$timeout','$window', '$http', 
         $scope.showcustomer != $scope.showcustomer;
     };
 
-    $scope.init = function () {
-
-      
+    $scope.init = function () {      
         $scope.AppointmentSchedule = [];
         $scope.MessageText = "Fetching Data...";
         $scope.IsVisible = true;
@@ -212,11 +210,12 @@ app.controller('dashboardController', ['$scope', '$timeout','$window', '$http', 
                 $scope.MessageText = "Deleting Appointment";
                 $scope.IsVisible = true;
                 $timeout(function () {
-                    $scope.MessageText = "Appointment Deleted";
-                    $timeout(function () {                     
+                    $scope.MessageText = "Appointment Deleted";                   
+                    $timeout(function () {                        
                         $scope.appointmentDetailisVisible = false;
                         $scope.IsVisible = false;
                         $scope.init();
+                        angular.element(document.querySelector("#UpdateDashboardAppointmentPopup")).css("display", "none");
                     }, 800)
                 }, 1000)
             }
@@ -452,8 +451,5 @@ app.controller('dashboardController', ['$scope', '$timeout','$window', '$http', 
         var apirequest = bookingService.SignOut();     
         sessionStorage.removeItem('userInfo-token');      
         $location.path("/signin");
-    }
-   
-
-  
+    } 
 }]);

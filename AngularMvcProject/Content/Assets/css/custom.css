@@ -1325,6 +1325,7 @@ ul.lableDropdownContent li a:hover {
     margin-bottom: 0px;
     font-size: 13px;
     font-weight: normal;
+    padding-right: 4px;
 }
 .popupdropdownDiv {
     width: 100%;

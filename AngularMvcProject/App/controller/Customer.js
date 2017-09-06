@@ -65,7 +65,7 @@
         $scope.months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
         //$scope.AllAppointmentYears = [];
         //$scope.AllAppointmentMonths = [];
-        $scope.SelectedYear = (new Date().getFullYear()).toString();
+      //  $scope.SelectedYear = (new Date().getFullYear()).toString();
         $scope.CompanyId = $routeParams.CompanyId;
         $scope.showcustomer = false;
         $scope.appointmentDetailisVisible = false;
@@ -370,7 +370,7 @@
 
     //Get Service allocated to employee
     $scope.GetAllocateServiceToEmployee = function (EmployeeId) {
-        debugger;
+        
         $scope.EmployeeId = EmployeeId;
         $scope.EmployeeServices = [];
         var EmployeeServices = bookingService.GetAllocatedServicetoEmployee($scope.CompanyId, EmployeeId);
@@ -446,7 +446,7 @@
     }
 
     $scope.SaveAppointment = function (form) {
-        debugger;
+        
         var selectedvalue = $scope.option;
        
         if (form.$invalid == true) {
@@ -517,7 +517,7 @@
     }
 
     $scope.ShowAppointmentDetail = function (item) {
-        debugger;
+        
         $scope.AppointmentStartDate = item.StartTime;
         $scope.AppointmentEndDate = item.EndTime;
         $scope.AppointmentProvider = item.EmployeeName;
@@ -552,7 +552,7 @@
     }
 
     $scope.UpdateStatus = function (item) {
-        debugger;
+        
         var status = $scope.StatusValue;
         $scope.UpdatedStatus = item.Status;
         var SetStatus = bookingService.SetStatusofAppointment(item.Status, $scope.AppointmentBookingId);
@@ -737,6 +737,7 @@
             else {
                 var date = new Date($scope.ListofAppointments[0].StartTime);
                 $scope.Year = date.getFullYear().toString();
+                $scope.SelectedYear = $scope.Year;
                 $scope.NoRecords = true;
             }
             var TotalCost = 0;
@@ -746,13 +747,13 @@
             $scope.SelectBoxYearDataSource.load();
             $scope.SelectBoxMonthDataSource.load();
 
-            $timeout(function () {
-                debugger;
-                $("#selectyearbox").dxSelectBox({
-                    width: 120,
-                    value: $scope.Year,
-                });
-            }, 1000);
+            //$timeout(function () {
+                
+            //    $("#selectyearbox").dxSelectBox({
+            //        width: 120,
+            //        value: $scope.Year,
+            //    });
+            //}, 1000);
            
           
             //$("#selectbox").dxSelectBox({
@@ -856,7 +857,7 @@
 
             var chartDataSource = new DevExpress.data.DataSource({
                 load: function () {
-                    debugger;
+                    
                     var df = $.Deferred();
                     $scope.AllAppointments = [];
                     var JanuaryApp = 0;
@@ -876,7 +877,7 @@
                     if ($scope.SelectedMonth == "All") {
                         $scope.DateIn = "Month";
                         $scope.Month = "";
-                        $scope.Year = $scope.SelectedYear;
+                      //  $scope.Year = $scope.SelectedYear;
                         var apirequest = bookingService.GetCustomerStats($routeParams.CompanyId, $scope.CustomerId, $scope.SelectedYear, $scope.SelectedMonth);                      
 
                         $scope.CombineResult = $q.all([
@@ -976,7 +977,7 @@
                     else {
                         $scope.DateIn = "Day(s)";
                         $scope.Month = (($scope.SelectedMonth).substring(0, 3)).toUpperCase();
-                        $scope.Year = $scope.SelectedYear;
+                      //  $scope.Year = $scope.SelectedYear;
                         var apirequest = bookingService.GetCustomerStats($routeParams.CompanyId, $scope.CustomerId, $scope.SelectedYear, $scope.SelectedMonth);
                         $scope.AppointmentsDetail = [];
                         var count0 = 0;
@@ -1026,7 +1027,7 @@
                 loadMode: "raw",
                 cacheRawData: false,
                 load: function () {                    
-                    debugger;
+                    
                     var df = $.Deferred();                    
                      $scope.AllAppointmentYears = [];
                     // $scope.AllAppointmentMonths = [];
@@ -1053,7 +1054,7 @@
                 loadMode: "raw",
                 cacheRawData: false,               
                 load: function () {
-                    debugger;
+                    
                     var df = $.Deferred();                   
                     $scope.AllAppointmentMonths = [];
                    // var TotalCost = 0;
@@ -1079,7 +1080,7 @@
 
           $scope.filterMonthsbyYears=function(e)
           {
-              debugger;
+              
               $scope.SelectedYear = e.value;
               $("#selectbox").dxSelectBox({
                   width: 120,
@@ -1091,7 +1092,7 @@
           }
 
           $scope.ReloadChart = function (e) {
-              debugger;
+              
               $scope.SelectedMonth = e.value;
               chartDataSource.load();
               PieChartSource.load();
