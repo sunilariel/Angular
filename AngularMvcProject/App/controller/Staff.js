@@ -1,4 +1,5 @@
-﻿app.controller("staffController", ['$scope', '$http', '$routeParams','$filter', '$timeout', '$location', 'bookingService', function ($scope, $http, $routeParams,$filter, $timeout, $location, bookingService) {
+﻿app.controller("staffController", ['$scope', '$http', '$routeParams', '$filter', '$timeout', '$location', 'bookingService', '$rootScope',
+    function ($scope, $http, $routeParams, $filter, $timeout, $location, bookingService, $rootScope) {
 
 
     $scope.showstaffpopup = false;

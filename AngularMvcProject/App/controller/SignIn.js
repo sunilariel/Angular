@@ -1,4 +1,4 @@
-﻿app.controller("SignIn", ['$scope', '$http', '$timeout', '$location', '$window', function ($scope, $http, $timeout, $location, $window) {
+﻿app.controller("SignIn", ['$scope', '$http', '$timeout', '$location', '$window', '$rootScope', function ($scope, $http, $timeout, $location, $window, $rootScope) {
     debugger;
     $scope.username = "";
     $scope.Email = "";

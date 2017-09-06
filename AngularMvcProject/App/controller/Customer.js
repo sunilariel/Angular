@@ -1,4 +1,5 @@
-﻿app.controller('customerController', ['$scope', '$location', '$filter', '$window', '$routeParams', '$q', '$http', '$timeout', 'bookingService', function ($scope, $location, $filter, $window, $routeParams, $q, $http, $timeout, bookingService) {
+﻿app.controller('customerController', ['$scope', '$location', '$filter', '$window', '$routeParams', '$q', '$http', '$timeout', 'bookingService', '$rootScope',
+    function ($scope, $location, $filter, $window, $routeParams, $q, $http, $timeout, bookingService, $rootScope) {
     //This will hide the DIV by default.
     $scope.procedures = [
 {

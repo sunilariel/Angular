@@ -1,6 +1,7 @@
 ﻿/// <reference path="dashboard.js" />
 //var app = angular.module('MyApp', [])
-app.controller('dashboardController', ['$scope', '$timeout','$window', '$http', '$routeParams', '$filter', '$location', 'bookingService', function ($scope, $timeout,$window, $http,$routeParams, $filter, $location, bookingService) {
+app.controller('dashboardController', ['$scope', '$timeout', '$window', '$http', '$routeParams', '$filter', '$location', 'bookingService', '$rootScope',
+    function ($scope, $timeout, $window, $http, $routeParams, $filter, $location, bookingService, $rootScope) {
     //This will hide the DIV by default.
     $scope.procedures = [
 {

@@ -1,4 +1,5 @@
-﻿app.controller("servicesController", ['$scope', '$http', '$routeParams', '$timeout', '$location','bookingService', function ($scope, $http, $routeParams, $timeout, $location,bookingService) {
+﻿app.controller("servicesController", ['$scope', '$http', '$routeParams', '$timeout', '$location', 'bookingService', '$rootScope',
+    function ($scope, $http, $routeParams, $timeout, $location, bookingService, $rootScope) {
 
 
     //Redirection to different pages////
