@@ -51,7 +51,7 @@
         $location.path("/Setting/" + $routeParams.CompanyId);
     }
     $scope.Logout = function () {
-        
+        $rootScope.IsLoggedInUser = false;
         var apirequest = bookingService.SignOut();
         sessionStorage.removeItem('userInfo-token');
         $location.path("/signin");
