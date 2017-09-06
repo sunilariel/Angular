@@ -301,8 +301,9 @@
                 $scope.customerArr = [];
                 $scope.customerArr = response.data;
                 $scope.CustomerCount = response.data.length
+                $timeout(function () { $scope.MessageText = "Data deleted."; $timeout(function () { $scope.IsVisible = false; $scope.EditCustomer(response.data[0]); }, 1000) }, 500);
             });
-            $timeout(function () { $scope.MessageText = "Data deleted."; $timeout(function () { $scope.IsVisible = false; }, 1000) }, 500);
+          
 
         }), function () {
             alert('Error in updating record');
@@ -758,10 +759,10 @@
             }, 1000);
            
           
-            //$("#selectbox").dxSelectBox({
-            //    width: 120,
-            //    value: "All",               
-            //});
+            $("#selectbox").dxSelectBox({
+                width: 120,
+                value: "All",               
+            });
             chartDataSource.load();
             $scope.PieChartDataSource();
             PieChartSource.load();
@@ -1081,8 +1082,7 @@
             })
 
           $scope.filterMonthsbyYears=function(e)
-          {
-              
+          {             
               $scope.SelectedYear = e.value;
               $("#selectbox").dxSelectBox({
                   width: 120,
@@ -1093,8 +1093,7 @@
               PieChartSource.load();
           }
 
-          $scope.ReloadChart = function (e) {
-              
+          $scope.ReloadChart = function (e) {              
               $scope.SelectedMonth = e.value;
               chartDataSource.load();
               PieChartSource.load();
@@ -1146,8 +1145,7 @@
                 };                                                         
             }
             var PieChartSource = new DevExpress.data.DataSource({
-                load: function () { 
-                    
+                load: function () {                     
                     $scope.PieChartData = [];
                     $scope.TotalCostofServices = 0;
                     var TotalAppointment = 0;
@@ -1170,7 +1168,6 @@
                     })
                     return def.promise();
                 }
-
             });
 
     //Pie Chart//
