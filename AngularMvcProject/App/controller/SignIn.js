@@ -49,6 +49,7 @@
 
                 $scope.msg = "Post Data Submitted Successfully!";
                 $scope.companyId = data.CompanyId;
+                $rootScope.IsLoggedInUser = true;
 
                 //  $timeout(function () { $scope.MessageText = "Your Details saved."; $timeout(function () { $scope.IsVisible = false; }, 1000) }, 500);
                 $scope.IsVisible = false;
