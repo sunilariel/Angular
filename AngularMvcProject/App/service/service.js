@@ -764,7 +764,7 @@ app.service("bookingService", function ($http, $window) {
             data: { CustomerId: customerId }
         })
         return response;
-    }
+    }    
 })
 
 
