@@ -212,7 +212,8 @@
     }
 
     //Edit Customer getting details  
-    $scope.EditCustomer = function (item) {        
+    $scope.EditCustomer = function (item) {
+        debugger;
         $scope.CustomerId = item.Id;
         $scope.SelectedCustomerId = item.Id;
         $scope.updatedCustomerName = item.FirstName;
@@ -220,6 +221,10 @@
         $scope.updatedPreCustomerMobileNo = item.TelephoneNo.substring(0, 2);
         $scope.updatedMobileNo = item.TelephoneNo.substring(2, item.length);
         $scope.customerAddress = item.Address;
+        $scope.OfficePhone = null;
+        $scope.HomePhone = null;
+        $scope.CustomerState = null;
+        $scope.CustomerCity = null;
         $scope.Zip = item.PostCode;       
         $scope.GetAppointmentDetails($scope.CustomerId);      
         var count = 0;

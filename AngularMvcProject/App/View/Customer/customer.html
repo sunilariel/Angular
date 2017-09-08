@@ -358,7 +358,7 @@
                                 <div class="col-md-12 providerpaddDiv">
                                     <div class="providerCustomer">
                                         <ul class="list-inline">                                           
-                                            <li class="selectCustomer" ng-repeat="item in customerArr | filter:searchName" ng-click="EditCustomer(item)" ng-class="{selected:CustomerId==item.Id}">
+                                            <li class="selectCustomer cursorhand" ng-repeat="item in customerArr | filter:searchName" ng-click="EditCustomer(item)" ng-class="{selected:CustomerId==item.Id}">
                                                 <span class="formCheckbox">
                                                     <input type="checkbox" name="" class="inputcheckbox">
                                                 </span>
@@ -450,13 +450,13 @@
                                     <div class="form-group">
                                         <label class="control-label col-md-3 col-xs-3 col-sm-12">Office</label>
                                         <div class="col-md-9 col-xs-9 col-sm-12">
-                                            <input type="text" class="form-control" id="text" placeholder="Phone" name="text">
+                                            <input type="text" class="form-control" id="text" placeholder="Phone" name="text" ng-model="OfficePhone">
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label class="control-label col-md-3 col-xs-3 col-sm-12">Home</label>
                                         <div class="col-md-9 col-xs-9 col-sm-12">
-                                            <input type="text" class="form-control" id="text" placeholder="Phone" name="text" >
+                                            <input type="text" class="form-control" id="text" placeholder="Phone" name="text" ng-model="HomePhone" >
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -471,10 +471,10 @@
                                         <div class="col-md-9 col-xs-9 col-sm-12">
                                             <div class="row">
                                                 <div class="col-md-4">
-                                                    <input type="text" class="form-control" id="text" placeholder="City" name="text">
+                                                    <input type="text" class="form-control" id="text" placeholder="City" name="text" ng-model="CustomerCity">
                                                 </div>
                                                 <div class="col-md-4 textNumberDiv" style="padding-left:0;">
-                                                    <input type="text" class="form-control" id="text" placeholder="State" name="text">
+                                                    <input type="text" class="form-control" id="text" placeholder="State" name="text" ng-model="CustomerState">
                                                 </div>
                                                 <div class="col-md-4 textNumberDiv" style="padding-left:0;">
                                                     <input type="text" class="form-control" id="text" placeholder="Zip" name="text" ng-model="Zip" ng-blur="updateCustomer()">
@@ -505,7 +505,7 @@
                                             <div class="appointment_content">
                                                 <div class="appoint_text appoint_cust" ng-hide="CustomerCount==0" ng-click="AddAppointmentPopup()">
                                                     <button class="pull-right btn btn-circle appointment_btn" id="createnewstaffbtn" title="" data-toggle="modal" data-target="#squarespaceModal"><i class="fa fa-plus" aria-hidden="true"></i></button>
-                                                    <span>{{NumberofAppointmnets}} appointment & 0 class</span><span class="dottext">.</span><span> £{{TotalCost}}</span>
+                                                    <span>{{NumberofAppointmnets}} appointment & 0 class</span><span class="dottext">.</span><span> £{{TotalCost}}</span>                                                 
                                                 </div>
                                                 <div ng-if="NumberofAppointmnets==0">
                                                     <span> No records available! </span>
@@ -899,7 +899,7 @@
                                                         <div id="selectyearbox" dx-select-box="selectBoxYearOption" ng-model="SelectedYear"></div>
                                                     </div>-->
                                                     <div class="chooseYearDiv">
-                                                    <div class="label">Choose a year:</div>                                                                                                        
+                                                    <div class="label">Choose a year:</div>                                                                                                     
                                                     <div id="selectyearbox" ng-model="Year" dx-select-box="{dataSource: SelectBoxYearDataSource,onValueChanged: filterMonthsbyYears,width:120}"></div>
                                                     </div>
                                                         <!--<div class="chooseMonthDiv">
