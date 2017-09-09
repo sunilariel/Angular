@@ -43,6 +43,10 @@
     $scope.redirecttoCustomer = function () {
         $location.path("/customer/" + $routeParams.CompanyId);
     }
+    $scope.redirectToCalendar = function () {
+        $location.path("/Calendar/" + $routeParams.CompanyId);
+    }
+
     $scope.redirecttodashboard = function () {
         
         $location.path("/dashboard/" + $routeParams.CompanyId);

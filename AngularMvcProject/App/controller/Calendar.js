@@ -2,6 +2,23 @@
     '$q', '$http', '$timeout', 'bookingService', '$rootScope', '$compile', 'uiCalendarConfig',
     function ($scope, $location, $filter, $window, $routeParams, $q, $http, $timeout, bookingService, $rootScope, $compile,
         uiCalendarConfig) {
+
+        //Redirection
+        $scope.redirecttoCustomer = function () {
+            $location.path("/customer/" + $routeParams.CompanyId);
+        }
+
+        $scope.redirectToCalendar = function () {
+            $location.path("/Calendar/" + $routeParams.CompanyId);
+        }
+
+        $scope.RedirecttoStaff = function () {
+            $location.path("/Setting/" + $routeParams.CompanyId);
+        }
+
+
+
+
         $scope.SelectedEvent = null;
         var isFirstTime = true;
 
