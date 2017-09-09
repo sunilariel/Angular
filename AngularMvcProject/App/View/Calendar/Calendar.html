@@ -1,0 +1,188 @@
+﻿<div ng-controller="calendarController">
+    <header class="top">
+        <div class="logo_section"> <a class="logo" href="#"></a><img src="/Content/Assets/images/logo.png" alt="Logo"></a> </div>
+        <h1>Calendar</h1>
+
+        <div class="pull-right movileViewList">
+            <ul class="nav navbar-nav navbar-right ">
+                <li><a href="#" id="menuiconBar" class="mobileViewIconBar"><i class="fa fa-bars" aria-hidden="true"></i></a></li>
+            </ul>
+        </div>
+        <div class="top_right">
+            <nav class="navbar navbar-default">
+                <div class="container-fluid">
+                    <!-- Brand and toggle get grouped for better mobile display -->
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
+                    </div>
+
+                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+
+                        <ul class="nav navbar-nav navbar-right">
+                            <li class="upgrade_btn"><a href="#" title="">Upgrade</a></li>
+                            <li class="dropdown">
+                                <a class="dropdown-toggle" data-toggle="dropdown" href="#"> <i class="fa fa-bell-o" aria-hidden="true"></i> <span class="caret"></span> </a>
+
+                                <!-- /.dropdown-user -->
+                                <ul class="dropdown-menu dropdown-user animated flipInY">
+                                    <li id="my_details">
+                                        <a href="#">
+                                            <div class="nav-dropdown-icon-holder"> <span class="setmore-icon-user setmore-icon-fsize"></span> </div>
+                                            <div class="nav-dropdown-desc-holder">
+                                                <h3 class="nav-dropdown-desc-header">test@gmail.com</h3>
+                                                <p class="nav-dropdown-desc-text">Username/password</p>
+                                            </div>
+                                            <div class="clear"></div>
+                                        </a>
+                                    </li>
+                                    <li id="account_details">
+                                        <a href="#">
+                                            <div class="nav-dropdown-icon-holder"> <span class="setmore-icon-account-plan setmore-icon-fsize"></span> </div>
+                                            <div class="nav-dropdown-desc-holder">
+                                                <h3 class="nav-dropdown-desc-header">Account Plan</h3>
+                                                <p class="nav-dropdown-desc-text">Update account</p>
+                                            </div>
+                                            <div class="clear"></div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            <div class="nav-dropdown-icon-holder"> <span class="setmore-icon-cog setmore-icon-fsize"></span> </div>
+                                            <div class="nav-dropdown-desc-holder">
+                                                <h3 class="nav-dropdown-desc-header">Refresh</h3>
+                                                <p class="nav-dropdown-desc-text">Updates the Page</p>
+                                            </div>
+                                            <div class="clear"></div>
+                                        </a>
+                                    </li>
+                                    <li id="sign_out" class="nav-dropdown-li-last">
+                                        <a ng-click="Logout()" class="cursorhand">
+                                            <div class="nav-dropdown-icon-holder"> <span class="setmore-icon-log-out setmore-icon-fsize"></span> </div>
+                                            <div class="nav-dropdown-desc-holder">
+                                                <h3 class="nav-dropdown-desc-header">Sign Out</h3>
+                                                <p class="nav-dropdown-desc-text">See you soon!</p>
+                                            </div>
+                                            <div class="clear"></div>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a class="dropdown-toggle" data-toggle="dropdown" href="#"> <i class="setmore-icon-user nav_user_icon"></i> <span class="caret"></span> </a>
+
+                                <!-- /.dropdown-user -->
+                                <ul class="dropdown-menu dropdown-user animated flipInY">
+                                    <li id="my_details">
+                                        <a href="#">
+                                            <div class="nav-dropdown-icon-holder"> <span class="setmore-icon-user setmore-icon-fsize"></span> </div>
+                                            <div class="nav-dropdown-desc-holder">
+                                                <h3 class="nav-dropdown-desc-header">{{companyEmail}}</h3>
+                                                <p class="nav-dropdown-desc-text">Username/password</p>
+                                            </div>
+                                            <div class="clear"></div>
+                                        </a>
+                                    </li>
+                                    <li id="account_details">
+                                        <a href="#">
+                                            <div class="nav-dropdown-icon-holder"> <span class="setmore-icon-account-plan setmore-icon-fsize"></span> </div>
+                                            <div class="nav-dropdown-desc-holder">
+                                                <h3 class="nav-dropdown-desc-header">Account Plan</h3>
+                                                <p class="nav-dropdown-desc-text">Update account</p>
+                                            </div>
+                                            <div class="clear"></div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            <div class="nav-dropdown-icon-holder"> <span class="setmore-icon-cog setmore-icon-fsize"></span> </div>
+                                            <div class="nav-dropdown-desc-holder">
+                                                <h3 class="nav-dropdown-desc-header">Refresh</h3>
+                                                <p class="nav-dropdown-desc-text">Updates the Page</p>
+                                            </div>
+                                            <div class="clear"></div>
+                                        </a>
+                                    </li>
+                                    <li id="sign_out" class="nav-dropdown-li-last">
+                                        <a ng-click="Logout()" class="cursorhand">
+                                            <div class="nav-dropdown-icon-holder"> <span class="setmore-icon-log-out setmore-icon-fsize"></span> </div>
+                                            <div class="nav-dropdown-desc-holder">
+                                                <h3 class="nav-dropdown-desc-header">Sign Out</h3>
+                                                <p class="nav-dropdown-desc-text">See you soon!</p>
+                                            </div>
+                                            <div class="clear"></div>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- /.navbar-collapse -->
+                </div>
+                <!-- /.container-fluid -->
+            </nav>
+        </div>
+        <div class="clearfix"> </div>
+        <div style="width: 100%;text-align: center;position: absolute;z-index: 999999; top:65px;" ng-if="IsVisible"><span id="voice-box" class="noDisplay" style="background:yellow; padding:5px 10px; border-radius:0 0 2px 2px;" ng-bind="MessageText"></span></div>
+
+    </header>
+
+    <div class="left_sidebar">
+        <ul class="nav">
+            <li class="side-nav-tooltip active" id="side-dashboard" data-toggle="tooltip" data-original-title="Dashboard" data-placement="right">
+                <a ng-click="redirecttodashboard()" data-toggle="tab" class="setmore-icon-home" id="startDashboard"><small>Dashboard</small></a>
+            </li>
+            <li class="side-nav-tooltip" id="side-calendar" data-placement="right" data-toggle="tooltip" data-original-title="Calendar">
+                <a ng-click="redirectToCalendar()" data-toggle="tab" class="setmore-icon-calendar-31" id="startCalendar"><small>Calendar</small></a>
+            </li>
+            <li class="side-nav-tooltip" id="side-customers" title="" data-toggle="tooltip" data-original-title="Customers" data-placement="right">
+                <a ng-click="redirecttoCustomer()" data-toggle="tab" class="setmore-icon-users2" id="side-nav-customers"><small>Customers</small></a>
+            </li>
+            <li class="side-nav-tooltip" id="side-profile" data-toggle="tooltip" data-original-title="Apps &amp; Integrations" data-placement="right">
+                <a href="" data-toggle="tab" class="setmore-icon-laptop-phone"><small>Profile&nbsp;</small></a>
+            </li>
+
+            <li class="side-nav-tooltip " id="settings_new" data-original-title="Settings" data-placement="right" data-toggle="tooltip">
+                <a ng-click="RedirecttoStaff()" data-toggle="tab" class="fa fa-cog"><small>Settings</small></a>
+
+
+
+            </li>
+
+
+            <li class="side-nav-tooltip blue_icon" data-toggle="tooltip" data-original-title="Premium" data-placement="right"> <a class="setmore-icon-shield-alert" href="#"><small>Premium</small></a> </li>
+        </ul>
+    </div>
+    <div class="right_section" id="calendar">
+
+        <div id="" class="tab-content full-height">
+            <div class="tab-pane full-height active" id="staff">
+
+                <div class="row">
+                    <div class="col-md-8">
+                        <div id="calendar" ui-calendar="uiConfig.calendar" ng-model="eventSources" calendar="myCalendar"></div>
+                    </div>
+                    <div class="col-md-4">
+                        <div ng-show="SelectedEvent" class="alert alert-success" style="margin-top:50px">
+                            <h2 style="margin-top:0px"> Selected Event:</h2>
+                            <h3 style="color:#A9A50E">{{SelectedEvent.title}}</h3>
+                            <p>{{SelectedEvent.description}}</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="tab-pane full-height" id="accounts">
+                <div id="accountsSideNav" class="span3 secondary-navbar container-fluid"> dfsdfsdfd </div>
+            </div>
+            <div class="tab-pane full-height" id="services"> sdfsadfs </div>
+            <div class="tab-pane full-height" id="classesSetting"> sdfsdfdfd </div>
+            <div class="tab-pane full-height" id="payments">
+                <div id="paymentsSideNav" class="span3 secondary-navbar container-fluid full-height"> </div>
+                fsdfsdfsd
+            </div>
+            <div class="tab-pane full-height" id="notifications">
+                <div class="setmore-loader" style="display:block;"> sdfdf </div>
+            </div>
+        </div>
+    </div>
+</div>

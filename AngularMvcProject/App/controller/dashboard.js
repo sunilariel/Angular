@@ -52,6 +52,12 @@ app.controller('dashboardController', ['$scope', '$timeout', '$window', '$http',
         $location.path("/customer/" + $routeParams.CompanyId);
     }
 
+    $scope.redirectToCalendar = function () {
+
+        $location.path("/Calendar/" + $routeParams.CompanyId);
+
+    }
+
     $scope.RedirecttoStaff = function ()
     {
         $location.path("/Setting/" + $routeParams.CompanyId);
