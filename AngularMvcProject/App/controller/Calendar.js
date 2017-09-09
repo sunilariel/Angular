@@ -29,7 +29,8 @@
         //Load events from server
         $http.get('/Calendar/getevents', {
             cache: true,
-            params: {}
+            params: { companyId: $routeParams.CompanyId },
+            headers: bookingService.GetHeader()
         }).then(function (data) {
             $scope.events.slice(0, $scope.events.length);
             angular.forEach(data.data, function (value) {

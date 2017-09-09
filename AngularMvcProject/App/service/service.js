@@ -8,7 +8,16 @@ app.service("bookingService", function ($http, $window) {
         };
 
         return headers;
-    }
+     }
+
+     this.GetHeader = function () {
+         var headers = {
+             'Content-Type': 'application/json',
+             'Token': $window.sessionStorage.getItem('userInfo-token')
+         };
+
+         return headers;
+     }
 
     this.SignUp = function (dataobject)
     {
