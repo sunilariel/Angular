@@ -20,7 +20,7 @@ namespace AngularMvcProject.Controllers
 {
     public partial class Event
     {
-        public int EventID { get; set; }
+        public Guid EventID { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
         public System.DateTime StartAt { get; set; }
@@ -35,20 +35,6 @@ namespace AngularMvcProject.Controllers
         {
 
             IList<Event> list = new List<Event>();
-
-            //list.Add(new Event
-            //{
-            //    Description = "hello",
-            //    EndAt = DateTime.Now.AddHours(2),
-            //    StartAt = DateTime.Now
-            //    ,
-            //    EventID = 1,
-            //    IsFullDay = false,
-            //    Title = "Cutting"
-            //});
-
-            //return new JsonResult { Data = list, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
-
 
             try
             {
@@ -75,21 +61,21 @@ namespace AngularMvcProject.Controllers
                 int i = 0;
                 foreach (var appointment in appointments)
                 {
-                    AppointmentDetails obj = new AppointmentDetails();
-                    obj.BookingId = appointment.Id;
-                    obj.EmployeeId = appointment.EmployeeId.ToString();
-                    obj.ServiceId = appointment.ServiceId.ToString();
-                    obj.EmployeeName = (appointment.Employee) == null ? "" : appointment.Employee.FirstName;
-                    obj.ServiceName = appointment.Service == null ? "" : appointment.Service.Name;
-                    obj.DurationInHours = appointment.Service.DurationInHours;
-                    obj.DurationInMinutes = appointment.Service.DurationInMinutes;
-                    obj.Cost = appointment.Service.Cost;
-                    obj.Currency = appointment.Service.Currency;
-                    obj.status = appointment.Status;
-                    obj.StartTime = appointment.Start;
-                    obj.EndTime = appointment.End;
+                    //AppointmentDetails obj = new AppointmentDetails();
+                    //obj.BookingId = appointment.Id;
+                    //obj.EmployeeId = appointment.EmployeeId.ToString();
+                    //obj.ServiceId = appointment.ServiceId.ToString();
+                    //obj.EmployeeName = (appointment.Employee) == null ? "" : appointment.Employee.FirstName;
+                    //obj.ServiceName = appointment.Service == null ? "" : appointment.Service.Name;
+                    //obj.DurationInHours = appointment.Service.DurationInHours;
+                    //obj.DurationInMinutes = appointment.Service.DurationInMinutes;
+                    //obj.Cost = appointment.Service.Cost;
+                    //obj.Currency = appointment.Service.Currency;
+                    //obj.status = appointment.Status;
+                    //obj.StartTime = appointment.Start;
+                    //obj.EndTime = appointment.End;
 
-                    ListofAppointment.Add(obj);
+                    //ListofAppointment.Add(obj);
 
 
 
@@ -99,18 +85,12 @@ namespace AngularMvcProject.Controllers
                         Description = (appointment.Employee) == null ? "" : appointment.Employee.FirstName,
                         EndAt = Convert.ToDateTime(appointment.End),
                         StartAt = Convert.ToDateTime(appointment.Start),
-                        EventID = ++i,
+                        EventID = new Guid(appointment.Id),
                         IsFullDay = false,
                         Title = appointment.Service.Name
                     });
 
                 }
-
-                
-                //var jsondata = JsonConvert.SerializeObject(ListofAppointment);
-
-                //return jsondata;
-
             }
             catch (Exception e)
             {

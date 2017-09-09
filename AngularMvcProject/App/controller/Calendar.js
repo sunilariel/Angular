@@ -36,6 +36,7 @@
             angular.forEach(data.data, function (value) {
                 $scope.events.push({
                     title: value.Title,
+                    id: value.EventID,
                     description: value.Description,
                     start: new Date(parseInt(value.StartAt.substr(6))),
                     end: new Date(parseInt(value.EndAt.substr(6))),
