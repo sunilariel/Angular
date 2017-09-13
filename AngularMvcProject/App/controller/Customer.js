@@ -55,6 +55,9 @@
     $scope.RedirecttoStaff = function () {
         $location.path("/Setting/" + $routeParams.CompanyId);
     }
+    $scope.RedirecttoReport = function () {
+        $location.path("/BuisnessReports/" + $routeParams.CompanyId);
+    }
     $scope.Logout = function () {
         $rootScope.IsLoggedInUser = false;
         var apirequest = bookingService.SignOut();
@@ -449,6 +452,7 @@
 
                         }
                     }
+                    $scope.timeoption = $scope.timeInfoFrom[0];
                 }
                 $scope.timeslotsloading = false;
             });
@@ -729,11 +733,13 @@
 
     $scope.GetAppointmentDetails = function (Id) {
         debugger;
-         $scope.SelectedMonth = "All";
+        $scope.SelectedMonth = "All";
+        $scope.AppointmentsLoader = true;
         var result = bookingService.GetAppointmentDetails(Id);
         result.then(function (response) {
             $scope.ListofAppointments = [];
             $scope.ListofAppointments = response.data;
+            $scope.AppointmentsLoader = false;
            // $scope.AllAppointmentYears = [];
             // $scope.AllAppointmentMonths = [];
             $scope.TotalCost = 0;

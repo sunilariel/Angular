@@ -23,7 +23,9 @@
     {
         $location.path("/Services/" + $routeParams.CompanyId);
     }
-
+    $scope.RedirecttoReport = function () {
+        $location.path("/BuisnessReports/" + $routeParams.CompanyId);
+    }
     $scope.init = function () {
         debugger;
       

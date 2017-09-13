@@ -773,7 +773,43 @@ app.service("bookingService", function ($http, $window) {
             data: { CustomerId: customerId }
         })
         return response;
-    }    
+    }
+
+    //Report Section//
+
+    this.GetBusinessReport=function(companyId,startDate,endDate)
+    {
+        debugger;
+        var response = $http({
+            method: "POST",
+            url: "/Report/GetBusinessReport",
+            headers: GetHeader(),
+            data: { CompanyId: companyId, StartDate: startDate, EndDate: endDate }
+        })
+        return response;
+    }
+
+    this.GetResourceReportsBetweenDates = function (companyId, employeeIdArray, startDate, endDate) {
+        debugger;
+      var response=  $http({
+            method: "POST",
+            url: "/Report/GetResourceReportsBetweenDates",
+            headers: GetHeader(),
+            data: { CompanyId: companyId, EmployeeIdArray: employeeIdArray,StartDate: startDate,EndDate: endDate },
+      })
+      return response;
+    }
+
+    this.GetServiceReportsBetweenDates = function (companyId, employeeIdsString, startDate, endDate) {
+        debugger;
+        var response = $http({
+            method: "POST",
+            url: "/Report/GetServiceReportsBetweenDates",
+            headers: GetHeader(),
+            data: { CompanyId: companyId, commaSeperatedServiceIds: employeeIdsString, StartDate: startDate, EndDate: endDate },
+        })
+        return response;
+    }
 })
 
 

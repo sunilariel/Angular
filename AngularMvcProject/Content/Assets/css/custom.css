@@ -4242,6 +4242,289 @@ div#pie svg.dxc.dxc-chart {
     padding: 10px;
 }
 
+/*12 Sep Reports secion css*/
+
+
+a, a:hover {
+	text-decoration: none;
+	transition:ease-in-out .5s;
+}
+a:focus {
+	outline: 0px !important;
+	text-decoration: none;
+}
+
+img {
+	max-width: 100%;
+}
+/* ============================== */
+.time_frame{
+	text-align:right;	
+}
+.time_frame label {
+    padding: 5px 18px;
+    vertical-align: middle;
+	display: inline-block;
+    font-size: 14px;
+}
+.gre_bg {
+       background: #fbfbfb;
+    border-radius: 3px;
+    box-shadow: 1px 1px 1px rgba(23, 23, 23, 0.28);
+}
+.time_frame, .buttons_sec{
+	padding:15px;
+}
+.buttons_sec a {
+    padding: 10px 15px;
+    color: #fff;
+    /*text-transform: lowercase;*/
+    font-weight: normal;
+    font-size: 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    background: #00BEB9;
+    text-align: center;
+    line-height: normal;
+    transition: all 0.5s ease;
+	 -webkit-transition: all 0.5s ease;
+	-moz-transition: all 0.5s ease;
+    border: 0;
+	margin-left:10px;
+	display:inline-block;
+}
+.buttons_sec a:hover{
+	background:#06d8d2;	
+}
+.margin_top20{
+	margin-top:20px;	
+}
+
+.right_tabcontent h3{
+ font-size: 25px;
+    color: #455862;
+    font-weight: 500;
+        margin: 20px 0 10px;
+
+}
+.business-card {
+     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.28);
+    border-radius: 4px;
+    padding: 17px;
+    margin-bottom: 10px;
+
+}
+.business-card label.card-label {
+    display: block;
+    font-size: 13px;
+	color: #999;
+}
+.business-card span.card-value {
+    font-size: 27px;
+    font-weight: bold;
+	    line-height: normal;
+		    color: #455862;
+}
+
+
+.tab_list ul li a {
+    display: block;
+    font-size: 16px;
+    padding: 10px 10px;
+    border-radius: 3px;
+    margin-bottom: 2px;
+    color: #c1c8cd ;
+	transition:ease-in-out .5s;
+}
+.tab_list ul li.active a , .tab_list ul li a:hover {
+    background:rgb(249, 249, 249);
+	color:#495861 ;
+}
+
+.tab_list ul li.active a:after{
+font-family: FontAwesome;
+    content: "\f0da";
+    float: right;
+    display: block;
+}
+
+.time_frame select {
+    padding: 5px;
+   min-width: 130px;
+    max-width: 190px;
+    border-color: #ccc;
+    border-radius: 3px;
+	font-size:15px;
+    background: #fff;
+}
+
+.business-card label.card-label a {
+    color: #555;
+}
+.table_1 table {
+	border-radius:5px;
+	overflow:hidden;	
+}
+.table_1 table tr th {
+    text-align: left;
+    line-height: 42px;
+    font-size: 16px;
+    color: #fff;
+       background: #00beb9;
+    cursor: pointer;
+    padding: 0 10px;
+    border-color: #00beb9;
+}
+.table_1 table tr td {
+    background: #F2F2F2;
+    border-right: 1px solid rgba(0,0,0,.05);
+    padding: 0 20px;
+    line-height: 58px;
+    font-size: 14px;
+    font-weight:normal;
+}
+.table_1 table tr td a {
+    text-decoration: underline;
+    font-weight: 700;
+	color:#455862;
+    font-size: 14px;
+}
+.time_frame label input {
+    margin-bottom: 0;
+    display: inline-block;
+    vertical-align: middle;
+    margin-top: 0;
+}
+.tab_list {
+    margin-top: 21px;
+}
+.inner_busscontent p a{
+	color:#00BEB9;
+}
+h4.resource_hd {
+    font-size: 18px;
+    margin: 10px 0;
+}
+
+/* sep-12-2017 css start here ================================= */
+.tab_section2 {
+    overflow-y: auto;
+    height: 91%;
+    width: 94%;
+    display: block !important;
+}
+/* sep-12-2017 css end here ================================= */
+
+/*     Sep-13 css start here     */
+.beetweenlabel {
+    font-weight: 400;
+    margin: 5px 20px;
+    padding: 0 5px 0 0;
+    float: left;
+    font-size: 17px;
+}
+
+.dateselect {
+    border: 1px solid #bababa;
+    background: #ffffff;
+    border-radius: 4px;
+    width: 120px;
+    display: block;
+    box-shadow: 0px 1px 2px rgba(0,0,0,0.2);
+    background: #ffffff;
+    height: 32px;
+    text-align: left;
+	float:left;
+	position:relative;
+}
+.dateselect:focus {
+	outline:0 !important;
+	box-shadow: 0px 1px 2px rgba(0,0,0,0.2);
+	    border-color: rgba(0,0,0,0.2);
+}
+.business-card .card-label .cursorhand {
+    padding: 0;
+    background: #fff;
+    margin: 0;
+}
+.reports .fa-line-chart:before {
+    font-size: 24px;
+}
+.business_carsec {
+    padding-bottom: 80px;
+}
+.inner_busscontent p .payment-link {
+    padding: 0;
+    background: transparent;
+    margin: 0;
+}
+.modal
+{
+    position: fixed;
+    z-index: 999;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    background-color: Black;
+    filter: alpha(opacity=60);
+    opacity: 0.6;
+    -moz-opacity: 0.8;
+}
+.center
+{
+    z-index: 1000;
+    margin: 265px auto;
+    padding: 10px;
+    width: 138px;
+    /*background-color: White;*/
+    border-radius: 10px;
+    filter: alpha(opacity=100);
+    opacity: 1;
+    -moz-opacity: 1;
+}
+.center img
+{
+    height: 93px;
+    width: 104px;
+}
+/*     Sep-13 css end here     */
+
+
+/* Sep-11-2017 media css start here ============================= */
+@media (max-width:767px){
+	.resources_div {
+		text-align: left;
+	}
+}
+
+@media (max-width:415px){
+	.time_frame label {
+		width: 49%;
+	}
+	.buttons_sec a:first-child {
+		margin: 0;
+	}
+	.buttons_sec a {
+		padding: 10px 10px;
+	}
+	.right_tabcontent h3 {
+		font-size: 20px;
+	}
+	.time_frame label.resources {
+		width: auto;
+		padding: 5px 13px;
+	}
+	span.time_frm {
+		margin-bottom: 5px;
+		display: inline-block;
+	}
+}
+/* Sep-11-2017 media css end here ============================= */
+
+
+
+/* -------------------------------*/
+
 /*  Sep-5 css end here ====================== */
 
 /* media css start here ================================= */

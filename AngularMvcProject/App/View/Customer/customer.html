@@ -166,7 +166,7 @@
                 <li class="side-nav-tooltip " id="settings_new" data-original-title="Settings" data-placement="right" data-toggle="tooltip">
                     <a ng-click="RedirecttoStaff()" data-toggle="tab" class="fa fa-cog"><small>Settings</small></a>
                 </li>
-
+                <li class="side-nav-tooltip reports" data-toggle="tooltip" data-original-title="Reports" data-placement="right"> <a class="fa fa-line-chart" ng-click="RedirecttoReport()"><small>Reports</small></a> </li>
 
                 <li class="side-nav-tooltip blue_icon" data-toggle="tooltip" data-original-title="Premium" data-placement="right"> <a class="setmore-icon-shield-alert" href="#"><small>Premium</small></a> </li>
             </ul>
@@ -507,7 +507,10 @@
                                             <div class="appointment_content">
                                                 <div class="appoint_text appoint_cust" ng-hide="CustomerCount==0" ng-click="AddAppointmentPopup()">
                                                     <button class="pull-right btn btn-circle appointment_btn" id="createnewstaffbtn" title="" data-toggle="modal" data-target="#squarespaceModal"><i class="fa fa-plus" aria-hidden="true"></i></button>
-                                                    <span>{{NumberofAppointmnets}} appointment & 0 class</span><span class="dottext">.</span><span> £{{TotalCost}}</span>                                                 
+                                                    <span>{{NumberofAppointmnets}} appointment & 0 class</span><span class="dottext">.</span><span> £{{TotalCost}}</span>
+                                                    <span style="width:104px;position:absolute;top:-17px;" ng-show="AppointmentsLoader">
+                                                        <img src="../Content/Assets/images/tenor.gif" />
+                                                    </span>                                                 
                                                 </div>
                                                 <div ng-if="NumberofAppointmnets==0">
                                                     <span> No records available! </span>

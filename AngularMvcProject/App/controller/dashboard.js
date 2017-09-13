@@ -63,6 +63,10 @@ app.controller('dashboardController', ['$scope', '$timeout', '$window', '$http',
         $location.path("/Setting/" + $routeParams.CompanyId);
     }
 
+    $scope.RedirecttoReport = function () {
+        $location.path("/BuisnessReports/" + $routeParams.CompanyId);
+    }
+
     $scope.addNewChoice = function (procedure) {
         debugger;
         $scope.IsVisible = true;
@@ -93,7 +97,8 @@ app.controller('dashboardController', ['$scope', '$timeout', '$window', '$http',
         $scope.showcustomer != $scope.showcustomer;
     };
 
-    $scope.init = function () {      
+    $scope.init = function () {
+        $scope.showdashboardloader = true;
         $scope.AppointmentSchedule = [];
         $scope.MessageText = "Fetching Data...";
         $scope.IsVisible = true;
@@ -120,6 +125,7 @@ app.controller('dashboardController', ['$scope', '$timeout', '$window', '$http',
              $scope.ListofWeekSchedule = [];
              $scope.ListofWeekSchedule = response.data;
              $scope.IsVisible = false;
+             $scope.showdashboardloader = false;
               })
             })
 
@@ -327,6 +333,7 @@ app.controller('dashboardController', ['$scope', '$timeout', '$window', '$http',
 
                         }
                     }
+                    $scope.timeoption = $scope.timeInfoFrom[0];
                 }
                 $scope.timeslotsloading = false;
             });

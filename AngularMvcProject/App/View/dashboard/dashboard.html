@@ -143,17 +143,20 @@
 
             <li class="side-nav-tooltip " id="settings_new" data-original-title="Settings" data-placement="right" data-toggle="tooltip">
                 <a ng-click="RedirecttoStaff()" data-toggle="tab" class="fa fa-cog"><small>Settings</small></a>
-
-
-
             </li>
 
+            <li class="side-nav-tooltip reports" data-toggle="tooltip" data-original-title="Reports" data-placement="right"> <a class="fa fa-line-chart" ng-click="RedirecttoReport()"><small>Reports</small></a> </li>
 
             <li class="side-nav-tooltip blue_icon" data-toggle="tooltip" data-original-title="Premium" data-placement="right"> <a class="setmore-icon-shield-alert" href="#"><small>Premium</small></a> </li>
         </ul>
     </div>
     <div class="right_section" id="dashboard">
-
+        <div class="modal" ng-if="showdashboardloader">
+            <div class="center">
+                <img src="/Content/Assets/images/loader.gif" />
+                
+            </div>
+        </div>
         <div id="" class="tab-content full-height">
             <div class="tab-pane full-height active" id="staff">
                 <div class="dashboardStatus">

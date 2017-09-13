@@ -33,6 +33,22 @@ app.config(function ($routeProvider) {
         templateUrl: "App/View/SignUp/SignIn.html",
         controller: "SignIn"
     })
+    .when("/BuisnessReports/:CompanyId", {
+        templateUrl: "App/View/Reports/BuisnessReports.html",
+        controller: "BuisnessReportsController"
+    })
+    .when("/ResourceReports/:CompanyId", {
+        templateUrl: "App/View/Reports/ResourceReports.html",
+        controller:"ResourceReportsController"
+    })
+    .when("/ServiceReports/:CompanyId", {
+        templateUrl: "App/View/Reports/ServiceReports.html",
+        controller: "ServiceReportsController"
+    })
+    .when("/CustomerReports/:CompanyId", {
+        templateUrl: "App/View/Reports/CustomerReports.html",
+        controller: "CustomerReportsController"
+    })
 })
 //.run(function ($rootScope, $location) {
 //    // register listener to watch route changes
