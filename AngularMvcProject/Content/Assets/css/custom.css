@@ -164,6 +164,7 @@ li.upgrade_btn a:hover {
     padding: 18px 0px;
     text-align: center;
 	font-weight:500;
+    font-family: 'Montserrat', sans-serif;
 }
 .tabs_section {
     background: #E1E7EB;
@@ -200,6 +201,9 @@ li.upgrade_btn a:hover {
 	    display: table-cell;	
 		/*width:100%;*/
 		
+}
+.business_carsec > div {
+      display: table-cell;	
 }
 div#settingsTabContent {
     background: #f1f5f7;

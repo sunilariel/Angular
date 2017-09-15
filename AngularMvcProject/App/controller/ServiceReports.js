@@ -31,6 +31,8 @@
 
     $scope.GetTimeFrame = function (TimeFrame) {
         debugger;
+        var ReportCount=false;
+        $scope.ServiceReportsloader = true;
         if (TimeFrame == "today") {
             $scope.ServiceTimeFrame = false;
             var firstDay = new Date();
@@ -64,31 +66,58 @@
         $scope.EndDate = lastDay;
 
         $scope.ServiceReport = [];
-        var apirequest = bookingService.getServicesData($routeParams.CompanyId);
-        $scope.Services = "";
-        apirequest.then(function (response) {
-            angular.forEach(response.data, function (value, key) {
-                $scope.Services = value.Id + "," + $scope.Services;
-            })
-            $scope.commaSeperatedServiceIds = $scope.Services.substring(0, $scope.Services.length - 1)
 
-            var apireportrequest = bookingService.GetServiceReportsBetweenDates($routeParams.CompanyId, $scope.commaSeperatedServiceIds, firstDay, lastDay);
-            apireportrequest.then(function (response) {
+        if ($scope.allservicechecked == true) {
+            var apirequest = bookingService.getServicesData($routeParams.CompanyId);
+            $scope.Services = "";
+            apirequest.then(function (response) {
                 angular.forEach(response.data, function (value, key) {
-                    $scope.ServiceReport.push({ "Service": "Wasing Hair", "Category": "General", "Booking": value.TotalBookings, "Revenue": value.TotalConfirmedRevenue, "Cancellations": value.TotalCancellations, "CancellationRate": value.PerntageOfTotalCancellations });
+                    $scope.Services = value.Id + "," + $scope.Services;
                 })
+                $scope.commaSeperatedServiceIds = $scope.Services.substring(0, $scope.Services.length - 1)
+
+                var apireportrequest = bookingService.GetServiceReportsBetweenDates($routeParams.CompanyId, $scope.commaSeperatedServiceIds, firstDay, lastDay);
+                apireportrequest.then(function (response) {
+                   
+                  
+                    angular.forEach(response.data, function (value, key) {
+                        ReportCount=true;
+                        $scope.ServiceReport.push({ "Service": value.ServiceName, "Category": value.CategoryName, "Booking": value.TotalBookings, "Revenue": "£"+value.TotalConfirmedRevenue, "Cancellations": value.TotalCancellations, "CancellationRate": value.PerntageOfTotalCancellations +"%" });
+                        $scope.ServiceReportsloader = false;
+                    })
+                    if (ReportCount==false) {
+                        $scope.ServiceReport.push({ "Service": "", "Category": "", "Booking": "", "Revenue": "No Records to display", "Cancellations": "", "CancellationRate": "" });
+                        $scope.ServiceReportsloader = false;
+                    }
+                })
+
             })
 
-        })
-
-
+        }
+        else {
+            var apireportrequest = bookingService.GetServiceReportsBetweenDates($routeParams.CompanyId, $scope.SelectedService, firstDay, lastDay);
+            apireportrequest.then(function (response) {               
+                angular.forEach(response.data, function (value, key) {
+                    ReportCount = true;
+                    $scope.ServiceReport.push({ "Service": value.ServiceName, "Category": value.CategoryName, "Booking": value.TotalBookings, "Revenue": "£" + value.TotalConfirmedRevenue, "Cancellations": value.TotalCancellations, "CancellationRate": value.PerntageOfTotalCancellations + "%" });
+                    $scope.ServiceReportsloader = false;
+                })
+                if (ReportCount == false) {
+                    $scope.ServiceReport.push({ "Service": "", "Category": "", "Booking": "", "Revenue": "No Records to display", "Cancellations": "", "CancellationRate": "" });
+                    $scope.ServiceReportsloader = false;
+                }
+            })
+        }
     }
 
     $scope.init = function () {
         debugger;
+        var ReportCount = 0;
+        $scope.ServiceReportsloader = true;
         $scope.ServiceTimeFrame = false;
+        $scope.allservicechecked = false;
         $scope.Months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-        $scope.Years = ["2000", "2001", "2002", "2003", "2004", "2005", "2006", "2007", "2008", "2009", "2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017"];
+        $scope.Years = ["2005", "2006", "2007", "2008", "2009", "2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020", "2021", "2022"];
         $scope.Date = [];
         for (var i = 1; i <= 31; i++) {
             $scope.Date.push(i);
@@ -97,7 +126,8 @@
         $scope.time = "thismonth";      
         var date = new Date();
         $scope.Services = "";
-        $scope.ServiceReport = []; 
+        $scope.ServiceReport = [];
+        $scope.ListofServices = [];
         var firstDay = new Date(date.getFullYear(), date.getMonth(), 1);
         var lastDay = new Date(date.getFullYear(), date.getMonth() + 1, 0);
 
@@ -113,28 +143,35 @@
         $scope.SelectedEndDate = (date.getDate() + 15).toString();
 
 
-
-
+               
         var apirequest=bookingService.getServicesData($routeParams.CompanyId);
         apirequest.then(function(response){
-            angular.forEach(response.data,function(value,key){
-                $scope.Services=value.Id + "," + $scope.Services;
+            angular.forEach(response.data, function (value, key) {
+                $scope.ListofServices.push({ "Id": value.Id, "Service": value.Name });                            
             })
-            $scope.commaSeperatedServiceIds = $scope.Services.substring(0, $scope.Services.length - 1)
-
-            var apireportrequest = bookingService.GetServiceReportsBetweenDates($routeParams.CompanyId, $scope.commaSeperatedServiceIds, firstDay, lastDay);
-            apireportrequest.then(function (response) {
-                angular.forEach(response.data, function (value, key) {
-                    $scope.ServiceReport.push({ "Service": "Wasing Hair", "Category": "General", "Booking": value.TotalBookings, "Revenue": value.TotalConfirmedRevenue, "Cancellations": value.TotalCancellations, "CancellationRate": value.PerntageOfTotalCancellations });
-                })               
+            $scope.SelectedService = response.data[0].Id.toString();
+       
+        $scope.ServiceReport = [];
+        var apireportrequest = bookingService.GetServiceReportsBetweenDates($routeParams.CompanyId, $scope.SelectedService, firstDay, lastDay);
+        apireportrequest.then(function (response) {           
+            angular.forEach(response.data, function (value, key) {
+                ReportCount = true;
+                $scope.ServiceReport.push({ "Service": value.ServiceName, "Category": value.CategoryName, "Booking": value.TotalBookings, "Revenue": "£" + value.TotalConfirmedRevenue, "Cancellations": value.TotalCancellations, "CancellationRate": value.PerntageOfTotalCancellations + "%" });
+                $scope.ServiceReportsloader = false;
             })
-
-        })      
+            if (ReportCount == false) {
+                $scope.ServiceReport.push({ "Service": "", "Category": "", "Booking": "", "Revenue": "No Records to display", "Cancellations": "", "CancellationRate": "" });
+                $scope.ServiceReportsloader = false;
+            }
+        })
+    })      
     }
 
     $scope.GetTimeFrameReports = function () {
         debugger;
-        $scope.BookingReport = [];
+        var ReportCount = false;
+        $scope.ServiceReportsloader = true;
+        $scope.ServiceReport = [];
 
         var firstDay = new Date(parseInt($scope.SelectedStartYear), $scope.Months.indexOf($scope.SelectedStartMonth), parseInt($scope.SelectedStartDate));
         var lastDay = new Date(parseInt($scope.SelectedEndYear), $scope.Months.indexOf($scope.SelectedEndMonth), parseInt($scope.SelectedEndDate));
@@ -149,13 +186,89 @@
             $scope.commaSeperatedServiceIds = $scope.Services.substring(0, $scope.Services.length - 1)
 
             var apireportrequest = bookingService.GetServiceReportsBetweenDates($routeParams.CompanyId, $scope.commaSeperatedServiceIds, firstDay, lastDay);
-            apireportrequest.then(function (response) {
+            apireportrequest.then(function (response) {              
                 angular.forEach(response.data, function (value, key) {
-                    $scope.ServiceReport.push({ "Service": "Wasing Hair", "Category": "General", "Booking": value.TotalBookings, "Revenue": value.TotalConfirmedRevenue, "Cancellations": value.TotalCancellations, "CancellationRate": value.PerntageOfTotalCancellations });
+                    ReportCount = true;
+                    $scope.ServiceReport.push({ "Service": value.ServiceName, "Category": value.CategoryName, "Booking": value.TotalBookings, "Revenue": "£" + value.TotalConfirmedRevenue, "Cancellations": value.TotalCancellations, "CancellationRate": value.PerntageOfTotalCancellations + "%" });
+                    $scope.ServiceReportsloader = false;
                 })
+                if (ReportCount == false) {
+                    $scope.ServiceReport.push({ "Service": "", "Category": "", "Booking": "", "Revenue": "No Records to display", "Cancellations": "", "CancellationRate": "" });
+                    $scope.ServiceReportsloader = false;
+                }
             })
 
         })
     }
+
+    $scope.GetAllServicesReport=function(checked)
+    {
+        debugger;
+        var ReportCount = false;
+        $scope.allservicechecked = true;
+        $scope.ServiceReportsloader = true;
+        $scope.ServiceReport = [];
+        if(checked==true)
+        {
+            var apirequest=bookingService.getServicesData($routeParams.CompanyId);
+            apirequest.then(function (response) {
+                angular.forEach(response.data, function (value, key) {
+                    $scope.Services = value.Id + "," + $scope.Services;
+                })
+            
+                $scope.commaSeperatedServiceIds = $scope.Services.substring(0, $scope.Services.length - 1)
+
+                var apireportrequest = bookingService.GetServiceReportsBetweenDates($routeParams.CompanyId, $scope.commaSeperatedServiceIds, $scope.StartDate, $scope.EndDate);
+                apireportrequest.then(function (response) {
+                  
+                    angular.forEach(response.data, function (value, key) {
+                        ReportCount = true;
+                        $scope.ServiceReport.push({ "Service": value.ServiceName, "Category": value.CategoryName, "Booking": value.TotalBookings, "Revenue": "£" + value.TotalConfirmedRevenue, "Cancellations": value.TotalCancellations, "CancellationRate": value.PerntageOfTotalCancellations + "%" });
+                        $scope.ServiceReportsloader=false;
+                    })
+                    if (ReportCount == false) {
+                        $scope.ServiceReport.push({ "Service": "", "Category": "", "Booking": "", "Revenue": "No Records to display", "Cancellations": "", "CancellationRate": "" });
+                        $scope.ServiceReportsloader = false;
+                    }
+                })
+            })
+        }
+        else {
+            $scope.allservicechecked = false;
+            var apireportrequest = bookingService.GetServiceReportsBetweenDates($routeParams.CompanyId, $scope.SelectedService, $scope.StartDate, $scope.EndDate);
+            apireportrequest.then(function (response) {
+                
+                angular.forEach(response.data, function (value, key) {
+                    ReportCount = true;
+                    $scope.ServiceReport.push({ "Service": value.ServiceName, "Category": value.CategoryName, "Booking": value.TotalBookings, "Revenue": "£" + value.TotalConfirmedRevenue, "Cancellations": value.TotalCancellations, "CancellationRate": value.PerntageOfTotalCancellations + "%" });
+                    $scope.ServiceReportsloader = false;
+                })
+                if (ReportCount == false) {
+                    $scope.ServiceReport.push({ "Service": "", "Category": "", "Booking": "", "Revenue": "No Records to display", "Cancellations": "", "CancellationRate": "" });
+                    $scope.ServiceReportsloader = false;
+                }
+            })
+        }
+    }
+
+    $scope.ServiceChange = function (Id) {
+        debugger;
+        var ReportCount = false;
+        $scope.ServiceReportsloader = true;
+        $scope.ServiceReport = [];
+        var apireportrequest = bookingService.GetServiceReportsBetweenDates($routeParams.CompanyId, Id, $scope.StartDate, $scope.EndDate);
+        apireportrequest.then(function (response) {           
+            angular.forEach(response.data, function (value, key) {
+                ReportCount = true;
+                    $scope.ServiceReport.push({ "Service": value.ServiceName, "Category": value.CategoryName, "Booking": value.TotalBookings, "Revenue": "£"+value.TotalConfirmedRevenue, "Cancellations": value.TotalCancellations, "CancellationRate": value.PerntageOfTotalCancellations +"%" });
+                    $scope.ServiceReportsloader = false;
+                })
+                if (ReportCount == false) {
+                    $scope.ServiceReport.push({ "Service": "", "Category": "", "Booking": "", "Revenue": "No Records to display", "Cancellations": "", "CancellationRate": "" });
+                    $scope.ServiceReportsloader = false;
+                }
+            })
+    }
+
 
 }])

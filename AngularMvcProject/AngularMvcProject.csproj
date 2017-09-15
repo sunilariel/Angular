@@ -235,7 +235,9 @@
     <Content Include="Content\Assets\css\trix.css" />
     <Content Include="Content\Assets\images\drag-drop-bg.png" />
     <Content Include="Content\Assets\images\glyphicons-halflings.png" />
+    <Content Include="Content\Assets\images\ImpoliteLivelyGenet13.gif" />
     <Content Include="Content\Assets\images\loader.gif" />
+    <Content Include="Content\Assets\images\loading %281%29.gif" />
     <Content Include="Content\Assets\images\loading.gif" />
     <Content Include="Content\Assets\images\service-icon-big.png" />
     <Content Include="Content\Assets\images\tenor.gif" />

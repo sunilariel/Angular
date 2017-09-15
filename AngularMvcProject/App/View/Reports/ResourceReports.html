@@ -42,7 +42,7 @@
 
     <header class="top">
         <div class="logo_section"> <a class="logo" href="#"></a><img src="../Content/Assets/images/logo.png" alt="Logo"></a> </div>
-        <h1>Customers</h1>
+        <h1>Reports</h1>
 
         <div class="pull-right movileViewList">
             <ul class="nav navbar-nav navbar-right ">
@@ -192,10 +192,38 @@
         </ul>
     </div>
     <div class="right_section" id="settings">
+        <div class="tabs_section" style="width: 100px;">
+            <ul class="nav nav-tab nav-stacked">
+                <li>
+                    <a ng-click="RedirecttoBuisnessReport()" title="Business" data-toggle="tab" class="cursorhand">
+                        <i class="setmore-icon-equalizer nav-icon-fsize"></i><br>
+                        BUISNESS
+                    </a>
+                </li>
+                <li class="active">
+                    <a ng-click="RedirecttoResourceReport()" title="Resource" class="cursorhand" data-toggle="tab">
+                        <i class="setmore-icon-users2 nav-icon-fsize"></i><br>
+                        RESOURCE
+                    </a>
+                </li>
+                <li>
+                    <a ng-click="RedirecttoServiceReport()" title="Service" class="cursorhand" data-toggle="tab">
+                        <i class="setmore-icon-truck nav-icon-fsize"></i><br>
+                        SERVICE
+                    </a>
+                </li>
+                <li id="paymentMainTab" style="">
+                    <a ng-click="RedirecttoCustomerReport()" title="Customer" data-toggle="tab" class="cursorhand">
+                        <i class="setmore-icon-cashier nav-icon-fsize"></i><br>
+                        CUSTOMER
+                    </a>
+                </li>
+            </ul>
+        </div>
         <div class="tab_section tab_section2">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-sm-3 col-md-2">
+                    <!--<div class="col-sm-3 col-md-2">
                         <div class="tab_list">
                             <ul class="list-unstyled">
                                 <li> <a ng-click="RedirecttoBuisnessReport()" class="cursorhand" title="Business"> Business </a> </li>
@@ -204,8 +232,8 @@
                                 <li> <a ng-click="RedirecttoCustomerReport()" class="cursorhand" title="Customer"> Customer </a> </li>
                             </ul>
                         </div>
-                    </div>
-                    <div class="col-sm-9 col-md-10">
+                    </div>-->
+                    <div class="col-sm-9 col-md-12" >
                         <div class="right_tabcontent">
                             <div class="business_content">
                                 <h3> Resource Report </h3>
@@ -308,7 +336,7 @@
                                             </div>
                                         </div>
                                     <a ng-csv="ResourceReport" csv-label="true" filename="ResourceReports.csv"> <i class="fa fa-cloud-download" aria-hidden="true"></i> Download as CSV </a>
-                                    <a ng-csv="ResourceReport" csv-label="true" filename="BuisnessReports.csv"> Show Results </a>
+                                    <!--<a ng-csv="ResourceReport" csv-label="true" filename="BuisnessReports.csv"> Show Results </a>-->
                                     <div class="clearfix"></div>
                                 </div>
                                 <div class="inner_busscontent">
@@ -324,7 +352,7 @@
                                                 <thead>
                                                     <tr>
                                                         <th ng-click="sortType='Bookings'; sortReverse = !sortReverse">Resource <i class="table-sort fa fa-sort" aria-hidden="true"></i></th>
-                                                        <th>  Bookings <i class="table-sort fa fa-sort" aria-hidden="true"></i></th>
+                                                        <th> Bookings <i class="table-sort fa fa-sort" aria-hidden="true"></i></th>
                                                         <th>  Revenue <i class="table-sort fa fa-sort" aria-hidden="true"></i></th>
                                                         <th> Duration (Hours) <i class="table-sort fa fa-sort" aria-hidden="true"></i> </th>
                                                         <th> Cancellations <i class="table-sort fa fa-sort" aria-hidden="true"></i> </th>
@@ -333,14 +361,25 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    <tr ng-repeat="item in ResourceReport | orderBy:sortType:sortReverse ">
-                                                        <td><a target="_blank" href="#">Tester Ariel</a><a></a></td>
+                                                    <!--<tr ng-repeat="item in ResourceReport | orderBy:sortType:sortReverse">-->
+                                                    <tr ng-repeat="item in ResourceReport">
+                                                        <td>{{item.Resource}}</td>
                                                         <td>{{item.Bookings}}</td>
-                                                        <td>${{item.Revenue}}</td>
+                                                        <td>{{item.Revenue}}</td>
                                                         <td>{{item.Duration}}</td>
                                                         <td>{{item.Cancellations}}</td>
-                                                        <td>{{item.CancellationRate}}%</td>
+                                                        <td>{{item.CancellationRate}}</td>
                                                         <td>{{item.Tasks}}</td>
+                                                    </tr>
+                                                    
+                                                    <tr ng-if="ResourcerReportsloader">
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td><img src="/Content/Assets/images/ImpoliteLivelyGenet13.gif" /></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
                                                     </tr>
                                                 </tbody>
                                             </table>

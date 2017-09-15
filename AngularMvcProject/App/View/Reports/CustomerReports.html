@@ -42,7 +42,7 @@
 
     <header class="top">
         <div class="logo_section"> <a class="logo" href="#"></a><img src="../Content/Assets/images/logo.png" alt="Logo"></a> </div>
-        <h1>Customers</h1>
+        <h1>Reports</h1>
 
         <div class="pull-right movileViewList">
             <ul class="nav navbar-nav navbar-right ">
@@ -190,11 +190,40 @@
         </ul>
     </div>
     <div class="right_section" id="settings">
-        <div ng-controller="CustomerReportsController">
-            <div class="tab_section tab_section2">
+        <div class="tabs_section" style="width: 100px;">
+            <ul class="nav nav-tab nav-stacked">
+                <li>
+                    <a ng-click="RedirecttoBuisnessReport()" title="Business" data-toggle="tab" class="cursorhand">
+                        <i class="setmore-icon-equalizer nav-icon-fsize"></i><br>
+                        BUISNESS
+                    </a>
+                </li>
+                <li >
+                    <a ng-click="RedirecttoResourceReport()" title="Resource" class="cursorhand"  data-toggle="tab">
+                        <i class="setmore-icon-users2 nav-icon-fsize"></i><br>
+                        RESOURCE
+                    </a>
+                </li>
+                <li>
+                    <a ng-click="RedirecttoServiceReport()" title="Service" class="cursorhand" data-toggle="tab">
+                        <i class="setmore-icon-truck nav-icon-fsize"></i><br>
+                        SERVICE
+                    </a>
+                </li>
+                <li class="active" id="paymentMainTab" style="">
+                    <a ng-click="RedirecttoCustomerReport()" title="Customer" data-toggle="tab" class="cursorhand">
+                        <i class="setmore-icon-cashier nav-icon-fsize"></i><br>
+                        CUSTOMER
+                    </a>
+                </li>
+              
+            </ul>
+        </div>
+        <div ng-controller="CustomerReportsController" ng-init="init()">
+            <div class="tab_section tab_section2" >
                 <div class="container-fluid">
                     <div class="row">
-                        <div class="col-sm-3 col-md-2">
+                        <!--<div class="col-sm-3 col-md-2">
                             <div class="tab_list">
                                 <ul class="list-unstyled">
                                     <li> <a ng-click="RedirecttoBuisnessReport()" class="cursorhand" title="Business"> Business </a> </li>
@@ -203,8 +232,8 @@
                                     <li class="active"> <a ng-click="RedirecttoCustomerReport()" class="cursorhand" title="Customer"> Customer </a> </li>
                                 </ul>
                             </div>
-                        </div>
-                        <div class="col-sm-9 col-md-10">
+                        </div>-->
+                        <div class="col-sm-9 col-md-12" >
                             <div class="right_tabcontent">
                                 <div class="business_content">
                                     <h3> Top 25 Customers Report </h3>
@@ -217,29 +246,24 @@
                                             <div class="col-sm-8 text-right">
                                                 <label class="all" for="timeframe_today">
                                                     Today
-                                                    <input type="radio" name="timeframe" value="today" id="">
+                                                    <input type="radio" name="timeframe" value="today" ng-model="time" ng-click="GetTimeFrame(time)" id="timeframe_today">
                                                 </label>
-                                                <label class="all" for="timeframe_custom">
-                                                    Custom
-                                                    <input type="radio" name="timeframe" value="custom" id="">
-                                                </label>
-                                                <label class="all" for="timeframe_custom">
-                                                    Custom
-                                                    <input type="radio" name="timeframe" value="custom" id="">
-                                                </label>
-
                                                 <label class="all" for="timeframe_thisweek">
                                                     This Week
-                                                    <input type="radio" name="timeframe" value="thisweek" id="">
+                                                    <input type="radio" name="timeframe" value="thisweek" ng-model="time" ng-click="GetTimeFrame(time)" id="timeframe_thisweek">
                                                 </label>
 
                                                 <label class="all" for="timeframe_thismonth">
                                                     This Month
-                                                    <input type="radio" name="timeframe" value="thismonth" id="" checked="checked">
+                                                    <input type="radio" name="timeframe" value="thismonth" ng-model="time" ng-click="GetTimeFrame(time)" id="timeframe_thismonth" checked="checked">
                                                 </label>
                                                 <label class="all" for="timeframe_thisyear">
                                                     This Year
-                                                    <input type="radio" name="timeframe" value="thisyear" id="">
+                                                    <input type="radio" name="timeframe" value="thisyear" ng-model="time" ng-click="GetTimeFrame(time)" id="timeframe_thisyear">
+                                                </label>
+                                                <label class="all" for="timeframe_custom">
+                                                    Custom
+                                                    <input type="radio" name="timeframe" value="custom" ng-model="time" ng-click="GetTimeFrame(time)" id="timeframe_custom">
                                                 </label>
                                             </div>
                                         </div>
@@ -247,7 +271,7 @@
                                         <div class="clearfix"></div>
                                     </div>
                                     <div class="gre_bg buttons_sec text-right margin_top20">
-                                        <div class="row">
+                                        <div class="row" ng-show="CustomerReportTimeFrame">
                                             <div class="col-md-6">
                                                 <div class="betweenDateDiv">
                                                     <label class="beetweenlabel">Between:</label>
@@ -257,12 +281,12 @@
                                                         </select>
                                                     </div>
                                                     <div class="dateBtnDiv">
-                                                        <select class="form-control dateselect" ng-model="SMonth" ng-change="GetTimeFrameReports()">
+                                                        <select class="form-control dateselect" ng-model="SelectedStartMonth" ng-change="GetTimeFrameReports()">
                                                             <option ng-repeat="item in Months" >{{item}}</option>                                                        
                                                         </select>
                                                     </div>
                                                     <div class="dateBtnDiv">
-                                                        <select class="form-control dateselect" ng-model="SYear" ng-change="GetTimeFrameReports()">
+                                                        <select class="form-control dateselect" ng-model="SelectedStartYear" ng-change="GetTimeFrameReports()">
                                                             <option ng-repeat="item in Years" >{{item}}</option>                                                       
                                                         </select>
                                                     </div>
@@ -290,12 +314,12 @@
                                             </div>
                                         </div>
                                         <a href="#" title=""> <i class="fa fa-cloud-download" aria-hidden="true"></i> Download as CSV </a>
-                                        <a href="#" title=""> Show Results </a>
+                                        <!--<a href="#" title=""> Show Results </a>-->
                                         <div class="clearfix"></div>
                                     </div>
                                     <div class="inner_busscontent">
                                         <h3>
-                                            Showing data for 1st September 2017 to 9th September 2017
+                                            Showing data for {{StartDate | date:"dd MMM yyyy" }} to {{EndDate | date:"dd MMM yyyy"}}
 
                                         </h3>
                                         <div class="customer_table">

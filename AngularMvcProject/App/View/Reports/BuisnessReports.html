@@ -37,7 +37,7 @@
 
     <header class="top">
         <div class="logo_section"> <a class="logo" href="#"></a><img src="../Content/Assets/images/logo.png" alt="Logo"></a> </div>
-        <h1>Customers</h1>
+        <h1>Reports</h1>
 
         <div class="pull-right movileViewList">
             <ul class="nav navbar-nav navbar-right ">
@@ -187,11 +187,40 @@
         </ul>
     </div>
     <div class="right_section" id="settings">
+        <div class="tabs_section" style="width: 100px;">
+            <ul class="nav nav-tab nav-stacked">
+                <li class="active">
+                    <a ng-click="RedirecttoBuisnessReport()" title="Business" data-toggle="tab" class="cursorhand">
+                        <i class="setmore-icon-equalizer nav-icon-fsize"></i><br>
+                        BUISNESS
+                    </a>
+                </li>
+                <li >
+                    <a ng-click="RedirecttoResourceReport()" title="Resource" class="cursorhand" data-toggle="tab">
+                        <i class="setmore-icon-users2 nav-icon-fsize"></i><br>
+                        RESOURCE
+                    </a>
+                </li>
+                <li>
+                    <a ng-click="RedirecttoServiceReport()" title="Service" class="cursorhand" data-toggle="tab">
+                        <i class="setmore-icon-truck nav-icon-fsize"></i><br>
+                        SERVICE
+                    </a>
+                </li>
+                <li id="paymentMainTab" style="">
+                    <a ng-click="RedirecttoCustomerReport()" title="Customer" data-toggle="tab" class="cursorhand">
+                        <i class="setmore-icon-cashier nav-icon-fsize"></i><br>
+                        CUSTOMER
+                    </a>
+                </li>
+
+            </ul>
+        </div>
         <div ng-controller="BuisnessReportsController" ng-init="init()">
             <div class="tab_section tab_section2">
                 <div class="container-fluid">
                     <div class="row">
-                        <div class="col-sm-3 col-md-2">
+                        <!--<div class="col-sm-3 col-md-2">
                             <div class="tab_list">
                                 <ul class="list-unstyled">
                                     <li class="active"> <a ng-click="RedirecttoBuisnessReport()" class="cursorhand" title="Business"> Business </a> </li>
@@ -200,8 +229,8 @@
                                     <li> <a ng-click="RedirecttoCustomerReport()" class="cursorhand" title="Customer"> Customer </a> </li>
                                 </ul>
                             </div>
-                        </div>
-                        <div class="col-sm-9 col-md-10">
+                        </div>-->
+                        <div class="col-sm-9 col-md-12">
                             <div class="right_tabcontent">
                                 <div class="business_content">
                                     <h3> Business Report </h3>
@@ -279,7 +308,7 @@
                                         <!--//////////////////////////////////-->
                                         <div class="gre_bg buttons_sec text-right margin_top20">
                                             <a title="" ng-csv="BookingReport" csv-label="true" filename="BuisnessReports.csv"> <i class="fa fa-cloud-download" aria-hidden="true"></i> Download as CSV </a>
-                                            <a ng-csv="BookingReport" csv-label="true" filename="BuisnessReports.csv"> Show Results </a>
+                                            <!--<a ng-csv="BookingReport" csv-label="true" filename="BuisnessReports.csv"> Show Results </a>-->
                                             <div class="clearfix"></div>
                                         </div>
                                         <div class="inner_busscontent">
@@ -292,7 +321,13 @@
                                             <p>
                                             <p>This report shows the total value of the bookings in your Appointedd calendars. <a class="payment-link" target="_blank" href="#">Click here </a> for full payment history.</p>
                                             </p>
-                                            <div class="business_carsec">
+                                            <div class="business_carsec" >
+                                                <div class="modal" ng-if="BuisnessReportLoader" >
+                                                    <div class="center">
+                                                        <img src="/Content/Assets/images/loader.gif" />
+
+                                                    </div>
+                                                </div>
                                                 <div class="row">
                                                     <div class="col-sm-6">
                                                         <div class="business-card">

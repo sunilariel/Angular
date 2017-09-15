@@ -700,6 +700,7 @@
                         apigetrequest.then(function (response) {
                             $scope.CustomerNotesDetail = [];
                             $scope.CustomerNotesDetail = response.data;
+                            $scope.trix = "";
                         })
                     }, 1000)
                 }, 800)

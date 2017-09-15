@@ -36,9 +36,10 @@
 
     $scope.init = function () {
         debugger;
+        $scope.BuisnessReportLoader = true;
         $scope.BookingReport = [];
         $scope.Months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-        $scope.Years = ["2000", "2001", "2002", "2003", "2004", "2005", "2006", "2007", "2008", "2009", "2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017"];
+        $scope.Years = ["2005", "2006", "2007", "2008", "2009", "2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020", "2021", "2022"];
         $scope.Date = [];
         for (var i = 1; i <= 31; i++) {
             $scope.Date.push(i);
@@ -71,11 +72,13 @@
             $scope.TotalEmailSent = response.data.TotalEmailSent;
             $scope.TotalMessagesSent = response.data.TotalMessagesSent;
             $scope.BookingReport.push({ "TotalBookings": response.data.TotalBookings, "TotalRevenue": response.data.TotalRevenue, "TotalCancellations": response.data.TotalCancellations, "TotalBookingMadeExternally": response.data.TotalBookingMadeExternally, "TotalBookingMadeInternally": response.data.TotalBookingMadeInternally, "TotalEmailSent": response.data.TotalEmailSent, "TotalMessagesSent": response.data.TotalMessagesSent })
+            $scope.BuisnessReportLoader = false;
         })
     }
 
     $scope.GetTimeFrame=function(TimeFrame)
     {
+        $scope.BuisnessReportLoader = true;
         $scope.BookingReport = [];
         debugger;
         if (TimeFrame == "today")
@@ -125,11 +128,13 @@
             $scope.TotalEmailSent = response.data.TotalEmailSent;
             $scope.TotalMessagesSent = response.data.TotalMessagesSent;
             $scope.BookingReport.push({ "TotalBookings": response.data.TotalBookings, "TotalRevenue": response.data.TotalRevenue, "TotalCancellations": response.data.TotalCancellations, "TotalBookingMadeExternally": response.data.TotalBookingMadeExternally, "TotalBookingMadeInternally": response.data.TotalBookingMadeInternally, "TotalEmailSent": response.data.TotalEmailSent, "TotalMessagesSent": response.data.TotalMessagesSent })
+            $scope.BuisnessReportLoader = false;
         })
     }
 
     $scope.GetTimeFrameReports = function () {
         debugger;
+        $scope.BuisnessReportLoader = true;
         $scope.BookingReport = [];
        
         var firstDay = new Date(parseInt($scope.SelectedStartYear), $scope.Months.indexOf($scope.SelectedStartMonth), parseInt($scope.SelectedStartDate));
@@ -147,6 +152,7 @@
             $scope.TotalEmailSent = response.data.TotalEmailSent;
             $scope.TotalMessagesSent = response.data.TotalMessagesSent;
             $scope.BookingReport.push({ "TotalBookings": response.data.TotalBookings, "TotalRevenue": response.data.TotalRevenue, "TotalCancellations": response.data.TotalCancellations, "TotalBookingMadeExternally": response.data.TotalBookingMadeExternally, "TotalBookingMadeInternally": response.data.TotalBookingMadeInternally, "TotalEmailSent": response.data.TotalEmailSent, "TotalMessagesSent": response.data.TotalMessagesSent })
+            $scope.BuisnessReportLoader = false;
         })
     }
 }
