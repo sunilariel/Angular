@@ -100,6 +100,7 @@ namespace AngularMvcProject.Controllers
                 var httpWebRequest = (HttpWebRequest)WebRequest.Create(ConfigurationManager.AppSettings["DomainUrl"].ToString() + "/api/customer/Logout");
                 httpWebRequest.ContentType = "application/json";
                 httpWebRequest.Method = "POST";
+                httpWebRequest.ProtocolVersion = HttpVersion.Version10;
                 httpWebRequest.Headers.Add("Token", Request.Headers["Token"]);
 
                 using (var StreamWriter = new StreamWriter(httpWebRequest.GetRequestStream()))
