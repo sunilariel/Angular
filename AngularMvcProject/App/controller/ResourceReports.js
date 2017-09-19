@@ -294,7 +294,7 @@
         }
         $scope.ResourceReport = [];
       
-        var apirequest = bookingService.GetResourceReportsBetweenDatesinSortedOrder($routeParams.CompanyId, $scope.SelectedResource, $scope.StartDate, $scope.EndDate, $scope.Order, field);
+        var apirequest = bookingService.GetResourceReportsBetweenDatesinSortedOrder($routeParams.CompanyId, $scope.AllResources, $scope.StartDate, $scope.EndDate, $scope.Order, field);
         apirequest.then(function (response) {             
             angular.forEach(response.data, function (value, key) {              
          //       $scope.ResourceReport.push({ "Resource": value.Employee.FirstName, "Bookings": value.TotalBookingsAssigned, "Revenue": "£" + value.TotalRevenue, "Duration": value.DurationInHours, "Cancellations": value.TotalCancellations, "CancellationRate": value.PerntageOfTotalCancellations + "%", "Tasks": value.TotalBookingsCompleted })
