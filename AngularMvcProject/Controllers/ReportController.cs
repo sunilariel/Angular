@@ -92,5 +92,61 @@ namespace AngularMvcProject.Controllers
                 return e.ToString();
             }
         }
+
+
+        [HttpPost]
+        public string GetResourceReportsBetweenDatesinSortedOrder(string CompanyId, string EmployeeIdArray, string StartDate, string EndDate,string sortingOrder,string field)
+        {
+            try
+            {
+                var result = "";
+                var startDate = StartDate.Split('T')[0];
+                var endDate = EndDate.Split('T')[0];
+                string apiUrl = ConfigurationManager.AppSettings["DomainUrl"].ToString() + "/api/Reports/GetResourceReportsBetweenDates?companyId=" + CompanyId + "&commaSeperatedEmployeeIds=" + EmployeeIdArray + "&startDate=" + startDate + "&endDate=" + endDate+"&asc="+ sortingOrder +"&field="+ field;
+                var httpWebRequest = HttpWebRequest.Create(apiUrl);
+                httpWebRequest.ContentType = "application/json";
+                httpWebRequest.Method = "GET";
+               
+                httpWebRequest.Headers.Add("Token", Request.Headers["Token"]);
+
+                var httpResponse = httpWebRequest.GetResponse();
+                using (var StreamReader = new StreamReader(httpResponse.GetResponseStream()))
+                {
+                    result = StreamReader.ReadToEnd();
+                }
+                return result;
+            }
+            catch (Exception e)
+            {
+                return e.ToString();
+            }
+        }
+        [HttpPost]
+        public string GetServiceReportsBetweenDatesByOrder(string CompanyId, string commaSeperatedServiceIds, string StartDate, string EndDate,string sortingOrder,string Field)
+        {
+            try
+            {
+
+                var result = "";
+                var startDate = StartDate.Split('T')[0];
+                var endDate = EndDate.Split('T')[0];
+                string apiUrl = ConfigurationManager.AppSettings["DomainUrl"].ToString() + "/api/Reports/GetServiceReportsBetweenDates?companyId=" + CompanyId + "&commaSeperatedServiceIds=" + commaSeperatedServiceIds + "&startDate=" + startDate + "&endDate=" + endDate + "&asc="+ sortingOrder + "&field=" + Field;
+                var httpWebRequest = HttpWebRequest.Create(apiUrl);
+                httpWebRequest.ContentType = "application/json";
+                httpWebRequest.Method = "GET";
+                httpWebRequest.Headers.Add("Token", Request.Headers["Token"]);
+
+                var httpResponse = httpWebRequest.GetResponse();
+                using (var StreamReader = new StreamReader(httpResponse.GetResponseStream()))
+                {
+                    result = StreamReader.ReadToEnd();
+                }
+                return result;
+            }
+            catch (Exception e)
+            {
+                return e.ToString();
+            }
+        }
     }
 }
