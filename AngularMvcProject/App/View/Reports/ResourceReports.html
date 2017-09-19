@@ -351,13 +351,13 @@
                                             <table class="table table-bordered">
                                                 <thead>
                                                     <tr>
-                                                        <th ng-click="sortType='Bookings'; sortReverse = !sortReverse">Resource <i class="table-sort fa fa-sort" aria-hidden="true"></i></th>
-                                                        <th> Bookings <i class="table-sort fa fa-sort" aria-hidden="true"></i></th>
-                                                        <th>  Revenue <i class="table-sort fa fa-sort" aria-hidden="true"></i></th>
-                                                        <th> Duration (Hours) <i class="table-sort fa fa-sort" aria-hidden="true"></i> </th>
-                                                        <th> Cancellations <i class="table-sort fa fa-sort" aria-hidden="true"></i> </th>
-                                                        <th>  Cancellation Rate <i class="table-sort fa fa-sort" aria-hidden="true"></i> </th>
-                                                        <th> Tasks  <i class="table-sort fa fa-sort" aria-hidden="true"></i></th>
+                                                        <th ng-click="GetReportbyOrder('Resource')">Resource <i class="table-sort fa fa-sort" aria-hidden="true"></i></th>
+                                                        <th ng-click="GetReportbyOrder('Bookings')"> Bookings <i class="table-sort fa fa-sort" aria-hidden="true"></i></th>
+                                                        <th ng-click="GetReportbyOrder('Revenue')">  Revenue <i class="table-sort fa fa-sort" aria-hidden="true"></i></th>
+                                                        <th ng-click="GetReportbyOrder('Duration')"> Duration (Hours) <i class="table-sort fa fa-sort" aria-hidden="true"></i> </th>
+                                                        <th ng-click="GetReportbyOrder('Cancellations')"> Cancellations <i class="table-sort fa fa-sort" aria-hidden="true"></i> </th>
+                                                        <th ng-click="GetReportbyOrder('CancellationRate')">  Cancellation Rate <i class="table-sort fa fa-sort" aria-hidden="true"></i> </th>
+                                                        <th ng-click="GetReportbyOrder('Tasks')"> Tasks  <i class="table-sort fa fa-sort" aria-hidden="true"></i></th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>

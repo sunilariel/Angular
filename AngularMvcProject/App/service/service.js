@@ -800,6 +800,17 @@ app.service("bookingService", function ($http, $window) {
       return response;
     }
 
+    this.GetResourceReportsBetweenDatesinSortedOrder = function (companyId, employeeIdArray, startDate, endDate,Order,Field) {
+        debugger;
+        var response = $http({
+            method: "POST",
+            url: "/Report/GetResourceReportsBetweenDatesinSortedOrder",
+            headers: GetHeader(),
+            data: { CompanyId: companyId, EmployeeIdArray: employeeIdArray, StartDate: startDate, EndDate: endDate, sortingOrder: Order, field:Field },
+        })
+        return response;
+    }
+
     this.GetServiceReportsBetweenDates = function (companyId, employeeIdsString, startDate, endDate) {
         debugger;
         var response = $http({
@@ -807,6 +818,17 @@ app.service("bookingService", function ($http, $window) {
             url: "/Report/GetServiceReportsBetweenDates",
             headers: GetHeader(),
             data: { CompanyId: companyId, commaSeperatedServiceIds: employeeIdsString, StartDate: startDate, EndDate: endDate },
+        })
+        return response;
+    }
+
+    this.GetServiceReportsBetweenDatesByOrder = function (companyId, employeeIdsString, startDate, endDate,Order,field) {
+        debugger;
+        var response = $http({
+            method: "POST",
+            url: "/Report/GetServiceReportsBetweenDatesByOrder",
+            headers: GetHeader(),
+            data: { CompanyId: companyId, commaSeperatedServiceIds: employeeIdsString, StartDate: startDate, EndDate: endDate,sortingOrder:Order,Field:field },
         })
         return response;
     }

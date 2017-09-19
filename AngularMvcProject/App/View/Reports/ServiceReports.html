@@ -332,7 +332,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <a ng-csv="ServiceReport" csv-label="true" filename="ServiceReports.csv"><i class="fa fa-cloud-download" aria-hidden="true"></i> Download as CSV </a>
+                                        <a ng-csv="ServiceReport" filename="ServiceReports.csv" csv-header="['Service','Category','Booking','Revenue','Cancellations','CancellationRate']"><i class="fa fa-cloud-download" aria-hidden="true"></i> Download as CSV </a>
                                         <!--<a ng-csv="ServiceReport" csv-label="true" filename="ServiceReports.csv">Show Results </a>-->
                                         <div class="clearfix"></div>
                                     </div>
@@ -346,12 +346,12 @@
                                                 <table class="table table-bordered">
                                                     <thead>
                                                         <tr>
-                                                            <th>Service <i class="table-sort fa fa-sort" aria-hidden="true"></i> </th>
-                                                            <th>Category <i class="table-sort fa fa-sort" aria-hidden="true"></i></th>
-                                                            <th>Booking <i class="table-sort fa fa-sort" aria-hidden="true"></i></th>
-                                                            <th>Revenue <i class="table-sort fa fa-sort" aria-hidden="true"></i> </th>
-                                                            <th>Cancellations  <i class="table-sort fa fa-sort" aria-hidden="true"></i></th>
-                                                            <th>Cancellation Rate <i class="table-sort fa fa-sort" aria-hidden="true"></i></th>
+                                                            <th ng-click="GetServiceReportByOrder('Service')">Service <i class="table-sort fa fa-sort" aria-hidden="true"></i> </th>
+                                                            <th ng-click="GetServiceReportByOrder('Category')">Category <i class="table-sort fa fa-sort" aria-hidden="true"></i></th>
+                                                            <th ng-click="GetServiceReportByOrder('Booking')">Booking <i class="table-sort fa fa-sort" aria-hidden="true"></i></th>
+                                                            <th ng-click="GetServiceReportByOrder('Revenue')">Revenue <i class="table-sort fa fa-sort" aria-hidden="true"></i> </th>
+                                                            <th ng-click="GetServiceReportByOrder('Cancellations')">Cancellations  <i class="table-sort fa fa-sort" aria-hidden="true"></i></th>
+                                                            <th ng-click="GetServiceReportByOrder('Cancellation Rate')">Cancellation Rate <i class="table-sort fa fa-sort" aria-hidden="true"></i></th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>

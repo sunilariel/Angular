@@ -35,6 +35,7 @@
 
     $scope.init = function () {
         debugger;
+        $scope.toggle = false;
         var ReportCount = false;
         $scope.ResourcerReportsloader = true;
         $scope.Resources = [];
@@ -280,6 +281,25 @@
             })
         }
 
+    }
+
+    $scope.GetReportbyOrder = function (field) {
+        debugger;
+        $scope.toggle = !$scope.toggle;
+        if ($scope.toggle == true) {
+            $scope.Order = "ASC";
+        }
+        else {
+            $scope.Order="DESC"
+        }
+        $scope.ResourceReport = [];
+      
+        var apirequest = bookingService.GetResourceReportsBetweenDatesinSortedOrder($routeParams.CompanyId, $scope.AllResources, $scope.StartDate, $scope.EndDate, $scope.Order, field);
+        apirequest.then(function (response) {             
+            angular.forEach(response.data, function (value, key) {              
+         //       $scope.ResourceReport.push({ "Resource": value.Employee.FirstName, "Bookings": value.TotalBookingsAssigned, "Revenue": "£" + value.TotalRevenue, "Duration": value.DurationInHours, "Cancellations": value.TotalCancellations, "CancellationRate": value.PerntageOfTotalCancellations + "%", "Tasks": value.TotalBookingsCompleted })
+            })
+        })
     }
 
 }])
