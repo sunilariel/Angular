@@ -169,7 +169,7 @@ li.upgrade_btn a:hover {
 .tabs_section {
     background: #E1E7EB;
     height: 100%;
-    width: 105px;
+    width: 105px !important;
     color: #CCC;
     text-align: center;
     /* border-right: 2px solid #CCC; */
@@ -189,7 +189,7 @@ li.upgrade_btn a:hover {
     height: 100%;
 }
 .right_section{
-		    display: table;
+    display: table;
     height: 100% !important;
     width: 100%;
     position: fixed;
@@ -198,8 +198,13 @@ li.upgrade_btn a:hover {
 }
 
 .right_section > div{
-	    display: table-cell;	
-		/*width:100%;*/
+    display: table-cell;
+    height:100%;
+    /*width:86%;
+    float:left;
+    height:100%;
+    max-width:100%;*/
+
 		
 }
 .business_carsec > div {
@@ -1160,8 +1165,8 @@ a.close_icon img {
     bottom: 0;
     left: 0;
     z-index: 1040;
-    background-color: #fff;
-	opacity:0.9 !important;
+    background-color: transparent;
+	opacity:0.9;
 } 
 
 .appointPopupHead {
@@ -4414,9 +4419,10 @@ h4.resource_hd {
 .tab_section2 {
     overflow-y: auto;
     height: 91%;
-    width: 94%;
+    width: 93%;
     display: block !important;
 }
+
 /* sep-12-2017 css end here ================================= */
 
 /*     Sep-13 css start here     */
@@ -4469,10 +4475,10 @@ h4.resource_hd {
     height: 100%;
     width: 100%;
     top: 0;
-    background-color: Black;
-    filter: alpha(opacity=60);
+    background-color: rgba(0, 0, 0, 0.61);
+    /*filter: alpha(opacity=60);
     opacity: 0.6;
-    -moz-opacity: 0.8;
+    -moz-opacity: 0.8;*/
 }
 .center
 {
@@ -4530,6 +4536,21 @@ h4.resource_hd {
 /* -------------------------------*/
 
 /*  Sep-5 css end here ====================== */
+
+/* Css only for IE start here ====================== */
+
+.nav-tab.nav-stacked {
+    display: inline-block;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+
+
+
+/* Css only for IE end here ====================== */
+
 
 /* media css start here ================================= */
 
