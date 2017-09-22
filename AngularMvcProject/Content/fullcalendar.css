@@ -16,6 +16,7 @@
 
 body .fc { /* extra precedence to overcome jqui */
 	font-size: 1em;
+    width: 1278px;
 }
 
 
@@ -715,6 +716,8 @@ be a descendant of the grid when it is being dragged.
 
 tr:first-child > td > .fc-day-grid-event {
 	margin-top: 2px; /* a little bit more space before the first event */
+    /*1992017 Changes*/
+    height: 51px;
 }
 
 .fc-day-grid-event.fc-selected:after {
@@ -824,6 +827,10 @@ a.fc-more:hover {
 
 .fc-toolbar.fc-header-toolbar {
 	margin-bottom: 1em;
+    
+    /*18 September Changes*/
+    margin-left:2px;
+    margin-top: 12px;
 }
 
 .fc-toolbar.fc-footer-toolbar {

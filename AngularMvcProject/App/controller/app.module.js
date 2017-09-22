@@ -1,7 +1,7 @@
 ﻿
 //    var app = angular.module('MyApp', ['ngRoute']);
 //    app.config(function ($routeProvider) {
-//        debugger;
+//        
 //        $routeProvider
 //       .when('dashboard', {
 //           url: "/dashboard",

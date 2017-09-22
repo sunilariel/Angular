@@ -94,6 +94,8 @@ namespace AngularMvcProject.Models
 
         public string Currency { get; set; }
 
+        public string Colour { get; set; }
+
         public string CreationDate { get; set; }
     }
 
@@ -222,6 +224,7 @@ namespace AngularMvcProject.Models
         public List<int> CustomerIds { get; set; }
         public string Start { get; set; }
         public string End { get; set; }
+        public int Status { get; set; } 
     }
 
 
@@ -236,6 +239,7 @@ namespace AngularMvcProject.Models
         public int DurationInHours { get; set; }
         public double Cost { get; set; }
         public string Currency { get; set; }
+        public string Colour { get; set; }
         public int status { get; set; }
         public int CustomerId { get; set; }
         public string StartTime { get; set; }

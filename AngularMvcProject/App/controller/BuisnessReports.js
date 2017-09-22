@@ -2,7 +2,7 @@
 {
     //Redirection to different tab section//
     $scope.RedirecttoBuisnessReport = function () {
-        debugger;
+        
         $location.path("/BuisnessReports/" + $routeParams.CompanyId);
     }
     $scope.RedirecttoResourceReport = function () {
@@ -35,7 +35,7 @@
     }
 
     $scope.init = function () {
-        debugger;
+        
         $scope.BuisnessReportLoader = true;
         $scope.BookingReport = [];
         $scope.Months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
@@ -80,7 +80,7 @@
     {
         $scope.BuisnessReportLoader = true;
         $scope.BookingReport = [];
-        debugger;
+        
         if (TimeFrame == "today")
         {
             $scope.CustomTimeFrame = false;
@@ -110,7 +110,7 @@
         }
         else if (TimeFrame == "custom")
         {
-            debugger;
+            
             $scope.CustomTimeFrame = true;           
             var firstDay = new Date(parseInt($scope.SelectedStartYear), $scope.Months.indexOf($scope.SelectedStartMonth), parseInt($scope.SelectedStartDate));
             var lastDay = new Date(parseInt($scope.SelectedEndYear), $scope.Months.indexOf($scope.SelectedEndMonth), parseInt($scope.SelectedEndDate));
@@ -133,7 +133,7 @@
     }
 
     $scope.GetTimeFrameReports = function () {
-        debugger;
+        
         $scope.BuisnessReportLoader = true;
         $scope.BookingReport = [];
        

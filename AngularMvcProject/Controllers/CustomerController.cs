@@ -362,6 +362,7 @@ namespace AngularMvcProject.Controllers
                     obj.status = appointment.Status;
                     obj.StartTime = appointment.Start;
                     obj.EndTime = appointment.End;
+                    obj.Colour = appointment.Service.Colour;
                    
                     ListofAppointment.Add(obj);
 

@@ -1,4 +1,6 @@
-﻿<div ng-controller="calendarController" ng-init="init()">
+﻿
+
+<div ng-controller="calendarController" ng-init="init()">
     <header class="top">
         <div class="logo_section"> <a class="logo" href="#"></a><img src="/Content/Assets/images/logo.png" alt="Logo"></a> </div>
         <h1>Calendar</h1>
@@ -156,14 +158,15 @@
 
         <div id="" class="tab-content full-height">
             <div class="tab-pane full-height active" id="staff">
-
                 <div class="row">
                     <div class="col-md-8">
-                        <div id="calendar" ui-calendar="uiConfig.calendar" ng-model="eventSources" calendar="myCalendar"></div>
+                      
+                        <!--<div id="display"><input type="button" ng-click="GetCurrentEvent()"/></div>-->
+                        <div id="calendar" ui-calendar="uiConfig.calendar" config="uiConfig.calendar" ng-model="eventSources" calendar="myCalendar"></div>
                     </div>
                     <div class="col-md-4">
                         <div ng-show="SelectedEvent" class="alert alert-success" style="margin-top:50px">
-                            <h2 style="margin-top:0px"> Selected Event:</h2>
+                            <h2 style="margin-top:0px">Selected Event:</h2>
                             <h3 style="color:#A9A50E">{{SelectedEvent.title}}</h3>
                             <h3 style="color:#A9A50E">{{SelectedEvent.id}}</h3>
                             <h3 style="color:#A9A50E">{{SelectedEvent.start}}</h3>
@@ -174,18 +177,348 @@
                 </div>
 
             </div>
-            <div class="tab-pane full-height" id="accounts">
-                <div id="accountsSideNav" class="span3 secondary-navbar container-fluid"> dfsdfsdfd </div>
+            
+        </div>
+    </div>
+
+    <div id="detailPopup" class="apptDetailPopup1 addCustomer bottomArrow" style="width:32%;left:517px;top: 106px;">
+        <div class="apptDetailDiv">
+            <div class="appt_text">
+                <h2>Appointment Details</h2>
+                <a id="crossHidebtn" class="crossBtn cursorhand" ng-click="Closebtn()"><i class="fa fa-times" aria-hidden="true"></i></a>
             </div>
-            <div class="tab-pane full-height" id="services"> sdfsadfs </div>
-            <div class="tab-pane full-height" id="classesSetting"> sdfsdfdfd </div>
-            <div class="tab-pane full-height" id="payments">
-                <div id="paymentsSideNav" class="span3 secondary-navbar container-fluid full-height"> </div>
-                fsdfsdfsd
+            <div class="dropdown labeldrowDownBtn">
+                <button class="dropbtn">
+                    {{UpdatedStatus}}
+                    <span class="glyphicon glyphicon-chevron-down"></span>
+                </button>
+                <ul class="lableDropdownContent dropdown-content">
+                    <li ng-repeat="item in StatusList"><a href="" ng-click="UpdateStatus(item)">{{item.Status}}</a></li>
+                </ul>
             </div>
-            <div class="tab-pane full-height" id="notifications">
-                <div class="setmore-loader" style="display:block;"> sdfdf </div>
+
+            <div class="apptdetailList">
+                <p>{{AppointmentStartDate| date:'EEE, MMM d' }},{{AppointmentStartDate| date:' h:mm a ' | lowercase}}-{{AppointmentEndDate | date:' hh:mm a' | lowercase}}</p>
+                <ul>
+                    <li>
+                        <label>Provider</label>
+                        <span>{{AppointmentProvider}}</span>
+                    </li>
+                    <li>
+                        <label>Service</label>
+                        <span>{{AppointmentService}}</span>
+                    </li>
+                    <li>
+                        <label>Cost £</label>
+                        <span>{{AppointmentServiceCost}}</span>
+                    </li>
+                    <li>
+                        <label>Customer </label>
+                        <span>
+                            {{updatedCustomerName}}<br />
+                            {{updatedMobileNo}} <br />
+                            {{updatedCustomerEmail}}
+                        </span>
+                    </li>
+                    <li>
+                        <label>Booked from </label>
+                        <span>Customer Page</span>
+                    </li>
+                </ul>
+                <div class="brdr_btm"></div>
+            </div>
+
+            <div class="pointerRightIcon"></div>
+            <div class="apptViewFooter">
+                <a ng-click="EditAppointment()" class="editAppt cursorhand" data-toggle="modal" data-target="#UpdateAppointmentPopup">
+                    Edit Appointment
+                    <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                </a>
+                <a class="apptDeleteBtn cursorhand" ng-click="DeleteAppointment()">Delete</a>
             </div>
         </div>
     </div>
+
+    <div class="modal fade appointmentPopup" id="squarespaceModal" style="padding-top:175px;" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+        <div class="modal-dialog appointPopupHead">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" ng-click="CloseAppointmentModal()" class="close modalcloseIcon" data-dismiss="modal"><span aria-hidden="true" class="">×</span><span class="sr-only">Close</span></button>
+                    <h3 class="modal-title" id="lineModalLabel">Appointment</h3>
+                </div>
+                <div class="form-horizontal appointPopUpform">
+                    <form ng-submit="SaveAppointment(appointmentform)" name="appointmentform" novalidate class="css-form">
+                        <div class="modal-body appointPopupBody" ng-hide="ShowAddAppointmentPopup">
+
+                            <div class="row popupDeatailDiv">
+                                <div class="col-md-6">
+                                    <div class="detailText">
+                                        <ul class="list-inline appointDeatailDiv">
+                                            <li><a href="#">Details</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="dropdown labeldrowDownBtn nolableDrop">
+                                        <select ng-model="Status" ng-init='Status="1"' style="border:none;font-size:12px;">
+                                            <option ng-repeat="item in StatusList" value="{{item.Value}}">{{item.Status}}</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- content goes here -->
+                            <!--<form class="form-horizontal appointPopUpform" ng-submit="SaveAppointment(appointmentform)" name="appointmentform" novalidate class="css-form">-->
+                            <div class="deatailForm">
+                                <!--<form class="form-horizontal appointPopUpform" ng-submit="SaveAppointment(appointmentform)" name="appointmentform" novalidate class="css-form">-->
+                                <div class="form-group">
+                                    <label class="control-label col-sm-4" for="email">Provider</label>
+                                    <div class="col-sm-8">
+                                        <div class="dropdown appointProvider">
+                                            <select class="btn btn-default dropdown-toggle" ng-model="selectedprovider" data-ng-options="x.Id as x.staffName for x in Provider" id="dropdownMenu2" name="providerdd" aria-haspopup="true" aria-expanded="false" ng-change="GetAllocateServiceToEmployee(selectedprovider)" required>
+                                                <option value="" selected="selected">-- Select a Provider --</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-sm-4" for="pwd">Service</label>
+                                    <div class="col-sm-8">
+                                        <div class="dropdown appointProvider">
+                                            <select class="btn btn-default dropdown-toggle" name="Servicedd" data-ng-options="x.Id as x.Name for x in EmployeeServices" ng-model="selectedservice" ng-change="ServiceDetail(selectedservice)" aria-haspopup="true" aria-expanded="false" required>
+                                                <option value="">-- Select a Service --</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group" ng-show="ServicePriceTimeDetailIsVisible">
+                                    <label class="control-label col-sm-4"></label>
+                                    <div class="col-sm-8">
+                                        <div class="row">
+                                            <div class="col-md-6 dateTimeDiv costField">
+                                                <span class="calendarOk">£</span>
+                                                <input type="text" class="appt_cost form-control" placeholder="10" ng-model="price" value="">
+                                            </div>
+                                            <div class="col-md-6 dateTimeDiv costMinField">
+                                                <input type="text" class="appt_cost_min form-control" placeholder="60" ng-model="time">
+                                                <a href="" id="minTextDiv" class="minText">
+                                                    Mins
+                                                    <!--<span class="glyphicon glyphicon-chevron-down chevronDownIcon" ng-click="minhours = !minhours">-->
+                                                    <span class="glyphicon glyphicon-chevron-down chevronDownIcon">
+                                                    </span>
+                                                </a>
+                                                <!--<ul id="custmDropdown" class="apptcustomeDropdown" ng-show="minhours" style="display:block;position:absolute;">
+                                                    <li><a ng-click="Converttomin()">Mins</a></li>
+                                                    <li><a ng-click="Convertohour()">Hours</a></li>
+                                                </ul>-->
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-sm-4" for="pwd">Day/Time</label>
+                                    <div class="col-sm-8 dateTimeDiv ">
+                                        <span class="glyphicon glyphicon-ok calendarOk"></span><!--<input type="text" class="form-control datepickerBox" ng-model="datatime" placeholder="Fri, May 12" id="datetimepicker4" />-->
+                                        <!--<input datetime-picker ng-model="selecteddate" date-disabled="disabled(date, mode)" disable-weekends="true"  class="form-control datepickerBox"  date-format="EEE, MMM d" size="30" date-only   />-->
+                                        <input type="text" class="form-control calendarBox" datepicker-popup="EEE, MMM d" ng-model="dt" open="opened" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-click="SetDatePicker()" name='theDate' ng-required="true" />
+
+                                        <div class="selectDropdown">
+                                            <div class="gifImage" ng-show="timeslotsloading"><img src="/Content/Assets/images/loading.gif" /></div>
+                                            <select class="select_btn dateTimeSelect" style="line-height:1;" ng-model="timeoption" name="timeoption" ng-init="timeoption='8:00 AM'">
+                                                <option ng-repeat="timeoption in timeInfoFrom " value="{{timeoption}}">{{timeoption}}</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="control-label col-sm-4" for="pwd">Notes</label>
+                                    <div class="col-sm-8 notesForCustomer">
+                                        <textarea class="form-control apptNotes" placeholder="Notes for the Customer" maxlength="500" ng-model="notes"></textarea>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="control-label col-sm-4" for="pwd">Recurring?</label>
+                                    <div class="col-sm-8 recurringDiv">
+                                        <div class="onoffswitch recurringOnOffBtn">
+                                            <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" checked="">
+                                            <label class="onoffswitch-label" for="myonoffswitch">
+                                                <span class="onoffswitch-inner"></span>
+                                                <span class="onoffswitch-switch"></span>
+                                            </label>
+                                        </div>
+                                        <div class="premiumBtn">
+                                            <button type="button" class="btn btn-default">
+                                                <span><i class="fa fa-lock" aria-hidden="true"></i></span>
+                                                <!--<a href="#">premium</a>-->
+                                                premium
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--<div class="form-group rescheduleDiv">
+                                    <div class="col-sm-12 sendSchdlEmail">
+                                        <input type="checkbox" class="sampleCheckbox checkbox-custom" name="" value="service"><label for="checkbox-1" class="checkbox-custom-label">Send Reschedule Email</label>
+                                    </div>
+                                </div>-->
+                            </div>
+
+                        </div>
+                        <div class="modal-footer">
+                            <div class="btn-group apptSaveBtn" role="group">
+                                <button type="submit" class="btn btn-default" data-action="save" role="button">Save Appointment</button>
+                            </div>
+                            <!--<div class="apptViewFooter">
+                                <a href="#" class="apptDeleteBtn">Delete</a>
+                            </div>-->
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div id="modalPopupbg" class="fade modal_bg in"></div>
+    </div>
+
+    <div class="modal fade appointmentPopup" id="UpdateAppointmentPopup" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+        <div class="modal-dialog appointPopupHead">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close modalcloseIcon" ng-click="CloseUpdateAppointmentPopup()" data-dismiss="modal"><span aria-hidden="true" class="">×</span><span class="sr-only">Close</span></button>
+                    <h3 class="modal-title" id="lineModalLabel">Appointment</h3>
+                </div>
+                <div class="form-horizontal appointPopUpform">
+                    <form ng-submit="UpdateAppointment(appointmentform)" name="updateappointmentform" novalidate class="css-form">
+                        <div class="modal-body appointPopupBody" ng-hide="ShowAddAppointmentPopup">
+
+                            <div class="row popupDeatailDiv">
+                                <div class="col-md-6">
+                                    <div class="detailText">
+                                        <ul class="list-inline appointDeatailDiv">
+                                            <li><a href="#">Details</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="dropdown labeldrowDownBtn">
+                                        <button class="dropbtn">
+                                            {{UpdatedStatus}}
+                                            <span class="glyphicon glyphicon-chevron-down"></span>
+                                        </button>
+                                        <ul class="lableDropdownContent dropdown-content">
+                                            <li ng-repeat="item in StatusList"><a href="" ng-click="UpdateStatus(item)">{{item.Status}}</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="deatailForm">
+                                <div class="form-group">
+                                    <label class="control-label col-sm-4" for="email">Provider</label>
+                                    <div class="col-sm-8">
+                                        <div class="dropdown appointProvider">
+                                            <!--<select class="btn btn-default dropdown-toggle" ng-model="selectedprovider" data-ng-options="x.Id as x.staffName for x in Provider" id="dropdownMenu2" name="providerdd" aria-haspopup="true" aria-expanded="false" ng-change="GetAllocateServiceToEmployee(selectedprovider)" required>
+
+                                            </select>-->
+                                            <select class="btn btn-default dropdown-toggle" ng-model="selectedprovider" name="provider" ng-change="GetAllocateServiceToEmployee(selectedprovider)" required>
+                                                <option ng-repeat="employee in Provider" value="{{employee.Id}}">{{employee.staffName}}</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-sm-4" for="pwd">Service</label>
+                                    <div class="col-sm-8">
+                                        <div class="dropdown appointProvider">
+                                            <!--<select class="btn btn-default dropdown-toggle" name="Servicedd" data-ng-options="x.Id as x.Name for x in EmployeeServices" ng-model="selectedservice" ng-change="ServiceDetail(selectedservice)" aria-haspopup="true" aria-expanded="false" required>
+                                                <option value="">-- Select a Service --</option>
+                                            </select>-->
+
+                                            <select class="btn btn-default dropdown-toggle" ng-model="selectedservice" name="Service" ng-change="ServiceDetail(selectedservice)" required>
+                                                <option ng-repeat="services in EmployeeServices " value="{{services.Id}}">{{services.Name}}</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-sm-4"></label>
+                                    <div class="col-sm-8">
+                                        <div class="row">
+                                            <div class="col-md-6 dateTimeDiv costField">
+                                                <span class="calendarOk">£</span>
+                                                <input type="text" class="appt_cost form-control" placeholder="10" ng-model="price" value="">
+                                            </div>
+                                            <div class="col-md-6 dateTimeDiv costMinField">
+                                                <input type="text" class="appt_cost_min form-control" placeholder="60" ng-model="time">
+                                                <a href="" id="minTextDiv" class="minText">
+                                                    Mins
+                                                    <!--<span class="glyphicon glyphicon-chevron-down chevronDownIcon" ng-click="minhours = !minhours">-->
+                                                    <span class="glyphicon glyphicon-chevron-down chevronDownIcon">
+                                                    </span>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-sm-4" for="pwd">Day/Time</label>
+                                    <div class="col-sm-8 dateTimeDiv">
+                                        <span class="glyphicon glyphicon-ok calendarOk"></span>
+                                        <input type="text" class="form-control calendarBox" datepicker-popup="EEE, MMM d" ng-model="dt" open="opened" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-click="EditDatePicker()" name='theDate' ng-required="true" />
+
+                                        <div class="selectDropdown">
+                                            <div class="gifImage" ng-show="timeslotsloading"><img src="/Content/Assets/images/loading.gif" /></div>
+                                            <select class="select_btn dateTimeSelect" style="line-height:1;" ng-model="timeoption" name="timeoption">
+                                                <option ng-repeat="timeoption in timeInfoFrom " value="{{timeoption}}">{{timeoption}}</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="control-label col-sm-4" for="pwd">Notes</label>
+                                    <div class="col-sm-8 notesForCustomer">
+                                        <textarea class="form-control apptNotes" placeholder="Notes for the Customer" maxlength="500" ng-model="notes"></textarea>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="control-label col-sm-4" for="pwd">Recurring?</label>
+                                    <div class="col-sm-8 recurringDiv">
+                                        <div class="onoffswitch recurringOnOffBtn">
+                                            <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" checked="">
+                                            <label class="onoffswitch-label" for="myonoffswitch">
+                                                <span class="onoffswitch-inner"></span>
+                                                <span class="onoffswitch-switch"></span>
+                                            </label>
+                                        </div>
+                                        <div class="premiumBtn">
+                                            <button type="button" class="btn btn-default">
+                                                <span><i class="fa fa-lock" aria-hidden="true"></i></span>
+
+                                                premium
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <div class="btn-group apptSaveBtn" role="group">
+                                <button type="submit" class="btn btn-default" data-action="save" role="button">Save Appointment</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div id="modalPopupbg" class="fade modal_bg in"></div>
+    </div>
+
+
+
 </div>

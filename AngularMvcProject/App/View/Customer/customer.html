@@ -566,7 +566,7 @@
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
-                                                                            <div class="form-group" ng-if="ServicePriceTimeDetailIsVisible">
+                                                                            <div class="form-group" ng-show="ServicePriceTimeDetailIsVisible">
                                                                                 <label class="control-label col-sm-4"></label>
                                                                                 <div class="col-sm-8">
                                                                                     <div class="row">
@@ -600,7 +600,7 @@
 
                                                                                     <div class="selectDropdown">
                                                                                         <div class="gifImage" ng-show="timeslotsloading"><img src="/Content/Assets/images/loading.gif" /></div>
-                                                                                        <select class="select_btn dateTimeSelect" ng-model="timeoption" name="timeoption" ng-init="timeoption='8:00 AM'">
+                                                                                        <select class="select_btn dateTimeSelect" style="line-height:1;" ng-model="timeoption" name="timeoption" ng-init="timeoption='8:00 AM'">
                                                                                             <option ng-repeat="timeoption in timeInfoFrom " value="{{timeoption}}">{{timeoption}}</option>
                                                                                         </select>
                                                                                     </div>
@@ -746,7 +746,7 @@
 
                                                                                     <div class="selectDropdown">
                                                                                         <div class="gifImage" ng-show="timeslotsloading"><img src="/Content/Assets/images/loading.gif" /></div>
-                                                                                        <select class="select_btn dateTimeSelect" ng-model="timeoption" name="timeoption">
+                                                                                        <select class="select_btn dateTimeSelect" style="line-height:1;" ng-model="timeoption" name="timeoption">
                                                                                             <option ng-repeat="timeoption in timeInfoFrom " value="{{timeoption}}">{{timeoption}}</option>
                                                                                         </select>
                                                                                     </div>
