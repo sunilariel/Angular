@@ -169,7 +169,7 @@ li.upgrade_btn a:hover {
 .tabs_section {
     background: #E1E7EB;
     height: 100%;
-    width: 105px;
+    width: 105px !important;
     color: #CCC;
     text-align: center;
     /* border-right: 2px solid #CCC; */
@@ -189,7 +189,7 @@ li.upgrade_btn a:hover {
     height: 100%;
 }
 .right_section{
-		    display: table;
+    display: table;
     height: 100% !important;
     width: 100%;
     position: fixed;
@@ -198,8 +198,13 @@ li.upgrade_btn a:hover {
 }
 
 .right_section > div{
-	    display: table-cell;	
-		/*width:100%;*/
+    display: table-cell;
+    height:100%;
+    /*width:86%;
+    float:left;
+    height:100%;
+    max-width:100%;*/
+
 		
 }
 .business_carsec > div {
@@ -371,7 +376,7 @@ div#staff-break a.add_break:hover{
 }
 
 div#staff-break select {
-    padding: 7px 9px;
+    padding: 5px 9px;
     border-color: #dcdcdc;
     border-radius: 2px;
     font-size: 13px;
@@ -1160,8 +1165,8 @@ a.close_icon img {
     bottom: 0;
     left: 0;
     z-index: 1040;
-    background-color: #fff;
-	opacity:0.9 !important;
+    background-color: transparent;
+	opacity:0.9;
 } 
 
 .appointPopupHead {
@@ -1790,10 +1795,11 @@ button#deleteBtn {
 select.select_btn {
     border: 1px solid #E4E4E4;
     border-radius: 3px;
-    padding: 5px 0;
+    padding: 5px 10px;
     height: 38px;
     color: #3d484f;
     font-size: 13px;
+    background: #f4f4f4;
 }
 select.select_btn:focus {
     background: #e6e6e6;
@@ -3384,6 +3390,7 @@ span.staffdatepickerTime a {
     height: 27px;
     width:90px;
     margin:0;
+        line-height: normal;
 }  
 .selectDropdown .select_btn:focus {
     background: none;
@@ -4360,6 +4367,7 @@ font-family: FontAwesome;
     border-radius: 3px;
 	font-size:15px;
     background: #fff;
+        line-height: normal;
 }
 
 .business-card label.card-label a {
@@ -4417,6 +4425,7 @@ h4.resource_hd {
     width: 94%;
     display: block !important;
 }
+
 /* sep-12-2017 css end here ================================= */
 
 /*     Sep-13 css start here     */
@@ -4469,10 +4478,10 @@ h4.resource_hd {
     height: 100%;
     width: 100%;
     top: 0;
-    background-color: Black;
-    filter: alpha(opacity=60);
+    background-color: rgba(0, 0, 0, 0.61);
+    /*filter: alpha(opacity=60);
     opacity: 0.6;
-    -moz-opacity: 0.8;
+    -moz-opacity: 0.8;*/
 }
 .center
 {
@@ -4530,6 +4539,204 @@ h4.resource_hd {
 /* -------------------------------*/
 
 /*  Sep-5 css end here ====================== */
+
+/* Css only for IE start here ====================== */
+
+.nav-tab.nav-stacked {
+    display: inline-block;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+
+
+
+/* Css only for IE end here ====================== */
+
+/* sep-21 css start here                           */
+
+/*.selecttotext .spantotext {
+    float: left;
+    padding-left: 0px;
+    padding-top: 10px;
+    margin: 0 0px;
+    padding-right: 7px;
+}
+.selectcarticon {
+    float: left;
+    position:relative;
+}
+.selectcarticon .carticon i {
+    position: absolute;
+    right: 8px;
+    top: 0px;
+    background: #f4f4f4;
+    border: 1px solid #E4E4E4;
+    border-radius: 3px;
+    padding: 12px 8px;
+    height: 38px;
+    color: #3d484f;
+    border-left: 0;
+    font-size: 13px;
+}
+.labelcartIcon span.carticon i {
+    border: none;
+    height: 28px;
+    background: #f4f4f4;
+    padding: 10px 8px;
+    right: 0;
+}
+.providercart {
+    float:none;
+}
+.providercart .carticon i {
+    right: 0;
+    background: #fff;
+    height: 35px;
+    border-bottom-left-radius: 0;
+    border-top-left-radius: 0;
+    padding:12px 14px;
+    cursor:pointer;
+}
+
+.daytimecarticon i {
+    position: absolute;
+    right: 15px;
+    top: 0px;
+    background: #fff;
+    height: 34px;
+    padding: 10px 8px;
+    border: 1px solid #d9d9d9;
+    border-radius: 3px;
+    padding: 12px 14px !important;
+    color: #3d484f;
+    border-left: 0;
+    font-size: 13px;
+      border-bottom-left-radius: 0;
+    border-top-left-radius: 0;
+}
+.labelcartIcon {
+    float: none;
+}
+.selectcarticon.labelcartIcon select {
+    background: #f4f4f4;
+}
+.breakhoursdiv .carticon i {
+    padding:12px 13px;
+    cursor:pointer;
+}
+.resourcecarticon i {
+    height:33px;
+    padding: 9px 14px !important;
+}
+
+.chooseYearDiv #selectyearbox {
+    width: 120px;
+    cursor: pointer;
+    color: #333;
+    font-weight: normal;
+    font-size: 14px;
+    font-family: 'Helvetica Neue', 'Segoe UI', Helvetica, Verdana, sans-serif;
+    line-height: 1.35715;
+    position: relative;
+    display: block;
+    -ms-content-zooming: none;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    -webkit-text-size-adjust: none;
+    -webkit-touch-callout: none;
+    padding: 0;
+    outline: 0;
+}
+.chooseYearDiv .dx-selectbox-container {
+    position: relative;
+}
+.chooseYearDiv .dx-selectbox .dx-texteditor-input {
+    max-width: 100%;
+}
+.chooseYearDiv .dx-placeholder {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    max-width: 100%;
+    width: auto;
+    height: 100%;
+    text-align: left;
+    cursor: text;
+    pointer-events: none;
+    color: #999999;
+}*/
+
+select::-ms-expand {
+    display: none;
+}
+select{
+    background: url(/Content/Assets/images/sort-down.png) no-repeat !important;
+    -webkit-appearance: none;
+    background-position-x: 228px !important;
+    background-size: 9px 9px !important;
+    background-position-y: 11px !important;
+}
+.selectcarticon.labelcartIcon select {
+    background-position-x: 62px !important;
+}
+.week_div.selecttotext select.select_btn {
+    padding: 5px 16px;
+    background-position-x: 85px !important;
+    background-position-y: 15px !important;
+}
+div#staff-break .BreakSelectDiv select {
+    background-position-y: 15px !important;
+    background-position-x: 82px !important;
+}
+.text-right.resources_div select {
+    /*padding: 0 8px;*/
+    background-position-x: 110px !important;
+}
+.selectDropdown .dateTimeSelect {
+    background-position-x: 69px !important;
+    background-position-y: 9px !important;
+}
+.labeldrowDownBtn.nolableDrop select {
+    background-position-x: 60px !important;
+    height: 30px;
+    line-height: 30px;
+    margin-right:10px !important;
+}
+
+.staffStartDate .selectDropdown .dateTimeSelect {
+    background-position-x:77px !important;
+}
+
+.fc-toolbar .fc-left select {
+    background-position-x:60px !important;
+}
+.appointPopupBody .dateTimeDiv ul li table thead tr th button.btn {
+    background: #fff !important;
+}
+.appointPopupBody .dateTimeDiv ul li table {
+    background-color: #fff !important;
+}
+.appointPopupBody .dateTimeDiv ul li table thead tr th {
+    background: #fff !important;
+    font-size: 12px;
+    font-weight: 600;
+    padding-left: 5px;
+    text-align: center !important;
+}
+.appointPopupBody .dateTimeDiv ul li table tbody tr td .btn {
+    background: #fff;
+    color: #555;
+    font-size: 10px;
+    padding: 0px 3px;
+    font-weight: 600;
+}
+.timeoption .selectDropdown .dateTimeSelect {
+    line-height: 17px;
+    background-position-x: 73px !important;
+}
+
+/* sep-21 css end here                           */
 
 /* media css start here ================================= */
 

@@ -28,9 +28,10 @@
         background-color: #00bbc5 !important;
         color: #fff !important;
     }
+
     .gre_bg.buttons_sec.text-right.margin_top20 a.ng-isolate-scope {
-    margin-top: 20px;
-}
+        margin-top: 20px;
+    }
 </style>
 
 <div ng-app="bookingApp" ng-init="init()">
@@ -198,7 +199,7 @@
                         BUISNESS
                     </a>
                 </li>
-                <li >
+                <li>
                     <a ng-click="RedirecttoResourceReport()" title="Resource" class="cursorhand" data-toggle="tab">
                         <i class="setmore-icon-users2 nav-icon-fsize"></i><br>
                         RESOURCE
@@ -251,6 +252,7 @@
                                                 <select ng-disabled="allservicechecked" ng-model="SelectedService" ng-change="ServiceChange(SelectedService)">
                                                     <option ng-repeat="item in ListofServices" value="{{item.Id}}">{{item.Service}}</option>
                                                 </select>
+                                                <!--<span class="daytimecarticon resourcecarticon"><i class="fa fa-caret-down" aria-hidden="true"></i></span>-->
                                             </div>
                                         </div>
                                     </div>
@@ -296,17 +298,17 @@
                                                     <label class="beetweenlabel">Between:</label>
                                                     <div class="dateBtnDiv">
                                                         <select class="form-control dateselect" ng-model="SelectedStartDate" ng-change="GetTimeFrameReports()">
-                                                            <option ng-repeat="item in Date" value="{{item}}" >{{item}}</option>                                                         
+                                                            <option ng-repeat="item in Date" value="{{item}}">{{item}}</option>
                                                         </select>
                                                     </div>
                                                     <div class="dateBtnDiv">
                                                         <select class="form-control dateselect" ng-model="SelectedStartMonth" ng-change="GetTimeFrameReports()">
-                                                            <option ng-repeat="item in Months" >{{item}}</option>                                                        
+                                                            <option ng-repeat="item in Months">{{item}}</option>
                                                         </select>
                                                     </div>
                                                     <div class="dateBtnDiv">
                                                         <select class="form-control dateselect" ng-model="SelectedStartYear" ng-change="GetTimeFrameReports()">
-                                                            <option ng-repeat="item in Years" >{{item}}</option>                                                       
+                                                            <option ng-repeat="item in Years">{{item}}</option>
                                                         </select>
                                                     </div>
                                                 </div>
@@ -358,19 +360,19 @@
                                                         <tr ng-repeat="item in ServiceReport">
                                                             <td>{{item.Service}}</td>
                                                             <td>{{item.Category}}</td>
-                                                            <td>{{item.Booking}}</td>                                                            
+                                                            <td>{{item.Booking}}</td>
                                                             <td>{{item.Revenue}}</td>
                                                             <td>{{item.Cancellations}}</td>
                                                             <td>{{item.CancellationRate}}</td>
                                                         </tr>
                                                         <tr></tr>
                                                         <tr></tr>
-                                                      
+
                                                         <tr ng-if="ServiceReportsloader">
                                                             <td></td>
                                                             <td></td>
                                                             <td></td>
-                                                            <td ><img src="/Content/Assets/images/ImpoliteLivelyGenet13.gif" /></td>                                                           
+                                                            <td><img src="/Content/Assets/images/ImpoliteLivelyGenet13.gif" /></td>
                                                             <td></td>
                                                             <td></td>
                                                         </tr>

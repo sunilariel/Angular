@@ -69,7 +69,7 @@
         var count = 0;
        // $scope.LineChartDataSource();
       //  $scope.PieChartDataSource();
-       
+     
         $scope.months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
         //$scope.AllAppointmentYears = [];
         //$scope.AllAppointmentMonths = [];
@@ -220,7 +220,7 @@
 
     //Edit Customer getting details  
     $scope.EditCustomer = function (item) {
-        debugger;
+        
         $scope.CustomerId = item.Id;
         $scope.SelectedCustomerId = item.Id;
         $scope.updatedCustomerName = item.FirstName;
@@ -364,7 +364,7 @@
         $scope.timeInfoFrom = [];
         $scope.Status = "1";
         $scope.selectedprovider = "-- Select a Provider --";
-        $scope.timeoption = "8:00 AM";
+      //  $scope.timeoption = "8:00 AM";
         $scope.notes = "";
         $scope.ServicePriceTimeDetailIsVisible = false;
         $scope.count = 0;     
@@ -409,7 +409,8 @@
         };
     }
 
-    $scope.ServiceDetail = function (SelectedServiceId) {        
+    $scope.ServiceDetail = function (SelectedServiceId) {
+        debugger;
         $scope.ServiceId = SelectedServiceId;
         var SelectedService = bookingService.GetSelectedService(SelectedServiceId);
         SelectedService.then(function (response) {
@@ -452,7 +453,9 @@
 
                         }
                     }
-                    $scope.timeoption = $scope.timeInfoFrom[0];
+                    
+                   
+                   $scope.timeoption = $scope.timeInfoFrom[0];
                 }
                 $scope.timeslotsloading = false;
             });
@@ -569,7 +572,7 @@
     $scope.UpdateStatus = function (item) {
         
         var status = $scope.StatusValue;
-        $scope.UpdatedStatus = item.Status;
+        $scope.UpdatedStatus = item.Value;
         var SetStatus = bookingService.SetStatusofAppointment(item.Status, $scope.AppointmentBookingId);
         SetStatus.then(function (response) {
             if(response.data.Success==true)
@@ -601,7 +604,7 @@
         var appointmenttime = new Date(1997, 4, 5, time[0], time[1], time[2]);
         $scope.timeoption = $filter('date')(appointmenttime, 'h:mm a');
         $scope.dt = appointmentdate;
-        // $scope.ServiceDetail($scope.AppointmentServiceId);
+        $scope.ServiceDetail($scope.AppointmentServiceId);
         $scope.GetAllocateServiceToEmployee($scope.AppointmentEmployeeId);      
         $scope.ServiceId = $scope.AppointmentServiceId;
         //$scope.EmployeeId = $scope.AppointmentEmployeeId;
@@ -626,6 +629,7 @@
                  "CustomerIds": [$scope.CustomerId],
                  "Start": $scope.dt,
                  "End": $scope.dt,
+                 "Status": $scope.Status
              }
 
         var apirequest=bookingService.UpdateAppointment(appointment);
@@ -868,6 +872,7 @@
                             }
                         }
                     }
+                    $scope.timeoption = $scope.timeInfoFrom[0];
                     $scope.timeslotsloading = false;
                 }
             });
