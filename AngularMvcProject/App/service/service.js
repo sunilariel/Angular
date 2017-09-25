@@ -1,7 +1,7 @@
 ﻿
 app.service("bookingService", function ($http, $window) {
 
-     var GetHeader = function() {
+    var GetHeader = function () {       
         var headers = {
             'Content-Type': 'application/json',
             'Token': $window.sessionStorage.getItem('userInfo-token')
@@ -832,6 +832,28 @@ app.service("bookingService", function ($http, $window) {
         })
         return response;
     }
+
+    this.GetCustomerReportsBetweenDates=function(companyId,customerIdsString,startDate,endDate)
+    {
+        var response = $http({
+            method: "POST",
+            url: "/Report/GetCustomerReportsBetweenDates",
+            headers: GetHeader(),
+            data: { CompanyId: companyId, commaSeperatedCustomerIds: customerIdsString, StartDate: startDate, EndDate: endDate },
+        })
+        return response;
+    }
+
+    this.GetBookingsForEmployeesByIdBetweenDates = function (companyId,EmployeeIds, startDate, endDate) {
+        var response = $http({
+            method: "POST",
+            url: "/Calendar/GetBookingsForEmployeesByIdBetweenDates",
+            headers: GetHeader(),
+            data: { CompanyId: companyId, commaSeperatedEmployeeIds: EmployeeIds, StartDate: startDate, EndDate: endDate },
+        })
+        return response;
+    }
+
 })
 
 

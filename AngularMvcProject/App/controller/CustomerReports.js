@@ -1,7 +1,7 @@
 ﻿app.controller("CustomerReportsController", ['$scope','$routeParams','$location','bookingService', function ($scope, $routeParams, $location,bookingService) {
     //Redirection to different tab section//
     $scope.RedirecttoBuisnessReport = function () {
-        debugger;
+        
         $location.path("/BuisnessReports/:CompanyId");
     }
     $scope.RedirecttoResourceReport = function () {
@@ -31,6 +31,7 @@
     }
 
     $scope.init = function () {
+        debugger;
         $scope.Months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
         $scope.Years = ["2005", "2006", "2007", "2008", "2009", "2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020", "2021", "2022"];
         $scope.Date = [];
@@ -49,17 +50,41 @@
         $scope.SelectedStartYear = date.getFullYear().toString();
         $scope.SelectedStartDate = date.getDate().toString();
 
-        $scope.SelectedEndMonth = $scope.Months[date.getMonth()];
-        $scope.SelectedEndYear = date.getFullYear().toString();
-        $scope.SelectedEndDate = (date.getDate() + 15).toString();
+        var EndDate = new Date(date);
+        EndDate.setDate(date.getDate() + 15);
+
+        $scope.SelectedEndMonth = $scope.Months[EndDate.getMonth()];
+        $scope.SelectedEndYear = EndDate.getFullYear().toString();
+        $scope.SelectedEndDate = (EndDate.getDate()).toString();
+      
 
         $scope.StartDate = firstDay;
         $scope.EndDate = lastDay;
+
+        $scope.CustomerIds="";
+        var customerhttprequest=bookingService.GetAllCustomer($routeParams.CompanyId);
+        customerhttprequest.then(function(response){
+            debugger;
+            for(var i=0;i<response.data.length;i++)
+            {
+                $scope.CustomerIds=response.data[i].Id + "," + $scope.CustomerIds;
+            }
+            $scope.CustomerReportIds=$scope.CustomerIds.substring(0,$scope.CustomerIds.length -1);
+
+            var httprequest = bookingService.GetCustomerReportsBetweenDates($routeParams.CompanyId, $scope.CustomerReportIds, $scope.StartDate, $scope.EndDate);
+            httprequest.then(function (response) {
+                debugger;
+                $scope.CustomerReportDetail = [];
+            })
+        })
+
+      
     }
 
     $scope.GetTimeFrame = function (TimeFrame) {
-        $scope.BookingReport = [];
         debugger;
+        $scope.BookingReport = [];
+        
         if (TimeFrame == "today") {
             $scope.CustomerReportTimeFrame = false;
             var firstDay = new Date();
@@ -85,7 +110,7 @@
             var lastDay = new Date("1/1/" + nextyear)
         }
         else if (TimeFrame == "custom") {
-            debugger;
+            
             $scope.CustomerReportTimeFrame = true;
             var firstDay = new Date(parseInt($scope.SelectedStartYear), $scope.Months.indexOf($scope.SelectedStartMonth), parseInt($scope.SelectedStartDate));
             var lastDay = new Date(parseInt($scope.SelectedEndYear), $scope.Months.indexOf($scope.SelectedEndMonth), parseInt($scope.SelectedEndDate));
@@ -93,11 +118,19 @@
 
         $scope.StartDate = firstDay;
         $scope.EndDate = lastDay;
+
+        var httprequest = bookingService.GetCustomerReportsBetweenDates($routeParams.CompanyId, $scope.CustomerReportIds, $scope.StartDate, $scope.EndDate);
+        httprequest.then(function (response) {
+            debugger;
+            $scope.CustomerReportDetail = [];
+        })
+
+
        
     }
 
     $scope.GetTimeFrameReports = function () {
-        debugger;
+        
         $scope.BookingReport = [];
 
         var firstDay = new Date(parseInt($scope.SelectedStartYear), $scope.Months.indexOf($scope.SelectedStartMonth), parseInt($scope.SelectedStartDate));
@@ -105,5 +138,15 @@
 
         $scope.StartDate = firstDay;
         $scope.EndDate = lastDay;
+
+        GetTimeFrameReports
+
+        var httprequest = bookingService.GetCustomerReportsBetweenDates($routeParams.CompanyId, $scope.CustomerReportIds, $scope.StartDate, $scope.EndDate);
+        httprequest.then(function (response) {
+            debugger;
+            $scope.CustomerReportDetail = [];
+        })
+
+
     }
 }])

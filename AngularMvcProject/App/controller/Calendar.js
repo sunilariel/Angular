@@ -31,7 +31,7 @@ app.controller('calendarController', ['$scope', '$location', '$filter', '$window
             $scope.events = [];
             $scope.eventSources = [$scope.events];
 
-            var apirequest = bookingService.GetAppointmentDetails(5);
+            var apirequest = bookingService.GetAppointmentDetails(12);
             apirequest.then(function (response) {
                 debugger;
                 angular.forEach(response.data, function (value, key) {
@@ -144,18 +144,7 @@ app.controller('calendarController', ['$scope', '$location', '$filter', '$window
         end: '16:00' // 4pm
     }
                 ],
-                eventSources: [
-
-       // your event source
-       {
-           events: [],
-           // an option!
-           
-       }
-
-       // any other event sources...
-
-                ],
+               
                 //eventClick: function (event) {
                 //    $scope.SelectedEvent = event;
                 //},
@@ -165,10 +154,7 @@ app.controller('calendarController', ['$scope', '$location', '$filter', '$window
              
         };
 
-        $scope.getSelectedStaff = function (item) {
-            
-            alert(item);
-        };
+        
           
         $scope.headerinit = true;
         $scope.eventAfterAllRender= function () {
@@ -214,8 +200,15 @@ app.controller('calendarController', ['$scope', '$location', '$filter', '$window
             //    //angular.element('.calendar').fullCalendar('gotoDate');
             //}
         }
-        $scope.getSelectedStaff = function (item) {
-            alert(item);
+        $scope.getSelectedStaff = function (Id) {
+            debugger;
+            var date = new Date();
+            var firstDay = new Date(date.getFullYear(), date.getMonth(), 1);
+            var lastDay = new Date(date.getFullYear(), date.getMonth() + 1, 0);
+            var apirequest = bookingService.GetBookingsForEmployeesByIdBetweenDates($routeParams.CompanyId, Id, firstDay, lastDay);
+            apirequest.then(function (response) {
+
+            })
         }
 
         $scope.alertOnEventClick = function (event) {            
@@ -237,6 +230,22 @@ app.controller('calendarController', ['$scope', '$location', '$filter', '$window
             $scope.selectedprovider = "-- Select a Provider --";           
             $scope.notes = "";
             $scope.ServicePriceTimeDetailIsVisible = false;
+
+            $scope.events = view.options.eventSources;
+            //////////////
+            $scope.events[0].push({
+                title: "title",
+                id: "123",
+                description: "Description",
+                start: "2017-09-29T08:30:00",
+                end: "2017-09-29T09:30:00",
+                allDay: " ",
+                color: "Green",
+                textColor: "black"
+            });
+
+
+            $scope.eventSources = [$scope.events[0]];
         }
       
         $scope.CloseAppointmentModal = function () {
@@ -283,6 +292,8 @@ app.controller('calendarController', ['$scope', '$location', '$filter', '$window
                 else if (appointmentdetail[4] == 6) {
                     $scope.UpdatedStatus = "Paid";
                 }
+
+
                          
         }
         $scope.Closebtn = function () {
@@ -398,14 +409,14 @@ app.controller('calendarController', ['$scope', '$location', '$filter', '$window
                      "ServiceId": $scope.selectedservice,
                      "EmployeeId": $scope.selectedprovider,
                      //"CustomerIdsCommaSeperated": $scope.CustomerId,
-                     "CustomerIdsCommaSeperated": 5,
+                     "CustomerIdsCommaSeperated": 12,
                      "StartHour": $scope.timeoption,
                      "StartMinute": "",
                      "EndHour": 0,
                      "EndMinute": $scope.time,
                      "IsAdded": true,
                      "Message": "",
-                     "CustomerIds": [5],
+                     "CustomerIds": [12],
                      "Start": $scope.dt,
                      "End": $scope.dt,
                      "Status": $scope.StatusId
@@ -554,7 +565,7 @@ app.controller('calendarController', ['$scope', '$location', '$filter', '$window
                 "ServiceId": $scope.selectedservice,
                 "EmployeeId": $scope.selectedprovider,
                 //"CustomerIdsCommaSeperated": $scope.CustomerId,
-                "CustomerIdsCommaSeperated": 5,
+                "CustomerIdsCommaSeperated": 12,
                 "StartHour": $scope.timeoption,
                 "StartMinute": "",
                 "EndHour": 0,
@@ -562,7 +573,7 @@ app.controller('calendarController', ['$scope', '$location', '$filter', '$window
                 "IsAdded": true,
                 "Message": $scope.notes,
                 //"CustomerIds": [$scope.CustomerId],
-                "CustomerIds": [5],
+                "CustomerIds": [12],
                 "Start": $scope.dt,
                 "End": $scope.dt,
             }
@@ -623,18 +634,7 @@ app.controller('calendarController', ['$scope', '$location', '$filter', '$window
         end: '16:00' // 4pm
     }
                 ],
-                eventSources: [
-
-       // your event source
-       {
-           events: [],
-           // an option!
-           
-       }
-
-       // any other event sources...
-
-                ],
+               
                 //eventClick: function (event) {
                 //    $scope.SelectedEvent = event;
                 //},
@@ -646,10 +646,31 @@ app.controller('calendarController', ['$scope', '$location', '$filter', '$window
                         $timeout(function () {
                             var SetStatus = bookingService.SetStatusofAppointment($scope.Status, $scope.AppointmentId);
                             SetStatus.then(function (response) {
-                                //  $scope.GetAppointmentDetails($scope.CustomerId);
-                                angular.element(document.querySelector("#UpdateAppointmentPopup")).css("display", "none");
-                                angular.element(document.querySelector("#UpdateAppointmentPopup")).css("opacity", 0);
-                                $scope.IsVisible = false;
+                                var apirequest = bookingService.GetAppointmentDetails(12);
+                                apirequest.then(function (response) {
+                                    $scope.events = [];
+                                    $scope.eventSources = [];
+                                    angular.forEach(response.data, function (value, key) {
+                                        $scope.events.push({
+                                            title: value.ServiceName,
+                                            id: value.BookingId + "," + value.ServiceName + "," + value.Cost + "," + value.EmployeeName + "," + value.status + "," + value.DurationInMinutes + "," + value.ServiceId + "," + value.EmployeeId,
+                                            description: value.Description,
+                                            start: value.StartTime,
+                                            end: (value.EndTime),
+                                            allDay: value.IsFullDay,
+                                            color: value.Colour,
+                                            textColor: "black"
+                                        });
+                                    })
+                                    $scope.eventSources[0] = $scope.events;
+                                    $('#calendar').fullCalendar('removeEventSource', $scope.eventSources[0]);
+                                    $('#calendar').fullCalendar('addEventSource', $scope.eventSources[0]);
+                                    $('#calendar').fullCalendar('refetchEvents');
+                                    angular.element(document.querySelector("#UpdateAppointmentPopup")).css("display", "none");
+                                    angular.element(document.querySelector("#UpdateAppointmentPopup")).css("opacity", 0);
+                                    $scope.IsVisible = false;
+                                })
+                                
                             })
                         }, 1000);
                     }, 500)

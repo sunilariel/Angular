@@ -1800,6 +1800,7 @@ select.select_btn {
     color: #3d484f;
     font-size: 13px;
     background: #f4f4f4;
+        line-height: normal;
 }
 select.select_btn:focus {
     background: #e6e6e6;
@@ -4736,6 +4737,19 @@ div#staff-break .BreakSelectDiv select {
     background-position-x: 73px !important;
 }
 
+.betweenDateDiv .dateBtnDiv .dateselect {
+    background-position-x: 100px !important;
+}
+.industryformDiv select.form-control {
+    background-position-x: 300px !important;
+    background-position-y: 15px !important;
+}
+
+.businessHourSelect select.select_btn {
+background-position-x: 77px !important;
+    background-position-y: 15px !important;
+    padding: 5px 15px 5px 10px;
+}
 /* sep-21 css end here                           */
 
 /* media css start here ================================= */

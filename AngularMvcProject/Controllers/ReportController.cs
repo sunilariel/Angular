@@ -148,5 +148,33 @@ namespace AngularMvcProject.Controllers
                 return e.ToString();
             }
         }
+
+        [HttpPost]
+        public string GetCustomerReportsBetweenDates(string CompanyId, string commaSeperatedCustomerIds, string StartDate, string EndDate)
+        {
+            try
+            {
+                var result = "";
+                var startDate = StartDate.Split('T')[0];
+                var endDate = EndDate.Split('T')[0];
+                string apiUrl = ConfigurationManager.AppSettings["DomainUrl"].ToString() + "/api/Reports/GetCustomerReportsBetweenDates?companyId=" + CompanyId + "&commaSeperatedCustomerIds=" + commaSeperatedCustomerIds + "&startDate=" + startDate + "&endDate=" + endDate;
+                var httpWebRequest = HttpWebRequest.Create(apiUrl);
+                httpWebRequest.ContentType = "application/json";
+                httpWebRequest.Method = "GET";
+                httpWebRequest.Headers.Add("Token", Request.Headers["Token"]);
+                
+
+                var httpResponse = httpWebRequest.GetResponse();
+                using (var StreamReader = new StreamReader(httpResponse.GetResponseStream()))
+                {
+                    result = StreamReader.ReadToEnd();
+                }
+                return result;
+            }
+            catch (Exception e)
+            {
+                return e.ToString();
+            }
+        }
     }
 }

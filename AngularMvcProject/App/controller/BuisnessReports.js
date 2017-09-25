@@ -35,7 +35,7 @@
     }
 
     $scope.init = function () {
-        
+        debugger;
         $scope.BuisnessReportLoader = true;
         $scope.BookingReport = [];
         $scope.Months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
@@ -63,7 +63,8 @@
         $scope.StartDate = firstDay;
         $scope.EndDate = lastDay;
         var apirequest = bookingService.GetBusinessReport($routeParams.CompanyId, firstDay, lastDay);
-        apirequest.then(function(response) {
+        apirequest.then(function (response) {
+                    
             $scope.TotalBookings = response.data.TotalBookings;
             $scope.TotalRevenue = response.data.TotalRevenue;
             $scope.TotalCancellations = response.data.TotalCancellations;
