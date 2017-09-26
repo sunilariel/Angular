@@ -1800,6 +1800,7 @@ select.select_btn {
     color: #3d484f;
     font-size: 13px;
     background: #f4f4f4;
+        line-height: normal;
 }
 select.select_btn:focus {
     background: #e6e6e6;
@@ -2247,7 +2248,7 @@ span.dotSplitter
 }
 .customerDetail .form-control {
     height: 30px;
-    line-height: 30px;
+    line-height: normal;
 	border: none;
     box-shadow: none;
     font-size:12px;
@@ -3058,6 +3059,7 @@ ul.dashboardNtfList {
 
 .serviceprovideBtn .checkbox label {
     padding: 0;
+    width:100%;
 }
 .serviceprovideBtn .checkbox:focus  {
     padding: 7px 20px 7px 10px;
@@ -4676,14 +4678,17 @@ select{
     background-position-x: 228px !important;
     background-size: 9px 9px !important;
     background-position-y: 11px !important;
+    -moz-appearance: none;
+    -webkit-appearance: none;
 }
 .selectcarticon.labelcartIcon select {
     background-position-x: 62px !important;
 }
 .week_div.selecttotext select.select_btn {
-    padding: 5px 16px;
-    background-position-x: 85px !important;
+    padding: 5px 9px;
+    background-position-x: 82px !important;
     background-position-y: 15px !important;
+    min-width: 99px;
 }
 div#staff-break .BreakSelectDiv select {
     background-position-y: 15px !important;
@@ -4694,18 +4699,21 @@ div#staff-break .BreakSelectDiv select {
     background-position-x: 110px !important;
 }
 .selectDropdown .dateTimeSelect {
-    background-position-x: 69px !important;
+    background-position-x: 71px !important;
     background-position-y: 9px !important;
 }
 .labeldrowDownBtn.nolableDrop select {
-    background-position-x: 60px !important;
+    background-position-x: 90px !important;
     height: 30px;
     line-height: 30px;
-    margin-right:10px !important;
+    margin-right: 10px !important;
+    padding: 0px 25px 0 10px;
+    outline: none;
 }
 
 .staffStartDate .selectDropdown .dateTimeSelect {
-    background-position-x:77px !important;
+    background-position-x:75px !important;
+    padding:5px;
 }
 
 .fc-toolbar .fc-left select {
@@ -4736,6 +4744,36 @@ div#staff-break .BreakSelectDiv select {
     background-position-x: 73px !important;
 }
 
+.betweenDateDiv .dateBtnDiv .dateselect {
+    background-position-x: 100px !important;
+}
+.industryformDiv select.form-control {
+    background-position-x: 300px !important;
+    background-position-y: 15px !important;
+}
+
+/*.businessHourSelect select.select_btn {
+    background-position-x: 76px !important;
+    background-position-y: 15px !important;
+    padding: 5px 12px;
+}*/
+
+.businessHourSelect select.select_btn {
+    background-position-x: 77px !important;
+    background-position-y: 15px !important;
+    padding: 5px 15px 5px 10px;
+}
+
+.appointProvider.serviceCategoryList .glyphicon-chevron-down.chevronDownIcon {
+    margin-top: 2px;
+    clear: both;
+    text-align: right;
+    display: block;
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    float:none;
+}
 /* sep-21 css end here                           */
 
 /* media css start here ================================= */

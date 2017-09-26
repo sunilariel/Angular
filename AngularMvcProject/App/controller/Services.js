@@ -25,7 +25,7 @@
     }
 
     $scope.init = function () {
-        debugger;
+        
         $scope.showAddServiceDiv = true;
         $scope.showCategoryServicesDiv = true;
         $scope.showAllServicesDiv = false;
@@ -62,7 +62,7 @@
     //Get All Services of particular CompanyId//
         var responsedata = bookingService.GetAllService($routeParams.CompanyId);
         responsedata.then(function (response) {
-            debugger;
+            
             $scope.AllServices = [];
             $scope.AllServices = response.data;
          
@@ -77,11 +77,12 @@
 
     //Show the AddService Section with staff name
     $scope.AddServicePopup = function () {
-        debugger;
+        
         $scope.ServiceName = "";
         $scope.ServiceCost = "";
         $scope.ServiceTime = "";
         $scope.BufferTime = "";
+        $scope.ServiceDescription = "";
 
         var responsedata = bookingService.GetAllStaff($routeParams.CompanyId);
 
@@ -101,19 +102,19 @@
 
     
     $scope.showAllServicePopup = function () {
-        debugger;
+        
         $scope.CategoryId = null;     
         $scope.init();
     }
 
     $scope.ShowCategoryService = function (item) {
-        debugger;
+        
         angular.element(document.querySelector("#allservice")).removeClass("selected");
         $scope.CategoryName = item.Name;
         $scope.CategoryId = item.Id;
         var responsedata = bookingService.GetAllServiceForCategory(item.Id,$routeParams.CompanyId);
         responsedata.then(function (response) {
-            debugger;
+            
             if (response.data.length > 0) {             
                 $scope.ServiceDividedByCategory = [];
                 $scope.ServiceDividedByCategory = response.data;
@@ -159,7 +160,7 @@
 
     $scope.DeleteCategory=function()
     {
-        debugger;
+        
         var responseresult = bookingService.DeleteCategory($routeParams.CompanyId,$scope.CategoryId);
         responseresult.then(function (response) {
             if(response.data.Success==true)
@@ -183,7 +184,7 @@
 
 
     $scope.AddCategory = function () {
-        debugger;
+        
         var CurrentDate=new Date();
         var data = {
             "Id": "",
@@ -228,7 +229,7 @@
   
     $scope.GetColour = function (Colour, ColourCode, BorderColourCode)
     {
-        debugger;
+        
         $scope.ColourCode = ColourCode;
         $scope.BorderColourCode = BorderColourCode;
         $scope.Colour = Colour;
@@ -291,7 +292,7 @@
             var responsedata = bookingService.AddServices(service);
 
             responsedata.then(function (response) {
-                debugger;
+                
                 if (response.data.Success == false)
                 {
                     if (response.data.Message.includes("Already Exists"))
@@ -321,7 +322,7 @@
                             }
                             var responseresult = bookingService.AssignStafftoService(requestdata);
                             responseresult.then(function (response) {
-                                debugger;
+                                
                             })
                         }
                     });
@@ -346,6 +347,7 @@
                                         $scope.ServiceTime = "";
                                         $scope.ServiceCost = "";
                                         $scope.BufferTime = "";
+                                        $scope.ServiceDescription = "";
                                     }
                                 })
 
@@ -359,7 +361,7 @@
 
 
     $scope.EditService = function (item) {
-        debugger;
+        
         $scope.ServiceId=item.Id;
         $scope.ServiceName = item.Name;
         $scope.ServiceCost = item.Cost;
@@ -432,7 +434,7 @@
     //Update Service//
 
     $scope.updateService = function () {
-        debugger;
+        
         var CurrentDate = new Date();
         var UpdatedService=
         {
@@ -470,7 +472,7 @@
 
     //Delete Service//
     $scope.DeleteService = function () {
-        debugger;
+        
         var result = bookingService.DeleteService($scope.ServiceId);
         result.then(function(response)
         {
@@ -499,7 +501,7 @@
 
     $scope.AssignedStafftoService=function(item)
     {
-        debugger;
+        
         if(item.confirmed==true)
         {
             var CurrentDate = new Date();
@@ -587,7 +589,7 @@
     //Get Categories Count//
     $scope.CategoryConfirmedCount=function()
     {
-        debugger;
+        
         $scope.CategoryCheckedCount = 0;
         angular.forEach($scope.Categories, function (value, key) {
             if(value.Confirmed==true)
@@ -629,7 +631,7 @@
     }
 
     $scope.Logout = function () {
-        debugger;
+        
         $rootScope.IsLoggedInUser = false;
         var apirequest = bookingService.SignOut();
         sessionStorage.removeItem('userInfo-token');

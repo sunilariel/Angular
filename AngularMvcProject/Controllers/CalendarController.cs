@@ -61,24 +61,6 @@ namespace AngularMvcProject.Controllers
                 int i = 0;
                 foreach (var appointment in appointments)
                 {
-                    //AppointmentDetails obj = new AppointmentDetails();
-                    //obj.BookingId = appointment.Id;
-                    //obj.EmployeeId = appointment.EmployeeId.ToString();
-                    //obj.ServiceId = appointment.ServiceId.ToString();
-                    //obj.EmployeeName = (appointment.Employee) == null ? "" : appointment.Employee.FirstName;
-                    //obj.ServiceName = appointment.Service == null ? "" : appointment.Service.Name;
-                    //obj.DurationInHours = appointment.Service.DurationInHours;
-                    //obj.DurationInMinutes = appointment.Service.DurationInMinutes;
-                    //obj.Cost = appointment.Service.Cost;
-                    //obj.Currency = appointment.Service.Currency;
-                    //obj.status = appointment.Status;
-                    //obj.StartTime = appointment.Start;
-                    //obj.EndTime = appointment.End;
-
-                    //ListofAppointment.Add(obj);
-
-
-
 
                     list.Add(new Event
                     {
@@ -98,6 +80,34 @@ namespace AngularMvcProject.Controllers
             }
 
             return new JsonResult { Data = list, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+        }
+
+
+        [HttpPost]
+        public string GetBookingsForEmployeesByIdBetweenDates(string CompanyId,string commaSeperatedEmployeeIds, string StartDate, string EndDate)
+        {
+            try
+            {
+                var result = "";
+                var startDate = StartDate.Split('T')[0];
+                var endDate = EndDate.Split('T')[0];
+                string apiUrl = ConfigurationManager.AppSettings["DomainUrl"].ToString() + "/api/booking/GetBookingsForEmployeesByIdBetweenDates?companyId=" + CompanyId + "&commaSeperatedEmployeeIds=" + commaSeperatedEmployeeIds + "&startDate=" + startDate + "&endDate=" + endDate;
+                var httpWebRequest = HttpWebRequest.Create(apiUrl);
+                httpWebRequest.ContentType = "application/json";
+                httpWebRequest.Method = "GET";
+                httpWebRequest.Headers.Add("Token", Request.Headers["Token"]);
+
+                var httpResponse = httpWebRequest.GetResponse();
+                using (var StreamReader = new StreamReader(httpResponse.GetResponseStream()))
+                {
+                    result = StreamReader.ReadToEnd();
+                }
+                return result;
+            }
+            catch (Exception e)
+            {
+                return e.ToString();
+            }
         }
     }
 }

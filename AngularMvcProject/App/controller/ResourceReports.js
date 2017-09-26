@@ -2,7 +2,7 @@
 
     //Redirection to different tab section//
     $scope.RedirecttoBuisnessReport = function () {
-        debugger;
+        
         $location.path("/BuisnessReports/" + $routeParams.CompanyId);
     }
     $scope.RedirecttoResourceReport = function () {
@@ -37,7 +37,16 @@
         debugger;
         $scope.toggle = false;
         var ReportCount = false;
-        $scope.ResourcerReportsloader = true;
+        var GetStaffProvider = bookingService.GetStaffData($routeParams.CompanyId);
+        GetStaffProvider.then(function (response) {
+            if (response.data.length != 0) {
+                $scope.ResourcerReportsloader = true;
+            }
+            else {
+                $scope.ResourcerReportsloader = false;
+            }
+        })
+      
         $scope.Resources = [];
         $scope.ResourceTimeFrame = false;
         $scope.Months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
@@ -61,23 +70,29 @@
         //Get All Staff for bind it to dropdown in reports//
         var GetStaffProvider = bookingService.GetStaffData($routeParams.CompanyId);
         GetStaffProvider.then(function (response) {
-          
-            for (var i = 0; i < response.data.length; i++) {
-                $scope.Resources.push({ 'Id': response.data[i].Id, 'CompanyId': response.data[i].CompanyId, 'UserName': response.data[i].UserName, 'staffName': response.data[i].FirstName, 'staffEmail': response.data[i].Email });              
-            }
-            $scope.SelectedResource = (response.data[0].Id).toString();
-            var apirequest = bookingService.GetResourceReportsBetweenDates($routeParams.CompanyId, $scope.Resources[0].Id, $scope.StartDate, $scope.EndDate);
-            apirequest.then(function (response) {               
-                $scope.ResourceReport = [];
-                angular.forEach(response.data, function (value, key) {
-                    ReportCount = true;
-                    $scope.ResourceReport.push({ "Resource": value.Employee.FirstName, "Bookings": value.TotalBookingsAssigned, "Revenue": "£"+value.TotalRevenue, "Duration": value.DurationInHours, "Cancellations": value.TotalCancellations, "CancellationRate": value.PerntageOfTotalCancellations + "%", "Tasks": value.TotalBookingsCompleted })
-                })
-                if (ReportCount == false) {
-                    $scope.ResourceReport.push({ "Resource": "", "Bookings": "", "Revenue": "", "Duration": "No Records to display", "Cancellations": "", "CancellationRate": "", "Tasks": "" })
+            if (response.data.length != 0) {
+                for (var i = 0; i < response.data.length; i++) {
+                    $scope.Resources.push({ 'Id': response.data[i].Id, 'CompanyId': response.data[i].CompanyId, 'UserName': response.data[i].UserName, 'staffName': response.data[i].FirstName, 'staffEmail': response.data[i].Email });
                 }
+                $scope.SelectedResource = (response.data[0].Id).toString();
+                var apirequest = bookingService.GetResourceReportsBetweenDates($routeParams.CompanyId, $scope.Resources[0].Id, $scope.StartDate, $scope.EndDate);
+                apirequest.then(function (response) {
+                    $scope.ResourceReport = [];
+                    angular.forEach(response.data, function (value, key) {
+                        ReportCount = true;
+                        $scope.ResourceReport.push({ "Resource": value.Employee.FirstName, "Bookings": value.TotalBookingsAssigned, "Revenue": "£" + value.TotalRevenue, "Duration": value.DurationInHours, "Cancellations": value.TotalCancellations, "CancellationRate": value.PerntageOfTotalCancellations + "%", "Tasks": value.TotalBookingsCompleted })
+                    })
+                    if (ReportCount == false) {
+                        $scope.ResourceReport.push({ "Resource": "", "Bookings": "", "Revenue": "", "Duration": "No Records to display", "Cancellations": "", "CancellationRate": "", "Tasks": "" })
+                    }
+                    $scope.ResourcerReportsloader = false;
+                })
+            }
+            else {
+                $scope.ResourceReport = [];               
+                $scope.ResourceReport.push({ "Resource": "", "Bookings": "", "Revenue": "", "Duration": "No Records to display", "Cancellations": "", "CancellationRate": "", "Tasks": "" })
                 $scope.ResourcerReportsloader = false;
-            })
+            }
         });
 
         //On it display records on monthly time frame//
@@ -85,14 +100,17 @@
         $scope.SelectedStartYear = date.getFullYear().toString();
         $scope.SelectedStartDate = date.getDate().toString();
 
-        $scope.SelectedEndMonth = $scope.Months[date.getMonth()];
-        $scope.SelectedEndYear = date.getFullYear().toString();
-        $scope.SelectedEndDate = (date.getDate() + 15).toString();
+         var EndDate = new Date(date);
+        EndDate.setDate(date.getDate() + 15);
+
+        $scope.SelectedEndMonth = $scope.Months[EndDate.getMonth()];
+        $scope.SelectedEndYear = EndDate.getFullYear().toString();
+        $scope.SelectedEndDate = (EndDate.getDate()).toString();
     
     }
 
     $scope.GetTimeFrame = function (TimeFrame) {
-        debugger;
+        
         $scope.ResourceReport = [];
         $scope.ResourcerReportsloader = true;
         var ReportCount = false;
@@ -128,76 +146,88 @@
         }
         $scope.StartDate = firstDay;
         $scope.EndDate = lastDay;
-        if ($scope.allresourcechecked == true)
-        {
-            $scope.ResourcesList = "";
-            angular.forEach($scope.Resources, function (value, Key) {
-                $scope.ResourcesList = value.Id + "," + $scope.ResourcesList;
-            })
-            $scope.AllResources = $scope.ResourcesList.substring(0, $scope.ResourcesList.length - 1);
-            var apirequest = bookingService.GetResourceReportsBetweenDates($routeParams.CompanyId, $scope.AllResources, $scope.StartDate, $scope.EndDate);
-            apirequest.then(function (response) {             
-                angular.forEach(response.data, function (value, key) {
-                    ReportCount = true;
-                    $scope.ResourceReport.push({ "Resource": value.Employee.FirstName, "Bookings": value.TotalBookingsAssigned, "Revenue": "£" + value.TotalRevenue, "Duration": value.DurationInHours, "Cancellations": value.TotalCancellations, "CancellationRate": value.PerntageOfTotalCancellations + "%", "Tasks": value.TotalBookingsCompleted })
+        if ($scope.Resources.length != 0) {
+            if ($scope.allresourcechecked == true) {
+                $scope.ResourcesList = "";
+
+                angular.forEach($scope.Resources, function (value, Key) {
+                    $scope.ResourcesList = value.Id + "," + $scope.ResourcesList;
                 })
-                if (ReportCount == false) {
-                    $scope.ResourceReport.push({ "Resource": "", "Bookings": "", "Revenue": "", "Duration": "No Records to display", "Cancellations": "", "CancellationRate": "", "Tasks": "" })
-                }
-                $scope.ResourcerReportsloader = false;
-            })
+                $scope.AllResources = $scope.ResourcesList.substring(0, $scope.ResourcesList.length - 1);
+                var apirequest = bookingService.GetResourceReportsBetweenDates($routeParams.CompanyId, $scope.AllResources, $scope.StartDate, $scope.EndDate);
+                apirequest.then(function (response) {
+                    angular.forEach(response.data, function (value, key) {
+                        ReportCount = true;
+                        $scope.ResourceReport.push({ "Resource": value.Employee.FirstName, "Bookings": value.TotalBookingsAssigned, "Revenue": "£" + value.TotalRevenue, "Duration": value.DurationInHours, "Cancellations": value.TotalCancellations, "CancellationRate": value.PerntageOfTotalCancellations + "%", "Tasks": value.TotalBookingsCompleted })
+                    })
+                    if (ReportCount == false) {
+                        $scope.ResourceReport.push({ "Resource": "", "Bookings": "", "Revenue": "", "Duration": "No Records to display", "Cancellations": "", "CancellationRate": "", "Tasks": "" })
+                    }
+                    $scope.ResourcerReportsloader = false;
+                })
+
+
+            }
+            else {
+
+                var apirequest = bookingService.GetResourceReportsBetweenDates($routeParams.CompanyId, $scope.Resources[0].Id, firstDay, lastDay);
+                apirequest.then(function (response) {
+                    $scope.ResourceReportData = [];
+                    $scope.ResourceReportData = response.data;
+                    angular.forEach(response.data, function (value, key) {
+                        ReportCount = true;
+                        $scope.ResourceReport.push({ "Resource": value.Employee.FirstName, "Bookings": value.TotalBookingsAssigned, "Revenue": "£" + value.TotalRevenue, "Duration": value.DurationInHours, "Cancellations": value.TotalCancellations, "CancellationRate": value.PerntageOfTotalCancellations + "%", "Tasks": value.TotalBookingsCompleted })
+                    })
+                    if (ReportCount == false) {
+                        $scope.ResourceReport.push({ "Resource": "", "Bookings": "", "Revenue": "", "Duration": "No Records to display", "Cancellations": "", "CancellationRate": "", "Tasks": "" })
+                    }
+                    $scope.ResourcerReportsloader = false;
+                })
+            }
         }
         else {
-        var apirequest = bookingService.GetResourceReportsBetweenDates($routeParams.CompanyId, $scope.Resources[0].Id, firstDay, lastDay);
-        apirequest.then(function (response) {
-            $scope.ResourceReportData = [];
-            $scope.ResourceReportData = response.data;          
-            angular.forEach(response.data, function (value, key) {
-                ReportCount = true;
-                $scope.ResourceReport.push({ "Resource": value.Employee.FirstName, "Bookings": value.TotalBookingsAssigned, "Revenue": "£" + value.TotalRevenue, "Duration": value.DurationInHours, "Cancellations": value.TotalCancellations, "CancellationRate": value.PerntageOfTotalCancellations + "%", "Tasks": value.TotalBookingsCompleted })
-            })
-            if (ReportCount == false) {
-                $scope.ResourceReport.push({ "Resource": "", "Bookings": "", "Revenue": "", "Duration": "No Records to display", "Cancellations": "", "CancellationRate": "", "Tasks": "" })
-            }
+            $scope.ResourceReport = [];
+            $scope.ResourceReport.push({ "Resource": "", "Bookings": "", "Revenue": "", "Duration": "No Records to display", "Cancellations": "", "CancellationRate": "", "Tasks": "" })
             $scope.ResourcerReportsloader = false;
-        })
-    }
+        }
+
     }
 
     $scope.GetAllResourcesReport = function (item) {
-        debugger;
+        
         $scope.ResourceReport = [];
         $scope.ResourcerReportsloader = true;
         var ReportCount = false;
         $scope.allresourcechecked = item;
-        if ($scope.allresourcechecked == true) {
-            var GetStaffProvider = bookingService.GetStaffData($routeParams.CompanyId);
-            GetStaffProvider.then(function (response) {
-                $scope.ResourcesList = "";
-                $scope.Resources = [];
-                for (var i = 0; i < response.data.length; i++) {
-                    $scope.Resources.push({ 'Id': response.data[i].Id, 'CompanyId': response.data[i].CompanyId, 'UserName': response.data[i].UserName, 'staffName': response.data[i].FirstName, 'staffEmail': response.data[i].Email });
-                    $scope.ResourcesList = response.data[i].Id + "," + $scope.ResourcesList;                                     
-                }
-                $scope.AllResources = $scope.ResourcesList.substring(0, $scope.ResourcesList.length - 1);
-
-                var apirequest = bookingService.GetResourceReportsBetweenDates($routeParams.CompanyId, $scope.AllResources, $scope.StartDate, $scope.EndDate);
-                apirequest.then(function (response) {                                   
-                    angular.forEach(response.data, function (value, key) {
-                        ReportCount = true;
-                        $scope.ResourceReport.push({ "Resource": value.Employee.FirstName, "Bookings": value.TotalBookingsAssigned, "Revenue": "£" + value.TotalRevenue, "Duration": value.DurationInHours, "Cancellations": value.TotalCancellations, "CancellationRate": value.PerntageOfTotalCancellations + "%", "Tasks": value.TotalBookingsCompleted })
-                    })
-                    if (ReportCount == false) {
-                        $scope.ResourceReport.push({ "Resource": "", "Bookings": "", "Revenue": "", "Duration": "No Records to display", "Cancellations": "", "CancellationRate": "", "Tasks": "" })
+        if ($scope.Resources.length != 0) {
+            if ($scope.allresourcechecked == true) {
+                var GetStaffProvider = bookingService.GetStaffData($routeParams.CompanyId);
+                GetStaffProvider.then(function (response) {
+                    $scope.ResourcesList = "";
+                    $scope.Resources = [];
+                    for (var i = 0; i < response.data.length; i++) {
+                        $scope.Resources.push({ 'Id': response.data[i].Id, 'CompanyId': response.data[i].CompanyId, 'UserName': response.data[i].UserName, 'staffName': response.data[i].FirstName, 'staffEmail': response.data[i].Email });
+                        $scope.ResourcesList = response.data[i].Id + "," + $scope.ResourcesList;
                     }
-                    $scope.ResourcerReportsloader = false;
-                })
-            })
+                    $scope.AllResources = $scope.ResourcesList.substring(0, $scope.ResourcesList.length - 1);
 
-        }
-        else {            
+                    var apirequest = bookingService.GetResourceReportsBetweenDates($routeParams.CompanyId, $scope.AllResources, $scope.StartDate, $scope.EndDate);
+                    apirequest.then(function (response) {
+                        angular.forEach(response.data, function (value, key) {
+                            ReportCount = true;
+                            $scope.ResourceReport.push({ "Resource": value.Employee.FirstName, "Bookings": value.TotalBookingsAssigned, "Revenue": "£" + value.TotalRevenue, "Duration": value.DurationInHours, "Cancellations": value.TotalCancellations, "CancellationRate": value.PerntageOfTotalCancellations + "%", "Tasks": value.TotalBookingsCompleted })
+                        })
+                        if (ReportCount == false) {
+                            $scope.ResourceReport.push({ "Resource": "", "Bookings": "", "Revenue": "", "Duration": "No Records to display", "Cancellations": "", "CancellationRate": "", "Tasks": "" })
+                        }
+                        $scope.ResourcerReportsloader = false;
+                    })
+                })
+
+            }
+            else {
                 var apirequest = bookingService.GetResourceReportsBetweenDates($routeParams.CompanyId, $scope.Resources[0].Id, $scope.StartDate, $scope.EndDate);
-                apirequest.then(function (response) {                   
+                apirequest.then(function (response) {
                     angular.forEach(response.data, function (value, key) {
                         ReportCount = true;
                         $scope.ResourceReport.push({ "Resource": value.Employee.FirstName, "Bookings": value.TotalBookingsAssigned, "Revenue": "£" + value.TotalRevenue, "Duration": value.DurationInHours, "Cancellations": value.TotalCancellations, "CancellationRate": value.PerntageOfTotalCancellations + "%", "Tasks": value.TotalBookingsCompleted })
@@ -207,13 +237,19 @@
                     }
                     $scope.ResourcerReportsloader = false;
                 })
-           
+
+            }
+        }
+        else {
+            $scope.ResourceReport = [];
+            $scope.ResourceReport.push({ "Resource": "", "Bookings": "", "Revenue": "", "Duration": "No Records to display", "Cancellations": "", "CancellationRate": "", "Tasks": "" })
+            $scope.ResourcerReportsloader = false;
         }
     }
 
 
     $scope.ResourceChange = function (Id) {
-        debugger;
+        
         $scope.ResourceReport = [];
         $scope.ResourcerReportsloader = true;
         var ReportCount = false;
@@ -230,7 +266,7 @@
         })
     }
     $scope.GetTimeFrameReports = function () {
-        debugger;
+        
         $scope.ResourceReport = [];
         var ReportCount = false;
         $scope.ResourcerReportsloader = true;
@@ -241,50 +277,56 @@
 
         $scope.StartDate = firstDay;
         $scope.EndDate = lastDay;
+        if ($scope.Resources.length != 0) {
+            if ($scope.allresourcechecked == true) {
 
-        if ($scope.allresourcechecked == true) {
-
-            var GetStaffProvider = bookingService.GetStaffData($routeParams.CompanyId);
-            GetStaffProvider.then(function (response) {
-                $scope.ResourcesList = "";
-                $scope.Resources = [];
-                for (var i = 0; i < response.data.length; i++) {
-                    $scope.Resources.push({ 'Id': response.data[i].Id, 'CompanyId': response.data[i].CompanyId, 'UserName': response.data[i].UserName, 'staffName': response.data[i].FirstName, 'staffEmail': response.data[i].Email });
-                    $scope.ResourcesList = response.data[i].Id + "," + $scope.ResourcesList;                                     
-                }
-                $scope.AllResources = $scope.ResourcesList.substring(0, $scope.ResourcesList.length - 1);
-            })
-            var apirequest = bookingService.GetResourceReportsBetweenDates($routeParams.CompanyId, $scope.AllResources, $scope.StartDate, $scope.EndDate);
-            apirequest.then(function (response) {               
-                angular.forEach(response.data, function (value, key) {
-                    ReportCount = true;
-                    $scope.ResourceReport.push({ "Resource": value.Employee.FirstName, "Bookings": value.TotalBookingsAssigned, "Revenue": "£" + value.TotalRevenue, "Duration": value.DurationInHours, "Cancellations": value.TotalCancellations, "CancellationRate": value.PerntageOfTotalCancellations + "%", "Tasks": value.TotalBookingsCompleted })
+                var GetStaffProvider = bookingService.GetStaffData($routeParams.CompanyId);
+                GetStaffProvider.then(function (response) {
+                    $scope.ResourcesList = "";
+                    $scope.Resources = [];
+                    for (var i = 0; i < response.data.length; i++) {
+                        $scope.Resources.push({ 'Id': response.data[i].Id, 'CompanyId': response.data[i].CompanyId, 'UserName': response.data[i].UserName, 'staffName': response.data[i].FirstName, 'staffEmail': response.data[i].Email });
+                        $scope.ResourcesList = response.data[i].Id + "," + $scope.ResourcesList;
+                    }
+                    $scope.AllResources = $scope.ResourcesList.substring(0, $scope.ResourcesList.length - 1);
                 })
-                if (ReportCount == false) {
-                    $scope.ResourceReport.push({ "Resource": "", "Bookings": "", "Revenue": "", "Duration": "No Records to display", "Cancellations": "", "CancellationRate": "", "Tasks": "" })
-                }
-                $scope.ResourcerReportsloader = false;
-            })
+                var apirequest = bookingService.GetResourceReportsBetweenDates($routeParams.CompanyId, $scope.AllResources, $scope.StartDate, $scope.EndDate);
+                apirequest.then(function (response) {
+                    angular.forEach(response.data, function (value, key) {
+                        ReportCount = true;
+                        $scope.ResourceReport.push({ "Resource": value.Employee.FirstName, "Bookings": value.TotalBookingsAssigned, "Revenue": "£" + value.TotalRevenue, "Duration": value.DurationInHours, "Cancellations": value.TotalCancellations, "CancellationRate": value.PerntageOfTotalCancellations + "%", "Tasks": value.TotalBookingsCompleted })
+                    })
+                    if (ReportCount == false) {
+                        $scope.ResourceReport.push({ "Resource": "", "Bookings": "", "Revenue": "", "Duration": "No Records to display", "Cancellations": "", "CancellationRate": "", "Tasks": "" })
+                    }
+                    $scope.ResourcerReportsloader = false;
+                })
+            }
+            else {
+
+                var apirequest = bookingService.GetResourceReportsBetweenDates($routeParams.CompanyId, $scope.SelectedResource, $scope.StartDate, $scope.EndDate);
+                apirequest.then(function (response) {
+                    angular.forEach(response.data, function (value, key) {
+                        ReportCount = true;
+                        $scope.ResourceReport.push({ "Resource": value.Employee.FirstName, "Bookings": value.TotalBookingsAssigned, "Revenue": "£" + value.TotalRevenue, "Duration": value.DurationInHours, "Cancellations": value.TotalCancellations, "CancellationRate": value.PerntageOfTotalCancellations + "%", "Tasks": value.TotalBookingsCompleted })
+                    })
+                    if (ReportCount == false) {
+                        $scope.ResourceReport.push({ "Resource": "", "Bookings": "", "Revenue": "", "Duration": "No Records to display", "Cancellations": "", "CancellationRate": "", "Tasks": "" })
+                    }
+                    $scope.ResourcerReportsloader = false;
+                })
+            }
         }
         else {
-            
-            var apirequest = bookingService.GetResourceReportsBetweenDates($routeParams.CompanyId, $scope.SelectedResource, $scope.StartDate, $scope.EndDate);
-            apirequest.then(function (response) {             
-                angular.forEach(response.data, function (value, key) {
-                    ReportCount = true;
-                    $scope.ResourceReport.push({ "Resource": value.Employee.FirstName, "Bookings": value.TotalBookingsAssigned, "Revenue": "£" + value.TotalRevenue, "Duration": value.DurationInHours, "Cancellations": value.TotalCancellations, "CancellationRate": value.PerntageOfTotalCancellations + "%", "Tasks": value.TotalBookingsCompleted })
-                })
-                if (ReportCount == false) {
-                    $scope.ResourceReport.push({ "Resource": "", "Bookings": "", "Revenue": "", "Duration": "No Records to display", "Cancellations": "", "CancellationRate": "", "Tasks": "" })
-                }
-                $scope.ResourcerReportsloader = false;
-            })
+            $scope.ResourceReport = [];
+            $scope.ResourceReport.push({ "Resource": "", "Bookings": "", "Revenue": "", "Duration": "No Records to display", "Cancellations": "", "CancellationRate": "", "Tasks": "" })
+            $scope.ResourcerReportsloader = false;
         }
 
     }
 
     $scope.GetReportbyOrder = function (field) {
-        debugger;
+        
         $scope.toggle = !$scope.toggle;
         if ($scope.toggle == true) {
             $scope.Order = "ASC";
