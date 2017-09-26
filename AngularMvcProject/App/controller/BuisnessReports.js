@@ -1,4 +1,4 @@
-﻿app.controller('BuisnessReportsController', ['$scope', '$location','$routeParams', 'bookingService', function ($scope, $location,$routeParams, bookingService)
+﻿app.controller('BuisnessReportsController', ['$scope', '$location','$routeParams', 'bookingService','$rootScope', function ($scope, $location,$routeParams, bookingService,$rootScope)
 {
     //Redirection to different tab section//
     $scope.RedirecttoBuisnessReport = function () {
@@ -55,9 +55,12 @@
         $scope.SelectedStartYear = date.getFullYear().toString();
         $scope.SelectedStartDate = date.getDate().toString();
 
-        $scope.SelectedEndMonth = $scope.Months[date.getMonth()];
-        $scope.SelectedEndYear = date.getFullYear().toString();
-        $scope.SelectedEndDate = (date.getDate() + 15).toString();
+        var EndDate = new Date(date);
+        EndDate.setDate(date.getDate() + 15);
+
+        $scope.SelectedEndMonth = $scope.Months[EndDate.getMonth()];
+        $scope.SelectedEndYear = EndDate.getFullYear().toString();
+        $scope.SelectedEndDate = (EndDate.getDate()).toString();
 
 
         $scope.StartDate = firstDay;
@@ -156,5 +159,13 @@
             $scope.BuisnessReportLoader = false;
         })
     }
+
+      $scope.Logout = function () {
+        $rootScope.IsLoggedInUser = false;
+        var apirequest = bookingService.SignOut();
+        sessionStorage.removeItem('userInfo-token');
+        $location.path("/signin");
+    }
+
 }
 ])

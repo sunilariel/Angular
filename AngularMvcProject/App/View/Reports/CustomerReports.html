@@ -35,7 +35,7 @@
 }
 </style>
 
-<div ng-app="bookingApp" ng-init="init()">
+<div ng-app="bookingApp">
 
 
     <div style="width: 100%;text-align: center;position: absolute;z-index: 999999; top:65px;" ng-if="IsVisible"><span id="voice-box" class="noDisplay" style="background:yellow; padding:5px 10px; border-radius:0 0 2px 2px;" ng-bind="MessageText"></span></div>
@@ -313,31 +313,39 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <a href="#" title=""> <i class="fa fa-cloud-download" aria-hidden="true"></i> Download as CSV </a>
+                                        <a class="cursorhand" ng-csv="CustomerReportDetail" filename="CustomerReports.csv" csv-header="['Customer','Bookings','Revenue']" > <i class="fa fa-cloud-download" aria-hidden="true"></i> Download as CSV </a>
                                         <!--<a href="#" title=""> Show Results </a>-->
                                         <div class="clearfix"></div>
                                     </div>
                                     <div class="inner_busscontent">
-                                        <h3>
-                                            Showing data for {{StartDate | date:"dd MMM yyyy" }} to {{EndDate | date:"dd MMM yyyy"}}
-
+                                        <h3 ng-if="time!='today'">
+                                            Showing data for {{StartDate | date :"dd MMM yyyy"}} to {{EndDate | date :"dd MMM yyyy"}}
+                                        </h3>
+                                        <h3 ng-if="time=='today'">
+                                            Showing data for {{StartDate | date :"dd MMM yyyy"}}
                                         </h3>
                                         <div class="customer_table">
                                             <div class="table-responsive table_1">
                                                 <table class="table table-bordered">
                                                     <thead>
                                                         <tr>
-                                                            <th>Customer <i class="table-sort fa fa-sort" aria-hidden="true"></i> </th>
-                                                            <th>  Bookings <i class="table-sort fa fa-sort" aria-hidden="true"></i></th>
-                                                            <th>  Revenue <i class="table-sort fa fa-sort" aria-hidden="true"></i></th>
+                                                            <th>Customer<i class="table-sort fa fa-sort" aria-hidden="true"></i> </th>
+                                                            <th>Bookings<i class="table-sort fa fa-sort" aria-hidden="true"></i></th>
+                                                            <th>Revenue<i class="table-sort fa fa-sort" aria-hidden="true"></i></th>
 
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-                                                        <tr>
-                                                            <td><a target="_blank" href="#">Sahara singh</a><a></a></td>
-                                                            <td>1</td>
-                                                            <td>$50.00</td>
+                                                        <tr ng-repeat="item in CustomerReportDetail">
+                                                            <!--<td><a target="_blank" href="#">{{item.Customer}}</a></td>-->
+                                                            <td>{{item.Customer}}</td>
+                                                            <td>{{item.Bookings}}</td>
+                                                            <td>{{item.Revenue}}</td>
+                                                        </tr>
+                                                        <tr ng-if="CustomerReportLoader">
+                                                            <td></td>
+                                                            <td><img src="/Content/Assets/images/ImpoliteLivelyGenet13.gif" /></td>
+                                                            <td></td>
                                                         </tr>
                                                     </tbody>
                                                 </table>

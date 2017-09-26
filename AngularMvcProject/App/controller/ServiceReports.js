@@ -1,4 +1,4 @@
-﻿app.controller('ServiceReportsController', ['$scope', '$routeParams', '$location', 'bookingService', function ($scope, $routeParams, $location, bookingService) {
+﻿app.controller('ServiceReportsController', ['$scope', '$routeParams', '$location', 'bookingService','$rootScope', function ($scope, $routeParams, $location, bookingService,$rootScope) {
 
     //Redirection to different tab section//
     $scope.RedirecttoBuisnessReport = function () {
@@ -126,19 +126,20 @@
     }
 
     $scope.init = function () {
-        
+        debugger;
+        $scope.ServiceExist=true;
         $scope.toggle = false;
         var ReportCount = 0;
-        var apirequest = bookingService.getServicesData($routeParams.CompanyId);
-        apirequest.then(function (response) {
-            if(response.data.length !=0)
-            {
-                $scope.ServiceReportsloader = true;
-            }
-            else {
-                $scope.ServiceReportsloader = false;
-            }
-        })
+        //var apirequest = bookingService.getServicesData($routeParams.CompanyId);
+        //apirequest.then(function (response) {
+        //    if(response.data.length !=0)
+        //    {
+        //        $scope.ServiceReportsloader = true;
+        //    }
+        //    else {
+        //        $scope.ServiceReportsloader = false;
+        //    }
+        //})
         //$scope.ServiceReportsloader = true;
         $scope.ServiceTimeFrame = false;
         $scope.allservicechecked = false;
@@ -175,7 +176,8 @@
                
         var apirequest=bookingService.getServicesData($routeParams.CompanyId);
         apirequest.then(function (response) {
-            if(response.data.length!=0){
+            if (response.data.length != 0) {
+                $scope.ServiceReportsloader = true;
             angular.forEach(response.data, function (value, key) {
                 $scope.ListofServices.push({ "Id": value.Id, "Service": value.Name });                            
             })
@@ -197,6 +199,7 @@
             }
             else
             {
+                $scope.ServiceExist = false;
                 $scope.ServiceReport.push({ "Service": "", "Category": "", "Booking": "", "Revenue": "No Records to display", "Cancellations": "", "CancellationRate": "" });
                 $scope.ServiceReportsloader = false;
             }
@@ -206,7 +209,7 @@
 
     $scope.GetTimeFrameReports = function () {       
         var ReportCount = false;
-        $scope.ServiceReportsloader = true;
+       
         $scope.ServiceReport = [];
 
         var firstDay = new Date(parseInt($scope.SelectedStartYear), $scope.Months.indexOf($scope.SelectedStartMonth), parseInt($scope.SelectedStartDate));
@@ -217,6 +220,7 @@
         var apirequest = bookingService.getServicesData($routeParams.CompanyId);
         apirequest.then(function (response) {
             if (response.data.length != 0) {
+                $scope.ServiceReportsloader = true;
                 angular.forEach(response.data, function (value, key) {
                     $scope.Services = value.Id + "," + $scope.Services;
                 })
@@ -248,13 +252,14 @@
         
         var ReportCount = false;
         $scope.allservicechecked = true;
-        $scope.ServiceReportsloader = true;
+      
         $scope.ServiceReport = [];
         if(checked==true)
         {
             var apirequest=bookingService.getServicesData($routeParams.CompanyId);
             apirequest.then(function (response) {
                 if (response.data.length != 0) {
+                    $scope.ServiceReportsloader = true;
                     angular.forEach(response.data, function (value, key) {
                         $scope.Services = value.Id + "," + $scope.Services;
                     })
@@ -342,6 +347,12 @@
             })
         })
 
+    }
+    $scope.Logout = function () {
+        $rootScope.IsLoggedInUser = false;
+        var apirequest = bookingService.SignOut();
+        sessionStorage.removeItem('userInfo-token');
+        $location.path("/signin");
     }
 
 }])
