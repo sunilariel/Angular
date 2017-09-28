@@ -128,7 +128,7 @@
     $scope.init = function () {
         debugger;
         $scope.ServiceExist=true;
-        $scope.toggle = false;
+        $scope.toggle = true;
         var ReportCount = 0;
         //var apirequest = bookingService.getServicesData($routeParams.CompanyId);
         //apirequest.then(function (response) {
@@ -334,16 +334,18 @@
     $scope.GetServiceReportByOrder = function (Field) {
         
         $scope.toggle = !$scope.toggle;
-        if ($scope.toggle == true) {
-            $scope.Order = "ASC";
-        }
-        else {
-            $scope.Order = "DESC";
-        }
-        var apireportrequest = bookingService.GetServiceReportsBetweenDatesByOrder($routeParams.CompanyId, $scope.commaSeperatedServiceIds, $scope.StartDate, $scope.EndDate, $scope.Order, Field);
-        apireportrequest.then(function (response) {           
+        //if ($scope.toggle == true) {
+        //    $scope.Order = "ASC";
+        //}
+        //else {
+        //    $scope.Order = "DESC";
+        //}
+      
+        var apireportrequest = bookingService.GetServiceReportsBetweenDatesByOrder($routeParams.CompanyId, $scope.commaSeperatedServiceIds, $scope.StartDate, $scope.EndDate, $scope.toggle, Field);
+        apireportrequest.then(function (response) {
+            $scope.ServiceReport = [];
             angular.forEach(response.data, function (value, key) {                
-            //    $scope.ServiceReport.push({ "Service": value.ServiceName, "Category": value.CategoryName, "Booking": value.TotalBookings, "Revenue": "£"+value.TotalConfirmedRevenue, "Cancellations": value.TotalCancellations, "CancellationRate": value.PerntageOfTotalCancellations +"%" });                
+                $scope.ServiceReport.push({ "Service": value.ServiceName, "Category": value.CategoryName, "Booking": value.TotalBookings, "Revenue": "£"+value.TotalConfirmedRevenue, "Cancellations": value.TotalCancellations, "CancellationRate": value.PerntageOfTotalCancellations +"%" });                
             })
         })
 
