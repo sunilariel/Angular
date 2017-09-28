@@ -1,26 +1,25 @@
 ﻿
 app.service("bookingService", function ($http, $window) {
 
-    var GetHeader = function () {       
+    var GetHeader = function () {
         var headers = {
             'Content-Type': 'application/json',
             'Token': $window.sessionStorage.getItem('userInfo-token')
         };
 
         return headers;
-     }
+    }
 
-     this.GetHeader = function () {
-         var headers = {
-             'Content-Type': 'application/json',
-             'Token': $window.sessionStorage.getItem('userInfo-token')
-         };
+    this.GetHeader = function () {
+        var headers = {
+            'Content-Type': 'application/json',
+            'Token': $window.sessionStorage.getItem('userInfo-token')
+        };
 
-         return headers;
-     }
+        return headers;
+    }
 
-    this.SignUp = function (dataobject)
-    {
+    this.SignUp = function (dataobject) {
         var response = $http({
             method: "POST",
             url: "/SignUp/CreateAccount",
@@ -31,8 +30,7 @@ app.service("bookingService", function ($http, $window) {
     }
 
 
-    this.CheckUserExist=function(email)
-    {
+    this.CheckUserExist = function (email) {
         var response = $http({
             method: "POST",
             url: "/SignUp/UserExist",
@@ -42,18 +40,18 @@ app.service("bookingService", function ($http, $window) {
     }
     // Add Employee
     this.register = function (dataobject) {
-        
+
         var response = $http({
             method: "post",
             url: "/wizard/postdata",
             data: { dataObj: dataobject },
-            headers : GetHeader()
+            headers: GetHeader()
         });
         return response;
 
     }
     this.staffInformation = function (dataobject) {
-        
+
         var response = $http({
             method: "post",
             url: "/wizard/poststaffdata",
@@ -64,7 +62,7 @@ app.service("bookingService", function ($http, $window) {
     }
 
     this.EditStaffInformation = function (dataobject) {
-        
+
         var response = $http({
             method: "post",
             url: "/wizard/EditStaffData",
@@ -75,7 +73,7 @@ app.service("bookingService", function ($http, $window) {
     }
 
     this.DeAllocateServiceForEmployee = function (dataobject) {
-        
+
         var response = $http({
             method: "post",
             url: "/wizard/DeAllocateServiceForEmployee",
@@ -84,7 +82,7 @@ app.service("bookingService", function ($http, $window) {
         });
         return response;
     }
-   
+
 
     this.WorkingHours = function (dataobject) {
         var response = $http({
@@ -97,7 +95,7 @@ app.service("bookingService", function ($http, $window) {
     }
 
     this.AddService = function (dataobject) {
-        
+
         var response = $http({
             method: "post",
             url: "/wizard/AddService",
@@ -108,7 +106,7 @@ app.service("bookingService", function ($http, $window) {
     }
 
     this.EditService = function (dataobject) {
-        
+
         var response = $http({
             method: "post",
             url: "/wizard/EditService",
@@ -119,7 +117,7 @@ app.service("bookingService", function ($http, $window) {
     }
 
     this.GetStaffData = function (dataobject) {
-        
+
 
         var response = $http({
             method: "post",
@@ -131,7 +129,7 @@ app.service("bookingService", function ($http, $window) {
     }
 
     this.DeleteStaff = function (id) {
-        
+
         var response = $http({
             method: "post",
             url: "/wizard/DeleteStaff",
@@ -141,7 +139,7 @@ app.service("bookingService", function ($http, $window) {
         return response;
     }
     this.getServicesData = function (id) {
-        
+
         var response = $http({
             method: "post",
             url: "/wizard/GetServiceData",
@@ -151,7 +149,7 @@ app.service("bookingService", function ($http, $window) {
         return response;
     }
     this.DeleteService = function (id) {
-        
+
         var response = $http({
             method: "post",
             url: "/wizard/DeleteService",
@@ -161,21 +159,21 @@ app.service("bookingService", function ($http, $window) {
         return response;
     }
     this.assignStaffToService = function (dataobject) {
-        
+
         var response = $http({
             method: "post",
             url: "/wizard/AssignStaff",
-            data: { dataobj: dataobject},
+            data: { dataobj: dataobject },
             headers: GetHeader()
         })
         return response;
     }
-    
-  
+
+
     ///////////Customer Section in MileStone_2///////////////
 
     this.CreateCustomer = function (dataobject) {
-        
+
         var response = $http({
             method: 'post',
             url: "/Customer/CreateCustomer",
@@ -185,13 +183,12 @@ app.service("bookingService", function ($http, $window) {
         return response;
     }
 
-    this.UpdateCustomer=function(dataobject)
-    {
-        
+    this.UpdateCustomer = function (dataobject) {
+
         var response = $http({
             method: "POST",
             url: "/Customer/UpdateCustomer",
-            data: {customer: dataobject},
+            data: { customer: dataobject },
             headers: GetHeader()
 
         })
@@ -200,18 +197,18 @@ app.service("bookingService", function ($http, $window) {
 
 
     this.GetAllCustomer = function (dataobject) {
-        
+
         var response = $http({
             method: 'post',
             url: '/Customer/GetAllCustomer',
-            data: { Id : dataobject },
+            data: { Id: dataobject },
             headers: GetHeader()
         })
         return response;
     }
 
-    this.DeleteCustomer = function (companyId,customerId) {
-        
+    this.DeleteCustomer = function (companyId, customerId) {
+
         var response = $http({
             method: "post",
             url: "/Customer/DeleteCustomer",
@@ -221,54 +218,50 @@ app.service("bookingService", function ($http, $window) {
         return response;
     }
 
-    this.GetCustomerStats=function(companyId,customerId,year,month)
-    {
+    this.GetCustomerStats = function (companyId, customerId, year, month) {
         var response = $http({
             method: "post",
             url: "/Customer/GetCustomerStats",
             data: { CompanyId: companyId, CustomerId: customerId, Year: year, Month: month },
-            headers:GetHeader()
+            headers: GetHeader()
         })
         return response;
     }
 
-    this.AddCustomerNote=function(dataobj)
-    {
+    this.AddCustomerNote = function (dataobj) {
         var response = $http({
             url: "/Customer/AddCustomerNote",
             method: "POST",
             data: { notesdetail: dataobj },
-            headers:GetHeader()
+            headers: GetHeader()
         })
         return response;
     }
 
-    this.GetCustomerNotes=function(companyId,customerId)
-    {
+    this.GetCustomerNotes = function (companyId, customerId) {
         var response = $http({
             url: "/Customer/GetCustomerNotes",
             data: { CompanyId: companyId, CustomerId: customerId },
             method: "POST",
-            headers:GetHeader()
+            headers: GetHeader()
         })
         return response;
     }
 
-    this.DeleteCustomerNote=function(companyId,customerNoteId)
-    {
+    this.DeleteCustomerNote = function (companyId, customerNoteId) {
         var response = $http({
             url: "/Customer/DeleteCustomerNote",
             data: { CompanyId: companyId, CustomerNoteId: customerNoteId },
             method: "POST",
-            headers:GetHeader()
+            headers: GetHeader()
         })
         return response;
     }
 
     ////////////for customer module Add appointment
 
-    this.GetAllocatedServicetoEmployee = function (companyId,employeeId) {
-        
+    this.GetAllocatedServicetoEmployee = function (companyId, employeeId) {
+
         var response = $http({
             method: 'post',
             url: '/Customer/GetAllocatedServicetoEmployee',
@@ -278,15 +271,14 @@ app.service("bookingService", function ($http, $window) {
         return response;
     }
 
-    this.AddAppointment=function(dataobject)
-    {
-       var response= $http({
+    this.AddAppointment = function (dataobject) {
+        var response = $http({
             method: 'POST',
             url: '/Customer/AddAppointment',
             data: { appointment: dataobject },
             headers: GetHeader()
-       })
-       return response;
+        })
+        return response;
     }
 
     this.UpdateAppointment = function (dataobject) {
@@ -299,12 +291,11 @@ app.service("bookingService", function ($http, $window) {
         return response;
     }
 
-    this.GetSelectedService = function (dataobject)
-    {
+    this.GetSelectedService = function (dataobject) {
         var response = $http({
             method: "POST",
             url: "/Customer/GetSelectedService",
-            data: { ServiceId: dataobject},
+            data: { ServiceId: dataobject },
             headers: GetHeader()
         })
         return response;
@@ -333,18 +324,17 @@ app.service("bookingService", function ($http, $window) {
         return response;
     }
 
-    this.GetAppointmentDetails=function(customerId){
-        var response=$http({
-            method:"POST",
+    this.GetAppointmentDetails = function (customerId) {
+        var response = $http({
+            method: "POST",
             url: "/Customer/GetAppointmentDetails",
-            data: { CustomerId: customerId},
+            data: { CustomerId: customerId },
             headers: GetHeader()
         })
         return response;
     }
 
-    this.DeleteAppointment=function(Id)
-    {
+    this.DeleteAppointment = function (Id) {
         var response = $http({
             method: "POST",
             url: "/Customer/DeleteAppointment",
@@ -365,9 +355,8 @@ app.service("bookingService", function ($http, $window) {
         })
         return response;
     }
-    
-    this.GetCategories=function(dataobject)
-    {
+
+    this.GetCategories = function (dataobject) {
         var response = $http({
             method: "POST",
             url: "/Services/GetCategories",
@@ -377,8 +366,7 @@ app.service("bookingService", function ($http, $window) {
         return response;
     }
 
-    this.AddServices=function(dataobject)
-    {
+    this.AddServices = function (dataobject) {
         var response = $http({
             method: "POST",
             url: "/Services/AddServices",
@@ -388,8 +376,7 @@ app.service("bookingService", function ($http, $window) {
         return response;
     }
 
-    this.UpdateService=function(dataobject)
-    {
+    this.UpdateService = function (dataobject) {
         var response = $http({
             method: "POST",
             url: "/Services/UpdateService",
@@ -399,8 +386,7 @@ app.service("bookingService", function ($http, $window) {
         return response;
     }
 
-    this.AssignCategorytoService=function(companyId,serviceId,categoryId)
-    {
+    this.AssignCategorytoService = function (companyId, serviceId, categoryId) {
         var response = $http({
             method: "POST",
             url: "/Services/AssignCategorytoService",
@@ -410,8 +396,7 @@ app.service("bookingService", function ($http, $window) {
         return response;
     }
 
-    this.DeAllocateCategoryFromService=function(companyId,serviceId,categoryId)
-    {
+    this.DeAllocateCategoryFromService = function (companyId, serviceId, categoryId) {
         var response = $http({
             method: "POST",
             url: "/Services/DeAllocateCategoryFromService",
@@ -422,8 +407,7 @@ app.service("bookingService", function ($http, $window) {
 
     }
 
-    this.GetCategoriesAssignedToService=function(companyId,serviceId)
-    {
+    this.GetCategoriesAssignedToService = function (companyId, serviceId) {
         var response = $http({
             method: "POST",
             url: "/Services/GetCategoriesAssignedToService",
@@ -433,19 +417,17 @@ app.service("bookingService", function ($http, $window) {
         return response;
     }
 
-    this.GetAllService=function(companyId)
-    {
+    this.GetAllService = function (companyId) {
         var response = $http({
             method: "POST",
             url: "/Services/GetAllServices",
             data: { CompanyId: companyId },
             headers: GetHeader()
         })
-       return response;
+        return response;
     }
 
-    this.GetAppointmentWorkingHours=function(Id)
-    {
+    this.GetAppointmentWorkingHours = function (Id) {
         var response = $http({
             method: "POST",
             url: "/Customer/GetAppointmentWorkinghours",
@@ -455,8 +437,7 @@ app.service("bookingService", function ($http, $window) {
         return response;
     }
 
-    this.GetAllServiceForCategory=function(categoryId,companyId)
-    {
+    this.GetAllServiceForCategory = function (categoryId, companyId) {
         var response = $http({
             method: "POST",
             url: "/Services/GetAllServiceForCategory",
@@ -466,8 +447,7 @@ app.service("bookingService", function ($http, $window) {
         return response;
     }
 
-    this.GetAllStaff=function(Id)
-    {
+    this.GetAllStaff = function (Id) {
         var response = $http({
             method: "POST",
             url: "/Services/GetAllStaff",
@@ -479,53 +459,49 @@ app.service("bookingService", function ($http, $window) {
     }
 
     this.AssignStafftoService = function (dataobject) {
-            var response = $http({
-                method: "POST",
-                url: "/Services/AssignStaffToService",
-                data: { AssignStaff: dataobject },
-                headers: GetHeader()
-                })
-            return response;
+        var response = $http({
+            method: "POST",
+            url: "/Services/AssignStaffToService",
+            data: { AssignStaff: dataobject },
+            headers: GetHeader()
+        })
+        return response;
     }
 
-    this.DeAssignedStaffToService=function(companyId,employeeId,serviceId)
-    {
+    this.DeAssignedStaffToService = function (companyId, employeeId, serviceId) {
         var response = $http({
             method: "POST",
             url: "/Services/DeAssignedStaffToService",
             data: { CompanyId: companyId, EmployeeId: employeeId, ServiceId: serviceId },
-            headers : GetHeader()
+            headers: GetHeader()
         })
         return response;
     }
 
-    this.UpdateCategory=function(dataobject)
-    {
+    this.UpdateCategory = function (dataobject) {
         var response = $http({
             method: "POST",
             url: "/Services/UpdateCategory",
-            data: { Category: dataobject},
+            data: { Category: dataobject },
             headers: GetHeader()
         })
 
         return response;
     }
 
-    this.DeleteCategory = function (companyId,categoryId)
-    {
+    this.DeleteCategory = function (companyId, categoryId) {
         var response = $http({
             method: "POST",
             url: "/Services/DeleteCategory",
-            data: { CompanyId: companyId,CategoryId:categoryId },
+            data: { CompanyId: companyId, CategoryId: categoryId },
             headers: GetHeader()
         })
         return response;
     }
-  
 
-    this.GetEmployeeAssignedtoService=function(Id)
-    {
-        
+
+    this.GetEmployeeAssignedtoService = function (Id) {
+
         var response = $http({
             method: "POST",
             url: "/Services/GetEmployeeAssignedtoService",
@@ -535,8 +511,7 @@ app.service("bookingService", function ($http, $window) {
         return response;
     }
 
-    this.DeleteService=function(Id)
-    {
+    this.DeleteService = function (Id) {
         var response = $http({
             method: "POST",
             url: "/Services/DeleteService",
@@ -558,19 +533,17 @@ app.service("bookingService", function ($http, $window) {
         return response;
     }
 
-    this.UpdateStaff=function(dataobject)
-    {
+    this.UpdateStaff = function (dataobject) {
         var response = $http({
             method: "POST",
             url: "/Staff/UpdateStaff",
-            data : { dataobj: dataobject },
+            data: { dataobj: dataobject },
             headers: GetHeader()
         })
         return response;
     }
 
-    this.AssignedServicetoStaff=function(dataobject)
-    {
+    this.AssignedServicetoStaff = function (dataobject) {
         var response = $http({
             method: "POST",
             url: "/Staff/AllocateServicetoEmployee",
@@ -579,8 +552,7 @@ app.service("bookingService", function ($http, $window) {
         })
         return response;
     }
-    this.UnAssignServicetoStaff=function(companyId,employeeId,serviceId)
-    {
+    this.UnAssignServicetoStaff = function (companyId, employeeId, serviceId) {
         var response = $http({
             method: "POST",
             url: "/Staff/DeAllocateServicetoEmployee",
@@ -590,8 +562,7 @@ app.service("bookingService", function ($http, $window) {
         return response;
     }
 
-    this.GetAllServiceStatus=function(companyId,employeeId)
-    {
+    this.GetAllServiceStatus = function (companyId, employeeId) {
         var response = $http({
             method: "POST",
             url: "/Staff/GetAllServiceStatus",
@@ -602,12 +573,11 @@ app.service("bookingService", function ($http, $window) {
     }
 
     //Set Employee Working Hours//
-    this.SetEmployeeWorkingHours=function(dataobject)
-    {
+    this.SetEmployeeWorkingHours = function (dataobject) {
         var response = $http({
             method: "POST",
             url: "/Staff/SetEmployeeWorkingHours",
-            data: { dataObj: dataobject},
+            data: { dataObj: dataobject },
             headers: GetHeader()
         })
         return response;
@@ -615,12 +585,11 @@ app.service("bookingService", function ($http, $window) {
 
     //Get Working Hours of Employee
 
-    this.GetWorkingHoursofEmployee=function(employeeId)
-    {
+    this.GetWorkingHoursofEmployee = function (employeeId) {
         var response = $http({
             method: "POST",
             url: "/Staff/GetWorkingHoursofEmployee",
-            data : { EmployeeId: employeeId },
+            data: { EmployeeId: employeeId },
             headers: GetHeader()
         })
         return response;
@@ -628,8 +597,7 @@ app.service("bookingService", function ($http, $window) {
 
     //Set timeOff//
 
-    this.AddtimeOff=function(dataobject)
-    {
+    this.AddtimeOff = function (dataobject) {
         var response = $http({
             method: "POST",
             url: "/Staff/SetTimeOff",
@@ -638,8 +606,7 @@ app.service("bookingService", function ($http, $window) {
         })
         return response;
     }
-    this.UpdateTimeOff=function(dataobject)
-    {
+    this.UpdateTimeOff = function (dataobject) {
         var response = $http({
             method: "POST",
             url: "/Staff/UpdateTimeOff",
@@ -650,50 +617,45 @@ app.service("bookingService", function ($http, $window) {
     }
     //Get TimeOff//
 
-    this.GetTimeOffDetail=function(Id)
-    {
+    this.GetTimeOffDetail = function (Id) {
         var response = $http({
             method: "POST",
             url: "/Staff/GetTimeOffDetail",
-            data: { EmployeeId : Id },
+            data: { EmployeeId: Id },
             headers: GetHeader()
         })
         return response;
     }
 
-    this.DeleteTimeOff=function(Id)
-    {
-        var response = $http({          
-            method:"POST",
+    this.DeleteTimeOff = function (Id) {
+        var response = $http({
+            method: "POST",
             url: "/Staff/DeleteTimeOffofEmployee",
             data: { TimeOffId: Id },
             headers: GetHeader()
         })
         return response;
     }
-    this.SetStatusofAppointment = function (Status, bookingId)
-    {
+    this.SetStatusofAppointment = function (Status, bookingId) {
         var response = $http({
             method: "POST",
             url: "/Customer/SetStatusOfAppointment",
             data: { status: Status, BookingId: bookingId },
             headers: GetHeader()
         })
-       return  response;
+        return response;
     }
 
-    this.AddEmployeeBreakTime=function(dataobj)
-    {
+    this.AddEmployeeBreakTime = function (dataobj) {
         var response = $http({
             method: "POST",
             url: "/Staff/SetEmployeeBreakTime",
-            data:{dataObj:dataobj},
-            headers : GetHeader()
+            data: { dataObj: dataobj },
+            headers: GetHeader()
         })
         return response;
     }
-    this.GetBreakTimeHoursofEmployee=function(employeeId)
-    {
+    this.GetBreakTimeHoursofEmployee = function (employeeId) {
         var response = $http({
             method: "POST",
             url: "/Staff/GetBreakTimeHoursofEmployee",
@@ -703,8 +665,7 @@ app.service("bookingService", function ($http, $window) {
         return response;
     }
 
-    this.DeleteBreak=function(Id)
-    {
+    this.DeleteBreak = function (Id) {
         var response = $http({
             method: "POST",
             url: "/Staff/DeleteBreakTimeOfEmployee",
@@ -714,25 +675,23 @@ app.service("bookingService", function ($http, $window) {
         return response;
     }
 
-    this.UpdateBreakTime=function(dataobj,status)
-    {
+    this.UpdateBreakTime = function (dataobj, status) {
         var response = $http({
             method: "POST",
             url: "/Staff/UpdateBreakTimeofEmployee",
-            data:{dataObj:dataobj,Status:status},
-            headers : GetHeader()
+            data: { dataObj: dataobj, Status: status },
+            headers: GetHeader()
         })
         return response;
     }
 
     //Dashboard Section//
-    this.GetWeeksSchedule=function(companyId)
-    {
+    this.GetWeeksSchedule = function (companyId) {
         var response = $http({
             method: "POST",
             url: "/Dashboard/GetWeeksSchedule",
             data: { CompanyId: companyId },
-            headers:GetHeader()
+            headers: GetHeader()
         })
         return response;
     }
@@ -755,12 +714,11 @@ app.service("bookingService", function ($http, $window) {
         return response;
     }
 
-    this.SignOut=function()
-    {
+    this.SignOut = function () {
         var response = $http({
             method: "POST",
             url: "/Dashboard/SignOut",
-            headers:GetHeader()
+            headers: GetHeader()
         })
         return response;
     }
@@ -777,8 +735,7 @@ app.service("bookingService", function ($http, $window) {
 
     //Report Section//
 
-    this.GetBusinessReport=function(companyId,startDate,endDate)
-    {
+    this.GetBusinessReport = function (companyId, startDate, endDate) {
         debugger;
         var response = $http({
             method: "POST",
@@ -791,22 +748,22 @@ app.service("bookingService", function ($http, $window) {
 
     this.GetResourceReportsBetweenDates = function (companyId, employeeIdArray, startDate, endDate) {
         debugger;
-      var response=  $http({
+        var response = $http({
             method: "POST",
             url: "/Report/GetResourceReportsBetweenDates",
             headers: GetHeader(),
-            data: { CompanyId: companyId, EmployeeIdArray: employeeIdArray,StartDate: startDate,EndDate: endDate },
-      })
-      return response;
+            data: { CompanyId: companyId, EmployeeIdArray: employeeIdArray, StartDate: startDate, EndDate: endDate },
+        })
+        return response;
     }
 
-    this.GetResourceReportsBetweenDatesinSortedOrder = function (companyId, employeeIdArray, startDate, endDate,Order,Field) {
+    this.GetResourceReportsBetweenDatesinSortedOrder = function (companyId, employeeIdArray, startDate, endDate, Order, Field) {
         debugger;
         var response = $http({
             method: "POST",
             url: "/Report/GetResourceReportsBetweenDatesinSortedOrder",
             headers: GetHeader(),
-            data: { CompanyId: companyId, EmployeeIdArray: employeeIdArray, StartDate: startDate, EndDate: endDate, sortingOrder: Order, field:Field },
+            data: { CompanyId: companyId, EmployeeIdArray: employeeIdArray, StartDate: startDate, EndDate: endDate, sortingOrder: Order, field: Field },
         })
         return response;
     }
@@ -822,19 +779,18 @@ app.service("bookingService", function ($http, $window) {
         return response;
     }
 
-    this.GetServiceReportsBetweenDatesByOrder = function (companyId, employeeIdsString, startDate, endDate,Order,field) {
+    this.GetServiceReportsBetweenDatesByOrder = function (companyId, employeeIdsString, startDate, endDate, Order, field) {
         debugger;
         var response = $http({
             method: "POST",
             url: "/Report/GetServiceReportsBetweenDatesByOrder",
             headers: GetHeader(),
-            data: { CompanyId: companyId, commaSeperatedServiceIds: employeeIdsString, StartDate: startDate, EndDate: endDate,sortingOrder:Order,Field:field },
+            data: { CompanyId: companyId, commaSeperatedServiceIds: employeeIdsString, StartDate: startDate, EndDate: endDate, sortingOrder: Order, Field: field },
         })
         return response;
     }
 
-    this.GetCustomerReportsBetweenDates=function(companyId,customerIdsString,startDate,endDate)
-    {
+    this.GetCustomerReportsBetweenDates = function (companyId, customerIdsString, startDate, endDate) {
         var response = $http({
             method: "POST",
             url: "/Report/GetCustomerReportsBetweenDates",
@@ -844,12 +800,23 @@ app.service("bookingService", function ($http, $window) {
         return response;
     }
 
-    this.GetBookingsForEmployeesByIdBetweenDates = function (companyId,EmployeeIds, startDate, endDate) {
+    this.GetBookingsForEmployeesByIdBetweenDates = function (companyId, EmployeeIds, startDate, endDate) {
         var response = $http({
             method: "POST",
             url: "/Calendar/GetBookingsForEmployeesByIdBetweenDates",
             headers: GetHeader(),
             data: { CompanyId: companyId, commaSeperatedEmployeeIds: EmployeeIds, StartDate: startDate, EndDate: endDate },
+        })
+        return response;
+    }
+
+    this.GetCustomerReportsBetweenDatesByOrder = function (companyId, customerIdsString, startDate, endDate, Order, field) {
+        debugger;
+        var response = $http({
+            method: "POST",
+            url: "/Report/GetCustomerReportsBetweenDatesByOrder",
+            headers: GetHeader(),
+            data: { CompanyId: companyId, commaSeperatedCustomerIds: customerIdsString, StartDate: startDate, EndDate: endDate, sortingOrder: Order, Field: field },
         })
         return response;
     }

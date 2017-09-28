@@ -130,10 +130,10 @@
 
     <div class="left_sidebar">
         <ul class="nav">
-            <li class="side-nav-tooltip active" id="side-dashboard" data-toggle="tooltip" data-original-title="Dashboard" data-placement="right">
+            <li class="side-nav-tooltip " id="side-dashboard" data-toggle="tooltip" data-original-title="Dashboard" data-placement="right">
                 <a ng-click="redirecttodashboard()" data-toggle="tab" class="setmore-icon-home" id="startDashboard"><small>Dashboard</small></a>
             </li>
-            <li class="side-nav-tooltip" id="side-calendar" data-placement="right" data-toggle="tooltip" data-original-title="Calendar">
+            <li class="side-nav-tooltip active" id="side-calendar" data-placement="right" data-toggle="tooltip" data-original-title="Calendar">
                 <a ng-click="redirectToCalendar()" data-toggle="tab" class="setmore-icon-calendar-31" id="startCalendar"><small>Calendar</small></a>
             </li>
             <li class="side-nav-tooltip" id="side-customers" title="" data-toggle="tooltip" data-original-title="Customers" data-placement="right">
@@ -160,7 +160,7 @@
             <div class="tab-pane full-height active" id="staff">
                 <div class="row">
                     <div class="col-md-8">
-                      
+
                         <!--<div id="display"><input type="button" ng-click="GetCurrentEvent()"/></div>-->
                         <div id="calendar" ui-calendar="uiConfig.calendar" config="uiConfig.calendar" ng-model="eventSources" calendar="myCalendar"></div>
                     </div>
@@ -177,7 +177,7 @@
                 </div>
 
             </div>
-            
+
         </div>
     </div>
 
@@ -247,14 +247,23 @@
                     <h3 class="modal-title" id="lineModalLabel">Appointment</h3>
                 </div>
                 <div class="form-horizontal appointPopUpform">
-                    <form ng-submit="SaveAppointment(appointmentform)" name="appointmentform" novalidate class="css-form">
+                    <form ng-submit="SaveAppointment(Eventform)" name="Eventform" novalidate class="css-form">
                         <div class="modal-body appointPopupBody" ng-hide="ShowAddAppointmentPopup">
 
                             <div class="row popupDeatailDiv">
                                 <div class="col-md-6">
                                     <div class="detailText">
-                                        <ul class="list-inline appointDeatailDiv">
+                                        <!--<ul class="list-inline appointDeatailDiv">
                                             <li><a href="#">Details</a></li>
+                                        </ul>-->
+                                        <ul class="nav nav-tabs calendarPopupDetail" role="tablist">
+                                            <li role="presentation" class="active" id="Appointmenttab">
+                                                <a data-target="#calendardetail" ng-click="Appointmenttab()"  aria-controls="home" role="tab" data-toggle="tab">Details</a>
+                                            </li>
+                                            <li role="presentation" id= "Calendartab">
+                                                <a data-target="#searchCustomer" ng-click="Calendartab()" aria-controls="profile">Customer</a>
+                                            </li>
+
                                         </ul>
                                     </div>
                                 </div>
@@ -268,108 +277,223 @@
                             </div>
                             <!-- content goes here -->
                             <!--<form class="form-horizontal appointPopUpform" ng-submit="SaveAppointment(appointmentform)" name="appointmentform" novalidate class="css-form">-->
-                            <div class="deatailForm">
-                                <!--<form class="form-horizontal appointPopUpform" ng-submit="SaveAppointment(appointmentform)" name="appointmentform" novalidate class="css-form">-->
-                                <div class="form-group">
-                                    <label class="control-label col-sm-4" for="email">Provider</label>
-                                    <div class="col-sm-8">
-                                        <div class="dropdown appointProvider">
-                                            <select class="btn btn-default dropdown-toggle" ng-model="selectedprovider" data-ng-options="x.Id as x.staffName for x in Provider" id="dropdownMenu2" name="providerdd" aria-haspopup="true" aria-expanded="false" ng-change="GetAllocateServiceToEmployee(selectedprovider)" required>
-                                                <option value="" selected="selected">-- Select a Provider --</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="control-label col-sm-4" for="pwd">Service</label>
-                                    <div class="col-sm-8">
-                                        <div class="dropdown appointProvider">
-                                            <select class="btn btn-default dropdown-toggle" name="Servicedd" data-ng-options="x.Id as x.Name for x in EmployeeServices" ng-model="selectedservice" ng-change="ServiceDetail(selectedservice)" aria-haspopup="true" aria-expanded="false" required>
-                                                <option value="">-- Select a Service --</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-group" ng-show="ServicePriceTimeDetailIsVisible">
-                                    <label class="control-label col-sm-4"></label>
-                                    <div class="col-sm-8">
-                                        <div class="row">
-                                            <div class="col-md-6 dateTimeDiv costField">
-                                                <span class="calendarOk">£</span>
-                                                <input type="text" class="appt_cost form-control" placeholder="10" ng-model="price" value="">
+
+                            <div class="tab-content">
+                                <div role="tabpanel" class="tab-pane active" id="calendardetail">
+                                    <div class="deatailForm">
+                                        <!--<form class="form-horizontal appointPopUpform" ng-submit="SaveAppointment(appointmentform)" name="appointmentform" novalidate class="css-form">-->
+                                        <div class="form-group">
+                                            <label class="control-label col-sm-4" for="email">Provider</label>
+                                            <div class="col-sm-8">
+                                                <div class="dropdown appointProvider">
+                                                    <select class="btn btn-default dropdown-toggle" ng-model="selectedprovider" data-ng-options="x.Id as x.staffName for x in Provider" id="dropdownMenu2" name="providerdd" aria-haspopup="true" aria-expanded="false" ng-change="GetAllocateServiceToEmployee(selectedprovider)" required>
+                                                        <option value="" selected="selected">-- Select a Provider --</option>
+                                                    </select>
+                                                </div>
                                             </div>
-                                            <div class="col-md-6 dateTimeDiv costMinField">
-                                                <input type="text" class="appt_cost_min form-control" placeholder="60" ng-model="time">
-                                                <a href="" id="minTextDiv" class="minText">
-                                                    Mins
-                                                    <!--<span class="glyphicon glyphicon-chevron-down chevronDownIcon" ng-click="minhours = !minhours">-->
-                                                    <span class="glyphicon glyphicon-chevron-down chevronDownIcon">
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label col-sm-4" for="pwd">Service</label>
+                                            <div class="col-sm-8">
+                                                <div class="dropdown appointProvider">
+                                                    <select class="btn btn-default dropdown-toggle" name="Servicedd" data-ng-options="x.Id as x.Name for x in EmployeeServices" ng-model="selectedservice" ng-change="ServiceDetail(selectedservice)" aria-haspopup="true" aria-expanded="false" >
+                                                        <option value="">-- Select a Service --</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group" ng-show="ServicePriceTimeDetailIsVisible">
+                                            <label class="control-label col-sm-4"></label>
+                                            <div class="col-sm-8">
+                                                <div class="row">
+                                                    <div class="col-md-6 dateTimeDiv costField">
+                                                        <span class="calendarOk">£</span>
+                                                        <input type="text" class="appt_cost form-control" placeholder="10" ng-model="price" value="">
+                                                    </div>
+                                                    <div class="col-md-6 dateTimeDiv costMinField">
+                                                        <input type="text" class="appt_cost_min form-control" placeholder="60" ng-model="time">
+                                                        <a href="" id="minTextDiv" class="minText">
+                                                            Mins
+                                                            <!--<span class="glyphicon glyphicon-chevron-down chevronDownIcon" ng-click="minhours = !minhours">-->
+                                                            <span class="glyphicon glyphicon-chevron-down chevronDownIcon">
+                                                            </span>
+                                                        </a>
+                                                        <!--<ul id="custmDropdown" class="apptcustomeDropdown" ng-show="minhours" style="display:block;position:absolute;">
+                                                            <li><a ng-click="Converttomin()">Mins</a></li>
+                                                            <li><a ng-click="Convertohour()">Hours</a></li>
+                                                        </ul>-->
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label col-sm-4" for="pwd">Day/Time</label>
+                                            <div class="col-sm-8 dateTimeDiv ">
+                                                <span class="glyphicon glyphicon-ok calendarOk"></span><!--<input type="text" class="form-control datepickerBox" ng-model="datatime" placeholder="Fri, May 12" id="datetimepicker4" />-->
+                                                <!--<input datetime-picker ng-model="selecteddate" date-disabled="disabled(date, mode)" disable-weekends="true"  class="form-control datepickerBox"  date-format="EEE, MMM d" size="30" date-only   />-->
+                                                <input type="text" class="form-control calendarBox" datepicker-popup="EEE, MMM d" ng-model="dt" open="opened" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-click="SetDatePicker()" name='theDate' ng-required="true" />
+
+                                                <div class="selectDropdown">
+                                                    <div class="gifImage" ng-show="timeslotsloading"><img src="/Content/Assets/images/loading.gif" /></div>
+                                                    <select class="select_btn dateTimeSelect" style="line-height:1;" ng-model="timeoption" name="timeoption" ng-init="timeoption='8:00 AM'">
+                                                        <option ng-repeat="timeoption in timeInfoFrom " value="{{timeoption}}">{{timeoption}}</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+
+
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="control-label col-sm-4" for="pwd">Notes</label>
+                                            <div class="col-sm-8 notesForCustomer">
+                                                <textarea class="form-control apptNotes" placeholder="Notes for the Customer" maxlength="500" ng-model="notes"></textarea>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="control-label col-sm-4" for="pwd">Recurring?</label>
+                                            <div class="col-sm-8 recurringDiv">
+                                                <div class="onoffswitch recurringOnOffBtn">
+                                                    <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" checked="">
+                                                    <label class="onoffswitch-label" for="myonoffswitch">
+                                                        <span class="onoffswitch-inner"></span>
+                                                        <span class="onoffswitch-switch"></span>
+                                                    </label>
+                                                </div>
+                                                <div class="premiumBtn">
+                                                    <button type="button" class="btn btn-default">
+                                                        <span><i class="fa fa-lock" aria-hidden="true"></i></span>
+                                                        <!--<a href="#">premium</a>-->
+                                                        premium
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!--<div class="form-group rescheduleDiv">
+                                            <div class="col-sm-12 sendSchdlEmail">
+                                                <input type="checkbox" class="sampleCheckbox checkbox-custom" name="" value="service"><label for="checkbox-1" class="checkbox-custom-label">Send Reschedule Email</label>
+                                            </div>
+                                        </div>-->
+                                    </div>
+
+                                </div>
+                                <div role="tabpanel" class="tab-pane" id="Calendarcustomer">
+                                    <div class="customerProfileDiv calendarCustomerSec">
+                                        <a class="calendarPopUpIcon"ng-click="CloseAddCustomertab()">×</a>
+                                        <!--<form class="form-horizontal imageUploadForm " action="">-->
+                                        <div class="form-group appointaploadDiv">
+                                            <label class="control-label col-md-3 col-sm-12 col-xs-3 customerUserDiv">
+                                                <img src="/Content/Assets/images/provider_img2.png">
+
+                                                <div class="fileupload fileupload-new" data-provides="fileupload">
+                                                    <span class="btn btn-primary btn-file">
+                                                        <span class="fileupload-new">
+
+                                                        </span>
+
+                                                        <input type="file">
                                                     </span>
-                                                </a>
-                                                <!--<ul id="custmDropdown" class="apptcustomeDropdown" ng-show="minhours" style="display:block;position:absolute;">
-                                                    <li><a ng-click="Converttomin()">Mins</a></li>
-                                                    <li><a ng-click="Convertohour()">Hours</a></li>
-                                                </ul>-->
+
+
+                                                </div>
+                                                <span class="uploadImageIcon"><i class="fa fa-camera" aria-hidden="true" style="margin-left: 4px; "></i></span>
+                                            </label>
+                                            <div class="col-md-9 col-sm-12 col-xs-9 customerNameDiv">
+                                                <input type="text" class="customerName namevalueField form-control ng-pristine ng-valid ng-touched" value="Mark" id="name" name="name" placeholder="Name" ng-model="CustomerName">
                                             </div>
                                         </div>
 
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="control-label col-sm-4" for="pwd">Day/Time</label>
-                                    <div class="col-sm-8 dateTimeDiv ">
-                                        <span class="glyphicon glyphicon-ok calendarOk"></span><!--<input type="text" class="form-control datepickerBox" ng-model="datatime" placeholder="Fri, May 12" id="datetimepicker4" />-->
-                                        <!--<input datetime-picker ng-model="selecteddate" date-disabled="disabled(date, mode)" disable-weekends="true"  class="form-control datepickerBox"  date-format="EEE, MMM d" size="30" date-only   />-->
-                                        <input type="text" class="form-control calendarBox" datepicker-popup="EEE, MMM d" ng-model="dt" open="opened" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-click="SetDatePicker()" name='theDate' ng-required="true" />
+                                        <!--</form>-->
 
-                                        <div class="selectDropdown">
-                                            <div class="gifImage" ng-show="timeslotsloading"><img src="/Content/Assets/images/loading.gif" /></div>
-                                            <select class="select_btn dateTimeSelect" style="line-height:1;" ng-model="timeoption" name="timeoption" ng-init="timeoption='8:00 AM'">
-                                                <option ng-repeat="timeoption in timeInfoFrom " value="{{timeoption}}">{{timeoption}}</option>
-                                            </select>
+                                        <div class="form-horizontal customerDetail">
+                                            <div class="form-group">
+                                                <label class="control-label col-md-3 col-xs-3 col-sm-12">Email</label>
+                                                <div class="col-md-9 col-xs-9 col-sm-12">
+                                                    <input type="email" class="form-control" id="email" placeholder="Email" name="email" ng-model="CustomerEmail" required>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label col-md-3 col-xs-3 col-sm-12">Mobile</label>
+                                                <div class="col-md-9 col-xs-9 col-sm-12">
+                                                    <div class="row">
+                                                        <div class="col-md-4 ">
+                                                            <input type="text" class="form-control " id="text" placeholder="91" name="text" ng-model="CustomerPreMobileNo">
+                                                        </div>
+                                                        <div class="col-md-8 textNumberDiv" style="padding-left:0;">
+                                                            <input type="text" class="form-control" id="text" placeholder="Phone" name="text" ng-model="CustomerMobileNo">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label col-md-3 col-xs-3 col-sm-12">Office</label>
+                                                <div class="col-md-9 col-xs-9 col-sm-12">
+                                                    <input type="text" class="form-control" id="text" placeholder="Phone" name="text" ng-model="CustomerOfficePhone">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label col-md-3 col-xs-3 col-sm-12">Home</label>
+                                                <div class="col-md-9 col-xs-9 col-sm-12">
+                                                    <input type="text" class="form-control" id="text" placeholder="Phone" name="text" ng-model="CustomerHomePhone">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label col-md-3 col-xs-3 col-sm-12">Address</label>
+                                                <div class="col-md-9 col-xs-9 col-sm-12">
+                                                    <input type="text" class="form-control" id="text" placeholder="Address" name="text" ng-model="CustomerAddress">
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label class="control-label col-md-3 col-xs-3 col-sm-12"></label>
+                                                <div class="col-md-9 col-xs-9 col-sm-12">
+                                                    <div class="row">
+                                                        <div class="col-md-4">
+                                                            <input type="text" class="form-control" id="text" placeholder="City" name="text" ng-model="CustomerCity">
+                                                        </div>
+                                                        <div class="col-md-4 textNumberDiv" style="padding-left:0;">
+                                                            <input type="text" class="form-control" id="text" placeholder="State" name="text" ng-model="CustomerState">
+                                                        </div>
+                                                        <div class="col-md-4 textNumberDiv" style="padding-left:0;">
+                                                            <input type="text" class="form-control" id="text" placeholder="Zip" name="text" ng-model="Zip">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
                                         </div>
+
                                     </div>
+
 
 
                                 </div>
-
-                                <div class="form-group">
-                                    <label class="control-label col-sm-4" for="pwd">Notes</label>
-                                    <div class="col-sm-8 notesForCustomer">
-                                        <textarea class="form-control apptNotes" placeholder="Notes for the Customer" maxlength="500" ng-model="notes"></textarea>
+                                <div class="tab-pane" id="searchCustomer">
+                                    <div class="customerFieldDiv">
+                                        <input type="text" class="form-control searchCustomerField" placeholder="Search Customer" ng-model="SearchCustomer" />
+                                        <div class="apptcustomericon"><i class="fa fa-search" aria-hidden="true"></i></div>
+                                        <ul class="searching-cust" style="display: block;" ng-show="counted >=1">                                       
+                                            <li ng-repeat="item in CustomerList | filter: SearchCustomer" ng-click="EditCustomer(item)">                              <span ng-show="SearchCustomer==item.FirstName" >
+                                             {{item.FirstName}}
+                                                </span>
+                                            </li>                                           
+                                        </ul>
+                                       
                                     </div>
+                                    <a class="apptnewcustomerbtn" ng-click="AddnewCustomer()"> + New Customer</a>
                                 </div>
-
-                                <div class="form-group">
-                                    <label class="control-label col-sm-4" for="pwd">Recurring?</label>
-                                    <div class="col-sm-8 recurringDiv">
-                                        <div class="onoffswitch recurringOnOffBtn">
-                                            <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" checked="">
-                                            <label class="onoffswitch-label" for="myonoffswitch">
-                                                <span class="onoffswitch-inner"></span>
-                                                <span class="onoffswitch-switch"></span>
-                                            </label>
-                                        </div>
-                                        <div class="premiumBtn">
-                                            <button type="button" class="btn btn-default">
-                                                <span><i class="fa fa-lock" aria-hidden="true"></i></span>
-                                                <!--<a href="#">premium</a>-->
-                                                premium
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!--<div class="form-group rescheduleDiv">
-                                    <div class="col-sm-12 sendSchdlEmail">
-                                        <input type="checkbox" class="sampleCheckbox checkbox-custom" name="" value="service"><label for="checkbox-1" class="checkbox-custom-label">Send Reschedule Email</label>
-                                    </div>
-                                </div>-->
                             </div>
 
+
+
+
                         </div>
-                        <div class="modal-footer">
+                        <div class="modal-footer" id="modalfooter">
                             <div class="btn-group apptSaveBtn" role="group">
-                                <button type="submit" class="btn btn-default" data-action="save" role="button">Save Appointment</button>
+                                <button type="submit" class="btn btn-default"  ng-show="ShowSubmit==true">Save Appointment</button>
+                                <button type="button" class="btn btn-default"  ng-click="GotoCustomerTab()"  ng-disabled="ContinueAppointment" ng-show="ShowSubmit==false">Continue</button>
                             </div>
                             <!--<div class="apptViewFooter">
                                 <a href="#" class="apptDeleteBtn">Delete</a>
@@ -436,7 +560,7 @@
                                                 <option value="">-- Select a Service --</option>
                                             </select>-->
 
-                                            <select class="btn btn-default dropdown-toggle" ng-model="selectedservice" name="Service" ng-change="ServiceDetail(selectedservice)" required>
+                                            <select class="btn btn-default dropdown-toggle" ng-model="selectedservice" name="Service" ng-change="ServiceDetail(selectedservice)" >
                                                 <option ng-repeat="services in EmployeeServices " value="{{services.Id}}">{{services.Name}}</option>
                                             </select>
                                         </div>
@@ -522,3 +646,5 @@
 
 
 </div>
+
+

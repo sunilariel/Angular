@@ -14,7 +14,7 @@ namespace AngularMvcProject.Controllers
     {
         // GET: Report
         [HttpPost]
-       public string GetBusinessReport(string CompanyId,string StartDate,string EndDate)
+        public string GetBusinessReport(string CompanyId, string StartDate, string EndDate)
         {
             try
             {
@@ -34,14 +34,14 @@ namespace AngularMvcProject.Controllers
                 }
                 return result;
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 return e.ToString();
             }
         }
-          [HttpPost]
-        public string GetResourceReportsBetweenDates(string CompanyId,string EmployeeIdArray, string StartDate, string EndDate)
-            {
+        [HttpPost]
+        public string GetResourceReportsBetweenDates(string CompanyId, string EmployeeIdArray, string StartDate, string EndDate)
+        {
             try
             {
                 var result = "";
@@ -70,7 +70,7 @@ namespace AngularMvcProject.Controllers
         {
             try
             {
-              
+
                 var result = "";
                 var startDate = StartDate.Split('T')[0];
                 var endDate = EndDate.Split('T')[0];
@@ -95,18 +95,26 @@ namespace AngularMvcProject.Controllers
 
 
         [HttpPost]
-        public string GetResourceReportsBetweenDatesinSortedOrder(string CompanyId, string EmployeeIdArray, string StartDate, string EndDate,string sortingOrder,string field)
+        public string GetResourceReportsBetweenDatesinSortedOrder(string CompanyId, string EmployeeIdArray, string StartDate, string EndDate, string sortingOrder, string field)
         {
             try
             {
                 var result = "";
                 var startDate = StartDate.Split('T')[0];
                 var endDate = EndDate.Split('T')[0];
-                string apiUrl = ConfigurationManager.AppSettings["DomainUrl"].ToString() + "/api/Reports/GetResourceReportsBetweenDates?companyId=" + CompanyId + "&commaSeperatedEmployeeIds=" + EmployeeIdArray + "&startDate=" + startDate + "&endDate=" + endDate+"&asc="+ sortingOrder +"&field="+ field;
+                string apiUrl  = ConfigurationManager.AppSettings["DomainUrl"].ToString() + "/api/Reports/GetResourceReportsBetweenDates?companyId=" + CompanyId + "&commaSeperatedEmployeeIds=" + EmployeeIdArray + "&startDate=" + startDate + "&endDate=" + endDate + "&asc=" + sortingOrder + "&field=" + field; ;
+                //if (sortingOrder == "ASC")
+                //{
+                //    apiUrl = ConfigurationManager.AppSettings["DomainUrl"].ToString() + "/api/Reports/GetResourceReportsBetweenDates?companyId=" + CompanyId + "&commaSeperatedEmployeeIds=" + EmployeeIdArray + "&startDate=" + startDate + "&endDate=" + endDate + "&asc=" + "asc" + "&field=" + field;
+                //}
+                //else
+                //{
+                //    apiUrl = ConfigurationManager.AppSettings["DomainUrl"].ToString() + "/api/Reports/GetResourceReportsBetweenDates?companyId=" + CompanyId + "&commaSeperatedEmployeeIds=" + EmployeeIdArray + "&startDate=" + startDate + "&endDate=" + endDate + "&dsc=" + "dsc" + "&field=" + field;
+                //}
                 var httpWebRequest = HttpWebRequest.Create(apiUrl);
                 httpWebRequest.ContentType = "application/json";
                 httpWebRequest.Method = "GET";
-               
+
                 httpWebRequest.Headers.Add("Token", Request.Headers["Token"]);
 
                 var httpResponse = httpWebRequest.GetResponse();
@@ -122,7 +130,7 @@ namespace AngularMvcProject.Controllers
             }
         }
         [HttpPost]
-        public string GetServiceReportsBetweenDatesByOrder(string CompanyId, string commaSeperatedServiceIds, string StartDate, string EndDate,string sortingOrder,string Field)
+        public string GetServiceReportsBetweenDatesByOrder(string CompanyId, string commaSeperatedServiceIds, string StartDate, string EndDate, string sortingOrder, string Field)
         {
             try
             {
@@ -130,7 +138,16 @@ namespace AngularMvcProject.Controllers
                 var result = "";
                 var startDate = StartDate.Split('T')[0];
                 var endDate = EndDate.Split('T')[0];
-                string apiUrl = ConfigurationManager.AppSettings["DomainUrl"].ToString() + "/api/Reports/GetServiceReportsBetweenDates?companyId=" + CompanyId + "&commaSeperatedServiceIds=" + commaSeperatedServiceIds + "&startDate=" + startDate + "&endDate=" + endDate + "&asc="+ sortingOrder + "&field=" + Field;
+                string apiUrl = ConfigurationManager.AppSettings["DomainUrl"].ToString() + "/api/Reports/GetServiceReportsBetweenDates?companyId=" + CompanyId + "&commaSeperatedServiceIds=" + commaSeperatedServiceIds + "&startDate=" + startDate + "&endDate=" + endDate + "&asc=" + sortingOrder + "&field=" + Field; ;
+                //if (sortingOrder == "ASC")
+                //{
+                //    apiUrl = ConfigurationManager.AppSettings["DomainUrl"].ToString() + "/api/Reports/GetServiceReportsBetweenDates?companyId=" + CompanyId + "&commaSeperatedServiceIds=" + commaSeperatedServiceIds + "&startDate=" + startDate + "&endDate=" + endDate + "&asc=" + "asc" + "&field=" + Field;
+                //}
+                //else
+                //{
+                //    apiUrl = ConfigurationManager.AppSettings["DomainUrl"].ToString() + "/api/Reports/GetServiceReportsBetweenDates?companyId=" + CompanyId + "&commaSeperatedServiceIds=" + commaSeperatedServiceIds + "&startDate=" + startDate + "&endDate=" + endDate + "&dsc=" + "dsc" + "&field=" + Field;
+                //}
+
                 var httpWebRequest = HttpWebRequest.Create(apiUrl);
                 httpWebRequest.ContentType = "application/json";
                 httpWebRequest.Method = "GET";
@@ -162,7 +179,7 @@ namespace AngularMvcProject.Controllers
                 httpWebRequest.ContentType = "application/json";
                 httpWebRequest.Method = "GET";
                 httpWebRequest.Headers.Add("Token", Request.Headers["Token"]);
-                
+
 
                 var httpResponse = httpWebRequest.GetResponse();
                 using (var StreamReader = new StreamReader(httpResponse.GetResponseStream()))
@@ -176,5 +193,42 @@ namespace AngularMvcProject.Controllers
                 return e.ToString();
             }
         }
+
+        [HttpPost]
+        public string GetCustomerReportsBetweenDatesByOrder(string CompanyId, string commaSeperatedCustomerIds, string StartDate, string EndDate, string sortingOrder, string Field)
+        {
+            try
+            {
+                var result = "";
+                var startDate = StartDate.Split('T')[0];
+                var endDate = EndDate.Split('T')[0];
+                string apiUrl = "";
+                if (sortingOrder == "ASC")
+                {
+                    apiUrl = ConfigurationManager.AppSettings["DomainUrl"].ToString() + "/api/Reports/GetCustomerReportsBetweenDates?companyId=" + CompanyId + "&commaSeperatedCustomerIds=" + commaSeperatedCustomerIds + "&startDate=" + startDate + "&endDate=" + endDate + "&asc=" + "asc" + "&field=" + Field;
+                }
+                else
+                {
+                    apiUrl = ConfigurationManager.AppSettings["DomainUrl"].ToString() + "/api/Reports/GetCustomerReportsBetweenDates?companyId=" + CompanyId + "&commaSeperatedCustomerIds=" + commaSeperatedCustomerIds + "&startDate=" + startDate + "&endDate=" + endDate + "&dsc=" + "dsc" + "&field=" + Field;
+                }
+                var httpWebRequest = HttpWebRequest.Create(apiUrl);
+                httpWebRequest.ContentType = "application/json";
+                httpWebRequest.Method = "GET";
+                httpWebRequest.Headers.Add("Token", Request.Headers["Token"]);
+
+
+                var httpResponse = httpWebRequest.GetResponse();
+                using (var StreamReader = new StreamReader(httpResponse.GetResponseStream()))
+                {
+                    result = StreamReader.ReadToEnd();
+                }
+                return result;
+            }
+            catch (Exception e)
+            {
+                return e.ToString();
+            }
+        }
+
     }
 }
