@@ -29,7 +29,7 @@
     $scope.RedirecttoReport = function () {
         $location.path("/BuisnessReports/" + $routeParams.CompanyId);
     }
-
+    $scope.ListofCustomers=[];
     $scope.init = function () {
         debugger;
         $scope.CustomerExists = true;
@@ -39,8 +39,7 @@
         for (var i = 1; i <= 31; i++) {
             $scope.Date.push(i);
         }
-
-
+      
         $scope.time = "thismonth";
         var date = new Date();
         var firstDay = new Date(date.getFullYear(), date.getMonth(), 1);
@@ -70,12 +69,13 @@
                 $scope.CustomerReportLoader = true;
                 for (var i = 0; i < response.data.length; i++) {
                     $scope.CustomerIds = response.data[i].Id + "," + $scope.CustomerIds;
+                    $scope.ListofCustomers = response.data;
                 }
-
+                $scope.SelectedCustomer = $scope.ListofCustomers[0].Id.toString();
                 $scope.CustomerReportIds = $scope.CustomerIds.substring(0, $scope.CustomerIds.length - 1);
 
                 $scope.CustomerReportDetail = [];
-                var httprequest = bookingService.GetCustomerReportsBetweenDates($routeParams.CompanyId, $scope.CustomerReportIds, $scope.StartDate, $scope.EndDate);
+                var httprequest = bookingService.GetCustomerReportsBetweenDates($routeParams.CompanyId, $scope.SelectedCustomer, $scope.StartDate, $scope.EndDate);
                 httprequest.then(function (response) {
                     debugger;
                     angular.forEach(response.data, function (value, key) {
@@ -135,7 +135,8 @@
         $scope.EndDate = lastDay;
         $scope.CustomerReportDetail = [];
         if ($scope.CustomerExists == true) {
-            var httprequest = bookingService.GetCustomerReportsBetweenDates($routeParams.CompanyId, $scope.CustomerReportIds, $scope.StartDate, $scope.EndDate);
+            if ($scope.allcustomerchecked==true){
+                var httprequest = bookingService.GetCustomerReportsBetweenDates($routeParams.CompanyId, $scope.CustomerReportIds, $scope.StartDate, $scope.EndDate);
             httprequest.then(function (response) {
                 debugger;
                 if (Object.keys(response.data).length != 0) {
@@ -149,6 +150,23 @@
                     $scope.CustomerReportLoader = false;
                 }
             })
+            }
+            else {
+                var httprequest = bookingService.GetCustomerReportsBetweenDates($routeParams.CompanyId, $scope.SelectedCustomer, $scope.StartDate, $scope.EndDate);
+                httprequest.then(function (response) {
+                    debugger;
+                    if (Object.keys(response.data).length != 0) {
+                        angular.forEach(response.data, function (value, key) {
+                            $scope.CustomerReportDetail.push({ "Customer": value.Customer.FirstName, "Bookings": value.TotalBookings, "Revenue": "£" + value.TotalConfirmedRevenue });
+                        })
+                        $scope.CustomerReportLoader = false;
+                    }
+                    else {
+                        $scope.CustomerReportDetail.push({ "Customer": "    ", "Bookings": "No Records to display", "Revenue": "    " });
+                        $scope.CustomerReportLoader = false;
+                    }
+                })
+            }
         }
         else {
             $scope.CustomerReportLoader = false;
@@ -157,7 +175,7 @@
     }
 
     $scope.GetTimeFrameReports = function () {
-
+        debugger;
         $scope.BookingReport = [];
         $scope.CustomerReportLoader = true;
         var firstDay = new Date(parseInt($scope.SelectedStartYear), $scope.Months.indexOf($scope.SelectedStartMonth), parseInt($scope.SelectedStartDate));
@@ -169,25 +187,47 @@
 
         $scope.CustomerReportDetail = [];
         if ($scope.CustomerExists == true) {
-            var httprequest = bookingService.GetCustomerReportsBetweenDates($routeParams.CompanyId, $scope.CustomerReportIds, $scope.StartDate, $scope.EndDate);
-            httprequest.then(function (response) {
-                if (Object.keys(response.data).length != 0) {
-                    angular.forEach(response.data, function (value, key) {
-                        $scope.CustomerReportDetail.push({ "Customer": value.Customer.FirstName, "Bookings": value.TotalBookings, "Revenue": "£" + value.TotalConfirmedRevenue });
+            {
+                if ($scope.allcustomerchecked == true) {
+                    var httprequest = bookingService.GetCustomerReportsBetweenDates($routeParams.CompanyId, $scope.CustomerReportIds, $scope.StartDate, $scope.EndDate);
+                    httprequest.then(function (response) {
+                        if (Object.keys(response.data).length != 0) {
+                            angular.forEach(response.data, function (value, key) {
+                                $scope.CustomerReportDetail.push({ "Customer": value.Customer.FirstName, "Bookings": value.TotalBookings, "Revenue": "£" + value.TotalConfirmedRevenue });
+                            })
+                            $scope.CustomerReportLoader = false;
+                        }
+                        else {
+                            $scope.CustomerReportLoader = false;
+                            $scope.CustomerReportDetail.push({ "Customer": "    ", "Bookings": "No Records to display", "Revenue": "    " });
+                        }
+
                     })
-                    $scope.CustomerReportLoader = false;
                 }
                 else {
-                    $scope.CustomerReportLoader = false;
-                    $scope.CustomerReportDetail.push({ "Customer": "    ", "Bookings": "No Records to display", "Revenue": "    " });
+                    var httprequest = bookingService.GetCustomerReportsBetweenDates($routeParams.CompanyId, $scope.CustomerReportIds, $scope.StartDate, $scope.EndDate);
+                    httprequest.then(function (response) {
+                        debugger;
+                        if (Object.keys(response.data).length != 0) {
+                            angular.forEach(response.data, function (value, key) {
+                                $scope.CustomerReportDetail.push({ "Customer": value.Customer.FirstName, "Bookings": value.TotalBookings, "Revenue": "£" + value.TotalConfirmedRevenue });
+                            })
+                            $scope.CustomerReportLoader = false;
+                        }
+                        else {
+                            $scope.CustomerReportLoader = false;
+                            $scope.CustomerReportDetail.push({ "Customer": "    ", "Bookings": "No Records to display", "Revenue": "    " });
+                        }
+                    })
                 }
-
-            })
+        }
         }
         else {
             $scope.CustomerReportLoader = false;
             $scope.CustomerReportDetail.push({ "Customer": "    ", "Bookings": "No Records to display", "Revenue": "    " });
         }
+
+
     }
 
     $scope.Logout = function () {
@@ -200,21 +240,118 @@
     $scope.GetCustomerReportbyOrder = function (field) {
         debugger;
         $scope.toggle = !$scope.toggle;
-        if ($scope.toggle == true) {
-            $scope.Order = "false";
-        }
-        else {
-            $scope.Order = "true"
-        }
-        $scope.ResourceReport = [];
-
-        var apirequest = bookingService.GetCustomerReportsBetweenDatesByOrder($routeParams.CompanyId, $scope.CustomerReportIds, $scope.StartDate, $scope.EndDate, $scope.Order, field);
+        //if ($scope.toggle == true) {
+        //    $scope.Order = "false";
+        //}
+        //else {
+        //    $scope.Order = "true"
+        //}
+        $scope.CustomerReportDetail = [];
+         if ($scope.allcustomerchecked==false){
+        var apirequest = bookingService.GetCustomerReportsBetweenDatesByOrder($routeParams.CompanyId, $scope.CustomerReportIds, $scope.StartDate, $scope.EndDate, $scope.toggle, field);
         apirequest.then(function (response) {
             debugger;
-            $scope.CustomerReportDetail = [];
+            if (Object.keys(response.data).length != 0) {
+                $scope.CustomerReportDetail = [];
+                angular.forEach(response.data, function (value, key) {
+                    $scope.CustomerReportDetail.push({ "Customer": value.Customer.FirstName, "Bookings": value.TotalBookings, "Revenue": "£" + value.TotalConfirmedRevenue });
+                })
+            }
+            else {
+                $scope.CustomerReportDetail.push({ "Customer": "    ", "Bookings": "No Records to display", "Revenue": "    " });
+            }
+        })
+         }
+        else{
+             var apirequest = bookingService.GetCustomerReportsBetweenDatesByOrder($routeParams.CompanyId, $scope.SelectedCustomer, $scope.StartDate, $scope.EndDate, $scope.toggle, field);
+             apirequest.then(function (response) {
+                 debugger;
+                 if (Object.keys(response.data).length != 0) {
+                     $scope.CustomerReportDetail = [];
+                     angular.forEach(response.data, function (value, key) {
+                         $scope.CustomerReportDetail.push({ "Customer": value.Customer.FirstName, "Bookings": value.TotalBookings, "Revenue": "£" + value.TotalConfirmedRevenue });
+                     })
+                 }
+                 else {
+                     $scope.CustomerReportDetail.push({ "Customer": "    ", "Bookings": "No Records to display", "Revenue": "    " });
+                 }
+             })
+         }
+    }
+
+    $scope.GetAllCustomerReport = function (item) {
+        debugger;
+        $scope.CustomerReportDetail = [];
+        $scope.CustomerReportsloader = true;
+        var ReportCount = false;
+        $scope.allcustomerchecked = item;
+        if ($scope.ListofCustomers.length != 0) {
+            if ($scope.allcustomerchecked == true) {
+
+                var customerhttprequest = bookingService.GetAllCustomer($routeParams.CompanyId);
+                customerhttprequest.then(function (response) {
+                    debugger;
+                    $scope.CustomerIds = "";
+                    if(response.data.length != 0) {
+
+                        $scope.CustomerReportLoader = true;
+                        for (var i = 0; i < response.data.length; i++) {
+                            $scope.CustomerIds = response.data[i].Id + "," + $scope.CustomerIds;
+                            $scope.ListofCustomers = response.data;
+                        }
+                       
+                        $scope.CustomerReportIds = $scope.CustomerIds.substring(0, $scope.CustomerIds.length - 1);
+
+                        var apirequest = bookingService.GetCustomerReportsBetweenDates($routeParams.CompanyId, $scope.CustomerReportIds, $scope.StartDate, $scope.EndDate);
+                        apirequest.then(function (response) {
+                            angular.forEach(response.data, function (value, key) {
+                                ReportCount = true;
+                                $scope.CustomerReportDetail.push({ "Customer": value.Customer.FirstName, "Bookings": value.TotalBookings, "Revenue": "£" + value.TotalConfirmedRevenue });
+                            })
+                            if (ReportCount == false) {
+                                $scope.CustomerReportDetail.push({ "Customer": "    ", "Bookings": "No Records to display", "Revenue": "    " });
+                            }
+                            $scope.CustomerReportLoader = false;
+                        })
+                    }
+                })
+
+            }
+            else {
+                var apirequest = bookingService.GetCustomerReportsBetweenDates($routeParams.CompanyId, $scope.SelectedCustomer, $scope.StartDate, $scope.EndDate);
+                apirequest.then(function (response) {
+                    angular.forEach(response.data, function (value, key) {
+                        ReportCount = true;
+                        $scope.CustomerReportDetail.push({ "Customer": value.Customer.FirstName, "Bookings": value.TotalBookings, "Revenue": "£" + value.TotalConfirmedRevenue });
+                    })
+                    if (ReportCount == false) {
+                        $scope.CustomerReportDetail.push({ "Customer": "    ", "Bookings": "No Records to display", "Revenue": "    " });
+                    }
+                    $scope.CustomerReportLoader = false;
+                })
+            }
+        }
+    }
+
+    $scope.CustomerChange = function (Id) {
+        debugger;
+       
+        $scope.CustomerReportLoader = true;
+        $scope.CustomerReportDetail = [];
+        var ReportCount = false;
+        var httprequest = bookingService.GetCustomerReportsBetweenDates($routeParams.CompanyId, Id, $scope.StartDate, $scope.EndDate);
+        httprequest.then(function (response) {
+            debugger;
             angular.forEach(response.data, function (value, key) {
+                ReportCount = true;
                 $scope.CustomerReportDetail.push({ "Customer": value.Customer.FirstName, "Bookings": value.TotalBookings, "Revenue": "£" + value.TotalConfirmedRevenue });
+                $scope.CustomerReportLoader = false;
             })
+            $scope.CustomerReportLoader = false;
+            if (ReportCount == false) {              
+                $scope.CustomerReportDetail.push({ "Customer": "    ", "Bookings": "No Records to display", "Revenue": "    " });
+                $scope.CustomerReportLoader = false;
+            }
         })
     }
 

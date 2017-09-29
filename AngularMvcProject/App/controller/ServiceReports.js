@@ -332,7 +332,7 @@
     }
 
     $scope.GetServiceReportByOrder = function (Field) {
-        
+        var ReportCount = false;
         $scope.toggle = !$scope.toggle;
         //if ($scope.toggle == true) {
         //    $scope.Order = "ASC";
@@ -340,15 +340,33 @@
         //else {
         //    $scope.Order = "DESC";
         //}
-      
-        var apireportrequest = bookingService.GetServiceReportsBetweenDatesByOrder($routeParams.CompanyId, $scope.commaSeperatedServiceIds, $scope.StartDate, $scope.EndDate, $scope.toggle, Field);
-        apireportrequest.then(function (response) {
-            $scope.ServiceReport = [];
-            angular.forEach(response.data, function (value, key) {                
-                $scope.ServiceReport.push({ "Service": value.ServiceName, "Category": value.CategoryName, "Booking": value.TotalBookings, "Revenue": "£"+value.TotalConfirmedRevenue, "Cancellations": value.TotalCancellations, "CancellationRate": value.PerntageOfTotalCancellations +"%" });                
+        $scope.ServiceReport = [];
+        if ($scope.allservicechecked == true) {
+            var apireportrequest = bookingService.GetServiceReportsBetweenDatesByOrder($routeParams.CompanyId, $scope.commaSeperatedServiceIds, $scope.StartDate, $scope.EndDate, $scope.toggle, Field);
+            apireportrequest.then(function (response) {
+                $scope.ServiceReport = [];
+                angular.forEach(response.data, function (value, key) {
+                    ReportCount = true;
+                    $scope.ServiceReport.push({ "Service": value.ServiceName, "Category": value.CategoryName, "Booking": value.TotalBookings, "Revenue": "£" + value.TotalConfirmedRevenue, "Cancellations": value.TotalCancellations, "CancellationRate": value.PerntageOfTotalCancellations + "%" });
+                })
+                if (ReportCount == false) {
+                    $scope.ServiceReport.push({ "Service": "", "Category": "", "Booking": "", "Revenue": "No Records to display", "Cancellations": "", "CancellationRate": "" });                    
+                }
             })
-        })
-
+        }
+        else {
+            var apireportrequest = bookingService.GetServiceReportsBetweenDatesByOrder($routeParams.CompanyId, $scope.SelectedService, $scope.StartDate, $scope.EndDate, $scope.toggle, Field);
+            apireportrequest.then(function (response) {
+                $scope.ServiceReport = [];
+                angular.forEach(response.data, function (value, key) {
+                    ReportCount = true;
+                    $scope.ServiceReport.push({ "Service": value.ServiceName, "Category": value.CategoryName, "Booking": value.TotalBookings, "Revenue": "£" + value.TotalConfirmedRevenue, "Cancellations": value.TotalCancellations, "CancellationRate": value.PerntageOfTotalCancellations + "%" });
+                })
+                if (ReportCount == false) {
+                    $scope.ServiceReport.push({ "Service": "", "Category": "", "Booking": "", "Revenue": "No Records to display", "Cancellations": "", "CancellationRate": "" });
+                }
+            })
+        }
     }
     $scope.Logout = function () {
         $rootScope.IsLoggedInUser = false;
