@@ -328,6 +328,7 @@
     $scope.GetReportbyOrder = function (field) {
         debugger;
         $scope.toggle = !$scope.toggle;
+        var ReportCount = false;
         //if ($scope.toggle == true) {
         //    $scope.Order = "ASC";
         //}
@@ -335,13 +336,31 @@
         //    $scope.Order="DESC"
         //}
         $scope.ResourceReport = [];
-      
+        if ($scope.allresourcechecked == true)
+        { 
         var apirequest = bookingService.GetResourceReportsBetweenDatesinSortedOrder($routeParams.CompanyId, $scope.AllResources, $scope.StartDate, $scope.EndDate, $scope.toggle, field);
         apirequest.then(function (response) {             
-            angular.forEach(response.data, function (value, key) {              
+            angular.forEach(response.data, function (value, key) {
+                ReportCount = true;
                 $scope.ResourceReport.push({ "Resource": value.Employee.FirstName, "Bookings": value.TotalBookingsAssigned, "Revenue": "£" + value.TotalRevenue, "Duration": value.DurationInHours, "Cancellations": value.TotalCancellations, "CancellationRate": value.PerntageOfTotalCancellations + "%", "Tasks": value.TotalBookingsCompleted })
             })
+            if (ReportCount == false) {
+                $scope.ResourceReport.push({ "Resource": "", "Bookings": "", "Revenue": "", "Duration": "No Records to display", "Cancellations": "", "CancellationRate": "", "Tasks": "" })
+            }
         })
+        }
+        else {
+            var apirequest = bookingService.GetResourceReportsBetweenDatesinSortedOrder($routeParams.CompanyId, $scope.SelectedResource, $scope.StartDate, $scope.EndDate, $scope.toggle, field);
+            apirequest.then(function (response) {
+                angular.forEach(response.data, function (value, key) {
+                    ReportCount = true;
+                    $scope.ResourceReport.push({ "Resource": value.Employee.FirstName, "Bookings": value.TotalBookingsAssigned, "Revenue": "£" + value.TotalRevenue, "Duration": value.DurationInHours, "Cancellations": value.TotalCancellations, "CancellationRate": value.PerntageOfTotalCancellations + "%", "Tasks": value.TotalBookingsCompleted })
+                })
+                if (ReportCount == false) {
+                    $scope.ResourceReport.push({ "Resource": "", "Bookings": "", "Revenue": "", "Duration": "No Records to display", "Cancellations": "", "CancellationRate": "", "Tasks": "" })
+                }
+            })
+        }
     }
 
 }])

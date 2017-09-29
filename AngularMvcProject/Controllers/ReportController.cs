@@ -202,15 +202,8 @@ namespace AngularMvcProject.Controllers
                 var result = "";
                 var startDate = StartDate.Split('T')[0];
                 var endDate = EndDate.Split('T')[0];
-                string apiUrl = "";
-                if (sortingOrder == "ASC")
-                {
-                    apiUrl = ConfigurationManager.AppSettings["DomainUrl"].ToString() + "/api/Reports/GetCustomerReportsBetweenDates?companyId=" + CompanyId + "&commaSeperatedCustomerIds=" + commaSeperatedCustomerIds + "&startDate=" + startDate + "&endDate=" + endDate + "&asc=" + "asc" + "&field=" + Field;
-                }
-                else
-                {
-                    apiUrl = ConfigurationManager.AppSettings["DomainUrl"].ToString() + "/api/Reports/GetCustomerReportsBetweenDates?companyId=" + CompanyId + "&commaSeperatedCustomerIds=" + commaSeperatedCustomerIds + "&startDate=" + startDate + "&endDate=" + endDate + "&dsc=" + "dsc" + "&field=" + Field;
-                }
+                string apiUrl = ConfigurationManager.AppSettings["DomainUrl"].ToString() + "/api/Reports/GetCustomerReportsBetweenDates?companyId=" + CompanyId + "&commaSeperatedCustomerIds=" + commaSeperatedCustomerIds + "&startDate=" + startDate + "&endDate=" + endDate + "&asc=" + sortingOrder + "&field=" + Field;
+               
                 var httpWebRequest = HttpWebRequest.Create(apiUrl);
                 httpWebRequest.ContentType = "application/json";
                 httpWebRequest.Method = "GET";
