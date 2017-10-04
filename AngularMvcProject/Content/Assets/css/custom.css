@@ -4900,7 +4900,7 @@ div#staff-break .BreakSelectDiv select {
     width: 100%;
     margin-top: -5px;
     margin-left: 0px;
-    height: 40px;
+    height: 80px;
     background: #fff;
     line-height: 38px;
     -moz-box-shadow: 0 1px 6px #777;
@@ -4909,6 +4909,7 @@ div#staff-break .BreakSelectDiv select {
     font-size:12px;
     padding-left: 10px;
     list-style: none;
+    overflow-y: auto;
 }
 /*.searchCustomer {
     display:none;
@@ -4919,7 +4920,22 @@ div#staff-break .BreakSelectDiv select {
 
 
 
+
+
+
 /* sep-27 css start here           */
+
+/* 2actober css start here           */
+
+ul.searching-cust li.ng-scope img {
+    width: 30px;
+    height: 30px;
+    border-radius: 100%;
+}
+ul.searching-cust li span{
+    padding-left:8px;
+}
+/* 2actober css start end           */
 
 /* media css start here ================================= */
 

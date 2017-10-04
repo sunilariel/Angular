@@ -109,5 +109,32 @@ namespace AngularMvcProject.Controllers
                 return e.ToString();
             }
         }
+
+
+
+        [HttpPost]
+        public string SearchCustomersByTerm(string CompanyId, string searchTerm)
+        {
+            try
+            {
+                var result = "";
+                string apiUrl = ConfigurationManager.AppSettings["DomainUrl"].ToString() + "/api/customer/SearchCustomersByTerm?companyId="+CompanyId + "&searchTerm="+searchTerm;
+                var httpWebRequest = HttpWebRequest.Create(apiUrl);
+                httpWebRequest.ContentType = "application/json";
+                httpWebRequest.Method = "GET";
+                httpWebRequest.Headers.Add("Token", Request.Headers["Token"]);
+
+                var httpResponse = httpWebRequest.GetResponse();
+                using (var StreamReader = new StreamReader(httpResponse.GetResponseStream()))
+                {
+                    result = StreamReader.ReadToEnd();
+                }
+                return result;
+            }
+            catch (Exception e)
+            {
+                return e.ToString();
+            }
+        }
     }
 }
