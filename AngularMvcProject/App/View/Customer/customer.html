@@ -339,7 +339,7 @@
                                                         <input id="customerExt" class="form-control" type="text" placeholder="Code" maxlength="2" ng-model="customerExt">
                                                     </div>
                                                     <div class="col-md-10 col-sm-10 col-xs-10 mobilenumberField">
-                                                        <input id="customerMobile" class="form-control" type="text" placeholder="Mobile" ng-model="customerMobile">
+                                                        <input id="customerMobile" class="form-control" type="text" placeholder="Mobile" ng-model="customerMobile" name="customerMobile" required>
                                                     </div>
 
 
@@ -807,7 +807,7 @@
                                                                     <span id="calendarfaIcon"><i class="fa fa-calendar" aria-hidden="true"></i></span>
                                                                 </div>
                                                                 <div class="media-body appointDate">
-                                                                    <h4 class="media-heading">{{item.StartTime | date :'EEE MMM d, y'}}</h4>
+                                                                    <h4 class="media-heading">{{item.StartTime | date :'EEE MMM d, y'}} {{item.StartTime | date:'hh:mm a' |lowercase}} - {{item.EndTime | date :'hh:mm a'| lowercase}}</h4>
                                                                     <p>{{item.EmployeeName}} <span class="dotSplitter">.</span> {{item.ServiceName}} <span class="dotSplitter">.</span> {{item.DurationInMinutes}} min <span class="dotSplitter">.</span> {{item.Cost | currency : '£' : 0}}</p>
                                                                 </div>
                                                             </div>

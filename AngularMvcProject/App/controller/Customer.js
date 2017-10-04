@@ -125,7 +125,8 @@
         $scope.timeInfoFrom = [];      
     }
  
-    $scope.CreateCustomer = function (form) {        
+    $scope.CreateCustomer = function (form) {
+        debugger;
         if (form.$invalid == true) {
             if (form.customerName.$invalid == true) {
                 form.customerName.$setTouched();
@@ -140,7 +141,20 @@
                 return false;
             }
         }
-
+        if (form.$invalid == true) {
+            if (form.customerMobile.$invalid == true) {
+                form.customerMobile.$setTouched();
+                form.customerMobile.$touched = true;
+                return false;
+            }
+        }
+        if (form.$invalid == true) {
+            if (form.customerPassword.$invalid == true) {
+                form.customerPassword.$setTouched();
+                form.customerPassword.$touched = true;
+                return false;
+            }
+        }
         $scope.MobileNo = $scope.customerExt + $scope.customerMobile;
         var obj = {
             Url: '/api/customer/Create',
@@ -185,6 +199,10 @@
                     form.customerName.$untouched = true;
                     form.customerEmail.$setUntouched();
                     form.customerEmail.$untouched = true;
+                    form.customerMobile.$untouched = true;
+                    form.customerMobile.$setUntouched();
+                    form.customerPassword.$untouched = true;
+                    form.customerPassword.$setUntouched();
 
                     //$scope.showcustomer = false;
                 });
@@ -196,7 +214,18 @@
                          1000)
                 }, 500);
             }
+            else {
+                if(response.data.Message=="Customer creation failed: Already member")
+                {
+                    $scope.MessageText = "Customer Already Exits";
+                    $scope.IsVisible = true;
 
+                    $timeout(function () {
+                        $scope.IsVisible = false;
+                    },800)
+
+                }
+            }
         }, function () {
             $scope.showcustomer = false;
             alert('Error in updating record');
@@ -216,6 +245,10 @@
         form.customerName.$untouched = true;
         form.customerEmail.$setUntouched();
         form.customerEmail.$untouched = true;
+        form.customerMobile.$untouched = true;
+        form.customerMobile.$setUntouched();
+        form.customerPassword.$untouched = true;
+        form.customerPassword.$setUntouched();
     }
 
     //Edit Customer getting details  
@@ -251,7 +284,8 @@
 
 
     //Updating Customer on blur event of element
-    $scope.updateCustomer = function () {        
+    $scope.updateCustomer = function () {
+       
         var MobileNumber = $scope.updatedPreCustomerMobileNo + $scope.updatedMobileNo;
         var updateddate = new Date();
         var UpdateCustomer = {
@@ -289,6 +323,18 @@
                 }, 500)
 
             }
+            // else {
+            //    if (response.data.Message == "Customer creation failed: The property 'Email' is part of the object's key information and cannot be modified.")
+            //    {
+            //        $scope.MessageText = "Customer Can't modified";
+            //        $scope.IsVisible = true;
+
+            //        $timeout(function () {
+            //            $scope.IsVisible = false;
+            //        },800)
+
+            //    }
+            //}
         }, function () {
             alert("Error in updating record");
         });
@@ -478,6 +524,8 @@
                 form.Servicedd.$touched = true;
                 return false;
             }
+
+            
         }
         var time = $scope.timeoption.split(" ");
         var starttime = time[0].split(":");

@@ -821,6 +821,16 @@ app.service("bookingService", function ($http, $window) {
         return response;
     }
 
+    this.GetSearchCustomer = function (companyId, searchterm) {
+        var response = $http({
+            method: "POST",
+            url: "/Calendar/SearchCustomersByTerm",
+            headers: GetHeader(),
+            data:{CompanyId:companyId,searchTerm:searchterm}
+        })
+        return response;
+    }
+
 })
 
 

@@ -238,7 +238,7 @@
 
 
     $scope.SaveService = function () {
-      
+        debugger;
         if (servicenameform.ServiceName.value == "")
         {
             $scope.MessageText = "Service name cannot be empty!";
@@ -248,8 +248,9 @@
             }, 1000);
             return false;
         }
-        if (servicedetailform.ServiceTime.value == "") {
+        if (servicedetailform.ServiceTime.value == "" || servicedetailform.ServiceTime.value == 0 || servicedetailform.ServiceTime.value.includes(".")) {
             $scope.MessageText = "Service time cannot be empty!";
+            $scope.ServiceTime = "";
             $scope.IsVisible = true;
             $timeout(function () {
                 $scope.IsVisible = false;

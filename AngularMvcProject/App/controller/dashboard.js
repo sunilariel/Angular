@@ -98,6 +98,7 @@ app.controller('dashboardController', ['$scope', '$timeout', '$window', '$http',
     };
 
     $scope.init = function () {
+        debugger;
         $scope.showdashboardloader = true;
         $scope.AppointmentSchedule = [];
         $scope.MessageText = "Fetching Data...";
@@ -154,6 +155,9 @@ app.controller('dashboardController', ['$scope', '$timeout', '$window', '$http',
 
             $scope.companyEmail = response.data.Email;
         });
+
+        $scope.appointmentDetailisVisible = false;
+        angular.element(document.querySelector("#UpdateDashboardAppointmentPopup")).css("display", "none");
     }
 
     $scope.DashboardAppointmentDetail = function (item) {
@@ -202,13 +206,14 @@ app.controller('dashboardController', ['$scope', '$timeout', '$window', '$http',
                 $timeout(function () {
                     $scope.MessageText = "Appointment Label Saved";
                     $timeout(function () {
-                        $scope.IsVisible = false;
-                        var apirequestWeeksSchedule = bookingService.GetWeeksSchedule($routeParams.CompanyId);
-                        apirequestWeeksSchedule.then(function (response) {
-                            $scope.ListofWeekSchedule = [];
-                            $scope.ListofWeekSchedule = response.data;
-                            $scope.IsVisible = false;
-                        })
+                        $scope.IsVisible = false;                       
+                        $scope.init();
+                        //var apirequestWeeksSchedule = bookingService.GetWeeksSchedule($routeParams.CompanyId);
+                        //apirequestWeeksSchedule.then(function (response) {
+                        //    $scope.ListofWeekSchedule = [];
+                        //    $scope.ListofWeekSchedule = response.data;
+                        //    $scope.IsVisible = false;
+                        //})
                     }, 800)
                 }, 1000)
             }
@@ -347,8 +352,8 @@ app.controller('dashboardController', ['$scope', '$timeout', '$window', '$http',
          {
              "Id": $scope.UpdateAppointmentId,
              "CompanyId": $routeParams.CompanyId,
-             "ServiceId": $scope.selectedprovider,
-             "EmployeeId": $scope.selectedservice,
+             "ServiceId": $scope.selectedservice,
+             "EmployeeId":$scope.selectedprovider,
              "CustomerIdsCommaSeperated": $scope.CustomerId,
              "StartHour": $scope.timeoption,
              "StartMinute": "",
