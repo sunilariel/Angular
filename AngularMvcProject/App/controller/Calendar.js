@@ -44,6 +44,23 @@ app.controller('calendarController', ['$scope', '$location', '$filter', '$window
            { "Name": "Weekly", "ViewName": "agendaWeek" }];
         $scope.SelectedView = "month";
 
+
+        //Set Company Buisness Working Hours//
+
+        $scope.timeInfFrom = ["12:00 AM", "01:00 AM", "02:00 AM", "03:00 AM", "04:00 AM", "05:00 AM", "06:00 AM", "07:00 AM", "08:00 AM", "09:00 AM", "10:00 AM", "11:00 AM", "12:00 PM", "01:00 PM", "02:00 PM", "03:00 PM", "04:00 PM", "05:00 PM", "06:00 PM", "07:00 PM", "08:00 PM", "09:00 PM", "10:00 PM", "11:00 PM"];
+      
+
+        $scope.timeInfoTo = ["12:00 AM", "01:00 AM", "02:00 AM", "03:00 AM", "04:00 AM", "05:00 AM", "06:00 AM", "07:00 AM", "08:00 AM", "09:00 AM", "10:00 AM", "11:00 AM", "12:00 PM", "01:00 PM", "02:00 PM", "03:00 PM", "04:00 PM", "05:00 PM", "06:00 PM", "07:00 PM", "08:00 PM", "09:00 PM", "10:00 PM", "11:00 PM"];
+        
+        $scope.businessHourInfo = [{ 'day': 'Monday', 'timeFrom': "08:00 AM", 'timeTo': "05:00 PM", 'available': true, 'NameOfDay': 1 },
+        { 'day': 'Tuesday', 'timeFrom': "08:00 AM", 'timeTo': "05:00 PM", 'available': true, 'NameOfDay': 2 },
+        { 'day': 'Wednesday', 'timeFrom': "08:00 AM", 'timeTo': "05:00 PM", 'available': true, 'NameOfDay': 3 },
+        { 'day': 'Thursday', 'timeFrom': "08:00 AM", 'timeTo': "05:00 PM", 'available': true, 'NameOfDay': 4 },
+        { 'day': 'Friday', 'timeFrom': "08:00 AM", 'timeTo': "05:00 PM", 'available': true, 'NameOfDay': 5 },
+        { 'day': 'Saturday', 'timeFrom': "08:00 AM", 'timeTo': "05:00 PM", 'available': false, 'NameOfDay': 6 },
+        { 'day': 'Sunday', 'timeFrom': "08:00 AM", 'timeTo': "05:00 PM", 'available': false, 'NameOfDay': 0 }, ]
+
+
         //--------------Initialize Full Calendar-----------//
 
         $scope.uiConfig = {
@@ -55,9 +72,13 @@ app.controller('calendarController', ['$scope', '$location', '$filter', '$window
                     left: '',
                    center: 'today prev,next',
                  // center: 'today prev,myCustomButton,next',
-                    right: 'title'
+                    right: ''
                 },
-                resources:[],
+                resources: [],
+                //columnFormat: {                   
+                //    week: 'ddd d/M',
+                    
+                //},
                 //customButtons: {
                 //    myCustomButton: {
                 //        text: 'custom!',
@@ -128,6 +149,7 @@ app.controller('calendarController', ['$scope', '$location', '$filter', '$window
 
         $scope.init = function () {
             debugger;
+            $scope.cdate = new Date();
             $scope.FilterCustomerList = [];
             $scope.showProviderDrpDwn = false;
             $scope.StatusList = [{ Status: "No Label", "Value": 1 },
@@ -260,7 +282,6 @@ app.controller('calendarController', ['$scope', '$location', '$filter', '$window
       
         //Events Executed after all revents has been rendered//
         $scope.eventAfterAllRender = function () {
-
             debugger;
             //$scope.headerinit = false;
             if ($scope.headerinit == true) {
@@ -297,6 +318,16 @@ app.controller('calendarController', ['$scope', '$location', '$filter', '$window
                     angular.element(e).after(datepickerhtml);
 
                     $compile($('#cldtest'))($scope);
+
+
+
+                    var e = document.getElementsByClassName("fc-right");
+                    var headerhtml = "<div data-toggle='modal' data-target='#myModal'><i class='fa fa-cog' aria-hidden='true'></i></div>";
+
+                    $compile($(headerhtml))($scope);
+                    angular.element(e).append(headerhtml);
+
+
 
                     //angular.element(document.querySelector("fc-header-toolbar")).innerHTML('');
 
@@ -462,11 +493,16 @@ app.controller('calendarController', ['$scope', '$location', '$filter', '$window
         //On click on date on Calendar//
         $scope.CurrentDateClick = function (date, jsEvent, view, resourceObj) {
             debugger;
+            var  cdate = $filter('date')(date._d, "EEE, MMM d");
+            $("#datepicker").val(cdate);
+            $scope.dt = date._d;
             $scope.ShowSubmit = false;
+            $scope.ContinueAppointment = true;
+
             angular.element(document.querySelector("#squarespaceModal")).css("display", "block");
             angular.element(document.querySelector("#squarespaceModal")).css("opacity", 1);
             // $scope.today();
-            $scope.dt = date._d;
+           
             $scope.timeslotsloading = false;
             $scope.selectedservice = null;
             $scope.price = null;
@@ -974,12 +1010,7 @@ app.controller('calendarController', ['$scope', '$location', '$filter', '$window
                                             $scope.selectedservice = null;
                                             $scope.price = null;
 
-                                            $scope.time = "";
-                                            $scope.timeoption = "";
-                                            $scope.timeInfoFrom = [];
-                                            $scope.Status = "1";
-                                            $scope.selectedprovider = "-- Select a Provider --";
-                                            $scope.notes = "";
+                                           
                                         })
                                     }, 1000);
                                 }, 500)
@@ -1059,12 +1090,7 @@ app.controller('calendarController', ['$scope', '$location', '$filter', '$window
             $scope.selectedservice = null;
             $scope.price = null;
 
-            $scope.time = "";
-            $scope.timeoption = "";
-            $scope.timeInfoFrom = [];
-            $scope.Status = "1";
-            $scope.selectedprovider = "-- Select a Provider --";
-            $scope.notes = "";
+           
                                 })
                             }, 1000);
                         }, 500)
@@ -1178,6 +1204,14 @@ app.controller('calendarController', ['$scope', '$location', '$filter', '$window
                 uiCalendarConfig.calendars['myCalendar'].fullCalendar('addEventSource', $scope.events);
                 $scope.getSelectedStaff($scope.selectedprovider);
                 $('#providers').val($scope.selectedprovider);
+
+                //Empty the values//
+                $scope.time = "";
+                $scope.timeoption = "";
+                $scope.timeInfoFrom = [];
+                $scope.Status = "1";
+                $scope.selectedprovider = "-- Select a Provider --";
+                $scope.notes = "";
                // $scope.eventSources[0] = $scope.events;
             })
             
@@ -1201,10 +1235,13 @@ app.controller('calendarController', ['$scope', '$location', '$filter', '$window
         }
         $scope.CloseAppointmentModal = function () {
             // $scope.today();
+            $scope.ShowSubmit = false;
+            $scope.ContinueAppointment = true;
+            $scope.DisabledAddCustomerTab = true;
+
             $scope.timeslotsloading = false;
             $scope.selectedservice = null;
-            $scope.price = null;
-
+            $scope.price = null;            
             $scope.time = "";
             $scope.timeoption = "";
             $scope.timeInfoFrom = [];
@@ -1225,11 +1262,11 @@ app.controller('calendarController', ['$scope', '$location', '$filter', '$window
             $scope.dt = new Date();
         };
 
-        $scope.SetDatePicker = function () {
+        //$scope.SetDatePicker = function () {
+        //    debugger;
+        //    $scope.today();
           
-            $scope.today();
-          
-        }
+        //}
 
         $scope.EditDatePicker = function () {
             //if ($scope.editcount == 0) {
@@ -1387,19 +1424,18 @@ app.controller('calendarController', ['$scope', '$location', '$filter', '$window
             angular.element(document.querySelector("#Appointmenttab")).addClass("active");
             angular.element(document.querySelector("#modalfooter")).css("display", "block");
 
-
         }
 
         $scope.Calendartab = function () {
             if ($scope.DisabledAddCustomerTab == false) {
-                $scope.FilterCustomerList = [];
-                $scope.SearchCustomer = "";
-                angular.element(document.querySelector("#searchCustomer")).css("display", "block");
+                //$scope.FilterCustomerList = [];
+                //$scope.SearchCustomer = "";
+                //angular.element(document.querySelector("#searchCustomer")).css("display", "block");
                 angular.element(document.querySelector("#Appointmenttab")).removeClass("active");
-                angular.element(document.querySelector("#Calendarcustomer")).css("display", "none");
+                angular.element(document.querySelector("#Calendarcustomer")).css("display", "block");
                 angular.element(document.querySelector("#Calendartab")).addClass("active");
                 angular.element(document.querySelector("#calendardetail")).css("display", "none");
-                angular.element(document.querySelector("#modalfooter")).css("display", "none");
+                angular.element(document.querySelector("#modalfooter")).css("display", "block");
             }
         }
 
@@ -1409,5 +1445,92 @@ app.controller('calendarController', ['$scope', '$location', '$filter', '$window
             sessionStorage.removeItem('userInfo-token');
             $location.path("/signin");
         }
+
+        //Buisness Working Hours Section in Calendar
+
+        $scope.switchOnOff = function (item) {
+            debugger;
+            angular.forEach($scope.businessHourInfo, function (value, key) {
+                //debugger; if (item.day != "Sunday" && item.day != "Saturday") {
+                {
+                    if (item.day == value.day) {
+                        if (item['available'] == true) {
+                            value.available = false;
+
+                            var buisnesshour = {
+                                Id: "",
+                                CompanyId: $routeParams.CompanyId,
+                                Start: item.timeFrom,
+                                End: item.timeTo,
+                                NameOfDay: item.day,
+                                IsOffAllDay: true,
+                                //CreationDate: "2017-06-05T05:20:32.2919738+00:00",
+                                CreationDate: new Date(),
+                            }                         
+                        }
+                        else {
+                            value.available = true;
+
+                            var buisnesshour = {
+                                Id: "",
+                                CompanyId: $routeParams.CompanyId,
+                                Start: item.timeFrom,
+                                End: item.timeTo,
+                                NameOfDay: item.day,
+                                IsOffAllDay: false,
+                                //CreationDate: "2017-06-05T05:20:32.2919738+00:00",
+                                CreationDate: new Date(),
+                            }
+                        }
+                    }
+
+                    
+
+                }
+                var apirequest = bookingService.SetCompanyWorkingHours(buisnesshour);
+                apirequest.then(function (response) {
+                    if (response.data.Success == true) {
+                        $scope.MessageText = "Saving buisness Hours";
+                        $scope.IsVisible = true;
+                        $timeout(function () {
+                            $scope.MessageText = "Buisness Hours Saved"
+                            $timeout(function () {
+                                $scope.IsVisible = false;
+                            }, 1000)
+                        }, 800)
+                    }
+                })
+            });
+        }
+
+        $scope.SetWorkingHours = function (timedata) {
+            debugger;
+            var buisnesshour = {
+                Id: "",
+                CompanyId: $routeParams.CompanyId,
+                Start: timedata.timeFrom,
+                End: timedata.timeTo,
+                NameOfDay: timedata.day,
+                IsOffAllDay: timedata.available == true ? false : true,
+                //CreationDate: "2017-06-05T05:20:32.2919738+00:00",
+                CreationDate: new Date(),
+            }
+
+            var apirequest = bookingService.SetCompanyWorkingHours(buisnesshour);
+            apirequest.then(function (response) {
+                if (response.data.Success == true) {
+                    $scope.MessageText = "Saving buisness Hours";
+                    $scope.IsVisible = true;
+                    $timeout(function () {
+                        $scope.MessageText = "Buisness Hours Saved"
+                        $timeout(function () {
+                            $scope.IsVisible = false;
+                        },1000)
+                    },800)
+                }
+            })
+        }
+
+
 
     }]);
