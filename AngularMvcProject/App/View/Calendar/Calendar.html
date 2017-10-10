@@ -162,7 +162,7 @@
                     <div class="col-md-8">
 
                         <!--<div id="display"><input type="button" ng-click="GetCurrentEvent()"/></div>-->
-                        <div id="calendar" ui-calendar="uiConfig.calendar" config="uiConfig.calendar" ng-model="eventSources" calendar="myCalendar"></div>
+                        <div id="calendar" ui-calendar="uiConfig.calendar" config="uiConfig.calendar" ng-model="events" calendar="myCalendar"></div>
                     </div>
                     <!--<div class="col-md-4">
                         <div ng-show="SelectedEvent" class="alert alert-success" style="margin-top:50px">
@@ -234,7 +234,7 @@
                     Edit Appointment
                     <i class="fa fa-angle-double-right" aria-hidden="true"></i>
                 </a>
-                <a class="apptDeleteBtn cursorhand" ng-click="DeleteAppointment()">Delete</a>
+                <a class="apptDeleteBtn cursorhand" ng-click="DeleteAppointment(AppointmentBookingId)">Delete</a>
             </div>
         </div>
     </div>
@@ -337,7 +337,7 @@
                                                 <div class="selectDropdown">
                                                     <div class="gifImage" ng-show="timeslotsloading"><img src="/Content/Assets/images/loading.gif" /></div>
                                                     <select class="select_btn dateTimeSelect" style="line-height:1;" ng-model="timeoption" name="timeoption" ng-init="timeoption='8:00 AM'">
-                                                        <option ng-repeat="timeoption in timeInfoFrom " value="{{timeoption}}">{{timeoption}}</option>
+                                                        <option ng-repeat="timeoption in timeInfoFrom track by $index" value="{{timeoption}}">{{timeoption}}</option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -618,7 +618,7 @@
                                             <div class="selectDropdown">
                                                 <div class="gifImage" ng-show="timeslotsloading"><img src="/Content/Assets/images/loading.gif" /></div>
                                                 <select class="select_btn dateTimeSelect" ng-model="timeoption" name="timeoption">
-                                                    <option ng-repeat="timeoption in timeInfoFrom " value="{{timeoption}}">{{timeoption}}</option>
+                                                    <option ng-repeat="timeoption in timeInfoFrom track by $index " value="{{timeoption}}">{{timeoption}}</option>
                                                 </select>
                                             </div>
                                         </div>

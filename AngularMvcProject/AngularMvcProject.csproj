@@ -245,7 +245,10 @@
     <Content Include="Content\Assets\js\angular-trix.js" />
     <Content Include="Content\Assets\js\angularjs-datetime-picker.min.js" />
     <Content Include="Content\Assets\js\bootstrap-datetimepicker.min.js" />
+    <Content Include="Content\Assets\js\fullcalendar.print.min.css" />
     <Content Include="Content\Assets\js\moment.js" />
+    <Content Include="Content\Assets\js\scheduler.js" />
+    <Content Include="Content\Assets\js\scheduler.min.css" />
     <Content Include="Content\Assets\js\trix.js" />
     <Content Include="Content\Assets\js\ui-bootstrap-tpls-0.5.0.js" />
     <Content Include="Content\dx.common.css" />
@@ -300,10 +303,12 @@
     <Content Include="Content\Assets\fonts\icomoon.woff2" />
     <None Include="Properties\PublishProfiles\Default Settings.pubxml" />
     <Content Include="Scripts\dx.all.js" />
-    <Content Include="Scripts\fullcalendar\fullcalendar.js" />
-    <Content Include="Scripts\fullcalendar\fullcalendar.min.js" />
-    <Content Include="Scripts\fullcalendar\gcal.js" />
-    <Content Include="Scripts\fullcalendar\gcal.min.js" />
+    <Content Include="Scripts\fullcalendar.js" />
+    <Content Include="Scripts\fullcalendar.min.js" />
+    <Content Include="Scripts\fullcalendar\fullcalendaroldversion.js" />
+    <Content Include="Scripts\fullcalendar\fullcalendaroldversion.min.js" />
+    <Content Include="Scripts\fullcalendar\gcaloldversion.js" />
+    <Content Include="Scripts\fullcalendar\gcaloldversion.min.js" />
     <Content Include="Scripts\fullcalendar\locale-all.js" />
     <Content Include="Scripts\fullcalendar\locale\af.js" />
     <Content Include="Scripts\fullcalendar\locale\ar-dz.js" />
@@ -372,6 +377,7 @@
     <Content Include="Scripts\fullcalendar\locale\vi.js" />
     <Content Include="Scripts\fullcalendar\locale\zh-cn.js" />
     <Content Include="Scripts\fullcalendar\locale\zh-tw.js" />
+    <Content Include="Scripts\gcal.js" />
     <Content Include="Scripts\globalize.min.js" />
     <None Include="Scripts\jquery-2.0.0.intellisense.js" />
     <Content Include="Scripts\jquery-2.0.0.js" />
@@ -408,6 +414,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Content\Assets\js\demos\" />
     <Folder Include="Views\Calendar\" />
     <Folder Include="Views\Report\" />
     <Folder Include="Views\Services\" />

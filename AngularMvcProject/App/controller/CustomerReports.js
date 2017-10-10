@@ -29,6 +29,11 @@
     $scope.RedirecttoReport = function () {
         $location.path("/BuisnessReports/" + $routeParams.CompanyId);
     }
+    $scope.redirecttodashboard = function () {
+        $location.path("/dashboard/" + $routeParams.CompanyId);
+    }
+    
+
     $scope.ListofCustomers=[];
     $scope.init = function () {
         debugger;
