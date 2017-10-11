@@ -75,6 +75,17 @@ app.controller('calendarController', ['$scope', '$location', '$filter', '$window
                     right: ''
                 },
                 resources: [],
+                views: {
+                    agendaWeek: { // name of view
+                        columnFormat: 'ddd,MMM YY',
+                        titleFormat:'MMM D'
+                        // other view-specific options here
+                    }
+                },
+                viewRender: function (view, element) {
+                    debugger;
+                    view.title = 'Your Custom Title';
+                },
                 //columnFormat: {                   
                 //    week: 'ddd d/M',
                     
@@ -203,6 +214,9 @@ app.controller('calendarController', ['$scope', '$location', '$filter', '$window
 
                     uiCalendarConfig.calendars['myCalendar'].fullCalendar('addResource', resourceobj);
                 }
+                $scope.selectedid = (response.data[0].id).tostring();
+                $scope.selectedstaff = (response.data[0].firstname).tostring();
+
                 //$scope.AllProviders = AllStaff.substring(0, AllStaff.length - 1);
 
                 var apirequest = bookingService.GetBookingsForEmployeesByIdBetweenDates($routeParams.CompanyId, $scope.Provider[0].Id, firstDay, lastDay);
@@ -280,7 +294,7 @@ app.controller('calendarController', ['$scope', '$location', '$filter', '$window
      
         //-----------------Full Calendar Events--------------------//
       
-        //Events Executed after all revents has been rendered//
+        //Events Executed after all revents has been rendered//        
         $scope.eventAfterAllRender = function () {
             debugger;
             //$scope.headerinit = false;
@@ -291,38 +305,105 @@ app.controller('calendarController', ['$scope', '$location', '$filter', '$window
                     debugger;
                     $scope.AllStaff = response.data;
                     // df.resolve($scope.AllStaff);
-                    $scope.selectedstaff = ($scope.AllStaff[0].Id).toString();
+                    //$scope.selectedId = ($scope.AllStaff[0].Id).toString();
+                    //$scope.selectedstaff = ($scope.AllStaff[0].FirstName).toString();
                     var e = document.getElementsByClassName("fc-left");
-                    var staffhtml = "<select class='form-control' ng-model='selectedstaff' id='providers' ng-change = getSelectedStaff(selectedstaff) ng-hide = 'showProviderDrpDwn' style='width:77px;height: 30px;'>";
+
+                    //var staffhtml = "<select class='form-control' ng-model='selectedstaff' id='providers' ng-change = getSelectedStaff(selectedstaff) ng-hide = 'showProviderDrpDwn' style='width:77px;height: 30px;'>";
+                    //angular.forEach($scope.AllStaff, function (value, key) {
+                    //    staffhtml = staffhtml + "<option value=" + value.Id + ">" + value.FirstName + "</option>";
+                    //})
+                    //staffhtml = staffhtml + "</select>";
+
+
+                    var staffhtml = "<div class='dropdownwtest' style='float:left;'><button class='dropbtntesta' ng-hide = 'showProviderDrpDwn'> <img class='testimgs' src='../Content/Assets/images/provider_img2.png'><span class='barhdermrgns'>{{selectedstaff }} </span> <span class='bariconodersd'><i class='fa fa-caret-down cheaderic' aria-hidden='true'></i></span></button><div class='dropdowntestcontent' style='left:0;'><input type='text' class='providersrchb' placeholder='Search Provider...'>";
                     angular.forEach($scope.AllStaff, function (value, key) {
-                        staffhtml = staffhtml + "<option value=" + value.Id + ">" + value.FirstName + "</option>";
+                        staffhtml = staffhtml + "<a class='subcmrgnf cursorhand' ng-click = getSelectedStaff(" + value.Id + ") ><img class='testimgs' src='../Content/Assets/images/provider_img2.png'><span class='econtent' style='display: inline-block;float: left;margin-top: 6px;'>" + value.FirstName + "</span><span class='bariconoder'><i class='fa fa-bars' aria-hidden='true'></i></span></a>";
                     })
-                    staffhtml = staffhtml + "</select>";
+                    staffhtml = staffhtml + "</div></div>";
+
                     var tempstaffhtml = $compile(staffhtml)($scope);
                     angular.element(e).append(tempstaffhtml);
 
                     ////
-                    var ViewHtml = "<select class='form-control' ng-model='SelectedView' ng-change = ChangeView(SelectedView) style='width:92px;height: 30px;'>";
-                    angular.forEach($scope.ViewList, function (value, key) {
-                        ViewHtml = ViewHtml + "<option value=" + value.ViewName + ">" + value.Name + "</option>";
-                    });
-                    ViewHtml = ViewHtml + "</select>";                    
+
+                    //var ViewHtml = "<div class='dropdownweeky'><button class='dropbtnweeky'> Weekly<span class='caret cmpdng'></span></button><ul class='dropcntentwkly'><li><a href='#'>Daily</a></li><li><a href='#'>Monthly</a></li></ul></div>";
+
+                    //var ViewHtml = "<select class='form-control' ng-model='SelectedView' ng-change = ChangeView(SelectedView) style='width:92px;height: 30px;'>";
+                   // angular.forEach($scope.ViewList, function (value, key) {
+                    //    ViewHtml = ViewHtml + "<option value=" + value.ViewName + ">" + value.Name + "</option>";
+                    // });
+
+                    var ViewHtml = "<div class='dropdownweeky'><button class='dropbtnweeky'>{{SelectedView}}<span class='caret cmpdng'></span></button><ul class='dropcntentwkly'>";
+                   
+                  
+                     angular.forEach($scope.ViewList, function (value, key) {
+                         ViewHtml = ViewHtml + "<li ng-click = ChangeView('"+ value.ViewName +"') ><a class='cursorhand'>" + value.Name + "</a></li>";
+                     });
+
+
+
+                     ViewHtml = ViewHtml + "</ul></div>";
+
                     var ViewOptionsHtml = $compile(ViewHtml)($scope);
                     angular.element(e).append(ViewOptionsHtml);
 
                     var e = document.getElementsByClassName("fc-prev-button");
 
-                    var datepickerhtml = "<input id='cldtest' type='text' class='form-control calendarBox' datepicker-popup='EEE, MMM d' ng-model='cdate' open='opened' datepicker-options='dateOptions' ng-click='SetDatePicker()' name='theDate' style='width: 131px;height: 30px;' />";
+                    var datepickerhtml = "<input id='cldtest' type='text' class='form-control calendarBox' datepicker-popup='EEE, MMM d' ng-model='cdate' is-open='Opened' ng-mouseover='Opened=true;$event.stopPropagation();' datepicker-options='dateOptions' ng-click='SetDatePicker()' name='theDate' style='width: 131px;height: 30px;' />";
                     //var datepickercompilehtml = $compile(datepickerhtml)($scope);
                     //angular.element(e).append(datepickercompilehtml);
                     angular.element(e).after(datepickerhtml);
 
                     $compile($('#cldtest'))($scope);
 
-
-
                     var e = document.getElementsByClassName("fc-right");
-                    var headerhtml = "<div data-toggle='modal' data-target='#myModal'><i class='fa fa-cog' aria-hidden='true'></i></div>";
+                    // var headerhtml = "div class='row'><div class='col-sm-3'></div> <div class='col-sm-3'><div class='dropdown'><i class='fa fa-cog settingt' aria-hidden='true'></i> <div class='dropdown-content dropdownbox'><a href='#'>Providers</a><a href='#'><i class='fa fa-check' aria-hidden='true'></i>View as dropdown</a><a class='listbborder' href='#'><i class='fa fa-tablet' aria-hidden='true'></i>view as tabs</a><a class='listbborder' href='#'>Disable off-hours booking</a><a class='listbborder' href='#'>Enable double booking</a><a class='listbborder' href='#'>Disable custom service duration</a><a class='listbborder' href='#'>Disable custom service cost</a><a class='listbborder' href='#'>Change business hours</a><a class='listbborder' href='#'>Hide calendar stats</a></div></div></div>";
+                    //<div class='col-sm-3'>
+                    var headerhtml = "<div class='row tooldropdwn'><div class='col-sm-3'><div class='dropdownrighticon'> <i class='fa fa-plus maindricons' aria-hidden='true'></i><div class='dropdownbox'><a href='#'><i class='fa fa-users plusbox' aria-hidden='true'></i>Add staff</a><a href='#'><i class='fa fa-truck plusbox' aria-hidden='true'></i>Add service</a><a href='#'><i class='fa fa-book  plusbox' aria-hidden='true'></i>Add customer</a><a href='#'><i class='fa fa-sitemap plusbox' aria-hidden='true'></i>Add class</a></div></div></div><div class='col-sm-3'><div class='dropdownrighticon'><i class='fa fa-signal maindricons' aria-hidden='true'></i><div class='dropdownbox'><a class='signalheader' href='#'>testerariel's Weekly Stats</a><ul class='signalbox'><li class=''><a href='#'><span id='totalApptsCount' class='scontent'>1</span><label class='pricetexts'>Appts.</label></a></li><li><a href='#'><span id='confirmedApptsCost' class='scontent'>₹0</span><label class='pricetexts'>Confirmed</label></a></li><li><a href='#'><span id='projectedApptsCost' class='scontent'>₹0</span><label class='pricetexts'>Projected</label></a></li><div class='clear_all'></div></ul></div></div></div><div class='col-sm-3'><div class='dropdownrighticon'><i class='fa fa-cog settingt maindricons' aria-hidden='true'></i><div class='dropdownbox'><a href='#'>Providers</a><a href='#'><i class='fa fa-check checkbtn' aria-hidden='true'></i>View as dropdown</a><a class='listbborder' href='#'><i class='fa fa-tablet tabletbtn' aria-hidden='true'></i>view as tabs</a><a class='listbborder' href='#'>Disable off-hours booking</a><a class='listbborder' href='#'>Enable double booking</a><a class='listbborder' href='#'>Disable custom service duration</a><a class='listbborder' href='#'>Disable custom service cost</a><a class='listbborder cursorhand' data-toggle='modal' data-target='#myModal' >Change business hours</a><a class='listbborder' href='#'>Hide calendar stats</a></div></div></div><div class='col-sm-3'> </div></div>";
+                    // 		<div class='dropdown'>
+
+                    // 		  <i class='fa fa-plus' aria-hidden='true'></i>
+                    // 		  <div class='dropdown-content dropdownbox'>
+                    // 			<a href='#'><i class='fa fa-users plusbox' aria-hidden='true'></i>Add staff</a>
+                    // 			<a href='#'><i class='fa fa-truck plusbox' aria-hidden='true'></i>Add service</a>
+                    // 			<a href='#'><i class='fa fa-book  plusbox' aria-hidden='true'></i>Add customer</a>
+                    // 			<a href='#'><i class='fa fa-sitemap plusbox' aria-hidden='true'></i>Add class</a>
+
+                    // 		  </div>
+                    // 		</div>
+                    //</div>
+                    //<div class='col-sm-3'>
+                    // 		<div class='dropdown'>
+                    // 		   <i class='fa fa-signal' aria-hidden='true'></i>
+                    // 		  <div class='dropdown-content dropdownbox'>
+                    // 			<a class='signalheader' href='#'>testerariel's Weekly Stats</a>
+                    // 			<ul class='signalbox'>
+                    // 							<li class=''>
+                    // 							  <a href='#'>
+                    // 								<span id='totalApptsCount' class='scontent'>1</span>
+                    // 								<label>Appts.</label>
+                    // 						      </a>
+                    // 							</li>
+                    // 							<li>
+                    // 							    <a href='#'>
+                    // 									<span id='confirmedApptsCost' class='scontent'>₹0</span>
+                    // 									<label>Confirmed</label>
+                    // 								</a>
+                    // 							</li>
+                    // 							<li>
+                    // 							   <a href='#'>
+                    // 									<span id='projectedApptsCost' class='scontent'>₹0</span>
+                    // 									<label>Projected</label>
+                    // 								</a>
+                    // 							</li>
+                    // 							<div class='clear_all'></div>
+                    // 						</ul>
+                    // 		  </div>
+                    // 		</div>
+                    //</div>
+                    //</div>
+                    //;
 
                     $compile($(headerhtml))($scope);
                     angular.element(e).append(headerhtml);
@@ -345,6 +426,18 @@ app.controller('calendarController', ['$scope', '$location', '$filter', '$window
         $scope.ChangeView = function (View) {
             debugger;
             $scope.showProviderDrpDwn = true;
+            if (View == "month") {
+                $scope.SelectedView="Monthly";
+            }
+            else if (View == "agendaDay")
+            {
+                $scope.SelectedView="Daily";
+            }
+            else if (View == "agendaWeek")
+            {
+                $scope.SelectedView = "Weekly";
+            }
+           // $scope.SelectedView = View;
             uiCalendarConfig.calendars['myCalendar'].fullCalendar('changeView', View);
             if(View=="agendaDay")
             {
@@ -430,6 +523,7 @@ app.controller('calendarController', ['$scope', '$location', '$filter', '$window
             $scope.eventSources = [];
             $scope.WorkingHours = [];
             $scope.BuisnessWorkingHours = [];
+
             debugger;
             var apirequest = bookingService.GetBookingsForEmployeesByIdBetweenDates($routeParams.CompanyId, Id, firstDay, lastDay);
             apirequest.then(function (response) {
@@ -459,8 +553,10 @@ app.controller('calendarController', ['$scope', '$location', '$filter', '$window
                         color: value.Service.Colour,
                         textColor: "black"
                     });
+                    $scope.selectedstaff = value.Employee.FirstName;
+                    
                 })
-
+                $scope.selectedId = Id;
                 uiCalendarConfig.calendars['myCalendar'].fullCalendar('addEventSource', $scope.events)
                
                 debugger;
@@ -630,7 +726,7 @@ app.controller('calendarController', ['$scope', '$location', '$filter', '$window
                                 }
                             }
 
-                            uiCalendarConfig.calendars['myCalendar'].fullCalendar('removeEventSource', $scope.events);
+                            uiCalendarConfig.calendars['myCalendar'].fullCalendar('removeEventSources');
                             uiCalendarConfig.calendars['myCalendar'].fullCalendar('addEventSource', $scope.events);
 
 
@@ -1104,7 +1200,7 @@ app.controller('calendarController', ['$scope', '$location', '$filter', '$window
             debugger
             $scope.events = [];
             var checkdelete = false;
-            var apirequest = bookingService.GetBookingsForEmployeesByIdBetweenDates($routeParams.CompanyId, $scope.selectedstaff, firstDay, lastDay);
+            var apirequest = bookingService.GetBookingsForEmployeesByIdBetweenDates($routeParams.CompanyId, $scope.selectedId, firstDay, lastDay);
             apirequest.then(function (response) {
                 debugger;
                 angular.forEach(response.data, function (value, key) {

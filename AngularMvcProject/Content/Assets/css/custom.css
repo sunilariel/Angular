@@ -3075,6 +3075,214 @@ ul.dashboardNtfList {
    
 } */
 
+/*///////////////////////////////////////////check//////////////////////*/
+
+
+
+.dropbtntesta {
+   
+    color:#252c32;
+    padding:6px 10px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    background-color:transparent;
+}
+button.dropbtntesta:hover {
+    color: #252c32;
+    border: solid 1px #aaa;
+    background: #f1f5f8;
+    box-shadow: 0px 1px 2px #CCC;
+}
+.dropdownwtest{
+    position: relative;
+    display: inline-block;
+}
+.dropdowntestcontent a {
+    color: black;
+    padding:0px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdowntestcontent a:hover {background-color: #f1f1f1}
+
+.dropdownwtest:hover .dropdowntestcontent {
+    display: block;
+}
+a.subcmrgn {
+    padding-left:5px;
+    padding-bottom: 20px;
+}
+a.subcmrgnf {
+    padding-left:5px;
+    padding-top: 9px;
+    padding-bottom:33px;
+}
+img.testimgs {
+    border-radius: 100%;
+    border: none;
+    width: 27px;
+    height: 27px;
+    display: block;
+    float: left;
+    padding: 0;
+    margin: -2px 8px 0px 2px;
+}
+.dropdowntestcontent {
+
+    min-width: 240px;
+    background: #ffffff;
+    border: solid 1px #a1a1a1;
+    box-shadow: 0px 2px 4px #CCC;
+    overflow: auto;
+    max-height: 350px;
+    margin-left: -1px;
+    z-index:999999999999999999999;
+    list-style: none;
+    position: absolute;
+    display:none;
+    right:0;
+}
+
+/*.dropdowntestcontent{
+    display: none;
+    position: absolute;
+    right: 0;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index:99999999999;
+}*/
+
+input.providersrchb {
+    border: 0;
+    border-bottom: solid 1px #CCC;
+    width: 100%;
+    border-radius: 0;
+    height: 44px;
+    text-indent: 15px;
+    padding: 0;
+    margin: 0;
+    font-size: 12px;
+}
+span.bariconoder {
+    float: right;
+    margin-right: 18px;
+}
+
+i.fa.fa-caret-down.cheaderic {
+    margin-right: 8px;
+    color: #252c32;
+    margin-left: 9px;
+    
+}
+.dropbtnweeky{
+    background-color: #4CAF50;
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+}
+.dropdownweeky {
+    position: relative;
+    display: inline-block;
+}
+.dropcntentwkly{
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width:100% !important;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index:99999999999999;
+}
+.dropcntentwkly a:hover {background-color: #f1f1f1;}
+.dropdownweeky:hover .dropcntentwkly{
+    display: block;
+}
+.dropdownweeky:hover .dropbtnweeky {
+    background-color: #3e8e41;
+}
+ul.dropcntentwkly{
+    list-style: none !important;
+	padding:0px;
+	margin:0px;
+}
+button.dropbtnweeky{
+    color: white;
+    padding: 6px 17px;
+    font-size: 13px;
+    border: none;
+    cursor: pointer;
+}
+button.dropbtnweeky:hover {
+    color: #252c32;
+    border: solid 1px #aaa;
+    background: #f1f5f8 !important;
+    box-shadow: 0px 1px 2px #CCC;
+}
+button.dropbtnweeky {
+    background-color: transparent!important;
+    color: #252c32 !important;
+    font-size: 12px !important;
+}
+span.caret.cmpdng {
+    margin-left: 10px;
+}
+button.dropbtnweeky {
+    width: 90px;
+}
+.dropcntentwkly li a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    float: left;
+    font-size: 12px;
+}
+button.dropbtnweeky {
+    height: auto !important;
+   
+    padding:9px 0px !important;
+     border-radius: 3px;
+     border:1px solid transparent;
+}
+button.dropbtntesta {
+   
+    height: auto !important;
+    padding:6px 0px !important;
+    border-radius: 3px;
+    border:1px solid transparent;
+}
+.row.tooldropdwn {
+    padding:9px 0px;
+}
+ul.dropdown-menu.ng-valid.ng-valid-date.ng-valid-date-disabled.calwlmrgn {
+    width: 17%;
+    left: 608px;
+}
+
+/*/////////////////////////////////////////////////// //*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 .staffactive {
     background: #E1E7EB;
@@ -6289,8 +6497,265 @@ div#deletetooltipPopup{
 .cursorhand{
     cursor:pointer;
 }
-
-
+/*============================10-10-2017 css start here============================================*/
+.dropdownrighticon {
+     position: relative;
+    display: inline-block;
+}
+.dropdownbox
+{
+     display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 9999999 !important;
+    right: 0 !important;
+}
+.dropdownbox a {
+        color: black;
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+        text-align: left;
+    }
+.dropdownrighticon:hover .dropdownbox {
+    display: block;
+}
+.dropdownbox a:hover {background-color: #f1f1f1}
+a.listbborder {
+    padding: 10px 0 10px 20px;
+    border-bottom: solid 1px #ccc;
+}
+.dropdownbox a {
+    font-size: 11px;
+}
+ul.signalbox {
+    list-style: none;
+    margin: 15px 30px;
+}
+ul.signalbox {
+    list-style: none;
+    margin: 15px 30px;
+	padding:0px;
+	width: 250px;
+}
+ul.signalbox li {
+    float: left;
+    width: 80px;
+   
+    position: relative;
+    top: 3px;
+   
+    text-align: center;
+}
+i.fa.plusbox {
+    margin-right: 10px;
+}
+a.signalheader
+{
+background: #F1F5F8;
+    line-height: 35px;
+    color: #8C949D;
+    text-transform: capitalize;
+    font-size: 12px;
+	text-align:center;
+}
+.scontent {
+      font-size: 31px;
+    color: #485861;
+    text-align: center;
+}
+.weeklybtn
+{
+   display: inline-block;
+    padding: 6px 12px;
+    margin-bottom: 0;
+    font-size: 14px;
+    font-weight: normal;
+    line-height: 1.42857143;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-image: none;
+    border: 1px solid transparent;
+    border-radius: 4px;
+   background-color: #e4ebf1; 
+}
+.weeklybtn:hover{
+	  border:1px solid #ccc;
+	  color:#252c32;
+	  background-color:white;
+}
+.row.tooldropdwn i.fa {
+    color: #8C949D;
+    font-size:13px;
+}
+i.fa.fa-check.checkbtn {
+    margin-right: 4px;
+    font-size:12px;
+}
+i.fa.fa-tablet.tabletbtn{
+    margin-right:7px;
+    font-size:12px;
+}
+label.pricetexts {
+    color: #8C949D;
+}
+i.fa.fa-plus.maindricons {
+    font-size: 18px;
+}
+i.fa.fa-signal.maindricons {
+        font-size:18px;
+}
+i.fa.fa-cog.settingt.maindricons
+{
+     font-size:18px;
+}
+/* 6-sep-2017 css start here */
+.booking_btn{
+    position:relative;
+    z-index:99;
+}
+.booking_div button span{
+    color:#fff;
+    font-size: 35px;
+    font-weight: normal;
+}
+.booking_div .close{
+    float:left;
+    opacity:inherit;
+}
+.booking_div h4{
+    padding-left:30px;
+    color:#fff;
+    font-size: 22px;
+    font-weight: normal;
+}
+.booking_div .modal-header{
+    background:#00C6BF;
+}
+.booking_div .modal-dialog{
+    max-width:1140px;
+    width:100%;
+}
+.booking_div .modal-body {
+    padding: 0;
+}
+.side_left{
+    width:30%;
+    float:left;
+    padding:25px;
+    background: #f1f5f7;
+}
+.business_right{
+    width:70%;
+    float:right;
+    padding:25px;
+}
+.drop_select {
+    padding: 10px;
+    background: #f8f8f8;
+    margin-bottom: 15px;
+    border-top: 1px solid #CCC
+}
+.drop_select select.form-control {
+    display: inline-block;
+    max-width: 250px;
+    margin-left: 30px;
+}
+span.pfcntent {
+    border: solid 1px #E9EDAB;
+    background: #FDFFE5;
+    padding: 10px 10px;
+    color: #ABA62F;
+}
+.staff-hours-note.popuopf {
+    margin: 50px 0 0 53px;
+}
+i.fa.sidebaricon {
+    color: #ccc;
+    font-size: 18px;
+    margin-right: 15px;
+}
+span.sidebarcntent {
+    color: #ccc;
+    font-size: 14px;
+}
+.side_left.sidebrpadding li {
+    padding: 8px;
+}
+.side_left.sidebrpadding {
+    height: 530px;
+}
+.side_left.sidebrpadding li:hover {
+    width: 100%;
+    background-color: rgba(193, 182, 182, 0.15);
+}
+span.sidebarcntent.active {
+    color: #495861;
+    font-weight: 400;
+}
+i.fa.fa-clock-o.sidebaricon.active {
+    color: #495861;
+    font-weight: 400;
+}
+h3.businesshrs {
+    font-family: inherit;
+    font-size: 23px;
+    color: #455862;
+    padding: 30px 0px 15px;
+    margin: 0px;
+    font-weight: 400;
+}
+.modal-header.headerbgclr {
+    box-shadow: 0px 2px 4px rgba(0,0,0,.1);
+    padding: 0 1.5em 0 0;
+    min-height: 60px;
+    clear: both;
+    height: 3em;
+    clear: both;
+    z-index: 20;
+    position: relative;
+    background: linear-gradient(to right, #00C6BF , #00AECC);
+    background-position: bottom;
+    background-size: cover;
+}
+.modal-dialog.modalboxmrgn {
+    margin: 3px auto;
+}
+.modal-header.headerbgclr h3#myModalLabel {
+    margin-bottom: 0;
+    line-height: 2.8em;
+    color: #fff;
+    font-size: 23px;
+    font-weight: 300 !important;
+}
+span.popupcntenthcbtn {
+    font-size: 62px !important;
+    color: white !important;
+    font-weight: 100 !important;
+    padding: 0px 19px 0px 28px !important;
+}
+.side_left.sidebrpadding {
+    padding-top: 51px;
+}
+.fc-toolbar.fc-header-toolbar {
+    position: relative;
+    /* z-index: 10; */
+    padding:6px 20px !important;
+    background: #e4ebf1;
+    /* background: #f1f5f7; */
+    /* border-bottom: 1px solid #ddd; */
+    margin-top: 0px !important;
+}
 
 @media screen and (-webkit-min-device-pixel-ratio:0) {  /*safari and chrome*/
     select {

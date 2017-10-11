@@ -16,7 +16,8 @@
 
 body .fc { /* extra precedence to overcome jqui */
 	font-size: 1em;
-    width: 1278px;
+    width: 1282px;
+    padding-left: 1px;
 }
 
 

@@ -285,7 +285,56 @@
 
     //Updating Customer on blur event of element
     $scope.updateCustomer = function () {
-       
+        debugger;
+        if (isNaN($scope.updatedMobileNo))
+        {
+            $scope.MessageText = "Only Numbers is allowed";
+            $scope.IsVisible = true;
+            $timeout(function () {
+                $scope.updatedMobileNo = "";
+                $scope.IsVisible = false;
+            }, 1000);
+            return false;
+        }
+        if (isNaN($scope.updatedPreCustomerMobileNo))
+        {
+            $scope.MessageText = "Only Numbers is allowed";
+            $scope.IsVisible = true;
+            $timeout(function () {
+                $scope.updatedPreCustomerMobileNo = "";
+                $scope.IsVisible = false;
+            }, 1000);
+            return false;
+        }
+        if (isNaN($scope.Zip))
+        {
+            $scope.MessageText = "Zip should be numeric";
+            $scope.IsVisible = true;
+            $timeout(function () {
+                $scope.Zip = "";
+                $scope.IsVisible = false;
+            }, 1000);
+            return false;
+        }
+        if (isNaN($scope.CustomerCity)) {
+            $scope.MessageText = "Only alphabets are allowed";
+            $scope.IsVisible = true;
+            $timeout(function () {
+                $scope.CustomerCity = "";
+                $scope.IsVisible = false;
+            }, 1000);
+            return false;
+        }
+        if (isNaN($scope.CustomerState)) {
+            $scope.MessageText = "Only alphabets are allowed";
+            $scope.IsVisible = true;
+            $timeout(function () {
+                $scope.CustomerState = "";
+                $scope.IsVisible = false;
+            }, 1000);
+            return false;
+        }
+
         var MobileNumber = $scope.updatedPreCustomerMobileNo + $scope.updatedMobileNo;
         var updateddate = new Date();
         var UpdateCustomer = {
@@ -583,7 +632,7 @@
     }
 
     $scope.ShowAppointmentDetail = function (item) {
-        
+        debugger;
         $scope.AppointmentStartDate = item.StartTime;
         $scope.AppointmentEndDate = item.EndTime;
         $scope.AppointmentProvider = item.EmployeeName;
@@ -618,9 +667,8 @@
     }
 
     $scope.UpdateStatus = function (item) {
-        
-        var status = $scope.StatusValue;
-        $scope.UpdatedStatus = item.Value;
+        debugger;        
+        $scope.UpdatedStatus = item.Status;
         var SetStatus = bookingService.SetStatusofAppointment(item.Status, $scope.AppointmentBookingId);
         SetStatus.then(function (response) {
             if(response.data.Success==true)
@@ -639,7 +687,7 @@
     }
 
     $scope.EditAppointment = function () {
-      
+        debugger;
         $scope.appointmentDetailisVisible = false;
         $scope.Status = $scope.UpdatedStatus;
         $scope.selectedprovider = $scope.AppointmentEmployeeId;

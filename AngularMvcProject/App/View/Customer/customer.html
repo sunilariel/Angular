@@ -305,8 +305,8 @@
                                                 <span class="sr-only">Toggle Dropdown</span>
                                             </button>
                                             <ul class="dropdown-menu">
-                                                <li><a href="">Sort by first name </a></li>
-                                                <li><a href="">Sort by last name </a></li>
+                                                <li><a ng-click="">Sort by first name </a></li>
+                                                <li><a ng-click="">Sort by last name </a></li>
                                                 <li><a href="">Import customers </a></li>
                                                 <li><a href="">Export customers</a></li>
                                             </ul>
@@ -441,10 +441,10 @@
                                         <div class="col-md-9 col-xs-9 col-sm-12">
                                             <div class="row">
                                                 <div class="col-md-4 ">
-                                                    <input type="text" class="form-control" id="text" placeholder="90" name="text" ng-model="updatedPreCustomerMobileNo" ng-blur="updateCustomer()">
+                                                    <input type="text" class="form-control" id="text" placeholder="90" name="text" ng-model="updatedPreCustomerMobileNo" maxlength="2" ng-blur="updateCustomer()">
                                                 </div>
                                                 <div class="col-md-8 textNumberDiv" style="padding-left:0;">
-                                                    <input type="text" class="form-control" id="text" placeholder="Phone" name="text" ng-model="updatedMobileNo" ng-blur="updateCustomer()">
+                                                    <input type="text" class="form-control" id="text" placeholder="Phone" maxlength="10" name="text" ng-model="updatedMobileNo" ng-blur="updateCustomer()">
                                                 </div>
                                             </div>
                                         </div>
@@ -479,7 +479,7 @@
                                                     <input type="text" class="form-control" id="text" placeholder="State" name="text" ng-model="CustomerState">
                                                 </div>
                                                 <div class="col-md-4 textNumberDiv" style="padding-left:0;">
-                                                    <input type="text" class="form-control" id="text" placeholder="Zip" name="text" ng-model="Zip" ng-blur="updateCustomer()">
+                                                    <input type="text" class="form-control" id="text" placeholder="Zip" maxlength="6" name="text" ng-model="Zip" ng-blur="updateCustomer()">
                                                 </div>
                                             </div>
                                         </div>

@@ -257,6 +257,26 @@
             }, 1000);
             return false;
         }
+        if (isNaN(servicedetailform.ServiceTime.value))
+        {
+            $scope.MessageText = "Service time should be number!";
+            $scope.ServiceTime = "";
+            $scope.IsVisible = true;
+            $timeout(function () {
+                $scope.IsVisible = false;
+            }, 1000);
+            return false;
+        }
+        if (isNaN(servicedetailform.ServiceCost.value)) {
+            $scope.MessageText = "Service Cost should be number!";
+            $scope.ServiceCost = "";
+            $scope.IsVisible = true;
+            $timeout(function () {
+                $scope.IsVisible = false;
+            }, 1000);
+            return false;
+        }
+
         for (var i = 0; i < $scope.staffList.length; i++) {
             if ($scope.staffList[i].confirmed == true) {
                 $scope.StaffAssigned = true;
@@ -291,7 +311,6 @@
             }
 
             var responsedata = bookingService.AddServices(service);
-
             responsedata.then(function (response) {
                 
                 if (response.data.Success == false)
@@ -639,6 +658,6 @@
         $location.path("/signin");
     }
  
+    
+    }]);
 
-
-}]);

@@ -178,11 +178,8 @@ app.controller('bookingController', ['$scope', '$routeParams', '$rootScope', '$h
         var dateTimeVal = "";
         var daysArr = [];
         var singleDay = {};
-        angular.forEach($scope.businessHourInfo, function (value, key) {
-
-                    
+        angular.forEach($scope.businessHourInfo, function (value, key) {                    
                 singleDay = {
-
                     Id: $scope.selectedIndustry,
                     CompanyId: $scope.companyId,
                     Start: value.timeFrom,
@@ -192,8 +189,7 @@ app.controller('bookingController', ['$scope', '$routeParams', '$rootScope', '$h
                     //CreationDate: "2017-06-05T05:20:32.2919738+00:00",
                     CreationDate: new Date(),
                 }
-                daysArr.push(singleDay);
-         
+                daysArr.push(singleDay);         
         });
 
         var businessInfo = {
@@ -814,6 +810,7 @@ app.controller('bookingController', ['$scope', '$routeParams', '$rootScope', '$h
             }
             return false;
         }
+       
 
         var count = $("input[type='checkbox'].staffcheckbox").length;
         for (var i = 0; i < count ; i++) {
@@ -834,7 +831,35 @@ app.controller('bookingController', ['$scope', '$routeParams', '$rootScope', '$h
 
             return false;
         }
+        if (form.serviceTime.$viewValue.includes(".") || form.serviceTime.$viewValue == 0)
+        {
+            $scope.MessageText = "Service time cannot be empty";
+            $scope.IsVisible = true;
+            $timeout(function () {
+                $scope.IsVisible = false;               
+            }, 800)
+            return false;
+        }
 
+        if (isNaN(form.servicePrice.$viewValue)) {
+            $scope.MessageText = "Service Cost should be number!";
+            $scope.servicePrice = "";
+            $scope.IsVisible = true;
+            $timeout(function () {
+                $scope.IsVisible = false;
+            }, 1000);
+            return false;
+        }
+
+        if (isNaN(form.serviceTime.$viewValue)) {
+            $scope.MessageText = "Service Time should be number!";
+            $scope.serviceTime = "";
+            $scope.IsVisible = true;
+            $timeout(function () {
+                $scope.IsVisible = false;
+            }, 1000);
+            return false;
+        }
 
         debugger;
         $scope.staffInfoCopy = angular.copy($scope.staffInfo);
