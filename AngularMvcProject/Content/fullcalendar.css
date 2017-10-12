@@ -716,9 +716,11 @@ be a descendant of the grid when it is being dragged.
 }
 
 tr:first-child > td > .fc-day-grid-event {
-	margin-top: 2px; /* a little bit more space before the first event */
+	/*margin-top: 2px;*/ /* a little bit more space before the first event */
     /*1992017 Changes*/
-    height: 51px;
+    /*height: 51px;*/
+    height: 49px;
+    margin-bottom: 4px;
 }
 
 .fc-day-grid-event.fc-selected:after {

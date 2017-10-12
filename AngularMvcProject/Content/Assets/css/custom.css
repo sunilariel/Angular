@@ -2,6 +2,7 @@ body{
 	font-family: 'Montserrat', sans-serif;	
     margin:0;
     padding:0;
+    
 }
 a:hover, button{
 	text-decoration:none;
@@ -3238,7 +3239,6 @@ button.dropbtnweeky {
     padding: 12px 16px;
     text-decoration: none;
     display: block;
-    float: left;
     font-size: 12px;
 }
 button.dropbtnweeky {
@@ -3263,6 +3263,222 @@ ul.dropdown-menu.ng-valid.ng-valid-date.ng-valid-date-disabled.calwlmrgn {
     left: 608px;
 }
 
+
+
+/*==========================12-10-2017==================================*/
+.fc-toolbar.fc-header-toolbar ul.dropdown-menu.ng-valid.ng-valid-date.ng-valid-date-disabled {
+    width: 250px !important;
+    top: 36px !important;
+    left: 555.969px !important;
+}
+.fc-toolbar.fc-header-toolbar button.btn {
+    background: none !important;
+    float: none !important;
+    width: auto !important;
+    margin: 0 !important;
+}
+.fc-toolbar.fc-header-toolbar td.text-center.ng-scope {
+    border: 1px solid transparent;
+}
+toolbar.fc-header-toolbar th.ng-binding.ng-scope {
+    border: 1px solid transparent;
+}
+.fc-toolbar.fc-header-toolbar th.ng-binding.ng-scope {
+    line-height: 22px;
+    height: 24px;
+    text-align: center;
+    padding-right: 0px;
+    background: #fff;
+    color: #000;
+    font-size: 12px;
+    font-weight: bold;
+    border: 1px solid transparent;
+}
+.fc-toolbar.fc-header-toolbar span.ng-binding {
+    color: #555;
+    text-decoration: none;
+    cursor: default;
+    outline: none;
+    font-size: 13px;
+}
+.fc-toolbar.fc-header-toolbar ul.dropdown-menu.ng-valid.ng-valid-date.ng-valid-date-disabled {
+    padding: 17px 11px 10px 10px;
+}
+.fc-toolbar.fc-header-toolbar li.divider {
+    display: none;
+}
+/*.fc-toolbar.fc-header-toolbar button.btn.btn-small.btn-info.active {
+    display: none;
+}
+.fc-toolbar.fc-header-toolbar button.btn.btn-small.btn-danger {
+    display: none;
+}*/
+.fc-toolbar.fc-header-toolbar button.btn.btn-small.btn-success.pull-right {
+    display: none;
+}
+.fc-toolbar.fc-header-toolbar span.btn-group {
+    display: none;
+}
+li.greenbtnpacal {
+    display: none;
+}
+.fc-toolbar.fc-header-toolbar.fc-toolbar.fc-header-toolbar ul.dropdown-menu.ng-valid.ng-valid-date.ng-valid-date-disabled li:last-child {
+  
+    display: none;
+}
+.fc-toolbar.fc-header-toolbar input#cldtest {
+    width: 168px !important;
+}
+.fc-row.fc-widget-header span {
+    line-height: 30px;
+    font-size: 13px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    padding: 3px 5px 0;
+    border-left-color: #fff;
+    border-top-color: #fff;
+    font-weight: 500;
+}
+.fc-toolbar.fc-header-toolbar {
+    margin-bottom: 0px !important;
+}
+.fc-row.fc-widget-header th.fc-day-header.fc-widget-header {
+    border: 1px solid transparent;
+}
+.fc-scroller.fc-day-grid-container span.fc-day-number {
+    font-size: 12px !important;
+}
+.fc-row.fc-widget-header span {
+    text-transform: uppercase;
+    color: #8c949d !important;
+    font-size: 11px !important;
+    font-weight: normal !important;
+    border-top: #fff;
+}
+.fc-view.fc-agendaWeek-view.fc-agenda-view td.fc-axis.fc-time.fc-widget-content {
+    width: 40px;
+    padding: 0 8px 0 0;
+    vertical-align: middle;
+    text-align: right;
+    white-space: nowrap;
+    font-weight: normal;
+    border-top: 0px !important;
+    font-size: 11px !important;
+    color: #8c949d !important;
+}
+.fc-view.fc-agendaWeek-view.fc-agenda-view td.fc-axis {
+    width: 40px !important !important;
+    padding: 0 8px 0 0 !important;
+    vertical-align: middle !important;
+    text-align: right;
+    white-space: nowrap;
+    font-weight: normal;
+    border-top: 0px !important;
+    font-size: 12px !important;
+    color: #8c949d !important;
+}
+.fc-row.fc-week.fc-widget-content td.fc-axis.fc-widget-content {
+    font-size: 12px;
+    color: #8c949d !important;
+}
+/*.fc-row.fc-week.fc-widget-content span
+{
+        width: 40px;
+    padding: 0 8px 0 0;
+    vertical-align: middle;
+    text-align: right;
+    white-space: nowrap;
+    font-weight: normal;
+    border-top: 0px !important;
+    font-size: 12px !important;
+   /* color: #8c949d !important;*/
+}*/
+/* .fc-scroller.fc-time-grid-container span
+{
+     width: 40px;
+    padding: 0 8px 0 0;
+    vertical-align: middle;
+    text-align: right;
+    white-space: nowrap;
+    font-weight: normal;
+    border-top: 0px !important;
+    font-size: 12px !important;
+    /*color: #8c949d !important;
+}*/
+ .fc-day-grid.fc-unselectable span {
+    width: 40px;
+    padding: 0 8px 0 0;
+    vertical-align: middle;
+    text-align: right;
+    white-space: nowrap;
+    font-weight: normal;
+    border-top: 0px !important;
+    font-size: 12px !important;
+    color: #8c949d !important;
+}
+ td.fc-axis.fc-time.fc-widget-content span{
+    width: 40px;
+    padding: 0 8px 0 0;
+    vertical-align: middle;
+    text-align: right;
+    white-space: nowrap;
+    font-weight: normal;
+    border-top: 0px !important;
+    font-size: 11px !important;
+    color: #8c949d !important;
+}
+.fc-row.fc-widget-header th.fc-resource-cell{
+    width: 100% !important;
+    background-image: url(../images/pro.png) !important;
+    background-position: 46% !important;
+    background-repeat: no-repeat !important;
+    height: 20px !important;
+    background-size: 22px 22px !important;
+    border:none;
+}
+.fc-row.fc-widget-header {
+    line-height: 30px;
+    border: none;
+}
+th.fc-axis.fc-widget-header {
+    border: none;
+}
+span.fc-title.unmaincntent {
+    font-size: 13px !important;
+}
+.dropdownbox.droprmegnp {
+    width: 235px !important;
+    border: solid 1px #A1A1A1;
+    background: none repeat scroll 0 0 #FFFFFF;
+    color: #69737C;
+    cursor: auto;
+    font-size: 12px;
+    line-height: 23px !important;
+}
+a.listbbordermtor {
+    margin: -25px 0px;
+}
+div#calendar input#cldtest {
+    color: #252c32;
+    border: solid 1px #aaa;
+    background: #f1f5f8;
+  
+}
+.form-control.calendarBox {
+    border: 1px solid transparent !important;
+    display: block;
+    width: 100%;
+    height: 34px;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #555;
+    background-color: #fff;
+    background-image: none;
+    -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+     background-color: transparent !important;
+}
 /*/////////////////////////////////////////////////// //*/
 
 
