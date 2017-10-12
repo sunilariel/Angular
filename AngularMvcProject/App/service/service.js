@@ -831,6 +831,17 @@ app.service("bookingService", function ($http, $window) {
         return response;
     }
 
+    this.SetCompanyWorkingHours=function(dataobject)
+    {
+        var response = $http({
+            method: "POST",
+            url: "/Calendar/SetCompanyWorkingHours",
+            headers: GetHeader(),
+            data: { dataobj: dataobject }
+        })
+        return response;
+    }
+
 })
 
 

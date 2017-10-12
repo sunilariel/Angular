@@ -136,5 +136,46 @@ namespace AngularMvcProject.Controllers
                 return e.ToString();
             }
         }
+
+        public string SetCompanyWorkingHours(ReqWorkingHours dataobj)
+        {
+            try
+            {
+                DateTime starttime = DateTime.Parse(dataobj.Start, CultureInfo.InvariantCulture);
+                dataobj.Start = starttime.ToString("HH:mm");
+
+                DateTime endtime = DateTime.Parse(dataobj.End, CultureInfo.InvariantCulture);
+                dataobj.End = endtime.ToString("HH:mm");
+
+                string apiURL = ConfigurationManager.AppSettings["DomainUrl"].ToString() + "/api/companyregistration/SetWorkingHours";
+                string result = "";
+                var httpWebRequest = (HttpWebRequest)WebRequest.Create(apiURL);
+                httpWebRequest.ContentType = "application/json";
+                httpWebRequest.Method = "POST";
+                httpWebRequest.Headers.Add("Token", Request.Headers["Token"]);
+
+                using (var streamWriter = new StreamWriter(httpWebRequest.GetRequestStream()))
+                {                    
+                    var jsonString = new JavaScriptSerializer().Serialize(dataobj);
+                    streamWriter.Write(jsonString);
+                    streamWriter.Flush();
+                    streamWriter.Close();
+                }
+
+                var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
+                using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
+                {
+                    result = streamReader.ReadToEnd();
+                }
+
+                return result;
+            }
+            catch (Exception e)
+            {
+                return e.ToString();
+            }
+        }
+
+
     }
 }
