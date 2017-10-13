@@ -239,6 +239,8 @@
     <Content Include="Content\Assets\images\loader.gif" />
     <Content Include="Content\Assets\images\loading %281%29.gif" />
     <Content Include="Content\Assets\images\loading.gif" />
+    <Content Include="Content\Assets\images\nonworkinghours3.png" />
+    <Content Include="Content\Assets\images\pro.png" />
     <Content Include="Content\Assets\images\service-icon-big.png" />
     <Content Include="Content\Assets\images\sort-down.png" />
     <Content Include="Content\Assets\images\tenor.gif" />

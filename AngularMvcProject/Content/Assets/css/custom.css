@@ -3225,7 +3225,7 @@ button.dropbtnweeky:hover {
 }
 button.dropbtnweeky {
     background-color: transparent!important;
-    color: #252c32 !important;
+   color: #666B6F !important;
     font-size: 12px !important;
 }
 span.caret.cmpdng {
@@ -3235,11 +3235,12 @@ button.dropbtnweeky {
     width: 90px;
 }
 .dropcntentwkly li a {
-    color: black;
+    color:#666B6F;
     padding: 12px 16px;
     text-decoration: none;
     display: block;
     font-size: 12px;
+    text-align:left !important;
 }
 button.dropbtnweeky {
     height: auto !important;
@@ -3257,6 +3258,7 @@ button.dropbtntesta {
 }
 .row.tooldropdwn {
     padding:9px 0px;
+    margin-right: -33px;
 }
 ul.dropdown-menu.ng-valid.ng-valid-date.ng-valid-date-disabled.calwlmrgn {
     width: 17%;
@@ -3266,11 +3268,16 @@ ul.dropdown-menu.ng-valid.ng-valid-date.ng-valid-date-disabled.calwlmrgn {
 
 
 /*==========================12-10-2017==================================*/
-.fc-toolbar.fc-header-toolbar ul.dropdown-menu.ng-valid.ng-valid-date.ng-valid-date-disabled {
-    width: 250px !important;
-    top: 36px !important;
-    left: 555.969px !important;
+.fc-toolbar .fc-center .fc-button-group {
+    position:relative;
 }
+ .fc-toolbar.fc-header-toolbar ul.dropdown-menu.ng-valid.ng-valid-date.ng-valid-date-disabled {
+    width: 235px !important;
+    top: 36px !important;
+    left: 0px !important;
+    position: absolute;
+}
+
 .fc-toolbar.fc-header-toolbar button.btn {
     background: none !important;
     float: none !important;
@@ -3327,7 +3334,7 @@ li.greenbtnpacal {
     display: none;
 }
 .fc-toolbar.fc-header-toolbar input#cldtest {
-    width: 168px !important;
+    width: 160px !important;
 }
 .fc-row.fc-widget-header span {
     line-height: 30px;
@@ -3436,6 +3443,7 @@ li.greenbtnpacal {
     height: 20px !important;
     background-size: 22px 22px !important;
     border:none;
+
 }
 .fc-row.fc-widget-header {
     line-height: 30px;
@@ -3460,24 +3468,225 @@ a.listbbordermtor {
     margin: -25px 0px;
 }
 div#calendar input#cldtest {
-    color: #252c32;
+ 
     border: solid 1px #aaa;
     background: #f1f5f8;
-  
+    font-size: 13px !important;
+    color: #666B6F;
+    font-size: 13px;
+    border: solid 1px transparent;
+    background: none;
+    box-shadow: none !important;
+        height: 29.39 !important;
+            width: 160px !important;
 }
 .form-control.calendarBox {
-    border: 1px solid transparent !important;
+   /* border: 1px solid transparent !important;*/
     display: block;
     width: 100%;
     height: 34px;
-    padding: 6px 12px;
-    font-size: 14px;
+    /*font-size: 14px;*/
     line-height: 1.42857143;
     color: #555;
     background-color: #fff;
     background-image: none;
     -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
      background-color: transparent !important;
+}
+/*=======================13-10-2017=====================================*/
+div#calendar button.fc-prev-button.fc-button.fc-state-default.fc-corner-left {
+    background-color: transparent !important;
+    border: 1px solid transparent !important;
+    background-image: none !important;
+    box-shadow:none !important;
+    width:37px !important;
+}
+a.cursorhand.cdailycur {
+    padding-right: 33px;
+}
+
+ul.dropdown-menu.ng-valid.ng-valid-date.ng-valid-date-disabled strong.ng-binding {
+    margin-left: 18px;
+}
+
+div#calendar button.fc-next-button.fc-button.fc-state-default.fc-corner-right{
+    background-color: transparent !important;
+    border: 1px solid transparent !important;
+    background-image: none !important;
+    box-shadow:none !important;
+    width:37px !important;
+}
+/*.fc-button-group:hover {
+    color: #252c32;
+    border: solid 1px #aaa !important;
+    background: #f1f5f8 !important;
+    box-shadow: 0px 1px 2px #CCC !important;
+    -moz-box-shadow: 0px 1px 2px #CCC;
+    color: #252c32;
+    -webkit-box-shadow: 0px 1px 2px #CCC;
+    border-radius:6px !important;
+
+}
+div#calendar input#cldtest:hover
+{
+    color: #252c32;
+    border: solid 1px #aaa !important;
+    background: #f1f5f8 !important;
+    box-shadow: 0px 1px 2px #CCC !important;
+    -moz-box-shadow: 0px 1px 2px #CCC;
+    color: #252c32;
+    -webkit-box-shadow: 0px 1px 2px #CCC;
+    border-radius:0px !important;
+   height: 2.9em !important;
+}
+div#calendar.fc-state-hover, .fc-state-down, .fc-state-active, .fc-state-disabled {
+    color: #333333;
+    background-color: transparent !important;
+    border: 1px solid transparent !important;
+    height: 32px;
+    width: 71px;
+}
+div#calendar:hover.fc-state-hover:hover, .fc-state-down:hover, .fc-state-active:hover, .fc-state-disabled:hover
+{
+  color: #252c32;
+    border: solid 1px #aaa !important;
+    background: #f1f5f8 !important;
+    box-shadow: 0px 1px 2px #CCC !important;
+    -moz-box-shadow: 0px 1px 2px #CCC;
+    color: #252c32;
+    -webkit-box-shadow: 0px 1px 2px #CCC;
+    border-radius:0px !important;
+}*/
+.fc-center:hover .fc-button-group
+{
+        color: #252c32;
+    border: solid 1px #aaa !important;
+    background: #f1f5f8 !important;
+    box-shadow: 0px 1px 2px #CCC !important;
+    -moz-box-shadow: 0px 1px 2px #CCC;
+    color: #252c32;
+    -webkit-box-shadow: 0px 1px 2px #CCC;
+    border-radius:0px !important;
+
+}
+.fc-center:hover input#cldtest {
+       color: #252c32;
+    border: solid 1px #aaa !important;
+    background: #f1f5f8 !important;
+    box-shadow: 0px 1px 2px #CCC !important;
+    -moz-box-shadow: 0px 1px 2px #CCC;
+    color: #252c32;
+    -webkit-box-shadow: 0px 1px 2px #CCC;
+   border-radius:0px !important;
+
+}
+.fc-center:hover button.fc-prev-button.fc-button.fc-state-default.fc-corner-left
+{
+      color: #252c32;
+    border: solid 1px #aaa !important;
+    background: #f1f5f8 !important;
+    box-shadow: 0px 1px 2px #CCC !important;
+    -moz-box-shadow: 0px 1px 2px #CCC;
+    color: #252c32;
+    -webkit-box-shadow: 0px 1px 2px #CCC;
+       border-radius: 3px 0 0 3px !important;
+}
+.fc-center:hover button.fc-next-button.fc-button.fc-state-default.fc-corner-right
+{
+      color: #252c32;
+    border: solid 1px #aaa !important;
+    background: #f1f5f8 !important;
+    box-shadow: 0px 1px 2px #CCC !important;
+    -moz-box-shadow: 0px 1px 2px #CCC;
+    color: #252c32;
+    -webkit-box-shadow: 0px 1px 2px #CCC;
+    border-radius: 3px 0 0 3px !important;
+}
+div#calendar.fc-state-hover, .fc-state-down, .fc-state-active{
+    color: #333333;
+    background-color: transparent !important;
+    border: 1px solid transparent !important;
+    height:32px !important;
+    width: 79px;
+}
+.fc-center:hover button.fc-today-button.fc-button.fc-state-default.fc-corner-left.fc-corner-right.fc-state-disabled
+{
+       color: #252c32;
+    border: solid 1px #aaa !important;
+    background: #f1f5f8 !important;
+    box-shadow: 0px 1px 2px #CCC !important;
+    -moz-box-shadow: 0px 1px 2px #CCC;
+    color: #252c32;
+    -webkit-box-shadow: 0px 1px 2px #CCC;
+        border-radius: 3px 0 0 3px !important;
+
+}
+.fc-unthemed td.fc-today {
+    background: transparent !important;
+}
+.fc-center:hover ul.dropdown-menu.ng-valid.ng-valid-date.ng-valid-date-disabled {
+    display: block !important;
+}
+.fc-nonbusiness {
+    background: transparent !important;
+    background-image: url("../images/nonworkinghours3.png") !important;
+}
+.fc-nonbusiness.fc-bgevent::before {
+   background-color: rgba(255, 255, 255, 0);
+   content: '';
+    display: block;
+    height: 100%;
+    position: absolute;
+    width: 100%;
+}
+.dropdowntestcontent a:hover i.fa.fa-bars {
+    display: block;
+}
+span.bariconoder i.fa.fa-bars {
+    display: none;
+}
+.bariconoder i.fa.fa-bars {
+    background: #FFF;
+    font-size: 11px;
+    padding: 4px 4px 3px 3px;
+    float: right;
+    -moz-border-radius: 3px 3px 3px 3px;
+    -webkit-border-radius: 3px 3px 3px 3px;
+    border-radius: 3px 3px 3px 3px;
+    color: #8C949D;
+    border: solid 1px #AAA;
+}
+/*button.dropbtntesta:hover i.fa.fa-caret-down.cheaderic {
+    display: none;
+}
+button.dropbtntesta i.fa.fa-bars.barhvric {
+    display: none;
+}
+*/
+.drop_select.cabtnstyle.drop_select select.form-control {
+    display: inline-block;
+    max-width: 483px !important;
+    margin-left: 30px;
+    background-image: none !important;
+    -webkit-appearance: menulist;
+}
+a.weekysmcnmrgn {
+    background-color: transparent !important;
+}
+.scontent.stextco {
+    font-size: 24px;
+    color: #485861;
+    display: block;
+    text-align: center;
+    line-height: 20px;
+}
+.dropdownbox.sgnalboxclr {
+    border: solid 1px #A1A1A1;
+    background: none repeat scroll 0 0 #FFFFFF;
+    color: #69737C;
+    cursor: auto;
+    font-size: 12px;
+    line-height: 23px !important;
 }
 /*/////////////////////////////////////////////////// //*/
 
@@ -6729,7 +6938,7 @@ div#deletetooltipPopup{
     right: 0 !important;
 }
 .dropdownbox a {
-        color: black;
+       color: #69737C;
         padding: 12px 16px;
         text-decoration: none;
         display: block;
@@ -6771,7 +6980,7 @@ i.fa.plusbox {
 a.signalheader
 {
 background: #F1F5F8;
-    line-height: 35px;
+    line-height:15px !important;
     color: #8C949D;
     text-transform: capitalize;
     font-size: 12px;
@@ -6823,7 +7032,12 @@ i.fa.fa-tablet.tabletbtn{
     font-size:12px;
 }
 label.pricetexts {
-    color: #8C949D;
+   
+    display: block !important;
+    text-align: center !important;
+    line-height: 20px !important;
+    color: #b2b2b2;
+    font-weight: normal;
 }
 i.fa.fa-plus.maindricons {
     font-size: 18px;

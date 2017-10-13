@@ -46,7 +46,7 @@ app.controller('calendarController', ['$scope', '$location', '$filter', '$window
         $scope.ViewList = [{ "Name": "Monthly", "ViewName": "month" },
            { "Name": "Daily", "ViewName": "agendaDay" },
            { "Name": "Weekly", "ViewName": "agendaWeek" }];
-        $scope.SelectedView = "month";
+        $scope.SelectedView = "Monthly";
         
 
         //Set Company Buisness Working Hours//
@@ -289,6 +289,21 @@ app.controller('calendarController', ['$scope', '$location', '$filter', '$window
                     var datepickerhtml = "<input id='cldtest' value='' type='button' class='form-control calendarBox' datepicker-popup='EEE, MMM d' ng-model='cdate' is-open='Opened' ng-mouseover='Opened=true;$event.stopPropagation();' datepicker-options='dateOptions' ng-click='SetDatePicker()' name='theDate' style='width: 131px;height: 30px;' />";                    
                     angular.element(e).after(datepickerhtml);
                     $compile($('#cldtest'))($scope);
+
+                    var date = new Date(), y = date.getFullYear(), m = date.getMonth();
+                    var firstDay = new Date(y, m, 1);
+                    var lastDay = new Date(y, m + 1, 0);
+
+                    var sm = $filter('date')(firstDay, "MMM dd");
+                    var em = $filter('date')(lastDay, "MMM dd");
+
+                    var CurrentValue = sm + "-" + em;
+                    $scope.cdate = firstDay;
+                    $("#cldtest").val(CurrentValue);
+
+
+
+
                     $scope.cdate=new Date();
 
                     //Adding dropdown in full calendar righ section//
@@ -1185,21 +1200,41 @@ app.controller('calendarController', ['$scope', '$location', '$filter', '$window
 
         $scope.viewRender = function (view, element) {
             debugger;
-            var date = new Date(view.calendar.currentDate._i), y = date.getFullYear(), m = date.getMonth();
-            var firstDay = new Date(y, m, 1);
-            var lastDay = new Date(y, m + 1, 0);
-
-            var s = $filter('date')(firstDay, "MMM dd");
-            var e = $filter('date')(lastDay, "MMM dd");
-
-            var CurrentValue = s + "-" + e;
-            if($scope.SelectedView=="month")
+            if ($scope.SelectedView == "Monthly")
             {
+                var date = new Date(view.calendar.currentDate._i), y = date.getFullYear(), m = date.getMonth();
+                var firstDay = new Date(y, m, 1);
+                var lastDay = new Date(y, m + 1, 0);
+
+                var sm = $filter('date')(firstDay, "MMM dd");
+                var em = $filter('date')(lastDay, "MMM dd");
+
+                var CurrentValue = sm + "-" + em;
                  $scope.cdate = firstDay;
+                 $("#cldtest").val(CurrentValue);
+            }
+            if ($scope.SelectedView == "Weekly")
+            {
+                var curr = new Date(view.calendar.currentDate._i); // get current date
+                var first = curr.getDate() - curr.getDay(); // First day is the day of the month - the day of the week
+                var last = first + 6
+
+                var firstday = new Date(curr.setDate(first,curr.getMonth(),curr.getFullYear()));
+                var lastday = new Date(curr.setDate(last,curr.getMonth(), curr.getFullYear()));
+
+                var sw = $filter('date')(firstday, "MMM dd");
+                var ew = $filter('date')(lastday, "MMM dd");
+
+                var CurrentValue = sw + "-" + ew;
+                $scope.cdate = firstday;
                 $("#cldtest").val(CurrentValue);
             }
-            if($scope.SelectedView=="agendaWeek")
-            {
+            if($scope.SelectedView=="Daily") {
+                var curr = new Date(view.calendar.currentDate._i);
+                var CurrentDate = $filter('date')(curr, "dd MMM yyyy");
+
+                $scope.cdate = curr;
+                $("#cldtest").val(CurrentDate);
 
             }
         }
