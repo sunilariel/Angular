@@ -559,7 +559,7 @@
                                             </label>
                                             <div class="col-md-8 col-sm-8 col-xs-12 sampleServicesSec">
 
-                                                <input type="text" class="customerName sampServiceName form-control" id="" placeholder="Enter Service name*" ng-model="ServiceName" name="ServiceName" >
+                                                <input type="text" class="customerName sampServiceName form-control" id="" placeholder="Enter Service name*" ng-model="ServiceName" ng-blur="updateService()" name="ServiceName" >
                                                 <div class="">
                                                     <div class="dropdown serviceColors">
                                                         <button class="btn dropdown-toggle chooseServiceColor" type="button" data-toggle="dropdown">
@@ -591,7 +591,7 @@
                                         <div class="form-group">
                                             <label class="control-label col-md-4 col-sm-4 col-xs-12">Service Time (mins*)</label>
                                             <div class="col-md-8 col-sm-8 col-xs-12">
-                                                <input type="text" class="form-control" id="text" placeholder="Time in min*" name="ServiceTime" ng-model="ServiceTime" ng-blur="updateService()">
+                                                <input type="text" class="form-control" id="text" placeholder="Time in min*" name="ServiceTime" ng-model="UpdateServiceTime" ng-blur="updateService()">
                                             </div>
                                         </div>
                                         <div class="form-group">

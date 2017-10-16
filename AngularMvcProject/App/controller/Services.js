@@ -381,11 +381,11 @@
 
 
     $scope.EditService = function (item) {
-        
+        debugger;
         $scope.ServiceId=item.Id;
         $scope.ServiceName = item.Name;
         $scope.ServiceCost = item.Cost;
-        $scope.ServiceTime = item.DurationInMinutes;
+        $scope.UpdateServiceTime = item.DurationInMinutes;
 
         //Get Colour Code of Service//
         angular.forEach($scope.ServiceColourList,function(value,key)
@@ -454,7 +454,49 @@
     //Update Service//
 
     $scope.updateService = function () {
-        
+        debugger;
+
+        if ($scope.ServiceName == "") {
+            $scope.MessageText = "Service name cannot be zero!";
+            $scope.IsVisible = true;
+            $timeout(function () {
+                $scope.IsVisible = false;
+            }, 1000);
+            return false;
+        }
+        if ($scope.UpdateServiceTime == "" || $scope.UpdateServiceTime.includes(".") || $scope.UpdateServiceTime == 0) {
+            if ($scope.UpdateServiceTime == "0") {
+                $scope.MessageText = "Service Time cannot be zero!";
+            }
+            else {
+                $scope.MessageText = "Service time cannot be empty!";
+            }
+            $scope.UpdateServiceTime = "";
+            $scope.IsVisible = true;
+            $timeout(function () {
+                $scope.IsVisible = false;
+            }, 1000);
+            return false;
+        }
+        if (isNaN($scope.UpdateServiceTime)) {
+            $scope.MessageText = "Service time should be number!";
+            $scope.UpdateServiceTime = "";
+            $scope.IsVisible = true;
+            $timeout(function () {
+                $scope.IsVisible = false;
+            }, 1000);
+            return false;
+        }
+        if (isNaN($scope.ServiceCost)) {
+            $scope.MessageText = "Service Cost should be number!";
+            $scope.ServiceCost = "";
+            $scope.IsVisible = true;
+            $timeout(function () {
+                $scope.IsVisible = false;
+            }, 1000);
+            return false;
+        }
+
         var CurrentDate = new Date();
         var UpdatedService=
         {
@@ -490,6 +532,7 @@
         });       
     }
 
+    
     //Delete Service//
     $scope.DeleteService = function () {
         
@@ -521,7 +564,7 @@
 
     $scope.AssignedStafftoService=function(item)
     {
-        
+        debugger;
         if(item.confirmed==true)
         {
             var CurrentDate = new Date();
