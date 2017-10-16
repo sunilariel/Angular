@@ -3688,6 +3688,15 @@ a.weekysmcnmrgn {
     font-size: 12px;
     line-height: 23px !important;
 }
+.dropdown.appointProvider.loadimgmps {
+    position: relative;
+}
+img.imagelmpabs {
+    position: absolute;
+    top: 2px;
+    right:22px;
+    height: 29px;
+}
 /*/////////////////////////////////////////////////// //*/
 
 

@@ -79,6 +79,7 @@
         $scope.appointmentDetailisVisible = false;
         $scope.selecteddate = $filter('date')(new Date(), "EEE, MMM d");
         $scope.ServicePriceTimeDetailIsVisible = false;
+        $scope.showServiceLoader = false;
 
         var CompanyDetails = bookingService.GetCompanyDetails($scope.CompanyId);
         CompanyDetails.then(function (response) {            
@@ -482,10 +483,11 @@
         
         $scope.EmployeeId = EmployeeId;
         $scope.EmployeeServices = [];
+        $scope.showServiceLoader = true;
         var EmployeeServices = bookingService.GetAllocatedServicetoEmployee($scope.CompanyId, EmployeeId);
         EmployeeServices.then(function (result) {                      
             $scope.EmployeeServices = result.data;
-
+            $scope.showServiceLoader = false;
             // $scope.selectedservice = $scope.EmployeeServices[0].Id;
             //Get Staff Appointment working hours ///
             $scope.AppointmentSchedule = [];

@@ -378,10 +378,11 @@
                                         <div class="form-group">
                                             <label class="control-label col-sm-4" for="pwd">Service</label>
                                             <div class="col-sm-8">
-                                                <div class="dropdown appointProvider">
+                                                <div class="dropdown appointProvider loadimgmps">
                                                     <select class="btn btn-default dropdown-toggle" name="Servicedd" data-ng-options="x.Id as x.Name for x in EmployeeServices" ng-model="selectedservice" ng-change="ServiceDetail(selectedservice)" aria-haspopup="true" aria-expanded="false">
                                                         <option value="">-- Select a Service --</option>
                                                     </select>
+                                                    <img class="imagelmpabs" ng-show="showServiceLoader" src="Content/Assets/images/loading.gif">
                                                 </div>
                                             </div>
                                         </div>
