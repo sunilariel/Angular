@@ -130,8 +130,8 @@ app.controller('calendarController', ['$scope', '$location', '$filter', '$window
             $scope.cdate = new Date();
 
             var date = new Date($scope.cdate);
-            var firstDay = new Date(date.getFullYear(), date.getMonth(), 1);
-            var lastDay = new Date(date.getFullYear(), date.getMonth() + 1, 0);
+            var firstDay = new Date(date.getFullYear(), date.getMonth(), 2);
+            var lastDay = new Date(date.getFullYear(), date.getMonth() + 1, 1);
 
 
             $scope.FilterCustomerList = [];
@@ -213,7 +213,7 @@ app.controller('calendarController', ['$scope', '$location', '$filter', '$window
                         $scope.events.push({
                             title: value.Service.Name,
                             id: value.Id + "," + value.Service.Name + "," + value.Service.Cost + "," + value.Employee.FirstName + "," + value.Status + "," + value.Service.DurationInMinutes + "," + value.Service.Id + "," + value.Employee.Id + "," + value.Customers[0].FirstName + "," + value.Customers[0].Id + "," + value.Customers[0].Email + "," + value.Customers[0].TelephoneNo ,
-                           // id: value.Id + "," + value.Service.Name + "," + value.Service.Cost + "," + value.Employee.FirstName + "," + value.Status + "," + value.Service.DurationInMinutes + "," + value.Service.Id + "," + value.Employee.Id,
+                          // id: value.Id + "," + value.Service.Name + "," + value.Service.Cost + "," + value.Employee.FirstName + "," + value.Status + "," + value.Service.DurationInMinutes + "," + value.Service.Id + "," + value.Employee.Id,
                             description: value.Id,
                             resourceId: value.Employee.Id,
                             start: value.Start,
@@ -412,8 +412,8 @@ app.controller('calendarController', ['$scope', '$location', '$filter', '$window
 
             AgendaDayDisplayed = false;
             var date = new Date($scope.cdate);
-            var firstDay = new Date(date.getFullYear(), date.getMonth(), 1);
-            var lastDay = new Date(date.getFullYear(), date.getMonth() + 1, 0);
+            var firstDay = new Date(date.getFullYear(), date.getMonth(), 2);
+            var lastDay = new Date(date.getFullYear(), date.getMonth() + 1, 1);
             //if ($scope.events.length > 0) {
             uiCalendarConfig.calendars['myCalendar'].fullCalendar('removeEventSources');
             //}
@@ -611,6 +611,9 @@ app.controller('calendarController', ['$scope', '$location', '$filter', '$window
                 }
 
             }
+            else {
+                uiCalendarConfig.calendars['myCalendar'].fullCalendar('removeEventSources');
+            }
         }
 
         //Update the Status of Event//
@@ -618,8 +621,8 @@ app.controller('calendarController', ['$scope', '$location', '$filter', '$window
             debugger;
 
             var date = new Date($scope.cdate);
-            var firstDay = new Date(date.getFullYear(), date.getMonth(), 1);
-            var lastDay = new Date(date.getFullYear(), date.getMonth() + 1, 0);
+            var firstDay = new Date(date.getFullYear(), date.getMonth(), 2);
+            var lastDay = new Date(date.getFullYear(), date.getMonth() + 1, 1);
 
             var status = $scope.StatusValue;
             $scope.UpdatedStatus = item.Status;
@@ -712,8 +715,8 @@ app.controller('calendarController', ['$scope', '$location', '$filter', '$window
             debugger;
 
             var date = new Date($scope.dt);
-            var firstDay = new Date(date.getFullYear(), date.getMonth(), 1);
-            var lastDay = new Date(date.getFullYear(), date.getMonth() + 1, 0);
+            var firstDay = new Date(date.getFullYear(), date.getMonth(), 2);
+            var lastDay = new Date(date.getFullYear(), date.getMonth() + 1, 1);
 
             $scope.events = [];
             var appointment =
@@ -881,8 +884,8 @@ app.controller('calendarController', ['$scope', '$location', '$filter', '$window
             debugger;
             var selectedvalue = $scope.option;
             var date = new Date($scope.dt);
-            var firstDay = new Date(date.getFullYear(), date.getMonth(), 1);
-            var lastDay = new Date(date.getFullYear(), date.getMonth() + 1, 0);
+            var firstDay = new Date(date.getFullYear(), date.getMonth(), 2);
+            var lastDay = new Date(date.getFullYear(), date.getMonth() + 1, 1);
 
             if (form.$invalid == true) {
                 if (form.providerdd.$invalid == true) {
@@ -1093,8 +1096,8 @@ app.controller('calendarController', ['$scope', '$location', '$filter', '$window
         $scope.DeleteAppointment = function (Id, EmployeeId) {
             debugger
             var date = new Date($scope.cdate);
-            var firstDay = new Date(date.getFullYear(), date.getMonth(), 1);
-            var lastDay = new Date(date.getFullYear(), date.getMonth() + 1, 0);
+            var firstDay = new Date(date.getFullYear(), date.getMonth(), 2);
+            var lastDay = new Date(date.getFullYear(), date.getMonth() + 1, 1);
 
             $scope.events = [];
             var checkdelete = false;
@@ -1171,8 +1174,8 @@ app.controller('calendarController', ['$scope', '$location', '$filter', '$window
         $scope.GetEventDetails = function(AppointmentId, Operation) {
             debugger;
             var date = new Date($scope.dt);
-            var firstDay = new Date(date.getFullYear(), date.getMonth(), 1);
-            var lastDay = new Date(date.getFullYear(), date.getMonth() + 1, 0);
+            var firstDay = new Date(date.getFullYear(), date.getMonth(), 2);
+            var lastDay = new Date(date.getFullYear(), date.getMonth() + 1, 1);
 
             var apirequest = bookingService.GetBookingsForEmployeesByIdBetweenDates($routeParams.CompanyId, $scope.selectedprovider, firstDay, lastDay);
             apirequest.then(function (response) {
@@ -1257,8 +1260,8 @@ app.controller('calendarController', ['$scope', '$location', '$filter', '$window
             debugger;
             //////////////-----------------////////////
             var date = new Date(view.calendar.currentDate._i);
-            var firstDay = new Date(date.getFullYear(), date.getMonth(), 1);
-            var lastDay = new Date(date.getFullYear(), date.getMonth() + 1, 0);
+            var firstDay = new Date(date.getFullYear(), date.getMonth(), 2);
+            var lastDay = new Date(date.getFullYear(), date.getMonth() + 1, 1);
 
             var SelectedStaffId = $("#selectedstaffId").val();
            
@@ -1272,7 +1275,7 @@ app.controller('calendarController', ['$scope', '$location', '$filter', '$window
                         $scope.events.push({
                             title: value.Service.Name,
                             id: value.Id + "," + value.Service.Name + "," + value.Service.Cost + "," + value.Employee.FirstName + "," + value.Status + "," + value.Service.DurationInMinutes + "," + value.Service.Id + "," + value.Employee.Id + "," + value.Customers[0].FirstName + "," + value.Customers[0].Id + "," + value.Customers[0].Email + "," + value.Customers[0].TelephoneNo,
-                          //  id: value.Id + "," + value.Service.Name + "," + value.Service.Cost + "," + value.Employee.FirstName + "," + value.Status + "," + value.Service.DurationInMinutes + "," + value.Service.Id + "," + value.Employee.Id,
+                           // id: value.Id + "," + value.Service.Name + "," + value.Service.Cost + "," + value.Employee.FirstName + "," + value.Status + "," + value.Service.DurationInMinutes + "," + value.Service.Id + "," + value.Employee.Id,
                             description: value.Id,
                             start: value.Start,
                             resourceId: value.Employee.Id,
