@@ -75,7 +75,7 @@ app.controller('calendarController', ['$scope', '$location', '$filter', '$window
                     left: '',
                     center: 'today prev,next',
                     right: ''
-                },
+                },             
                 resources: [],
                 views: {
                     agendaWeek: { // name of view
@@ -95,6 +95,7 @@ app.controller('calendarController', ['$scope', '$location', '$filter', '$window
                 refetchEvents: $scope.refetchEvents,
                 businessHours: $scope.WorkingHours,
                 viewRender: $scope.viewRender,
+               
                 //                businessHours: [
                 //{
                 //dow: [2],
@@ -129,8 +130,8 @@ app.controller('calendarController', ['$scope', '$location', '$filter', '$window
             $scope.cdate = new Date();
 
             var date = new Date($scope.cdate);
-            var firstDay = new Date(date.getFullYear(), date.getMonth(), 1);
-            var lastDay = new Date(date.getFullYear(), date.getMonth() + 1, 0);
+            var firstDay = new Date(date.getFullYear(), date.getMonth(), 2);
+            var lastDay = new Date(date.getFullYear(), date.getMonth() + 1, 1);
 
 
             $scope.FilterCustomerList = [];
@@ -212,7 +213,7 @@ app.controller('calendarController', ['$scope', '$location', '$filter', '$window
                         $scope.events.push({
                             title: value.Service.Name,
                             id: value.Id + "," + value.Service.Name + "," + value.Service.Cost + "," + value.Employee.FirstName + "," + value.Status + "," + value.Service.DurationInMinutes + "," + value.Service.Id + "," + value.Employee.Id + "," + value.Customers[0].FirstName + "," + value.Customers[0].Id + "," + value.Customers[0].Email + "," + value.Customers[0].TelephoneNo ,
-                           // id: value.Id + "," + value.Service.Name + "," + value.Service.Cost + "," + value.Employee.FirstName + "," + value.Status + "," + value.Service.DurationInMinutes + "," + value.Service.Id + "," + value.Employee.Id,
+                          // id: value.Id + "," + value.Service.Name + "," + value.Service.Cost + "," + value.Employee.FirstName + "," + value.Status + "," + value.Service.DurationInMinutes + "," + value.Service.Id + "," + value.Employee.Id,
                             description: value.Id,
                             resourceId: value.Employee.Id,
                             start: value.Start,
@@ -411,8 +412,8 @@ app.controller('calendarController', ['$scope', '$location', '$filter', '$window
 
             AgendaDayDisplayed = false;
             var date = new Date($scope.cdate);
-            var firstDay = new Date(date.getFullYear(), date.getMonth(), 1);
-            var lastDay = new Date(date.getFullYear(), date.getMonth() + 1, 0);
+            var firstDay = new Date(date.getFullYear(), date.getMonth(), 2);
+            var lastDay = new Date(date.getFullYear(), date.getMonth() + 1, 1);
             //if ($scope.events.length > 0) {
             uiCalendarConfig.calendars['myCalendar'].fullCalendar('removeEventSources');
             //}
@@ -574,35 +575,44 @@ app.controller('calendarController', ['$scope', '$location', '$filter', '$window
         }
 
         //Render the events one by one.
-        $scope.eventRender = function (event, element) {
+        $scope.eventRender = function (event, element,view) {
             debugger;
-            if (event.hasOwnProperty("id") == true) {
-                var eventdetail = event.id.split(",");
+            var CurrentViewMonth = new Date(view.calendar.currentDate._i).getMonth()+1;
+            var CurrentEventMonth = new Date(event.start._i).getMonth()+1;
 
-                var status = "";
-                if (eventdetail[4] == 1) {
-                    status = "No Label";
-                }
-                else if (eventdetail[4] == 2) {
-                    status = "Pending";
-                }
-                else if (eventdetail[4] == 3) {
-                    status = "Confirmed";
-                }
-                else if (eventdetail[4] == 5) {
-                    status = "No-Show";
-                }
-                else if (eventdetail[4] == 4) {
-                    status = "Done";
-                }
-                else if (eventdetail[4] == 7) {
-                    status = "RunningLate";
-                }
-                else if (eventdetail[4] == 6) {
-                    status = "Paid";
+            if (CurrentViewMonth == CurrentEventMonth) {
+                if (event.hasOwnProperty("id") == true) {
+                    var eventdetail = event.id.split(",");
+
+                    var status = "";
+                    if (eventdetail[4] == 1) {
+                        status = "No Label";
+                    }
+                    else if (eventdetail[4] == 2) {
+                        status = "Pending";
+                    }
+                    else if (eventdetail[4] == 3) {
+                        status = "Confirmed";
+                    }
+                    else if (eventdetail[4] == 5) {
+                        status = "No-Show";
+                    }
+                    else if (eventdetail[4] == 4) {
+                        status = "Done";
+                    }
+                    else if (eventdetail[4] == 7) {
+                        status = "RunningLate";
+                    }
+                    else if (eventdetail[4] == 6) {
+                        status = "Paid";
+                    }
+
+                    element[0].innerHTML = "<div class='fc-content'><span class='fc-title unmaincntent' style='padding-left:5px;font-size: 11px;font-weight: 500;'>" + eventdetail[8] + "</span><span class='fc-title' style='text-align: right;float: right;font-size: 9px;padding: 0px 5px;'>" + status + "</span><div style='margin-top: 20px;'><span style='padding-left:5px;font-size: 11px !important;'>" + eventdetail[1] + "  " + "£" + eventdetail[2] + "</span></div></div>";
                 }
 
-                element[0].innerHTML = "<div class='fc-content'><span class='fc-title unmaincntent' style='padding-left:5px;font-size: 11px;font-weight: 500;'>" + eventdetail[8] + "</span><span class='fc-title' style='text-align: right;float: right;font-size: 9px;padding: 0px 5px;'>" + status + "</span><div style='margin-top: 20px;'><span style='padding-left:5px;font-size: 11px !important;'>" + eventdetail[1] + "  " + "£" + eventdetail[2] + "</span></div></div>";
+            }
+            else {
+                uiCalendarConfig.calendars['myCalendar'].fullCalendar('removeEventSources');
             }
         }
 
@@ -611,8 +621,8 @@ app.controller('calendarController', ['$scope', '$location', '$filter', '$window
             debugger;
 
             var date = new Date($scope.cdate);
-            var firstDay = new Date(date.getFullYear(), date.getMonth(), 1);
-            var lastDay = new Date(date.getFullYear(), date.getMonth() + 1, 0);
+            var firstDay = new Date(date.getFullYear(), date.getMonth(), 2);
+            var lastDay = new Date(date.getFullYear(), date.getMonth() + 1, 1);
 
             var status = $scope.StatusValue;
             $scope.UpdatedStatus = item.Status;
@@ -705,8 +715,8 @@ app.controller('calendarController', ['$scope', '$location', '$filter', '$window
             debugger;
 
             var date = new Date($scope.dt);
-            var firstDay = new Date(date.getFullYear(), date.getMonth(), 1);
-            var lastDay = new Date(date.getFullYear(), date.getMonth() + 1, 0);
+            var firstDay = new Date(date.getFullYear(), date.getMonth(), 2);
+            var lastDay = new Date(date.getFullYear(), date.getMonth() + 1, 1);
 
             $scope.events = [];
             var appointment =
@@ -874,8 +884,8 @@ app.controller('calendarController', ['$scope', '$location', '$filter', '$window
             debugger;
             var selectedvalue = $scope.option;
             var date = new Date($scope.dt);
-            var firstDay = new Date(date.getFullYear(), date.getMonth(), 1);
-            var lastDay = new Date(date.getFullYear(), date.getMonth() + 1, 0);
+            var firstDay = new Date(date.getFullYear(), date.getMonth(), 2);
+            var lastDay = new Date(date.getFullYear(), date.getMonth() + 1, 1);
 
             if (form.$invalid == true) {
                 if (form.providerdd.$invalid == true) {
@@ -1086,8 +1096,8 @@ app.controller('calendarController', ['$scope', '$location', '$filter', '$window
         $scope.DeleteAppointment = function (Id, EmployeeId) {
             debugger
             var date = new Date($scope.cdate);
-            var firstDay = new Date(date.getFullYear(), date.getMonth(), 1);
-            var lastDay = new Date(date.getFullYear(), date.getMonth() + 1, 0);
+            var firstDay = new Date(date.getFullYear(), date.getMonth(), 2);
+            var lastDay = new Date(date.getFullYear(), date.getMonth() + 1, 1);
 
             $scope.events = [];
             var checkdelete = false;
@@ -1164,8 +1174,8 @@ app.controller('calendarController', ['$scope', '$location', '$filter', '$window
         $scope.GetEventDetails = function(AppointmentId, Operation) {
             debugger;
             var date = new Date($scope.dt);
-            var firstDay = new Date(date.getFullYear(), date.getMonth(), 1);
-            var lastDay = new Date(date.getFullYear(), date.getMonth() + 1, 0);
+            var firstDay = new Date(date.getFullYear(), date.getMonth(), 2);
+            var lastDay = new Date(date.getFullYear(), date.getMonth() + 1, 1);
 
             var apirequest = bookingService.GetBookingsForEmployeesByIdBetweenDates($routeParams.CompanyId, $scope.selectedprovider, firstDay, lastDay);
             apirequest.then(function (response) {
@@ -1250,10 +1260,11 @@ app.controller('calendarController', ['$scope', '$location', '$filter', '$window
             debugger;
             //////////////-----------------////////////
             var date = new Date(view.calendar.currentDate._i);
-            var firstDay = new Date(date.getFullYear(), date.getMonth(), 1);
-            var lastDay = new Date(date.getFullYear(), date.getMonth() + 1, 0);
+            var firstDay = new Date(date.getFullYear(), date.getMonth(), 2);
+            var lastDay = new Date(date.getFullYear(), date.getMonth() + 1, 1);
 
             var SelectedStaffId = $("#selectedstaffId").val();
+           
 
             if (SelectedStaffId != null && SelectedStaffId != "") {
                 var apirequest = bookingService.GetBookingsForEmployeesByIdBetweenDates($routeParams.CompanyId, SelectedStaffId, firstDay, lastDay);
@@ -1264,7 +1275,7 @@ app.controller('calendarController', ['$scope', '$location', '$filter', '$window
                         $scope.events.push({
                             title: value.Service.Name,
                             id: value.Id + "," + value.Service.Name + "," + value.Service.Cost + "," + value.Employee.FirstName + "," + value.Status + "," + value.Service.DurationInMinutes + "," + value.Service.Id + "," + value.Employee.Id + "," + value.Customers[0].FirstName + "," + value.Customers[0].Id + "," + value.Customers[0].Email + "," + value.Customers[0].TelephoneNo,
-                            //id: value.Id + "," + value.Service.Name + "," + value.Service.Cost + "," + value.Employee.FirstName + "," + value.Status + "," + value.Service.DurationInMinutes + "," + value.Service.Id + "," + value.Employee.Id,
+                           // id: value.Id + "," + value.Service.Name + "," + value.Service.Cost + "," + value.Employee.FirstName + "," + value.Status + "," + value.Service.DurationInMinutes + "," + value.Service.Id + "," + value.Employee.Id,
                             description: value.Id,
                             start: value.Start,
                             resourceId: value.Employee.Id,
@@ -1279,10 +1290,10 @@ app.controller('calendarController', ['$scope', '$location', '$filter', '$window
 
                     })
 
-
                     if ($scope.events.length > 0) {
                         uiCalendarConfig.calendars['myCalendar'].fullCalendar('removeEventSources');
                     }
+                                                                          
                     uiCalendarConfig.calendars['myCalendar'].fullCalendar('addEventSource', $scope.events);
                     //$scope.getSelectedStaff(SelectedStaffId);
                     //$('#providers').val($scope.selectedprovider);
@@ -1400,7 +1411,48 @@ app.controller('calendarController', ['$scope', '$location', '$filter', '$window
 
         });
 
-       
+        $scope.$watch("dt", function (newValue, oldValue) {
+            $scope.timeInfoFrom = [];
+            if (newValue != null && oldValue != null) {
+                var days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+                RequestValues = {
+                    CompanyId: $routeParams.CompanyId,
+                    ServiceId: $scope.ServiceId,
+                    EmployeeId: $scope.EmployeeId,
+                    DateofBooking: $filter('date')(newValue, "dd-MM-yyyy"),
+                    Day: days[newValue.getDay()],
+                }
+                $scope.timeslotsloading = true;
+                var result = bookingService.GetFreeBookingSlotsForEmployee(RequestValues);
+                result.then(function (response) {
+                    if (newValue != oldValue) {
+                        if (response.data.Value != null) {
+                            for (var i = 0; i < response.data.Value.length; i++) {
+                                if (i == 0) {
+                                    var startdate = response.data.Value[i].Start.split(":");
+                                    var startdatetime = new Date(1970, 0, 1, startdate[0], startdate[1], startdate[2]);
+                                    var starttime = $filter('date')(startdatetime, 'h:mm a');
+                                    $scope.timeInfoFrom.push(starttime);
+                                    var enddate = response.data.Value[i].End.split(":");
+                                    var enddatetime = new Date(1970, 0, 1, enddate[0], enddate[1], enddate[2]);
+                                    var endtime = $filter('date')(enddatetime, 'h:mm a');
+                                    $scope.timeInfoFrom.push(endtime);
+                                }
+                                else {
+                                    var date = response.data.Value[i].End.split(":");
+                                    var datetime = new Date(1970, 0, 1, date[0], date[1], date[2]);
+                                    var time = $filter('date')(datetime, 'h:mm a');
+                                    $scope.timeInfoFrom.push(time);
+                                }
+                            }
+                        }
+                        $scope.timeoption = $scope.timeInfoFrom[0];
+                        $scope.timeslotsloading = false;
+                    }
+                });
+            }
+        });
+
 
         $scope.open = function () {
             $timeout(function () {
