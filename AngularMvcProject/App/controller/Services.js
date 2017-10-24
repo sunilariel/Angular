@@ -505,7 +505,7 @@
             "Name": $scope.ServiceName,
             "CategoryName": "",
             "CategoryId": null,
-            "DurationInMinutes": $scope.ServiceTime ,
+            "DurationInMinutes": $scope.UpdateServiceTime,
             "DurationInHours": "",
             "Cost": $scope.ServiceCost,
             "Currency": "",

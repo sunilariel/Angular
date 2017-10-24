@@ -478,9 +478,18 @@ app.controller('bookingController', ['$scope', '$routeParams', '$rootScope', '$h
                    
                 }, 500);
             }
-        }, function () {
-            alert('Error in updating record');
-        });      
+            else
+            {
+                if (msg.data.Message.includes("Already member"))
+                {
+                    $scope.MessageText = "Employee Already Exists";
+                    $scope.IsVisible = true;
+                    $timeout(function () {
+                        $scope.IsVisible = false;
+                    },800)
+                }
+            }
+        });   
     };
 
     //Edit Staff and update the staff on blur function. 
