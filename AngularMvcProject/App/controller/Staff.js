@@ -28,7 +28,7 @@
     }
     $scope.init = function () {
         debugger;
-      
+        $scope.ShowDeletePopUp=false;
         $scope.isvisibleMenuiconBar = true;
         $scope.IsVisibleAddNewStaffPopUp = false;
         
@@ -261,6 +261,7 @@
                     $timeout(function()
                     {
                         $scope.IsVisible = false;
+                        $scope.ShowDeletePopUp = false;
                         var StaffResult = bookingService.GetAllStaff($routeParams.CompanyId);
                         StaffResult.then(function (response) {
                             $scope.ListofStaff = [];

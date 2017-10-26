@@ -535,10 +535,25 @@
                                         <div class="allservicesText">
                                             <a ng-click="showAllServicePopup()" class="allserviceanchorbtn cursorhand"><span><i class="fa fa-angle-left" aria-hidden="true"></i></span>All Services</a>
                                         </div>
-                                        <a id="deletecateBtn" ng-click="DeleteService()" class="deletecatIconBtn btn btn-default">
+                                        <!--<a id="deletecateBtn" ng-click="DeleteService()" class="deletecatIconBtn btn btn-default">
+                                            <i class="fa fa-trash-o" aria-hidden="true"></i>
+                                        </a>-->
+                                        <a id="deletecateBtn" ng-click="ShowDeletePopUp=true" class="deletecatIconBtn btn btn-default">
                                             <i class="fa fa-trash-o" aria-hidden="true"></i>
                                         </a>
                                         <div class="clearfix"></div>
+
+                                        <span class="staff-break-delete-holder" ng-show="ShowDeletePopUp">
+                                            <div class="popover left staff-delete-box staffbbtns" style="">
+                                                <div class="arrow staffarrowbtn"></div>
+                                                <h3 class="popover-title surecntnt">Are you sure?</h3>
+                                                <div class="btn_box staffbtnpadn">
+                                                    <button id="" class="btn btn-danger deletebtn" ng-click="DeleteService()">Delete</button>
+                                                    <button class="new-gray-btn btn btn-default cancelbtn" ng-click="ShowDeletePopUp=false">Cancel</button>
+                                                </div>
+                                            </div>
+                                        </span>
+
                                     </div>                                                       
                         <div class="row">
                             <div class="col-md-7">

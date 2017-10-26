@@ -231,6 +231,7 @@
     <Content Include="App\View\Reports\ServiceReports.html" />
     <Content Include="App\View\Setting\Services.html" />
     <Content Include="App\View\Setting\Staff.html" />
+    <Content Include="Content\Assets\css\angular-tooltips.css" />
     <Content Include="Content\Assets\css\angularjs-datetime-picker.css" />
     <Content Include="Content\Assets\css\trix.css" />
     <Content Include="Content\Assets\images\drag-drop-bg.png" />
@@ -288,6 +289,7 @@
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\angular-sanitize.min.js" />
+    <Content Include="Scripts\angular-tooltips.min.js" />
     <Content Include="Scripts\angularUiCalendar\calendar.js" />
     <Content Include="Scripts\angularUiCalendar\gcal.js" />
     <Content Include="Scripts\bootstrap.js" />

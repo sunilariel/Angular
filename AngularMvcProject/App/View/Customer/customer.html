@@ -1,19 +1,18 @@
 ﻿<style>
-
     .dx-list:not(.dx-list-select-decorator-enabled) .dx-list-item.dx-state-focused {
-    background-color: #00bbc5 !important;
-    color: #fff !important;
-}
-.dx-list:not(.dx-list-select-decorator-enabled) .dx-list-item.dx-list-item-selected {
-    background-color: #00bbc5 !important;
-    color: #fff !important;
-}
-.dx-list:not(.dx-list-select-decorator-enabled) .dx-list-item.dx-state-hover {
-    background-color: #00bbc5 !important;
-    color: #fff !important;
-}
+        background-color: #00bbc5 !important;
+        color: #fff !important;
+    }
 
+    .dx-list:not(.dx-list-select-decorator-enabled) .dx-list-item.dx-list-item-selected {
+        background-color: #00bbc5 !important;
+        color: #fff !important;
+    }
 
+    .dx-list:not(.dx-list-select-decorator-enabled) .dx-list-item.dx-state-hover {
+        background-color: #00bbc5 !important;
+        color: #fff !important;
+    }
 </style>
 
 <div ng-app="bookingApp">
@@ -330,7 +329,7 @@
                                             <h3 class="addCustomerTitle">Add New Customer</h3>
                                             <div class="addcustomerContent">
                                                 <div class="customerField">
-                                                    <input id="customerName"     class="form-control" type="text"  placeholder="Name"     name="customerName"     ng-model="customerName" required>
+                                                    <input id="customerName" class="form-control" type="text" placeholder="Name" name="customerName" ng-model="customerName" required>
                                                     <input class="form-control emailField" type="text" placeholder="E-mail" name="customerEmail" ng-model="customerEmail" required>
                                                     <input id="customerPassword" class="form-control" type="text" placeholder="Password" name="customerPassword" ng-model="customerPassword" required>
                                                 </div>
@@ -359,27 +358,37 @@
 
                                 <div class="col-md-12 providerpaddDiv">
                                     <div class="providerCustomer">
-                                        <ul class="list-inline">                                           
-                                            <li class="selectCustomer cursorhand" ng-repeat="item in customerArr | filter:searchName" ng-click="EditCustomer(item)" ng-class="{selected:CustomerId==item.Id}">
-                                                <span class="formCheckbox">
-                                                    <input type="checkbox" name="" class="inputcheckbox">
-                                                </span>
+                                        <ul class="list-inline">
 
-                                                <span class="providerImage cursorhand" >
-                                                    <a><img src="/Content/Assets/images/provider_img2.png" /></a>
-                                                </span>
+                                            <li class="selectCustomer cursorhand cstmersidebarl" ng-repeat="item in customerArr | filter:searchName" ng-click="EditCustomer(item)" ng-class="{selected:CustomerId==item.Id}">
+                                                <div class="row">
+                                                    <div class="col-sm-4">
+                                                        <span class="formCheckbox">
+                                                            <input type="checkbox" name="" class="inputcheckbox ichkbxmrgnt">
+                                                        </span>
 
-                                                <!--<input type="hidden" name="id" ng-model="item.Id">-->
-                                                <label class="providerName">{{item.FirstName}}</label>
-                                                <!-- Single button -->
-                                                <div class="popOverDeleteBtn">
-                                                    <!--<a ng-click="showdeletepopup = !showdeletepopup" id="deleteBtn" class="btn btn-default delete_btn">
-                                                        <span class="glyphicon glyphicon-trash"></span>Delete
-                                                    </a>-->
-                                                    <a ng-click="DeleteCustomerData(item.Id)" id="deleteBtn" class="btn btn-default delete_btn">
-                                                    <span class="glyphicon glyphicon-trash"></span>Delete
-                                                    </a>
+                                                        <span class="providerImage cursorhand cstmersidepimg">
+                                                            <a><img style="width:21px !important;" src="/Content/Assets/images/provider_img2.png" /></a>
+                                                        </span>
+                                                    </div>
+                                                    <!--<input type="hidden" name="id" ng-model="item.Id">-->
+
+                                                    <div class="col-sm-8 cstmercntentcnt">
+                                                        <label class="providerName">{{item.FirstName}}</label>
+                                                        <div class="popOverDeleteBtn">
+                                                            <!--<a ng-click="showdeletepopup = !showdeletepopup" id="deleteBtn" class="btn btn-default delete_btn">
+                                                                <span class="glyphicon glyphicon-trash"></span>Delete
+                                                            </a>-->
+                                                            <div class="cstmerdeletebnt">
+                                                                <a ng-click="DeleteCustomerData(item.Id)" id="deleteBtn" class="btn btn-default delete_btn">
+                                                                    <span class="glyphicon glyphicon-trash"></span>Delete
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
+                                                <!-- Single button -->
+
 
                                                 <div class="col-md-12">
                                                     <div id="deletetooltipPopup" class="addCustomer  tooltipArrow" ng-show="showdeletepopup">
@@ -458,7 +467,7 @@
                                     <div class="form-group">
                                         <label class="control-label col-md-3 col-xs-3 col-sm-12">Home</label>
                                         <div class="col-md-9 col-xs-9 col-sm-12">
-                                            <input type="text" class="form-control" id="text" placeholder="Phone" name="text" ng-model="HomePhone" >
+                                            <input type="text" class="form-control" id="text" placeholder="Phone" name="text" ng-model="HomePhone">
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -510,7 +519,7 @@
                                                     <span>{{NumberofAppointmnets}} appointment & 0 class</span><span class="dottext">.</span><span> £{{TotalCost}}</span>
                                                     <span style="width:104px;position:absolute;top:-17px;" ng-show="AppointmentsLoader">
                                                         <img src="../Content/Assets/images/tenor.gif" />
-                                                    </span>                                                 
+                                                    </span>
                                                 </div>
                                                 <div ng-if="NumberofAppointmnets==0">
                                                     <span> No records available! </span>
@@ -537,7 +546,7 @@
                                                                             <div class="col-md-6">
                                                                                 <div class="dropdown labeldrowDownBtn nolableDrop">
                                                                                     <select ng-model="Status" ng-init='Status="1"' style="border:none;font-size:12px;">
-                                                                                        <option ng-repeat="item in StatusList" value="{{item.Value}}" >{{item.Status}}</option>
+                                                                                        <option ng-repeat="item in StatusList" value="{{item.Value}}">{{item.Status}}</option>
                                                                                     </select>
                                                                                 </div>
                                                                             </div>
@@ -564,7 +573,7 @@
                                                                                         <select class="btn btn-default dropdown-toggle" name="Servicedd" data-ng-options="x.Id as x.Name for x in EmployeeServices" ng-model="selectedservice" ng-change="ServiceDetail(selectedservice)" aria-haspopup="true" aria-expanded="false" required>
                                                                                             <option value="">-- Select a Service --</option>
                                                                                         </select>
-                                                                            <img class="imagelmpabs" ng-show="showServiceLoader" src="Content/Assets/images/loading.gif">
+                                                                                        <img class="imagelmpabs" ng-show="showServiceLoader" src="Content/Assets/images/loading.gif">
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
@@ -585,9 +594,9 @@
                                                                                                 </span>
                                                                                             </a>
                                                                                             <!--<ul id="custmDropdown" class="apptcustomeDropdown" ng-show="minhours" style="display:block;position:absolute;">
-                                                                    <li><a ng-click="Converttomin()">Mins</a></li>
-                                                                    <li><a ng-click="Convertohour()">Hours</a></li>
-                                                                </ul>-->
+                                                                                                <li><a ng-click="Converttomin()">Mins</a></li>
+                                                                                                <li><a ng-click="Convertohour()">Hours</a></li>
+                                                                                            </ul>-->
                                                                                         </div>
                                                                                     </div>
 
@@ -638,10 +647,10 @@
                                                                                 </div>
                                                                             </div>
                                                                             <!--<div class="form-group rescheduleDiv">
-                                                    <div class="col-sm-12 sendSchdlEmail">
-                                                        <input type="checkbox" class="sampleCheckbox checkbox-custom" name="" value="service"><label for="checkbox-1" class="checkbox-custom-label">Send Reschedule Email</label>
-                                                    </div>
-                                                </div>-->
+                                                                                <div class="col-sm-12 sendSchdlEmail">
+                                                                                    <input type="checkbox" class="sampleCheckbox checkbox-custom" name="" value="service"><label for="checkbox-1" class="checkbox-custom-label">Send Reschedule Email</label>
+                                                                                </div>
+                                                                            </div>-->
                                                                         </div>
 
                                                                     </div>
@@ -650,8 +659,8 @@
                                                                             <button type="submit" class="btn btn-default" data-action="save" role="button">Save Appointment</button>
                                                                         </div>
                                                                         <!--<div class="apptViewFooter">
-                                                <a href="#" class="apptDeleteBtn">Delete</a>
-                                            </div>-->
+                                                                            <a href="#" class="apptDeleteBtn">Delete</a>
+                                                                        </div>-->
                                                                     </div>
                                                                 </form>
                                                             </div>
@@ -699,7 +708,7 @@
                                                                                     <div class="dropdown appointProvider">
                                                                                         <!--<select class="btn btn-default dropdown-toggle" ng-model="selectedprovider" data-ng-options="x.Id as x.staffName for x in Provider" id="dropdownMenu2" name="providerdd" aria-haspopup="true" aria-expanded="false" ng-change="GetAllocateServiceToEmployee(selectedprovider)" required>
 
-                                                            </select>-->
+                                                                                        </select>-->
                                                                                         <select class="btn btn-default dropdown-toggle" ng-model="selectedprovider" name="provider" ng-change="GetAllocateServiceToEmployee(selectedprovider)" required>
                                                                                             <option ng-repeat="employee in Provider" value="{{employee.Id}}">{{employee.staffName}}</option>
                                                                                         </select>
@@ -711,8 +720,8 @@
                                                                                 <div class="col-sm-8">
                                                                                     <div class="dropdown appointProvider">
                                                                                         <!--<select class="btn btn-default dropdown-toggle" name="Servicedd" data-ng-options="x.Id as x.Name for x in EmployeeServices" ng-model="selectedservice" ng-change="ServiceDetail(selectedservice)" aria-haspopup="true" aria-expanded="false" required>
-                                                                <option value="">-- Select a Service --</option>
-                                                            </select>-->
+                                                                                            <option value="">-- Select a Service --</option>
+                                                                                        </select>-->
 
                                                                                         <select class="btn btn-default dropdown-toggle" ng-model="selectedservice" name="Service" ng-change="ServiceDetail(selectedservice)" required>
                                                                                             <option ng-repeat="services in EmployeeServices " value="{{services.Id}}">{{services.Name}}</option>
@@ -855,6 +864,10 @@
                                                                             {{updatedCustomerEmail}}
                                                                         </span>
                                                                     </li>
+                                                                    <li ng-show="ShowNotes">
+                                                                        <label>Comments</label>
+                                                                        <span>{{}}</span>
+                                                                    </li>
                                                                     <li>
                                                                         <label>Booked from </label>
                                                                         <span>Customer Page</span>
@@ -879,14 +892,16 @@
                                         <div class="tab-pane" id="staff-services" style="margin-top:10px;">
                                             <div id="form-container">
                                                 <!--<div id="form" dx-form="formOptions"></div>-->
-                                               
-                                                <trix-editor ng-model-options="{ updateOn: 'blur' }" spellcheck="false" class="trix-content" ng-model="trix" angular-trix trix-initialize="trixInitialize(e, editor);" trix-change="trixChange(e, editor);" trix-selection-change="trixSelectionChange(e, editor);" trix-focus="trixFocus(e, editor);" trix-blur="trixBlur(e, editor);" trix-file-accept="trixFileAccept(e, editor);" trix-attachment-add="trixAttachmentAdd(e, editor);" trix-attachment-remove="trixAttachmentRemove(e, editor);" ></trix-editor>
+
+                                                <trix-editor ng-model-options="{ updateOn: 'blur' }" spellcheck="false" class="trix-content" ng-model="trix" angular-trix trix-initialize="trixInitialize(e, editor);" trix-change="trixChange(e, editor);" trix-selection-change="trixSelectionChange(e, editor);" trix-focus="trixFocus(e, editor);" trix-blur="trixBlur(e, editor);" trix-file-accept="trixFileAccept(e, editor);" trix-attachment-add="trixAttachmentAdd(e, editor);" trix-attachment-remove="trixAttachmentRemove(e, editor);"></trix-editor>
                                             </div>
                                             <div class="createDiv" style="font-size:14px;">
+
                                                 <div class="" ng-repeat="item in CustomerNotesDetail">
                                                     <div class="discripDiv" ng-bind-html="item.Description">
-                                                       
+
                                                     </div>
+
                                                     <div class="createdOnby">
                                                         <ul class="list-inline">
                                                             <li>{{item.WhoAddedThis}}</li>
@@ -894,6 +909,7 @@
                                                             <li><a ng-click="DeleteCustomerNote(item.Id)" class="cursorhand"><i class="fa fa-trash-o" aria-hidden="true"></i></a></li>
                                                         </ul>
                                                     </div>
+                                                    <div class="clearfix"></div>
                                                 </div>
                                                 <div class="clearfix"></div>
                                             </div>
@@ -906,24 +922,24 @@
                                                         <div id="selectyearbox" dx-select-box="selectBoxYearOption" ng-model="SelectedYear"></div>
                                                     </div>-->
                                                     <div class="chooseYearDiv">
-                                                    <div class="label">Choose a year:</div>                                                                                                     
-                                                    <div id="selectyearbox" ng-model="Year" dx-select-box="{dataSource: SelectBoxYearDataSource,onValueChanged: filterMonthsbyYears,width:120}"></div>
+                                                        <div class="label">Choose a year:</div>
+                                                        <div id="selectyearbox" ng-model="Year" dx-select-box="{dataSource: SelectBoxYearDataSource,onValueChanged: filterMonthsbyYears,width:120}"></div>
                                                     </div>
-                                                        <!--<div class="chooseMonthDiv">
-                                                            <div class="label">Choose a month:</div>
-                                                            <div id="selectbox" dx-select-box="selectBoxOptions"  ></div>
-                                                            <div id="selectbox" dx-select-box="selectBoxOptions" ng-model="SelectedMonth"></div>
-                                                        </div>-->
+                                                    <!--<div class="chooseMonthDiv">
+                                                        <div class="label">Choose a month:</div>
+                                                        <div id="selectbox" dx-select-box="selectBoxOptions"  ></div>
+                                                        <div id="selectbox" dx-select-box="selectBoxOptions" ng-model="SelectedMonth"></div>
+                                                    </div>-->
                                                     <div class="chooseMonthDiv">
                                                         <div class="label">Choose a month:</div>
                                                         <!--<div id="selectbox" dx-select-box="selectBoxOptions"  ></div>-->
                                                         <!--<div id="selectbox" dx-select-box="selectBoxOptions" ng-model="SelectedMonth"></div>-->
-                                                        <div id="selectbox" dx-select-box="{dataSource: SelectBoxMonthDataSource,onValueChanged:ReloadChart,value:'All',width:120}" ></div>
+                                                        <div id="selectbox" dx-select-box="{dataSource: SelectBoxMonthDataSource,onValueChanged:ReloadChart,value:'All',width:120}"></div>
                                                     </div>
 
 
 
-                                                    </div>
+                                                </div>
                                                 <div class="dxChartDiv">
                                                     <!--<label class="chartText">Appointments AUG, 2017</label>-->
                                                     <label class="chartText">Appointments {{Month}} {{Year}}</label>

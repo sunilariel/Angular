@@ -378,10 +378,37 @@
                                 <li id="StaffBreakLink"><a data-target="#staff-break" data-toggle="tab" class="cursorhand">BREAKS</a></li>
                                 <li id="StaffTimeOffLink"><a data-target="#staff-timeoff" data-toggle="tab" class="cursorhand">TIME OFF</a></li>
                                 <li class="pull-right settingIcon staffDeleteIcon">
-                                    <button class="pull-right btn btn-circle appointment_btn" id="deletestaffbtn" ng-click="DeleteStaff()">
+
+                                    <!--<button class="pull-right btn btn-circle appointment_btn" id="deletestaffbtn" ng-click="DeleteStaff()">
+                                        <i class="fa fa-trash-o" aria-hidden="true"></i>
+                                    </button>-->
+                                    <button class="pull-right btn btn-circle appointment_btn" id="deletestaffbtn" ng-click="ShowDeletePopUp=true">
                                         <i class="fa fa-trash-o" aria-hidden="true"></i>
                                     </button>
+
+
+                                    <span class="staff-break-delete-holder" ng-show="ShowDeletePopUp">
+                                        <div class="popover left staff-delete-box staffbbtns" style="">
+                                            <div class="arrow staffarrowbtn"></div>
+                                            <h3 class="popover-title surecntnt">Are you sure?</h3>
+                                            <div class="btn_box staffbtnpadn">
+                                                <button id="" class="btn btn-danger deletebtn" ng-click="DeleteStaff()">Delete</button>
+                                                <button class="new-gray-btn btn btn-default cancelbtn" ng-click="ShowDeletePopUp=false">Cancel</button>
+                                            </div>
+                                        </div>
+                                    </span>
+
+
+
+
+
+
+
+
+
                                 </li>
+
+
                                 <div class="clearfix"></div>
                             </ul>
 

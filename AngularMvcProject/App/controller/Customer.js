@@ -69,7 +69,7 @@
         var count = 0;
        // $scope.LineChartDataSource();
       //  $scope.PieChartDataSource();
-     
+        $scope.showdeletepopup = false;
         $scope.months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
         //$scope.AllAppointmentYears = [];
         //$scope.AllAppointmentMonths = [];
@@ -254,7 +254,7 @@
 
     //Edit Customer getting details  
     $scope.EditCustomer = function (item) {
-        
+               
         $scope.CustomerId = item.Id;
         $scope.SelectedCustomerId = item.Id;
         $scope.updatedCustomerName = item.FirstName;
