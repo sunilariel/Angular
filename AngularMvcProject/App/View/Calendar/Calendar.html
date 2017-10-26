@@ -130,14 +130,14 @@
 
     <div class="left_sidebar">
         <ul class="nav">
-            <li class="side-nav-tooltip " id="side-dashboard" data-toggle="tooltip" data-original-title="Dashboard" data-placement="right">
-                <a ng-click="redirecttodashboard()" data-toggle="tab" class="setmore-icon-home" id="startDashboard"><small>Dashboard</small></a>
+            <li class="side-nav-tooltip" id="side-dashboard" data-toggle="tooltip" data-original-title="Dashboard" data-placement="right">
+                <a ng-click="redirecttodashboard()" style="cursor:pointer;" data-toggle="tab" class="setmore-icon-home" id="startDashboard"><small>Dashboard</small></a>
             </li>
             <li class="side-nav-tooltip active" id="side-calendar" data-placement="right" data-toggle="tooltip" data-original-title="Calendar">
                 <a ng-click="redirectToCalendar()" data-toggle="tab" class="setmore-icon-calendar-31" id="startCalendar"><small>Calendar</small></a>
             </li>
             <li class="side-nav-tooltip" id="side-customers" title="" data-toggle="tooltip" data-original-title="Customers" data-placement="right">
-                <a ng-click="redirecttoCustomer()" data-toggle="tab" class="setmore-icon-users2" id="side-nav-customers"><small>Customers</small></a>
+                <a ng-click="redirecttoCustomer()" style="cursor:pointer;" data-toggle="tab" class="setmore-icon-users2" id="side-nav-customers"><small>Customers</small></a>
             </li>
             <li class="side-nav-tooltip" id="side-profile" data-toggle="tooltip" data-original-title="Apps &amp; Integrations" data-placement="right">
                 <a href="" data-toggle="tab" class="setmore-icon-laptop-phone"><small>Profile&nbsp;</small></a>
@@ -145,11 +145,8 @@
 
             <li class="side-nav-tooltip " id="settings_new" data-original-title="Settings" data-placement="right" data-toggle="tooltip">
                 <a ng-click="RedirecttoStaff()" data-toggle="tab" class="fa fa-cog"><small>Settings</small></a>
-
-            <li class="side-nav-tooltip reports" data-toggle="tooltip" data-original-title="Reports" data-placement="right"> <a class="fa fa-line-chart" ng-click="RedirecttoReport()"><small>Reports</small></a> </li>
-
             </li>
-
+            <li class="side-nav-tooltip reports" data-toggle="tooltip" data-original-title="Reports" data-placement="right"> <a class="fa fa-line-chart" ng-click="RedirecttoReport()"><small>Reports</small></a> </li>
 
             <li class="side-nav-tooltip blue_icon" data-toggle="tooltip" data-original-title="Premium" data-placement="right"> <a class="setmore-icon-shield-alert" href="#"><small>Premium</small></a> </li>
         </ul>
@@ -368,9 +365,9 @@
                                         <div class="form-group">
                                             <label class="control-label col-sm-4" for="email">Provider</label>
                                             <div class="col-sm-8">
-                                                <div class="dropdown appointProvider">
-                                                    <select class="btn btn-default dropdown-toggle" ng-model="selectedprovider" data-ng-options="x.Id as x.staffName for x in Provider" id="dropdownMenu2" name="providerdd" aria-haspopup="true" aria-expanded="false" ng-change="GetAllocateServiceToEmployee(selectedprovider)" required>
-                                                        <option value="" selected="selected">-- Select a Provider --</option>
+                                                <div class="dropdown appointProvider">                                                   
+                                                    <select class="btn btn-default dropdown-toggle" ng-model="selectedprovider" id="dropdownMenu2" name="providerdd" aria-haspopup="true" aria-expanded="false" ng-change="GetAllocateServiceToEmployee(selectedprovider)"  required >
+                                                        <option ng-repeat="item in Provider" ng-selected="selectedprovider==item.Id" value="{{item.Id}}">{{item.staffName}}</option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -379,9 +376,15 @@
                                             <label class="control-label col-sm-4" for="pwd">Service</label>
                                             <div class="col-sm-8">
                                                 <div class="dropdown appointProvider loadimgmps">
-                                                    <select class="btn btn-default dropdown-toggle" name="Servicedd" data-ng-options="x.Id as x.Name for x in EmployeeServices" ng-model="selectedservice" ng-change="ServiceDetail(selectedservice)" aria-haspopup="true" aria-expanded="false">
+                                                    <!--<select class="btn btn-default dropdown-toggle" name="Servicedd" data-ng-options="x.Id as x.Name for x in EmployeeServices" ng-model="selectedservice" ng-change="ServiceDetail(selectedservice)" aria-haspopup="true" aria-expanded="false">
                                                         <option value="">-- Select a Service --</option>
+                                                    </select>-->
+
+                                                    <select class="btn btn-default dropdown-toggle" name="Servicedd" ng-model="selectedservice" ng-change="ServiceDetail(selectedservice)" aria-haspopup="true" aria-expanded="false">
+                                                        <option value="">-- Select a Service --</option>
+                                                        <option ng-repeat="item in CalendarEmployeeServices" value="{{item.Id}}">{{item.Name}}</option>
                                                     </select>
+
                                                     <img class="imagelmpabs" ng-show="showServiceLoader" src="Content/Assets/images/loading.gif">
                                                 </div>
                                             </div>
@@ -416,7 +419,7 @@
                                             <div class="col-sm-8 dateTimeDiv ">
                                                 <span class="glyphicon glyphicon-ok calendarOk"></span><!--<input type="text" class="form-control datepickerBox" ng-model="datatime" placeholder="Fri, May 12" id="datetimepicker4" />-->
                                                 <!--<input datetime-picker ng-model="selecteddate" date-disabled="disabled(date, mode)" disable-weekends="true"  class="form-control datepickerBox"  date-format="EEE, MMM d" size="30" date-only   />-->
-                                                <input type="text" class="form-control calendarBox" datepicker-popup="EEE, MMM d" ng-model="dt" open="opened" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-click="SetDatePicker()" name='theDate' ng-required="true" />
+                                                <input type="text" class="form-control calendarBox" datepicker-popup="EEE, MMM d" ng-model="dt" open="opened" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-click="SetDatePicker()" id="calendardatepicker" name='theDate' ng-required="true" />
 
                                                 <div class="selectDropdown">
                                                     <div class="gifImage" ng-show="timeslotsloading"><img src="/Content/Assets/images/loading.gif" /></div>
@@ -667,7 +670,7 @@
                                                 </select>-->
 
                                                 <select class="btn btn-default dropdown-toggle" ng-model="selectedservice" name="Servicedd" ng-change="ServiceDetail(selectedservice)" required>
-                                                    <option ng-repeat="services in EmployeeServices " value="{{services.Id}}">{{services.Name}}</option>
+                                                    <option ng-repeat="services in CalendarEmployeeServices " value="{{services.Id}}">{{services.Name}}</option>
                                                 </select>
                                             </div>
                                         </div>

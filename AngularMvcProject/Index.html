@@ -26,8 +26,9 @@
     <!--<link href="Content/dx.spa.css" rel="stylesheet" />-->
     <link href="Content/dx.common.css" rel="stylesheet" />
     <link href="Content/dx.light.css" rel="stylesheet" />
+    <link href="Content/Assets/css/angular-tooltips.css" rel="stylesheet" />
     <script src="Scripts/dx.all.js"></script>
-
+    <script src="Scripts/angular-tooltips.min.js"></script>
     <script src="Content/Assets/js/trix.js"></script>
     <script src="Content/Assets/js/angular-trix.js"></script>
 
@@ -69,6 +70,23 @@
         <div ng-view></div>
     </div>
 
+    <!--<script>
+        $(document).ready(function ()
+        {
+         debugger;    
+         $('[data-toggle="tooltip"]').tooltip();
+        });
 
+        $(document).ready(function () {
+            $('[data-toggle=tooltip]').hover(function () {
+                // on mouseenter
+                $(this).tooltip('show');
+            }, function () {
+                // on mouseleave
+                $(this).tooltip('hide');
+            });
+        });
+    </script>-->
 </body>
+
 </html>

@@ -31,6 +31,7 @@
         $scope.showAllServicesDiv = false;
         $scope.CategoryCheckedCount = 0;
         $scope.EditServiceDiv = true;
+        $scope.ShowDeletePopUp = false;
 
         $scope.ColourCode = "#f0c2c1";
         $scope.BorderColourCode = "1px solid #e59190";
@@ -546,6 +547,7 @@
                 $timeout(function () {
                       
                     $scope.MessageText = "Service Deleted";
+                    $scope.ShowDeletePopUp = false;
                     $timeout(function () {
                         $scope.IsVisible = false;
                         $scope.init();

@@ -166,6 +166,7 @@
         <ul class="nav">
             <li class="side-nav-tooltip " id="side-dashboard" data-toggle="tooltip" data-original-title="Dashboard" data-placement="right">
                 <a ng-click="redirecttodashboard()" data-toggle="tab" class="setmore-icon-home" id="startDashboard"><small>Dashboard</small></a>
+              
             </li>
             <li class="side-nav-tooltip" id="side-calendar" data-placement="right" data-toggle="tooltip" data-original-title="Calendar">
                 <a ng-click="redirectToCalendar()" data-toggle="tab" class="setmore-icon-calendar-31" id="startCalendar"><small>Calendar</small></a>
@@ -344,19 +345,20 @@
 
                                                     <div class="col-sm-6">
                                                         <div class="business-card">
-                                                            <label class="card-label">CANCELLATIONS  <a class="cursorhand" data-toggle="tooltip" title="Percentage of all bookings that were cancelled"><i class="fa fa-info-circle" aria-hidden="true"></i></a> </label>
+                                                            <label class="card-label">CANCELLATIONS  <a class="cursorhand"  tooltips tooltip-template="Percentage of all bookings that were cancelled" tooltip-side="right"><i class="fa fa-info-circle" aria-hidden="true"></i></a> </label>
+                                                         
                                                             <span class="card-value">{{TotalCancellations}}</span>
                                                         </div>
                                                     </div>
                                                     <div class="col-sm-6">
                                                         <div class="business-card">
-                                                            <label class="card-label">BOOKINGS INTERNALLY <a class="cursorhand" data-toggle="tooltip" title="Bookings originally made in the Appointedd calendar"><i class="fa fa-info-circle" aria-hidden="true"></i></a> </label>
+                                                            <label class="card-label">BOOKINGS INTERNALLY <a class="cursorhand" tooltips tooltip-template="Bookings originally made in the Appointedd calendar" tooltip-side="right"><i class="fa fa-info-circle" aria-hidden="true"></i></a> </label>                                                          
                                                             <span class="card-value">{{TotalBookingMadeInternally}}</span>
                                                         </div>
                                                     </div>
                                                     <div class="col-sm-6">
                                                         <div class="business-card">
-                                                            <label class="card-label">BOOKINGS EXTERNALLY <a class="cursorhand" data-toggle="tooltip" title="Bookings made through online booking tools"><i class="fa fa-info-circle" aria-hidden="true"></i></a> </label>
+                                                            <label class="card-label">BOOKINGS EXTERNALLY <a class="cursorhand" tooltips tooltip-template="Bookings made through online booking tools" tooltip-side="right"><i class="fa fa-info-circle" aria-hidden="true"></i></a> </label>
                                                             <span class="card-value">{{TotalBookingMadeExternally}}</span>
                                                         </div>
                                                     </div>
@@ -383,10 +385,11 @@
             </div>
         </div>
     </div>
+
 </div>
 
 
-
+   
 
 
 
