@@ -403,7 +403,9 @@
 
         responsedata.then(function (response) {
             $scope.staffList = [];
-            $scope.staffList.push({ 'Id': "", 'CompanyId': "", 'UserName': "", 'staffName': "All Staff", 'staffEmail': "" });
+            if (response.data.length > 0) {
+                $scope.staffList.push({ 'Id': "", 'CompanyId': "", 'UserName': "", 'staffName': "All Staff", 'staffEmail': "" });
+            }
             for (var i = 0; i < response.data.length; i++) {
                 $scope.staffList.push({ 'Id': response.data[i].Id, 'CompanyId': response.data[i].CompanyId, 'UserName': response.data[i].UserName, 'staffName': response.data[i].FirstName, 'staffEmail': response.data[i].Email });
             }

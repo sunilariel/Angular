@@ -254,7 +254,7 @@
 
     //Edit Customer getting details  
     $scope.EditCustomer = function (item) {
-               
+        debugger;
         $scope.CustomerId = item.Id;
         $scope.SelectedCustomerId = item.Id;
         $scope.updatedCustomerName = item.FirstName;
@@ -392,7 +392,7 @@
 
     //Delete Customer//
     $scope.DeleteCustomerData = function (CustomerId) {
-        
+        debugger;
         var deletecustomer = bookingService.DeleteCustomer($scope.CompanyId, CustomerId);
         deletecustomer.then(function (response) {
             $scope.MessageText = "Deleting Data"
@@ -409,7 +409,18 @@
                 $scope.customerArr = [];
                 $scope.customerArr = response.data;
                 $scope.CustomerCount = response.data.length
-                $timeout(function () { $scope.MessageText = "Data deleted."; $timeout(function () { $scope.IsVisible = false; $scope.EditCustomer(response.data[0]); }, 1000) }, 500);
+                $timeout(function () {
+                    $scope.MessageText = "Data deleted."; 
+                    $timeout(function () {
+                        $scope.IsVisible = false;
+                        if (response.data.length > 0) {
+                            $scope.EditCustomer(response.data[0]);
+                        }
+                        else {
+                            $scope.showcustomer = true;
+                        }
+                    }, 1000)
+                }, 500);
             });
           
 

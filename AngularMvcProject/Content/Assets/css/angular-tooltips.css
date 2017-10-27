@@ -63,7 +63,7 @@
   z-index: 999; }
 
 tooltip {
-  display: inline-block;
+  display:block;
   position: relative; }
   tooltip._multiline {
     display: block; }
