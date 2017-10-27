@@ -147,27 +147,27 @@
             <!-- <div style="width: 100%;text-align: center;position: absolute;z-index: 999999;" ng-if="IsVisible"><span id="voice-box" class="noDisplay" style="display: none;">Staff breaks saved.</span></div> -->
         </header>
 
-        <div class="left_sidebar">
+        <div class="left_sidebar sidebtipt">
             <ul class="nav">
-                <li class="side-nav-tooltip" id="side-dashboard" data-toggle="tooltip" data-original-title="Dashboard" data-placement="right">
+                <li class="side-nav-tooltip" id="side-dashboard" tooltips tooltip-template="Dashboard" tooltip-side="right">
                     <a ng-click="redirecttodashboard()" style="cursor:pointer;" data-toggle="tab" class="setmore-icon-home" id="startDashboard"><small>Dashboard</small></a>
                 </li>
-                <li class="side-nav-tooltip" id="side-calendar" data-placement="right" data-toggle="tooltip" data-original-title="Calendar">
+                <li class="side-nav-tooltip" id="side-calendar" tooltips tooltip-template="Calendar" tooltip-side="right">
                     <a ng-click="redirectToCalendar()" data-toggle="tab" class="setmore-icon-calendar-31" id="startCalendar"><small>Calendar</small></a>
                 </li>
-                <li class="side-nav-tooltip active" id="side-customers" title="" data-toggle="tooltip" data-original-title="Customers" data-placement="right">
+                <li class="side-nav-tooltip active" id="side-customers" title="" tooltips tooltip-template="Customers" tooltip-side="right">
                     <a ng-click="redirecttoCustomer()" style="cursor:pointer;" data-toggle="tab" class="setmore-icon-users2" id="side-nav-customers"><small>Customers</small></a>
                 </li>
-                <li class="side-nav-tooltip" id="side-profile" data-toggle="tooltip" data-original-title="Apps &amp; Integrations" data-placement="right">
+                <li class="side-nav-tooltip" id="side-profile appsnavpstng" tooltips tooltip-template="Apps &amp; Integrations" tooltip-side="right">
                     <a href="" data-toggle="tab" class="setmore-icon-laptop-phone"><small>Profile&nbsp;</small></a>
                 </li>
 
-                <li class="side-nav-tooltip " id="settings_new" data-original-title="Settings" data-placement="right" data-toggle="tooltip">
+                <li class="side-nav-tooltip" id="settings_new" tooltips tooltip-template="Settings" tooltip-side="right">
                     <a ng-click="RedirecttoStaff()" data-toggle="tab" class="fa fa-cog"><small>Settings</small></a>
                 </li>
-                <li class="side-nav-tooltip reports" data-toggle="tooltip" data-original-title="Reports" data-placement="right"> <a class="fa fa-line-chart" ng-click="RedirecttoReport()"><small>Reports</small></a> </li>
+                <li class="side-nav-tooltip reports" tooltips tooltip-template="Reports" tooltip-side="right"> <a class="fa fa-line-chart" ng-click="RedirecttoReport()"><small>Reports</small></a> </li>
 
-                <li class="side-nav-tooltip blue_icon" data-toggle="tooltip" data-original-title="Premium" data-placement="right"> <a class="setmore-icon-shield-alert" href="#"><small>Premium</small></a> </li>
+                <li class="side-nav-tooltip blue_icon" tooltips tooltip-template="Premium" tooltip-side="right"> <a class="setmore-icon-shield-alert" href="#"><small>Premium</small></a> </li>
             </ul>
         </div>
         <div class="right_section" id="settings">
@@ -376,14 +376,14 @@
                                                     <div class="col-sm-8 cstmercntentcnt">
                                                         <label class="providerName">{{item.FirstName}}</label>
                                                         <div class="popOverDeleteBtn">
-                                                            <!--<a ng-click="showdeletepopup = !showdeletepopup" id="deleteBtn" class="btn btn-default delete_btn">
+                                                            <a ng-click="showdeletepopup = !showdeletepopup" id="deleteBtn" class="btn btn-default delete_btn">
                                                                 <span class="glyphicon glyphicon-trash"></span>Delete
-                                                            </a>-->
-                                                            <div class="cstmerdeletebnt">
+                                                            </a>
+                                                            <!--<div class="cstmerdeletebnt">
                                                                 <a ng-click="DeleteCustomerData(item.Id)" id="deleteBtn" class="btn btn-default delete_btn">
                                                                     <span class="glyphicon glyphicon-trash"></span>Delete
                                                                 </a>
-                                                            </div>
+                                                            </div>-->
                                                         </div>
                                                     </div>
                                                 </div>

@@ -1,3 +1,5 @@
+
+
 body{
 	font-family: 'Montserrat', sans-serif;	
     margin:0;
@@ -61,7 +63,9 @@ li.upgrade_btn a:hover {
     background: #fff;
     color: #0495a5;
 }
-
+label.card-label tooltip {
+    display: inline-block;
+}
 .top_right {
     padding: 13px 15px;
 }
@@ -1548,7 +1552,7 @@ span.serviceCheckboxDiv input.sampleCheckbox {
     top: 41%;
     right: 0px;
     margin-right: -24px;
-    background: url(../images/popup_pointer.png) no-repeat;
+    /*background: url(../images/popup_pointer.png) no-repeat;*/
 }	
 
 .apptViewFooter .editAppt {
@@ -3438,7 +3442,7 @@ li.greenbtnpacal {
 .fc-row.fc-widget-header th.fc-resource-cell{
     width: 100% !important;
     background-image: url(../images/pro.png) !important;
-    background-position: 46% !important;
+    background-position: 40% !important;
     background-repeat: no-repeat !important;
     height: 20px !important;
     background-size: 22px 22px !important;
@@ -5622,7 +5626,7 @@ h3.popover-title.surecntnt {
 .btn_box.staffbtnpadn {
     padding: 15px;
 }
-button.new-gray-btn.btn.btn-default.cancelbtn {
+.cancelbtn {
     font-weight: normal !important;
     background: #F1F5F7;
     border-color: #F1F5F7;
@@ -5660,7 +5664,7 @@ button.new-gray-btn.btn.btn-default.cancelbtn {
     border: 1px solid transparent;
     /* border-radius: 4px; */
 }
-button.btn.btn-danger.deletebtn {
+.deletebtn {
     margin-right: 4px;
     height: 35px !important;
     line-height: 32px !important;
@@ -5691,6 +5695,46 @@ button.btn.btn-danger.deletebtn {
     border-bottom: 1px solid transparent !important;
 }
 /*===================26-10-2017 css end here===============*/
+
+
+/*===================27-10-2017 css start here===============*/
+
+.cstmercntentcnt label.providerName.ng-binding {
+    padding-bottom:8px !important;
+}
+.left_sidebar.sidebtipt {
+    z-index: 1000 !important;
+}
+.left_sidebar.sidebtipt tooltip tip {
+    border-radius: 3px;
+    background: rgba(0, 0, 0, 0.85);
+    color: #fff;
+    display: none;
+    line-height: normal;
+   width: 66px;
+    opacity: 0;
+    padding: 8px 7px;
+    position: absolute;
+    text-align: center;
+    will-change: top, left, bottom, right;
+    font-size: 13px;
+}
+.businesstipw tooltip tip {
+    border-radius: 3px;
+    background: rgba(0, 0, 0, 0.85);
+    color: #fff;
+    display: none ;
+    line-height: normal;
+    max-width: 500px;
+    min-width:322px;
+    opacity: 0;
+    padding: 8px 16px;
+    position: absolute;
+    text-align: center;
+    width: auto;
+    will-change: top, left, bottom, right;
+}
+/*===================27-10-2017 css end here===============*/
 
 /* sep-27 css start here           */
 

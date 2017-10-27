@@ -148,21 +148,22 @@ app.controller('calendarController', ['$scope', '$location', '$filter', '$window
             //Getting all employees(provider) for appointment dropdown(Add Appointment)
             var GetStaffProvider = bookingService.GetStaffData($routeParams.CompanyId);
             GetStaffProvider.then(function (response) {
+                if (response.data.length > 0)
+                {
+                    for (var i = 0; i < response.data.length; i++) {
+                        resourceobj = "";
+                        $scope.Provider.push({ 'Id': response.data[i].Id, 'CompanyId': response.data[i].CompanyId, 'UserName': response.data[i].UserName, 'staffName': response.data[i].FirstName, 'staffEmail': response.data[i].Email });
+                        resourceobj = {
+                            id: response.data[i].Id,
+                            title: response.data[i].FirstName
+                        }
 
-                for (var i = 0; i < response.data.length; i++) {
-                    resourceobj = "";
-                    $scope.Provider.push({ 'Id': response.data[i].Id, 'CompanyId': response.data[i].CompanyId, 'UserName': response.data[i].UserName, 'staffName': response.data[i].FirstName, 'staffEmail': response.data[i].Email });
-                    resourceobj = {
-                        id: response.data[i].Id,
-                        title: response.data[i].FirstName
+                        // $('#selectedprovider').val($scope.Provider[0].FirstName);
+                        //AllStaff = response.data[i].Id + "," + AllStaff;
+
+                        uiCalendarConfig.calendars['myCalendar'].fullCalendar('addResource', resourceobj);
+
                     }
-
-                    // $('#selectedprovider').val($scope.Provider[0].FirstName);
-                    //AllStaff = response.data[i].Id + "," + AllStaff;
-
-                    uiCalendarConfig.calendars['myCalendar'].fullCalendar('addResource', resourceobj);
-
-                }
                 //$scope.selectedid = (response.data[0].id).tostring();
                 $scope.selectedstaff = response.data[0].FirstName;
                 $("#selectedprovider").text(response.data[0].FirstName);
@@ -190,7 +191,7 @@ app.controller('calendarController', ['$scope', '$location', '$filter', '$window
                         $scope.events.push({
                             title: value.Service.Name,
                             id: value.Id + "," + value.Service.Name + "," + value.Service.Cost + "," + value.Employee.FirstName + "," + value.Status + "," + value.Service.DurationInMinutes + "," + value.Service.Id + "," + value.Employee.Id + "," + value.Customers[0].FirstName + "," + value.Customers[0].Id + "," + value.Customers[0].Email + "," + value.Customers[0].TelephoneNo ,
-                          // id: value.Id + "," + value.Service.Name + "," + value.Service.Cost + "," + value.Employee.FirstName + "," + value.Status + "," + value.Service.DurationInMinutes + "," + value.Service.Id + "," + value.Employee.Id,
+                            // id: value.Id + "," + value.Service.Name + "," + value.Service.Cost + "," + value.Employee.FirstName + "," + value.Status + "," + value.Service.DurationInMinutes + "," + value.Service.Id + "," + value.Employee.Id,
                             description: value.Id,
                             resourceId: value.Employee.Id,
                             start: value.Start,
@@ -225,6 +226,7 @@ app.controller('calendarController', ['$scope', '$location', '$filter', '$window
                         $scope.UpdatedStatus = "Paid";
                     }
                 })
+            }
             });
         }
 
@@ -240,6 +242,7 @@ app.controller('calendarController', ['$scope', '$location', '$filter', '$window
                 var apirequest = bookingService.GetStaffData($routeParams.CompanyId);
                 apirequest.then(function (response) {
                     debugger;
+                    if (response.data.length > 0) {
                     $scope.AllStaff = response.data;
 
                     //Dynamically adding html for full calendar header left section//
@@ -294,8 +297,9 @@ app.controller('calendarController', ['$scope', '$location', '$filter', '$window
 
                     $compile($(headerhtml))($scope);
                     angular.element(e).append(headerhtml);
-
+                }
                 })
+
             }
         }
 

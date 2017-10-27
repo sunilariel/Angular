@@ -1,5 +1,5 @@
-﻿app.controller("staffController", ['$scope', '$http', '$routeParams', '$filter', '$timeout', '$location', 'bookingService', '$rootScope',
-    function ($scope, $http, $routeParams, $filter, $timeout, $location, bookingService, $rootScope) {
+﻿app.controller("staffController", ['$scope', '$http', '$routeParams', '$filter', '$timeout', '$location', 'bookingService', '$rootScope','$route',
+    function ($scope, $http, $routeParams, $filter, $timeout, $location, bookingService, $rootScope, $route) {
 
 
     $scope.showstaffpopup = false;
@@ -52,8 +52,9 @@
 
            // $scope.EndTime = ["08:00 AM", "09:00 AM", "10:00 AM", "11:00 AM", "12:00 PM", "01:00 PM", "02:00 PM", "03:00 PM", "04:00 PM", "05:00 PM", "06:00 PM", "07:00 PM", "08:00 PM"];
 
-                              
-            $scope.EditStaff(response.data[0]);
+            if (response.data.length > 0) {
+                $scope.EditStaff(response.data[0]);
+            }
         });
         var CompanyDetails = bookingService.GetCompanyDetails($routeParams.CompanyId);
         CompanyDetails.then(function (response) {
@@ -127,6 +128,7 @@
                         StaffResult.then(function (response) {
                             $scope.ListofStaff = [];
                             $scope.ListofStaff = response.data;
+                            $scope.EditStaff(response.data[0]);
                             $scope.TotalNoOfStaff = $scope.ListofStaff.length;
                         });
                     },1000);
@@ -211,12 +213,19 @@
         var ServiceResult = bookingService.GetAllServiceStatus($routeParams.CompanyId, item.Id);
         ServiceResult.then(function (response) {
             $scope.ListofAllServices = [];
-            $scope.ListofAllServices.push({ "Id": "", "CompanyId": $routeParams.CompanyId, "Name": "All Staff", "CategoryName": "", "CategoryId": "", "DurationInMinutes": "", "Cost": "", "Currency": "", "CreationDate": new Date() })
+            if (response.data.length > 0) {
+                $scope.ListofAllServices.push({ "Id": "", "CompanyId": $routeParams.CompanyId, "Name": "All Services", "CategoryName": "", "CategoryId": "", "DurationInMinutes": "", "Cost": "", "Currency": "", "CreationDate": new Date() })
+            }
             angular.forEach(response.data, function (value, key) {
                 $scope.ListofAllServices.push({ "Id": value.Id, "CompanyId": value.CompanyId, "Name": value.Name, "CategoryName": value.CategoryName, "CategoryId": value.CategoryId, "DurationInMinutes": value.DurationInMinutes, "Cost": value.Cost, "Currency": value.Currency, "CreationDate": new Date(), "Confirmed": value.Confirmed })
               //  $scope.EmployeeServiceCount = response.data.length;
             });
-            $scope.EmployeeServiceCount = response.data[0].AllocatedServiceCount;
+            if (response.data.length > 0) {
+                $scope.EmployeeServiceCount = response.data[0].AllocatedServiceCount;
+            }
+            else {
+                $scope.EmployeeServiceCount = 0;
+            }
           
             for (var i = 1; i < $scope.ListofAllServices.length; i++) {
                 if ($scope.ListofAllServices[i].Confirmed == true) {
@@ -247,7 +256,7 @@
         })
     }
 
-    //Delete  Staff by using wizard Controller DeleteStaff method by api
+    //Delete Staff by using wizard Controller DeleteStaff method by api
     $scope.DeleteStaff = function () {
         debugger;
         var result = bookingService.DeleteStaff($scope.StaffId);
@@ -266,7 +275,12 @@
                         StaffResult.then(function (response) {
                             $scope.ListofStaff = [];
                             $scope.ListofStaff = response.data;
-                            $scope.EditStaff(response.data[0]);
+                            if (response.data.length > 0) {
+                                $scope.EditStaff(response.data[0]);
+                            }
+                            else {                                
+                                $route.reload();
+                            }
                             $scope.TotalNoOfStaff = $scope.ListofStaff.length;
                         });
                     },1000)
@@ -279,39 +293,40 @@
     $scope.UpdateStaff = function () {
         debugger;
         var CurrentDate = new Date();
-        var requestedStaff=
-        {
-            "Id": $scope.StaffId,
-            "CompanyId": $routeParams.CompanyId,
-            "UserName": $scope.staffEmail,
-            "Password": "",
-            "FirstName": $scope.staffName,
-            "LastName": "",
-            "Address": "",
-            "Email": $scope.staffEmail,
-            "TelephoneNo": $scope.staffMobileNo,
-            "CreationDate": CurrentDate
-        }
-        var responseresult = bookingService.UpdateStaff(requestedStaff);
-        responseresult.then(function (response) {
-            if(response.data.Success==true)
+        if ($scope.StaffId != null) {
+            var requestedStaff =
             {
-                $scope.IsVisible = true;
-                $scope.MessageText = "Saving Staff Details";
-                $timeout(function () {
-                    $scope.MessageText = "Staff Details Saved";
-                    $timeout(function () {
-                         var StaffResult = bookingService.GetAllStaff($routeParams.CompanyId);
-                        StaffResult.then(function (response) {
-                            $scope.ListofStaff = [];
-                            $scope.ListofStaff = response.data;
-                            $scope.TotalNoOfStaff = $scope.ListofStaff.length;
-                        });
-                        $scope.IsVisible = false;
-                    },1000)
-                },800)
+                "Id": $scope.StaffId,
+                "CompanyId": $routeParams.CompanyId,
+                "UserName": $scope.staffEmail,
+                "Password": "",
+                "FirstName": $scope.staffName,
+                "LastName": "",
+                "Address": "",
+                "Email": $scope.staffEmail,
+                "TelephoneNo": $scope.staffMobileNo,
+                "CreationDate": CurrentDate
             }
-        });
+            var responseresult = bookingService.UpdateStaff(requestedStaff);
+            responseresult.then(function (response) {
+                if (response.data.Success == true) {
+                    $scope.IsVisible = true;
+                    $scope.MessageText = "Saving Staff Details";
+                    $timeout(function () {
+                        $scope.MessageText = "Staff Details Saved";
+                        $timeout(function () {
+                            var StaffResult = bookingService.GetAllStaff($routeParams.CompanyId);
+                            StaffResult.then(function (response) {
+                                $scope.ListofStaff = [];
+                                $scope.ListofStaff = response.data;
+                                $scope.TotalNoOfStaff = $scope.ListofStaff.length;
+                            });
+                            $scope.IsVisible = false;
+                        }, 1000)
+                    }, 800)
+                }
+            });
+        }
     }
 
     $scope.AssignServicetoEmployee = function (item) {

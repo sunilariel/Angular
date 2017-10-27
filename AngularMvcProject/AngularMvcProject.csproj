@@ -233,7 +233,11 @@
     <Content Include="App\View\Setting\Staff.html" />
     <Content Include="Content\Assets\css\angular-tooltips.css" />
     <Content Include="Content\Assets\css\angularjs-datetime-picker.css" />
+    <Content Include="Content\Assets\css\font-awesome.min.css" />
+    <Content Include="Content\Assets\css\fontsgoogleapis.css" />
+    <Content Include="Content\Assets\css\fontsgoogleapisMontserrat.css" />
     <Content Include="Content\Assets\css\trix.css" />
+    <Content Include="Content\Assets\fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="Content\Assets\images\drag-drop-bg.png" />
     <Content Include="Content\Assets\images\glyphicons-halflings.png" />
     <Content Include="Content\Assets\images\ImpoliteLivelyGenet13.gif" />
@@ -245,7 +249,9 @@
     <Content Include="Content\Assets\images\service-icon-big.png" />
     <Content Include="Content\Assets\images\sort-down.png" />
     <Content Include="Content\Assets\images\tenor.gif" />
+    <Content Include="Content\Assets\js\angular-route.js" />
     <Content Include="Content\Assets\js\angular-trix.js" />
+    <Content Include="Content\Assets\js\angular.min.js" />
     <Content Include="Content\Assets\js\angularjs-datetime-picker.min.js" />
     <Content Include="Content\Assets\js\bootstrap-datetimepicker.min.js" />
     <Content Include="Content\Assets\js\fullcalendar.print.min.css" />
@@ -300,7 +306,6 @@
     <Content Include="Content\Assets\fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Content\Assets\fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="Content\Assets\fonts\glyphicons-halflings-regular.woff" />
-    <Content Include="Content\Assets\fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="Content\Assets\fonts\icomoon.eot" />
     <Content Include="Content\Assets\fonts\icomoon.ttf" />
     <Content Include="Content\Assets\fonts\icomoon.woff" />
