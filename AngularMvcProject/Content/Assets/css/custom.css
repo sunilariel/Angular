@@ -2280,11 +2280,11 @@ span.dotSplitter
 .tooltipArrow .arrow {
     border-width: 11px;
 }
-.tooltipArrow {
+/*.tooltipArrow {
     width: 100%;
     left: 105%;
     top: -60px;
-}
+}*/
 .emplyValues {
     width: 59%;
     left: 100%;
@@ -5571,8 +5571,8 @@ input.inputcheckbox.ichkbxmrgnt {
     margin-top: 11px !important;
 }
 span.providerImage.cursorhand.cstmersidepimg img {
-    width: 16px;
-    height: 20px;
+    width:30px !important;
+    height: 25px;
     border-radius: 100%;
     margin-top: 10px;
    
@@ -5698,7 +5698,9 @@ h3.popover-title.surecntnt {
 
 
 /*===================27-10-2017 css start here===============*/
-
+.modal.loaderrstn {
+    height: 100% !important;
+}
 .cstmercntentcnt label.providerName.ng-binding {
     padding-bottom:8px !important;
 }
@@ -5736,6 +5738,41 @@ h3.popover-title.surecntnt {
 }
 /*===================27-10-2017 css end here===============*/
 
+
+
+/*===================30-10-2017 css start here===============*/
+.addCustomer.tooltipArrow > .arrow {
+    top: -6px!important;
+    right: 39px !important;
+    margin-top: -11px;
+    border-right-color: #999;
+    border-right-color: rgba(0,0,0,.25);
+    border-left-width: 0;
+    margin-left: 0;
+    border-bottom-color: transparent;
+    left: auto;
+    transform: rotate(90deg);
+}
+.col-sm-4.sidecstmeerimgp {
+    padding-right: 0px;
+    /* margin-left: -4px; */
+}
+
+.addCustomer {
+    top: -1px !important;
+}
+@media (max-width: 1440px) {
+    .tooltipArrow {
+        left: auto !important;
+        top: 100 !important%;
+        width: 100%;
+      
+    }
+}
+
+
+/*===================30-10-2017 css end here===============*/
+
 /* sep-27 css start here           */
 
 /* 2actober css start here           */
@@ -5762,9 +5799,9 @@ ul.searching-cust li span{
 .apptDetailPopup {
     left: -104% !important;
 }
-.tooltipArrow {
+/*.tooltipArrow {
     left: 105% !important;
-}
+}*/
 }
 
 .appoin_popup{
@@ -7102,6 +7139,7 @@ div#deletetooltipPopup{
 .cursorhand{
     cursor:pointer;
 }
+
 /*============================10-10-2017 css start here============================================*/
 .dropdownrighticon {
      position: relative;
