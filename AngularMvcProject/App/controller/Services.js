@@ -409,25 +409,27 @@
             for (var i = 0; i < response.data.length; i++) {
                 $scope.staffList.push({ 'Id': response.data[i].Id, 'CompanyId': response.data[i].CompanyId, 'UserName': response.data[i].UserName, 'staffName': response.data[i].FirstName, 'staffEmail': response.data[i].Email });
             }
+
+            //Get Assigned Staff to Service//
+            var responseresult = bookingService.GetEmployeeAssignedtoService($scope.ServiceId);
+            responseresult.then(function (response) {
+                for (var i = 0; i < response.data.length; i++) {
+                    angular.forEach($scope.staffList, function (value, key) {
+                        if (value.Id == response.data[i].Id) {
+                            value.confirmed = true;
+                        }
+                    })
+
+                }
+                if ($scope.staffList.length == response.data.length + 1) {
+                    $scope.staffList[0].confirmed = true;
+                }
+
+            });
+
+
         });
-        var responseresult = bookingService.GetEmployeeAssignedtoService($scope.ServiceId);
-        responseresult.then(function (response) {
-            for(var i=0;i<response.data.length;i++)
-            {             
-                angular.forEach($scope.staffList,function(value,key)
-                {
-                    if(value.Id==response.data[i].Id)
-                    {
-                        value.confirmed = true;
-                    }                  
-                })
-              
-            }
-            if ($scope.staffList.length == response.data.length + 1) {
-                $scope.staffList[0].confirmed = true;
-            }
-            
-        });
+        
 
         //Get All Categories assigned to service//
         var response = bookingService.GetCategoriesAssignedToService($routeParams.CompanyId, $scope.ServiceId);
@@ -571,46 +573,95 @@
         debugger;
         if(item.confirmed==true)
         {
-            var CurrentDate = new Date();
-            var requesteddata = {
-                "Id": "",
-                "CompanyId": $routeParams.CompanyId,
-                "EmployeeId": item.Id,
-                "ServiceId": $scope.ServiceId,
-                "CreationDate": CurrentDate
-            }
-
-            var result = bookingService.AssignStafftoService(requesteddata);
-            result.then(function(response)
-            {
-                if(response.data.Success==true)
-                {
-                    $scope.MessageText = "Assigning staff to services";
-                    $scope.IsVisible = true;
-                    $timeout(function()
-                    {
-                        $scope.MessageText = "Service Saved";
-                        $timeout(function () {
-                            $scope.IsVisible = false;
-                        },1000)
-                    },800)
+            if (item.staffName == "All Staff") {
+                for (var i = 0; i < $scope.staffList.length; i++) {
+                    $scope.staffList[i].confirmed = true;
+                    if (i > 0) {
+                        var CurrentDate = new Date();
+                        var requesteddata = {
+                            "Id": "",
+                            "CompanyId": $routeParams.CompanyId,
+                            "EmployeeId": $scope.staffList[i].Id,
+                            "ServiceId": $scope.ServiceId,
+                            "CreationDate": CurrentDate
+                        }
+                        var result = bookingService.AssignStafftoService(requesteddata);
+                        result.then(function (response) {
+                            if (response.data.Success == true) {
+                                $scope.MessageText = "Assigning  All staff to services";
+                                $scope.IsVisible = true;
+                                $timeout(function () {
+                                    $scope.MessageText = "Service Saved";
+                                    $timeout(function () {
+                                        $scope.IsVisible = false;
+                                    }, 1000)
+                                }, 800)
+                            }
+                        });
+                    }
                 }
-            })
+            }
+            else {
+                var CurrentDate = new Date();
+                var requesteddata = {
+                    "Id": "",
+                    "CompanyId": $routeParams.CompanyId,
+                    "EmployeeId": item.Id,
+                    "ServiceId": $scope.ServiceId,
+                    "CreationDate": CurrentDate
+                }
+
+                var result = bookingService.AssignStafftoService(requesteddata);
+                result.then(function (response) {
+                    if (response.data.Success == true) {
+                        $scope.MessageText = "Assigning staff to services";
+                        $scope.IsVisible = true;
+                        $timeout(function () {
+                            $scope.MessageText = "Service Saved";
+                            $timeout(function () {
+                                $scope.IsVisible = false;
+                            }, 1000)
+                        }, 800)
+                    }
+                })
+            }
         }
         else {
-            var result = bookingService.DeAssignedStaffToService($routeParams.CompanyId, item.Id, $scope.ServiceId);
-            result.then(function (response) {
-                if (response.data.Success == true) {
-                    $scope.MessageText = "Unassigning staff to services";
-                    $scope.IsVisible = true;
-                    $timeout(function () {
-                        $scope.MessageText = "Service Saved";
-                        $timeout(function () {
-                            $scope.IsVisible = false;
-                        },1000)
-                    },800)
+            if (item.staffName == "All Staff") {
+                for (var i = 0; i < $scope.staffList.length; i++) {
+                    $scope.staffList[i].confirmed = false;
+                    if (i > 0) {                       
+                        var result = bookingService.DeAssignedStaffToService($routeParams.CompanyId, $scope.staffList[i].Id, $scope.ServiceId);
+                        result.then(function (response) {
+                            if (response.data.Success == true) {
+                                $scope.MessageText = "Unassigning All staff to services";
+                                $scope.IsVisible = true;
+                                $timeout(function () {
+                                    $scope.MessageText = "Service Saved";
+                                    $timeout(function () {
+                                        $scope.IsVisible = false;
+                                    }, 1000)
+                                }, 800)
+                            }
+                        });
+                    }
                 }
-            })
+            }
+            else {
+                var result = bookingService.DeAssignedStaffToService($routeParams.CompanyId, item.Id, $scope.ServiceId);
+                result.then(function (response) {
+                    if (response.data.Success == true) {
+                        $scope.MessageText = "Unassigning staff to services";
+                        $scope.IsVisible = true;
+                        $timeout(function () {
+                            $scope.MessageText = "Service Saved";
+                            $timeout(function () {
+                                $scope.IsVisible = false;
+                            }, 1000)
+                        }, 800)
+                    }
+                })
+            }
         }
 
         $scope.staffchecked(item);

@@ -334,7 +334,7 @@
         if(item.Confirmed==true)
         {
             //Assigned All Service to Staff
-            if (item.Name == "All Staff") {
+            if (item.Name == "All Services") {
                // angular.forEach($scope.ListofAllServices, function (value, key) {
                 for (var i = 0; i < $scope.ListofAllServices.length; i++)
                 {
@@ -362,10 +362,8 @@
                             }, 800)
                         }
                     })
-
                 }
-                }
-               
+                }               
             }
             else {
                 //Assign Service to Staff
@@ -392,7 +390,7 @@
         }
         else {
             //UnAssign All Service to Staff
-            if (item.Name == "All Staff") {
+            if (item.Name == "All Services") {
                 // angular.forEach($scope.ListofAllServices, function (value, key) {
                 for (var i = 0; i < $scope.ListofAllServices.length; i++) {
                     if (i > 0) {
