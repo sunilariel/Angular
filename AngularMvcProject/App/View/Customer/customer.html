@@ -368,15 +368,15 @@
                                                         </span>
 
                                                         <span class="providerImage cursorhand cstmersidepimg">
-                                                            <a><img style="width:21px !important;" src="/Content/Assets/images/provider_img2.png" /></a>
+                                                            <a><img style="width:27px !important;" src="/Content/Assets/images/provider_img2.png" /></a>
                                                         </span>
                                                     </div>
                                                     <!--<input type="hidden" name="id" ng-model="item.Id">-->
 
                                                     <div class="col-sm-8 cstmercntentcnt">
                                                         <label class="providerName">{{item.FirstName}}</label>
-                                                        <div class="popOverDeleteBtn">
-                                                            <a ng-click="showdeletepopup = !showdeletepopup"  id="deleteBtn" class="btn btn-default delete_btn">
+                                                        <div class="popOverDeleteBtn" ng-show="CustomerId==item.Id">
+                                                            <a ng-click="showdeletepopup = !showdeletepopup"   id="deleteBtn" class="btn btn-default delete_btn">
                                                                 <span class="glyphicon glyphicon-trash"></span>Delete
                                                             </a>
                                                             <!--<div class="cstmerdeletebnt">

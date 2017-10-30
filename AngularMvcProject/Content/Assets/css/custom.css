@@ -3442,7 +3442,8 @@ li.greenbtnpacal {
 .fc-row.fc-widget-header th.fc-resource-cell{
     width: 100% !important;
     background-image: url(../images/pro.png) !important;
-    background-position: 40% !important;
+    /*background-position: 40% !important;*/
+    background-position: center left 77px;
     background-repeat: no-repeat !important;
     height: 20px !important;
     background-size: 22px 22px !important;
