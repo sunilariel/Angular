@@ -27,6 +27,7 @@ namespace AngularMvcProject.Controllers
                 var httpWebRequest = (HttpWebRequest)WebRequest.Create(apiUrl);
                 httpWebRequest.ContentType = "application/json";
                 httpWebRequest.Method = "POST";
+                httpWebRequest.ProtocolVersion = HttpVersion.Version10;
                 httpWebRequest.Headers.Add("Token", Request.Headers["Token"]);
 
                 using (var streamWriter = new StreamWriter(httpWebRequest.GetRequestStream()))
@@ -63,6 +64,7 @@ namespace AngularMvcProject.Controllers
                 var httpWebRequest = (HttpWebRequest)WebRequest.Create(apiUrl);
                 httpWebRequest.ContentType = "application/json";
                 httpWebRequest.Method = "POST";
+                httpWebRequest.ProtocolVersion = HttpVersion.Version10;
                 httpWebRequest.Headers.Add("Token", Request.Headers["Token"]);
 
                 using (var streamWriter = new StreamWriter(httpWebRequest.GetRequestStream()))
@@ -100,6 +102,7 @@ namespace AngularMvcProject.Controllers
                 var httpWebRequest = (HttpWebRequest)WebRequest.Create(apiUrl);
                 httpWebRequest.ContentType = "application/json";
                 httpWebRequest.Method = "POST";
+                httpWebRequest.ProtocolVersion = HttpVersion.Version10;
                 httpWebRequest.Headers.Add("Token", Request.Headers["Token"]);
 
                 using (var streamWriter = new StreamWriter(httpWebRequest.GetRequestStream()))
@@ -137,6 +140,7 @@ namespace AngularMvcProject.Controllers
                 var httpWebRequest = (HttpWebRequest)WebRequest.Create(apiUrl);
                 httpWebRequest.ContentType = "application/json";
                 httpWebRequest.Method = "POST";
+                httpWebRequest.ProtocolVersion = HttpVersion.Version10;
                 httpWebRequest.ContentLength = 0;
                 httpWebRequest.Headers.Add("Token", Request.Headers["Token"]);
 
@@ -246,6 +250,7 @@ namespace AngularMvcProject.Controllers
                 var httpWebRequest = (HttpWebRequest)WebRequest.Create(apiUrl);
                 httpWebRequest.ContentType = "application/json";
                 httpWebRequest.Method = "POST";
+                httpWebRequest.ProtocolVersion = HttpVersion.Version10;
                 httpWebRequest.Headers.Add("Token", Request.Headers["Token"]);
 
                 using (var streamWriter = new StreamWriter(httpWebRequest.GetRequestStream()))
@@ -351,6 +356,7 @@ namespace AngularMvcProject.Controllers
                 var httpWebRequest = (HttpWebRequest)WebRequest.Create(apiUrl);
                 httpWebRequest.ContentType = "application/json";
                 httpWebRequest.Method = "POST";
+                httpWebRequest.ProtocolVersion = HttpVersion.Version10;
                 httpWebRequest.Headers.Add("Token", Request.Headers["Token"]);
 
                 using (var streamWriter = new StreamWriter(httpWebRequest.GetRequestStream()))
@@ -410,6 +416,7 @@ namespace AngularMvcProject.Controllers
                 var httpWebRequest = (HttpWebRequest)WebRequest.Create(apiUrl);
                 httpWebRequest.ContentType = "application/json";
                 httpWebRequest.Method = "POST";
+                httpWebRequest.ProtocolVersion = HttpVersion.Version10;
                 httpWebRequest.Headers.Add("Token", Request.Headers["Token"]);
 
                 using (var streamWriter = new StreamWriter(httpWebRequest.GetRequestStream()))
@@ -514,6 +521,7 @@ namespace AngularMvcProject.Controllers
                 var httpWebRequest = (HttpWebRequest)WebRequest.Create(apiUrl);
                 httpWebRequest.ContentType = "application/json";
                 httpWebRequest.Method = "POST";
+                httpWebRequest.ProtocolVersion = HttpVersion.Version10;
                 httpWebRequest.Headers.Add("Token", Request.Headers["Token"]);
 
                 using (var streamWriter = new StreamWriter(httpWebRequest.GetRequestStream()))
@@ -564,6 +572,7 @@ namespace AngularMvcProject.Controllers
                 var httpWebRequest = (HttpWebRequest)WebRequest.Create(apiUrl);
                 httpWebRequest.ContentType = "application/json";
                 httpWebRequest.Method = "POST";
+                httpWebRequest.ProtocolVersion = HttpVersion.Version10;
                 httpWebRequest.Headers.Add("Token", Request.Headers["Token"]);
 
                 using (var streamWriter = new StreamWriter(httpWebRequest.GetRequestStream()))

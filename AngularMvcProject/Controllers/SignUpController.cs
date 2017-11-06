@@ -33,6 +33,7 @@ namespace AngularMvcProject.Controllers
                 var result = "";
                 var httpWebRequest = (HttpWebRequest)WebRequest.Create(ConfigurationManager.AppSettings["DomainUrl"].ToString() + "/api/companyregistration/CreateAccount");
                 httpWebRequest.Method = "POST";
+               
                 httpWebRequest.ContentType = "application/json";
                 httpWebRequest.ProtocolVersion = HttpVersion.Version10;
                 using (var StreamWriter = new StreamWriter(httpWebRequest.GetRequestStream()))

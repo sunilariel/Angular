@@ -22,6 +22,7 @@ namespace AngularMvcProject.Controllers
 
             HttpWebRequest httpRequest = HttpWebRequest.CreateHttp(apiURL);
             httpRequest.Method = "POST";
+            httpRequest.ProtocolVersion = HttpVersion.Version10;
             httpRequest.ContentType = "application/x-www-form-urlencoded";
             httpRequest.ContentLength = json.Length;
 

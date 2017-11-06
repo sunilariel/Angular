@@ -23,6 +23,7 @@ namespace AngularMvcProject.Controllers
                 var httpWebRequest = (HttpWebRequest)WebRequest.Create(ConfigurationManager.AppSettings["DomainUrl"].ToString() + "/api/services/CreateCategory");
                 httpWebRequest.ContentType = "application/json";
                 httpWebRequest.Method = "POST";
+                httpWebRequest.ProtocolVersion = HttpVersion.Version10;
                 httpWebRequest.Headers.Add("Token", Request.Headers["Token"]);
 
                 using (var StreamWriter = new StreamWriter(httpWebRequest.GetRequestStream()))
@@ -82,6 +83,7 @@ namespace AngularMvcProject.Controllers
                 var httpWebRequest = (HttpWebRequest)WebRequest.Create(ConfigurationManager.AppSettings["DomainUrl"].ToString() + "/api/companyregistration/AddService");
                 httpWebRequest.Method = "POST";
                 httpWebRequest.ContentType = "application/json";
+                httpWebRequest.ProtocolVersion = HttpVersion.Version10;
                 httpWebRequest.Headers.Add("Token", Request.Headers["Token"]);
 
                 using (var StreamWriter = new StreamWriter(httpWebRequest.GetRequestStream()))
@@ -142,6 +144,7 @@ namespace AngularMvcProject.Controllers
                 var httpWebRequest = (HttpWebRequest)WebRequest.Create(ConfigurationManager.AppSettings["DomainUrl"].ToString() + "/api/services/DeAllocateCategoryFromService?companyId=" + CompanyId + "&categoryId=" + CategoryId + "&serviceId=" + SeviceId);
                 httpWebRequest.Method = "POST";
                 httpWebRequest.ContentType = "application/json";
+                httpWebRequest.ProtocolVersion = HttpVersion.Version10;
                 httpWebRequest.Headers.Add("Token", Request.Headers["Token"]);
                 httpWebRequest.ContentLength = 0;
 
@@ -241,6 +244,7 @@ namespace AngularMvcProject.Controllers
                 var httpWebRequest = (HttpWebRequest)WebRequest.Create(ConfigurationManager.AppSettings["DomainUrl"].ToString() + "/api/services/UpdateService");
                 httpWebRequest.Method = "POST";
                 httpWebRequest.ContentType = "application/json";
+                httpWebRequest.ProtocolVersion = HttpVersion.Version10;
                 httpWebRequest.Headers.Add("Token", Request.Headers["Token"]);
 
                 using (var StreamWriter = new StreamWriter(httpWebRequest.GetRequestStream()))
@@ -297,6 +301,7 @@ namespace AngularMvcProject.Controllers
                 var httpWebRequest = (HttpWebRequest)WebRequest.Create(ConfigurationManager.AppSettings["DomainUrl"].ToString() + "/api/companyregistration/AssignServiceToStaff");
                 httpWebRequest.Method = "POST";
                 httpWebRequest.ContentType = "application/json";
+                httpWebRequest.ProtocolVersion = HttpVersion.Version10;
                 httpWebRequest.Headers.Add("Token", Request.Headers["Token"]);
 
                 using (var StreamWriter = new StreamWriter(httpWebRequest.GetRequestStream()))
@@ -330,6 +335,7 @@ namespace AngularMvcProject.Controllers
                 var httpWebRequest = (HttpWebRequest)WebRequest.Create(apiURL);
                 httpWebRequest.ContentType = "application/json";
                 httpWebRequest.Method = "POST";
+                httpWebRequest.ProtocolVersion = HttpVersion.Version10;
                 httpWebRequest.Headers.Add("Token", Request.Headers["Token"]);
                 httpWebRequest.ContentLength = 0;
 
@@ -356,6 +362,7 @@ namespace AngularMvcProject.Controllers
                 var httpWebRequest = (HttpWebRequest)WebRequest.Create(ConfigurationManager.AppSettings["DomainUrl"].ToString()+"/api/services/UpdateCategory");
                 httpWebRequest.Method = "POST";
                 httpWebRequest.ContentType = "application/json";
+                httpWebRequest.ProtocolVersion = HttpVersion.Version10;
                 httpWebRequest.Headers.Add("Token", Request.Headers["Token"]);
 
                 using (var StreamWriter = new StreamWriter(httpWebRequest.GetRequestStream()))
