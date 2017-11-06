@@ -135,6 +135,7 @@
 
     //Updating Category Name//
     $scope.EditCategory = function (categoryName) {
+        debugger;
         var updatedcategory =
             {
                 "Id": $scope.CategoryId,
@@ -300,6 +301,7 @@
                 "Id": "",
                 "CompanyId": $routeParams.CompanyId,
                 "Name": $scope.ServiceName,
+                "Description": $scope.ServiceDescription,
                 "CategoryName": "",
                 "CategoryId": null,
                 "DurationInMinutes": $scope.ServiceTime,
@@ -387,6 +389,8 @@
         $scope.ServiceName = item.Name;
         $scope.ServiceCost = item.Cost;
         $scope.UpdateServiceTime = item.DurationInMinutes;
+        $scope.ServiceDescription = item.Description;
+        $scope.BufferTime = item.Buffer;
 
         //Get Colour Code of Service//
         angular.forEach($scope.ServiceColourList,function(value,key)
@@ -419,12 +423,10 @@
                             value.confirmed = true;
                         }
                     })
-
                 }
                 if ($scope.staffList.length == response.data.length + 1) {
                     $scope.staffList[0].confirmed = true;
                 }
-
             });
 
 
@@ -433,8 +435,7 @@
 
         //Get All Categories assigned to service//
         var response = bookingService.GetCategoriesAssignedToService($routeParams.CompanyId, $scope.ServiceId);
-        response.then(function (response) {
-           
+        response.then(function (response) {           
                 $scope.CategoryCheckedCount = response.data.length;
                 for(var i=0;i<response.data.length;i++)
                 {
@@ -444,8 +445,7 @@
                             value.Confirmed = true;
                         }
                     })
-                }
-           
+                }           
         })
 
 
@@ -469,7 +469,9 @@
             }, 1000);
             return false;
         }
-        if ($scope.UpdateServiceTime == "" || $scope.UpdateServiceTime.includes(".") || $scope.UpdateServiceTime == 0) {
+        var UpdatedServiceTime = $("#UpdateServiceTime").val();
+       
+        if ($scope.UpdateServiceTime == "" || UpdatedServiceTime.indexOf(".") > 0 || $scope.UpdateServiceTime == 0) {
             if ($scope.UpdateServiceTime == "0") {
                 $scope.MessageText = "Service Time cannot be zero!";
             }
@@ -508,6 +510,7 @@
             "Id": $scope.ServiceId,
             "CompanyId": $routeParams.CompanyId,
             "Name": $scope.ServiceName,
+            "Description":$scope.ServiceDescription,
             "CategoryName": "",
             "CategoryId": null,
             "DurationInMinutes": $scope.UpdateServiceTime,
@@ -567,7 +570,6 @@
 
 
     //Assigned/Deassigned Staff to Service
-
     $scope.AssignedStafftoService=function(item)
     {
         debugger;
