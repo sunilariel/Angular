@@ -3830,7 +3830,7 @@ img.imagelmpabs {
 .staffProfileDiv {
 	margin:0;
 	overflow: auto;
-    height: 450px;
+    /*height: 450px;*/
 	padding-bottom: 85px;
     overflow-x: hidden;
 }
@@ -4413,7 +4413,7 @@ form.form-horizontal.imageUploadForm .form-group.appointaploadDiv {
     height: 450px;
 }
 .staffServices {
-    width: 104%;
+    width: 100%;
 }
 input#customerExt {
     padding: 2px;
@@ -7404,6 +7404,11 @@ span.popupcntenthcbtn {
     /* background: #f1f5f7; */
     /* border-bottom: 1px solid #ddd; */
     margin-top: 0px !important;
+}
+.content_div{
+    height: 460px;
+    overflow-y: auto;
+    overflow-x: hidden;
 }
 
 @media screen and (-webkit-min-device-pixel-ratio:0) {  /*safari and chrome*/

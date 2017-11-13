@@ -25,7 +25,7 @@
     }
 
     $scope.init = function () {
-        
+        debugger;
         $scope.showAddServiceDiv = true;
         $scope.showCategoryServicesDiv = true;
         $scope.showAllServicesDiv = false;
@@ -57,6 +57,10 @@
                 $scope.Categories = [];
                 $scope.Categories = response.data;
                 $scope.CategoriesCount = response.data.length;
+            }
+            else {
+                $scope.Categories = [];
+                $scope.CategoriesCount = 0;
             }
         });
 
@@ -162,7 +166,7 @@
 
     $scope.DeleteCategory=function()
     {
-        
+        debugger;
         var responseresult = bookingService.DeleteCategory($routeParams.CompanyId,$scope.CategoryId);
         responseresult.then(function (response) {
             if(response.data.Success==true)

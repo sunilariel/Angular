@@ -610,7 +610,15 @@
     //Set Time Off//
     $scope.AddtimeOff = function () {
         debugger;
-        if ($scope.EndoffTime < $scope.StartoffTime)
+        var StartDate = new Date($scope.startdate);
+        var EndDate = new Date($scope.enddate);
+
+        if ($scope.StartoffTime != null) {
+            var StartTime = parseInt($scope.StartoffTime.split(":")[0]);
+            var EndTime = parseInt($scope.EndoffTime.split(":")[0]);
+        }
+
+        if (StartDate > EndDate)
         {
             $scope.MessageText = "Start date cannot be greater than end date.";
             $scope.IsVisible = true;
@@ -618,6 +626,14 @@
                 $scope.IsVisible = false;                
             }, 800);
             return false;
+        }
+        if (StartDate.getDate()==EndDate.getDate() && StartDate.getMonth()==EndDate.getMonth() && StartDate.getYear()==EndDate.getYear() && StartTime >= EndTime) {
+            $scope.MessageText = "End time cannot be greater or equal to start time.";
+            $scope.IsVisible = true;
+            $timeout(function () {
+                $scope.IsVisible = false;
+            }, 800);
+            return false;            
         }
         var timeOff = {           
             "CompanyId": $routeParams.CompanyId,
@@ -648,6 +664,19 @@
             }
         });
     }
+
+
+    $scope.$watch("startdate", function (newvalue, oldvalue) {
+        $scope.enddate = newvalue;
+    });
+
+    $scope.AddtimeoffPopup = function () {
+        $scope.startdate = new Date();
+        $scope.StartoffTime = "08:00 AM";
+        $scope.EndoffTime = "05:00 PM";
+        $scope.alldaystatus=true
+    }
+
 
     
     $scope.SetEmployeeBreakTime=function(time)
