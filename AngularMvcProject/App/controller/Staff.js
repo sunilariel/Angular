@@ -613,11 +613,34 @@
         var StartDate = new Date($scope.startdate);
         var EndDate = new Date($scope.enddate);
 
-        if ($scope.StartoffTime != null) {
-            var StartTime = parseInt($scope.StartoffTime.split(":")[0]);
-            var EndTime = parseInt($scope.EndoffTime.split(":")[0]);
-        }
 
+        if ($scope.StartoffTime != null) {
+            var hours = Number($scope.StartoffTime.match(/^(\d+)/)[1]);
+            var minutes = Number($scope.StartoffTime.match(/:(\d+)/)[1]);
+            var AMPM = $scope.StartoffTime.match(/\s(.*)$/)[1];
+            if (AMPM == "PM" && hours < 12) hours = hours + 12;
+            if (AMPM == "AM" && hours == 12) hours = hours - 12;
+            var startHours = hours.toString();
+            var startMinutes = minutes.toString();
+            if (hours < 10) startHours = "0" + startHours;
+            if (minutes < 10) startMinutes = "0" + startMinutes;
+
+            var StartTimeHour = parseInt(startHours);
+
+            var hours = Number($scope.EndoffTime.match(/^(\d+)/)[1]);
+            var minutes = Number($scope.EndoffTime.match(/:(\d+)/)[1]);
+            var AMPM = $scope.EndoffTime.match(/\s(.*)$/)[1];
+            if (AMPM == "PM" && hours < 12) hours = hours + 12;
+            if (AMPM == "AM" && hours == 12) hours = hours - 12;
+            var endHours = hours.toString();
+            var endMinutes = minutes.toString();
+            if (hours < 10) endHours = "0" + endHours;
+            if (minutes < 10) endMinutes = "0" + endMinutes;
+
+            var EndTimeHour = parseInt(endHours);
+
+        }
+               
         if (StartDate > EndDate)
         {
             $scope.MessageText = "Start date cannot be greater than end date.";
@@ -627,7 +650,7 @@
             }, 800);
             return false;
         }
-        if (StartDate.getDate()==EndDate.getDate() && StartDate.getMonth()==EndDate.getMonth() && StartDate.getYear()==EndDate.getYear() && StartTime >= EndTime) {
+        if (StartDate.getDate() == EndDate.getDate() && StartDate.getMonth() == EndDate.getMonth() && StartDate.getYear() == EndDate.getYear() && StartTimeHour >= EndTimeHour) {
             $scope.MessageText = "End time cannot be greater or equal to start time.";
             $scope.IsVisible = true;
             $timeout(function () {
@@ -671,6 +694,7 @@
     });
 
     $scope.AddtimeoffPopup = function () {
+        debugger;
         $scope.startdate = new Date();
         $scope.StartoffTime = "08:00 AM";
         $scope.EndoffTime = "05:00 PM";
