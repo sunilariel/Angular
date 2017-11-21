@@ -863,10 +863,15 @@ app.controller('calendarController', ['$scope', '$location', '$filter', '$window
                             }
                         }
                         $scope.timeoption = $scope.timeInfoFrom[0];
+                        $scope.DisabledAddCustomerTab = false;
+                        $scope.ContinueAppointment = false;
+                    }
+                    else {
+                        $scope.ContinueAppointment = true;
+                        $scope.DisabledAddCustomerTab = true;
                     }
                     $scope.timeslotsloading = false;
-                    $scope.DisabledAddCustomerTab = false;
-                    $scope.ContinueAppointment = false;
+                   
                 });
 
             });
