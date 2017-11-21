@@ -274,7 +274,7 @@ app.controller('calendarController', ['$scope', '$location', '$filter', '$window
 
                     //Adding datepicker in full calendar center section//
                     var e = document.getElementsByClassName("fc-prev-button");
-                    var datepickerhtml = "<input id='cldtest' value='' type='button' class='form-control calendarBox' datepicker-popup='EEE, MMM d' ng-model='cdate' is-open='Opened' ng-mouseover='Opened=true;$event.stopPropagation();' datepicker-options='dateOptions' ng-click='SetDatePicker()' name='theDate' style='width: 131px;height: 30px;' />";
+                    var datepickerhtml = "<input id='cldtest' value='' type='button' class='form-control calendarBox' datepicker-popup='EEE, MMM d' ng-model='cdate' is-open='Opened' ng-mouseover='Opened=true;$event.stopPropagation();' datepicker-options='dateOptions' ng-click='SetDatePicker()' name='theDate' style='width: 131px;height: 30px;pointer-events: none;' />";
                     angular.element(e).after(datepickerhtml);
                     $compile($('#cldtest'))($scope);
 
@@ -494,8 +494,18 @@ app.controller('calendarController', ['$scope', '$location', '$filter', '$window
             $scope.timeInfoFrom = [];
             $scope.Status = "1";
             // $scope.selectedprovider = "-- Select a Provider --";
-            $scope.selectedprovider =$("#selectedstaffId").val();
-            
+           
+
+            if (view.name == "agendaDay")
+            {
+                $scope.selectedprovider = resourceObj.id;
+            }
+            else {
+                $scope.selectedprovider = $("#selectedstaffId").val();
+
+            }
+
+
             $("#dropdownMenu2").val($scope.selectedprovider);
             $scope.GetAllocateServiceToEmployee($("#selectedstaffId").val());
             $scope.notes = "";

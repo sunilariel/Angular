@@ -3270,14 +3270,14 @@ ul.dropdown-menu.ng-valid.ng-valid-date.ng-valid-date-disabled.calwlmrgn {
 }
 
 
-
 /*==========================12-10-2017==================================*/
 .fc-toolbar .fc-center .fc-button-group {
     position:relative;
 }
  .fc-toolbar.fc-header-toolbar ul.dropdown-menu.ng-valid.ng-valid-date.ng-valid-date-disabled {
     width: 235px !important;
-    top: 36px !important;
+    /*top: 36px !important;*/
+    top: 29px !important;
     left: 0px !important;
     position: absolute;
 }
@@ -3443,11 +3443,13 @@ li.greenbtnpacal {
     width: 100% !important;
     background-image: url(../images/pro.png) !important;
     /*background-position: 40% !important;*/
-    background-position: center left 77px;
+    /*background-position: center left 77px;*/
+    background-position: left;
     background-repeat: no-repeat !important;
     height: 20px !important;
     background-size: 22px 22px !important;
     border:none;
+    padding-left: 30px;
 
 }
 .fc-row.fc-widget-header {
@@ -3498,6 +3500,12 @@ div#calendar input#cldtest {
     -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
      background-color: transparent !important;
 }
+
+/*21-11-2017*/
+.fc-center button.fc-today-button.fc-button.fc-state-default.fc-corner-left.fc-corner-right {
+    width: fit-content;
+}
+/*=================*/
 /*=======================13-10-2017=====================================*/
 div#calendar button.fc-prev-button.fc-button.fc-state-default.fc-corner-left {
     background-color: transparent !important;
