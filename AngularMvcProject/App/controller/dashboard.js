@@ -107,7 +107,7 @@ app.controller('dashboardController', ['$scope', '$timeout', '$window', '$http',
         apirequestWeeksRevenue.then(function (response) {
             debugger;
             var CurrentDate = new Date();
-             var first =CurrentDate.getDate() - CurrentDate.getDay();
+             var first =(CurrentDate.getDate() + 1) - CurrentDate.getDay() ;
              var last = first + 6;
             $scope.WeekFirstDate = new Date(CurrentDate.setDate(first));
             $scope.WeekLastDate = new Date(CurrentDate.setDate(last));

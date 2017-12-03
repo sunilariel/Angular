@@ -307,6 +307,7 @@ namespace AngularMvcProject.Models
         public string Colour { get; set; }
         public int Buffer { get; set; }
         public string CreationDate { get; set; }
+        public string Description { get; set; }
     }
 
     public class AssignedServiceStatus
