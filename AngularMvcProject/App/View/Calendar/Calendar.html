@@ -4,7 +4,9 @@
     <header class="top">
         <div class="logo_section"> <a class="logo" href="#"></a><img src="/Content/Assets/images/logo.png" alt="Logo"></a> </div>
         <h1>Calendar</h1>
-
+        <div class="msg_box" id="msg_box">
+            Loading Appointments
+        </div>
         <div class="pull-right movileViewList">
             <ul class="nav navbar-nav navbar-right ">
                 <li><a href="#" id="menuiconBar" class="mobileViewIconBar"><i class="fa fa-bars" aria-hidden="true"></i></a></li>
@@ -419,7 +421,7 @@
                                             <div class="col-sm-8 dateTimeDiv ">
                                                 <span class="glyphicon glyphicon-ok calendarOk"></span><!--<input type="text" class="form-control datepickerBox" ng-model="datatime" placeholder="Fri, May 12" id="datetimepicker4" />-->
                                                 <!--<input datetime-picker ng-model="selecteddate" date-disabled="disabled(date, mode)" disable-weekends="true"  class="form-control datepickerBox"  date-format="EEE, MMM d" size="30" date-only   />-->
-                                                <input type="text" class="form-control calendarBox" datepicker-popup="EEE, MMM d" ng-model="dt" open="opened" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-click="SetDatePicker()" id="calendardatepicker" name='theDate' ng-required="true" />
+                                                <input type="text" class="form-control calendarBox" datepicker-popup="EEE, MMM d" ng-model="dt" ng-init="DatePickerinit()" open="opened" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-click="SetDatePicker()" id="calendardatepicker" name='theDate' ng-required="true" />
 
                                                 <div class="selectDropdown">
                                                     <div class="gifImage" ng-show="timeslotsloading"><img src="/Content/Assets/images/loading.gif" /></div>
@@ -665,8 +667,8 @@
                                         <label class="control-label col-sm-4" for="pwd">Service</label>
                                         <div class="col-sm-8">
                                             <div class="dropdown appointProvider">
-                                                <!--<select class="btn btn-default dropdown-toggle" name="Servicedd" data-ng-options="x.Id as x.Name for x in EmployeeServices" ng-model="selectedservice" ng-change="ServiceDetail(selectedservice)" aria-haspopup="true" aria-expanded="false" required>
-                                                    <option value="">-- Select a Service --</option>
+                                                <!--<select class="btn btn-default dropdown-toggle" name="servicedd" data-ng-options="x.id as x.name for x in employeeservices" ng-model="selectedservice" ng-change="servicedetail(selectedservice)" aria-haspopup="true" aria-expanded="false" required>
+                                                    <option value="">-- select a service --</option>
                                                 </select>-->
 
                                                 <select class="btn btn-default dropdown-toggle" ng-model="selectedservice" name="Servicedd" ng-change="ServiceDetail(selectedservice)" required>
@@ -829,9 +831,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-
                                         </div>
-
                                     </div>
 
                                     <!--<div class="appSearchdiv">
@@ -851,9 +851,7 @@
                                     </div>-->
 
                                 </div>
-
                             </div>
-
                         </div>
                         <div class="modal-footer">
                             <div class="btn-group apptSaveBtn" role="group">
@@ -870,11 +868,10 @@
         </div>
         <div id="modalPopupbg" class="fade modal_bg in"></div>
     </div>
-
-
-
-
-
 </div>
+
+
+
+
 
 

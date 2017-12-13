@@ -203,6 +203,7 @@ namespace AngularMvcProject.Models
         public int EndMinute { get; set; }
         public bool IsAdded { get; set; }
         public string Message { get; set; }
+        public string Notes { get; set; }
         public List<int> CustomerIds { get; set; }
         public string Start { get; set; }
         public string End { get; set; }
@@ -224,7 +225,7 @@ namespace AngularMvcProject.Models
         public List<int> CustomerIds { get; set; }
         public string Start { get; set; }
         public string End { get; set; }
-        public int Status { get; set; } 
+        public int Status { get; set; }
     }
 
 
@@ -244,7 +245,7 @@ namespace AngularMvcProject.Models
         public int CustomerId { get; set; }
         public string StartTime { get; set; }
         public string EndTime { get; set; }
-       
+
 
     }
 
@@ -260,11 +261,11 @@ namespace AngularMvcProject.Models
         public RequestAddService Service { get; set; }
 
         public List<int> CustomerIds { get; set; }
-        public int Status { get; set; }    
+        public int Status { get; set; }
         public string Start { get; set; }
         public string End { get; set; }
-       
-     
+
+
     }
 
 
@@ -363,7 +364,7 @@ namespace AngularMvcProject.Models
         public bool IsOffAllDay { get; set; }
     }
     public class TimeOff
-    {       
+    {
         public int CompanyId { get; set; }
         public int EmployeeId { get; set; }
         public string Start { get; set; }
@@ -398,15 +399,15 @@ namespace AngularMvcProject.Models
     }
     public class TimeSchedule
     {
-        public string Id { get; set;}
-        public int  DayOfWeek { get; set; }
+        public string Id { get; set; }
+        public int DayOfWeek { get; set; }
         public string Start { get; set; }
         public string End { get; set; }
     }
 
     public class SetBreak
     {
-      
+
         public int CompanyId { get; set; }
         public int EmployeeId { get; set; }
         public int DayOfWeek { get; set; }
