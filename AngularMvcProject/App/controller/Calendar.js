@@ -24,13 +24,11 @@ app.controller('calendarController', ['$scope', '$location', '$filter', '$window
         }
 
         $scope.redirecttodashboard = function () {
-            debugger;
+
             $location.path("/dashboard/" + $routeParams.CompanyId);
         }
 
         this.selectedId;
-
-
 
         //Global Variables//
         $scope.eventSources = [];
@@ -38,7 +36,7 @@ app.controller('calendarController', ['$scope', '$location', '$filter', '$window
         $scope.events = [];
         $scope.WorkingHours = [];
         $scope.BuisnessWorkingHours = [];
-        
+
 
         var headerinit = true;
         $scope.AllProviders = "";
@@ -75,7 +73,7 @@ app.controller('calendarController', ['$scope', '$location', '$filter', '$window
                     left: '',
                     center: 'today prev,next',
                     right: ''
-                },             
+                },
                 resources: [],
                 views: {
                     agendaWeek: { // name of view
@@ -95,7 +93,7 @@ app.controller('calendarController', ['$scope', '$location', '$filter', '$window
                 refetchEvents: $scope.refetchEvents,
                 businessHours: $scope.WorkingHours,
                 viewRender: $scope.viewRender,
-                              
+
             }
         };
 
@@ -103,7 +101,8 @@ app.controller('calendarController', ['$scope', '$location', '$filter', '$window
 
         //Initialize funtion//
         $scope.init = function () {
-            debugger;
+
+            $scope.ShowCalendarMessage = false;
             $scope.cdate = new Date();
 
             var date = new Date($scope.cdate);
@@ -148,8 +147,7 @@ app.controller('calendarController', ['$scope', '$location', '$filter', '$window
             //Getting all employees(provider) for appointment dropdown(Add Appointment)
             var GetStaffProvider = bookingService.GetStaffData($routeParams.CompanyId);
             GetStaffProvider.then(function (response) {
-                if (response.data.length > 0)
-                {
+                if (response.data.length > 0) {
                     for (var i = 0; i < response.data.length; i++) {
                         resourceobj = "";
                         $scope.Provider.push({ 'Id': response.data[i].Id, 'CompanyId': response.data[i].CompanyId, 'UserName': response.data[i].UserName, 'staffName': response.data[i].FirstName, 'staffEmail': response.data[i].Email });
@@ -164,69 +162,69 @@ app.controller('calendarController', ['$scope', '$location', '$filter', '$window
                         uiCalendarConfig.calendars['myCalendar'].fullCalendar('addResource', resourceobj);
 
                     }
-                //$scope.selectedid = (response.data[0].id).tostring();
-                $scope.selectedstaff = response.data[0].FirstName;
-                $("#selectedprovider").text(response.data[0].FirstName);
-                this.selectedId = response.data[0].Id;
-                $scope.selectedId = response.data[0].Id;
-                //$scope.AllProviders = AllStaff.substring(0, AllStaff.length - 1);
+                    //$scope.selectedid = (response.data[0].id).tostring();
+                    $scope.selectedstaff = response.data[0].FirstName;
+                    $("#selectedprovider").text(response.data[0].FirstName);
+                    this.selectedId = response.data[0].Id;
+                    $scope.selectedId = response.data[0].Id;
+                    //$scope.AllProviders = AllStaff.substring(0, AllStaff.length - 1);
 
-                var apirequest = bookingService.GetBookingsForEmployeesByIdBetweenDates($routeParams.CompanyId, $scope.Provider[0].Id, firstDay, lastDay);
-                apirequest.then(function (response) {
-                    debugger;
-                    if (response.data.length != 0) {
-                        angular.forEach(response.data[0].Employee.WorkingHours, function (value, key) {
-                            if (value.IsOffAllDay == false) {
-                                $scope.BuisnessWorkingHours.push({ "dow": [value.NameOfDay], "start": value.Start, "end": value.End })
-                            }
-                        });
-                    }
-                    $scope.WorkingHours[0] = $scope.BuisnessWorkingHours;
-                    //uiCalendarConfig.calendars['myCalendar'].fullCalendar('render');
-                    uiCalendarConfig.calendars['myCalendar'].fullCalendar('option', {
-                        businessHours: $scope.WorkingHours[0]
-                    });
+                    var apirequest = bookingService.GetBookingsForEmployeesByIdBetweenDates($routeParams.CompanyId, $scope.Provider[0].Id, firstDay, lastDay);
+                    apirequest.then(function (response) {
 
-                    angular.forEach(response.data, function (value, key) {
-                        $scope.events.push({
-                            title: value.Service.Name,
-                            id: value.Id + "," + value.Service.Name + "," + value.Service.Cost + "," + value.Employee.FirstName + "," + value.Status + "," + value.Service.DurationInMinutes + "," + value.Service.Id + "," + value.Employee.Id + "," + value.Customers[0].FirstName + "," + value.Customers[0].Id + "," + value.Customers[0].Email + "," + value.Customers[0].TelephoneNo ,
-                            // id: value.Id + "," + value.Service.Name + "," + value.Service.Cost + "," + value.Employee.FirstName + "," + value.Status + "," + value.Service.DurationInMinutes + "," + value.Service.Id + "," + value.Employee.Id,
-                            description: value.Id,
-                            resourceId: value.Employee.Id,
-                            start: value.Start,
-                            end: value.End,
-                            allDay: value.IsFullDay,
-                            color: value.Service.Colour,
-                            textColor: "black"
+                        if (response.data.length != 0) {
+                            angular.forEach(response.data[0].Employee.WorkingHours, function (value, key) {
+                                if (value.IsOffAllDay == false) {
+                                    $scope.BuisnessWorkingHours.push({ "dow": [value.NameOfDay], "start": value.Start, "end": value.End })
+                                }
+                            });
+                        }
+                        $scope.WorkingHours[0] = $scope.BuisnessWorkingHours;
+                        //uiCalendarConfig.calendars['myCalendar'].fullCalendar('render');
+                        uiCalendarConfig.calendars['myCalendar'].fullCalendar('option', {
+                            businessHours: $scope.WorkingHours[0]
                         });
+
+                        angular.forEach(response.data, function (value, key) {
+                            $scope.events.push({
+                                title: value.Service.Name,
+                                id: value.Id + "," + value.Service.Name + "," + value.Service.Cost + "," + value.Employee.FirstName + "," + value.Status + "," + value.Service.DurationInMinutes + "," + value.Service.Id + "," + value.Employee.Id + "," + value.Customers[0].FirstName + "," + value.Customers[0].Id + "," + value.Customers[0].Email + "," + value.Customers[0].TelephoneNo + "," + value.Notes,
+                                // id: value.Id + "," + value.Service.Name + "," + value.Service.Cost + "," + value.Employee.FirstName + "," + value.Status + "," + value.Service.DurationInMinutes + "," + value.Service.Id + "," + value.Employee.Id,
+                                description: value.Id,
+                                resourceId: value.Employee.Id,
+                                start: value.Start,
+                                end: value.End,
+                                allDay: value.IsFullDay,
+                                color: value.Service.Colour,
+                                textColor: "black"
+                            });
+                        })
+
+                        uiCalendarConfig.calendars['myCalendar'].fullCalendar('addEventSource', $scope.events);
+
+                        if (response.data.status == 1) {
+                            $scope.UpdatedStatus = "No Label";
+                        }
+                        else if (response.data.status == 2) {
+                            $scope.UpdatedStatus = "Pending";
+                        }
+                        else if (response.data.status == 3) {
+                            $scope.UpdatedStatus = "Confirmed";
+                        }
+                        else if (response.data.status == 5) {
+                            $scope.UpdatedStatus = "No-Show";
+                        }
+                        else if (response.data.status == 4) {
+                            $scope.UpdatedStatus = "Done";
+                        }
+                        else if (response.data.status == 7) {
+                            $scope.UpdatedStatus = "RunningLate";
+                        }
+                        else if (response.data.status == 6) {
+                            $scope.UpdatedStatus = "Paid";
+                        }
                     })
-
-                    uiCalendarConfig.calendars['myCalendar'].fullCalendar('addEventSource', $scope.events);
-
-                    if (response.data.status == 1) {
-                        $scope.UpdatedStatus = "No Label";
-                    }
-                    else if (response.data.status == 2) {
-                        $scope.UpdatedStatus = "Pending";
-                    }
-                    else if (response.data.status == 3) {
-                        $scope.UpdatedStatus = "Confirmed";
-                    }
-                    else if (response.data.status == 5) {
-                        $scope.UpdatedStatus = "No-Show";
-                    }
-                    else if (response.data.status == 4) {
-                        $scope.UpdatedStatus = "Done";
-                    }
-                    else if (response.data.status == 7) {
-                        $scope.UpdatedStatus = "RunningLate";
-                    }
-                    else if (response.data.status == 6) {
-                        $scope.UpdatedStatus = "Paid";
-                    }
-                })
-            }
+                }
             });
         }
 
@@ -234,78 +232,78 @@ app.controller('calendarController', ['$scope', '$location', '$filter', '$window
 
         //Events Executed after all events has been rendered//        
         $scope.eventAfterAllRender = function () {
-            debugger;
 
             //This code will render only on intialize time.
             if (headerinit == true) {
                 headerinit = false
                 var apirequest = bookingService.GetStaffData($routeParams.CompanyId);
                 apirequest.then(function (response) {
-                    debugger;
+
                     if (response.data.length > 0) {
-                    $scope.AllStaff = response.data;
+                        $scope.AllStaff = response.data;
 
-                    //Dynamically adding html for full calendar header left section//
-                    var e = document.getElementsByClassName("fc-left");
-                    $scope.selectedId = response.data[0].Id;
-                    //Adding Staff Dropdown html //
-                    var staffhtml = "<div class='dropdownwtest' style='float:left;'><button class='dropbtntesta' ng-hide = 'showProviderDrpDwn'> <img class='testimgs' src='../Content/Assets/images/provider_img2.png'><span class='barhdermrgns' id='selectedprovider'>{{selectedstaff}} </span><span class='bariconodersd'><i class='fa fa-caret-down cheaderic' aria-hidden='true'></i></span></button><div class='dropdowntestcontent' style='left:0;'><input type='text' class='providersrchb' ng-model='SearchStaff' placeholder='Search Provider...'>";
+                        //Dynamically adding html for full calendar header left section//
+                        var e = document.getElementsByClassName("fc-left");
+                        $scope.selectedId = response.data[0].Id;
+                        //Adding Staff Dropdown html //
+                        var staffhtml = "<div class='dropdownwtest' style='float:left;'><button class='dropbtntesta' ng-hide = 'showProviderDrpDwn'> <img class='testimgs' src='../Content/Assets/images/provider_img2.png'><span class='barhdermrgns' id='selectedprovider'>{{selectedstaff}} </span><span class='bariconodersd'><i class='fa fa-caret-down cheaderic' aria-hidden='true'></i></span></button><div class='dropdowntestcontent' style='left:0;'><input type='text' class='providersrchb' ng-model='SearchStaff' placeholder='Search Provider...'>";
 
-                    staffhtml = staffhtml + "<a class='subcmrgnf cursorhand' ng-repeat='item in AllStaff | filter:SearchStaff' ng-click = 'getSelectedStaff(item.Id,item.FirstName)' ><img class='testimgs' src='../Content/Assets/images/provider_img2.png'><span class='econtent' style='display: inline-block;float: left;margin-top: 6px;'>{{item.FirstName}}</span><span class='bariconoder'><i class='fa fa-bars' aria-hidden='true'></i></span></a>";
+                        staffhtml = staffhtml + "<a class='subcmrgnf cursorhand' ng-repeat='item in AllStaff | filter:SearchStaff' ng-click = 'getSelectedStaff(item.Id,item.FirstName)' ><img class='testimgs' src='../Content/Assets/images/provider_img2.png'><span class='econtent' style='display: inline-block;float: left;margin-top: 6px;'>{{item.FirstName}}</span><span class='bariconoder'><i class='fa fa-bars' aria-hidden='true'></i></span></a>";
 
-                    staffhtml = staffhtml + "</div></div><input type='hidden' id='selectedstaffId' value={{selectedId}} />";
+                        staffhtml = staffhtml + "</div></div><input type='hidden' id='selectedstaffId' value={{selectedId}} />";
 
-                    var tempstaffhtml = $compile(staffhtml)($scope);
-                    angular.element(e).append(tempstaffhtml);
+                        var tempstaffhtml = $compile(staffhtml)($scope);
+                        angular.element(e).append(tempstaffhtml);
 
-                    $scope.selectedstaff = response.data[0].FirstName;
-                    this.selectedId = response.data[0].Id;
+                        $scope.selectedstaff = response.data[0].FirstName;
+                        this.selectedId = response.data[0].Id;
 
-                    //Adding View Dropdown Html//
-                    var ViewHtml = "<div class='dropdownweeky'><button class='dropbtnweeky'>{{SelectedView}}<span class='caret cmpdng'></span></button><ul class='dropcntentwkly'>";
-                    angular.forEach($scope.ViewList, function (value, key) {
-                        ViewHtml = ViewHtml + "<li ng-click = ChangeView('" + value.ViewName + "') ng-hide = {{SelectedView==value.Name}} ><a class='cursorhand'>" + value.Name + "</a></li>";
-                    });
-                    ViewHtml = ViewHtml + "</ul></div>";
+                        //Adding View Dropdown Html//
+                        var ViewHtml = "<div class='dropdownweeky'><button class='dropbtnweeky'>{{SelectedView}}<span class='caret cmpdng'></span></button><ul class='dropcntentwkly'>";
+                        angular.forEach($scope.ViewList, function (value, key) {
+                            ViewHtml = ViewHtml + "<li ng-click = ChangeView('" + value.ViewName + "') ng-hide = {{SelectedView==value.Name}} ><a class='cursorhand'>" + value.Name + "</a></li>";
+                        });
+                        ViewHtml = ViewHtml + "</ul></div>";
 
-                    var ViewOptionsHtml = $compile(ViewHtml)($scope);
-                    angular.element(e).append(ViewOptionsHtml);
+                        var ViewOptionsHtml = $compile(ViewHtml)($scope);
+                        angular.element(e).append(ViewOptionsHtml);
 
 
-                    //Adding datepicker in full calendar center section//
-                    var e = document.getElementsByClassName("fc-prev-button");
-                    var datepickerhtml = "<input id='cldtest' value='' type='button' class='form-control calendarBox' datepicker-popup='EEE, MMM d' ng-model='cdate' is-open='Opened' ng-mouseover='Opened=true;$event.stopPropagation();' datepicker-options='dateOptions' ng-click='SetDatePicker()' name='theDate' style='width: 131px;height: 30px;pointer-events: none;' />";
-                    angular.element(e).after(datepickerhtml);
-                    $compile($('#cldtest'))($scope);
+                        //Adding datepicker in full calendar center section//
+                        var e = document.getElementsByClassName("fc-prev-button");
+                        var datepickerhtml = "<input id='cldtest' value='' type='button' class='form-control calendarBox' datepicker-popup='EEE, MMM d' ng-model='cdate' is-open='Opened' ng-mouseover='Opened=true;$event.stopPropagation();' datepicker-options='dateOptions' ng-click='SetDatePicker()' name='theDate' style='width: 131px;height: 30px;pointer-events: none;' />";
+                        angular.element(e).after(datepickerhtml);
+                        $compile($('#cldtest'))($scope);
 
-                    var date = new Date(), y = date.getFullYear(), m = date.getMonth();
-                    var firstDay = new Date(y, m, 1);
-                    var lastDay = new Date(y, m + 1, 0);
+                        var date = new Date(), y = date.getFullYear(), m = date.getMonth();
+                        var firstDay = new Date(y, m, 1);
+                        var lastDay = new Date(y, m + 1, 0);
 
-                    var sm = $filter('date')(firstDay, "MMM dd");
-                    var em = $filter('date')(lastDay, "MMM dd");
+                        var sm = $filter('date')(firstDay, "MMM dd");
+                        var em = $filter('date')(lastDay, "MMM dd");
 
-                    var CurrentValue = sm + "-" + em;
-                    $scope.cdate = firstDay;
-                    $("#cldtest").val(CurrentValue);
+                        var CurrentValue = sm + "-" + em;
+                        $scope.cdate = firstDay;
+                        $("#cldtest").val(CurrentValue);
 
-                    $scope.cdate = new Date();
+                        $scope.cdate = new Date();
 
-                    //Adding dropdown in full calendar righ section//
-                    var e = document.getElementsByClassName("fc-right");
-                    var headerhtml = "<div class='row tooldropdwn'><div class='col-sm-3'><div class='dropdownrighticon'> <i class='fa fa-plus maindricons' aria-hidden='true'></i><div class='dropdownbox'><a href='#'><i class='fa fa-users plusbox' aria-hidden='true'></i>Add staff</a><a href='#'><i class='fa fa-truck plusbox' aria-hidden='true'></i>Add service</a><a href='#'><i class='fa fa-book  plusbox' aria-hidden='true'></i>Add customer</a><a href='#'><i class='fa fa-sitemap plusbox' aria-hidden='true'></i>Add class</a></div></div></div><div class='col-sm-3'><div class='dropdownrighticon'><i class='fa fa-signal maindricons' aria-hidden='true'></i><div class='dropdownbox'><a class='signalheader' href='#'>testerariel's Weekly Stats</a><ul class='signalbox'><li class=''><a href='#'><span id='totalApptsCount' class='scontent'>1</span><label class='pricetexts'>Appts.</label></a></li><li><a href='#'><span id='confirmedApptsCost' class='scontent'>₹0</span><label class='pricetexts'>Confirmed</label></a></li><li><a href='#'><span id='projectedApptsCost' class='scontent'>₹0</span><label class='pricetexts'>Projected</label></a></li><div class='clear_all'></div></ul></div></div></div><div class='col-sm-3'><div class='dropdownrighticon'><i class='fa fa-cog settingt maindricons' aria-hidden='true'></i><div class='dropdownbox droprmegnp'><a href='#'>Providers</a><a class='listbbordermtor' href='#'><i class='fa fa-check checkbtn' aria-hidden='true'></i>View as dropdown</a><a class='listbborder' href='#'><i class='fa fa-tablet tabletbtn' aria-hidden='true'></i>view as tabs</a><a class='listbborder' href='#'>Disable off-hours booking</a><a class='listbborder' href='#'>Enable double booking</a><a class='listbborder' href='#'>Disable custom service duration</a><a class='listbborder' href='#'>Disable custom service cost</a><a class='listbborder cursorhand' data-toggle='modal' data-target='#myModal' >Change business hours</a><a class='listbborder' href='#'>Hide calendar stats</a></div></div></div><div class='col-sm-3'> </div></div>";
+                        //Adding dropdown in full calendar righ section//
+                        var e = document.getElementsByClassName("fc-right");
+                        var headerhtml = "<div class='row tooldropdwn'><div class='col-sm-3'><div class='dropdownrighticon'> <i class='fa fa-plus maindricons' aria-hidden='true'></i><div class='dropdownbox'><a href='#'><i class='fa fa-users plusbox' aria-hidden='true'></i>Add staff</a><a href='#'><i class='fa fa-truck plusbox' aria-hidden='true'></i>Add service</a><a href='#'><i class='fa fa-book  plusbox' aria-hidden='true'></i>Add customer</a><a href='#'><i class='fa fa-sitemap plusbox' aria-hidden='true'></i>Add class</a></div></div></div><div class='col-sm-3'><div class='dropdownrighticon'><i class='fa fa-signal maindricons' aria-hidden='true'></i><div class='dropdownbox'><a class='signalheader' href='#'>testerariel's Weekly Stats</a><ul class='signalbox'><li class=''><a href='#'><span id='totalApptsCount' class='scontent'>1</span><label class='pricetexts'>Appts.</label></a></li><li><a href='#'><span id='confirmedApptsCost' class='scontent'>₹0</span><label class='pricetexts'>Confirmed</label></a></li><li><a href='#'><span id='projectedApptsCost' class='scontent'>₹0</span><label class='pricetexts'>Projected</label></a></li><div class='clear_all'></div></ul></div></div></div><div class='col-sm-3'><div class='dropdownrighticon'><i class='fa fa-cog settingt maindricons' aria-hidden='true'></i><div class='dropdownbox droprmegnp'><a href='#'>Providers</a><a class='listbbordermtor' href='#'><i class='fa fa-check checkbtn' aria-hidden='true'></i>View as dropdown</a><a class='listbborder' href='#'><i class='fa fa-tablet tabletbtn' aria-hidden='true'></i>view as tabs</a><a class='listbborder' href='#'>Disable off-hours booking</a><a class='listbborder' href='#'>Enable double booking</a><a class='listbborder' href='#'>Disable custom service duration</a><a class='listbborder' href='#'>Disable custom service cost</a><a class='listbborder cursorhand' data-toggle='modal' data-target='#myModal' >Change business hours</a><a class='listbborder' href='#'>Hide calendar stats</a></div></div></div><div class='col-sm-3'> </div></div>";
 
-                    $compile($(headerhtml))($scope);
-                    angular.element(e).append(headerhtml);
-                }
+                        $compile($(headerhtml))($scope);
+                        angular.element(e).append(headerhtml);
+                    }
                 })
 
             }
+
         }
 
         //Change View function//
         $scope.ChangeView = function (View) {
-            debugger;
+
             if (View == "month") {
                 $scope.SelectedView = "Monthly";
             }
@@ -317,6 +315,7 @@ app.controller('calendarController', ['$scope', '$location', '$filter', '$window
             }
 
             uiCalendarConfig.calendars['myCalendar'].fullCalendar('changeView', View);
+
             //if (View == "agendaDay") {
             //    $scope.showProviderDrpDwn = true;
             //    AgendaDayDisplayed = true;
@@ -379,16 +378,17 @@ app.controller('calendarController', ['$scope', '$location', '$filter', '$window
             //    if (AgendaDayDisplayed == true) {
             //        $scope.showProviderDrpDwn = false;
             //        uiCalendarConfig.calendars['myCalendar'].fullCalendar('removeEventSources');
-                   
+
             //       // $scope.init();
             //    }
             //}
         }
 
         //Staff Dropdown Change function//
-        $scope.getSelectedStaff = function (Id,SelectedStaff) {
-            debugger;
-          
+        $scope.getSelectedStaff = function (Id, SelectedStaff) {
+
+            angular.element(document.querySelector("#msg_box")).css("display", "block");
+
             AgendaDayDisplayed = false;
             var date = new Date($scope.cdate);
             var firstDay = new Date(date.getFullYear(), date.getMonth(), 2);
@@ -402,7 +402,7 @@ app.controller('calendarController', ['$scope', '$location', '$filter', '$window
             $scope.WorkingHours = [];
             $scope.BuisnessWorkingHours = [];
 
-            debugger;
+
             var apirequest = bookingService.GetBookingsForEmployeesByIdBetweenDates($routeParams.CompanyId, Id, firstDay, lastDay);
             apirequest.then(function (response) {
                 if (response.data.length != 0) {
@@ -421,7 +421,7 @@ app.controller('calendarController', ['$scope', '$location', '$filter', '$window
                     angular.forEach(response.data, function (value, key) {
                         $scope.events.push({
                             title: value.Service.Name,
-                            id: value.Id + "," + value.Service.Name + "," + value.Service.Cost + "," + value.Employee.FirstName + "," + value.Status + "," + value.Service.DurationInMinutes + "," + value.Service.Id + "," + value.Employee.Id + "," + value.Customers[0].FirstName + "," + value.Customers[0].Id + "," + value.Customers[0].Email + "," + value.Customers[0].TelephoneNo,
+                            id: value.Id + "," + value.Service.Name + "," + value.Service.Cost + "," + value.Employee.FirstName + "," + value.Status + "," + value.Service.DurationInMinutes + "," + value.Service.Id + "," + value.Employee.Id + "," + value.Customers[0].FirstName + "," + value.Customers[0].Id + "," + value.Customers[0].Email + "," + value.Customers[0].TelephoneNo + "," + value.Notes,
                             //id: value.Id + "," + value.Service.Name + "," + value.Service.Cost + "," + value.Employee.FirstName + "," + value.Status + "," + value.Service.DurationInMinutes + "," + value.Service.Id + "," + value.Employee.Id,
                             //description: value.Id,
                             start: value.Start,
@@ -441,7 +441,7 @@ app.controller('calendarController', ['$scope', '$location', '$filter', '$window
                     $scope.selectedId = Id;
                     uiCalendarConfig.calendars['myCalendar'].fullCalendar('addEventSource', $scope.events)
 
-                    debugger;
+
                     if (response.data.status == 1) {
                         $scope.UpdatedStatus = "No Label";
                     }
@@ -470,12 +470,15 @@ app.controller('calendarController', ['$scope', '$location', '$filter', '$window
                 }
 
             })
-
+            $timeout(function () {
+                angular.element(document.querySelector("#msg_box")).css("display", "none");
+            }, 1000);
         }
 
         //On click on date on Calendar//
         $scope.CurrentDateClick = function (date, jsEvent, view, resourceObj) {
-            debugger;       
+            debugger;
+
             var cdate = $filter('date')(date._d, "EEE, MMM d");
             $("#datepicker").val(cdate);
             $scope.dt = date._d;
@@ -495,17 +498,15 @@ app.controller('calendarController', ['$scope', '$location', '$filter', '$window
             $scope.timeInfoFrom = [];
             $scope.Status = "1";
             // $scope.selectedprovider = "-- Select a Provider --";
-           
 
-            if (view.name == "agendaDay")
-            {
+
+            if (view.name == "agendaDay") {
                 $scope.selectedprovider = resourceObj.id;
             }
             else {
                 $scope.selectedprovider = $("#selectedstaffId").val();
 
             }
-
 
             $("#dropdownMenu2").val($scope.selectedprovider);
             $scope.GetAllocateServiceToEmployee($("#selectedstaffId").val());
@@ -523,6 +524,8 @@ app.controller('calendarController', ['$scope', '$location', '$filter', '$window
             angular.element(document.querySelector("#modalfooter")).css("display", "block");
             angular.element(document.querySelector("#detailPopup")).css("display", "none");
         }
+
+
 
         //Click on event function//
         $scope.GetCurrentEvent = function (event) {
@@ -542,6 +545,7 @@ app.controller('calendarController', ['$scope', '$location', '$filter', '$window
             $scope.CustomerName = appointmentdetail[8];
             $scope.CustomerEmail = appointmentdetail[10];
             $scope.CustomerTelephone = appointmentdetail[11];
+            $scope.notes = appointmentdetail[12];
 
             $scope.StatusId = appointmentdetail[4];
             if (appointmentdetail[4] == 1) {
@@ -565,14 +569,12 @@ app.controller('calendarController', ['$scope', '$location', '$filter', '$window
             else if (appointmentdetail[4] == 6) {
                 $scope.UpdatedStatus = "Paid";
             }
-
         }
 
         //Render the events one by one.
-        $scope.eventRender = function (event, element,view) {
-            debugger;
-            var CurrentViewMonth = new Date(view.calendar.currentDate._i).getMonth()+1;
-            var CurrentEventMonth = new Date(event.start._i).getMonth()+1;
+        $scope.eventRender = function (event, element, view) {
+            var CurrentViewMonth = new Date(view.calendar.currentDate._i).getMonth() + 1;
+            var CurrentEventMonth = new Date(event.start._i).getMonth() + 1;
 
             if (CurrentViewMonth == CurrentEventMonth) {
                 if (event.hasOwnProperty("id") == true) {
@@ -603,7 +605,6 @@ app.controller('calendarController', ['$scope', '$location', '$filter', '$window
 
                     element[0].innerHTML = "<div class='fc-content'><span class='fc-title unmaincntent' style='padding-left:5px;font-size: 11px;font-weight: 500;'>" + eventdetail[8] + "</span><span class='fc-title' style='text-align: right;float: right;font-size: 9px;padding: 0px 5px;'>" + status + "</span><div style='margin-top: 20px;'><span style='padding-left:5px;font-size: 11px !important;'>" + eventdetail[1] + "  " + "£" + eventdetail[2] + "</span></div></div>";
                 }
-
             }
             else {
                 uiCalendarConfig.calendars['myCalendar'].fullCalendar('removeEventSources');
@@ -612,8 +613,6 @@ app.controller('calendarController', ['$scope', '$location', '$filter', '$window
 
         //Update the Status of Event//
         $scope.UpdateStatus = function (item) {
-            debugger;
-
             var date = new Date($scope.cdate);
             var firstDay = new Date(date.getFullYear(), date.getMonth(), 2);
             var lastDay = new Date(date.getFullYear(), date.getMonth() + 1, 1);
@@ -623,7 +622,7 @@ app.controller('calendarController', ['$scope', '$location', '$filter', '$window
             $scope.StatusId = item.Value;
             var SetStatus = bookingService.SetStatusofAppointment(item.Status, $scope.AppointmentBookingId);
             SetStatus.then(function (response) {
-                debugger;
+
                 if (response.data.Success == true) {
                     $scope.MessageText = "Updating Appointment Label";
                     $scope.IsVisible = true;
@@ -639,8 +638,8 @@ app.controller('calendarController', ['$scope', '$location', '$filter', '$window
                                     angular.forEach(response.data, function (value, key) {
                                         $scope.events.push({
                                             title: value.Service.Name,
-                                            id: value.Id + "," + value.Service.Name + "," + value.Service.Cost + "," + value.Employee.FirstName + "," + value.Status + "," + value.Service.DurationInMinutes + "," + value.Service.Id + "," + value.Employee.Id + "," + value.Customers[0].FirstName + "," + value.Customers[0].Id + "," + value.Customers[0].Email + "," + value.Customers[0].TelephoneNo,
-                                           // id: value.Id + "," + value.Service.Name + "," + value.Service.Cost + "," + value.Employee.FirstName + "," + value.Status + "," + value.Service.DurationInMinutes + "," + value.Service.Id + "," + value.Employee.Id,
+                                            id: value.Id + "," + value.Service.Name + "," + value.Service.Cost + "," + value.Employee.FirstName + "," + value.Status + "," + value.Service.DurationInMinutes + "," + value.Service.Id + "," + value.Employee.Id + "," + value.Customers[0].FirstName + "," + value.Customers[0].Id + "," + value.Customers[0].Email + "," + value.Customers[0].TelephoneNo + "," + value.Notes,
+                                            // id: value.Id + "," + value.Service.Name + "," + value.Service.Cost + "," + value.Employee.FirstName + "," + value.Status + "," + value.Service.DurationInMinutes + "," + value.Service.Id + "," + value.Employee.Id,
                                             description: value.Id,
                                             start: value.Start,
                                             resourceId: value.Employee.Id,
@@ -655,7 +654,7 @@ app.controller('calendarController', ['$scope', '$location', '$filter', '$window
                                 for (var i = 0; i < $scope.events.length; i++) {
                                     if ($scope.events[i].description == $scope.AppointmentBookingId) {
                                         var events = $scope.events[i].id.split(",");
-                                        $scope.events[i].id = events[0] + "," + events[1] + "," + events[2] + "," + events[3] + "," + item.Value + "," + events[5] + "," + events[6] + "," + events[7] + "," + events[8] + "," + events[9] + "," + events[10] + events[11]
+                                        $scope.events[i].id = events[0] + "," + events[1] + "," + events[2] + "," + events[3] + "," + item.Value + "," + events[5] + "," + events[6] + "," + events[7] + "," + events[8] + "," + events[9] + "," + events[10] + events[11] + event[12]
                                         break;
                                     }
                                 }
@@ -673,7 +672,7 @@ app.controller('calendarController', ['$scope', '$location', '$filter', '$window
         //Get Details of Appointment//
         $scope.EditAppointment = function () {
             debugger;
-            //Close the Detail PopUp//
+            //Close the Detail PopUp//            
             angular.element(document.querySelector("#detailPopup")).css("display", "none");
 
             //Get All Staff of particular CompanyId
@@ -706,7 +705,6 @@ app.controller('calendarController', ['$scope', '$location', '$filter', '$window
 
         //Update Event on Calendar//
         $scope.UpdateAppointment = function () {
-            debugger;
 
             var date = new Date($scope.dt);
             var firstDay = new Date(date.getFullYear(), date.getMonth(), 2);
@@ -732,8 +730,6 @@ app.controller('calendarController', ['$scope', '$location', '$filter', '$window
                      "End": $scope.dt,
                      "Status": $scope.StatusId
                  }
-
-
 
             var apirequest = bookingService.UpdateAppointment(appointment);
             apirequest.then(function (response) {
@@ -761,8 +757,8 @@ app.controller('calendarController', ['$scope', '$location', '$filter', '$window
                                 angular.forEach(response.data, function (value, key) {
                                     $scope.events.push({
                                         title: value.Service.Name,
-                                        id: value.Id + "," + value.Service.Name + "," + value.Service.Cost + "," + value.Employee.FirstName + "," + value.Status + "," + value.Service.DurationInMinutes + "," + value.Service.Id + "," + value.Employee.Id + "," + value.Customers[0].FirstName + "," + value.Customers[0].Id + "," + value.Customers[0].Email + "," + value.Customers[0].TelephoneNo,
-                                      //  id: value.Id + "," + value.Service.Name + "," + value.Service.Cost + "," + value.Employee.FirstName + "," + value.Status + "," + value.Service.DurationInMinutes + "," + value.Service.Id + "," + value.Employee.Id,
+                                        id: value.Id + "," + value.Service.Name + "," + value.Service.Cost + "," + value.Employee.FirstName + "," + value.Status + "," + value.Service.DurationInMinutes + "," + value.Service.Id + "," + value.Employee.Id + "," + value.Customers[0].FirstName + "," + value.Customers[0].Id + "," + value.Customers[0].Email + "," + value.Customers[0].TelephoneNo + "," + value.Notes,
+                                        //  id: value.Id + "," + value.Service.Name + "," + value.Service.Cost + "," + value.Employee.FirstName + "," + value.Status + "," + value.Service.DurationInMinutes + "," + value.Service.Id + "," + value.Employee.Id,
                                         description: value.Id,
                                         resourceId: value.Employee.Id,
                                         start: value.Start,
@@ -779,7 +775,7 @@ app.controller('calendarController', ['$scope', '$location', '$filter', '$window
 
                                 $scope.cdate = $scope.dt;
                                 $scope.getSelectedStaff($scope.selectedprovider);
-                                $('#providers').val($scope.selectedprovider);                             
+                                $('#providers').val($scope.selectedprovider);
                             })
 
                             angular.element(document.querySelector("#UpdateAppointmentPopup")).css("display", "none");
@@ -792,14 +788,14 @@ app.controller('calendarController', ['$scope', '$location', '$filter', '$window
 
         //Get Allocated Service to Employee//
         $scope.GetAllocateServiceToEmployee = function (EmployeeId) {
-            debugger;
+
             $scope.showServiceLoader = true;
             $scope.EmployeeId = EmployeeId;
             $rootScope.CalendarEmployeeServices = [];
             var EmployeeServices = bookingService.GetAllocatedServicetoEmployee($routeParams.CompanyId, EmployeeId);
-            EmployeeServices.then(function (result) {               
+            EmployeeServices.then(function (result) {
                 $rootScope.CalendarEmployeeServices = result.data;
-               
+
                 $scope.showServiceLoader = false;
                 // $scope.selectedservice = $scope.EmployeeServices[0].Id;
                 //Get Staff Appointment working hours ///
@@ -821,7 +817,7 @@ app.controller('calendarController', ['$scope', '$location', '$filter', '$window
 
         //Get timeslots corespond to service//
         $scope.ServiceDetail = function (SelectedServiceId) {
-           $scope.ServiceId = SelectedServiceId;
+            $scope.ServiceId = SelectedServiceId;
             var SelectedService = bookingService.GetSelectedService(SelectedServiceId);
             SelectedService.then(function (response) {
 
@@ -871,7 +867,7 @@ app.controller('calendarController', ['$scope', '$location', '$filter', '$window
                         $scope.DisabledAddCustomerTab = true;
                     }
                     $scope.timeslotsloading = false;
-                   
+
                 });
 
             });
@@ -879,7 +875,7 @@ app.controller('calendarController', ['$scope', '$location', '$filter', '$window
 
         //Save Event on Calendar//
         $scope.SaveAppointment = function (form) {
-            debugger;
+
             var selectedvalue = $scope.option;
             var date = new Date($scope.dt);
             var firstDay = new Date(date.getFullYear(), date.getMonth(), 2);
@@ -924,8 +920,8 @@ app.controller('calendarController', ['$scope', '$location', '$filter', '$window
                         "Password": $scope.customerPassword,
                         "FirstName": $scope.CustomerName,
                         "LastName": "",
-                        "Address": "",
-                        "PostCode": "",
+                        "Address": $scope.CustomerAddress,
+                        "PostCode": $scope.Zip,
                         "Email": $scope.CustomerEmail,
                         "TelephoneNo": $scope.CustomerMobileNo,
                         "CreationDate": new Date()
@@ -954,6 +950,7 @@ app.controller('calendarController', ['$scope', '$location', '$filter', '$window
                             "EndMinute": $scope.time,
                             "IsAdded": true,
                             "Message": $scope.notes,
+                            "Notes": $scope.notes,
                             //"CustomerIds": [$scope.CustomerId],
                             "CustomerIds": [$scope.CustomerId],
                             "Start": $scope.dt,
@@ -1101,7 +1098,7 @@ app.controller('calendarController', ['$scope', '$location', '$filter', '$window
             var checkdelete = false;
             var apirequest = bookingService.GetBookingsForEmployeesByIdBetweenDates($routeParams.CompanyId, EmployeeId, firstDay, lastDay);
             apirequest.then(function (response) {
-                debugger;
+
                 angular.forEach(response.data, function (value, key) {
                     //for (var i = 0; i < $scope.events.length; i++) {
                     //if ($scope.events[i].description.includes(value.Id) && checkdelete == false) {
@@ -1115,8 +1112,8 @@ app.controller('calendarController', ['$scope', '$location', '$filter', '$window
                     if (value.Id != Id) {
                         $scope.events.push({
                             title: value.Service.Name,
-                            id: value.Id + "," + value.Service.Name + "," + value.Service.Cost + "," + value.Employee.FirstName + "," + value.Status + "," + value.Service.DurationInMinutes + "," + value.Service.Id + "," + value.Employee.Id + "," + value.Customers[0].FirstName + "," + value.Customers[0].Id + "," + value.Customers[0].Email + "," + value.Customers[0].TelephoneNo,
-                           // id: value.Id + "," + value.Service.Name + "," + value.Service.Cost + "," + value.Employee.FirstName + "," + value.Status + "," + value.Service.DurationInMinutes + "," + value.Service.Id + "," + value.Employee.Id,
+                            id: value.Id + "," + value.Service.Name + "," + value.Service.Cost + "," + value.Employee.FirstName + "," + value.Status + "," + value.Service.DurationInMinutes + "," + value.Service.Id + "," + value.Employee.Id + "," + value.Customers[0].FirstName + "," + value.Customers[0].Id + "," + value.Customers[0].Email + "," + value.Customers[0].TelephoneNo + "," + value.Notes,
+                            // id: value.Id + "," + value.Service.Name + "," + value.Service.Cost + "," + value.Employee.FirstName + "," + value.Status + "," + value.Service.DurationInMinutes + "," + value.Service.Id + "," + value.Employee.Id,
                             description: value.Id,
                             resourceId: value.Employee.Id,
                             start: value.Start,
@@ -1169,8 +1166,8 @@ app.controller('calendarController', ['$scope', '$location', '$filter', '$window
         }.bind(this);
 
 
-        $scope.GetEventDetails = function(AppointmentId, Operation) {
-            debugger;
+        $scope.GetEventDetails = function (AppointmentId, Operation) {
+
             var date = new Date($scope.dt);
             var firstDay = new Date(date.getFullYear(), date.getMonth(), 2);
             var lastDay = new Date(date.getFullYear(), date.getMonth() + 1, 1);
@@ -1182,7 +1179,7 @@ app.controller('calendarController', ['$scope', '$location', '$filter', '$window
 
                     $scope.events.push({
                         title: value.Service.Name,
-                        id: value.Id + "," + value.Service.Name + "," + value.Service.Cost + "," + value.Employee.FirstName + "," + value.Status + "," + value.Service.DurationInMinutes + "," + value.Service.Id + "," + value.Employee.Id + "," + value.Customers[0].FirstName + "," + value.Customers[0].Id + "," + value.Customers[0].Email + "," + value.Customers[0].TelephoneNo,
+                        id: value.Id + "," + value.Service.Name + "," + value.Service.Cost + "," + value.Employee.FirstName + "," + value.Status + "," + value.Service.DurationInMinutes + "," + value.Service.Id + "," + value.Employee.Id + "," + value.Customers[0].FirstName + "," + value.Customers[0].Id + "," + value.Customers[0].Email + "," + value.Customers[0].TelephoneNo + "," + value.Notes,
                         description: value.Id,
                         start: value.Start,
                         resourceId: value.Employee.Id,
@@ -1208,9 +1205,9 @@ app.controller('calendarController', ['$scope', '$location', '$filter', '$window
                 //Empty the values//
                 $scope.time = "";
                 $scope.timeoption = "";
-                $scope.timeInfoFrom = []; 
+                $scope.timeInfoFrom = [];
                 $scope.Status = "1";
-               // $scope.selectedprovider = "-- Select a Provider --";
+                // $scope.selectedprovider = "-- Select a Provider --";
                 $scope.notes = "";
 
                 // $scope.eventSources[0] = $scope.events;
@@ -1221,7 +1218,7 @@ app.controller('calendarController', ['$scope', '$location', '$filter', '$window
         //Get Customer by Search term//
         $scope.GetSearchCustomer = function (searchterm) {
             $scope.FilterCustomerList = [];
-            debugger;
+
             if (searchterm != "") {
                 var apirequest = bookingService.GetSearchCustomer($routeParams.CompanyId, searchterm);
                 apirequest.then(function (response) {
@@ -1248,7 +1245,7 @@ app.controller('calendarController', ['$scope', '$location', '$filter', '$window
             $scope.timeoption = "";
             $scope.timeInfoFrom = [];
             $scope.Status = "1";
-          //  $scope.selectedprovider = "-- Select a Provider --";
+            //  $scope.selectedprovider = "-- Select a Provider --";
             $scope.notes = "";
             $scope.ServicePriceTimeDetailIsVisible = false;
             angular.element(document.querySelector("#squarespaceModal")).css("display", "none");
@@ -1258,12 +1255,13 @@ app.controller('calendarController', ['$scope', '$location', '$filter', '$window
         $scope.viewRender = function (view, element) {
             debugger;
             //////////////-----------------////////////
+            angular.element(document.querySelector("#msg_box")).css("display", "block");
             var date = new Date(view.calendar.currentDate._i);
             var firstDay = new Date(date.getFullYear(), date.getMonth(), 2);
             var lastDay = new Date(date.getFullYear(), date.getMonth() + 1, 1);
 
             var SelectedStaffId = $("#selectedstaffId").val();
-           
+
             if (view.name != "agendaDay") {
                 $scope.showProviderDrpDwn = false;
                 if ($scope.events.length > 0) {
@@ -1277,7 +1275,7 @@ app.controller('calendarController', ['$scope', '$location', '$filter', '$window
 
                             $scope.events.push({
                                 title: value.Service.Name,
-                                id: value.Id + "," + value.Service.Name + "," + value.Service.Cost + "," + value.Employee.FirstName + "," + value.Status + "," + value.Service.DurationInMinutes + "," + value.Service.Id + "," + value.Employee.Id + "," + value.Customers[0].FirstName + "," + value.Customers[0].Id + "," + value.Customers[0].Email + "," + value.Customers[0].TelephoneNo,
+                                id: value.Id + "," + value.Service.Name + "," + value.Service.Cost + "," + value.Employee.FirstName + "," + value.Status + "," + value.Service.DurationInMinutes + "," + value.Service.Id + "," + value.Employee.Id + "," + value.Customers[0].FirstName + "," + value.Customers[0].Id + "," + value.Customers[0].Email + "," + value.Customers[0].TelephoneNo + "," + value.Notes,
                                 // id: value.Id + "," + value.Service.Name + "," + value.Service.Cost + "," + value.Employee.FirstName + "," + value.Status + "," + value.Service.DurationInMinutes + "," + value.Service.Id + "," + value.Employee.Id,
                                 description: value.Id,
                                 start: value.Start,
@@ -1330,7 +1328,7 @@ app.controller('calendarController', ['$scope', '$location', '$filter', '$window
                             $scope.cdate = firstday;
                             $("#cldtest").val(CurrentValue);
                         }
-                      
+
                         //if ($scope.SelectedView == "Daily") {
                         //    var curr = new Date(view.calendar.currentDate._i);
                         //    var CurrentDate = $filter('date')(curr, "dd MMM yyyy");
@@ -1343,84 +1341,86 @@ app.controller('calendarController', ['$scope', '$location', '$filter', '$window
                 }
             }
             else {
-                
-                    $scope.showProviderDrpDwn = true;
-                    AgendaDayDisplayed = true;
-                    $scope.events = [];
-                    $scope.WorkingHours = [];
-                    $scope.BuisnessWorkingHours = [];
-                    var date = new Date();
-                    var mm = date.getMonth();
-                    var dd = date.getDate();
-                    var yy = date.getFullYear();
 
-                    var enddate = date.setDate(dd, mm, yy);
-                    var eDate = new Date(enddate);
-                    var AllStaff = "";
+                $scope.showProviderDrpDwn = true;
+                AgendaDayDisplayed = true;
+                $scope.events = [];
+                $scope.WorkingHours = [];
+                $scope.BuisnessWorkingHours = [];
+                var date = new Date();
+                var mm = date.getMonth();
+                var dd = date.getDate();
+                var yy = date.getFullYear();
 
-                    var GetStaffProvider = bookingService.GetStaffData($routeParams.CompanyId);
-                    GetStaffProvider.then(function (response) {
-                        for (var i = 0; i < response.data.length; i++) {
-                            AllStaff = response.data[i].Id + "," + AllStaff;
-                        }
-                        $scope.AllProviders = AllStaff.substring(0, AllStaff.length - 1);
+                var enddate = date.setDate(dd, mm, yy);
+                var eDate = new Date(enddate);
+                var AllStaff = "";
 
-                        var apirequest = bookingService.GetBookingsForEmployeesByIdBetweenDates($routeParams.CompanyId, $scope.AllProviders, firstDay, lastDay);
-                        apirequest.then(function (response) 
-                        {
-                            if (response.data.length != 0) {
-                                angular.forEach(response.data[0].Employee.WorkingHours, function (value, key) {
-                                    if (value.IsOffAllDay == false) {
-                                        $scope.BuisnessWorkingHours.push({ "dow": [value.NameOfDay], "start": value.Start, "end": value.End });
-                                    }
-                                })
+                var GetStaffProvider = bookingService.GetStaffData($routeParams.CompanyId);
+                GetStaffProvider.then(function (response) {
+                    for (var i = 0; i < response.data.length; i++) {
+                        AllStaff = response.data[i].Id + "," + AllStaff;
+                    }
+                    $scope.AllProviders = AllStaff.substring(0, AllStaff.length - 1);
 
-                                $scope.WorkingHours[0] = $scope.BuisnessWorkingHours;
+                    var apirequest = bookingService.GetBookingsForEmployeesByIdBetweenDates($routeParams.CompanyId, $scope.AllProviders, firstDay, lastDay);
+                    apirequest.then(function (response) {
+                        if (response.data.length != 0) {
+                            angular.forEach(response.data[0].Employee.WorkingHours, function (value, key) {
+                                if (value.IsOffAllDay == false) {
+                                    $scope.BuisnessWorkingHours.push({ "dow": [value.NameOfDay], "start": value.Start, "end": value.End });
+                                }
+                            })
 
-                                uiCalendarConfig.calendars['myCalendar'].fullCalendar('option', {
-                                    businessHours: $scope.WorkingHours[0]
+                            $scope.WorkingHours[0] = $scope.BuisnessWorkingHours;
+
+                            uiCalendarConfig.calendars['myCalendar'].fullCalendar('option', {
+                                businessHours: $scope.WorkingHours[0]
+                            });
+
+                            angular.forEach(response.data, function (value, key) {
+                                $scope.events.push({
+                                    title: value.Service.Name,
+                                    id: value.Id + "," + value.Service.Name + "," + value.Service.Cost + "," + value.Employee.FirstName + "," + value.Status + "," + value.Service.DurationInMinutes + "," + value.Service.Id + "," + value.Employee.Id + "," + value.Customers[0].FirstName + "," + value.Customers[0].Id + "," + value.Customers[0].Email + "," + value.Customers[0].TelephoneNo + "," + value.Notes,
+                                    //id: value.Id + "," + value.Service.Name + "," + value.Service.Cost + "," + value.Employee.FirstName + "," + value.Status + "," + value.Service.DurationInMinutes + "," + value.Service.Id + "," + value.Employee.Id,
+                                    description: value.Id,
+                                    start: value.Start,
+                                    resourceId: value.Employee.Id,
+                                    end: value.End,
+                                    allDay: value.IsFullDay,
+                                    color: value.Service.Colour,
+                                    textColor: "black"
                                 });
+                            })
+                            uiCalendarConfig.calendars['myCalendar'].fullCalendar('removeEventSources');
+                            uiCalendarConfig.calendars['myCalendar'].fullCalendar('addEventSource', $scope.events)
+                        }
+                        var curr = new Date(view.calendar.currentDate._i);
+                        var CurrentDate = $filter('date')(curr, "dd MMM yyyy");
 
-                                angular.forEach(response.data, function (value, key) {
-                                    $scope.events.push({
-                                        title: value.Service.Name,
-                                        id: value.Id + "," + value.Service.Name + "," + value.Service.Cost + "," + value.Employee.FirstName + "," + value.Status + "," + value.Service.DurationInMinutes + "," + value.Service.Id + "," + value.Employee.Id + "," + value.Customers[0].FirstName + "," + value.Customers[0].Id + "," + value.Customers[0].Email + "," + value.Customers[0].TelephoneNo,
-                                        //id: value.Id + "," + value.Service.Name + "," + value.Service.Cost + "," + value.Employee.FirstName + "," + value.Status + "," + value.Service.DurationInMinutes + "," + value.Service.Id + "," + value.Employee.Id,
-                                        description: value.Id,
-                                        start: value.Start,
-                                        resourceId: value.Employee.Id,
-                                        end: value.End,
-                                        allDay: value.IsFullDay,
-                                        color: value.Service.Colour,
-                                        textColor: "black"
-                                    });
-                                })
-                                uiCalendarConfig.calendars['myCalendar'].fullCalendar('removeEventSources');
-                                uiCalendarConfig.calendars['myCalendar'].fullCalendar('addEventSource', $scope.events)
-                            }                           
-                                var curr = new Date(view.calendar.currentDate._i);
-                                var CurrentDate = $filter('date')(curr, "dd MMM yyyy");
-
-                                $scope.cdate = curr;
-                                $("#cldtest").val(CurrentDate);
-
-                           
-                        });
-
+                        $scope.cdate = curr;
+                        $("#cldtest").val(CurrentDate);
                     });
-                
+
+                });
             }
+            $timeout(function () {
+                angular.element(document.querySelector("#msg_box")).css("display", "none");
+            }, 1000);
         };
 
         //----------------Date Picker Events---------------------//
 
         $scope.today = function () {
-            debugger;
             $scope.dt = new Date();
         };
 
+        $scope.DatePickerinit = function () {
+            $scope.dt = null;
+            $scope.today();
+        };
         //$scope.SetDatePicker = function () {
-        //    debugger;
+        //    
         //    $scope.today();
 
         //}
@@ -1438,10 +1438,10 @@ app.controller('calendarController', ['$scope', '$location', '$filter', '$window
 
 
         $scope.$watch("cdate", function (newValue, oldValue) {
-            debugger;
+
             //$scope.timeInfoFrom = [];
             if (newValue != null && oldValue != null && newValue != oldValue) {
-                uiCalendarConfig.calendars['myCalendar'].fullCalendar('gotoDate', newValue)                  
+                uiCalendarConfig.calendars['myCalendar'].fullCalendar('gotoDate', newValue)
             }
         });
 
@@ -1482,8 +1482,7 @@ app.controller('calendarController', ['$scope', '$location', '$filter', '$window
                             $scope.ContinueAppointment = false;
                             $scope.DisabledAddCustomerTab = false;
                         }
-                        else
-                        {
+                        else {
                             $scope.ContinueAppointment = true;
                             $scope.DisabledAddCustomerTab = true;
                         }
@@ -1494,6 +1493,9 @@ app.controller('calendarController', ['$scope', '$location', '$filter', '$window
             }
         });
 
+        $scope.clear = function () {
+            $scope.dt = null;
+        };
 
         $scope.open = function () {
             $timeout(function () {
@@ -1506,10 +1508,7 @@ app.controller('calendarController', ['$scope', '$location', '$filter', '$window
             'starting-day': 1
         };
 
-
-
         //---------------Update Event on Calendar--------------------//
-
         $scope.CloseUpdateAppointmentPopup = function () {
             $scope.today();
             $scope.timeslotsloading = false;
@@ -1527,7 +1526,7 @@ app.controller('calendarController', ['$scope', '$location', '$filter', '$window
         //------------Add event on Calendar-----------------//
 
         $scope.EditCustomer = function (item) {
-            debugger;
+
             $scope.SearchCustomer = "";
             $scope.ShowSubmit = true;
             $scope.CustomerId = item.Id
@@ -1583,18 +1582,15 @@ app.controller('calendarController', ['$scope', '$location', '$filter', '$window
         }
 
         $scope.Appointmenttab = function () {
-            debugger;
             angular.element(document.querySelector("#searchCustomer")).css("display", "none");
             angular.element(document.querySelector("#Calendartab")).removeClass("active");
             angular.element(document.querySelector("#Calendarcustomer")).css("display", "none");
             angular.element(document.querySelector("#calendardetail")).css("display", "block");
             angular.element(document.querySelector("#Appointmenttab")).addClass("active");
             angular.element(document.querySelector("#modalfooter")).css("display", "block");
-
         }
 
         $scope.Calendartab = function () {
-            debugger;
             if ($scope.DisabledAddCustomerTab == false) {
                 //$scope.FilterCustomerList = [];
                 //$scope.SearchCustomer = "";
@@ -1615,19 +1611,19 @@ app.controller('calendarController', ['$scope', '$location', '$filter', '$window
         }
 
         //$(".fc-center fc-button-group fc-next-button").click(function () {
-        //    debugger;
+        //    
         //    alert("hello");
         //});
         $('body').on('click', 'button.fc-next-button', function () {
-            //debugger;     
+            //     
         });
 
         //Buisness Working Hours Section in Calendar
 
         $scope.switchOnOff = function (item) {
-            debugger;
+
             for (var i = 0; i < $scope.businessHourInfo.length; i++)
-                //debugger; if (item.day != "Sunday" && item.day != "Saturday") {
+                // if (item.day != "Sunday" && item.day != "Saturday") {
             {
                 if (item.day == $scope.businessHourInfo[i].day) {
                     if (item['available'] == true) {
@@ -1675,7 +1671,7 @@ app.controller('calendarController', ['$scope', '$location', '$filter', '$window
         }
 
         $scope.SetWorkingHours = function (timedata) {
-            debugger;
+
             var buisnesshour = {
                 Id: "",
                 CompanyId: $routeParams.CompanyId,

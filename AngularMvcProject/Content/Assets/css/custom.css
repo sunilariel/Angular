@@ -7419,6 +7419,30 @@ span.popupcntenthcbtn {
     overflow-x: hidden;
 }
 
+
+.msg_box {
+    text-align: center;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    z-index: 9999999;
+    max-width: 174px;
+    margin: 0 auto;
+    color: #000;
+    font-weight: 500;
+    line-height: 26px;
+    background: #FFF39E;
+    border-radius: 0 0 5px 5px;
+    font-size: 12px;
+    padding: 0px 0px;
+}
+header.top {
+    position: relative;
+}
+
+
+
 @media screen and (-webkit-min-device-pixel-ratio:0) {  /*safari and chrome*/
     select {
         height:30px;
