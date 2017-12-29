@@ -104,7 +104,6 @@ app.controller('calendarController', ['$scope', '$location', '$filter', '$window
 
             $scope.ShowCalendarMessage = false;
             $scope.cdate = new Date();
-
             var date = new Date($scope.cdate);
             var firstDay = new Date(date.getFullYear(), date.getMonth(), 2);
             var lastDay = new Date(date.getFullYear(), date.getMonth() + 1, 1);
@@ -232,7 +231,6 @@ app.controller('calendarController', ['$scope', '$location', '$filter', '$window
 
         //Events Executed after all events has been rendered//        
         $scope.eventAfterAllRender = function () {
-
             //This code will render only on intialize time.
             if (headerinit == true) {
                 headerinit = false
@@ -478,10 +476,12 @@ app.controller('calendarController', ['$scope', '$location', '$filter', '$window
         //On click on date on Calendar//
         $scope.CurrentDateClick = function (date, jsEvent, view, resourceObj) {
             debugger;
-
             var cdate = $filter('date')(date._d, "EEE, MMM d");
             $("#datepicker").val(cdate);
-            $scope.dt = date._d;
+            $("#calendardatepicker").val(cdate);
+            //$scope.cdate = date._d;
+            $scope.hidden = new Date(date._d);
+            $scope.dt = new Date(date._d);
             $scope.ShowSubmit = false;
             $scope.ContinueAppointment = true;
 
@@ -522,7 +522,7 @@ app.controller('calendarController', ['$scope', '$location', '$filter', '$window
             angular.element(document.querySelector("#calendardetail")).css("display", "block");
             angular.element(document.querySelector("#Appointmenttab")).addClass("active");
             angular.element(document.querySelector("#modalfooter")).css("display", "block");
-            angular.element(document.querySelector("#detailPopup")).css("display", "none");
+            angular.element(document.querySelector("#detailPopup")).css("display", "none");            
         }
 
 
@@ -875,9 +875,9 @@ app.controller('calendarController', ['$scope', '$location', '$filter', '$window
 
         //Save Event on Calendar//
         $scope.SaveAppointment = function (form) {
-
+            var SelectedDate = $scope.hidden;
             var selectedvalue = $scope.option;
-            var date = new Date($scope.dt);
+            var date = new Date(SelectedDate);
             var firstDay = new Date(date.getFullYear(), date.getMonth(), 2);
             var lastDay = new Date(date.getFullYear(), date.getMonth() + 1, 1);
 
@@ -953,8 +953,8 @@ app.controller('calendarController', ['$scope', '$location', '$filter', '$window
                             "Notes": $scope.notes,
                             //"CustomerIds": [$scope.CustomerId],
                             "CustomerIds": [$scope.CustomerId],
-                            "Start": $scope.dt,
-                            "End": $scope.dt,
+                            "Start": SelectedDate,
+                            "End": SelectedDate,
                             "Status": $scope.Status
                         }
 
@@ -1034,8 +1034,8 @@ app.controller('calendarController', ['$scope', '$location', '$filter', '$window
                     "Message": $scope.notes,
                     //"CustomerIds": [$scope.CustomerId],
                     "CustomerIds": [$scope.CustomerId],
-                    "Start": $scope.dt,
-                    "End": $scope.dt,
+                    "Start": SelectedDate,
+                    "End": SelectedDate,
                     "Status": $scope.Status
                 }
 
@@ -1419,11 +1419,13 @@ app.controller('calendarController', ['$scope', '$location', '$filter', '$window
             $scope.dt = null;
             $scope.today();
         };
-        //$scope.SetDatePicker = function () {
-        //    
-        //    $scope.today();
+        $scope.SetDatePicker = function () {
+            debugger;
+            //$scope.dt = new Date();
+            //$scope.today();
 
-        //}
+
+        }
 
         $scope.EditDatePicker = function () {
             //if ($scope.editcount == 0) {
