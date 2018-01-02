@@ -470,7 +470,7 @@ app.controller('calendarController', ['$scope', '$location', '$filter', '$window
             })
             $timeout(function () {
                 angular.element(document.querySelector("#msg_box")).css("display", "none");
-            }, 1000);
+            }, 3000);
         }
 
         //On click on date on Calendar//
@@ -827,13 +827,15 @@ app.controller('calendarController', ['$scope', '$location', '$filter', '$window
                 // $scope.today();
 
                 $scope.timeInfoFrom = [];
+                var SelectedDate = $scope.hidden;
                 var days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+                debugger;
                 RequestValues = {
                     CompanyId: $routeParams.CompanyId,
                     ServiceId: SelectedServiceId,
                     EmployeeId: $scope.EmployeeId,
-                    DateofBooking: $filter('date')($scope.dt, "dd-MM-yyyy"),
-                    Day: days[$scope.dt.getDay()],
+                    DateofBooking: $filter('date')(SelectedDate, "dd-MM-yyyy"),
+                    Day: days[SelectedDate.getDay()],
                 }
                 $scope.timeslotsloading = true;
                 var result = bookingService.GetFreeBookingSlotsForEmployee(RequestValues);
@@ -1406,7 +1408,7 @@ app.controller('calendarController', ['$scope', '$location', '$filter', '$window
             }
             $timeout(function () {
                 angular.element(document.querySelector("#msg_box")).css("display", "none");
-            }, 1000);
+            }, 3000);
         };
 
         //----------------Date Picker Events---------------------//
