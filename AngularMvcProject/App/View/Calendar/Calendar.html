@@ -563,12 +563,10 @@
                                     <div class="customerFieldDiv">
                                         <input type="text" class="form-control searchCustomerField" placeholder="Search Customer" ng-model="SearchCustomer" ng-change="GetSearchCustomer(SearchCustomer)" />
                                         <div class="apptcustomericon"><i class="fa fa-search" aria-hidden="true"></i></div>
-                                        <ul class="searching-cust" style="display: block;" ng-show="counted >=1">
-
+                                        <ul class="searching-cust" ng-show="counted >=1">
                                             <li ng-repeat="item in FilterCustomerList" ng-click="EditCustomer(item)">
                                                 <img src="../Content/Assets/images/provider_img2.png" />
                                                 <span>{{item.FirstName}}</span>
-
                                             </li>
                                         </ul>
 
@@ -583,15 +581,10 @@
                                                 </span>
                                             </li>
                                         </ul>
-
                                     </div>-->
                                     <a class="apptnewcustomerbtn" ng-click="AddnewCustomer()"> + New Customer</a>
                                 </div>
                             </div>
-
-
-
-
                         </div>
                         <div class="modal-footer" id="modalfooter">
                             <div class="btn-group apptSaveBtn" role="group">
@@ -830,7 +823,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
+                                            </div>  
                                         </div>
                                     </div>
 
