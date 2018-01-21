@@ -349,6 +349,10 @@ namespace AngularMvcProject.Controllers
                     result = streamReader.ReadToEnd();
                 }
 
+               
+
+
+
                 List<AllAppointments> appointments = JsonConvert.DeserializeObject<List<AllAppointments>>(result);
                 List<AppointmentDetails> ListofAppointment = new List<AppointmentDetails>();
                foreach( var appointment in appointments)

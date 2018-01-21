@@ -2178,9 +2178,9 @@ table#mytable tr td {
     position: relative;
    
 }
-div#detail {
+/*div#detail {
     margin: 25px 15px;
-}
+}*/
 .customermedia {
     height:410px !important;
 }

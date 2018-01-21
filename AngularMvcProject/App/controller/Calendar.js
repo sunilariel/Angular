@@ -1222,11 +1222,14 @@ app.controller('calendarController', ['$scope', '$location', '$filter', '$window
             $scope.FilterCustomerList = [];
 
             if (searchterm != "") {
+                $(".searching-cust").css("display", "block");
                 var apirequest = bookingService.GetSearchCustomer($routeParams.CompanyId, searchterm);
                 apirequest.then(function (response) {
                     $scope.counted = response.data.length;
                     $scope.FilterCustomerList = response.data;
                 })
+            } else {
+                $(".searching-cust").css("display", "none");
             }
         };
 
@@ -1270,6 +1273,7 @@ app.controller('calendarController', ['$scope', '$location', '$filter', '$window
                     uiCalendarConfig.calendars['myCalendar'].fullCalendar('removeEventSources');
                 }
                 if (SelectedStaffId != null && SelectedStaffId != "") {
+                    debugger;
                     var apirequest = bookingService.GetBookingsForEmployeesByIdBetweenDates($routeParams.CompanyId, SelectedStaffId, firstDay, lastDay);
                     apirequest.then(function (response) {
                         $scope.events = [];
@@ -1364,7 +1368,7 @@ app.controller('calendarController', ['$scope', '$location', '$filter', '$window
                         AllStaff = response.data[i].Id + "," + AllStaff;
                     }
                     $scope.AllProviders = AllStaff.substring(0, AllStaff.length - 1);
-
+                    debugger;
                     var apirequest = bookingService.GetBookingsForEmployeesByIdBetweenDates($routeParams.CompanyId, $scope.AllProviders, firstDay, lastDay);
                     apirequest.then(function (response) {
                         if (response.data.length != 0) {
