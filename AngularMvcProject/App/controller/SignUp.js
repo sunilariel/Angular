@@ -1,6 +1,6 @@
 ﻿//var app = angular.module("bookingApp", []);
 app.controller("SignUp", ['$scope', '$http', '$timeout', '$location','$rootScope','$routeParams', 'bookingService', '$window', function ($scope, $http, $timeout, $location,$rootScope,$routeParams, bookingService, $window) {
-    debugger;
+    //debugger;
     $scope.username = "";
     $scope.Email = "";
     $scope.Password = "";
@@ -12,11 +12,11 @@ app.controller("SignUp", ['$scope', '$http', '$timeout', '$location','$rootScope
     }
 
     $scope.submitTheForm = function (form) {
-        debugger;
+        //debugger;
 
-        if (form.$invalid == true)
+        if (form.$invalid === true)
         {
-            if(form.username.$invalid==true)
+            if(form.username.$invalid === true)
             {
                 $scope.IsVisible = true;
                 $scope.MessageText = "Name field cannot be blank";
@@ -27,13 +27,13 @@ app.controller("SignUp", ['$scope', '$http', '$timeout', '$location','$rootScope
                 form.username.$setTouched();
                 return false;
             }
-            if(form.email.$invalid==true)
+            if(form.email.$invalid === true)
             {
                 form.email.$touched = true;
                 form.email.$setTouched();
               
             }
-            if(form.password.$invalid==true)
+            if(form.password.$invalid === true)
             {
                 form.password.$touched = true;
                 form.password.$setTouched();
@@ -48,8 +48,8 @@ app.controller("SignUp", ['$scope', '$http', '$timeout', '$location','$rootScope
         //Checking User Existence//
         var apirequest = bookingService.CheckUserExist($scope.Email);
         apirequest.then(function (response) {
-            debugger;
-            if (response.data == "true") {
+            //debugger;
+            if (response.data === "true") {
                 $scope.MessageText = "User is already exist";
                 $scope.IsVisible = true;
                 $timeout(function () {
@@ -76,7 +76,7 @@ app.controller("SignUp", ['$scope', '$http', '$timeout', '$location','$rootScope
                 $rootScope.LoginUsername = $scope.username;
                 var apirequest = bookingService.SignUp(dataobject);
                 apirequest.then(function (response) {
-                    if (response.data.Success == true) {
+                    if (response.data.Success === true) {
                        // alert(response.data.ReturnObject.AuthToken);
                         $rootScope.SignUpCompanyId = response.data.ReturnObject.CompanyId;
                         $window.sessionStorage.setItem('userInfo-token', response.data.ReturnObject.AuthToken);
@@ -98,7 +98,7 @@ app.controller("SignUp", ['$scope', '$http', '$timeout', '$location','$rootScope
         //var data = JSON.stringify(dataobject);
 
         //$http.post("SignUp/postdata", { json: data }).success(function (data) {
-        //    debugger;
+        //    //debugger;
         //    $scope.IsVisible = true;
         //    $scope.MessageText = "Checking availability";
         //    if(data.success==true){
